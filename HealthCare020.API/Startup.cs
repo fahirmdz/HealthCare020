@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
+using HealthCare020.Repository;
+using HealthCare020.Services.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace HealthCare020.API
 {
@@ -26,6 +24,15 @@ namespace HealthCare020.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddDbContext<HealthCare020DbContext>(x =>
+                x.UseSqlServer(Configuration.GetConnectionString("HealthCare020DB")));
+
+            services.AddSwaggerGen(x =>
+                x.SwaggerDoc("v1", new OpenApiInfo {Title = "HealthCare020 API", Version = "v1"}));
+
+            services.AddHealthCare020Services();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +43,11 @@ namespace HealthCare020.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json","HealthCare020 API v1");
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();
