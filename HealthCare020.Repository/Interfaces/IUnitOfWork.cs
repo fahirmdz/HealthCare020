@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using HealthCare020.Core;
 using HealthCare020.Core.Entities;
 
 namespace HealthCare020.Repository.Interfaces
@@ -25,6 +26,8 @@ namespace HealthCare020.Repository.Interfaces
         IRepository<TokenPoseta> TokeniPoseta { get; }
         IRepository<UputZaLecenje> UputiZaLecenje { get; }
         IRepository<ZdravstvenoStanje> ZdravstvenaStanja { get; }
+
+        IRepository<T> Set<T>() where T: class;
 
         Task<int> CompleteAsync();
         void Complete();

@@ -7,6 +7,7 @@ namespace HealthCare020.Repository.Interfaces
 {
     public interface IRepository<T>
     {
+        Type TypeofT();
         Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter = null);
 
         Task<IEnumerable<T>> GetAllWithEagerLoad(string[] children, Expression<Func<T, bool>> filter = null);

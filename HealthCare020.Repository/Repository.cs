@@ -5,16 +5,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using HealthCare020.Core;
 
 namespace HealthCare020.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
+
         private readonly HealthCare020DbContext _dbContext;
 
         public Repository(HealthCare020DbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public Type TypeofT()
+        {
+            return typeof(T);
         }
 
         public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter = null)

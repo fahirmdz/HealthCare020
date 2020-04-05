@@ -1,5 +1,6 @@
 ﻿using HealthCare020.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace HealthCare020.Repository
 {
@@ -8,6 +9,8 @@ namespace HealthCare020.Repository
         public HealthCare020DbContext(DbContextOptions<HealthCare020DbContext> options) : base(options)
         {
         }
+
+    
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
