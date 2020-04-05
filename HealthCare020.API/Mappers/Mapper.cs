@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
 
 namespace HealthCare020.API.Mappers
 {
@@ -8,7 +9,11 @@ namespace HealthCare020.API.Mappers
     {
         public Mapper()
         {
-            CreateMap<ZdravstvenoStanje, TwoFields>().ReverseMap();
+            CreateMap<ZdravstvenoStanje, TwoFields>()
+                .ForMember(x=>x.Value,opt=>opt.MapFrom(x=>x.Opis))
+                .ReverseMap();
+
+            CreateMap<ZdravstvenoStanje, ZdravstvenoStanjeUpsertRequest>().ReverseMap();
         }
     }
 }

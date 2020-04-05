@@ -3,6 +3,6 @@
     public class TwoFields
     {
         public int Id { get; set; }
-        public string Opis { get; set; }
+        public string Value { get; set; }
     }
 }
