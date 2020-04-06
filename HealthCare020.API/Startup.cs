@@ -23,7 +23,6 @@ namespace HealthCare020.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<HealthCare020DbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -32,7 +31,9 @@ namespace HealthCare020.API
 
             services.AddHealthCare020Services();
 
-            services.AddControllers();
+            services.AddControllers().AddDataAnnotationsLocalization(opt =>
+            {
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
