@@ -24,17 +24,15 @@ namespace HealthCare020.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-
             services.AddDbContext<HealthCare020DbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSwaggerGen(x =>
-                x.SwaggerDoc("v1", new OpenApiInfo {Title = "HealthCare020 API", Version = "v1"}));
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthCare020 API", Version = "v1" }));
 
             services.AddHealthCare020Services();
 
             services.AddControllers();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +47,7 @@ namespace HealthCare020.API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json","HealthCare020 API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "HealthCare020 API v1");
             });
             app.UseHttpsRedirection();
 

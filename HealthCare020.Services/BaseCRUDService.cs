@@ -2,6 +2,7 @@
 using HealthCare020.Repository.Interfaces;
 using HealthCare020.Services.Interfaces;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 
 namespace HealthCare020.Services
 {
@@ -11,7 +12,7 @@ namespace HealthCare020.Services
         {
         }
 
-        public async Task<TModel> Insert(TInsert request)
+        public virtual async Task<TModel> Insert(TInsert request)
         {
             var entity = _mapper.Map<TEntity>(request);
 
@@ -23,9 +24,23 @@ namespace HealthCare020.Services
 
         public virtual TModel Update(int id, TUpdate request)
         {
-            var entity = _mapper.Map<TEntity>(request);
+            var repository = _unitOfWork.Set<TEntity>();
+            var entity =  repository.GetById(id).Result;
+            entity = _mapper.Map(request,entity);
 
-            _unitOfWork.Set<TEntity>().Update(entity);
+            repository.Update(entity);
+            _unitOfWork.Complete();
+
+            return _mapper.Map<TModel>(entity);
+        }
+
+        public virtual TModel Delete(int id)
+        {
+            var repository = _unitOfWork.Set<TEntity>();
+
+            var entity = repository.GetById(id).Result;
+
+            repository.Delete(entity);
             _unitOfWork.Complete();
 
             return _mapper.Map<TModel>(entity);

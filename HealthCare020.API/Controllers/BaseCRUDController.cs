@@ -24,9 +24,15 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<TModel> Update(int id, TUpdate request)
+        public TModel Update(int id, TUpdate request)
         {
             return _crudService.Update(id, request);
+        }
+
+        [HttpDelete("{id}")]
+        public TModel Delete(int id)
+        {
+           return _crudService.Delete(id);
         }
     }
 }

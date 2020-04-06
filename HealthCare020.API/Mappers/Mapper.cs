@@ -5,15 +5,18 @@ using HealthCare020.Core.Request;
 
 namespace HealthCare020.API.Mappers
 {
-    public class Mapper:Profile
+    public class Mapper : Profile
     {
         public Mapper()
         {
+
             CreateMap<ZdravstvenoStanje, TwoFields>()
-                .ForMember(x=>x.Value,opt=>opt.MapFrom(x=>x.Opis))
+                .ForMember(x => x.Value, opt => opt.MapFrom(x => x.Opis))
                 .ReverseMap();
 
-            CreateMap<ZdravstvenoStanje, ZdravstvenoStanjeUpsertRequest>().ReverseMap();
+            CreateMap<ZdravstvenoStanjeUpsertRequest, ZdravstvenoStanje>()
+                .ForMember(x => x.Id, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

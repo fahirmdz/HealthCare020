@@ -92,7 +92,7 @@ namespace HealthCare020.Repository
 
         public void Update(T entity)
         {
-            _dbContext.Set<T>().Update(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public async Task SaveChangesAsync()
