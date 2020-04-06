@@ -1,4 +1,4 @@
-﻿using HealthCare020.Core.Entities;
+﻿using AutoMapper;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Repository;
@@ -12,6 +12,8 @@ namespace HealthCare020.Services.Configuration
     {
         public static void AddHealthCare020Services(this IServiceCollection services)
         {
+            services.AddSingleton((new MapperConfiguration(cfg => cfg.AddProfile(new Mappers.Mapper())).CreateMapper()));
+
             services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
