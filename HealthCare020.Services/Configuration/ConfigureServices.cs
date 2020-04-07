@@ -18,6 +18,7 @@ namespace HealthCare020.Services.Configuration
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ICRUDService<TwoFields,TwoFieldsSearchRequest,ZdravstvenoStanjeUpsertRequest,ZdravstvenoStanjeUpsertRequest>,ZdravstvenoStanjeService>();
+
         }
     }
 }

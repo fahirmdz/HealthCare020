@@ -1,4 +1,3 @@
-using AutoMapper;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
 using Microsoft.AspNetCore.Builder;
@@ -28,12 +27,9 @@ namespace HealthCare020.API
 
             services.AddSwaggerGen(x =>
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthCare020 API", Version = "v1" }));
-
             services.AddHealthCare020Services();
 
-            services.AddControllers().AddDataAnnotationsLocalization(opt =>
-            {
-            });
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

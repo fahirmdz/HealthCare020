@@ -1,38 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HealthCare020.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HealthCare020.API.Controllers
 {
-    public class BaseCRUDController<TModel, TSerach, TInsert, TUpdate> : BaseController<TModel,TSerach>
+    public class BaseCRUDController<TModel, TSerach, TInsert, TUpdate> : BaseController<TModel, TSerach>
     {
         private readonly ICRUDService<TModel, TSerach, TInsert, TUpdate> _crudService;
 
-        public BaseCRUDController( ICRUDService<TModel, TSerach, TInsert, TUpdate> crudService) : base(crudService)
+        public BaseCRUDController(ICRUDService<TModel, TSerach, TInsert, TUpdate> crudService) : base(crudService)
         {
             _crudService = crudService;
         }
 
         [HttpPost]
-        public async Task<TModel> Insert(TInsert request)
+        public async Task<IActionResult> Insert(TInsert request)
         {
-            return await _crudService.Insert(request);
+            var result = await _crudService.Insert(request);
+
+            if (result == null)
+                return BadRequest();
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public TModel Update(int id, TUpdate request)
+        public IActionResult Update(int id, TUpdate request)
         {
-            return _crudService.Update(id, request);
+            if (_crudService.GetById(id).Result == null)
+                return NotFound();
+
+            var result = _crudService.Update(id, request);
+            if (result == null)
+                return BadRequest();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public TModel Delete(int id)
+        public IActionResult Delete(int id)
         {
-           return _crudService.Delete(id);
+            var entity = _crudService.GetById(id).Result;
+
+            if (entity == null)
+                return NotFound();
+
+            var result = _crudService.Delete(id);
+
+            return Ok(result);
         }
     }
 }
