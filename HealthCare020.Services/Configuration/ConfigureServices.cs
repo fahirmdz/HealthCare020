@@ -18,6 +18,12 @@ namespace HealthCare020.Services.Configuration
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ICRUDService<TwoFields,TwoFieldsSearchRequest,ZdravstvenoStanjeUpsertRequest,ZdravstvenoStanjeUpsertRequest>,ZdravstvenoStanjeService>();
+            services.AddScoped<ICRUDService<TwoFields,TwoFieldsSearchRequest,RoleUpsertRequest,RoleUpsertRequest>,RoleService>();
+            services.AddScoped<ICRUDService<TwoFields,TwoFieldsSearchRequest,TokenPosetaUpsertRequest,TokenPosetaUpsertRequest>,TokenPosetaService>();
+            services
+                .AddScoped<ICRUDService<DrzavaModel, DrzavaSearchRequest, DrzavaUpsertRequest, DrzavaUpsertRequest>,
+                    DrzavaService>();
+
 
         }
     }
