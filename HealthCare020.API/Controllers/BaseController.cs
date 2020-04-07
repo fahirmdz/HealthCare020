@@ -1,6 +1,5 @@
 ﻿using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HealthCare020.API.Controllers
@@ -17,15 +16,25 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<TModel>> Get([FromQuery] TSearch serach)
+        public async Task<IActionResult> Get([FromQuery] TSearch serach)
         {
-            return await _service.Get(serach);
+            var result = await _service.Get(serach);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<TModel> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return await _service.GetById(id);
+            var result = await _service.GetById(id);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
         }
     }
 }
