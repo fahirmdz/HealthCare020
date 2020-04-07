@@ -19,6 +19,15 @@ namespace HealthCare020.Services.Mappers
                 .ReverseMap();
 
             CreateMap<TokenPoseta, TwoFields>().ReverseMap();
+            CreateMap<TokenPosetaUpsertRequest, TokenPoseta>().ReverseMap();
+
+            CreateMap<Role, TwoFields>()
+                .ForMember(x => x.Value, opt => opt.MapFrom(x => x.Naziv))
+                .ReverseMap();
+            CreateMap<RoleUpsertRequest, Role>().ReverseMap();
+
+            CreateMap<Drzava, DrzavaUpsertRequest>().ReverseMap();
+            CreateMap<Drzava, DrzavaModel>().ReverseMap();
         }
     }
 }
