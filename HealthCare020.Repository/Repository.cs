@@ -56,22 +56,21 @@ namespace HealthCare020.Repository
         {
             return await _dbContext.FindAsync<T>(id);
         }
+    
 
-        public async Task<T> GetByIdWithEagerLoad(Expression<Func<T, bool>> filter, string[] children)
+        public async Task<T> Find(Expression<Func<T, bool>> filter)
         {
-            try
+            return await _dbContext.Set<T>().FirstOrDefaultAsync(filter);
+        }
+
+        public async Task<T> FindWithEagerLoad(Expression<Func<T, bool>> filter, string[] children)
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
+            foreach (var x in children)
             {
-                IQueryable<T> query = _dbContext.Set<T>();
-                foreach (var x in children)
-                {
-                    query = query.Include(x);
-                }
-                return await query.FirstOrDefaultAsync(filter);
+                query = query.Include(x);
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return await query.FirstOrDefaultAsync(filter);
         }
 
         public async Task Insert(T entity)

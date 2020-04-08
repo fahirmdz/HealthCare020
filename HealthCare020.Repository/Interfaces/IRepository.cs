@@ -8,13 +8,16 @@ namespace HealthCare020.Repository.Interfaces
     public interface IRepository<T>
     {
         Type TypeofT();
+
         Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter = null);
 
         Task<IEnumerable<T>> GetAllWithEagerLoad(string[] children, Expression<Func<T, bool>> filter = null);
 
         Task<T> GetById(int id);
 
-        Task<T> GetByIdWithEagerLoad(Expression<Func<T, bool>> filter, string[] children);
+        Task<T> Find(Expression<Func<T, bool>> filter);
+
+        Task<T> FindWithEagerLoad(Expression<Func<T, bool>> filter, string[] children);
 
         Task Insert(T entity);
 

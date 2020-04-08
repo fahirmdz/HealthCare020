@@ -2,11 +2,10 @@
 using HealthCare020.Repository.Interfaces;
 using HealthCare020.Services.Interfaces;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic;
 
 namespace HealthCare020.Services
 {
-    public class BaseCRUDService<TModel, TSearch, TEntity, TInsert, TUpdate> : BaseService<TModel, TSearch, TEntity>, ICRUDService<TModel, TSearch, TInsert, TUpdate> where TEntity : class
+    public class BaseCRUDService<TModel, TSearch, TEntity, TInsert, TUpdate> : BaseService<TModel, TSearch, TEntity>, ICRUDService<TEntity, TModel, TSearch, TInsert, TUpdate> where TEntity : class
     {
         public BaseCRUDService(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork)
         {

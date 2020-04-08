@@ -9,7 +9,6 @@ namespace HealthCare020.Services.Mappers
     {
         public Mapper()
         {
-
             CreateMap<ZdravstvenoStanje, TwoFields>()
                 .ForMember(x => x.Value, opt => opt.MapFrom(x => x.Opis))
                 .ReverseMap();
@@ -28,6 +27,14 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<Drzava, DrzavaUpsertRequest>().ReverseMap();
             CreateMap<Drzava, DrzavaModel>().ReverseMap();
+
+            CreateMap<Grad, GradModel>().ReverseMap();
+            CreateMap<GradUpsertRequest, Grad>().ReverseMap();
+
+            CreateMap<KorisnickiNalog, KorisnickiNalogUpsertRequest>()
+                .ReverseMap()
+                .ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<KorisnickiNalog, KorisnickiNalogModel>().ReverseMap();
         }
     }
 }

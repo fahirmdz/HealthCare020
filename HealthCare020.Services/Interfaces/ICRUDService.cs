@@ -2,7 +2,7 @@
 
 namespace HealthCare020.Services.Interfaces
 {
-    public interface ICRUDService<TModel,TSearch,TInsert,TUpdate>:IService<TModel,TSearch>
+    public interface ICRUDService<TEntity, TModel,TSearch,TInsert,TUpdate>:IService<TEntity, TModel,TSearch>
     {
         Task<TModel> Insert(TInsert request);
 
