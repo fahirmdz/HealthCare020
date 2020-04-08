@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace HealthCare020.API.Controllers
 {
-    public class BaseCRUDController<TModel, TSerach, TInsert, TUpdate> : BaseController<TModel, TSerach>
+    public class BaseCRUDController<TEntity, TModel, TSerach, TInsert, TUpdate> : BaseController<TEntity,TModel, TSerach>
     {
-        private readonly ICRUDService<TModel, TSerach, TInsert, TUpdate> _crudService;
+        private readonly ICRUDService<TEntity, TModel, TSerach, TInsert, TUpdate> _crudService;
 
-        public BaseCRUDController(ICRUDService<TModel, TSerach, TInsert, TUpdate> crudService) : base(crudService)
+        public BaseCRUDController(ICRUDService<TEntity, TModel, TSerach, TInsert, TUpdate> crudService) : base(crudService)
         {
             _crudService = crudService;
         }
