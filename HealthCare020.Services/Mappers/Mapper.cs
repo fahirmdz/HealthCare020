@@ -35,6 +35,12 @@ namespace HealthCare020.Services.Mappers
                 .ReverseMap()
                 .ForMember(x => x.Id, opt => opt.Ignore());
             CreateMap<KorisnickiNalog, KorisnickiNalogModel>().ReverseMap();
+
+            CreateMap<LicniPodaci, LicniPodaciModel>().ReverseMap();
+            CreateMap<LicniPodaci, LicniPodaciUpsertRequest>()
+                .ReverseMap()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+
         }
     }
 }

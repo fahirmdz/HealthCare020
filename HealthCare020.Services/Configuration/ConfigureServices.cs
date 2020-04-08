@@ -27,6 +27,8 @@ namespace HealthCare020.Services.Configuration
 
             services.AddScoped<ICRUDService<Grad, GradModel, GradSearchRequest, GradUpsertRequest, GradUpsertRequest>, GradService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
+            services
+                .AddScoped<ICRUDService<LicniPodaci, LicniPodaciModel, LicniPodaciSearchRequest, LicniPodaciUpsertRequest,LicniPodaciUpsertRequest>, LicniPodaciService>();
         }
     }
 }

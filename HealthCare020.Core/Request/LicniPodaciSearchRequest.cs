@@ -1,8 +1,8 @@
-﻿namespace HealthCare020.Core.Models
+﻿namespace HealthCare020.Core.Request
 {
-    public class LicniPodaciModel
+    public class LicniPodaciSearchRequest
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string Ime { get; set; }
 
@@ -14,6 +14,6 @@
 
         public string BrojTelefona { get; set; }
 
-        public GradModel Grad { get; set; }
+        public string Grad { get; set; }
     }
 }
