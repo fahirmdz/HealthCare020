@@ -32,7 +32,7 @@ namespace HealthCare020.API.Controllers
         public async Task<IActionResult> GetById(int id, bool? eagerLoaded=false)
         {
             _service.TempId = id;
-            var result =eagerLoaded.HasValue && eagerLoaded.Value ? await _service.GetByIdWithEagerLoad(_service.GetFilterForId()): await _service.GetById(id);
+            var result =eagerLoaded.HasValue && eagerLoaded.Value ? await _service.FindWithEagerLoad(_service.GetFilterForId()): await _service.GetById(id);
 
             if (result == null)
                 return NotFound();

@@ -52,9 +52,9 @@ namespace HealthCare020.Services
             return _mapper.Map<TModel>(result);
         }
 
-        public async Task<TModel> GetByIdWithEagerLoad(Expression<Func<TEntity, bool>> filter)
+        public async Task<TModel> FindWithEagerLoad(Expression<Func<TEntity, bool>> filter)
         {
-            var result = await _unitOfWork.Set<TEntity>().GetByIdWithEagerLoad(filter, children);
+            var result = await _unitOfWork.Set<TEntity>().FindWithEagerLoad(filter, children);
             return _mapper.Map<TModel>(result);
         }
     }

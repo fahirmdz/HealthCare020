@@ -30,6 +30,11 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<Grad, GradModel>().ReverseMap();
             CreateMap<GradUpsertRequest, Grad>().ReverseMap();
+
+            CreateMap<KorisnickiNalog, KorisnickiNalogUpsertRequest>()
+                .ReverseMap()
+                .ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<KorisnickiNalog, KorisnickiNalogModel>().ReverseMap();
         }
     }
 }

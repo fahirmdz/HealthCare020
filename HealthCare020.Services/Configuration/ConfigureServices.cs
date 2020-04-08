@@ -26,6 +26,7 @@ namespace HealthCare020.Services.Configuration
                     DrzavaService>();
 
             services.AddScoped<ICRUDService<Grad, GradModel, GradSearchRequest, GradUpsertRequest, GradUpsertRequest>, GradService>();
+            services.AddScoped<IKorisnikService, KorisnikService>();
         }
     }
 }

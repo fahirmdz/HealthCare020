@@ -15,6 +15,6 @@ namespace HealthCare020.Services.Interfaces
 
         Task<TModel> GetById(int id);
 
-        Task<TModel> GetByIdWithEagerLoad(Expression<Func<TEntity, bool>> filter);
+        Task<TModel> FindWithEagerLoad(Expression<Func<TEntity, bool>> filter);
     }
 }

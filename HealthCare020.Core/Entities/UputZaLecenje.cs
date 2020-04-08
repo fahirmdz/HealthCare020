@@ -9,10 +9,10 @@ namespace HealthCare020.Core.Entities
         public int Id { get; set; }
 
         [StringLength(maximumLength: 250, MinimumLength = 5)]
-        [Required]
+        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
         public string OpisStanja { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
         public DateTime DatumVreme { get; set; }
 
         [ForeignKey(nameof(LicniPodaci))]

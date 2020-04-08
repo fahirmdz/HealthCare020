@@ -30,7 +30,7 @@ namespace HealthCore020.Test
             var context = new HealthCare020DbContext(dbContextOptions);
 
             HealthCore020DataDBInitializer db = new HealthCore020DataDBInitializer();
-            db.Seed(context);
+            db.Seed_ZdravstvenoStanje(context);
 
             _unitOfWork = new UnitOfWork(context);
             _service = new ZdravstvenoStanjeService(
