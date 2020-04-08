@@ -19,7 +19,7 @@ namespace HealthCore020.Test
         private readonly IUnitOfWork _unitOfWork;
         private readonly KorisnikService _service;
         public static DbContextOptions<HealthCare020DbContext> dbContextOptions { get; set; }
-        public static string connectionString = "Server=.;Database=Healthcare020_Test;Trusted_Connection=true;";
+        public static string connectionString = "Server=192.168.100.18\\MSSQLSERVER,1433;Database=HealthCare020_Test;User=fahirmdz;Password=slusketine123;";
 
         static KorisnikUnitTestController()
         {
