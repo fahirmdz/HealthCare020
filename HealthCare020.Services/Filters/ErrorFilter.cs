@@ -11,6 +11,10 @@ namespace HealthCare020.Services.Filters
         {
             if (context.Exception is UserException)
             {
+                if (context.Exception is NotFoundException)
+                {
+                    context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                }
                 context.ModelState.AddModelError("ERROR", context.Exception.Message);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             }

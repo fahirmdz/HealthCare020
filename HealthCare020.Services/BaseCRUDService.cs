@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using HealthCare020.Repository.Interfaces;
+using HealthCare020.Repository;
+using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace HealthCare020.Services
 {
     public class BaseCRUDService<TModel, TSearch, TEntity, TInsert, TUpdate> : BaseService<TModel, TSearch, TEntity>, ICRUDService<TEntity, TModel, TSearch, TInsert, TUpdate> where TEntity : class
     {
-        public BaseCRUDService(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork)
+        public BaseCRUDService(IMapper mapper, HealthCare020DbContext dbContext) : base(mapper, dbContext)
         {
         }
 
@@ -15,32 +16,38 @@ namespace HealthCare020.Services
         {
             var entity = _mapper.Map<TEntity>(request);
 
-            await _unitOfWork.Set<TEntity>().Insert(entity);
-            await _unitOfWork.CompleteAsync();
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
 
             return _mapper.Map<TModel>(entity);
         }
 
         public virtual TModel Update(int id, TUpdate request)
         {
-            var repository = _unitOfWork.Set<TEntity>();
-            var entity =  repository.GetById(id).Result;
-            entity = _mapper.Map(request,entity);
+            var query = _dbContext.Set<TEntity>();
+            var entity = query.Find(id);
+            if (entity == null)
+                throw new NotFoundException("Not found");
 
-            repository.Update(entity);
-            _unitOfWork.Complete();
+            entity = _mapper.Map(request, entity);
+
+            query.Update(entity);
+            _dbContext.SaveChanges();
 
             return _mapper.Map<TModel>(entity);
         }
 
         public virtual TModel Delete(int id)
         {
-            var repository = _unitOfWork.Set<TEntity>();
+            var query = _dbContext.Set<TEntity>();
 
-            var entity = repository.GetById(id).Result;
+            var entity = query.Find(id);
 
-            repository.Delete(entity);
-            _unitOfWork.Complete();
+            if (entity == null)
+                throw new NotFoundException("Not found");
+
+            query.Remove(entity);
+            _dbContext.SaveChanges();
 
             return _mapper.Map<TModel>(entity);
         }

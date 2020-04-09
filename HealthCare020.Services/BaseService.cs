@@ -1,61 +1,50 @@
 ﻿using AutoMapper;
-using HealthCare020.Repository.Interfaces;
 using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using HealthCare020.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
 {
     public class BaseService<TModel, TSearch, TEntity> : IService<TEntity, TModel, TSearch> where TEntity : class
     {
-        protected readonly IUnitOfWork _unitOfWork;
+        protected readonly HealthCare020DbContext _dbContext;
         protected readonly IMapper _mapper;
-        protected string[] children;
-        public Expression<Func<TEntity, bool>> filterForId;
 
-
-        public BaseService(IMapper mapper, IUnitOfWork unitOfWork)
+        public BaseService(IMapper mapper, HealthCare020DbContext dbContext)
         {
             _mapper = mapper;
-            _unitOfWork = unitOfWork;
-        }
-
-        public int TempId { get; set; }
-
-        public Expression<Func<TEntity, bool>> GetFilterForId()
-        {
-            return filterForId;
+            _dbContext = dbContext;
         }
 
         public async Task<IList<TModel>> Get(TSearch search)
         {
-            var result = await _unitOfWork.Set<TEntity>().GetAll();
-            if (result != null)
+            var result =await _dbContext.Set<TEntity>().ToListAsync();
+
+            if (result.Any())
                 return _mapper.Map<List<TModel>>(result);
-            return null;
+            return new List<TModel>();
         }
 
-        public async Task<IList<TModel>> GetWithEagerLoad(TSearch search)
+        public virtual async Task<IList<TModel>> GetWithEagerLoad(TSearch search)
         {
-            var result = children != null && children.Any() ? await _unitOfWork.Set<TEntity>().GetAllWithEagerLoad(children) : await _unitOfWork.Set<TEntity>().GetAll();
-            if (result != null)
-                return _mapper.Map<List<TModel>>(result);
-            return null;
+           return new List<TModel>();
         }
 
         public async Task<TModel> GetById(int id)
         {
-            var result = await _unitOfWork.Set<TEntity>().GetById(id);
+            var result = await _dbContext.Set<TEntity>().FindAsync(id);
             return _mapper.Map<TModel>(result);
         }
 
-        public async Task<TModel> FindWithEagerLoad(Expression<Func<TEntity, bool>> filter)
+        public virtual async Task<TModel> FindWithEagerLoad(int id)
         {
-            var result = await _unitOfWork.Set<TEntity>().FindWithEagerLoad(filter, children);
-            return _mapper.Map<TModel>(result);
+            throw new NotImplementedException();
         }
     }
 }
