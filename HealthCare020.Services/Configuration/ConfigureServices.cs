@@ -24,6 +24,11 @@ namespace HealthCare020.Services.Configuration
             services.AddScoped<IKorisnikService, KorisnikService>();
             services
                 .AddScoped<ICRUDService<LicniPodaci, LicniPodaciModel, LicniPodaciSearchRequest, LicniPodaciUpsertRequest, LicniPodaciUpsertRequest>, LicniPodaciService>();
+
+            services.AddScoped<ICRUDService<StacionarnoOdeljenje, TwoFields, TwoFieldsSearchRequest, StacionarnoOdeljenjeUpsertRequest, StacionarnoOdeljenjeUpsertRequest>, StacionarnoOdeljenjeService>();
+            services
+                .AddScoped<ICRUDService<RoleKorisnickiNalog, RoleKorisnickiNalogModel, KorisnickiNalogRoleSearchRequest,
+                    KorisnickiNalogRoleUpsertRequest, KorisnickiNalogRoleUpsertRequest>, RoleKorisnikService>();
         }
     }
 }

@@ -4,7 +4,6 @@ using HealthCare020.API.Controllers;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Repository;
-using HealthCare020.Repository.Interfaces;
 using HealthCare020.Services;
 using HealthCare020.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +15,6 @@ namespace HealthCore020.Test
 {
     public class KorisnikUnitTestController
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly KorisnikService _service;
         public static DbContextOptions<HealthCare020DbContext> dbContextOptions { get; set; }
         public static string connectionString = "Server=.;Database=Healthcare020_Test;Trusted_Connection=true;";
@@ -33,9 +31,7 @@ namespace HealthCore020.Test
             HealthCore020DataDBInitializer db = new HealthCore020DataDBInitializer();
             db.Seed_Korisnik(context);
 
-            _unitOfWork = new UnitOfWork(context);
-            _service = new KorisnikService(_unitOfWork,
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))));
+            _service = new KorisnikService( new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context);
         }
 
         #region Get By Id
@@ -62,7 +58,7 @@ namespace HealthCore020.Test
             var korisnickiNalogId = 10;
 
             //Act
-            UserException ex = await Assert.ThrowsAsync<UserException>(() =>
+            NotFoundException ex = await Assert.ThrowsAsync<NotFoundException>(() =>
              {
                  return controller.GetById(korisnickiNalogId);
              });
@@ -285,7 +281,7 @@ namespace HealthCore020.Test
         }
 
         [Fact]
-        public async void Task_Update_ValidData_Throw_UserExceptionNotFound()
+        public async void Task_Update_ValidData_Throw_NotFoundException()
         {
             //Arrange
             var controller = new KorisnikController(_service);
@@ -298,7 +294,7 @@ namespace HealthCore020.Test
             };
 
             //Act
-            UserException ex = Assert.Throws<UserException>(() =>
+            NotFoundException ex = Assert.Throws<NotFoundException>(() =>
             {
                 controller.Update(korisnickiNalogId, korisnickiNalogInsertRequest);
             });
@@ -326,14 +322,14 @@ namespace HealthCore020.Test
         }
 
         [Fact]
-        public async void Task_Delete_KorisnickiNalog_Throw_UserExceptionNotFound()
+        public async void Task_Delete_KorisnickiNalog_Throw_NotFoundException()
         {
             //Arrange
             var controller = new KorisnikController(_service);
             var korisnickiNalogId = 10;
 
             //Act
-            UserException ex = Assert.Throws<UserException>(() =>
+            NotFoundException ex = Assert.Throws<NotFoundException>(() =>
             {
                 controller.Delete(korisnickiNalogId);
             });

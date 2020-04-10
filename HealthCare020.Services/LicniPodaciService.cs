@@ -45,5 +45,37 @@ namespace HealthCare020.Services
             return new List<LicniPodaciModel>();
         }
 
+        public override async Task<LicniPodaciModel> Insert(LicniPodaciUpsertRequest request)
+        {
+            if(!await _dbContext.Gradovi.AnyAsync(x=>x.Id==request.GradId))
+                throw new NotFoundException($"Grad sa ID-em {request.GradId} nije pronadjen");
+
+            var entity = _mapper.Map<LicniPodaci>(request);
+
+            await _dbContext.LicniPodaci.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+
+            return _mapper.Map<LicniPodaciModel>(entity);
+        }
+
+        public override LicniPodaciModel Update(int id, LicniPodaciUpsertRequest request)
+        {
+            var entity =  _dbContext.LicniPodaci.Find(id);
+
+            if(entity==null)
+                throw new NotFoundException("Licni podaci nisu pronadjeni");
+
+            if (!_dbContext.Gradovi.Any(x => x.Id == request.GradId))
+            {
+                throw new NotFoundException($"Grad sa ID-em {request.GradId} nije pronadjen");
+            }
+
+            _mapper.Map(request, entity);
+
+            _dbContext.LicniPodaci.Update(entity);
+            _dbContext.SaveChanges();
+
+            return _mapper.Map<LicniPodaciModel>(entity);
+        }
     }
 }

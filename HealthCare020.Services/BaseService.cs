@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HealthCare020.Repository;
+using HealthCare020.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
@@ -22,7 +23,7 @@ namespace HealthCare020.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IList<TModel>> Get(TSearch search)
+        public virtual async Task<IList<TModel>> Get(TSearch search)
         {
             var result =await _dbContext.Set<TEntity>().ToListAsync();
 
@@ -39,6 +40,8 @@ namespace HealthCare020.Services
         public async Task<TModel> GetById(int id)
         {
             var result = await _dbContext.Set<TEntity>().FindAsync(id);
+            if(result==null)
+                throw new NotFoundException("Not Found");
             return _mapper.Map<TModel>(result);
         }
 

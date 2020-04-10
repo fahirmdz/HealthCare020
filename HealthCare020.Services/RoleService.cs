@@ -11,5 +11,6 @@ namespace HealthCare020.Services
         public RoleService(IMapper mapper, HealthCare020DbContext dbContext) : base(mapper, dbContext)
         {
         }
+
     }
 }

@@ -27,7 +27,7 @@ namespace HealthCare020.Services
             var query = _dbContext.Set<TEntity>();
             var entity = query.Find(id);
             if (entity == null)
-                throw new NotFoundException("Not found");
+                throw new NotFoundException("Not Found");
 
             entity = _mapper.Map(request, entity);
 
@@ -44,7 +44,7 @@ namespace HealthCare020.Services
             var entity = query.Find(id);
 
             if (entity == null)
-                throw new NotFoundException("Not found");
+                throw new NotFoundException("Not Found");
 
             query.Remove(entity);
             _dbContext.SaveChanges();

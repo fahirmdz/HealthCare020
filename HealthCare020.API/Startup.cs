@@ -1,5 +1,6 @@
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
+using HealthCare020.Services.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,7 @@ namespace HealthCare020.API
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthCare020 API", Version = "v1" }));
             services.AddHealthCare020Services();
 
-            services.AddControllers();
+            services.AddControllers(cfg => cfg.Filters.Add(typeof(ErrorFilter)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
