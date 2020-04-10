@@ -4,18 +4,17 @@ using HealthCare020.API.Controllers;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Repository;
-using HealthCare020.Repository.Interfaces;
 using HealthCare020.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using HealthCare020.Services.Exceptions;
 using Xunit;
 
 namespace HealthCore020.Test
 {
     public class ZdravstvenoStanjeUnitTestController
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ZdravstvenoStanjeService _service;
         public static DbContextOptions<HealthCare020DbContext> dbContextOptions { get; set; }
         public static string connectionString = "Server=.;Database=Healthcare020_Test;Trusted_Connection=true;";
@@ -32,10 +31,8 @@ namespace HealthCore020.Test
             HealthCore020DataDBInitializer db = new HealthCore020DataDBInitializer();
             db.Seed_ZdravstvenoStanje(context);
 
-            _unitOfWork = new UnitOfWork(context);
             _service = new ZdravstvenoStanjeService(
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),
-                _unitOfWork);
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context);
         }
 
         #region Get By Id
@@ -62,10 +59,10 @@ namespace HealthCore020.Test
             var zdravstvenoStanjeId = 10;
 
             //Act
-            var data = await controller.GetById(zdravstvenoStanjeId);
+            NotFoundException ex = await Assert.ThrowsAsync<NotFoundException>(() => controller.GetById(zdravstvenoStanjeId));
 
             //Assert
-            Assert.IsType<NotFoundResult>(data);
+            Assert.Equal("Not Found", ex.Message);
         }
 
         [Fact]
@@ -233,11 +230,13 @@ namespace HealthCore020.Test
             var controller = new ZdravstvenoStanjeController(_service);
             var zdravstvenoStanjeId = 10;
 
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertRequest() { Opis = "a" }; //Mora imati 3 ili vise slova
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertRequest() { Opis = "aaaaa" }; 
 
-            var result = controller.Update(zdravstvenoStanjeId, zdravstvenoStanjeUpsertRequest);
+            //Act
+            NotFoundException ex =  Assert.Throws<NotFoundException>(() => controller.Update(zdravstvenoStanjeId,zdravstvenoStanjeUpsertRequest));
 
-            Assert.IsType<NotFoundResult>(result);
+            //Assert
+            Assert.Equal("Not Found", ex.Message);
         }
 
         #endregion Update Existing ZdravstvenoStanje
@@ -260,17 +259,17 @@ namespace HealthCore020.Test
 
 
         [Fact]
-        public async void Task_Delete_ZdravstvenoStanje_Return_NotFoundResult()
+        public async void Task_Delete_ZdravstvenoStanje_Return_NotFound()
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
             var id = 10;
 
             //Act
-            var result =  controller.Delete(id);
+            NotFoundException ex =  Assert.Throws<NotFoundException>(() => controller.Delete(id));
 
             //Assert
-            Assert.IsType<NotFoundResult>(result);
+            Assert.Equal("Not Found", ex.Message);
         }
         
         #endregion

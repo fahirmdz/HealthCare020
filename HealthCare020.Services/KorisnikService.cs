@@ -2,7 +2,6 @@
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using HealthCare020.Repository.Interfaces;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
 using System;
@@ -11,25 +10,27 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCare020.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
 {
     public class KorisnikService : IKorisnikService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly HealthCare020DbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public KorisnikService(IUnitOfWork unitOfWork, IMapper mapper)
+        public KorisnikService(IMapper mapper, HealthCare020DbContext dbContext)
         {
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _dbContext = dbContext;
         }
 
         public async Task<IList<KorisnickiNalogModel>> Get(KorisnickiNalogSearchRequest request)
         {
-            var result = await _unitOfWork.KorisnickiNalozi.GetAll();
+            var result =  _dbContext.KorisnickiNalozi.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(request.Username))
+            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(request.Username))
             {
                 result = result.Where(x => x.Username.StartsWith(request.Username));
             }
@@ -39,10 +40,10 @@ namespace HealthCare020.Services
 
         public async Task<KorisnickiNalogModel> GetById(int id)
         {
-            var korisnickiNalog = await _unitOfWork.KorisnickiNalozi.GetById(id);
+            var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
             if (korisnickiNalog == null)
-                throw new UserException("Korisnicki nalog nije pronadjen");
+                throw new NotFoundException("Korisnicki nalog nije pronadjen");
 
             return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
         }
@@ -62,18 +63,18 @@ namespace HealthCare020.Services
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;
 
-            await _unitOfWork.KorisnickiNalozi.Insert(korisnickiNalog);
-            await _unitOfWork.CompleteAsync();
+            await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
+            await _dbContext.SaveChangesAsync();
 
             return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
         }
 
         public KorisnickiNalogModel Update(int id, KorisnickiNalogUpsertRequest request)
         {
-            var korisnickiNalog = _unitOfWork.KorisnickiNalozi.GetById(id).Result;
+            var korisnickiNalog = _dbContext.KorisnickiNalozi.Find(id);
 
             if (korisnickiNalog == null)
-                throw new UserException("Korisnicki nalog nije pronadjen");
+                throw new NotFoundException("Korisnicki nalog nije pronadjen");
 
             _mapper.Map(request, korisnickiNalog);
 
@@ -86,28 +87,28 @@ namespace HealthCare020.Services
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;
 
-            _unitOfWork.KorisnickiNalozi.Update(korisnickiNalog);
-            _unitOfWork.Complete();
+            _dbContext.KorisnickiNalozi.Update(korisnickiNalog);
+            _dbContext.SaveChanges();
 
             return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
         }
 
         public KorisnickiNalogModel Delete(int id)
         {
-            var korisnickiNalog = _unitOfWork.KorisnickiNalozi.GetById(id).Result;
+            var korisnickiNalog = _dbContext.KorisnickiNalozi.Find(id);
 
             if (korisnickiNalog == null)
-                throw new UserException("Korisnicki nalog nije pronadjen");
+                throw new NotFoundException("Korisnicki nalog nije pronadjen");
 
-            _unitOfWork.KorisnickiNalozi.DeleteById(id);
-            _unitOfWork.Complete();
+            _dbContext.KorisnickiNalozi.Remove(korisnickiNalog);
+            _dbContext.SaveChanges();
 
             return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
         }
 
         public async Task<KorisnickiNalogModel> Authenticate(string username, string password)
         {
-            var korisnickiNalog = await _unitOfWork.KorisnickiNalozi.Find(x => x.Username == username);
+            var korisnickiNalog = await _dbContext.KorisnickiNalozi.FirstAsync(x => x.Username == username);
 
             if (korisnickiNalog == null)
             {

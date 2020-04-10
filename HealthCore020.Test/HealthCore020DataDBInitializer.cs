@@ -27,6 +27,24 @@ namespace HealthCore020.Test
             context.SaveChanges();
         }
 
+        public void Seed_Drzave(HealthCare020DbContext context)
+        {
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+
+            context.Drzave.AddRange(
+                new Drzava { Naziv = "TestNaziv1",PozivniBroj = "+123"},
+                new Drzava { Naziv = "TestNaziv2",PozivniBroj = "+124" },
+                new Drzava { Naziv = "TestNaziv3",PozivniBroj = "+125" },
+                new Drzava { Naziv = "TestNaziv4",PozivniBroj = "+126" },
+                new Drzava { Naziv = "TestNaziv5",PozivniBroj = "+127" },
+                new Drzava { Naziv = "TestNaziv6",PozivniBroj = "+128" }
+            );
+
+            context.SaveChanges();
+        }
+
+
         public void Seed_Korisnik(HealthCare020DbContext context)
         {
             context.Database.EnsureDeleted();
