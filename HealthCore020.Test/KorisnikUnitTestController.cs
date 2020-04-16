@@ -9,6 +9,7 @@ using HealthCare020.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using HealthCare020.Core.ResourceParameters;
 using Xunit;
 
 namespace HealthCore020.Test
@@ -77,7 +78,7 @@ namespace HealthCore020.Test
             //Act
             var data = await controller.GetById(korisnickiNalogId);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogModel>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDto>().Subject;
 
             //Assert
             Assert.Equal("testuser1", result.Username);
@@ -94,7 +95,7 @@ namespace HealthCore020.Test
             var controller = new KorisnikController(_service);
 
             //Act
-            var data = await controller.Get(new KorisnickiNalogSearchRequest());
+            var data = await controller.Get(new KorisnickiNalogResourceParameters());
 
             //Assert
             Assert.IsType<OkObjectResult>(data);
@@ -105,12 +106,12 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogSearchRequest = new KorisnickiNalogSearchRequest { Username = "testuser1" };
+            var korisnickiNalogSearchRequest = new KorisnickiNalogResourceParameters { Username = "testuser1" };
 
             //Act
             var data = await controller.Get(korisnickiNalogSearchRequest);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<List<KorisnickiNalogModel>>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<List<KorisnickiNalogDto>>().Subject;
 
             //Assert
             Assert.Equal("testuser1", result[0].Username);
@@ -125,7 +126,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "test2020",
                 Password = "testpw",
@@ -144,7 +145,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "test2020",
                 Password = "test",   //Invalid data -> minimum 6 characters
@@ -163,7 +164,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "test2020",
                 Password = "different", //should be same
@@ -182,7 +183,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "test2020",
                 Password = "test1111",
@@ -192,7 +193,7 @@ namespace HealthCore020.Test
             //Act
             var data = await controller.Insert(korisnickiNalogInsertRequest);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogModel>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDto>().Subject;
 
             //Assert
             Assert.Equal("test2020", result.Username);
@@ -207,7 +208,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "testtest",
                 Password = "test1111",
@@ -226,7 +227,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "testtest",
                 Password = "lowe", //should be at least 6 characters
@@ -245,7 +246,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "testtest",
                 Password = "loeeee", //razlicite lozinke
@@ -264,7 +265,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "test2020",
                 Password = "test1111",
@@ -274,7 +275,7 @@ namespace HealthCore020.Test
             //Act
             var data = controller.Update(1, korisnickiNalogInsertRequest);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogModel>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDto>().Subject;
 
             //Assert
             Assert.Equal("test2020", result.Username);
@@ -286,7 +287,7 @@ namespace HealthCore020.Test
             //Arrange
             var controller = new KorisnikController(_service);
             var korisnickiNalogId = 10;
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertRequest
+            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
             {
                 Username = "test2020",
                 Password = "test1111",

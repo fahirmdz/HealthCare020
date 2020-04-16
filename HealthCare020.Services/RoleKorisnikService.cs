@@ -8,29 +8,31 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.Services
 {
-    public class RoleKorisnikService : BaseCRUDService<RoleKorisnickiNalogModel, KorisnickiNalogRoleSearchRequest, RoleKorisnickiNalog, KorisnickiNalogRoleUpsertRequest, KorisnickiNalogRoleUpsertRequest>
+    public class RoleKorisnikService : BaseCRUDService<RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters, RoleKorisnickiNalog, KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>
     {
-        public RoleKorisnikService(IMapper mapper, HealthCare020DbContext dbContext) : base(mapper, dbContext)
+        public RoleKorisnikService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {
         }
 
-        public override async Task<IList<RoleKorisnickiNalogModel>> Get(KorisnickiNalogRoleSearchRequest search)
+        public override async Task<IList<RoleKorisnickiNalogDto>> Get(KorisnickiNalogRoleResourceParameters search)
         {
             var result = _dbContext.RolesKorisnickiNalozi.AsQueryable();
 
             if (await result.AnyAsync())
             {
                 result = await SearchFilter(result, search);
-                return await result.Select(x => _mapper.Map<RoleKorisnickiNalogModel>(x)).ToListAsync();
+                return await result.Select(x => _mapper.Map<RoleKorisnickiNalogDto>(x)).ToListAsync();
             }
 
-            return new List<RoleKorisnickiNalogModel>();
+            return new List<RoleKorisnickiNalogDto>();
         }
 
-        public override async Task<IList<RoleKorisnickiNalogModel>> GetWithEagerLoad(KorisnickiNalogRoleSearchRequest search)
+        public override async Task<IList<RoleKorisnickiNalogDto>> GetWithEagerLoad(KorisnickiNalogRoleResourceParameters search)
         {
             var result = _dbContext.RolesKorisnickiNalozi
                 .Include(x => x.KorisnickiNalog)
@@ -40,13 +42,13 @@ namespace HealthCare020.Services
             if (await result.AnyAsync())
             {
                 result = await SearchFilter(result, search);
-                return await result.Select(x => _mapper.Map<RoleKorisnickiNalogModel>(x)).ToListAsync();
+                return await result.Select(x => _mapper.Map<RoleKorisnickiNalogDto>(x)).ToListAsync();
             }
 
-            return new List<RoleKorisnickiNalogModel>();
+            return new List<RoleKorisnickiNalogDto>();
         }
 
-        public override async Task<RoleKorisnickiNalogModel> Insert(KorisnickiNalogRoleUpsertRequest request)
+        public override async Task<RoleKorisnickiNalogDto> Insert(KorisnickiNalogRoleUpsertDto request)
         {
             if (!await _dbContext.KorisnickiNalozi.AnyAsync(x => x.Id == request.KorisnickiNalogId))
                 throw new NotFoundException($"Korisnicki nalog sa ID-em {request.KorisnickiNalogId} nije pronadjen");
@@ -62,10 +64,10 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<RoleKorisnickiNalogModel>(entity);
+            return _mapper.Map<RoleKorisnickiNalogDto>(entity);
         }
 
-        public override RoleKorisnickiNalogModel Update(int id, KorisnickiNalogRoleUpsertRequest request)
+        public override RoleKorisnickiNalogDto Update(int id, KorisnickiNalogRoleUpsertDto request)
         {
             var entity = _dbContext.RolesKorisnickiNalozi.Find(id);
 
@@ -80,10 +82,10 @@ namespace HealthCare020.Services
             _dbContext.Update(entity);
             _dbContext.SaveChanges();
 
-            return _mapper.Map<RoleKorisnickiNalogModel>(entity);
+            return _mapper.Map<RoleKorisnickiNalogDto>(entity);
         }
 
-        public override async Task<RoleKorisnickiNalogModel> FindWithEagerLoad(int id)
+        public override async Task<RoleKorisnickiNalogDto> FindWithEagerLoad(int id)
         {
             var entity = await _dbContext.RolesKorisnickiNalozi
                 .Include(x => x.KorisnickiNalog)
@@ -93,10 +95,10 @@ namespace HealthCare020.Services
             if (entity == null)
                 throw new NotFoundException("Not Found");
 
-            return _mapper.Map<RoleKorisnickiNalogModel>(entity);
+            return _mapper.Map<RoleKorisnickiNalogDto>(entity);
         }
 
-        private async Task<IQueryable<RoleKorisnickiNalog>> SearchFilter(IQueryable<RoleKorisnickiNalog> result, KorisnickiNalogRoleSearchRequest search)
+        private async Task<IQueryable<RoleKorisnickiNalog>> SearchFilter(IQueryable<RoleKorisnickiNalog> result, KorisnickiNalogRoleResourceParameters search)
         {
             if (search.RoleId.HasValue)
                 result = result.Where(x => x.RoleId == search.RoleId);
@@ -106,5 +108,7 @@ namespace HealthCare020.Services
 
             return result;
         }
+
+       
     }
 }

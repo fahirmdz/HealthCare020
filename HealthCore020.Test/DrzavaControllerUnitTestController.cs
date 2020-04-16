@@ -80,7 +80,7 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var drzava = okResult.Value.Should().BeAssignableTo<DrzavaModel>().Subject;
+            var drzava = okResult.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
 
             Assert.Equal("TestNaziv1", drzava.Naziv);
             Assert.Equal("+123", drzava.PozivniBroj);
@@ -117,7 +117,7 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var zdravstvenaStanja = okResult.Value.Should().BeOfType<List<DrzavaModel>>().Subject;
+            var zdravstvenaStanja = okResult.Value.Should().BeOfType<List<DrzavaDto>>().Subject;
 
             Assert.Equal("TestNaziv1", zdravstvenaStanja[0].Naziv);
             Assert.Equal("TestNaziv2", zdravstvenaStanja[1].Naziv);
@@ -169,7 +169,7 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<DrzavaModel>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
 
             Assert.Equal("Tur", result.Naziv);
         }
@@ -188,7 +188,7 @@ namespace HealthCore020.Test
             //Act
             var existingEntity = await controller.GetById(drzavaId);
             var okResult = existingEntity.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<DrzavaModel>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
 
             Assert.NotNull(result);
 
@@ -200,7 +200,7 @@ namespace HealthCore020.Test
 
             var updatedData = controller.Update(drzavaId, drzava);
             var okResultUpdated = updatedData.Should().BeOfType<OkObjectResult>().Subject;
-            var resultUpdated = okResultUpdated.Value.Should().BeAssignableTo<DrzavaModel>().Subject;
+            var resultUpdated = okResultUpdated.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
 
             //Assert
             Assert.IsType<OkObjectResult>(updatedData);
@@ -219,7 +219,7 @@ namespace HealthCore020.Test
 
             var entity = await controller.GetById(drzavaId);
             var okResult = entity.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<DrzavaModel>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
 
             Assert.NotNull(result);
 

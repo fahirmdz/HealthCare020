@@ -2,7 +2,7 @@
 
 namespace HealthCare020.Core.Request
 {
-    public class KorisnickiNalogRoleUpsertRequest
+    public class KorisnickiNalogRoleUpsertDto
     {
         [Required(ErrorMessage="Obavezno polje")]
         public int RoleId { get; set; }

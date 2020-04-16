@@ -2,7 +2,9 @@
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
+using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
+using HealthCare020.Services.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthCare020.Services.Configuration
@@ -13,22 +15,28 @@ namespace HealthCare020.Services.Configuration
         {
             services.AddSingleton((new MapperConfiguration(cfg => cfg.AddProfile(new Mappers.Mapper())).CreateMapper()));
 
-            services.AddScoped<ICRUDService<ZdravstvenoStanje, TwoFields, TwoFieldsSearchRequest, ZdravstvenoStanjeUpsertRequest, ZdravstvenoStanjeUpsertRequest>, ZdravstvenoStanjeService>();
-            services.AddScoped<ICRUDService<Role, TwoFields, TwoFieldsSearchRequest, RoleUpsertRequest, RoleUpsertRequest>, RoleService>();
-            services.AddScoped<ICRUDService<TokenPoseta, TwoFields, TwoFieldsSearchRequest, TokenPosetaUpsertRequest, TokenPosetaUpsertRequest>, TokenPosetaService>();
+            services.AddScoped<ICRUDService<ZdravstvenoStanje, TwoFieldsDto, TwoFieldsResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
+            services.AddScoped<ICRUDService<Role, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>, RoleService>();
+            services.AddScoped<ICRUDService<TokenPoseta, TwoFieldsDto, TwoFieldsResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
             services
-                .AddScoped<ICRUDService<Drzava, DrzavaModel, DrzavaSearchRequest, DrzavaUpsertRequest, DrzavaUpsertRequest>,
+                .AddScoped<ICRUDService<Drzava, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>,
                     DrzavaService>();
 
-            services.AddScoped<ICRUDService<Grad, GradModel, GradSearchRequest, GradUpsertRequest, GradUpsertRequest>, GradService>();
+            services.AddScoped<ICRUDService<Grad, GradDto, GradResourceParameters, GradUpsertDto, GradUpsertDto>, GradService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
             services
-                .AddScoped<ICRUDService<LicniPodaci, LicniPodaciModel, LicniPodaciSearchRequest, LicniPodaciUpsertRequest, LicniPodaciUpsertRequest>, LicniPodaciService>();
+                .AddScoped<ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto>, LicniPodaciService>();
 
-            services.AddScoped<ICRUDService<StacionarnoOdeljenje, TwoFields, TwoFieldsSearchRequest, StacionarnoOdeljenjeUpsertRequest, StacionarnoOdeljenjeUpsertRequest>, StacionarnoOdeljenjeService>();
+            services.AddScoped<ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>, StacionarnoOdeljenjeService>();
             services
-                .AddScoped<ICRUDService<RoleKorisnickiNalog, RoleKorisnickiNalogModel, KorisnickiNalogRoleSearchRequest,
-                    KorisnickiNalogRoleUpsertRequest, KorisnickiNalogRoleUpsertRequest>, RoleKorisnikService>();
+                .AddScoped<ICRUDService<RoleKorisnickiNalog, RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters,
+                    KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>, RoleKorisnikService>();
+            services
+                .AddScoped<ICRUDService<Radnik, RadnikDto, RadnikResourceParameters, RadnikUpsertDto,
+                    RadnikUpsertDto>, RadnikService>();
+
+            services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();
+            services.AddTransient<IPropertyMappingService,PropertyMappingService>();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HealthCare020.Core.Models
 {
-    public class KorisnickiNalogModel
+    public class KorisnickiNalogDto
     {
         public int Id { get; set; }
         public string Username { get; set; }

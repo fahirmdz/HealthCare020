@@ -1,6 +1,6 @@
-﻿namespace HealthCare020.Core.Request
+﻿namespace HealthCare020.Core.ResourceParameters
 {
-    public class GradSearchRequest
+    public class GradResourceParameters:BaseResourceParameters
     {
         public int? Id { get; set; }
         public string Naziv { get; set; }

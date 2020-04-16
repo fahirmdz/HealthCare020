@@ -2,7 +2,7 @@
 
 namespace HealthCare020.Core.Request
 {
-    public class KorisnickiNalogUpsertRequest
+    public class KorisnickiNalogUpsertDto
     {
         [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
         [StringLength(maximumLength: 20, MinimumLength = 4,ErrorMessage="Username mora sadrzati izmedju 4 i 20 karaktera")]

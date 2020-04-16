@@ -2,6 +2,7 @@
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.API.Controllers
 {
@@ -17,7 +18,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] KorisnickiNalogSearchRequest request)
+        public async Task<IActionResult> Get([FromQuery] KorisnickiNalogResourceParameters request)
         {
             return Ok(await _service.Get(request));
         }
@@ -29,13 +30,13 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert(KorisnickiNalogUpsertRequest request)
+        public async Task<IActionResult> Insert(KorisnickiNalogUpsertDto request)
         {
             return Ok(await _service.Insert(request));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, KorisnickiNalogUpsertRequest request)
+        public IActionResult Update(int id, KorisnickiNalogUpsertDto request)
         {
             return Ok(_service.Update(id, request));
         }

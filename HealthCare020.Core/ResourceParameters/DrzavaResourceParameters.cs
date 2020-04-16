@@ -1,6 +1,6 @@
-﻿namespace HealthCare020.Core.Request
+﻿namespace HealthCare020.Core.ResourceParameters
 {
-    public class DrzavaSearchRequest
+    public class DrzavaResourceParameters:BaseResourceParameters
     {
         public int? Id { get; set; }
         public string Naziv { get; set; }

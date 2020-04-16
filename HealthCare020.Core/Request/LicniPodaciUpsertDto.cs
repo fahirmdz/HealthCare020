@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare020.Core.Request
 {
-    public class LicniPodaciUpsertRequest
+    public class LicniPodaciUpsertDto
     {
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
         [StringLength(maximumLength: 15, MinimumLength = 2)]

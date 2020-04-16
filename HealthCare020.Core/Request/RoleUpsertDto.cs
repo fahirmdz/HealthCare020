@@ -2,12 +2,10 @@
 
 namespace HealthCare020.Core.Request
 {
-    public class GradUpsertRequest
+    public class RoleUpsertDto
     {
         [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
-        [StringLength(maximumLength: 20, MinimumLength = 2, ErrorMessage = "Naziv mora sadrzati izmedju 2 i 20 karaktera")]
+        [StringLength(maximumLength:15,MinimumLength = 3,ErrorMessage = "Naziv role mora sadrzati izmedju 3 i 15 slova")]
         public string Naziv { get; set; }
-
-        public int DrzavaId { get; set; }
     }
 }

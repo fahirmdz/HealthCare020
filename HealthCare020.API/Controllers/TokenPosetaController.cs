@@ -1,13 +1,16 @@
 ﻿using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
+using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.API.Controllers
 {
-    public class TokenPosetaController : BaseCRUDController<TokenPoseta,TwoFields, TwoFieldsSearchRequest,TokenPosetaUpsertRequest, TokenPosetaUpsertRequest>
+    [Route("/api/token-poseta")]
+    public class TokenPosetaController : BaseCRUDController<TokenPoseta,TwoFieldsDto, TwoFieldsResourceParameters,TokenPosetaUpsertDto, TokenPosetaUpsertDto>
     {
-        public TokenPosetaController(ICRUDService<TokenPoseta, TwoFields, TwoFieldsSearchRequest, TokenPosetaUpsertRequest, TokenPosetaUpsertRequest> crudService) : base(crudService)
+        public TokenPosetaController(ICRUDService<TokenPoseta, TwoFieldsDto, TwoFieldsResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto> crudService) : base(crudService)
         {
         }
     }

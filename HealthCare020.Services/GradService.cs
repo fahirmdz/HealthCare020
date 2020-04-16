@@ -8,38 +8,40 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.Services
 {
-    public class GradService : BaseCRUDService<GradModel, GradSearchRequest, Grad, GradUpsertRequest, GradUpsertRequest>
+    public class GradService : BaseCRUDService<GradDto, GradResourceParameters, Grad, GradUpsertDto, GradUpsertDto>
     {
-        public GradService(IMapper mapper, HealthCare020DbContext dbContext) : base(mapper, dbContext)
+        public GradService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {
         }
 
-        public override async Task<GradModel> FindWithEagerLoad(int id)
+        public override async Task<GradDto> FindWithEagerLoad(int id)
         {
             var result = await _dbContext.Gradovi.Include(x => x.Drzava).FirstOrDefaultAsync(x => x.Id == id);
 
             if (result == null)
                 throw new NotFoundException("Grad nije pronadjen");
 
-            return _mapper.Map<GradModel>(result);
+            return _mapper.Map<GradDto>(result);
         }
 
-        public override async Task<IList<GradModel>> GetWithEagerLoad(GradSearchRequest search)
+        public override async Task<IList<GradDto>> GetWithEagerLoad(GradResourceParameters search)
         {
             var result = _dbContext.Gradovi.Include(x => x.Drzava);
 
             if (await result.AnyAsync())
             {
-                return await result.Select(x => _mapper.Map<GradModel>(x)).ToListAsync();
+                return await result.Select(x => _mapper.Map<GradDto>(x)).ToListAsync();
             }
 
-            return new List<GradModel>();
+            return new List<GradDto>();
         }
 
-        public override async Task<GradModel> Insert(GradUpsertRequest request)
+        public override async Task<GradDto> Insert(GradUpsertDto request)
         {
             if (!await _dbContext.Drzave.AnyAsync(x => x.Id == request.DrzavaId))
             {
@@ -51,10 +53,10 @@ namespace HealthCare020.Services
             await _dbContext.Gradovi.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<GradModel>(entity);
+            return _mapper.Map<GradDto>(entity);
         }
 
-        public override GradModel Update(int id, GradUpsertRequest request)
+        public override GradDto Update(int id, GradUpsertDto request)
         {
             var entity = _dbContext.Gradovi.Find(id);
 
@@ -71,7 +73,9 @@ namespace HealthCare020.Services
             _dbContext.Gradovi.Update(entity);
             _dbContext.SaveChanges();
 
-            return _mapper.Map<GradModel>(entity);
+            return _mapper.Map<GradDto>(entity);
         }
+
+       
     }
 }

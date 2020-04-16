@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services.Interfaces
 {
-    public interface IService<TEntity, TModel, TSearch>
+    public interface IService<TEntity, TDto, TResourceParameters>
     {
-        Task<IList<TModel>> Get(TSearch search);
+        Task<IList<TDto>> Get(TResourceParameters resourceParameters);
 
-        Task<IList<TModel>> GetWithEagerLoad(TSearch search);
+        Task<IList<TDto>> GetWithEagerLoad(TResourceParameters resourceParameters);
 
-        Task<TModel> GetById(int id);
+        Task<TDto> GetById(int id);
 
-        Task<TModel> FindWithEagerLoad(int id);
+        Task<TDto> FindWithEagerLoad(int id);
     }
 }

@@ -9,45 +9,47 @@ namespace HealthCare020.Services.Mappers
     {
         public Mapper()
         {
-            CreateMap<ZdravstvenoStanje, TwoFields>()
+            CreateMap<ZdravstvenoStanje, TwoFieldsDto>()
                 .ForMember(x => x.Value, opt => opt.MapFrom(x => x.Opis))
                 .ReverseMap();
 
-            CreateMap<ZdravstvenoStanjeUpsertRequest, ZdravstvenoStanje>()
+            CreateMap<ZdravstvenoStanjeUpsertDto, ZdravstvenoStanje>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<TokenPoseta, TwoFields>().ReverseMap();
-            CreateMap<TokenPosetaUpsertRequest, TokenPoseta>().ReverseMap();
+            CreateMap<TokenPoseta, TwoFieldsDto>().ReverseMap();
+            CreateMap<TokenPosetaUpsertDto, TokenPoseta>().ReverseMap();
 
-            CreateMap<Role, TwoFields>()
+            CreateMap<Role, TwoFieldsDto>()
                 .ForMember(x => x.Value, opt => opt.MapFrom(x => x.Naziv))
                 .ReverseMap();
-            CreateMap<RoleUpsertRequest, Role>().ReverseMap();
+            CreateMap<RoleUpsertDto, Role>().ReverseMap();
 
             CreateMap<Drzava, DrzavaUpsertRequest>().ReverseMap();
-            CreateMap<Drzava, DrzavaModel>().ReverseMap();
+            CreateMap<Drzava, DrzavaDto>().ReverseMap();
 
-            CreateMap<Grad, GradModel>().ReverseMap();
-            CreateMap<GradUpsertRequest, Grad>().ReverseMap();
+            CreateMap<Grad, GradDto>().ReverseMap();
+            CreateMap<GradUpsertDto, Grad>().ReverseMap();
 
-            CreateMap<KorisnickiNalog, KorisnickiNalogUpsertRequest>()
+            CreateMap<KorisnickiNalog, KorisnickiNalogUpsertDto>()
                 .ReverseMap()
                 .ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<KorisnickiNalog, KorisnickiNalogModel>().ReverseMap();
+            CreateMap<KorisnickiNalog, KorisnickiNalogDto>().ReverseMap();
 
-            CreateMap<LicniPodaci, LicniPodaciModel>().ReverseMap();
-            CreateMap<LicniPodaci, LicniPodaciUpsertRequest>()
+            CreateMap<LicniPodaci, LicniPodaciDto>().ReverseMap();
+            CreateMap<LicniPodaci, LicniPodaciUpsertDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
-            CreateMap<StacionarnoOdeljenje, TwoFields>()
+            CreateMap<StacionarnoOdeljenje, TwoFieldsDto>()
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(x => x.Naziv));
 
-            CreateMap<StacionarnoOdeljenjeUpsertRequest, StacionarnoOdeljenje>();
+            CreateMap<StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenje>();
 
-            CreateMap<RoleKorisnickiNalog, RoleKorisnickiNalogModel>();
-            CreateMap<KorisnickiNalogRoleUpsertRequest, RoleKorisnickiNalog>();
+            CreateMap<RoleKorisnickiNalog, RoleKorisnickiNalogDto>();
+            CreateMap<KorisnickiNalogRoleUpsertDto, RoleKorisnickiNalog>();
+
+            CreateMap<Radnik, RadnikDto>();
         }
     }
 }

@@ -6,19 +6,19 @@ namespace HealthCare020.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<TEntity,TModel, TSearch> : ControllerBase
+    public class BaseController<TEntity,TDto, TResourceParameters> : ControllerBase
     {
-        private readonly IService<TEntity,TModel, TSearch> _service;
+        private readonly IService<TEntity,TDto, TResourceParameters> _service;
 
-        public BaseController(IService<TEntity, TModel, TSearch> service)
+        public BaseController(IService<TEntity, TDto, TResourceParameters> service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] TSearch serach,bool? eagerLoaded=false)
+        public async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters,bool? eagerLoaded=false)
         {
-            var result = eagerLoaded.HasValue && eagerLoaded.Value ? await _service.GetWithEagerLoad(serach):await _service.Get(serach);
+            var result = eagerLoaded.HasValue && eagerLoaded.Value ? await _service.GetWithEagerLoad(resourceParameters):await _service.Get(resourceParameters);
 
             if (result == null)
                 return NotFound();
