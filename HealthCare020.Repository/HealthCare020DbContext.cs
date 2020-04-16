@@ -10,8 +10,6 @@ namespace HealthCare020.Repository
         {
         }
 
-    
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

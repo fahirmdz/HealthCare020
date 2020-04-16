@@ -15,5 +15,9 @@
         public string BrojTelefona { get; set; }
 
         public string Grad { get; set; }
+
+        public bool EagerLoaded { get; set; } = false;
+
+
     }
 }

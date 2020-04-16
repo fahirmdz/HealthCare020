@@ -7,9 +7,11 @@ using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.Services
@@ -32,22 +34,7 @@ namespace HealthCare020.Services
 
             return new List<RoleKorisnickiNalogDto>();
         }
-
-        public override async Task<IList<RoleKorisnickiNalogDto>> GetWithEagerLoad(KorisnickiNalogRoleResourceParameters search)
-        {
-            var result = _dbContext.RolesKorisnickiNalozi
-                .Include(x => x.KorisnickiNalog)
-                .Include(x => x.Role)
-                .AsQueryable();
-
-            if (await result.AnyAsync())
-            {
-                result = await SearchFilter(result, search);
-                return await result.Select(x => _mapper.Map<RoleKorisnickiNalogDto>(x)).ToListAsync();
-            }
-
-            return new List<RoleKorisnickiNalogDto>();
-        }
+        
 
         public override async Task<RoleKorisnickiNalogDto> Insert(KorisnickiNalogRoleUpsertDto request)
         {
@@ -82,19 +69,6 @@ namespace HealthCare020.Services
 
             _dbContext.Update(entity);
             _dbContext.SaveChanges();
-
-            return _mapper.Map<RoleKorisnickiNalogDto>(entity);
-        }
-
-        public override async Task<RoleKorisnickiNalogDto> FindWithEagerLoad(int id)
-        {
-            var entity = await _dbContext.RolesKorisnickiNalozi
-                .Include(x => x.KorisnickiNalog)
-                .Include(x => x.Role)
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (entity == null)
-                throw new NotFoundException("Not Found");
 
             return _mapper.Map<RoleKorisnickiNalogDto>(entity);
         }

@@ -15,9 +15,9 @@ namespace HealthCare020.Services.Configuration
         {
             services.AddSingleton((new MapperConfiguration(cfg => cfg.AddProfile(new Mappers.Mapper())).CreateMapper()));
 
-            services.AddScoped<ICRUDService<ZdravstvenoStanje, TwoFieldsDto, TwoFieldsResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
+            services.AddScoped<ICRUDService<ZdravstvenoStanje, ZdravstvenoStanjeDto, ZdravstvenoStanjeResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
             services.AddScoped<ICRUDService<Role, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>, RoleService>();
-            services.AddScoped<ICRUDService<TokenPoseta, TwoFieldsDto, TwoFieldsResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
+            services.AddScoped<ICRUDService<TokenPoseta, TokenPosetaDto, TokenPosetaResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
             services
                 .AddScoped<ICRUDService<Drzava, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>,
                     DrzavaService>();
@@ -32,7 +32,7 @@ namespace HealthCare020.Services.Configuration
                 .AddScoped<ICRUDService<RoleKorisnickiNalog, RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters,
                     KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>, RoleKorisnikService>();
             services
-                .AddScoped<ICRUDService<Radnik, RadnikDto, RadnikResourceParameters, RadnikUpsertDto,
+                .AddScoped<ICRUDService<Radnik, RadnikDtoEagerLoaded, RadnikResourceParameters, RadnikUpsertDto,
                     RadnikUpsertDto>, RadnikService>();
 
             services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();

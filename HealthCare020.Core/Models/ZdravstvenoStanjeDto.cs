@@ -1,8 +1,8 @@
 ﻿namespace HealthCare020.Core.Models
 {
-    public class TwoFieldsDto
+    public class ZdravstvenoStanjeDto
     {
         public int Id { get; set; }
-        public string Naziv { get; set; }
+        public string Opis { get; set; }
     }
 }

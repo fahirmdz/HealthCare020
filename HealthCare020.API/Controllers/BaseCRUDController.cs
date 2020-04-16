@@ -1,10 +1,11 @@
 ﻿using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.API.Controllers
 {
-    public class BaseCRUDController<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto, TResourceParameters>
+    public class BaseCRUDController<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto, TResourceParameters> where TResourceParameters: BaseResourceParameters
     {
         private readonly ICRUDService<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> _crudService;
 

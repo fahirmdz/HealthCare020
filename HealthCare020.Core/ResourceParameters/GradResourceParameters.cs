@@ -6,5 +6,7 @@
         public string Naziv { get; set; }
         public string DrzavaNaziv { get; set; }
         public int? DrzavaId { get; set; }
+        public bool EagerLoaded { get; set; } = false;
+
     }
 }

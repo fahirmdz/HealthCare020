@@ -46,7 +46,7 @@ namespace HealthCare020.Services.Services
                 var propertyName = indexOfFirstSpace == -1 ? trimmedField : trimmedField.Remove(indexOfFirstSpace);
 
                 //find matching property
-                if (!propertyMapping.ContainsKey(propertyName.ToLower()))
+                if (!propertyMapping.ContainsKey(propertyName))
                 {
                     return false;
                 }

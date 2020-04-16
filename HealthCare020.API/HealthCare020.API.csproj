@@ -28,9 +28,5 @@
     <ProjectReference Include="..\HealthCare020.Services\HealthCare020.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ResourceParameters\" />
-  </ItemGroup>
-
 
 </Project>

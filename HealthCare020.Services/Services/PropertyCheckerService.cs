@@ -21,7 +21,7 @@ namespace HealthCare020.Services.Services
 
                 //check property on T using reflection
                 var propertyInfo = typeof(T).GetProperty(propertyName,
-                    BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+                    BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance |BindingFlags.FlattenHierarchy);
 
                 //it can't be found, return false
                 if (propertyInfo == null)

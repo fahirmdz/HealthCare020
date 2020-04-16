@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,6 +10,7 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
+using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,32 +22,17 @@ namespace HealthCare020.Services
         {
         }
 
-        public override async Task<LicniPodaciDto> FindWithEagerLoad(int id)
+
+        public override IQueryable<LicniPodaci> GetWithEagerLoad(int? id=null)
         {
-            var result = await _dbContext.LicniPodaci
+            var result = _dbContext.LicniPodaci
                 .Include(x => x.Grad)
-                .ThenInclude(x=>x.Drzava)
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (result == null)
-                throw new NotFoundException("Licni podaci nisu pronadjen");
-
-            return _mapper.Map<LicniPodaciDto>(result);
-        }
-
-        public override async Task<IList<LicniPodaciDto>> GetWithEagerLoad(LicniPodaciResourceParameters search)
-        {
-            var result =  _dbContext.LicniPodaci
-                .Include(x => x.Grad)
-                .ThenInclude(x=>x.Drzava)
                 .AsQueryable();
 
-            if (await result.AnyAsync())
-            {
-                return await result.Select(x => _mapper.Map<LicniPodaciDto>(x)).ToListAsync();
-            }
+            if (id.HasValue)
+                result = result.Where(x => x.Id == id);
 
-            return new List<LicniPodaciDto>();
+            return result;
         }
 
         public override async Task<LicniPodaciDto> Insert(LicniPodaciUpsertDto request)
