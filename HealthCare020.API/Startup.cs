@@ -24,7 +24,7 @@ namespace HealthCare020.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HealthCare020DbContext>(x =>
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(true));
 
             services.AddSwaggerGen(x =>
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthCare020 API", Version = "v1" }));

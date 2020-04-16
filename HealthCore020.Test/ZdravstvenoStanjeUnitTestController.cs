@@ -79,7 +79,7 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var zdravstvenoStanje = okResult.Value.Should().BeAssignableTo<TwoFields>().Subject;
+            var zdravstvenoStanje = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
 
             Assert.Equal("TestOpis1", zdravstvenoStanje.Value);
         }
@@ -114,7 +114,7 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var zdravstvenaStanja = okResult.Value.Should().BeOfType<List<TwoFields>>().Subject;
+            var zdravstvenaStanja = okResult.Value.Should().BeOfType<List<TwoFieldsDto>>().Subject;
 
             Assert.Equal("TestOpis1", zdravstvenaStanja[0].Value);
             Assert.Equal("TestOpis2", zdravstvenaStanja[1].Value);
@@ -129,7 +129,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertRequest() { Opis = "Odlicno" };
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "Odlicno" };
 
             //Act
             var data = await controller.Insert(zdravstvenoStanjeUpsertRequest);
@@ -143,7 +143,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertRequest() { Opis = "a" }; //Mora imati 3 ili vise slova
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "a" }; //Mora imati 3 ili vise slova
 
             //Act
             controller.ValidateViewModel(zdravstvenoStanjeUpsertRequest);
@@ -157,7 +157,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertRequest() { Opis = "Sjajno" }; //Mora imati 3 ili vise slova
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "Sjajno" }; //Mora imati 3 ili vise slova
 
             //Act
             var data = await controller.Insert(zdravstvenoStanjeUpsertRequest);
@@ -166,7 +166,7 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<TwoFields>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
 
             Assert.Equal("Sjajno", result.Value);
         }
@@ -185,11 +185,11 @@ namespace HealthCore020.Test
             //Act
             var existingEntity = await controller.GetById(zdravstvenoStanjeId);
             var okResult = existingEntity.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<TwoFields>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
 
             Assert.NotNull(result);
 
-            var zdravstvenoStanje = new ZdravstvenoStanjeUpsertRequest
+            var zdravstvenoStanje = new ZdravstvenoStanjeUpsertDto
             {
                 Opis = "UpdatedOpis1"
             };
@@ -210,11 +210,11 @@ namespace HealthCore020.Test
 
             var entity = await controller.GetById(zdravstvenoStanjeId);
             var okResult = entity.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<TwoFields>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
 
             Assert.NotNull(result);
 
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertRequest() { Opis = "a" }; //Mora imati 3 ili vise slova
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "a" }; //Mora imati 3 ili vise slova
 
             //Act
             controller.ValidateViewModel(zdravstvenoStanjeUpsertRequest);
@@ -230,7 +230,7 @@ namespace HealthCore020.Test
             var controller = new ZdravstvenoStanjeController(_service);
             var zdravstvenoStanjeId = 10;
 
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertRequest() { Opis = "aaaaa" }; 
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "aaaaa" }; 
 
             //Act
             NotFoundException ex =  Assert.Throws<NotFoundException>(() => controller.Update(zdravstvenoStanjeId,zdravstvenoStanjeUpsertRequest));

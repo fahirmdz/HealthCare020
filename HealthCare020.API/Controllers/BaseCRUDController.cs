@@ -1,29 +1,30 @@
 ﻿using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.API.Controllers
 {
-    public class BaseCRUDController<TEntity, TModel, TSerach, TInsert, TUpdate> : BaseController<TEntity, TModel, TSerach>
+    public class BaseCRUDController<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto, TResourceParameters> where TResourceParameters: BaseResourceParameters
     {
-        private readonly ICRUDService<TEntity, TModel, TSerach, TInsert, TUpdate> _crudService;
+        private readonly ICRUDService<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> _crudService;
 
-        public BaseCRUDController(ICRUDService<TEntity, TModel, TSerach, TInsert, TUpdate> crudService) : base(crudService)
+        public BaseCRUDController(ICRUDService<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> crudService) : base(crudService)
         {
             _crudService = crudService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert(TInsert request)
+        public async Task<IActionResult> Insert(TDtoForCreation dtoForCreation)
         {
-            var result = await _crudService.Insert(request);
+            var result = await _crudService.Insert(dtoForCreation);
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, TUpdate request)
+        public IActionResult Update(int id, TDtoForUpdate dtoForUpdate)
         {
-            var result = _crudService.Update(id, request);
+            var result = _crudService.Update(id, dtoForUpdate);
             return Ok(result);
         }
 

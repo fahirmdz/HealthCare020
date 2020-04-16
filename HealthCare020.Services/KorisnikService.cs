@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,7 @@ namespace HealthCare020.Services
             _dbContext = dbContext;
         }
 
-        public async Task<IList<KorisnickiNalogModel>> Get(KorisnickiNalogSearchRequest request)
+        public async Task<IList<KorisnickiNalogDto>> Get(KorisnickiNalogResourceParameters request)
         {
             var result =  _dbContext.KorisnickiNalozi.AsQueryable();
 
@@ -35,20 +36,20 @@ namespace HealthCare020.Services
                 result = result.Where(x => x.Username.StartsWith(request.Username));
             }
 
-            return result.Select(x => _mapper.Map<KorisnickiNalogModel>(x)).ToList();
+            return result.Select(x => _mapper.Map<KorisnickiNalogDto>(x)).ToList();
         }
 
-        public async Task<KorisnickiNalogModel> GetById(int id)
+        public async Task<KorisnickiNalogDto> GetById(int id)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
             if (korisnickiNalog == null)
                 throw new NotFoundException("Korisnicki nalog nije pronadjen");
 
-            return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
+            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
         }
 
-        public async Task<KorisnickiNalogModel> Insert(KorisnickiNalogUpsertRequest request)
+        public async Task<KorisnickiNalogDto> Insert(KorisnickiNalogUpsertDto request)
         {
             var korisnickiNalog = _mapper.Map<KorisnickiNalog>(request);
 
@@ -66,10 +67,10 @@ namespace HealthCare020.Services
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
+            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
         }
 
-        public KorisnickiNalogModel Update(int id, KorisnickiNalogUpsertRequest request)
+        public KorisnickiNalogDto Update(int id, KorisnickiNalogUpsertDto request)
         {
             var korisnickiNalog = _dbContext.KorisnickiNalozi.Find(id);
 
@@ -90,10 +91,10 @@ namespace HealthCare020.Services
             _dbContext.KorisnickiNalozi.Update(korisnickiNalog);
             _dbContext.SaveChanges();
 
-            return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
+            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
         }
 
-        public KorisnickiNalogModel Delete(int id)
+        public KorisnickiNalogDto Delete(int id)
         {
             var korisnickiNalog = _dbContext.KorisnickiNalozi.Find(id);
 
@@ -103,10 +104,10 @@ namespace HealthCare020.Services
             _dbContext.KorisnickiNalozi.Remove(korisnickiNalog);
             _dbContext.SaveChanges();
 
-            return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
+            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
         }
 
-        public async Task<KorisnickiNalogModel> Authenticate(string username, string password)
+        public async Task<KorisnickiNalogDto> Authenticate(string username, string password)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FirstAsync(x => x.Username == username);
 
@@ -115,7 +116,7 @@ namespace HealthCare020.Services
                 var newHash = GenerateHash(korisnickiNalog.PasswordSalt, password);
 
                 if (newHash == korisnickiNalog.PasswordHash)
-                    return _mapper.Map<KorisnickiNalogModel>(korisnickiNalog);
+                    return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
             }
             return null;
         }

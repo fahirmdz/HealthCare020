@@ -206,6 +206,11 @@ namespace HealthCare020.Repository.Migrations
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
+                    b.Property<string>("JMBG")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(12)")
+                        .HasMaxLength(12);
+
                     b.Property<string>("Pol")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
@@ -467,30 +472,30 @@ namespace HealthCare020.Repository.Migrations
             modelBuilder.Entity("HealthCare020.Core.Entities.CustomIzvestaj", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.MedicinskiTehnicar", "MedicinskiTehnicar")
-                        .WithMany()
+                        .WithMany("CustomIzvestaji")
                         .HasForeignKey("MedicinskiTehnicarId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
-                        .WithMany()
+                        .WithMany("CustomIzvestaji")
                         .HasForeignKey("PacijentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.DnevniIzvestaj", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.MedicinskiTehnicar", "MedicinskiTehnicar")
-                        .WithMany()
+                        .WithMany("DnevniIzvestaji")
                         .HasForeignKey("MedicinskiTehnicarId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
-                        .WithMany()
+                        .WithMany("DnevniIzvestaji")
                         .HasForeignKey("PacijentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HealthCare020.Core.Entities.ZdravstvenoStanje", "ZdravstvenoStanje")
@@ -518,9 +523,9 @@ namespace HealthCare020.Repository.Migrations
             modelBuilder.Entity("HealthCare020.Core.Entities.Grad", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.Drzava", "Drzava")
-                        .WithMany()
+                        .WithMany("Gradovi")
                         .HasForeignKey("DrzavaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -560,9 +565,9 @@ namespace HealthCare020.Repository.Migrations
             modelBuilder.Entity("HealthCare020.Core.Entities.Poseta", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
-                        .WithMany()
+                        .WithMany("Posete")
                         .HasForeignKey("PacijentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -614,9 +619,9 @@ namespace HealthCare020.Repository.Migrations
             modelBuilder.Entity("HealthCare020.Core.Entities.UputZaLecenje", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.Doktor", "Doktor")
-                        .WithMany()
+                        .WithMany("UputiZaLecenje")
                         .HasForeignKey("DoktorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HealthCare020.Core.Entities.LicniPodaci", "LicniPodaci")
