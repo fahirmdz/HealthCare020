@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -29,7 +30,7 @@ namespace HealthCare020.Services
             _korisnikService = korisnikService;
         }
 
-        public override async Task<IList<RadnikDto>> Get(RadnikResourceParameters search)
+        public override async Task<IEnumerable> Get(RadnikResourceParameters search)
         {
             var result = _dbContext.Radnici
                 .Include(x => x.LicniPodaci)

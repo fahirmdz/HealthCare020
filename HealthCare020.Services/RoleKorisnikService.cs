@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -19,7 +20,7 @@ namespace HealthCare020.Services
         {
         }
 
-        public override async Task<IList<RoleKorisnickiNalogDto>> Get(KorisnickiNalogRoleResourceParameters search)
+        public override async Task<IEnumerable> Get(KorisnickiNalogRoleResourceParameters search)
         {
             var result = _dbContext.RolesKorisnickiNalozi.AsQueryable();
 

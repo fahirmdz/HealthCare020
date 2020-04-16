@@ -5,10 +5,13 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Services.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.Services
 {
@@ -27,7 +30,7 @@ namespace HealthCare020.Services
             _propertyCheckerService = propertyCheckerService;
         }
 
-        public virtual async Task<IList<TDto>> Get(TResourceParameters resourceParameters)
+        public virtual async Task<IEnumerable> Get(TResourceParameters resourceParameters)
         {
             if (!_propertyCheckerService.TypeHasProperties<TDto>(resourceParameters.Fields))
             {
@@ -43,7 +46,8 @@ namespace HealthCare020.Services
             var result = await _dbContext.Set<TEntity>().ToListAsync();
 
             if (result.Any())
-                return _mapper.Map<List<TDto>>(result);
+                return _mapper.Map<List<TDto>>(result).ShapeData(resourceParameters.Fields);
+
             return new List<TDto>();
         }
 
