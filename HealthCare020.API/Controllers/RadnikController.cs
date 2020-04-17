@@ -8,12 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.API.Controllers
 {
-    public class RadnikController : BaseCRUDController<Radnik, RadnikDtoEagerLoaded, RadnikResourceParameters, RadnikUpsertDto, RadnikUpsertDto>
+    public class RadnikController : BaseCRUDController<Radnik, RadnikDtoLazyLoaded,RadnikDtoEagerLoaded, RadnikResourceParameters, RadnikUpsertDto, RadnikUpsertDto>
     {
-        public RadnikController(ICRUDService<Radnik, RadnikDtoEagerLoaded, RadnikResourceParameters, RadnikUpsertDto, RadnikUpsertDto> crudService) : base(crudService)
+        public RadnikController(ICRUDService<Radnik, RadnikDtoLazyLoaded, RadnikDtoEagerLoaded, RadnikResourceParameters, RadnikUpsertDto, RadnikUpsertDto> crudService) : base(crudService)
         {
         }
-
-        
     }
 }

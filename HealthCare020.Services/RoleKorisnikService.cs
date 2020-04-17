@@ -16,7 +16,7 @@ using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.Services
 {
-    public class RoleKorisnikService : BaseCRUDService<RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters, RoleKorisnickiNalog, KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>
+    public class RoleKorisnikService : BaseCRUDService<RoleKorisnickiNalogDto,RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters, RoleKorisnickiNalog, KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>
     {
         public RoleKorisnikService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {

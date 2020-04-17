@@ -6,9 +6,9 @@ using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.API.Controllers
 {
-    public class RoleController : BaseCRUDController<Role,TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>
+    public class RoleController : BaseCRUDController<Role,TwoFieldsDto,TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>
     {
-        public RoleController(ICRUDService<Role, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto> crudService) : base(crudService)
+        public RoleController(ICRUDService<Role, TwoFieldsDto,TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto> crudService) : base(crudService)
         {
         }
     }

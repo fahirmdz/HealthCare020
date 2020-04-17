@@ -6,9 +6,9 @@ using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.API.Controllers
 {
-    public class DrzavaController : BaseCRUDController<Drzava,DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>
+    public class DrzavaController : BaseCRUDController<Drzava,DrzavaDto,DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>
     {
-        public DrzavaController(ICRUDService<Drzava, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest> crudService) : base(crudService)
+        public DrzavaController(ICRUDService<Drzava, DrzavaDto, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest> crudService) : base(crudService)
         {
         }
     }

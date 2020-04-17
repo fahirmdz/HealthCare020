@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Components;
 namespace HealthCare020.API.Controllers
 {
     [Route("/api/stacionarno-odeljenje")]
-    public class StacionarnoOdeljenjeController : BaseCRUDController<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>
+    public class StacionarnoOdeljenjeController : BaseCRUDController<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsDto,TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>
     {
-        public StacionarnoOdeljenjeController(ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto> crudService) : base(crudService)
+        public StacionarnoOdeljenjeController(ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsDto,TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto> crudService) : base(crudService)
         {
         }
     }

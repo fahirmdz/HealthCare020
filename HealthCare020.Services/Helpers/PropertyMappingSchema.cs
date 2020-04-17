@@ -53,7 +53,6 @@ namespace HealthCare020.Services.Helpers
                 {new PropertyMapping<RadnikDtoLazyLoaded,Radnik>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(RadnikDtoLazyLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(Radnik.Id)})},
-                        {nameof(RadnikDtoLazyLoaded.ImePrezime),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.Ime)},{nameof(Radnik.LicniPodaci.Prezime)}})},
                         {nameof(RadnikDtoLazyLoaded.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaciId)}})},
                         {nameof(RadnikDtoLazyLoaded.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.StacionarnoOdeljenjeId)}})},
                         {nameof(RadnikDtoLazyLoaded.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.KorisnickiNalogId)}})},

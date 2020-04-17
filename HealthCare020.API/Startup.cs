@@ -1,13 +1,19 @@
+using System.Linq;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
 using HealthCare020.Services.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace HealthCare020.API
 {
@@ -28,9 +34,42 @@ namespace HealthCare020.API
 
             services.AddSwaggerGen(x =>
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthCare020 API", Version = "v1" }));
+
+            services.TryAddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             services.AddHealthCare020Services();
 
-            services.AddControllers(cfg => cfg.Filters.Add(typeof(ErrorFilter)));
+            services.AddControllers(cfg =>
+                {
+                    cfg.Filters.Add(typeof(ErrorFilter));
+                    cfg.ReturnHttpNotAcceptable = true;
+                }).AddNewtonsoftJson(setupAction =>
+                  {
+                    //Input and output JSON formatters
+
+                   setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                  }).AddXmlDataContractSerializerFormatters()
+                .ConfigureApiBehaviorOptions(config =>
+                {
+                    config.InvalidModelStateResponseFactory = context =>
+                    {
+                        var problemDetails = new ValidationProblemDetails(context.ModelState)
+                        {
+                            Type = "Model state validation error",
+                            Status = StatusCodes.Status422UnprocessableEntity,
+                            Title = "One or more validation errors occurred",
+                            Detail = "See the errors field for details.",
+                            Instance = context.HttpContext.Request.Path
+                        };
+
+                        problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+
+                        return new UnprocessableEntityObjectResult(problemDetails)
+                        {
+                            ContentTypes = {"application/problem+json"}
+                        };
+                    };
+                });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,7 +7,9 @@ using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.Services
 {
-    public class BaseCRUDService<TDto, TResourceParameters, TEntity, TDtoForCreation, TDtoForUpdate> : BaseService<TDto, TResourceParameters, TEntity>, ICRUDService<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> where TEntity : class where TResourceParameters: BaseResourceParameters
+    public class BaseCRUDService<TDto,TDtoEagerLoaded, TResourceParameters, TEntity, TDtoForCreation, TDtoForUpdate> : BaseService<TDto,TDtoEagerLoaded, 
+        TResourceParameters, TEntity>, ICRUDService<TEntity, TDto,TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate>
+        where TEntity : class where TResourceParameters: BaseResourceParameters
     {
 
         public BaseCRUDService(IMapper mapper, HealthCare020DbContext dbContext,

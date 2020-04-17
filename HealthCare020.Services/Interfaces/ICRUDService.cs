@@ -2,12 +2,12 @@
 
 namespace HealthCare020.Services.Interfaces
 {
-    public interface ICRUDService<TEntity, TModel,TSearch,TInsert,TUpdate>:IService<TEntity, TModel,TSearch>
+    public interface ICRUDService<TEntity, TDto, TDtoEagerLoaded, TResourceParameters,TDtoForCreation,TDtoForUpdate>:IService<TEntity,TResourceParameters>
     {
-        Task<TModel> Insert(TInsert request);
+        Task<TDto> Insert(TDtoForCreation request);
 
-        TModel Update(int id, TUpdate request);
+        TDto Update(int id, TDtoForUpdate request);
 
-        TModel Delete(int id);
+        TDto Delete(int id);
     }
 }

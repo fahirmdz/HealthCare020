@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
 {
-    public class LicniPodaciService: BaseCRUDService<LicniPodaciDto,LicniPodaciResourceParameters,LicniPodaci,LicniPodaciUpsertDto,LicniPodaciUpsertDto>
+    public class LicniPodaciService: BaseCRUDService<LicniPodaciDto,LicniPodaciDtoEagerLoaded,LicniPodaciResourceParameters,LicniPodaci,LicniPodaciUpsertDto,LicniPodaciUpsertDto>
     {
         public LicniPodaciService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {

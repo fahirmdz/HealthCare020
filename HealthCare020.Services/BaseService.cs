@@ -4,16 +4,17 @@ using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.Services
 {
-    public class BaseService<TDto, TResourceParameters, TEntity> : IService<TEntity, TDto, TResourceParameters> where TEntity : class where TResourceParameters : BaseResourceParameters
+    public class BaseService<TDto, TDtoEagerLoaded, TResourceParameters, TEntity> : IService<TEntity, TResourceParameters> where TEntity : class where TResourceParameters : BaseResourceParameters
     {
         protected readonly HealthCare020DbContext _dbContext;
         protected readonly IMapper _mapper;
@@ -30,11 +31,9 @@ namespace HealthCare020.Services
 
         public virtual async Task<IEnumerable> Get(TResourceParameters resourceParameters)
         {
-            var eagerLoadedProp = resourceParameters.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
-
             IQueryable<TEntity> result;
 
-            if (eagerLoadedProp != null && (bool)eagerLoadedProp)
+            if (ShouldEagerLoad(resourceParameters))
             {
                 result = GetWithEagerLoad();
             }
@@ -43,7 +42,7 @@ namespace HealthCare020.Services
                 //check prop and prop mapping
                 PropertyCheck<TDto>(resourceParameters.Fields);
 
-                result = _dbContext.Set<TEntity>();
+                result = _dbContext.Set<TEntity>().AsQueryable();
             }
 
             var resultToReturn = await FilterAndPrepare(result, resourceParameters);
@@ -56,13 +55,13 @@ namespace HealthCare020.Services
             throw new NotImplementedException();
         }
 
+
         public async Task<ExpandoObject> GetById(int id, TResourceParameters resourceParameters)
         {
-            var eagerLoadedProp = resourceParameters.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
-
             TEntity result;
+            var eagerLoad = ShouldEagerLoad(resourceParameters);
 
-            if (eagerLoadedProp != null && (bool)eagerLoadedProp)
+            if (eagerLoad)
             {
                 result = GetWithEagerLoad(id).FirstOrDefault();
             }
@@ -77,27 +76,55 @@ namespace HealthCare020.Services
             if (result == null)
                 throw new NotFoundException("Not Found");
 
-            var resultToReturn = await FilterAndPrepare(result,resourceParameters);
+            if(eagerLoad)
+             return PrepareDataForClient<TDtoEagerLoaded>(result,resourceParameters).ShapeData(resourceParameters.Fields);
+            
+            return PrepareDataForClient<TDto>(result,resourceParameters).ShapeData(resourceParameters.Fields);
 
-            return resultToReturn;
         }
 
         /// <summary>
-        /// Prepare data for client
+        /// Filtering and pagination
         /// </summary>
-        /// <param name="result"></param>
-        /// <param name="resourceParameters"></param>
-        /// <returns></returns>
-        public virtual async Task<IEnumerable> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters)
+        public virtual async Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters)
         {
-            return result.Select(x => _mapper.Map<TDto>(x)).AsEnumerable().ShapeData(resourceParameters.Fields);
+            //Apply pagination
+              return PagedList<TEntity>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
 
-        public virtual async Task<ExpandoObject> FilterAndPrepare(TEntity entity, TResourceParameters resourceParameters)
+
+        /// <summary>
+        /// Mapping entities to the data type for a client
+        /// </summary>
+        public virtual IEnumerable PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters)
         {
-            return _mapper.Map<TDto>(entity).ShapeData(resourceParameters.Fields);
+            if (ShouldEagerLoad(resourceParameters))
+                return data.Select(x => _mapper.Map<TDtoEagerLoaded>(x));
+
+            return data.Select(x => _mapper.Map<TDto>(x));
         }
 
+        /// <summary>
+        /// Mapping entity to the data type for a client
+        /// </summary>
+        public virtual T PrepareDataForClient<T>(TEntity data, TResourceParameters resourceParameters)
+        {
+                return _mapper.Map<T>(data);
+        }
+
+        /// <summary>
+        /// Get the value of EagerLoad property from ResourceParameters if it exists.
+        /// </summary>
+        public bool ShouldEagerLoad(TResourceParameters resourceParameters)
+        {
+            var eagerLoadedProp = resourceParameters.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
+
+            return eagerLoadedProp != null && (bool)eagerLoadedProp;
+        }
+
+        /// <summary>
+        /// Check if properties exist
+        /// </summary>
         public void PropertyCheck<TType>(string fields)
         {
             if (!_propertyCheckerService.TypeHasProperties<TType>(fields))

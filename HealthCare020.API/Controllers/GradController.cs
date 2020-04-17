@@ -6,9 +6,9 @@ using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.API.Controllers
 {
-    public class GradController : BaseCRUDController<Grad,GradDto, GradResourceParameters,GradUpsertDto, GradUpsertDto>
+    public class GradController : BaseCRUDController<Grad,GradDto,GradDtoEagerLoaded, GradResourceParameters,GradUpsertDto, GradUpsertDto>
     {
-        public GradController(ICRUDService<Grad, GradDto, GradResourceParameters, GradUpsertDto, GradUpsertDto> crudService) : base(crudService)
+        public GradController(ICRUDService<Grad, GradDto, GradDtoEagerLoaded, GradResourceParameters, GradUpsertDto, GradUpsertDto> crudService) : base(crudService)
         {
         }
     }

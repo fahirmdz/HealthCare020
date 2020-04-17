@@ -52,9 +52,7 @@ namespace HealthCare020.Services.Mappers
             CreateMap<RoleKorisnickiNalog, RoleKorisnickiNalogDto>();
             CreateMap<KorisnickiNalogRoleUpsertDto, RoleKorisnickiNalog>();
 
-            CreateMap<Radnik, RadnikDtoLazyLoaded>()
-                .ForMember(dest => dest.ImePrezime,
-                    opt => opt.MapFrom(x => x.LicniPodaci.Ime +" "+ x.LicniPodaci.Prezime));
+            CreateMap<Radnik, RadnikDtoLazyLoaded>();
 
             CreateMap<Radnik, RadnikDtoEagerLoaded>()
                 .ForMember(dest => dest.ImePrezime,
