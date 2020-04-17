@@ -125,7 +125,7 @@ namespace HealthCare020.Services
             result=result.Include(x => x.LicniPodaci);
 
             if (resourceParameters.EagerLoaded)
-                PropertyCheck<RadnikDtoEagerLoaded>(resourceParameters.Fields);
+                PropertyCheck<RadnikDtoEagerLoaded>(resourceParameters.Fields,resourceParameters.OrderBy);
 
             var pagedResult = PagedList<Radnik>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
 

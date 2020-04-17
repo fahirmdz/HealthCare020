@@ -69,7 +69,7 @@ namespace HealthCare020.Services
         public override async Task<PagedList<Grad>> FilterAndPrepare(IQueryable<Grad> result, GradResourceParameters resourceParameters)
         {
             if (resourceParameters.EagerLoaded)
-                PropertyCheck<GradDtoEagerLoaded>(resourceParameters.Fields);
+                PropertyCheck<GradDtoEagerLoaded>(resourceParameters.Fields,resourceParameters.OrderBy);
 
             return PagedList<Grad>.Create(result, resourceParameters.PageNumber,
                 resourceParameters.PageSize);

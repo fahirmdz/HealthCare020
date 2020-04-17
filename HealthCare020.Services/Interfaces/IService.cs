@@ -10,7 +10,7 @@ namespace HealthCare020.Services.Interfaces
 {
     public interface IService<TEntity, TResourceParameters>
     {
-        Task<IEnumerable> Get(TResourceParameters resourceParameters);
+        Task<ServiceSequenceResult> Get(TResourceParameters resourceParameters);
 
         IQueryable<TEntity> GetWithEagerLoad(int? id = null);
 

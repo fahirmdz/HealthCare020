@@ -29,7 +29,7 @@ namespace HealthCare020.Services
             _propertyCheckerService = propertyCheckerService;
         }
 
-        public virtual async Task<IEnumerable> Get(TResourceParameters resourceParameters)
+        public virtual async Task<ServiceSequenceResult> Get(TResourceParameters resourceParameters)
         {
             IQueryable<TEntity> result;
 
@@ -40,14 +40,26 @@ namespace HealthCare020.Services
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.Fields);
+                PropertyCheck<TDto>(resourceParameters.Fields,resourceParameters.OrderBy);
 
                 result = _dbContext.Set<TEntity>().AsQueryable();
             }
 
-            var resultToReturn = await FilterAndPrepare(result, resourceParameters);
+            var pagedResult = await FilterAndPrepare(result, resourceParameters);
 
-            return resultToReturn;
+            var serviceResultToReturn = new ServiceSequenceResult
+            {
+                PaginationMetadata = new PaginationMetadata
+                {
+                    CurrentPage = pagedResult.CurrentPage,
+                    PageSize = pagedResult.PageSize,
+                    TotalCount = pagedResult.TotalCount,
+                    TotalPages = pagedResult.TotalPages
+                },
+                Data = PrepareDataForClient(pagedResult,resourceParameters)
+            };
+
+            return serviceResultToReturn;
         }
 
         public virtual IQueryable<TEntity> GetWithEagerLoad(int? id = null)
@@ -68,7 +80,7 @@ namespace HealthCare020.Services
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.Fields);
+                PropertyCheck<TDto>(resourceParameters.Fields,resourceParameters.OrderBy);
 
                 result = _dbContext.Set<TEntity>().Find(id);
             }
@@ -88,6 +100,7 @@ namespace HealthCare020.Services
         /// </summary>
         public virtual async Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters)
         {
+
             //Apply pagination
               return PagedList<TEntity>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
@@ -99,9 +112,33 @@ namespace HealthCare020.Services
         public virtual IEnumerable PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters)
         {
             if (ShouldEagerLoad(resourceParameters))
-                return data.Select(x => _mapper.Map<TDtoEagerLoaded>(x));
+            {
+                var dataWithFinalTypeEagerLoaded= data.Select(x => _mapper.Map<TDtoEagerLoaded>(x));
 
-            return data.Select(x => _mapper.Map<TDto>(x));
+                if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
+                {
+                    var propertyMappingDictionary =
+                        _propertyMappingService.GetPropertyMapping<TDtoEagerLoaded, TEntity>();
+
+                     dataWithFinalTypeEagerLoaded = dataWithFinalTypeEagerLoaded.AsQueryable()
+                        .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
+                }
+
+                return dataWithFinalTypeEagerLoaded.ShapeData(resourceParameters.Fields);
+            }
+
+            var dataWithFinalTypeLazyLoaded = data.Select(x => _mapper.Map<TDto>(x));
+
+            if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
+            {
+                var propertyMappingDictionary =
+                    _propertyMappingService.GetPropertyMapping<TDtoEagerLoaded, TEntity>();
+
+                dataWithFinalTypeLazyLoaded = dataWithFinalTypeLazyLoaded.AsQueryable()
+                    .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
+            }
+
+            return dataWithFinalTypeLazyLoaded.ShapeData(resourceParameters.Fields);
         }
 
         /// <summary>
@@ -125,16 +162,16 @@ namespace HealthCare020.Services
         /// <summary>
         /// Check if properties exist
         /// </summary>
-        public void PropertyCheck<TType>(string fields)
+        public void PropertyCheck<TType>(string fields, string orderBy)
         {
             if (!_propertyCheckerService.TypeHasProperties<TType>(fields))
             {
                 throw new UserException($"One or more properties are invalid");
             }
 
-            if (!_propertyMappingService.ValidMappingExistsFor<TType, TEntity>(fields))
+            if (!_propertyMappingService.ValidMappingExistsFor<TType, TEntity>(orderBy))
             {
-                throw new UserException(string.Empty);
+                throw new UserException($"Invalid OrderBy fields -> {orderBy}");
             }
         }
     }

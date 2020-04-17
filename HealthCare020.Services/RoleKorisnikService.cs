@@ -22,20 +22,6 @@ namespace HealthCare020.Services
         {
         }
 
-        public override async Task<IEnumerable> Get(KorisnickiNalogRoleResourceParameters search)
-        {
-            var result = _dbContext.RolesKorisnickiNalozi.AsQueryable();
-
-            if (await result.AnyAsync())
-            {
-                result = await SearchFilter(result, search);
-                return await result.Select(x => _mapper.Map<RoleKorisnickiNalogDto>(x)).ToListAsync();
-            }
-
-            return new List<RoleKorisnickiNalogDto>();
-        }
-        
-
         public override async Task<RoleKorisnickiNalogDto> Insert(KorisnickiNalogRoleUpsertDto request)
         {
             if (!await _dbContext.KorisnickiNalozi.AnyAsync(x => x.Id == request.KorisnickiNalogId))

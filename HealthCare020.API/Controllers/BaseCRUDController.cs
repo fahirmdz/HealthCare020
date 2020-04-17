@@ -9,7 +9,8 @@ namespace HealthCare020.API.Controllers
     {
         private readonly ICRUDService<TEntity, TDto,TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> _crudService;
 
-        public BaseCRUDController(ICRUDService<TEntity, TDto, TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> crudService):base(crudService)
+        public BaseCRUDController(ICRUDService<TEntity, TDto, TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> crudService)
+            :base(crudService)
         {
             _crudService = crudService;
         }

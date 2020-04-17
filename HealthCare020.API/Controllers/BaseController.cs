@@ -3,6 +3,7 @@ using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -22,25 +23,11 @@ namespace HealthCare020.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
-            var result = await _service.Get(resourceParameters) as PagedList<TEntity>;
-            var paginationMetadata = new PaginationMetadata
-            {
-                CurrentPage = result.CurrentPage,
-                PageSize = result.PageSize,
-                TotalCount = result.TotalCount,
-                TotalPages = result.TotalPages
-            };
+            var result = await _service.Get(resourceParameters);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.PaginationMetadata));
 
-            if (_service.ShouldEagerLoad(resourceParameters))
-            {
-                var resultToReturn = _service.PrepareDataForClient(result, resourceParameters) as IEnumerable<TDtoEagerLoaded>;
-                return Ok(resultToReturn.ShapeData(resourceParameters.Fields));
-            }
-
-            var resultToReturnLazyLoaded = _service.PrepareDataForClient(result, resourceParameters) as IEnumerable<TDto>;
-            return Ok(resultToReturnLazyLoaded.ShapeData(resourceParameters.Fields));
+            return Ok(result.Data);
         }
 
         [HttpGet("{id}")]
