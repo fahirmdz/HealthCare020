@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HealthCare020.Core.Models
 {
@@ -6,7 +7,7 @@ namespace HealthCare020.Core.Models
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        public DateTime LastOnline { get; set; }
-        public DateTime DateCreated { get; set; }
+        public string LastOnline { get; set; }
+        public string DateCreated { get; set; }
     }
 }

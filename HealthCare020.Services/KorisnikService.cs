@@ -2,60 +2,55 @@
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
+using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using HealthCare020.Core.ResourceParameters;
-using HealthCare020.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
+
 {
-    public class KorisnikService : IKorisnikService
+    public class KorisnikService : BaseService<KorisnickiNalogDtoLazyLoaded, KorisnickiNalogDtoEagerLoaded, KorisnickiNalogResourceParameters, KorisnickiNalog>, IKorisnikService
     {
-        private readonly HealthCare020DbContext _dbContext;
-        private readonly IMapper _mapper;
-
-        public KorisnikService(IMapper mapper, HealthCare020DbContext dbContext)
+        public KorisnikService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) :
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {
-            _mapper = mapper;
-            _dbContext = dbContext;
         }
 
-        public async Task<IList<KorisnickiNalogDto>> Get(KorisnickiNalogResourceParameters request)
+        public override IQueryable<KorisnickiNalog> GetWithEagerLoad(int? id = null)
         {
-            var result =  _dbContext.KorisnickiNalozi.AsQueryable();
+            var result = _dbContext.KorisnickiNalozi
+                .Include(x => x.RolesKorisnickiNalog)
+                .ThenInclude(x => x.Role)
+                .AsQueryable();
 
-            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(request.Username))
-            {
-                result = result.Where(x => x.Username.StartsWith(request.Username));
-            }
+            if (id.HasValue)
+                result = result.Where(x => x.Id == id);
 
-            return result.Select(x => _mapper.Map<KorisnickiNalogDto>(x)).ToList();
+            return result;
         }
 
-        public async Task<KorisnickiNalogDto> GetById(int id)
-        {
-            var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
-
-            if (korisnickiNalog == null)
-                throw new NotFoundException("Korisnicki nalog nije pronadjen");
-
-            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
-        }
-
-        public async Task<KorisnickiNalogDto> Insert(KorisnickiNalogUpsertDto request)
+        public async Task<KorisnickiNalogDtoLazyLoaded> Insert(KorisnickiNalogUpsertDto request)
         {
             var korisnickiNalog = _mapper.Map<KorisnickiNalog>(request);
 
             if (request.ConfirmPassword != request.Password)
             {
                 throw new UserException("Lozinke se ne podudaraju");
+            }
+
+            foreach (var roleId in request.Roles)
+            {
+                if (!await _dbContext.Roles.AnyAsync(x => x.Id == roleId))
+                    throw new NotFoundException($"Rola sa ID-em {roleId} nije pronadjena");
             }
 
             korisnickiNalog.PasswordSalt = GenerateSalt();
@@ -67,10 +62,23 @@ namespace HealthCare020.Services
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
+            foreach (var roleId in request.Roles)
+            {
+                await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
+                {
+                    KorisnickiNalogId = korisnickiNalog.Id,
+                    RoleId = roleId
+                });
+            }
+            await _dbContext.SaveChangesAsync();
+
+            //Load RoleKorisnickiNalog relations
+            _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).Load();
+
+            return _mapper.Map<KorisnickiNalogDtoLazyLoaded>(korisnickiNalog);
         }
 
-        public KorisnickiNalogDto Update(int id, KorisnickiNalogUpsertDto request)
+        public KorisnickiNalogDtoLazyLoaded Update(int id, KorisnickiNalogUpsertDto request)
         {
             var korisnickiNalog = _dbContext.KorisnickiNalozi.Find(id);
 
@@ -91,10 +99,40 @@ namespace HealthCare020.Services
             _dbContext.KorisnickiNalozi.Update(korisnickiNalog);
             _dbContext.SaveChanges();
 
-            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
+            if(request.RolesToDelete.Any(x=>request.Roles.Contains(x)))
+                throw new UserException($"Liste rola za brisanje i dodavanje ne smiju sadrzati zajednicke elemente.");
+
+            foreach (var roleId in request.Roles)
+            {
+                if (_dbContext.RolesKorisnickiNalozi.Any(x =>
+                    x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId))
+                    throw new UserException($"Korisnik sa ID-em {korisnickiNalog.Id} vec poseduje role sa ID-em {roleId}");
+
+                _dbContext.RolesKorisnickiNalozi.Add(new RoleKorisnickiNalog
+                {
+                    KorisnickiNalogId = korisnickiNalog.Id,
+                    RoleId = roleId
+                });
+            }
+            _dbContext.SaveChanges();
+
+            foreach (var roleId in request.RolesToDelete)
+            {
+                var roleKorisnik = _dbContext.RolesKorisnickiNalozi.FirstOrDefault(x=>x.KorisnickiNalogId==korisnickiNalog.Id && x.RoleId==roleId);
+                if (roleKorisnik == null)
+                    throw new NotFoundException($"Rola sa ID-em {roleId} ne pripada ovom korisniku");
+
+                _dbContext.RolesKorisnickiNalozi.Remove(roleKorisnik);
+            }
+            _dbContext.SaveChanges();
+
+            //Load RoleKorisnickiNalog relations
+            _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).Load();
+
+            return _mapper.Map<KorisnickiNalogDtoLazyLoaded>(korisnickiNalog);
         }
 
-        public KorisnickiNalogDto Delete(int id)
+        public void Delete(int id)
         {
             var korisnickiNalog = _dbContext.KorisnickiNalozi.Find(id);
 
@@ -103,11 +141,18 @@ namespace HealthCare020.Services
 
             _dbContext.KorisnickiNalozi.Remove(korisnickiNalog);
             _dbContext.SaveChanges();
-
-            return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
         }
 
-        public async Task<KorisnickiNalogDto> Authenticate(string username, string password)
+        public override IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<KorisnickiNalog> data, KorisnickiNalogResourceParameters resourceParameters)
+        {
+            foreach (var x in data)
+            {
+                _dbContext.Entry(x).Collection(c => c.RolesKorisnickiNalog).Load();
+            }
+            return base.PrepareDataForClient(data, resourceParameters);
+        }
+
+        public async Task<KorisnickiNalogDtoLazyLoaded> Authenticate(string username, string password)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FirstAsync(x => x.Username == username);
 
@@ -116,7 +161,7 @@ namespace HealthCare020.Services
                 var newHash = GenerateHash(korisnickiNalog.PasswordSalt, password);
 
                 if (newHash == korisnickiNalog.PasswordHash)
-                    return _mapper.Map<KorisnickiNalogDto>(korisnickiNalog);
+                    return _mapper.Map<KorisnickiNalogDtoLazyLoaded>(korisnickiNalog);
             }
             return null;
         }

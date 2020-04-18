@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare020.Core.Entities
@@ -15,5 +16,7 @@ namespace HealthCare020.Core.Entities
         public string PasswordSalt { get; set; }
         public DateTime LastOnline { get; set; }
         public DateTime DateCreated { get; set; }
+
+        public virtual ICollection<RoleKorisnickiNalog> RolesKorisnickiNalog { get; set; }
     }
 }

@@ -82,6 +82,24 @@ namespace HealthCare020.Services.Helpers
                         {nameof(GradDtoEagerLoaded.Drzava),new PropertyMappingValue(new List<string>(){{nameof(Grad.Drzava.Naziv)}}) },
                     })
                 },
+                {new PropertyMapping<KorisnickiNalogDtoLazyLoaded,KorisnickiNalog>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(KorisnickiNalogDtoLazyLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(KorisnickiNalog.Id)})},
+                        {nameof(KorisnickiNalogDtoLazyLoaded.Username),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.Username)}}) },
+                        {nameof(KorisnickiNalogDtoLazyLoaded.LastOnline),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.LastOnline)}}) },
+                        {nameof(KorisnickiNalogDtoLazyLoaded.DateCreated),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.DateCreated)}}) },
+                        {nameof(KorisnickiNalogDtoLazyLoaded.Roles),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.RolesKorisnickiNalog)}}) },
+                    })
+                },
+                {new PropertyMapping<KorisnickiNalogDtoEagerLoaded,KorisnickiNalog>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(KorisnickiNalogDtoEagerLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(KorisnickiNalog.Id)})},
+                        {nameof(KorisnickiNalogDtoEagerLoaded.Username),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.Username)}}) },
+                        {nameof(KorisnickiNalogDtoEagerLoaded.LastOnline),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.LastOnline)}}) },
+                        {nameof(KorisnickiNalogDtoEagerLoaded.DateCreated),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.DateCreated)}}) },
+                        {nameof(KorisnickiNalogDtoEagerLoaded.Roles),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.RolesKorisnickiNalog)}}) },
+                    })
+                },
             };
     }
 }

@@ -1,24 +1,19 @@
 ﻿using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using HealthCare020.Core.ResourceParameters;
+using System.Threading.Tasks;
 
 namespace HealthCare020.Services.Interfaces
 {
-    public interface IKorisnikService
+    public interface IKorisnikService : IService<KorisnickiNalog, KorisnickiNalogResourceParameters>
     {
-        Task<IList<KorisnickiNalogDto>> Get(KorisnickiNalogResourceParameters request);
+        Task<KorisnickiNalogDtoLazyLoaded> Authenticate(string username, string password);
 
-        Task<KorisnickiNalogDto> GetById(int id);
+        Task<KorisnickiNalogDtoLazyLoaded> Insert(KorisnickiNalogUpsertDto request);
 
-        Task<KorisnickiNalogDto> Insert(KorisnickiNalogUpsertDto request);
+        KorisnickiNalogDtoLazyLoaded Update(int id, KorisnickiNalogUpsertDto request);
 
-        KorisnickiNalogDto Update(int id, KorisnickiNalogUpsertDto request);
-
-        KorisnickiNalogDto Delete(int id);
-
-        Task<KorisnickiNalogDto> Authenticate(string username, string password);
+        void Delete(int id);
     }
 }
