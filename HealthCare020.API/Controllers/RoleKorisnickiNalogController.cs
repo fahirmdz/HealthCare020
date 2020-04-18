@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("api/role/korisnicki-nalog/")]
+    [Route("api/korisnici/{korisnikId}/roles")]
     public class RoleKorisnickiNalogController : BaseCRUDController<RoleKorisnickiNalog, RoleKorisnickiNalogDto,RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters, KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>
     {
         public RoleKorisnickiNalogController(ICRUDService<RoleKorisnickiNalog, RoleKorisnickiNalogDto,RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters, KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto> crudService) : base(crudService)

@@ -6,7 +6,7 @@ using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/korisnici")]
     [ApiController]
     public class KorisnikController : ControllerBase
     {

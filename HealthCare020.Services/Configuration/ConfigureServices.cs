@@ -33,8 +33,10 @@ namespace HealthCare020.Services.Configuration
                 .AddScoped<ICRUDService<RoleKorisnickiNalog, RoleKorisnickiNalogDto,RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters,
                     KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>, RoleKorisnikService>();
             services
-                .AddScoped<ICRUDService<Radnik, RadnikDtoLazyLoaded,RadnikDtoEagerLoaded, RadnikResourceParameters, RadnikUpsertDto,
-                    RadnikUpsertDto>, RadnikService>();
+                .AddScoped<ICRUDService<RadnikPrijem, RadnikPrijemDto,RadnikPrijemDtoEagerLoaded, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto,
+                    RadnikPrijemUpsertDto>, RadnikPrijemService>();
+
+            services.AddScoped<IRadnikService, RadnikService>();
 
             services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();
             services.AddTransient<IPropertyMappingService,PropertyMappingService>();

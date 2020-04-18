@@ -52,20 +52,35 @@ namespace HealthCare020.Services.Mappers
             CreateMap<RoleKorisnickiNalog, RoleKorisnickiNalogDto>();
             CreateMap<KorisnickiNalogRoleUpsertDto, RoleKorisnickiNalog>();
 
-            CreateMap<Radnik, RadnikDtoLazyLoaded>();
+            //Radnik
+            CreateMap<Radnik, RadnikPrijemDto>()
+                .ForMember(dest=>dest.Id,
+                    opt=>opt.Ignore());
+            CreateMap<Radnik, RadnikPrijemDtoEagerLoaded>()
+                .ForMember(dest=>dest.Id,
+                    opt=>opt.Ignore());
 
-            CreateMap<Radnik, RadnikDtoEagerLoaded>()
+            //RadnikPrijem
+            CreateMap<RadnikPrijem, RadnikPrijemDto>();
+            CreateMap<RadnikPrijem, RadnikPrijemDtoEagerLoaded>()
                 .ForMember(dest => dest.ImePrezime,
-                    opt => opt.MapFrom(x => x.LicniPodaci.Ime +" "+ x.LicniPodaci.Prezime));
+                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci.Ime +" "+ x.Radnik.LicniPodaci.Prezime));
+            CreateMap<RadnikPrijemUpsertDto, Radnik>();
+                
 
-            CreateMap<LicniPodaci, RadnikDtoEagerLoaded>()
+
+            CreateMap<LicniPodaci, RadnikPrijemDtoEagerLoaded>()
                 .ForMember(dest=>dest.Grad,
-                    opt=>opt.MapFrom(x=>x.Grad.Naziv));
+                    opt=>opt.MapFrom(x=>x.Grad.Naziv))
+                .ForMember(dest=>dest.Id,opt=>opt.Ignore());
 
-            CreateMap<KorisnickiNalog, RadnikDtoEagerLoaded>();
-            CreateMap<StacionarnoOdeljenje, RadnikDtoEagerLoaded>()
+            CreateMap<KorisnickiNalog, RadnikPrijemDtoEagerLoaded>()
+                .ForMember(dest=>dest.Id,opt=>opt.Ignore());
+
+            CreateMap<StacionarnoOdeljenje, RadnikPrijemDtoEagerLoaded>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
-                    opt => opt.MapFrom(x => x.Naziv));
+                    opt => opt.MapFrom(x => x.Naziv))
+                .ForMember(dest=>dest.Id,opt=>opt.Ignore());
         }
     }
 }

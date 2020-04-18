@@ -42,7 +42,7 @@ namespace HealthCare020.Services
             return _mapper.Map<TDto>(entity);
         }
 
-        public virtual TDto Delete(int id)
+        public virtual void Delete(int id)
         {
             var query = _dbContext.Set<TEntity>();
 
@@ -53,8 +53,6 @@ namespace HealthCare020.Services
 
             query.Remove(entity);
             _dbContext.SaveChanges();
-
-            return _mapper.Map<TDto>(entity);
         }
     }
 }

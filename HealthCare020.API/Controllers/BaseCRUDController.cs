@@ -33,9 +33,9 @@ namespace HealthCare020.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var result = _crudService.Delete(id);
+            _crudService.Delete(id);
 
-            return Ok(result);
+            return NoContent();
         }
 
         

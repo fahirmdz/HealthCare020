@@ -10,6 +10,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,13 +74,6 @@ namespace HealthCare020.Services
 
             return PagedList<Grad>.Create(result, resourceParameters.PageNumber,
                 resourceParameters.PageSize);
-        }
-
-        public override IEnumerable PrepareDataForClient(IEnumerable<Grad> data, GradResourceParameters resourceParameters)
-        {
-            if (resourceParameters.EagerLoaded)
-                return data.Select(x => _mapper.Map<GradDtoEagerLoaded>(x));
-            return data.Select(x => _mapper.Map<GradDto>(x));
         }
     }
 }

@@ -18,6 +18,10 @@ namespace HealthCare020.Core.Request
         public string Adresa { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
+        [StringLength(maximumLength:12,MinimumLength = 9)]
+        public string JMBG { get; set; }
+
+        [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
         [DefaultValue("M")]
         public char Pol { get; set; }
 

@@ -8,6 +8,6 @@ namespace HealthCare020.Services.Interfaces
 
         TDto Update(int id, TDtoForUpdate request);
 
-        TDto Delete(int id);
+        void Delete(int id);
     }
 }

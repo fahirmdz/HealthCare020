@@ -45,7 +45,7 @@ namespace HealthCare020.Services
                 result = _dbContext.Set<TEntity>().AsQueryable();
             }
 
-            var pagedResult = await FilterAndPrepare(result, resourceParameters);
+            var pagedResult = await FilterAndPrepare(result, resourceParameters)??new PagedList<TEntity>(new List<TEntity>(),0,0,0);
 
             var serviceResultToReturn = new ServiceSequenceResult
             {
@@ -56,7 +56,9 @@ namespace HealthCare020.Services
                     TotalCount = pagedResult.TotalCount,
                     TotalPages = pagedResult.TotalPages
                 },
-                Data = PrepareDataForClient(pagedResult,resourceParameters)
+                Data = PrepareDataForClient(pagedResult,resourceParameters),
+                HasNext = pagedResult.HasNext,
+                HasPrevious = pagedResult.HasPrevious
             };
 
             return serviceResultToReturn;
@@ -109,7 +111,7 @@ namespace HealthCare020.Services
         /// <summary>
         /// Mapping entities to the data type for a client
         /// </summary>
-        public virtual IEnumerable PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters)
+        public virtual IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters)
         {
             if (ShouldEagerLoad(resourceParameters))
             {
@@ -132,7 +134,7 @@ namespace HealthCare020.Services
             if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
             {
                 var propertyMappingDictionary =
-                    _propertyMappingService.GetPropertyMapping<TDtoEagerLoaded, TEntity>();
+                    _propertyMappingService.GetPropertyMapping<TDto, TEntity>();
 
                 dataWithFinalTypeLazyLoaded = dataWithFinalTypeLazyLoaded.AsQueryable()
                     .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
