@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Services.Services;
 using Xunit;
 
 namespace HealthCore020.Test
@@ -32,7 +33,8 @@ namespace HealthCore020.Test
             HealthCore020DataDBInitializer db = new HealthCore020DataDBInitializer();
             db.Seed_Korisnik(context);
 
-            _service = new KorisnikService( new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context);
+            _service = new KorisnikService( new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context,
+                new PropertyMappingService(), new PropertyCheckerService());
         }
 
         #region Get By Id
