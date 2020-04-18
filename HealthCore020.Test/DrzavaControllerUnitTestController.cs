@@ -7,6 +7,7 @@ using HealthCare020.Core.Request;
 using HealthCare020.Repository;
 using HealthCare020.Services;
 using HealthCare020.Services.Exceptions;
+using HealthCare020.Services.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
@@ -32,7 +33,7 @@ namespace HealthCore020.Test
             db.Seed_Drzave(context);
 
             _service = new DrzavaService(
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context);
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context,new PropertyMappingService(), new PropertyCheckerService());
         }
 
         
