@@ -47,6 +47,11 @@ namespace HealthCare020.Repository
                 .HasOne(x => x.Pacijent)
                 .WithMany(x => x.Posete)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RoleKorisnickiNalog>()
+                .HasOne(x => x.KorisnickiNalog)
+                .WithMany(x => x.RolesKorisnickiNalog)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Drzava> Drzave { get; set; }

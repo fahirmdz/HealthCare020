@@ -8,7 +8,7 @@ using HealthCare020.Services.Interfaces;
 
 namespace HealthCare020.Services
 {
-    public class StacionarnoOdeljenjeService: BaseCRUDService<TwoFieldsDto,TwoFieldsResourceParameters,StacionarnoOdeljenje,StacionarnoOdeljenjeUpsertDto,StacionarnoOdeljenjeUpsertDto>
+    public class StacionarnoOdeljenjeService: BaseCRUDService<TwoFieldsDto,TwoFieldsDto,TwoFieldsResourceParameters,StacionarnoOdeljenje,StacionarnoOdeljenjeUpsertDto,StacionarnoOdeljenjeUpsertDto>
     {
         public StacionarnoOdeljenjeService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {

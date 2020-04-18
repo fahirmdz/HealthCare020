@@ -9,6 +9,7 @@ namespace HealthCare020.Services.Services
     {
         private ICollection<IPropertyMapping> PropertyMapping;
 
+
         public PropertyMappingService()
         {
             PropertyMapping = Helpers.PropertyMappingSchema.PropertyMappings;

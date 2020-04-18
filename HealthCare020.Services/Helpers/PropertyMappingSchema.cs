@@ -50,29 +50,28 @@ namespace HealthCare020.Services.Helpers
                         {nameof(TwoFieldsDto.Id),new PropertyMappingValue(new List<string>(){{nameof(Role.Id)}}) }
                     })
                 },
-                {new PropertyMapping<RadnikDtoLazyLoaded,Radnik>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                {new PropertyMapping<RadnikPrijemDto,RadnikPrijem>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
-                        {nameof(RadnikDtoLazyLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(Radnik.Id)})},
-                        {nameof(RadnikDtoLazyLoaded.ImePrezime),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.Ime)},{nameof(Radnik.LicniPodaci.Prezime)}})},
-                        {nameof(RadnikDtoLazyLoaded.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaciId)}})},
-                        {nameof(RadnikDtoLazyLoaded.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.StacionarnoOdeljenjeId)}})},
-                        {nameof(RadnikDtoLazyLoaded.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.KorisnickiNalogId)}})},
+                        {nameof(RadnikPrijemDto.Id),new PropertyMappingValue(new List<string>(){nameof(RadnikPrijem.Id)})},
+                        {nameof(RadnikPrijemDto.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaciId)}})},
+                        {nameof(RadnikPrijemDto.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.StacionarnoOdeljenjeId)}})},
+                        {nameof(RadnikPrijemDto.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.KorisnickiNalogId)}})},
                     })
                 },
-                {new PropertyMapping<RadnikDtoEagerLoaded,Radnik>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                {new PropertyMapping<RadnikPrijemDtoEagerLoaded,RadnikPrijem>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
-                        {nameof(RadnikDtoEagerLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(Radnik.Id)})},
-                        {nameof(RadnikDtoEagerLoaded.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.KorisnickiNalogId)}})},
-                        {nameof(RadnikDtoEagerLoaded.Username),new PropertyMappingValue(new List<string>(){{nameof(Radnik.KorisnickiNalog.Username)}})},
-                        {nameof(RadnikDtoEagerLoaded.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaciId)}})},
-                        {nameof(RadnikDtoEagerLoaded.ImePrezime),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.Ime)},{nameof(Radnik.LicniPodaci.Prezime)}})},
-                        {nameof(RadnikDtoEagerLoaded.JMBG),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.JMBG)}})},
-                        {nameof(RadnikDtoEagerLoaded.Adresa),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.Adresa)}})},
-                        {nameof(RadnikDtoEagerLoaded.Pol),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.Pol)}})},
-                        {nameof(RadnikDtoEagerLoaded.BrojTelefona),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.BrojTelefona)}})},
-                        {nameof(RadnikDtoEagerLoaded.Grad),new PropertyMappingValue(new List<string>(){{nameof(Radnik.LicniPodaci.Grad.Naziv)}})},
-                        {nameof(RadnikDtoEagerLoaded.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){{nameof(Radnik.StacionarnoOdeljenjeId)}})},
-                        {nameof(RadnikDtoEagerLoaded.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){{nameof(Radnik.StacionarnoOdeljenje.Naziv)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(RadnikPrijem.Id)})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.KorisnickiNalogId)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.Username),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.KorisnickiNalog.Username)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaciId)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.ImePrezime),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaci.Ime)},{nameof(Radnik.LicniPodaci.Prezime)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.JMBG),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaci.JMBG)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.Adresa),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaci.Adresa)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.Pol),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaci.Pol)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.BrojTelefona),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaci.BrojTelefona)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.Grad),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaci.Grad.Naziv)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.StacionarnoOdeljenjeId)}})},
+                        {nameof(RadnikPrijemDtoEagerLoaded.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.StacionarnoOdeljenje.Naziv)}})},
                     })
                 },
                 {new PropertyMapping<GradDtoEagerLoaded,Grad>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
@@ -81,6 +80,24 @@ namespace HealthCare020.Services.Helpers
                         {nameof(GradDtoEagerLoaded.Id),new PropertyMappingValue(new List<string>(){{nameof(Grad.Id)}}) },
                         {nameof(GradDtoEagerLoaded.DrzavaId),new PropertyMappingValue(new List<string>(){{nameof(Grad.DrzavaId)}}) },
                         {nameof(GradDtoEagerLoaded.Drzava),new PropertyMappingValue(new List<string>(){{nameof(Grad.Drzava.Naziv)}}) },
+                    })
+                },
+                {new PropertyMapping<KorisnickiNalogDtoLazyLoaded,KorisnickiNalog>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(KorisnickiNalogDtoLazyLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(KorisnickiNalog.Id)})},
+                        {nameof(KorisnickiNalogDtoLazyLoaded.Username),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.Username)}}) },
+                        {nameof(KorisnickiNalogDtoLazyLoaded.LastOnline),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.LastOnline)}}) },
+                        {nameof(KorisnickiNalogDtoLazyLoaded.DateCreated),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.DateCreated)}}) },
+                        {nameof(KorisnickiNalogDtoLazyLoaded.Roles),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.RolesKorisnickiNalog)}}) },
+                    })
+                },
+                {new PropertyMapping<KorisnickiNalogDtoEagerLoaded,KorisnickiNalog>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(KorisnickiNalogDtoEagerLoaded.Id),new PropertyMappingValue(new List<string>(){nameof(KorisnickiNalog.Id)})},
+                        {nameof(KorisnickiNalogDtoEagerLoaded.Username),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.Username)}}) },
+                        {nameof(KorisnickiNalogDtoEagerLoaded.LastOnline),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.LastOnline)}}) },
+                        {nameof(KorisnickiNalogDtoEagerLoaded.DateCreated),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.DateCreated)}}) },
+                        {nameof(KorisnickiNalogDtoEagerLoaded.Roles),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.RolesKorisnickiNalog)}}) },
                     })
                 },
             };

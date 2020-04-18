@@ -7,7 +7,9 @@ using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.Services
 {
-    public class BaseCRUDService<TDto, TResourceParameters, TEntity, TDtoForCreation, TDtoForUpdate> : BaseService<TDto, TResourceParameters, TEntity>, ICRUDService<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> where TEntity : class where TResourceParameters: BaseResourceParameters
+    public class BaseCRUDService<TDto,TDtoEagerLoaded, TResourceParameters, TEntity, TDtoForCreation, TDtoForUpdate> : BaseService<TDto,TDtoEagerLoaded, 
+        TResourceParameters, TEntity>, ICRUDService<TEntity, TDto,TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate>
+        where TEntity : class where TResourceParameters: BaseResourceParameters
     {
 
         public BaseCRUDService(IMapper mapper, HealthCare020DbContext dbContext,
@@ -40,7 +42,7 @@ namespace HealthCare020.Services
             return _mapper.Map<TDto>(entity);
         }
 
-        public virtual TDto Delete(int id)
+        public virtual void Delete(int id)
         {
             var query = _dbContext.Set<TEntity>();
 
@@ -51,8 +53,6 @@ namespace HealthCare020.Services
 
             query.Remove(entity);
             _dbContext.SaveChanges();
-
-            return _mapper.Map<TDto>(entity);
         }
     }
 }

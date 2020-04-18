@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("/api/token-poseta")]
-    public class TokenPosetaController : BaseCRUDController<TokenPoseta,TwoFieldsDto, TwoFieldsResourceParameters,TokenPosetaUpsertDto, TokenPosetaUpsertDto>
+    [Route("/api/tokeni-poseta")]
+    public class TokenPosetaController : BaseCRUDController<TokenPoseta,TwoFieldsDto,TwoFieldsDto, TwoFieldsResourceParameters,TokenPosetaUpsertDto, TokenPosetaUpsertDto>
     {
-        public TokenPosetaController(ICRUDService<TokenPoseta, TwoFieldsDto, TwoFieldsResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto> crudService) : base(crudService)
+        public TokenPosetaController(ICRUDService<TokenPoseta, TwoFieldsDto,TwoFieldsDto, TwoFieldsResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto> crudService) : base(crudService)
         {
         }
     }

@@ -4,5 +4,6 @@
     {
         public int? Id { get; set; }
         public string Username { get; set; }
+        public bool EagerLoaded  { get; set; }
     }
 }

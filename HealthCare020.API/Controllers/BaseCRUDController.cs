@@ -5,14 +5,16 @@ using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.API.Controllers
 {
-    public class BaseCRUDController<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto, TResourceParameters> where TResourceParameters: BaseResourceParameters
+    public class BaseCRUDController<TEntity, TDto,TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto,TDtoEagerLoaded, TResourceParameters> where TResourceParameters: BaseResourceParameters
     {
-        private readonly ICRUDService<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> _crudService;
+        private readonly ICRUDService<TEntity, TDto,TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> _crudService;
 
-        public BaseCRUDController(ICRUDService<TEntity, TDto, TResourceParameters, TDtoForCreation, TDtoForUpdate> crudService) : base(crudService)
+        public BaseCRUDController(ICRUDService<TEntity, TDto, TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> crudService)
+            :base(crudService)
         {
             _crudService = crudService;
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Insert(TDtoForCreation dtoForCreation)
@@ -31,9 +33,11 @@ namespace HealthCare020.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var result = _crudService.Delete(id);
+            _crudService.Delete(id);
 
-            return Ok(result);
+            return NoContent();
         }
+
+        
     }
 }

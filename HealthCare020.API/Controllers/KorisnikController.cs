@@ -1,50 +1,55 @@
-﻿using HealthCare020.Core.Request;
+﻿using System.Threading.Tasks;
+using HealthCare020.Core.Request;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using HealthCare020.Core.Entities;
+using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/korisnici")]
     [ApiController]
     public class KorisnikController : ControllerBase
     {
-        private readonly IKorisnikService _service;
+        private readonly IKorisnikService _korisnikService;
 
-        public KorisnikController(IKorisnikService service)
+        public KorisnikController(IKorisnikService korisnikService)
         {
-            _service = service;
+            _korisnikService = korisnikService;
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] KorisnickiNalogResourceParameters request)
+        public async Task<IActionResult> Get([FromQuery] KorisnickiNalogResourceParameters resourceParameters)
         {
-            return Ok(await _service.Get(request));
+            var result = await _korisnikService.Get(resourceParameters);
+
+            return Ok(result.Data);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> Get(int id, [FromQuery] KorisnickiNalogResourceParameters resourceParameters)
         {
-            return Ok(await _service.GetById(id));
+            var result = await _korisnikService.GetById(id, resourceParameters);
+
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Insert(KorisnickiNalogUpsertDto request)
         {
-            return Ok(await _service.Insert(request));
+            var result = await _korisnikService.Insert(request);
+
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, KorisnickiNalogUpsertDto request)
+        public async Task<IActionResult> Update(int id, KorisnickiNalogUpsertDto request)
         {
-            return Ok(_service.Update(id, request));
-        }
+            var result = _korisnikService.Update(id, request);
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            return Ok(_service.Delete(id));
+            return Ok(result);
         }
     }
 }

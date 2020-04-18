@@ -3,14 +3,14 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("/api/stacionarno-odeljenje")]
-    public class StacionarnoOdeljenjeController : BaseCRUDController<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>
+    [Route("api/stacionarna-odeljenja")]
+    public class StacionarnoOdeljenjeController : BaseCRUDController<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>
     {
-        public StacionarnoOdeljenjeController(ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto> crudService) : base(crudService)
+        public StacionarnoOdeljenjeController(ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto> crudService) : base(crudService)
         {
         }
     }

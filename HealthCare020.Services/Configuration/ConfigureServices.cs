@@ -6,6 +6,7 @@ using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
 using HealthCare020.Services.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace HealthCare020.Services.Configuration
 {
@@ -13,30 +14,29 @@ namespace HealthCare020.Services.Configuration
     {
         public static void AddHealthCare020Services(this IServiceCollection services)
         {
-            services.AddSingleton((new MapperConfiguration(cfg => cfg.AddProfile(new Mappers.Mapper())).CreateMapper()));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<ICRUDService<ZdravstvenoStanje, ZdravstvenoStanjeDto, ZdravstvenoStanjeResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
-            services.AddScoped<ICRUDService<Role, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>, RoleService>();
-            services.AddScoped<ICRUDService<TokenPoseta, TokenPosetaDto, TokenPosetaResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
+            services.AddScoped<ICRUDService<ZdravstvenoStanje, ZdravstvenoStanjeDto, ZdravstvenoStanjeDto, ZdravstvenoStanjeResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
+            services.AddScoped<ICRUDService<Role, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>, RoleService>();
+            services.AddScoped<ICRUDService<TokenPoseta, TokenPosetaDto, TokenPosetaDto, TokenPosetaResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
             services
-                .AddScoped<ICRUDService<Drzava, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>,
+                .AddScoped<ICRUDService<Drzava, DrzavaDto, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>,
                     DrzavaService>();
 
-            services.AddScoped<ICRUDService<Grad, GradDto, GradResourceParameters, GradUpsertDto, GradUpsertDto>, GradService>();
+            services.AddScoped<ICRUDService<Grad, GradDto, GradDtoEagerLoaded, GradResourceParameters, GradUpsertDto, GradUpsertDto>, GradService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
             services
-                .AddScoped<ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto>, LicniPodaciService>();
+                .AddScoped<ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDtoEagerLoaded, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto>, LicniPodaciService>();
 
-            services.AddScoped<ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>, StacionarnoOdeljenjeService>();
+            services.AddScoped<ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>, StacionarnoOdeljenjeService>();
             services
-                .AddScoped<ICRUDService<RoleKorisnickiNalog, RoleKorisnickiNalogDto, KorisnickiNalogRoleResourceParameters,
-                    KorisnickiNalogRoleUpsertDto, KorisnickiNalogRoleUpsertDto>, RoleKorisnikService>();
-            services
-                .AddScoped<ICRUDService<Radnik, RadnikDtoEagerLoaded, RadnikResourceParameters, RadnikUpsertDto,
-                    RadnikUpsertDto>, RadnikService>();
+                .AddScoped<ICRUDService<RadnikPrijem, RadnikPrijemDto, RadnikPrijemDtoEagerLoaded, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto,
+                    RadnikPrijemUpsertDto>, RadnikPrijemService>();
+
+            services.AddScoped<IRadnikService, RadnikService>();
 
             services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();
-            services.AddTransient<IPropertyMappingService,PropertyMappingService>();
+            services.AddTransient<IPropertyMappingService, PropertyMappingService>();
         }
     }
 }

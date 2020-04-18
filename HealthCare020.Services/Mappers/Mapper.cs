@@ -1,7 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
+using System.Globalization;
+using System.Linq;
 
 namespace HealthCare020.Services.Mappers
 {
@@ -37,7 +40,22 @@ namespace HealthCare020.Services.Mappers
             CreateMap<KorisnickiNalog, KorisnickiNalogUpsertDto>()
                 .ReverseMap()
                 .ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<KorisnickiNalog, KorisnickiNalogDto>().ReverseMap();
+            CreateMap<KorisnickiNalog, KorisnickiNalogDtoLazyLoaded>()
+                .ForMember(dest => dest.DateCreated,
+                    opt => opt.MapFrom(x => x.DateCreated.ToString("d", new CultureInfo("de-DE"))))
+                .ForMember(dest => dest.LastOnline,
+                    opt => opt.MapFrom(x => x.DateCreated.ToString("d", new CultureInfo("de-DE"))))
+                .ForMember(dest => dest.Roles,
+                    opt => opt.MapFrom(x => x.RolesKorisnickiNalog.Select(z => z.RoleId)));
+
+            CreateMap<KorisnickiNalog, KorisnickiNalogDtoEagerLoaded>()
+                .ForMember(dest => dest.DateCreated,
+                    opt => opt.MapFrom(x => x.DateCreated.ToString("d", new CultureInfo("de-DE"))))
+                .ForMember(dest => dest.LastOnline,
+                    opt => opt.MapFrom(x => x.DateCreated.ToString("d", new CultureInfo("de-DE"))))
+                 .ForMember(dest => dest.Roles,
+                    opt => opt.MapFrom(x => x.RolesKorisnickiNalog.Select(z=>z.Role)));
+               
 
             CreateMap<LicniPodaci, LicniPodaciDto>().ReverseMap();
             CreateMap<LicniPodaci, LicniPodaciUpsertDto>()
@@ -49,25 +67,33 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenje>();
 
-            CreateMap<RoleKorisnickiNalog, RoleKorisnickiNalogDto>();
-            CreateMap<KorisnickiNalogRoleUpsertDto, RoleKorisnickiNalog>();
+            //Radnik
+            CreateMap<Radnik, RadnikPrijemDto>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.Ignore());
+            CreateMap<Radnik, RadnikPrijemDtoEagerLoaded>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.Ignore());
 
-            CreateMap<Radnik, RadnikDtoLazyLoaded>()
+            //RadnikPrijem
+            CreateMap<RadnikPrijem, RadnikPrijemDto>();
+            CreateMap<RadnikPrijem, RadnikPrijemDtoEagerLoaded>()
                 .ForMember(dest => dest.ImePrezime,
-                    opt => opt.MapFrom(x => x.LicniPodaci.Ime +" "+ x.LicniPodaci.Prezime));
+                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci.Ime + " " + x.Radnik.LicniPodaci.Prezime));
+            CreateMap<RadnikPrijemUpsertDto, Radnik>();
 
-            CreateMap<Radnik, RadnikDtoEagerLoaded>()
-                .ForMember(dest => dest.ImePrezime,
-                    opt => opt.MapFrom(x => x.LicniPodaci.Ime +" "+ x.LicniPodaci.Prezime));
+            CreateMap<LicniPodaci, RadnikPrijemDtoEagerLoaded>()
+                .ForMember(dest => dest.Grad,
+                    opt => opt.MapFrom(x => x.Grad.Naziv))
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
-            CreateMap<LicniPodaci, RadnikDtoEagerLoaded>()
-                .ForMember(dest=>dest.Grad,
-                    opt=>opt.MapFrom(x=>x.Grad.Naziv));
+            CreateMap<KorisnickiNalog, RadnikPrijemDtoEagerLoaded>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
-            CreateMap<KorisnickiNalog, RadnikDtoEagerLoaded>();
-            CreateMap<StacionarnoOdeljenje, RadnikDtoEagerLoaded>()
+            CreateMap<StacionarnoOdeljenje, RadnikPrijemDtoEagerLoaded>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
-                    opt => opt.MapFrom(x => x.Naziv));
+                    opt => opt.MapFrom(x => x.Naziv))
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }
