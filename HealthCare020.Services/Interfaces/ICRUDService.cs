@@ -6,8 +6,8 @@ namespace HealthCare020.Services.Interfaces
     {
         Task<TDto> Insert(TDtoForCreation request);
 
-        TDto Update(int id, TDtoForUpdate request);
+        Task<TDto> Update(int id, TDtoForUpdate request);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

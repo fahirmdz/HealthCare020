@@ -1,8 +1,8 @@
 ﻿namespace HealthCare020.Core.Models
 {
-    public abstract class GradDto
+    public class RadnikPrijemDtoLL:RadnikDtoLL
     {
         public int Id { get; set; }
-        public string Naziv { get; set; }
+
     }
 }

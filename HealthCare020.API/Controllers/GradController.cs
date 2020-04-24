@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/gradovi")]
-    public class GradController : BaseCRUDController<Grad,GradDto,GradDtoEagerLoaded, GradResourceParameters,GradUpsertDto, GradUpsertDto>
+    public class GradController : BaseCRUDController<Grad,GradDtoLL,GradDtoEL, GradResourceParameters,GradUpsertDto, GradUpsertDto>
     {
-        public GradController(ICRUDService<Grad, GradDto, GradDtoEagerLoaded, GradResourceParameters, GradUpsertDto, GradUpsertDto> crudService) : base(crudService)
+        public GradController(ICRUDService<Grad, GradDtoLL, GradDtoEL, GradResourceParameters, GradUpsertDto, GradUpsertDto> crudService) : base(crudService)
         {
         }
     }

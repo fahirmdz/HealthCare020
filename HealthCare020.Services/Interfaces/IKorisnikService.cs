@@ -8,12 +8,12 @@ namespace HealthCare020.Services.Interfaces
 {
     public interface IKorisnikService : IService<KorisnickiNalog, KorisnickiNalogResourceParameters>
     {
-        Task<KorisnickiNalogDtoLazyLoaded> Authenticate(string username, string password);
+        Task<KorisnickiNalogDtoLL> Authenticate(string username, string password);
 
-        Task<KorisnickiNalogDtoLazyLoaded> Insert(KorisnickiNalogUpsertDto request);
+        Task<KorisnickiNalogDtoLL> Insert(KorisnickiNalogUpsertDto request);
 
-        KorisnickiNalogDtoLazyLoaded Update(int id, KorisnickiNalogUpsertDto request);
+        Task<KorisnickiNalogDtoLL> Update(int id, KorisnickiNalogUpsertDto request);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

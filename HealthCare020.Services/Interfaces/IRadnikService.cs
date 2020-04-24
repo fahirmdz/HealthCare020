@@ -1,6 +1,6 @@
 ﻿using HealthCare020.Core.Entities;
-using System.Threading.Tasks;
 using HealthCare020.Core.Request;
+using System.Threading.Tasks;
 
 namespace HealthCare020.Services.Interfaces
 {
@@ -8,8 +8,8 @@ namespace HealthCare020.Services.Interfaces
     {
         Task<Radnik> Insert(RadnikUpsertDto radnik);
 
-        Radnik Update(int id, RadnikUpsertDto radnik);
+        Task<Radnik> Update(int id, RadnikUpsertDto radnik);
 
-        void Delete(int id);
+        Task Delete(int id);
     }
 }

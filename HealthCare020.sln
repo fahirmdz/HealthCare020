@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCare020.Repository", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCare020.Services", "HealthCare020.Services\HealthCare020.Services.csproj", "{69058AFD-D88E-4688-B9AD-1F71260809FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthCore020.Test", "HealthCore020.Test\HealthCore020.Test.csproj", "{B7FEA282-5FCB-4893-8D51-E0A166FC3EB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCore020.Test", "HealthCore020.Test\HealthCore020.Test.csproj", "{B7FEA282-5FCB-4893-8D51-E0A166FC3EB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
