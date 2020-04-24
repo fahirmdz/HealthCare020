@@ -50,6 +50,12 @@ namespace HealthCare020.Services.Helpers
                         {nameof(TwoFieldsDto.Id),new PropertyMappingValue(new List<string>(){{nameof(Role.Id)}}) }
                     })
                 },
+                {new PropertyMapping<TwoFieldsDto,NaucnaOblast>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(TwoFieldsDto.Naziv),new PropertyMappingValue(new List<string>(){nameof(NaucnaOblast.Naziv)})},
+                        {nameof(TwoFieldsDto.Id),new PropertyMappingValue(new List<string>(){{nameof(NaucnaOblast.Id)}}) }
+                    })
+                },
                 {new PropertyMapping<RadnikPrijemDtoLL,RadnikPrijem>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(RadnikPrijemDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(RadnikPrijem.Id)})},
@@ -80,6 +86,22 @@ namespace HealthCare020.Services.Helpers
                         {nameof(MedicinskiTehnicarDtoEL.KorisnickiNalog),new PropertyMappingValue(new List<string>(){{nameof(MedicinskiTehnicar.Radnik.KorisnickiNalog)}})},
                         {nameof(MedicinskiTehnicarDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(MedicinskiTehnicar.Radnik.LicniPodaci)}})},
                         {nameof(MedicinskiTehnicarDtoEL.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){{nameof(MedicinskiTehnicar.Radnik.StacionarnoOdeljenje)}})},
+                    })
+                },
+                {new PropertyMapping<DoktorDtoLL,Doktor>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(DoktorDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Doktor.Id)})},
+                        {nameof(DoktorDtoLL.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.LicniPodaciId)}})},
+                        {nameof(DoktorDtoLL.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.StacionarnoOdeljenjeId)}})},
+                        {nameof(DoktorDtoLL.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.KorisnickiNalogId)}})},
+                    })
+                },
+                {new PropertyMapping<DoktorDtoEL,Doktor>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(DoktorDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Doktor.Id)})},
+                        {nameof(DoktorDtoEL.KorisnickiNalog),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.KorisnickiNalog)}})},
+                        {nameof(DoktorDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.LicniPodaci)}})},
+                        {nameof(DoktorDtoEL.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.StacionarnoOdeljenje)}})},
                     })
                 },
                 {new PropertyMapping<GradDtoEL,Grad>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)

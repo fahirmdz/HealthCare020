@@ -112,42 +112,6 @@ namespace HealthCare020.Services
 
             return pagedResult;
         }
-
-        public override IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<MedicinskiTehnicar> data, MedicinskiTehnicarResourceParameters resourceParameters)
-        {
-            if (ShouldEagerLoad(resourceParameters))
-            {
-                var dataWithFinalTypeEagerLoaded = data.Select(x => _mapper.Map<MedicinskiTehnicarDtoEL>(x));
-
-                if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
-                {
-                    var propertyMappingDictionary =
-                        _propertyMappingService.GetPropertyMapping<MedicinskiTehnicarDtoEL, MedicinskiTehnicar>();
-
-                    dataWithFinalTypeEagerLoaded = dataWithFinalTypeEagerLoaded.AsQueryable()
-                        .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
-                }
-
-                return dataWithFinalTypeEagerLoaded.ShapeData(resourceParameters.Fields);
-            }
-
-            var dataWithFinalTypeLazyLoaded = data.Select(x => _mapper.Map<MedicinskiTehnicarDtoLL>(x));
-
-            if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
-            {
-                var propertyMappingDictionary =
-                    _propertyMappingService.GetPropertyMapping<MedicinskiTehnicarDtoLL, MedicinskiTehnicar>();
-
-                dataWithFinalTypeLazyLoaded = dataWithFinalTypeLazyLoaded.AsQueryable()
-                    .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
-            }
-
-            return dataWithFinalTypeLazyLoaded.ShapeData(resourceParameters.Fields);
-        }
-
-        public override T PrepareDataForClient<T>(MedicinskiTehnicar data, MedicinskiTehnicarResourceParameters resourceParameters)
-        {
-            return _mapper.Map<T>(data).Map(_mapper, data.Radnik.LicniPodaci).Map(_mapper, data.Radnik.KorisnickiNalog).Map(_mapper, data.Radnik.StacionarnoOdeljenje);
-        }
+       
     }
 }

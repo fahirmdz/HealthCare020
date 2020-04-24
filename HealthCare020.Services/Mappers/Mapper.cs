@@ -27,6 +27,11 @@ namespace HealthCare020.Services.Mappers
                 .ReverseMap();
             CreateMap<RoleUpsertDto, Role>().ReverseMap();
 
+            CreateMap<NaucnaOblast, TwoFieldsDto>()
+                .ForMember(x => x.Naziv, opt => opt.MapFrom(x => x.Naziv))
+                .ReverseMap();
+            CreateMap<NaucnaOblastUpsertDto, NaucnaOblast>().ReverseMap();
+
             CreateMap<Drzava, DrzavaUpsertRequest>().ReverseMap();
             CreateMap<Drzava, DrzavaDto>().ReverseMap();
 
@@ -95,8 +100,6 @@ namespace HealthCare020.Services.Mappers
                 .ForMember(dest => dest.StacionarnoOdeljenjeId,
                     opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenjeId));
 
-
-
             CreateMap<RadnikPrijem, RadnikPrijemDtoEL>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
                     opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje))
@@ -106,6 +109,7 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog));
                 
             CreateMap<RadnikPrijemUpsertDto, Radnik>();
+
 
 
             //MedicinskiTehnicar
@@ -126,6 +130,29 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog));
                 
             CreateMap<MedicinskiTehnicarUpsertDto, Radnik>();
+
+
+            //Doktor
+            CreateMap<Doktor, DoktorDtoLL>()
+                .ForMember(dest => dest.KorisnickiNalogId,
+                    opt => opt.MapFrom(x => x.Radnik.KorisnickiNalogId))
+                .ForMember(dest => dest.LicniPodaciId,
+                    opt => opt.MapFrom(x => x.Radnik.LicniPodaciId))
+                .ForMember(dest => dest.StacionarnoOdeljenjeId,
+                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenjeId));
+
+            CreateMap<Doktor, DoktorDtoEL>()
+                .ForMember(dest => dest.StacionarnoOdeljenje,
+                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje))
+                .ForMember(dest => dest.LicniPodaci,
+                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci))
+                .ForMember(dest => dest.KorisnickiNalog,
+                    opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog))
+                .ForMember(dest => dest.NaucnaOblast,
+                    opt => opt.MapFrom(x => x.NaucnaOblast));
+
+            CreateMap<DoktorUpsertDto, Doktor>();
+            CreateMap<DoktorUpsertDto, Radnik>();
         }
     }
 }

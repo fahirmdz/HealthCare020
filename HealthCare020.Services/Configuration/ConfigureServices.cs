@@ -18,6 +18,7 @@ namespace HealthCare020.Services.Configuration
 
             services.AddScoped<ICRUDService<ZdravstvenoStanje, ZdravstvenoStanjeDto, ZdravstvenoStanjeDto, ZdravstvenoStanjeResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
             services.AddScoped<ICRUDService<Role, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>, RoleService>();
+            services.AddScoped<ICRUDService<NaucnaOblast, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, NaucnaOblastUpsertDto, NaucnaOblastUpsertDto>, NaucnaOblastService>();
             services.AddScoped<ICRUDService<TokenPoseta, TokenPosetaDto, TokenPosetaDto, TokenPosetaResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
             services
                 .AddScoped<ICRUDService<Drzava, DrzavaDto, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>,
@@ -35,6 +36,9 @@ namespace HealthCare020.Services.Configuration
             services
                 .AddScoped<ICRUDService<MedicinskiTehnicar, MedicinskiTehnicarDtoLL, MedicinskiTehnicarDtoEL, MedicinskiTehnicarResourceParameters, MedicinskiTehnicarUpsertDto,
                     MedicinskiTehnicarUpsertDto>, MedicinskiTehnicarService>();
+            services
+                .AddScoped<ICRUDService<Doktor, DoktorDtoLL, DoktorDtoEL, DoktorResourceParameters, DoktorUpsertDto,
+                    DoktorUpsertDto>, DoktorService>();
 
             services.AddScoped<IRadnikService, RadnikService>();
 

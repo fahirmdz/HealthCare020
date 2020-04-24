@@ -1,11 +1,9 @@
 ﻿namespace HealthCare020.Core.Models
 {
-    public class DoktorDtoEagerLoaded
+    //LL -> Lazy Loaded
+    public class DoktorDtoLL : RadnikDtoLL
     {
         public int Id { get; set; }
-
-
         public int NaucnaOblastId { get; set; }
-        public string NaucnaOblastNaziv { get; set; }
     }
 }
