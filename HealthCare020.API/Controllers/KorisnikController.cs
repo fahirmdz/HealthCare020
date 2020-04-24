@@ -47,7 +47,7 @@ namespace HealthCare020.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, KorisnickiNalogUpsertDto request)
         {
-            var result = _korisnikService.Update(id, request);
+            var result = await _korisnikService.Update(id, request);
 
             return Ok(result);
         }

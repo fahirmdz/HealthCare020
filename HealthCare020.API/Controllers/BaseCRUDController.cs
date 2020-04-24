@@ -24,16 +24,16 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, TDtoForUpdate dtoForUpdate)
+        public async Task<IActionResult> Update(int id, TDtoForUpdate dtoForUpdate)
         {
-            var result = _crudService.Update(id, dtoForUpdate);
+            var result = await _crudService.Update(id, dtoForUpdate);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _crudService.Delete(id);
+            await _crudService.Delete(id);
 
             return NoContent();
         }

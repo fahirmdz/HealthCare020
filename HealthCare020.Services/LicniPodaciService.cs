@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
 {
-    public class LicniPodaciService: BaseCRUDService<LicniPodaciDto,LicniPodaciDtoEagerLoaded,LicniPodaciResourceParameters,LicniPodaci,LicniPodaciUpsertDto,LicniPodaciUpsertDto>
+    public class LicniPodaciService: BaseCRUDService<LicniPodaciDto,LicniPodaciDto,LicniPodaciResourceParameters,LicniPodaci,LicniPodaciUpsertDto,LicniPodaciUpsertDto>
     {
         public LicniPodaciService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {
@@ -49,22 +49,26 @@ namespace HealthCare020.Services
             return _mapper.Map<LicniPodaciDto>(entity);
         }
 
-        public override LicniPodaciDto Update(int id, LicniPodaciUpsertDto request)
+        public override async Task<LicniPodaciDto> Update(int id, LicniPodaciUpsertDto request)
         {
-            var entity =  _dbContext.LicniPodaci.Find(id);
+            var entity =  await _dbContext.LicniPodaci.FindAsync(id);
 
-            if(entity==null)
-                throw new NotFoundException("Licni podaci nisu pronadjeni");
-
-            if (!_dbContext.Gradovi.Any(x => x.Id == request.GradId))
+            await Task.Run(() =>
             {
-                throw new NotFoundException($"Grad sa ID-em {request.GradId} nije pronadjen");
-            }
+                if (entity == null)
+                    throw new NotFoundException("Licni podaci nisu pronadjeni");
 
-            _mapper.Map(request, entity);
+                if (!_dbContext.Gradovi.Any(x => x.Id == request.GradId))
+                {
+                    throw new NotFoundException($"Grad sa ID-em {request.GradId} nije pronadjen");
+                }
 
-            _dbContext.LicniPodaci.Update(entity);
-            _dbContext.SaveChanges();
+                _mapper.Map(request, entity);
+
+                _dbContext.LicniPodaci.Update(entity);
+            });
+            
+            await _dbContext.SaveChangesAsync();
 
             return _mapper.Map<LicniPodaciDto>(entity);
         }

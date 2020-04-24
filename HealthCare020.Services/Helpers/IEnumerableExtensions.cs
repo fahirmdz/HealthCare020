@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Reflection;
+using System.Windows.Markup;
 
 namespace HealthCare020.Services.Helpers
 {
     public static class IEnumerableExtensions
     {
-        public static IEnumerable<ExpandoObject> ShapeData<TSource>(this IEnumerable<TSource> source,
+     public static IEnumerable<ExpandoObject> ShapeData<TSource>(this IEnumerable<TSource> source,
             string fields)
         {
             if (source == null)

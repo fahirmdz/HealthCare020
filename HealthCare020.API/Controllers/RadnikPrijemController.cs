@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/radnici-prijem")]
-    public class RadnikPrijemController : BaseCRUDController<RadnikPrijem, RadnikPrijemDto,RadnikPrijemDtoEagerLoaded, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto>
+    public class RadnikPrijemController : BaseCRUDController<RadnikPrijem, RadnikPrijemDtoLL,RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto>
     {
-        public RadnikPrijemController(ICRUDService<RadnikPrijem, RadnikPrijemDto, RadnikPrijemDtoEagerLoaded, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto> crudService) : base(crudService)
+        public RadnikPrijemController(ICRUDService<RadnikPrijem, RadnikPrijemDtoLL, RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto> crudService) : base(crudService)
         {
         }
     }

@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
 
-
         public string Ime { get; set; }
 
         public string Prezime { get; set; }
@@ -16,6 +15,6 @@
 
         public string BrojTelefona { get; set; }
 
-        public GradDto Grad { get; set; }
+        public GradDtoLL Grad { get; set; }
     }
 }

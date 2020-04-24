@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -9,18 +7,20 @@ using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
-    public class RadnikService:IRadnikService
+    public class RadnikService : IRadnikService
     {
         private readonly HealthCare020DbContext _dbContext;
-        private readonly ICRUDService<LicniPodaci, LicniPodaciDto,LicniPodaciDtoEagerLoaded, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> _licniPodaciService;
+        private readonly ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> _licniPodaciService;
         private readonly IKorisnikService _korisnikService;
         private readonly IMapper _mapper;
 
-        public RadnikService(HealthCare020DbContext dbContext, 
-            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDtoEagerLoaded, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService, 
+        public RadnikService(HealthCare020DbContext dbContext,
+            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService,
             IKorisnikService korisnikService, IMapper mapper)
         {
             _dbContext = dbContext;
@@ -28,7 +28,6 @@ namespace HealthCare020.Services
             _korisnikService = korisnikService;
             _mapper = mapper;
         }
-
 
         public async Task<Radnik> Insert(RadnikUpsertDto radnikDto)
         {
@@ -43,46 +42,51 @@ namespace HealthCare020.Services
             radnik.KorisnickiNalogId = korisnickiNalogResult.Id;
             radnik.LicniPodaciId = licniPodaciResult.Id;
 
-
             await _dbContext.AddAsync(radnik);
             await _dbContext.SaveChangesAsync();
 
             return radnik;
         }
 
-        public Radnik Update(int id, RadnikUpsertDto radnikDto)
+        public async Task<Radnik> Update(int id, RadnikUpsertDto radnikDto)
         {
             if (!_dbContext.StacionarnaOdeljenja.Any(x => x.Id == radnikDto.StacionarnoOdeljenjeId))
                 throw new NotFoundException($"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
 
-            var entity = _dbContext.Radnici
+            var entity = await _dbContext.Radnici
                 .Include(x => x.KorisnickiNalog)
                 .Include(x => x.LicniPodaci)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (entity == null)
                 throw new NotFoundException($"Radnik sa ID-em {id} nije pronadjen");
 
-            _korisnikService.Update(entity.KorisnickiNalogId, radnikDto.KorisnickiNalog);
-            _licniPodaciService.Update(entity.LicniPodaciId, radnikDto.LicniPodaci);
-            entity.StacionarnoOdeljenjeId = radnikDto.StacionarnoOdeljenjeId;
+            await _korisnikService.Update(entity.KorisnickiNalogId, radnikDto.KorisnickiNalog);
+            await _licniPodaciService.Update(entity.LicniPodaciId, radnikDto.LicniPodaci);
 
-            _dbContext.Update(entity);
-            _dbContext.SaveChanges();
+            await Task.Run(() =>
+            {
+                entity.StacionarnoOdeljenjeId = radnikDto.StacionarnoOdeljenjeId;
+
+                _dbContext.Update(entity);
+            });
+
+            await _dbContext.SaveChangesAsync();
 
             return entity;
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var entity = _dbContext.Radnici.Find(id);
+            var entity = await _dbContext.Radnici.FindAsync(id);
 
             if (entity == null)
                 throw new NotFoundException($"Radnik sa ID-em {id} nije pronadjen");
 
-            _licniPodaciService.Delete(entity.LicniPodaciId);
-            _korisnikService.Delete(entity.KorisnickiNalogId);
-            _dbContext.Remove(entity);
+            await _licniPodaciService.Delete(entity.LicniPodaciId);
+            await _korisnikService.Delete(entity.KorisnickiNalogId);
+
+            await Task.Run(() => { _dbContext.Remove(entity); });
         }
     }
 }

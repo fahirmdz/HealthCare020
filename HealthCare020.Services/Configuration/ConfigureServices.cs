@@ -23,15 +23,18 @@ namespace HealthCare020.Services.Configuration
                 .AddScoped<ICRUDService<Drzava, DrzavaDto, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>,
                     DrzavaService>();
 
-            services.AddScoped<ICRUDService<Grad, GradDto, GradDtoEagerLoaded, GradResourceParameters, GradUpsertDto, GradUpsertDto>, GradService>();
+            services.AddScoped<ICRUDService<Grad, GradDtoLL, GradDtoEL, GradResourceParameters, GradUpsertDto, GradUpsertDto>, GradService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
             services
-                .AddScoped<ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDtoEagerLoaded, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto>, LicniPodaciService>();
+                .AddScoped<ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto>, LicniPodaciService>();
 
             services.AddScoped<ICRUDService<StacionarnoOdeljenje, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, StacionarnoOdeljenjeUpsertDto, StacionarnoOdeljenjeUpsertDto>, StacionarnoOdeljenjeService>();
             services
-                .AddScoped<ICRUDService<RadnikPrijem, RadnikPrijemDto, RadnikPrijemDtoEagerLoaded, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto,
+                .AddScoped<ICRUDService<RadnikPrijem, RadnikPrijemDtoLL, RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto,
                     RadnikPrijemUpsertDto>, RadnikPrijemService>();
+            services
+                .AddScoped<ICRUDService<MedicinskiTehnicar, MedicinskiTehnicarDtoLL, MedicinskiTehnicarDtoEL, MedicinskiTehnicarResourceParameters, MedicinskiTehnicarUpsertDto,
+                    MedicinskiTehnicarUpsertDto>, MedicinskiTehnicarService>();
 
             services.AddScoped<IRadnikService, RadnikService>();
 

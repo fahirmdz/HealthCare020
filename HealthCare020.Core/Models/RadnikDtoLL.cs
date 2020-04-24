@@ -1,8 +1,7 @@
 ﻿namespace HealthCare020.Core.Models
 {
-    public class RadnikPrijemDto
+    public abstract class RadnikDtoLL
     {
-        public int Id { get; set; }
         public int RadnikId { get; set; }
         public int LicniPodaciId { get; set; }
         public int StacionarnoOdeljenjeId { get; set; }

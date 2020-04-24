@@ -1,4 +1,8 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -8,29 +12,25 @@ using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
-    public class RadnikPrijemService : BaseCRUDService<RadnikPrijemDtoLL, RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijem, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto>
+    public class MedicinskiTehnicarService : BaseCRUDService<MedicinskiTehnicarDtoLL, MedicinskiTehnicarDtoEL, MedicinskiTehnicarResourceParameters, MedicinskiTehnicar, MedicinskiTehnicarUpsertDto, MedicinskiTehnicarUpsertDto>
     {
         private readonly IRadnikService _radnikService;
 
-        public RadnikPrijemService(IMapper mapper, HealthCare020DbContext dbContext,
+        public MedicinskiTehnicarService(IMapper mapper,
+            HealthCare020DbContext dbContext, 
             IPropertyMappingService propertyMappingService,
-            IPropertyCheckerService propertyCheckerService,
-            IRadnikService radnikService) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+            IPropertyCheckerService propertyCheckerService, 
+            IRadnikService radnikService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {
             _radnikService = radnikService;
         }
 
-        public override IQueryable<RadnikPrijem> GetWithEagerLoad(int? id = null)
+         public override IQueryable<MedicinskiTehnicar> GetWithEagerLoad(int? id = null)
         {
-            var result = _dbContext.RadniciPrijem
+            var result = _dbContext.MedicinskiTehnicari
                 .Include(x => x.Radnik)
                 .ThenInclude(x => x.KorisnickiNalog)
                 .Include(x => x.Radnik)
@@ -46,31 +46,31 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<RadnikPrijemDtoLL> Insert(RadnikPrijemUpsertDto request)
+        public override async Task<MedicinskiTehnicarDtoLL> Insert(MedicinskiTehnicarUpsertDto request)
         {
             var radnikInsert = await _radnikService.Insert(request);
 
-            var entity = new RadnikPrijem { RadnikId = radnikInsert.Id };
+            var entity = new MedicinskiTehnicar { RadnikId = radnikInsert.Id };
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<RadnikPrijemDtoLL>(entity);
+            return _mapper.Map<MedicinskiTehnicarDtoLL>(entity);
         }
 
-        public override async Task<RadnikPrijemDtoLL> Update(int id, RadnikPrijemUpsertDto dtoForUpdate)
+        public override async Task<MedicinskiTehnicarDtoLL> Update(int id, MedicinskiTehnicarUpsertDto dtoForUpdate)
         {
             var radnikPrijemFromDb = await _dbContext.RadniciPrijem
                 .Include(x => x.Radnik)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (radnikPrijemFromDb == null)
-                throw new NotFoundException($"Radnik sa ID-em {id} nije pronadjen");
+                throw new NotFoundException($"Medicinski tehnicar sa ID-em {id} nije pronadjen");
 
             _mapper.Map(dtoForUpdate, radnikPrijemFromDb.Radnik);
             var radnikUpdated = await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
 
-            return _mapper.Map<RadnikPrijemDtoLL>(radnikPrijemFromDb);
+            return _mapper.Map<MedicinskiTehnicarDtoLL>(radnikPrijemFromDb);
         }
 
         public override async Task Delete(int id)
@@ -80,7 +80,7 @@ namespace HealthCare020.Services
             await Task.Run(() =>
             {
                 if (entity == null)
-                    throw new NotFoundException($"RadnikPrijem sa ID-em {id} nije pronadjen.");
+                    throw new NotFoundException($"Medicinski tehnicar sa ID-em {id} nije pronadjen.");
                 _radnikService.Delete(id);
 
                 _dbContext.Remove(entity);
@@ -89,7 +89,7 @@ namespace HealthCare020.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public override async Task<PagedList<RadnikPrijem>> FilterAndPrepare(IQueryable<RadnikPrijem> result, RadnikPrijemResourceParameters resourceParameters)
+        public override async Task<PagedList<MedicinskiTehnicar>> FilterAndPrepare(IQueryable<MedicinskiTehnicar> result, MedicinskiTehnicarResourceParameters resourceParameters)
         {
             if (!await result.AnyAsync())
                 return null;
@@ -106,23 +106,23 @@ namespace HealthCare020.Services
             result = result.Include(x => x.Radnik.LicniPodaci);
 
             if (resourceParameters.EagerLoaded)
-                PropertyCheck<RadnikPrijemDtoEL>(resourceParameters.Fields, resourceParameters.OrderBy);
+                PropertyCheck<MedicinskiTehnicarDtoEL>(resourceParameters.Fields, resourceParameters.OrderBy);
 
-            var pagedResult = PagedList<RadnikPrijem>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
+            var pagedResult = PagedList<MedicinskiTehnicar>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
 
             return pagedResult;
         }
 
-        public override IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<RadnikPrijem> data, RadnikPrijemResourceParameters resourceParameters)
+        public override IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<MedicinskiTehnicar> data, MedicinskiTehnicarResourceParameters resourceParameters)
         {
             if (ShouldEagerLoad(resourceParameters))
             {
-                var dataWithFinalTypeEagerLoaded = data.Select(x => _mapper.Map<RadnikPrijemDtoEL>(x));
+                var dataWithFinalTypeEagerLoaded = data.Select(x => _mapper.Map<MedicinskiTehnicarDtoEL>(x));
 
                 if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
                 {
                     var propertyMappingDictionary =
-                        _propertyMappingService.GetPropertyMapping<RadnikPrijemDtoEL, RadnikPrijem>();
+                        _propertyMappingService.GetPropertyMapping<MedicinskiTehnicarDtoEL, MedicinskiTehnicar>();
 
                     dataWithFinalTypeEagerLoaded = dataWithFinalTypeEagerLoaded.AsQueryable()
                         .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
@@ -131,12 +131,12 @@ namespace HealthCare020.Services
                 return dataWithFinalTypeEagerLoaded.ShapeData(resourceParameters.Fields);
             }
 
-            var dataWithFinalTypeLazyLoaded = data.Select(x => _mapper.Map<RadnikPrijemDtoLL>(x));
+            var dataWithFinalTypeLazyLoaded = data.Select(x => _mapper.Map<MedicinskiTehnicarDtoLL>(x));
 
             if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
             {
                 var propertyMappingDictionary =
-                    _propertyMappingService.GetPropertyMapping<RadnikPrijemDtoLL, RadnikPrijem>();
+                    _propertyMappingService.GetPropertyMapping<MedicinskiTehnicarDtoLL, MedicinskiTehnicar>();
 
                 dataWithFinalTypeLazyLoaded = dataWithFinalTypeLazyLoaded.AsQueryable()
                     .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
@@ -145,7 +145,7 @@ namespace HealthCare020.Services
             return dataWithFinalTypeLazyLoaded.ShapeData(resourceParameters.Fields);
         }
 
-        public override T PrepareDataForClient<T>(RadnikPrijem data, RadnikPrijemResourceParameters resourceParameters)
+        public override T PrepareDataForClient<T>(MedicinskiTehnicar data, MedicinskiTehnicarResourceParameters resourceParameters)
         {
             return _mapper.Map<T>(data).Map(_mapper, data.Radnik.LicniPodaci).Map(_mapper, data.Radnik.KorisnickiNalog).Map(_mapper, data.Radnik.StacionarnoOdeljenje);
         }

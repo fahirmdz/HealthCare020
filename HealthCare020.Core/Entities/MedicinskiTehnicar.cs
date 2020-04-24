@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthCare020.Core.Entities
@@ -10,6 +9,7 @@ namespace HealthCare020.Core.Entities
 
         [ForeignKey(nameof(Radnik))]
         public int RadnikId { get; set; }
+
         public Radnik Radnik { get; set; }
 
         public virtual ICollection<CustomIzvestaj> CustomIzvestaji { get; set; }
