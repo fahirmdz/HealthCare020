@@ -91,17 +91,14 @@ namespace HealthCare020.Services.Helpers
                 {new PropertyMapping<DoktorDtoLL,Doktor>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(DoktorDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Doktor.Id)})},
-                        {nameof(DoktorDtoLL.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.LicniPodaciId)}})},
-                        {nameof(DoktorDtoLL.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.StacionarnoOdeljenjeId)}})},
-                        {nameof(DoktorDtoLL.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.KorisnickiNalogId)}})},
+                        {nameof(DoktorDtoLL.RadnikId),new PropertyMappingValue(new List<string>(){{nameof(Doktor.RadnikId)}})},
                     })
                 },
                 {new PropertyMapping<DoktorDtoEL,Doktor>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(DoktorDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Doktor.Id)})},
-                        {nameof(DoktorDtoEL.KorisnickiNalog),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.KorisnickiNalog)}})},
-                        {nameof(DoktorDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.LicniPodaci)}})},
-                        {nameof(DoktorDtoEL.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){{nameof(Doktor.Radnik.StacionarnoOdeljenje)}})},
+                        {nameof(DoktorDtoEL.NaucnaOblast),new PropertyMappingValue(new List<string>(){nameof(Doktor.NaucnaOblast)})},
+                        {nameof(DoktorDtoEL.Radnik),new PropertyMappingValue(new List<string>(){nameof(Doktor.Radnik)})},
                     })
                 },
                 {new PropertyMapping<GradDtoEL,Grad>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)

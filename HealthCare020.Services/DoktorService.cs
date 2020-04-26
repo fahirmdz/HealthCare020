@@ -112,7 +112,7 @@ namespace HealthCare020.Services
 
             if (resourceParameters.EagerLoaded)
                 PropertyCheck<DoktorDtoEL>(resourceParameters.Fields, resourceParameters.OrderBy);
-
+            
             var pagedResult = PagedList<Doktor>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
 
             return pagedResult;

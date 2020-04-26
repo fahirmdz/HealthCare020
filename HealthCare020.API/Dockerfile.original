@@ -8,9 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["HealthCare020.API/HealthCare020.API.csproj", "HealthCare020.API/"]
-COPY ["HealthCare020.Services/HealthCare020.Services.csproj", "HealthCare020.Services/"]
-COPY ["HealthCare020.Repository/HealthCare020.Repository.csproj", "HealthCare020.Repository/"]
-COPY ["HealthCare020.Core/HealthCare020.Core.csproj", "HealthCare020.Core/"]
 RUN dotnet restore "HealthCare020.API/HealthCare020.API.csproj"
 COPY . .
 WORKDIR "/src/HealthCare020.API"

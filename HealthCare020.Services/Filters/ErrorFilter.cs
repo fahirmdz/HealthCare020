@@ -1,4 +1,5 @@
-﻿using HealthCare020.Services.Exceptions;
+﻿using System.Linq;
+using HealthCare020.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
@@ -25,7 +26,7 @@ namespace HealthCare020.Services.Filters
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
 
-            context.Result = new JsonResult(context.ModelState);
+            context.Result = new JsonResult(context.ModelState.Values.SelectMany(x=>x.Errors));
             base.OnException(context);
         }
     }

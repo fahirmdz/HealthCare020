@@ -12,8 +12,8 @@ namespace HealthCare020.Core.Entities
         [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
         public string OpisStanja { get; set; }
 
-        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
-        public DateTime DatumVreme { get; set; }
+        [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
+        public DateTime DatumVreme { get; set; } = DateTime.Now;
 
         [ForeignKey(nameof(LicniPodaci))]
         public int LicniPodaciId { get; set; }
