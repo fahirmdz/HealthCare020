@@ -39,6 +39,13 @@ namespace HealthCare020.Services.Configuration
             services
                 .AddScoped<ICRUDService<Doktor, DoktorDtoLL, DoktorDtoEL, DoktorResourceParameters, DoktorUpsertDto,
                     DoktorUpsertDto>, DoktorService>();
+            services
+                .AddScoped<ICRUDService<UputZaLecenje, UputZaLecenjeDtoLL, UputZaLecenjeDtoEL,
+                        UputZaLecenjeResourceParameters, UputZaLecenjeUpsertDto, UputZaLecenjeUpsertDto>,
+                    UputZaLecenjeService>();
+            services
+                .AddScoped<ICRUDService<Pacijent, PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters,
+                    PacijentUpsertDto, PacijentDtoForUpdate>, PacijentService>();
 
             services.AddScoped<IRadnikService, RadnikService>();
 

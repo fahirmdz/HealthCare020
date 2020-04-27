@@ -146,6 +146,30 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<DoktorUpsertDto, Doktor>().ReverseMap();
             CreateMap<DoktorUpsertDto, Radnik>().ReverseMap();
+
+
+            //UputZaLecenje
+            CreateMap<UputZaLecenje, UputZaLecenjeDtoLL>();
+
+            CreateMap<UputZaLecenje, UputZaLecenjeDtoEL>()
+                .ForMember(dest => dest.Doktor,
+                    opt => opt.MapFrom(x =>"dr. "+ x.Doktor.ImePrezime))
+                .ForMember(dest => dest.LicniPodaci,
+                    opt => opt.MapFrom(x => x.LicniPodaci));
+            CreateMap<UputZaLecenjeUpsertDto, UputZaLecenje>()
+                .ForMember(dest=>dest.LicniPodaci,opt=>opt.Ignore())
+                .ReverseMap();
+
+
+            //Pacijent
+            CreateMap<Pacijent, PacijentDtoLL>();
+
+            CreateMap<Pacijent, PacijentDtoEL>()
+                .ForMember(dest => dest.LicniPodaci,
+                    opt => opt.MapFrom(x => x.LicniPodaci))
+                .ForMember(dest => dest.TokenPoseta,
+                    opt => opt.MapFrom(x => x.TokenPoseta));
+
         }
     }
 }

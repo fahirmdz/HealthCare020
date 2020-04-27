@@ -126,6 +126,38 @@ namespace HealthCare020.Services.Helpers
                         {nameof(KorisnickiNalogDtoEL.Roles),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.RolesKorisnickiNalog)}}) },
                     })
                 },
+                {new PropertyMapping<UputZaLecenjeDtoLL,UputZaLecenje>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(UputZaLecenjeDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(UputZaLecenje.Id)})},
+                        {nameof(UputZaLecenjeDtoLL.DoktorId),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.DoktorId)}}) },
+                        {nameof(UputZaLecenjeDtoLL.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.LicniPodaciId)}}) },
+                        {nameof(UputZaLecenjeDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.DatumVreme)}}) },
+                        {nameof(UputZaLecenjeDtoLL.OpisStanja),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.OpisStanja)}}) },
+                    })
+                },
+                {new PropertyMapping<UputZaLecenjeDtoEL,UputZaLecenje>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(UputZaLecenjeDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(UputZaLecenje.Id)})},
+                        {nameof(UputZaLecenjeDtoEL.Doktor),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.Doktor)}}) },
+                        {nameof(UputZaLecenjeDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.LicniPodaci)}}) },
+                        {nameof(UputZaLecenjeDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.DatumVreme)}}) },
+                        {nameof(UputZaLecenjeDtoEL.OpisStanja),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.OpisStanja)}}) },
+                    })
+                },
+                {new PropertyMapping<PacijentDtoLL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PacijentDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
+                        {nameof(PacijentDtoLL.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(Pacijent.LicniPodaci)}}) },
+                        {nameof(PacijentDtoLL.TokenPosetaId),new PropertyMappingValue(new List<string>(){{nameof(Pacijent.TokenPoseta)}}) },
+                    })
+                },
+                {new PropertyMapping<PacijentDtoEL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PacijentDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
+                        {nameof(PacijentDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(Pacijent.LicniPodaci)}}) },
+                        {nameof(PacijentDtoEL.TokenPoseta),new PropertyMappingValue(new List<string>(){{nameof(Pacijent.TokenPoseta)}}) },
+                    })
+                },
             };
     }
 }

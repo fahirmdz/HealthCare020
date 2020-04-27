@@ -33,6 +33,9 @@ namespace HealthCare020.Services
 
             if (ShouldEagerLoad(resourceParameters))
             {
+                //check prop and prop mapping
+                PropertyCheck<TDtoEagerLoaded>(resourceParameters.Fields, resourceParameters.OrderBy);
+
                 result = GetWithEagerLoad();
             }
             else
@@ -74,6 +77,9 @@ namespace HealthCare020.Services
 
             if (eagerLoad)
             {
+                //check prop and prop mapping
+                PropertyCheck<TDtoEagerLoaded>(resourceParameters.Fields, resourceParameters.OrderBy);
+
                 result = GetWithEagerLoad(id).FirstOrDefault();
             }
             else

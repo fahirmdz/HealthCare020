@@ -22,5 +22,6 @@ namespace HealthCare020.Core.Entities
         [ForeignKey(nameof(Doktor))]
         public int DoktorId { get; set; }
         public Doktor Doktor { get; set; }
+
     }
 }
