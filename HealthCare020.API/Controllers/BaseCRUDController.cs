@@ -3,6 +3,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace HealthCare020.API.Controllers
 {
+    [Authorize]
     public class BaseCRUDController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters>
         where TResourceParameters : BaseResourceParameters
         where TDtoForUpdate : class
