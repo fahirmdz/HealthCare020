@@ -2,8 +2,6 @@
 {
     public class LicniPodaciResourceParameters:BaseResourceParameters
     {
-        public int? Id { get; set; }
-
         public string Ime { get; set; }
 
         public string Prezime { get; set; }
@@ -15,9 +13,5 @@
         public string BrojTelefona { get; set; }
 
         public string Grad { get; set; }
-
-        public bool EagerLoaded { get; set; } = false;
-
-
     }
 }

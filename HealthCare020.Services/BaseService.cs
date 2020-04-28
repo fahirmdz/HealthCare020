@@ -5,12 +5,10 @@ using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCare020.Services
 {
@@ -35,17 +33,20 @@ namespace HealthCare020.Services
 
             if (ShouldEagerLoad(resourceParameters))
             {
+                //check prop and prop mapping
+                PropertyCheck<TDtoEagerLoaded>(resourceParameters.Fields, resourceParameters.OrderBy);
+
                 result = GetWithEagerLoad();
             }
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.Fields,resourceParameters.OrderBy);
+                PropertyCheck<TDto>(resourceParameters.Fields, resourceParameters.OrderBy);
 
                 result = _dbContext.Set<TEntity>().AsQueryable();
             }
 
-            var pagedResult = await FilterAndPrepare(result, resourceParameters)??new PagedList<TEntity>(new List<TEntity>(),0,0,0);
+            var pagedResult = await FilterAndPrepare(result, resourceParameters) ?? new PagedList<TEntity>(new List<TEntity>(), 0, 0, 0);
 
             var serviceResultToReturn = new ServiceSequenceResult
             {
@@ -56,7 +57,7 @@ namespace HealthCare020.Services
                     TotalCount = pagedResult.TotalCount,
                     TotalPages = pagedResult.TotalPages
                 },
-                Data = PrepareDataForClient(pagedResult,resourceParameters),
+                Data = PrepareDataForClient(pagedResult, resourceParameters),
                 HasNext = pagedResult.HasNext,
                 HasPrevious = pagedResult.HasPrevious
             };
@@ -69,7 +70,6 @@ namespace HealthCare020.Services
             throw new NotImplementedException();
         }
 
-
         public async Task<ExpandoObject> GetById(int id, TResourceParameters resourceParameters)
         {
             TEntity result;
@@ -77,24 +77,26 @@ namespace HealthCare020.Services
 
             if (eagerLoad)
             {
+                //check prop and prop mapping
+                PropertyCheck<TDtoEagerLoaded>(resourceParameters.Fields, resourceParameters.OrderBy);
+
                 result = GetWithEagerLoad(id).FirstOrDefault();
             }
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.Fields,resourceParameters.OrderBy);
+                PropertyCheck<TDto>(resourceParameters.Fields, resourceParameters.OrderBy);
 
-                result = _dbContext.Set<TEntity>().Find(id);
+                result = await _dbContext.Set<TEntity>().FindAsync(id);
             }
 
             if (result == null)
                 throw new NotFoundException("Not Found");
 
-            if(eagerLoad)
-             return PrepareDataForClient<TDtoEagerLoaded>(result,resourceParameters).ShapeData(resourceParameters.Fields);
-            
-            return PrepareDataForClient<TDto>(result,resourceParameters).ShapeData(resourceParameters.Fields);
+            if (eagerLoad)
+                return PrepareDataForClient<TDtoEagerLoaded>(result, resourceParameters).ShapeData(resourceParameters.Fields);
 
+            return PrepareDataForClient<TDto>(result, resourceParameters).ShapeData(resourceParameters.Fields);
         }
 
         /// <summary>
@@ -102,11 +104,9 @@ namespace HealthCare020.Services
         /// </summary>
         public virtual async Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters)
         {
-
             //Apply pagination
-              return PagedList<TEntity>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
+            return PagedList<TEntity>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
-
 
         /// <summary>
         /// Mapping entities to the data type for a client
@@ -115,15 +115,15 @@ namespace HealthCare020.Services
         {
             if (ShouldEagerLoad(resourceParameters))
             {
-                var dataWithFinalTypeEagerLoaded= data.Select(x => _mapper.Map<TDtoEagerLoaded>(x));
+                var dataWithFinalTypeEagerLoaded = data.Select(x => _mapper.Map<TDtoEagerLoaded>(x));
 
                 if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
                 {
                     var propertyMappingDictionary =
                         _propertyMappingService.GetPropertyMapping<TDtoEagerLoaded, TEntity>();
 
-                     dataWithFinalTypeEagerLoaded = dataWithFinalTypeEagerLoaded.AsQueryable()
-                        .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
+                    dataWithFinalTypeEagerLoaded = dataWithFinalTypeEagerLoaded.AsQueryable()
+                       .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
                 }
 
                 return dataWithFinalTypeEagerLoaded.ShapeData(resourceParameters.Fields);
@@ -148,7 +148,7 @@ namespace HealthCare020.Services
         /// </summary>
         public virtual T PrepareDataForClient<T>(TEntity data, TResourceParameters resourceParameters)
         {
-                return _mapper.Map<T>(data);
+            return _mapper.Map<T>(data);
         }
 
         /// <summary>

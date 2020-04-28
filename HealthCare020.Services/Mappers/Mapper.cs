@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -11,16 +12,17 @@ namespace HealthCare020.Services.Mappers
     {
         public Mapper()
         {
-            CreateMap<ZdravstvenoStanje, TwoFieldsDto>()
-                .ForMember(x => x.Naziv, opt => opt.MapFrom(x => x.Opis))
-                .ReverseMap();
+            CreateMap<ZdravstvenoStanje, ZdravstvenoStanjeDto>();
 
             CreateMap<ZdravstvenoStanjeUpsertDto, ZdravstvenoStanje>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<TokenPoseta, TokenPosetaDto>().ReverseMap();
-            CreateMap<TokenPosetaUpsertDto, TokenPoseta>().ReverseMap();
+
+            CreateMap<TokenPoseta, TokenPosetaDtoLL>();
+            CreateMap<TokenPoseta, TokenPosetaDtoEL>()
+                .ForMember(dest => dest.Pacijent,
+                    opt => opt.MapFrom(x => x.Pacijent));
 
             CreateMap<Role, TwoFieldsDto>()
                 .ForMember(x => x.Naziv, opt => opt.MapFrom(x => x.Naziv))
@@ -41,6 +43,7 @@ namespace HealthCare020.Services.Mappers
             CreateMap<KorisnickiNalog, KorisnickiNalogUpsertDto>()
                 .ReverseMap()
                 .ForMember(x => x.Id, opt => opt.Ignore());
+
             CreateMap<KorisnickiNalog, KorisnickiNalogDtoLL>()
                 .ForMember(dest => dest.DateCreated,
                     opt => opt.MapFrom(x => x.DateCreated.ToString("d", new CultureInfo("de-DE"))))
@@ -74,11 +77,12 @@ namespace HealthCare020.Services.Mappers
             CreateMap<Radnik, RadnikPrijemDtoEL>()
                 .ForMember(dest => dest.Id,
                     opt => opt.Ignore());
+            CreateMap<Radnik, RadnikDtoEL>();
 
             //RadnikPrijem
             CreateMap<RadnikPrijem, RadnikPrijemDtoLL>();
             CreateMap<RadnikPrijem, RadnikPrijemDtoEL>();
-            CreateMap<RadnikPrijemUpsertDto, Radnik>();
+            CreateMap<RadnikPrijemUpsertDto, Radnik>().ReverseMap();
 
             CreateMap<LicniPodaci, RadnikPrijemDtoEL>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
@@ -107,10 +111,8 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.Radnik.LicniPodaci))
                 .ForMember(dest => dest.KorisnickiNalog,
                     opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog));
-                
-            CreateMap<RadnikPrijemUpsertDto, Radnik>();
 
-
+            CreateMap<RadnikPrijemUpsertDto, Radnik>().ReverseMap();
 
             //MedicinskiTehnicar
             CreateMap<MedicinskiTehnicar, MedicinskiTehnicarDtoLL>()
@@ -128,31 +130,82 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.Radnik.LicniPodaci))
                 .ForMember(dest => dest.KorisnickiNalog,
                     opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog));
-                
-            CreateMap<MedicinskiTehnicarUpsertDto, Radnik>();
 
+            CreateMap<MedicinskiTehnicarUpsertDto, Radnik>().ReverseMap();
 
             //Doktor
-            CreateMap<Doktor, DoktorDtoLL>()
-                .ForMember(dest => dest.KorisnickiNalogId,
-                    opt => opt.MapFrom(x => x.Radnik.KorisnickiNalogId))
-                .ForMember(dest => dest.LicniPodaciId,
-                    opt => opt.MapFrom(x => x.Radnik.LicniPodaciId))
-                .ForMember(dest => dest.StacionarnoOdeljenjeId,
-                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenjeId));
+            CreateMap<Doktor, DoktorDtoLL>();
 
             CreateMap<Doktor, DoktorDtoEL>()
-                .ForMember(dest => dest.StacionarnoOdeljenje,
-                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje))
-                .ForMember(dest => dest.LicniPodaci,
-                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci))
-                .ForMember(dest => dest.KorisnickiNalog,
-                    opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog))
                 .ForMember(dest => dest.NaucnaOblast,
-                    opt => opt.MapFrom(x => x.NaucnaOblast));
+                    opt => opt.MapFrom(x => x.NaucnaOblast))
+                .ForMember(dest => dest.Radnik,
+                    opt => opt.MapFrom(x => x.Radnik));
 
-            CreateMap<DoktorUpsertDto, Doktor>();
-            CreateMap<DoktorUpsertDto, Radnik>();
+            CreateMap<DoktorUpsertDto, Doktor>()
+                .ForMember(dest => dest.Radnik, opt => opt.Ignore())
+                .ReverseMap();
+            CreateMap<DoktorUpsertDto, Radnik>().ReverseMap();
+
+            //UputZaLecenje
+            CreateMap<UputZaLecenje, UputZaLecenjeDtoLL>();
+
+            CreateMap<UputZaLecenje, UputZaLecenjeDtoEL>()
+                .ForMember(dest => dest.Doktor,
+                    opt => opt.MapFrom(x => "dr. " + x.Doktor.ImePrezime))
+                .ForMember(dest => dest.LicniPodaci,
+                    opt => opt.MapFrom(x => x.LicniPodaci));
+            CreateMap<UputZaLecenjeUpsertDto, UputZaLecenje>()
+                .ForMember(dest => dest.LicniPodaci, opt => opt.Ignore())
+                .ReverseMap();
+
+            //Pacijent
+            CreateMap<Pacijent, PacijentDtoLL>();
+
+            CreateMap<Pacijent, PacijentDtoEL>()
+                .ForMember(dest => dest.LicniPodaci,
+                    opt => opt.MapFrom(x => x.LicniPodaci));
+
+            //Poseta
+            CreateMap<Poseta, PosetaDtoLL>();
+
+            CreateMap<Poseta, PosetaDtoEL>()
+                .ForMember(dest => dest.TokenPoseta,
+                    opt => opt.MapFrom(x => x.TokenPoseta));
+
+            //CustomIzvestaj
+            CreateMap<CustomIzvestaj, CustomIzvestajDtoLL>();
+
+            CreateMap<CustomIzvestaj, CustomIzvestajDtoEL>()
+                .ForMember(dest => dest.PacijentImePrezime,
+                    opt => 
+                        opt.MapFrom(x => x.Pacijent.LicniPodaci.Ime+" "+x.Pacijent.LicniPodaci.Prezime))
+                .ForMember(dest => dest.MedicinskiTehnicarImePrezime,
+                    opt => 
+                        opt.MapFrom(x => x.MedicinskiTehnicar.Radnik.LicniPodaci.Ime+" "+x.MedicinskiTehnicar.Radnik.LicniPodaci.Prezime));
+
+            CreateMap<CustomIzvestajUpsertDto, CustomIzvestaj>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ReverseMap();
+
+            
+            //DnevniIzvestaj
+            CreateMap<DnevniIzvestaj, DnevniIzvestajDtoLL>();
+
+            CreateMap<DnevniIzvestaj, DnevniIzvestajDtoEL>()
+                .ForMember(dest => dest.Pacijent,
+                    opt => 
+                        opt.MapFrom(x => x.Pacijent.LicniPodaci.Ime+" "+x.Pacijent.LicniPodaci.Prezime))
+                .ForMember(dest => dest.Doktor,
+                    opt => 
+                        opt.MapFrom(x => x.Doktor.Radnik.LicniPodaci.Ime+" "+x.Doktor.Radnik.LicniPodaci.Prezime))
+                .ForMember(dest => dest.ZdravstvenoStanje,
+                    opt => 
+                        opt.MapFrom(x => x.ZdravstvenoStanje.Opis));
+
+            CreateMap<DnevniIzvestajUpsertDto, DnevniIzvestaj>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

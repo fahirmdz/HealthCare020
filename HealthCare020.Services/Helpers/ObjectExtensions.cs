@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
+using System.Linq;
 using System.Reflection;
+using HealthCare020.Services.Exceptions;
 
 namespace HealthCare020.Services.Helpers
 {
@@ -53,5 +56,19 @@ namespace HealthCare020.Services.Helpers
 
             return dataShapedObject;
         }
+
+
+
+        public static void ValidateModel<T>(this T obj)
+        {
+            var context = new ValidationContext(obj,serviceProvider:null,items:null);
+            var results = new List<ValidationResult>();
+            var isValid = Validator.TryValidateObject(obj, context,results );
+
+            if(!isValid)
+                throw new Exception("Model is not valid because " + string.Join(", ", results.Select( s => s.ErrorMessage).ToArray()));
+        }
     }
+
+
 }

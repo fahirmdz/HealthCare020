@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCare020.Services", "H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCore020.Test", "HealthCore020.Test\HealthCore020.Test.csproj", "{B7FEA282-5FCB-4893-8D51-E0A166FC3EB7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare020.OAuth", "Healthcare020.OAuth\Healthcare020.OAuth.csproj", "{7D48F9A9-7CDA-4A30-9572-5B99A303079F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B7FEA282-5FCB-4893-8D51-E0A166FC3EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7FEA282-5FCB-4893-8D51-E0A166FC3EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7FEA282-5FCB-4893-8D51-E0A166FC3EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D48F9A9-7CDA-4A30-9572-5B99A303079F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D48F9A9-7CDA-4A30-9572-5B99A303079F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D48F9A9-7CDA-4A30-9572-5B99A303079F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D48F9A9-7CDA-4A30-9572-5B99A303079F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

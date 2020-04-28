@@ -19,9 +19,9 @@ namespace HealthCare020.Core.Entities
         public int ZdravstvenoStanjeId { get; set; }
         public ZdravstvenoStanje ZdravstvenoStanje { get; set; }
 
-        [ForeignKey(nameof(MedicinskiTehnicar))]
-        public int MedicinskiTehnicarId { get; set; }
-        public MedicinskiTehnicar MedicinskiTehnicar { get; set; }
+        [ForeignKey(nameof(Doktor))]
+        public int DoktorId { get; set; }
+        public Doktor Doktor { get; set; }
 
         [ForeignKey(nameof(Pacijent))]
         public int PacijentId { get; set; }

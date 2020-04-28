@@ -2,6 +2,8 @@
 {
     public class TokenPosetaResourceParameters:BaseResourceParameters
     {
-        public string Value { get; set; }
+        public bool EagerLoaded { get; set; } = false;
+        public string ImePacijenta { get; set; }
+        public string PrezimePacijenta { get; set; }
     }
 }

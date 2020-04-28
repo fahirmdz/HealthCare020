@@ -1,12 +1,12 @@
-using System.Linq;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
 using HealthCare020.Services.Filters;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
 
 namespace HealthCare020.API
 {
@@ -26,16 +28,51 @@ namespace HealthCare020.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HealthCare020DbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(true));
 
             services.AddSwaggerGen(x =>
-                x.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthCare020 API", Version = "v1" }));
+                {
+                    x.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Title = "HealthCare020 API",
+                        Version = "v1"
+                    });
 
-            services.TryAddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+                    x.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                    {
+                        Type = SecuritySchemeType.OAuth2,
+                        Flows = new OpenApiOAuthFlows
+                        {
+                            Password = new OpenApiOAuthFlow
+                            {
+                                AuthorizationUrl = new Uri("https://localhost:5005/connect/authorize"),
+                                TokenUrl = new Uri("https://localhost:5005/connect/token")
+                            }
+                        },
+                        OpenIdConnectUrl = new Uri("https://localhost:5005/.well-known/openid-configuration"),
+                        Scheme = JwtBearerDefaults.AuthenticationScheme,
+                        BearerFormat = "JWT",
+                        Name = "Authorization",
+                        In = ParameterLocation.Header
+                    });
+
+                    x.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                            },
+                            new List<string>()
+                        }
+                    });
+                });
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddHealthCare020Services();
 
             services.AddControllers(cfg =>
@@ -44,9 +81,9 @@ namespace HealthCare020.API
                     cfg.ReturnHttpNotAcceptable = true;
                 }).AddNewtonsoftJson(setupAction =>
                   {
-                    //Input and output JSON formatters
+                      //Input and output JSON formatters
 
-                   setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                      setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                   }).AddXmlDataContractSerializerFormatters()
                 .ConfigureApiBehaviorOptions(config =>
                 {
@@ -65,14 +102,19 @@ namespace HealthCare020.API
 
                         return new UnprocessableEntityObjectResult(problemDetails)
                         {
-                            ContentTypes = {"application/problem+json"}
+                            ContentTypes = { "application/problem+json" }
                         };
                     };
                 });
-           
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "https://localhost:5005/";
+                    options.RequireHttpsMetadata = false;
+                });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -80,16 +122,18 @@ namespace HealthCare020.API
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "HealthCare020 API v1");
+                c.OAuthClientId("Healthcare020_WebAPI");
+                c.OAuthClientSecret("devsecret");
             });
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

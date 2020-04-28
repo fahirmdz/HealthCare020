@@ -10,12 +10,18 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace HealthCare020.Services
 {
     public class GradService : BaseCRUDService<GradDtoLL, GradDtoEL, GradResourceParameters, Grad, GradUpsertDto, GradUpsertDto>
     {
-        public GradService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+        public GradService(IMapper mapper, 
+            HealthCare020DbContext dbContext,
+            IPropertyMappingService propertyMappingService,
+            IPropertyCheckerService propertyCheckerService,
+            IHttpContextAccessor httpContextAccessor) 
+            : base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
         {
         }
 

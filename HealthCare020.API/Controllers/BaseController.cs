@@ -2,11 +2,15 @@
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {
+    [Authorize]
     [ApiController]
     public class BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters> : ControllerBase where TResourceParameters : BaseResourceParameters
     {
@@ -20,6 +24,8 @@ namespace HealthCare020.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
+         
+
             var result = await _service.Get(resourceParameters);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.PaginationMetadata));
