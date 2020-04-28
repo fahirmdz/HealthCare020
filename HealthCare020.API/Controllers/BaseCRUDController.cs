@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace HealthCare020.API.Controllers
 {
-    [Authorize]
     public class BaseCRUDController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters>
         where TResourceParameters : BaseResourceParameters
         where TDtoForUpdate : class

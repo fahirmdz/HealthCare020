@@ -39,7 +39,7 @@ namespace Healthcare020.OAuth.Validators
             claims.Add(new Claim(JwtClaimTypes.Id, user.Id.ToString()));
 
             context.Result = new GrantValidationResult(user.Id.ToString(), "Application",
-                identityProvider: "bitwarden",
+                identityProvider: "Healthcare020_OAuth",
                 claims: claims);
         }
     }
