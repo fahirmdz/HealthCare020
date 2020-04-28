@@ -5,7 +5,9 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
+using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,10 +20,15 @@ using System.Threading.Tasks;
 namespace HealthCare020.Services
 
 {
-    public class KorisnikService : BaseService<KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalog>, IKorisnikService
+    public class KorisnikService : BaseCRUDService<KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalog, KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto>,
+        IKorisnikService
     {
-        public KorisnikService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+        public KorisnikService(IMapper mapper,
+            HealthCare020DbContext dbContext,
+            IPropertyMappingService propertyMappingService,
+            IPropertyCheckerService propertyCheckerService,
+            IHttpContextAccessor httpContextAccessor)
+            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
         {
         }
 
@@ -38,7 +45,7 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public async Task<KorisnickiNalogDtoLL> Insert(KorisnickiNalogUpsertDto request)
+        public override async Task<KorisnickiNalogDtoLL> Insert(KorisnickiNalogUpsertDto request)
         {
             var korisnickiNalog = _mapper.Map<KorisnickiNalog>(request);
 
@@ -78,7 +85,7 @@ namespace HealthCare020.Services
             return _mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog);
         }
 
-        public async Task<KorisnickiNalogDtoLL> Update(int id, KorisnickiNalogUpsertDto request)
+        public override async Task<KorisnickiNalogDtoLL> Update(int id, KorisnickiNalogUpsertDto dtoForUpdate)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
@@ -87,13 +94,13 @@ namespace HealthCare020.Services
                 if (korisnickiNalog == null)
                     throw new NotFoundException("Korisnicki nalog nije pronadjen");
 
-                _mapper.Map(request, korisnickiNalog);
+                _mapper.Map(dtoForUpdate, korisnickiNalog);
 
-                if (!string.IsNullOrEmpty(request.Password) && request.Password != request.ConfirmPassword)
+                if (!string.IsNullOrEmpty(dtoForUpdate.Password) && dtoForUpdate.Password != dtoForUpdate.ConfirmPassword)
                     throw new UserException("Lozinke se ne podudaraju");
 
                 korisnickiNalog.PasswordSalt = GenerateSalt();
-                korisnickiNalog.PasswordHash = GenerateHash(korisnickiNalog.PasswordSalt, request.Password);
+                korisnickiNalog.PasswordHash = GenerateHash(korisnickiNalog.PasswordSalt, dtoForUpdate.Password);
 
                 korisnickiNalog.DateCreated = DateTime.Now;
                 korisnickiNalog.LastOnline = DateTime.Now;
@@ -103,10 +110,10 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            if (request.RolesToDelete.Any(x => request.Roles.Contains(x)))
+            if (dtoForUpdate.RolesToDelete.Any(x => dtoForUpdate.Roles.Contains(x)))
                 throw new UserException($"Liste rola za brisanje i dodavanje ne smiju sadrzati zajednicke elemente.");
 
-            foreach (var roleId in request.Roles)
+            foreach (var roleId in dtoForUpdate.Roles)
             {
                 if (_dbContext.RolesKorisnickiNalozi.Any(x =>
                     x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId))
@@ -120,7 +127,7 @@ namespace HealthCare020.Services
             }
             await _dbContext.SaveChangesAsync();
 
-            foreach (var roleId in request.RolesToDelete)
+            foreach (var roleId in dtoForUpdate.RolesToDelete)
             {
                 var roleKorisnik = await _dbContext.RolesKorisnickiNalozi.FirstOrDefaultAsync(x => x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId);
                 if (roleKorisnik == null)
@@ -151,6 +158,16 @@ namespace HealthCare020.Services
             });
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public override async Task<PagedList<KorisnickiNalog>> FilterAndPrepare(IQueryable<KorisnickiNalog> result, KorisnickiNalogResourceParameters resourceParameters)
+        {
+            if (!string.IsNullOrWhiteSpace(resourceParameters.Username) && await result.AnyAsync())
+            {
+                result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
+            }
+
+            return await base.FilterAndPrepare(result, resourceParameters);
         }
 
         public override IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<KorisnickiNalog> data, KorisnickiNalogResourceParameters resourceParameters)

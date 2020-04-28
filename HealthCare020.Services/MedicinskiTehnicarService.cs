@@ -97,7 +97,7 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrEmpty(resourceParameters.Ime))
+            if (!string.IsNullOrEmpty(resourceParameters.Ime) && await result.AnyAsync())
                 result = result.Where(x => x.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
 
             if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.Prezime))

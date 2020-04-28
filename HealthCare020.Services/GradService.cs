@@ -76,11 +76,23 @@ namespace HealthCare020.Services
 
         public override async Task<PagedList<Grad>> FilterAndPrepare(IQueryable<Grad> result, GradResourceParameters resourceParameters)
         {
-            if (resourceParameters.EagerLoaded)
-                PropertyCheck<GradDtoEL>(resourceParameters.Fields, resourceParameters.OrderBy);
+            if (!string.IsNullOrWhiteSpace(resourceParameters.Naziv) && await result.AnyAsync())
+            {
+                result = result.Where(x => x.Naziv.ToLower().StartsWith(resourceParameters.Naziv.ToLower()));
+            }
 
-            return PagedList<Grad>.Create(result, resourceParameters.PageNumber,
-                resourceParameters.PageSize);
+            if (!string.IsNullOrWhiteSpace(resourceParameters.DrzavaNaziv) && await result.AnyAsync())
+            {
+                result = result.Where(
+                    x => x.Drzava.Naziv.ToLower().StartsWith(resourceParameters.DrzavaNaziv.ToLower()));
+            }
+
+            if (resourceParameters.DrzavaId.HasValue && await result.AnyAsync())
+            {
+                result = result.Where(x => x.DrzavaId == resourceParameters.DrzavaId);
+            }
+
+            return await base.FilterAndPrepare(result, resourceParameters);
         }
     }
 }
