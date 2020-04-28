@@ -24,8 +24,7 @@ namespace HealthCare020.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
-            var claimsdentity = User.Identity as ClaimsIdentity;
-            var claims = claimsdentity.Claims.FirstOrDefault(x => x.Type=="sub");
+         
 
             var result = await _service.Get(resourceParameters);
 

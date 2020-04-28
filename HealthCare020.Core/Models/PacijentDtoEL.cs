@@ -4,7 +4,5 @@
     public class PacijentDtoEL : PacijentDto
     {
         public LicniPodaciDto LicniPodaci { get; set; }
-
-        public TokenPosetaDto TokenPoseta { get; set; }
     }
 }

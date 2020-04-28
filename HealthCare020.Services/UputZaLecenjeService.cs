@@ -10,6 +10,7 @@ using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
@@ -18,9 +19,13 @@ namespace HealthCare020.Services
     {
         private readonly ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters,LicniPodaciUpsertDto, LicniPodaciUpsertDto> _licniPodaciService;
 
-        public UputZaLecenjeService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, 
-            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService) : 
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+        public UputZaLecenjeService(IMapper mapper,
+            HealthCare020DbContext dbContext, 
+            IPropertyMappingService propertyMappingService,
+            IPropertyCheckerService propertyCheckerService, 
+            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService,
+            IHttpContextAccessor httpContextAccessor) : 
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
         {
             _licniPodaciService = licniPodaciService;
         }
@@ -44,15 +49,25 @@ namespace HealthCare020.Services
 
         public override async Task<UputZaLecenjeDtoLL> Insert(UputZaLecenjeUpsertDto dtoForCreation)
         {
-            if(!await _dbContext.Set<Doktor>().AnyAsync(x=>x.Id==dtoForCreation.DoktorId))
-                throw new NotFoundException($"Doktor sa ID-em {dtoForCreation.DoktorId} nije pronadjen.");
+            var userId = base._httpContextAccessor.HttpContext.GetUserIdFromIdentityClaim();
+
+            var user = await _dbContext.Set<KorisnickiNalog>().FindAsync(userId);
+
+            if(user==null)
+                throw new UnauthorizedException("Unauthorized access");
+
+            var doktorLoggedIn = await _dbContext.Set<Doktor>()
+                .FirstOrDefaultAsync(x => x.Radnik.KorisnickiNalogId == user.Id);
+
+            if(doktorLoggedIn==null)
+                throw new ForbiddenException("Samo doktori imaju mogucnost kreiranja novog uputa za lecenje.");
 
             var licniPodaciResult=await _licniPodaciService.Insert(dtoForCreation.LicniPodaci);
 
             var newEntity = new UputZaLecenje
             {
                 DatumVreme = DateTime.Now,
-                DoktorId = dtoForCreation.DoktorId,
+                DoktorId = doktorLoggedIn.Id,
                 LicniPodaciId = licniPodaciResult.Id,
                 OpisStanja = dtoForCreation.OpisStanja
             };
@@ -69,9 +84,6 @@ namespace HealthCare020.Services
 
             if (entity == null)
                 throw new NotFoundException($"Uput za lecenje sa ID-em {id} nije pronadjen");
-
-            if(!await _dbContext.Set<Doktor>().AnyAsync(x=>x.Id==dtoForUpdate.DoktorId))
-                throw new NotFoundException($"Doktor sa ID-em {dtoForUpdate.DoktorId} nije pronadjen.");
 
             await _licniPodaciService.Update(entity.LicniPodaciId, dtoForUpdate.LicniPodaci);
 

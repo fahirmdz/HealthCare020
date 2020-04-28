@@ -1,6 +1,5 @@
 ﻿using HealthCare020.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace HealthCare020.Repository
 {
@@ -12,7 +11,6 @@ namespace HealthCare020.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<UputZaLecenje>()
                 .HasOne(x => x.Doktor)
                 .WithMany(x => x.UputiZaLecenje)
@@ -24,7 +22,7 @@ namespace HealthCare020.Repository
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DnevniIzvestaj>()
-                .HasOne(x => x.MedicinskiTehnicar)
+                .HasOne(x => x.Doktor)
                 .WithMany(x => x.DnevniIzvestaji)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -44,7 +42,7 @@ namespace HealthCare020.Repository
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Poseta>()
-                .HasOne(x => x.Pacijent)
+                .HasOne(x => x.TokenPoseta)
                 .WithMany(x => x.Posete)
                 .OnDelete(DeleteBehavior.Restrict);
 

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace HealthCare020.Services
 {
@@ -18,9 +19,13 @@ namespace HealthCare020.Services
         private readonly ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters,
             LicniPodaciUpsertDto, LicniPodaciUpsertDto> _licniPodaciService;
 
-        public PacijentService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService,
-            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+        public PacijentService(IMapper mapper, 
+            HealthCare020DbContext dbContext,
+            IPropertyMappingService propertyMappingService,
+            IPropertyCheckerService propertyCheckerService,
+            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService,
+            IHttpContextAccessor httpContextAccessor) :
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
         {
             _licniPodaciService = licniPodaciService;
         }
@@ -31,7 +36,6 @@ namespace HealthCare020.Services
                 .Include(x => x.LicniPodaci)
                 .ThenInclude(x => x.Grad)
                 .ThenInclude(x => x.Drzava)
-                .Include(x => x.TokenPoseta)
                 .AsQueryable();
 
             if (id.HasValue)
@@ -50,23 +54,22 @@ namespace HealthCare020.Services
             if(await _dbContext.Set<Pacijent>().AnyAsync(x=>x.LicniPodaciId==uputZaLecenjeFromDb.LicniPodaciId))
                 throw new UserException("Pacijent je vec prijavljen na lecenje");
 
-            var noviTokenPoseta = new TokenPoseta
-            {
-                Value = GenerateTokenPoseta()
-            };
-
-            await _dbContext.AddAsync(noviTokenPoseta);
-            await _dbContext.SaveChangesAsync();
-
             var newEntity = new Pacijent
             {
-                LicniPodaciId = uputZaLecenjeFromDb.LicniPodaciId,
-                TokenPosetaId = noviTokenPoseta.Id
+                LicniPodaciId = uputZaLecenjeFromDb.LicniPodaciId
             };
 
             await _dbContext.AddAsync(newEntity);
             await _dbContext.SaveChangesAsync();
 
+            var noviTokenPoseta = new TokenPoseta
+            {
+                Value = GenerateTokenPoseta(),
+                PacijentId = newEntity.Id
+            };
+
+            await _dbContext.AddAsync(noviTokenPoseta);
+            await _dbContext.SaveChangesAsync();
             return _mapper.Map<PacijentDtoLL>(newEntity);
         }
 

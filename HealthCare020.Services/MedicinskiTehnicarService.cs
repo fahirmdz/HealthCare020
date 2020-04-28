@@ -11,6 +11,7 @@ using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
@@ -23,7 +24,9 @@ namespace HealthCare020.Services
             HealthCare020DbContext dbContext, 
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService, 
-            IRadnikService radnikService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+            IRadnikService radnikService,
+            IHttpContextAccessor httpContextAccessor) :
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
         {
             _radnikService = radnikService;
         }

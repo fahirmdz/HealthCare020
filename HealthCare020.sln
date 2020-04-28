@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCare020.Services", "H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCore020.Test", "HealthCore020.Test\HealthCore020.Test.csproj", "{B7FEA282-5FCB-4893-8D51-E0A166FC3EB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare020.OAuth", "Healthcare020.OAuth\Healthcare020.OAuth.csproj", "{7D48F9A9-7CDA-4A30-9572-5B99A303079F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare020.OAuth", "Healthcare020.OAuth\Healthcare020.OAuth.csproj", "{7D48F9A9-7CDA-4A30-9572-5B99A303079F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

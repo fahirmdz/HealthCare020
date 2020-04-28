@@ -13,6 +13,5 @@ namespace HealthCare020.Core.Entities
         public Radnik Radnik { get; set; }
 
         public virtual ICollection<CustomIzvestaj> CustomIzvestaji { get; set; }
-        public virtual ICollection<DnevniIzvestaj> DnevniIzvestaji { get; set; }
     }
 }

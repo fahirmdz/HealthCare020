@@ -19,7 +19,7 @@ namespace HealthCare020.Services.Configuration
             services.AddScoped<ICRUDService<ZdravstvenoStanje, ZdravstvenoStanjeDto, ZdravstvenoStanjeDto, ZdravstvenoStanjeResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
             services.AddScoped<ICRUDService<Role, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>, RoleService>();
             services.AddScoped<ICRUDService<NaucnaOblast, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, NaucnaOblastUpsertDto, NaucnaOblastUpsertDto>, NaucnaOblastService>();
-            services.AddScoped<ICRUDService<TokenPoseta, TokenPosetaDto, TokenPosetaDto, TokenPosetaResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
+            services.AddScoped<ICRUDService<TokenPoseta, TokenPosetaDtoLL, TokenPosetaDtoEL, TokenPosetaResourceParameters, TokenPosetaUpsertDto, TokenPosetaUpsertDto>, TokenPosetaService>();
             services
                 .AddScoped<ICRUDService<Drzava, DrzavaDto, DrzavaDto, DrzavaResourceParameters, DrzavaUpsertRequest, DrzavaUpsertRequest>,
                     DrzavaService>();
@@ -46,6 +46,17 @@ namespace HealthCare020.Services.Configuration
             services
                 .AddScoped<ICRUDService<Pacijent, PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters,
                     PacijentUpsertDto, PacijentDtoForUpdate>, PacijentService>();
+            services
+                .AddScoped<ICRUDService<Poseta, PosetaDtoLL, PosetaDtoEL, PosetaResourceParameters, PosetaUpsertDto,
+                    PosetaUpsertDto>, PosetaService>();
+            services
+                .AddScoped<ICRUDService<CustomIzvestaj, CustomIzvestajDtoLL, CustomIzvestajDtoEL,
+                        CustomIzvestajResourceParameters, CustomIzvestajUpsertDto, CustomIzvestajUpsertDto>,
+                    CustomIzvestajService>();
+            services
+                .AddScoped<ICRUDService<DnevniIzvestaj, DnevniIzvestajDtoLL, DnevniIzvestajDtoEL,
+                        DnevniIzvestajResourceParameters, DnevniIzvestajUpsertDto, DnevniIzvestajUpsertDto>,
+                    DnevniIzvestajService>();
 
             services.AddScoped<IRadnikService, RadnikService>();
 

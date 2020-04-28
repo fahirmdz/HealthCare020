@@ -11,10 +11,6 @@ namespace HealthCare020.Core.Entities
         public int LicniPodaciId { get; set; }
         public LicniPodaci LicniPodaci { get; set; }
 
-        [ForeignKey(nameof(TokenPoseta))]
-        public int TokenPosetaId { get; set; }
-        public TokenPoseta TokenPoseta { get; set; }
-
         public virtual ICollection<CustomIzvestaj> CustomIzvestaji { get; set; }
         public virtual ICollection<DnevniIzvestaj> DnevniIzvestaji { get; set; }
         public virtual ICollection<Poseta> Posete { get; set; }

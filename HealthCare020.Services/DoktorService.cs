@@ -10,6 +10,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace HealthCare020.Services
 {
@@ -17,7 +18,11 @@ namespace HealthCare020.Services
     {
         private readonly IRadnikService _radnikService;
 
-        public DoktorService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, IRadnikService radnikService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+        public DoktorService(IMapper mapper, HealthCare020DbContext dbContext, 
+            IPropertyMappingService propertyMappingService,
+            IPropertyCheckerService propertyCheckerService,
+            IRadnikService radnikService,
+            IHttpContextAccessor httpContextAccessor) : base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
         {
             _radnikService = radnikService;
         }

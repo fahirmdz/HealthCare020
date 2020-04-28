@@ -6,7 +6,9 @@ using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using System.Threading.Tasks;
+using HealthCare020.Core.Entities;
 using HealthCare020.Services.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace HealthCare020.Services
 {
@@ -16,13 +18,21 @@ namespace HealthCare020.Services
         where TResourceParameters : BaseResourceParameters
         where TDtoForUpdate : class
     {
+        protected readonly IHttpContextAccessor _httpContextAccessor;
+
         public BaseCRUDService(IMapper mapper, HealthCare020DbContext dbContext,
-            IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+            IPropertyMappingService propertyMappingService,
+            IPropertyCheckerService propertyCheckerService, 
+            IHttpContextAccessor httpContextAccessor) : 
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public virtual async Task<TDto> Insert(TDtoForCreation dtoForCreation)
         {
+            
+
             var entity = _mapper.Map<TEntity>(dtoForCreation);
 
             await _dbContext.Set<TEntity>().AddAsync(entity);

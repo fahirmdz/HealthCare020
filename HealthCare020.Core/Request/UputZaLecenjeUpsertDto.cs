@@ -10,8 +10,5 @@ namespace HealthCare020.Core.Request
 
         [Required(ErrorMessage = "Obavezno polje")]
         public LicniPodaciUpsertDto LicniPodaci { get; set; }
-
-        [Required(ErrorMessage = "Obavezno polje")]
-        public int DoktorId { get; set; }
     }
 }

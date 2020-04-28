@@ -9,13 +9,19 @@ using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Repository;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
 {
     public class NaucnaOblastService : BaseCRUDService<TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, NaucnaOblast, NaucnaOblastUpsertDto, NaucnaOblastUpsertDto>
     {
-        public NaucnaOblastService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+        public NaucnaOblastService(IMapper mapper,
+            HealthCare020DbContext dbContext, 
+            IPropertyMappingService propertyMappingService,
+            IPropertyCheckerService propertyCheckerService,
+            IHttpContextAccessor httpContextAccessor) : 
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
         {
         }
 

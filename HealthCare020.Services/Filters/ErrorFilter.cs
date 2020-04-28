@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using HealthCare020.Services.Exceptions;
+﻿using HealthCare020.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Linq;
 using System.Net;
 
 namespace HealthCare020.Services.Filters
@@ -20,13 +20,22 @@ namespace HealthCare020.Services.Filters
                 context.ModelState.AddModelError("ERROR", context.Exception.Message);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
+            else if (context.Exception is UnauthorizedException)
+            {
+                context.ModelState.AddModelError("Unauthorized access", context.Exception.Message);
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            }else if (context.Exception is ForbiddenException)
+            {
+                context.ModelState.AddModelError("Missing permission for this action", context.Exception.Message);
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+            }
             else
             {
                 context.ModelState.AddModelError("ERROR", "Greska na serveru");
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
 
-            context.Result = new JsonResult(context.ModelState.Values.SelectMany(x=>x.Errors));
+            context.Result = new JsonResult(context.ModelState.Values.SelectMany(x => x.Errors));
             base.OnException(context);
         }
     }

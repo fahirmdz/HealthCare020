@@ -66,7 +66,7 @@ namespace HealthCare020.Repository.Migrations
                     b.Property<DateTime>("DatumVreme")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MedicinskiTehnicarId")
+                    b.Property<int>("DoktorId")
                         .HasColumnType("int");
 
                     b.Property<string>("OpisStanja")
@@ -82,7 +82,7 @@ namespace HealthCare020.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MedicinskiTehnicarId");
+                    b.HasIndex("DoktorId");
 
                     b.HasIndex("PacijentId");
 
@@ -270,14 +270,9 @@ namespace HealthCare020.Repository.Migrations
                     b.Property<int>("LicniPodaciId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TokenPosetaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LicniPodaciId");
-
-                    b.HasIndex("TokenPosetaId");
 
                     b.ToTable("Pacijenti");
                 });
@@ -292,20 +287,17 @@ namespace HealthCare020.Repository.Migrations
                     b.Property<DateTime>("DatumVreme")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PacijentId")
+                    b.Property<int?>("PacijentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PosetiocIme")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
-
-                    b.Property<string>("PosetiocPrezime")
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                    b.Property<int>("TokenPosetaId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PacijentId");
+
+                    b.HasIndex("TokenPosetaId");
 
                     b.ToTable("Posete");
                 });
@@ -414,11 +406,19 @@ namespace HealthCare020.Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BrojPreostalihPoseta")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PacijentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PacijentId");
 
                     b.ToTable("TokeniPoseta");
                 });
@@ -486,9 +486,9 @@ namespace HealthCare020.Repository.Migrations
 
             modelBuilder.Entity("HealthCare020.Core.Entities.DnevniIzvestaj", b =>
                 {
-                    b.HasOne("HealthCare020.Core.Entities.MedicinskiTehnicar", "MedicinskiTehnicar")
+                    b.HasOne("HealthCare020.Core.Entities.Doktor", "Doktor")
                         .WithMany("DnevniIzvestaji")
-                        .HasForeignKey("MedicinskiTehnicarId")
+                        .HasForeignKey("DoktorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -554,19 +554,17 @@ namespace HealthCare020.Repository.Migrations
                         .HasForeignKey("LicniPodaciId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("HealthCare020.Core.Entities.TokenPoseta", "TokenPoseta")
-                        .WithMany()
-                        .HasForeignKey("TokenPosetaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.Poseta", b =>
                 {
-                    b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
+                    b.HasOne("HealthCare020.Core.Entities.Pacijent", null)
                         .WithMany("Posete")
-                        .HasForeignKey("PacijentId")
+                        .HasForeignKey("PacijentId");
+
+                    b.HasOne("HealthCare020.Core.Entities.TokenPoseta", "TokenPoseta")
+                        .WithMany("Posete")
+                        .HasForeignKey("TokenPosetaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -604,14 +602,23 @@ namespace HealthCare020.Repository.Migrations
             modelBuilder.Entity("HealthCare020.Core.Entities.RoleKorisnickiNalog", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.KorisnickiNalog", "KorisnickiNalog")
-                        .WithMany()
+                        .WithMany("RolesKorisnickiNalog")
                         .HasForeignKey("KorisnickiNalogId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("HealthCare020.Core.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.TokenPoseta", b =>
+                {
+                    b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
+                        .WithMany()
+                        .HasForeignKey("PacijentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

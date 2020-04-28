@@ -38,9 +38,12 @@ namespace HealthCare020.Services
 
             var korisnickiNalogResult = await _korisnikService.Insert(radnikDto.KorisnickiNalog);
 
-            var radnik = _mapper.Map<Radnik>(radnikDto);
-            radnik.KorisnickiNalogId = korisnickiNalogResult.Id;
-            radnik.LicniPodaciId = licniPodaciResult.Id;
+            var radnik = new Radnik
+            {
+                KorisnickiNalogId = korisnickiNalogResult.Id,
+                LicniPodaciId=licniPodaciResult.Id,
+                StacionarnoOdeljenjeId = radnikDto.StacionarnoOdeljenjeId
+            };
 
             await _dbContext.AddAsync(radnik);
             await _dbContext.SaveChangesAsync();
