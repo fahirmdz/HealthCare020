@@ -14,12 +14,12 @@ namespace HealthCare020.Services.Interfaces
 
         IQueryable<TEntity> GetWithEagerLoad(int? id = null);
 
-        Task<ExpandoObject> GetById(int id, TResourceParameters resourceParameters);
+        Task<dynamic> GetById(int id, TResourceParameters resourceParameters);
 
         Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters);
 
 
-        IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters);
+        IEnumerable PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters);
 
         bool ShouldEagerLoad(TResourceParameters resourceParameters);
     }

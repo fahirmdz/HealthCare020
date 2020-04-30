@@ -1,12 +1,9 @@
 ﻿using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {
@@ -24,8 +21,6 @@ namespace HealthCare020.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
-         
-
             var result = await _service.Get(resourceParameters);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.PaginationMetadata));
@@ -43,7 +38,6 @@ namespace HealthCare020.API.Controllers
 
             return Ok(result);
         }
-     
 
         //----HATEOAS support----
         //protected virtual string CreateResourceUri(TResourceParameters resourceParameters, ResourceUriType type)

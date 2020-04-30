@@ -10,6 +10,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -145,7 +146,7 @@ namespace HealthCare020.Services
             return _mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog);
         }
 
-        public async Task Delete(int id)
+        public override async Task Delete(int id)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
@@ -170,7 +171,7 @@ namespace HealthCare020.Services
             return await base.FilterAndPrepare(result, resourceParameters);
         }
 
-        public override IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<KorisnickiNalog> data, KorisnickiNalogResourceParameters resourceParameters)
+        public override IEnumerable PrepareDataForClient(IEnumerable<KorisnickiNalog> data, KorisnickiNalogResourceParameters resourceParameters)
         {
             foreach (var x in data)
             {

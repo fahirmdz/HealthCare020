@@ -109,7 +109,7 @@ namespace HealthCare020.Services
             result = result.Include(x => x.Radnik.LicniPodaci);
 
             if (resourceParameters.EagerLoaded)
-                PropertyCheck<MedicinskiTehnicarDtoEL>(resourceParameters.Fields, resourceParameters.OrderBy);
+                PropertyCheck<MedicinskiTehnicarDtoEL>(resourceParameters.OrderBy);
 
             var pagedResult = PagedList<MedicinskiTehnicar>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
 
