@@ -24,7 +24,11 @@ namespace Healthcare020.OAuth.Configuration
                     ClientId = "Healthcare020_WebAPI",
                     ClientSecrets = new [] { new Secret("devsecret".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId }
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId },
+                    RefreshTokenUsage = TokenUsage.ReUse,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    AbsoluteRefreshTokenLifetime = 2592000,
+                    AllowOfflineAccess = true
                 }
             };
 

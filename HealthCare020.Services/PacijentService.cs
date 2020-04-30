@@ -10,7 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthCare020.Services.Helpers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Update;
 
 namespace HealthCare020.Services
 {
@@ -83,6 +85,22 @@ namespace HealthCare020.Services
             await _licniPodaciService.Update(id, dtoForUpdate.LicniPodaci);
 
             return _mapper.Map<PacijentDtoLL>(entity);
+        }
+
+        public override async Task<PagedList<Pacijent>> FilterAndPrepare(IQueryable<Pacijent> result, PacijentResourceParameters resourceParameters)
+        {
+            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Ime))
+            {
+                result = result.Where(x => x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
+            }
+
+            if (!string.IsNullOrWhiteSpace(resourceParameters.Prezime) && await result.AnyAsync())
+            {
+                result = result.Where(x =>
+                    x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
+            }
+
+            return await base.FilterAndPrepare(result, resourceParameters);
         }
 
         private string GenerateTokenPoseta()

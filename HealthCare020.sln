@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthCore020.Test", "Healt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare020.OAuth", "Healthcare020.OAuth\Healthcare020.OAuth.csproj", "{7D48F9A9-7CDA-4A30-9572-5B99A303079F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{08755D88-F04A-4EC9-B294-E0FD8074D9C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare020.WinUI", "Healthcare020.WinUI\Healthcare020.WinUI.csproj", "{302498AE-7B4F-4C38-9988-6214D3C84503}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,9 +49,16 @@ Global
 		{7D48F9A9-7CDA-4A30-9572-5B99A303079F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D48F9A9-7CDA-4A30-9572-5B99A303079F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D48F9A9-7CDA-4A30-9572-5B99A303079F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{302498AE-7B4F-4C38-9988-6214D3C84503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{302498AE-7B4F-4C38-9988-6214D3C84503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{302498AE-7B4F-4C38-9988-6214D3C84503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{302498AE-7B4F-4C38-9988-6214D3C84503}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{302498AE-7B4F-4C38-9988-6214D3C84503} = {08755D88-F04A-4EC9-B294-E0FD8074D9C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FCE93F7-73D2-4070-A44A-D3563DDD74B6}

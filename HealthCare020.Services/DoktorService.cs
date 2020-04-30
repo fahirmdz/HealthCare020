@@ -104,13 +104,13 @@ namespace HealthCare020.Services
             if (!string.IsNullOrEmpty(resourceParameters.Ime))
                 result = result.Where(x => x.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.Prezime))
+            if (!string.IsNullOrEmpty(resourceParameters.Prezime) && await result.AnyAsync())
                 result = result.Where(x => x.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.Username))
+            if (!string.IsNullOrEmpty(resourceParameters.Username) && await result.AnyAsync())
                 result = result.Where(x => x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.NaucnaOblast))
+            if (!string.IsNullOrEmpty(resourceParameters.NaucnaOblast) && await result.AnyAsync())
                 result = result.Where(x => x.NaucnaOblast.Naziv.ToLower().StartsWith(resourceParameters.NaucnaOblast.ToLower()));
 
             result = result.Include(x => x.Radnik.LicniPodaci);
