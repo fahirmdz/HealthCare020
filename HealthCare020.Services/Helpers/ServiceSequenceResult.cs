@@ -12,6 +12,6 @@ namespace HealthCare020.Services.Helpers
         public PaginationMetadata PaginationMetadata { get; set; }
         public bool HasNext { get; set; }
         public bool HasPrevious { get; set; }
-        public IEnumerable<ExpandoObject> Data { get; set; }
+        public IEnumerable Data { get; set; }
     }
 }

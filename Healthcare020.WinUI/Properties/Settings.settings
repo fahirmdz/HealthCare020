@@ -1,7 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Healthcare020.WinUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ApiUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://localhost:5001/api/</Value>
+    </Setting>
+    <Setting Name="IdpTokenEndpoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://localhost:5005/connect/token</Value>
+    </Setting>
+    <Setting Name="IdpClientId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Healthcare020_WebAPI</Value>
+    </Setting>
+    <Setting Name="IdpClientSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)">devsecret</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

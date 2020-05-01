@@ -10,23 +10,24 @@ namespace Healthcare020.WinUI.Helpers
 
         public static IFlurlRequest GetAuthorizedApiRequest(string relativePath)
         {
-            return ("https://localhost:5001/api/" + relativePath).WithHeader("Authorization", "Bearer " + AccessToken);
+            return (Properties.Settings.Default.ApiUrl + relativePath).WithHeader("Authorization", "Bearer " + AccessToken);
         }
 
         public static string GetAccessToken() => AccessToken;
 
-        public static void AuthenticateWithPassword(string username, string password)
+        public static bool AuthenticateWithPassword(string username, string password)
         {
             try
             {
-                var client = new OAuth2Client(new Uri("https://localhost:5005/connect/token"), "Healthcare020_WebAPI",
-                    "devsecret");
+                var client = new OAuth2Client(new Uri(Properties.Settings.Default.IdpTokenEndpoint), Properties.Settings.Default.IdpClientId,
+                    Properties.Settings.Default.IdpClientSecret);
                 var tokens = client.RequestAccessTokenUserName(username, password, string.Empty);
                 AccessToken = tokens.AccessToken;
+                return true;
             }
             catch (Exception ex)
             {
-                // ignored
+                return false;
             }
         }
     }

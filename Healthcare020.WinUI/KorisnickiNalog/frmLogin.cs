@@ -1,6 +1,8 @@
 ﻿using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.StartMenu;
 using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.KorisnickiNalog
@@ -10,8 +12,14 @@ namespace Healthcare020.WinUI.KorisnickiNalog
         public frmLogin()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+
         }
 
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            this.KeyPreview = true;
+        }
         private void Login()
         {
             if (!ValidateInput())
@@ -22,11 +30,16 @@ namespace Healthcare020.WinUI.KorisnickiNalog
             var username = txtUsername.Text;
             var password = txtPassword.Text;
 
-            Auth.AuthenticateWithPassword(username, password);
-
-            var startMenu = new frmStartMenu { MdiParent = MdiParent };
-            startMenu.Show();
-            Close();
+            if (Auth.AuthenticateWithPassword(username, password))
+            {
+                var startMenu = new frmStartMenu { MdiParent = MdiParent };
+                startMenu.Show();
+                Close();
+            }
+            else
+            {
+                err.SetError(txtPassword,"Netačan username ili password");
+            }
         }
 
         private void btnLogin_MouseClick(object sender, MouseEventArgs e)
@@ -51,11 +64,6 @@ namespace Healthcare020.WinUI.KorisnickiNalog
             return true;
         }
 
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-            this.KeyPreview = true;
-        }
-
         private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
@@ -63,6 +71,20 @@ namespace Healthcare020.WinUI.KorisnickiNalog
                 e.Handled = true;
                 Login();
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MdiParent.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button_WOC1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -5,6 +5,7 @@ using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -34,14 +35,14 @@ namespace HealthCare020.Services
             if (ShouldEagerLoad(resourceParameters))
             {
                 //check prop and prop mapping
-                PropertyCheck<TDtoEagerLoaded>(resourceParameters.Fields, resourceParameters.OrderBy);
+                PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
 
                 result = GetWithEagerLoad();
             }
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.Fields, resourceParameters.OrderBy);
+                PropertyCheck<TDto>(resourceParameters.OrderBy);
 
                 result = _dbContext.Set<TEntity>().AsQueryable();
             }
@@ -61,7 +62,6 @@ namespace HealthCare020.Services
                 HasNext = pagedResult.HasNext,
                 HasPrevious = pagedResult.HasPrevious
             };
-
             return serviceResultToReturn;
         }
 
@@ -70,7 +70,7 @@ namespace HealthCare020.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ExpandoObject> GetById(int id, TResourceParameters resourceParameters)
+        public async Task<dynamic> GetById(int id, TResourceParameters resourceParameters)
         {
             TEntity result;
             var eagerLoad = ShouldEagerLoad(resourceParameters);
@@ -78,14 +78,14 @@ namespace HealthCare020.Services
             if (eagerLoad)
             {
                 //check prop and prop mapping
-                PropertyCheck<TDtoEagerLoaded>(resourceParameters.Fields, resourceParameters.OrderBy);
+                PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
 
                 result = GetWithEagerLoad(id).FirstOrDefault();
             }
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.Fields, resourceParameters.OrderBy);
+                PropertyCheck<TDto>(resourceParameters.OrderBy);
 
                 result = await _dbContext.Set<TEntity>().FindAsync(id);
             }
@@ -94,9 +94,9 @@ namespace HealthCare020.Services
                 throw new NotFoundException("Not Found");
 
             if (eagerLoad)
-                return PrepareDataForClient<TDtoEagerLoaded>(result, resourceParameters).ShapeData(resourceParameters.Fields);
+                return PrepareDataForClient<TDtoEagerLoaded>(result, resourceParameters);
 
-            return PrepareDataForClient<TDto>(result, resourceParameters).ShapeData(resourceParameters.Fields);
+            return PrepareDataForClient<TDto>(result, resourceParameters);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace HealthCare020.Services
         /// <summary>
         /// Mapping entities to the data type for a client
         /// </summary>
-        public virtual IEnumerable<ExpandoObject> PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters)
+        public virtual IEnumerable PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters)
         {
             if (ShouldEagerLoad(resourceParameters))
             {
@@ -126,7 +126,8 @@ namespace HealthCare020.Services
                        .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
                 }
 
-                return dataWithFinalTypeEagerLoaded.ShapeData(resourceParameters.Fields);
+                return dataWithFinalTypeEagerLoaded;
+                //return dataWithFinalTypeEagerLoaded.ShapeData(resourceParameters.Fields);
             }
 
             var dataWithFinalTypeLazyLoaded = data.Select(x => _mapper.Map<TDto>(x));
@@ -140,7 +141,8 @@ namespace HealthCare020.Services
                     .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
             }
 
-            return dataWithFinalTypeLazyLoaded.ShapeData(resourceParameters.Fields);
+            return dataWithFinalTypeLazyLoaded;
+            //return dataWithFinalTypeLazyLoaded.ShapeData(resourceParameters.Fields);
         }
 
         /// <summary>
@@ -164,12 +166,12 @@ namespace HealthCare020.Services
         /// <summary>
         /// Check if properties exist
         /// </summary>
-        public void PropertyCheck<TType>(string fields, string orderBy)
+        public void PropertyCheck<TType>(string orderBy)
         {
-            if (!_propertyCheckerService.TypeHasProperties<TType>(fields))
-            {
-                throw new UserException($"One or more properties are invalid");
-            }
+            //if (!_propertyCheckerService.TypeHasProperties<TType>(fields))
+            //{
+            //    throw new UserException($"One or more properties are invalid");
+            //}
 
             if (!_propertyMappingService.ValidMappingExistsFor<TType, TEntity>(orderBy))
             {

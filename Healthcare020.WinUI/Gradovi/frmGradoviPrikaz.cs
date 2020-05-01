@@ -1,36 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Dynamic;
-using System.Linq;
+﻿using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Models;
+using System;
 using System.Windows.Forms;
-using Flurl.Http;
-using Flurl.Util;
-using HealthCare020.Core.Entities;
-using Healthcare020.WinUI.Helpers;
-using Newtonsoft.Json;
+using HealthCare020.Core.ResourceParameters;
 
 namespace Healthcare020.WinUI.Gradovi
 {
     public partial class frmGradoviPrikaz : Form
     {
+        private readonly APIService<GradResourceParameters> _apiService;
+
         public frmGradoviPrikaz()
         {
+            _apiService = new APIService<GradResourceParameters>("gradovi");
             InitializeComponent();
         }
 
-        
-
         private async void frmGradoviPrikaz_Load(object sender, EventArgs e)
         {
-            var data = (await Auth.GetAuthorizedApiRequest("gradovi")
-                .GetAsync()
-                .ReceiveJson<IList<ExpandoObject>>());
+            var data = await _apiService.Get<GradDtoLL>(new GradResourceParameters{Naziv = ""});
 
-
-            dgrvGradoviPrikaz.DataSource = data.ToDataTable();
+            dgrvGradoviPrikaz.DataSource = data;
         }
-
-        
     }
 }
