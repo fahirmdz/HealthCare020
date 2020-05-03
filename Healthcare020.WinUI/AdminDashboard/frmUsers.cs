@@ -34,6 +34,13 @@ namespace Healthcare020.WinUI.AdminDashboard
         {
             InitializeComponent();
             _apiService=new APIService<KorisnickiNalogResourceParameters>("korisnici");
+            dgrvKorisnickiNalozi.EnableHeadersVisualStyles = false;
+            dgrvKorisnickiNalozi.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgrvKorisnickiNalozi.BorderStyle = BorderStyle.None;
+            dgrvKorisnickiNalozi.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgrvKorisnickiNalozi.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 190, 190);
+            dgrvKorisnickiNalozi.ColumnHeadersDefaultCellStyle.ForeColor=Color.White;
+            dgrvKorisnickiNalozi.AutoGenerateColumns = false;
         }
 
         private async void frmUsers_Load(object sender, EventArgs e)
@@ -45,13 +52,6 @@ namespace Healthcare020.WinUI.AdminDashboard
                 });
 
             dgrvKorisnickiNalozi.DataSource = korisnici;
-            dgrvKorisnickiNalozi.EnableHeadersVisualStyles = false;
-            dgrvKorisnickiNalozi.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgrvKorisnickiNalozi.BorderStyle = BorderStyle.None;
-            dgrvKorisnickiNalozi.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgrvKorisnickiNalozi.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 190, 190);
-            dgrvKorisnickiNalozi.ColumnHeadersDefaultCellStyle.ForeColor=Color.White;
-            
         }
     }
 }

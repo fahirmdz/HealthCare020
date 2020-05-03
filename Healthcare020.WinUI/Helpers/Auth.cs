@@ -30,5 +30,13 @@ namespace Healthcare020.WinUI.Helpers
                 return false;
             }
         }
+
+        public static void Logout()
+        {
+            AccessToken = string.Empty;
+            MainForm.Instance.SetLoginAsChildForm();
+        }
+
+        public static bool IsAuthenticated() => !string.IsNullOrWhiteSpace(AccessToken);
     }
 }

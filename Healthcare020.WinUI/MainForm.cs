@@ -144,5 +144,14 @@ namespace Healthcare020.WinUI
         private void MainForm_Resize(object sender, EventArgs e)
         {
         }
+
+        public void SetLoginAsChildForm()
+        {
+            var loginForm = frmLogin.Instance;
+            this.SetCopyrightPanelColor(Color.Transparent);
+            currentChild = loginForm;
+            loginForm.ShowAsNextMdiChild(panelDesktop);
+            loginForm.BringToFront();
+        }
     }
 }

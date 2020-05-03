@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.AdminDashboard
 {
@@ -35,7 +36,6 @@ namespace Healthcare020.WinUI.AdminDashboard
             leftBorderBtn.Size = new Size(7, 60);
             panelMenu.Controls.Add(leftBorderBtn);
             MainForm.Instance.SetCopyrightPanelColor(Color.FromArgb(240, 240, 240));
-            pnlUserMenuDropdown.Hide();
         }
 
         private void frmStartMenuAdmin_Load(object sender, EventArgs e)
@@ -165,21 +165,16 @@ namespace Healthcare020.WinUI.AdminDashboard
             if (pnlUserMenuDropdown.Visible)
                 pnlUserMenuDropdown.Hide();
         }
-
-        private void btnUserMenu_Click_1(object sender, EventArgs e)
-        {
-            if (pnlUserMenuDropdown.Visible)
-                pnlUserMenuDropdown.Hide();
-            else
-            {
-                pnlUserMenuDropdown.Show();
-                pnlUserMenuDropdown.BringToFront();
-            }
-        }
+        
 
         private void iconCurrentChildForm_Click(object sender, EventArgs e)
         {
             CloseUserDropdownMenu();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Auth.Logout();
         }
     }
 }

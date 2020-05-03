@@ -37,22 +37,18 @@
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.btnUserMenu = new FontAwesome.Sharp.IconPictureBox();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.pnlUserMenuDropdown = new System.Windows.Forms.Panel();
-            this.btnLogout = new FontAwesome.Sharp.IconButton();
-            this.btnSettings = new FontAwesome.Sharp.IconButton();
-            this.btnProfile = new FontAwesome.Sharp.IconButton();
+            this.pnlUserMenuDropdown = new Healthcare020.WinUI.CustomElements.UserMenuDropdownPanel();
+            this.btnUserMenu = new Healthcare020.WinUI.CustomElements.UserMenuButton();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
             this.pnlTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
             this.pnlBody.SuspendLayout();
-            this.pnlUserMenuDropdown.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -201,22 +197,6 @@
             this.pnlTop.TabIndex = 2;
             this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
-            // btnUserMenu
-            // 
-            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUserMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
-            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconSize = 41;
-            this.btnUserMenu.Location = new System.Drawing.Point(723, 12);
-            this.btnUserMenu.Name = "btnUserMenu";
-            this.btnUserMenu.Size = new System.Drawing.Size(41, 42);
-            this.btnUserMenu.TabIndex = 4;
-            this.btnUserMenu.TabStop = false;
-            this.btnUserMenu.Click += new System.EventHandler(this.btnUserMenu_Click_1);
-            // 
             // lblTitleChildForm
             // 
             this.lblTitleChildForm.AutoSize = true;
@@ -257,73 +237,28 @@
             // 
             this.pnlUserMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlUserMenuDropdown.Controls.Add(this.btnLogout);
-            this.pnlUserMenuDropdown.Controls.Add(this.btnSettings);
-            this.pnlUserMenuDropdown.Controls.Add(this.btnProfile);
-            this.pnlUserMenuDropdown.Location = new System.Drawing.Point(619, 0);
+            this.pnlUserMenuDropdown.Button = this.btnUserMenu;
+            this.pnlUserMenuDropdown.Location = new System.Drawing.Point(576, 3);
             this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
-            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(157, 110);
+            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(200, 100);
             this.pnlUserMenuDropdown.TabIndex = 0;
+            this.pnlUserMenuDropdown.Visible = false;
             // 
-            // btnLogout
+            // btnUserMenu
             // 
-            this.btnLogout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnLogout.FlatAppearance.BorderSize = 0;
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnLogout.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnLogout.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
-            this.btnLogout.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnLogout.IconSize = 26;
-            this.btnLogout.Location = new System.Drawing.Point(0, 72);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Rotation = 0D;
-            this.btnLogout.Size = new System.Drawing.Size(157, 36);
-            this.btnLogout.TabIndex = 2;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLogout.UseVisualStyleBackColor = true;
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSettings.FlatAppearance.BorderSize = 0;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnSettings.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSettings.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnSettings.IconChar = FontAwesome.Sharp.IconChar.Cog;
-            this.btnSettings.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnSettings.IconSize = 26;
-            this.btnSettings.Location = new System.Drawing.Point(0, 36);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Rotation = 0D;
-            this.btnSettings.Size = new System.Drawing.Size(157, 36);
-            this.btnSettings.TabIndex = 1;
-            this.btnSettings.Text = "Settings";
-            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSettings.UseVisualStyleBackColor = true;
-            // 
-            // btnProfile
-            // 
-            this.btnProfile.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnProfile.FlatAppearance.BorderSize = 0;
-            this.btnProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProfile.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnProfile.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProfile.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnProfile.IconChar = FontAwesome.Sharp.IconChar.IdCard;
-            this.btnProfile.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnProfile.IconSize = 26;
-            this.btnProfile.Location = new System.Drawing.Point(0, 0);
-            this.btnProfile.Name = "btnProfile";
-            this.btnProfile.Rotation = 0D;
-            this.btnProfile.Size = new System.Drawing.Size(157, 36);
-            this.btnProfile.TabIndex = 0;
-            this.btnProfile.Text = "Profile";
-            this.btnProfile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
+            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconSize = 44;
+            this.btnUserMenu.Location = new System.Drawing.Point(720, 9);
+            this.btnUserMenu.Name = "btnUserMenu";
+            this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
+            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.btnUserMenu.TabIndex = 2;
+            this.btnUserMenu.TabStop = false;
             // 
             // frmStartMenuAdmin
             // 
@@ -349,10 +284,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
             this.pnlBody.ResumeLayout(false);
-            this.pnlUserMenuDropdown.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -370,10 +304,7 @@
         private FontAwesome.Sharp.IconPictureBox iconCurrentChildForm;
         private System.Windows.Forms.Label lblTitleChildForm;
         private System.Windows.Forms.Panel pnlBody;
-        private FontAwesome.Sharp.IconPictureBox btnUserMenu;
-        private System.Windows.Forms.Panel pnlUserMenuDropdown;
-        private FontAwesome.Sharp.IconButton btnLogout;
-        private FontAwesome.Sharp.IconButton btnSettings;
-        private FontAwesome.Sharp.IconButton btnProfile;
+        private CustomElements.UserMenuButton btnUserMenu;
+        private CustomElements.UserMenuDropdownPanel pnlUserMenuDropdown;
     }
 }
