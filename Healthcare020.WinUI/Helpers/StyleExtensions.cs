@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -27,5 +28,6 @@ namespace Healthcare020.WinUI.Helpers
         {
             return CreateRoundRectRgn(0, 0, textBox.Width, textBox.Height, nWidthElipse, nHeightElipse);
         }
+
     }
 }
