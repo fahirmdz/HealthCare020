@@ -28,88 +28,170 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.picClose = new System.Windows.Forms.PictureBox();
-            this.picMaximize = new System.Windows.Forms.PictureBox();
-            this.picMinimize = new System.Windows.Forms.PictureBox();
-            this.panelMainForm = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.pnlControlBox = new System.Windows.Forms.Panel();
+            this.picMaximize = new FontAwesome.Sharp.IconPictureBox();
+            this.picMinimize = new FontAwesome.Sharp.IconPictureBox();
+            this.picClose = new FontAwesome.Sharp.IconPictureBox();
+            this.panelDesktop = new System.Windows.Forms.Panel();
+            this.lblCopyright = new System.Windows.Forms.Label();
+            this.pnlCopyright = new System.Windows.Forms.Panel();
+            this.panelTop.SuspendLayout();
+            this.pnlControlBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
+            this.pnlCopyright.SuspendLayout();
             this.SuspendLayout();
             // 
-            // picClose
+            // panelTop
             // 
-            this.picClose.Cursor = System.Windows.Forms.Cursors.Default;
-            this.picClose.Image = ((System.Drawing.Image)(resources.GetObject("picClose.Image")));
-            this.picClose.Location = new System.Drawing.Point(968, 14);
-            this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(16, 23);
-            this.picClose.TabIndex = 7;
-            this.picClose.TabStop = false;
-            this.picClose.Click += new System.EventHandler(this.picClose_Click);
+            this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.panelTop.Controls.Add(this.pnlControlBox);
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(1000, 37);
+            this.panelTop.TabIndex = 1;
+            this.panelTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMainForm_MouseDown);
+            // 
+            // pnlControlBox
+            // 
+            this.pnlControlBox.BackColor = System.Drawing.Color.Transparent;
+            this.pnlControlBox.Controls.Add(this.picMaximize);
+            this.pnlControlBox.Controls.Add(this.picMinimize);
+            this.pnlControlBox.Controls.Add(this.picClose);
+            this.pnlControlBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlControlBox.Location = new System.Drawing.Point(850, 0);
+            this.pnlControlBox.Name = "pnlControlBox";
+            this.pnlControlBox.Size = new System.Drawing.Size(150, 37);
+            this.pnlControlBox.TabIndex = 10;
             // 
             // picMaximize
             // 
-            this.picMaximize.Image = ((System.Drawing.Image)(resources.GetObject("picMaximize.Image")));
-            this.picMaximize.Location = new System.Drawing.Point(937, 12);
+            this.picMaximize.BackColor = System.Drawing.Color.Transparent;
+            this.picMaximize.ForeColor = System.Drawing.SystemColors.Window;
+            this.picMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
+            this.picMaximize.IconColor = System.Drawing.SystemColors.Window;
+            this.picMaximize.IconSize = 37;
+            this.picMaximize.Location = new System.Drawing.Point(50, 0);
             this.picMaximize.Name = "picMaximize";
-            this.picMaximize.Size = new System.Drawing.Size(25, 25);
-            this.picMaximize.TabIndex = 8;
+            this.picMaximize.Size = new System.Drawing.Size(50, 37);
+            this.picMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picMaximize.TabIndex = 13;
             this.picMaximize.TabStop = false;
-            this.picMaximize.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.picMaximize.Click += new System.EventHandler(this.picMaximize_Click);
+            this.picMaximize.MouseLeave += new System.EventHandler(this.picMaximize_MouseLeave);
+            this.picMaximize.MouseHover += new System.EventHandler(this.picMaximize_MouseHover);
             // 
             // picMinimize
             // 
-            this.picMinimize.Image = ((System.Drawing.Image)(resources.GetObject("picMinimize.Image")));
-            this.picMinimize.Location = new System.Drawing.Point(906, 12);
+            this.picMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.picMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.picMinimize.IconColor = System.Drawing.Color.White;
+            this.picMinimize.IconSize = 37;
+            this.picMinimize.Location = new System.Drawing.Point(0, 0);
             this.picMinimize.Name = "picMinimize";
-            this.picMinimize.Size = new System.Drawing.Size(25, 25);
-            this.picMinimize.TabIndex = 9;
+            this.picMinimize.Size = new System.Drawing.Size(50, 37);
+            this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picMinimize.TabIndex = 12;
             this.picMinimize.TabStop = false;
-            this.picMinimize.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.picMinimize.Click += new System.EventHandler(this.picMinimize_Click);
+            this.picMinimize.MouseLeave += new System.EventHandler(this.picMinimize_MouseLeave);
+            this.picMinimize.MouseHover += new System.EventHandler(this.picMinimize_MouseHover);
             // 
-            // panelMainForm
+            // picClose
             // 
-            this.panelMainForm.Location = new System.Drawing.Point(3, 2);
-            this.panelMainForm.Name = "panelMainForm";
-            this.panelMainForm.Size = new System.Drawing.Size(993, 47);
-            this.panelMainForm.TabIndex = 10;
-            this.panelMainForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMainForm_MouseDown);
-            this.panelMainForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelMainForm_MouseMove);
-            this.panelMainForm.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelMainForm_MouseUp);
+            this.picClose.BackColor = System.Drawing.Color.Transparent;
+            this.picClose.IconChar = FontAwesome.Sharp.IconChar.Times;
+            this.picClose.IconColor = System.Drawing.Color.White;
+            this.picClose.IconSize = 37;
+            this.picClose.Location = new System.Drawing.Point(100, 0);
+            this.picClose.Name = "picClose";
+            this.picClose.Size = new System.Drawing.Size(50, 37);
+            this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picClose.TabIndex = 11;
+            this.picClose.TabStop = false;
+            this.picClose.Click += new System.EventHandler(this.picClose_Click_1);
+            this.picClose.MouseLeave += new System.EventHandler(this.picClose_MouseLeave);
+            this.picClose.MouseHover += new System.EventHandler(this.picClose_MouseHover);
+            // 
+            // panelDesktop
+            // 
+            this.panelDesktop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelDesktop.BackColor = System.Drawing.Color.White;
+            this.panelDesktop.Location = new System.Drawing.Point(0, 37);
+            this.panelDesktop.Name = "panelDesktop";
+            this.panelDesktop.Size = new System.Drawing.Size(1000, 513);
+            this.panelDesktop.TabIndex = 12;
+            this.panelDesktop.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktop_Paint);
+            // 
+            // lblCopyright
+            // 
+            this.lblCopyright.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblCopyright.AutoSize = true;
+            this.lblCopyright.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblCopyright.Location = new System.Drawing.Point(192, 4);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Size = new System.Drawing.Size(195, 13);
+            this.lblCopyright.TabIndex = 14;
+            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
+            // 
+            // pnlCopyright
+            // 
+            this.pnlCopyright.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pnlCopyright.BackColor = System.Drawing.Color.Transparent;
+            this.pnlCopyright.Controls.Add(this.lblCopyright);
+            this.pnlCopyright.Location = new System.Drawing.Point(228, 528);
+            this.pnlCopyright.Name = "pnlCopyright";
+            this.pnlCopyright.Size = new System.Drawing.Size(772, 23);
+            this.pnlCopyright.TabIndex = 15;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 550);
-            this.Controls.Add(this.panelMainForm);
-            this.Controls.Add(this.picMinimize);
-            this.Controls.Add(this.picMaximize);
-            this.Controls.Add(this.picClose);
+            this.ControlBox = false;
+            this.Controls.Add(this.pnlCopyright);
+            this.Controls.Add(this.panelDesktop);
+            this.Controls.Add(this.panelTop);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.IsMdiContainer = true;
             this.KeyPreview = true;
             this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
+            this.panelTop.ResumeLayout(false);
+            this.pnlControlBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
+            this.pnlCopyright.ResumeLayout(false);
+            this.pnlCopyright.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox picClose;
-        private System.Windows.Forms.PictureBox picMaximize;
-        private System.Windows.Forms.PictureBox picMinimize;
-        private System.Windows.Forms.Panel panelMainForm;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Panel panelDesktop;
+        private System.Windows.Forms.Panel pnlControlBox;
+        private FontAwesome.Sharp.IconPictureBox picClose;
+        private FontAwesome.Sharp.IconPictureBox picMaximize;
+        private FontAwesome.Sharp.IconPictureBox picMinimize;
+        private System.Windows.Forms.Label lblCopyright;
+        private System.Windows.Forms.Panel pnlCopyright;
     }
 }
 

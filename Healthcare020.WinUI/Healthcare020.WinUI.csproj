@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Healthcare020_Logo_108x108.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
@@ -39,11 +42,17 @@
     <Reference Include="Flurl.Http, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.Http.2.4.2\lib\net46\Flurl.Http.dll</HintPath>
     </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=5.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.12.1\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
     <Reference Include="IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e7877f4675df049f, processorArchitecture=MSIL">
       <HintPath>..\packages\IdentityModel.4.0.0\lib\net461\IdentityModel.dll</HintPath>
     </Reference>
     <Reference Include="JTextBox">
       <HintPath>D:\Downloads\JTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.6.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
@@ -105,6 +114,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboard\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -116,6 +131,7 @@
     </Compile>
     <Compile Include="Helpers\Auth.cs" />
     <Compile Include="Helpers\DynamicTypesExntesions.cs" />
+    <Compile Include="Helpers\FormExtensions.cs" />
     <Compile Include="Helpers\StyleExtensions.cs" />
     <Compile Include="KorisnickiNalog\frmLogin.cs">
       <SubType>Form</SubType>
@@ -132,12 +148,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\APIService.cs" />
-    <Compile Include="StartMenu\frmStartMenu.cs">
+    <Compile Include="AdminDashboard\frmStartMenuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartMenu\frmStartMenu.Designer.cs">
-      <DependentUpon>frmStartMenu.cs</DependentUpon>
+    <Compile Include="AdminDashboard\frmStartMenuAdmin.Designer.cs">
+      <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminDashboard\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gradovi\frmGradoviPrikaz.resx">
       <DependentUpon>frmGradoviPrikaz.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,16 +167,17 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StartMenu\frmStartMenu.resx">
-      <DependentUpon>frmStartMenu.cs</DependentUpon>
+    <EmbeddedResource Include="AdminDashboard\frmStartMenuAdmin.resx">
+      <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -179,6 +199,14 @@
       <Name>HealthCare020.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Healthcare020_Logo_108x108.ico" />
+    <None Include="Resources\healthcare020_logo_210x210.ico" />
+    <None Include="Resources\Healthcare020_Icon.ico" />
+    <None Include="Resources\AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Filters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
