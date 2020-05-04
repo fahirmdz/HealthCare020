@@ -37,18 +37,18 @@
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.btnUserMenu = new Healthcare020.WinUI.CustomElements.UserMenuButton();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlUserMenuDropdown = new Healthcare020.WinUI.CustomElements.UserMenuDropdownPanel();
-            this.btnUserMenu = new Healthcare020.WinUI.CustomElements.UserMenuButton();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
             this.pnlTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
             this.pnlBody.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -197,6 +197,22 @@
             this.pnlTop.TabIndex = 2;
             this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
+            // btnUserMenu
+            // 
+            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
+            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconSize = 44;
+            this.btnUserMenu.Location = new System.Drawing.Point(720, 9);
+            this.btnUserMenu.Name = "btnUserMenu";
+            this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
+            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.btnUserMenu.TabIndex = 2;
+            this.btnUserMenu.TabStop = false;
+            // 
             // lblTitleChildForm
             // 
             this.lblTitleChildForm.AutoSize = true;
@@ -237,28 +253,12 @@
             // 
             this.pnlUserMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlUserMenuDropdown.Button = this.btnUserMenu;
             this.pnlUserMenuDropdown.Location = new System.Drawing.Point(576, 3);
             this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
             this.pnlUserMenuDropdown.Size = new System.Drawing.Size(200, 100);
             this.pnlUserMenuDropdown.TabIndex = 0;
+            this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
             this.pnlUserMenuDropdown.Visible = false;
-            // 
-            // btnUserMenu
-            // 
-            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
-            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
-            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconSize = 44;
-            this.btnUserMenu.Location = new System.Drawing.Point(720, 9);
-            this.btnUserMenu.Name = "btnUserMenu";
-            this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
-            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnUserMenu.TabIndex = 2;
-            this.btnUserMenu.TabStop = false;
             // 
             // frmStartMenuAdmin
             // 
@@ -284,9 +284,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
             this.pnlBody.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.ResumeLayout(false);
 
         }

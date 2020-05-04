@@ -161,6 +161,7 @@
     <Compile Include="MainFormContainer.Designer.cs">
       <DependentUpon>MainFormContainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\APIServiceResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\APIService.cs" />
