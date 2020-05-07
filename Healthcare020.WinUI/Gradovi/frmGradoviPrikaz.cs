@@ -8,11 +8,11 @@ namespace Healthcare020.WinUI.Gradovi
 {
     public partial class frmGradoviPrikaz : Form
     {
-        private readonly APIService<GradResourceParameters> _apiService;
+        private readonly APIService _apiService;
 
         public frmGradoviPrikaz()
         {
-            _apiService = new APIService<GradResourceParameters>("gradovi");
+            _apiService = new APIService("gradovi");
             InitializeComponent();
         }
 

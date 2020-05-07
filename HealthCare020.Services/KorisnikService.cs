@@ -105,6 +105,8 @@ namespace HealthCare020.Services
 
                 korisnickiNalog.DateCreated = DateTime.Now;
                 korisnickiNalog.LastOnline = DateTime.Now;
+                korisnickiNalog.LockedOut = dtoForUpdate.LockedOut;
+                korisnickiNalog.LockedOutUntil = dtoForUpdate.LokedOutUntil;
 
                 _dbContext.KorisnickiNalozi.Update(korisnickiNalog);
             });
@@ -168,6 +170,10 @@ namespace HealthCare020.Services
                 result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
             }
 
+            if (resourceParameters.LockedOut)
+            {
+                result = result.Where(x => x.LockedOut);
+            }
             return await base.FilterAndPrepare(result, resourceParameters);
         }
 

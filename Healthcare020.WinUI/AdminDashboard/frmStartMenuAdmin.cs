@@ -1,8 +1,9 @@
 ﻿using FontAwesome.Sharp;
+using Healthcare020.WinUI.Exceptions;
+using Healthcare020.WinUI.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.AdminDashboard
 {
@@ -20,6 +21,9 @@ namespace Healthcare020.WinUI.AdminDashboard
         {
             get
             {
+                //if (!Auth.IsAuthenticated())
+                //    return null;
+
                 if (_instance == null || _instance.IsDisposed)
                 {
                     _instance = new frmStartMenuAdmin();
@@ -35,11 +39,22 @@ namespace Healthcare020.WinUI.AdminDashboard
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
             panelMenu.Controls.Add(leftBorderBtn);
-            MainForm.Instance.SetCopyrightPanelColor(Color.FromArgb(240, 240, 240));
+            
         }
 
         private void frmStartMenuAdmin_Load(object sender, EventArgs e)
         {
+            SetClickEventToCloseUserMenu(Controls);
+            SetClickEventToCloseUserMenu(panelMenu.Controls);
+            SetClickEventToCloseUserMenu(pnlTop.Controls);
+        }
+
+        private void SetClickEventToCloseUserMenu(Control.ControlCollection controls)
+        {
+            foreach (Control control in Controls)
+            {
+                control.Click += control_Click;
+            }
         }
 
         //Structs
@@ -92,31 +107,35 @@ namespace Healthcare020.WinUI.AdminDashboard
         private void btnUsers_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
-            OpenChildForm(frmUsers.Instance);
-            CloseUserDropdownMenu();
+            var frmUsers = AdminDashboard.frmUsers.Instance;
+            if (frmUsers != null)
+            {
+                OpenChildForm(frmUsers.Instance);
+                SetClickEventToCloseUserMenu(frmUsers.Controls);
+            }
+            else
+            {
+                MessageBox.Show("Niste prijavljeni na sistem!");
+            }
         }
 
         private void btnSecurity_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
-            CloseUserDropdownMenu();
         }
 
         private void btnPredefinedData_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color3);
-            CloseUserDropdownMenu();
         }
 
         private void btnStatistics_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
-            CloseUserDropdownMenu();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            CloseUserDropdownMenu();
             if (currentChildForm != null)
                 currentChildForm.Close();
             Reset();
@@ -160,21 +179,16 @@ namespace Healthcare020.WinUI.AdminDashboard
         private void pnlBody_Paint(object sender, PaintEventArgs e)
         {
         }
+
         private void CloseUserDropdownMenu()
         {
             if (pnlUserMenuDropdown.Visible)
                 pnlUserMenuDropdown.Hide();
         }
-        
 
-        private void iconCurrentChildForm_Click(object sender, EventArgs e)
+        private void control_Click(object sender, EventArgs e)
         {
             CloseUserDropdownMenu();
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            Auth.Logout();
         }
     }
 }

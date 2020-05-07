@@ -200,10 +200,11 @@
             // lblTitleChildForm
             // 
             this.lblTitleChildForm.AutoSize = true;
+            this.lblTitleChildForm.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleChildForm.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblTitleChildForm.Location = new System.Drawing.Point(55, 31);
+            this.lblTitleChildForm.Location = new System.Drawing.Point(55, 26);
             this.lblTitleChildForm.Name = "lblTitleChildForm";
-            this.lblTitleChildForm.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleChildForm.Size = new System.Drawing.Size(45, 18);
             this.lblTitleChildForm.TabIndex = 3;
             this.lblTitleChildForm.Text = "Home";
             // 
@@ -220,11 +221,10 @@
             this.iconCurrentChildForm.Size = new System.Drawing.Size(32, 32);
             this.iconCurrentChildForm.TabIndex = 0;
             this.iconCurrentChildForm.TabStop = false;
-            this.iconCurrentChildForm.Click += new System.EventHandler(this.iconCurrentChildForm_Click);
             // 
             // pnlBody
             // 
-            this.pnlBody.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlBody.BackColor = System.Drawing.Color.White;
             this.pnlBody.Controls.Add(this.pnlUserMenuDropdown);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(220, 60);
@@ -237,11 +237,11 @@
             // 
             this.pnlUserMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlUserMenuDropdown.Button = this.btnUserMenu;
             this.pnlUserMenuDropdown.Location = new System.Drawing.Point(576, 3);
             this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
             this.pnlUserMenuDropdown.Size = new System.Drawing.Size(200, 100);
             this.pnlUserMenuDropdown.TabIndex = 0;
+            this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
             this.pnlUserMenuDropdown.Visible = false;
             // 
             // btnUserMenu
@@ -265,7 +265,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(996, 546);
             this.ControlBox = false;
             this.Controls.Add(this.pnlBody);
@@ -277,7 +277,6 @@
             this.MinimizeBox = false;
             this.Name = "frmStartMenuAdmin";
             this.ShowIcon = false;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmStartMenuAdmin_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);

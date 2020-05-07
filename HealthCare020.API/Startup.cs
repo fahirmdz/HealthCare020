@@ -119,8 +119,13 @@ namespace HealthCare020.API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseExceptionHandler("/Error");
+
+                //app.UseDeveloperExceptionPage();
+                //app.UseDatabaseErrorPage();
+            }
+            else
+            {
             }
             app.UseSwagger();
             app.UseSwaggerUI(c =>

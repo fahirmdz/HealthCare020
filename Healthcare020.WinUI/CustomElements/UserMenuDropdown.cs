@@ -10,15 +10,16 @@ namespace Healthcare020.WinUI.CustomElements
 {
     public class UserMenuDropdownPanel : Panel
     {
-        private UserMenuButton _button;
+        private UserMenuButton _toggler;
 
-        public UserMenuButton Button
+        [Description("Icon button which toggles this dropdown list")]
+        public UserMenuButton Toggler
         {
-            get => _button;
+            get => _toggler;
             set
             {
-                _button = value;
-                _button.Click += button_OnClick;
+                _toggler = value;
+                _toggler.Click += toggler_OnClick;
 
             }
 
@@ -37,7 +38,7 @@ namespace Healthcare020.WinUI.CustomElements
 
         public UserMenuDropdownPanel()
         {
-            _button = new UserMenuButton();
+            _toggler = new UserMenuButton();
             this.Name = "pnlUserMenuDropdown";
             this.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
             this.BackColor = Color.FromArgb(0, 190, 190);
@@ -94,7 +95,7 @@ namespace Healthcare020.WinUI.CustomElements
             Auth.Logout();
         }
 
-        protected void button_OnClick(object sender, EventArgs e)
+        protected void toggler_OnClick(object sender, EventArgs e)
         {
             if (this.Visible)
                 this.Hide();

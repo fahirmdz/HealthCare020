@@ -1,19 +1,22 @@
 ﻿using Flurl.Http;
 using System;
+using Healthcare020.WinUI.Exceptions;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers
 {
     public class Auth
     {
-        private static string AccessToken { get; set; } = string.Empty;
+        public static string AccessToken { get; private set; } = string.Empty;
 
         public static IFlurlRequest GetAuthorizedApiRequest(string relativePath)
         {
-            return (Properties.Settings.Default.ApiUrl + relativePath).WithHeader("Authorization", "Bearer " + AccessToken);
+            if (!IsAuthenticated())
+            {
+                throw new UnauthorizedException("Niste prijavljeni na sistem!");
+            }
+            return (Properties.Settings.Default.ApiUrl + relativePath).WithHeader("Authorization", $"Bearer {AccessToken}");
         }
-
-        public static string GetAccessToken() => AccessToken;
 
         public static bool AuthenticateWithPassword(string username, string password)
         {
