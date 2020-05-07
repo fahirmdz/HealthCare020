@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare020.Core.Request
@@ -18,6 +19,9 @@ namespace HealthCare020.Core.Request
         [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
+
+        public bool LockedOut { get; set; } = false;
+        public DateTime? LokedOutUntil { get; set; }
 
         [MaxLength(4,ErrorMessage = "Maximum number of roles is 4 per one request")]
         public ICollection<int> Roles { get; set; }=new List<int>();

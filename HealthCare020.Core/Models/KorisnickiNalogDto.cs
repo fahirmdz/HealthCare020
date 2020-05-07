@@ -9,5 +9,7 @@ namespace HealthCare020.Core.Models
         public string Username { get; set; }
         public string LastOnline { get; set; }
         public string DateCreated { get; set; }
+        public bool LockedOut { get; set; } = false;
+        public DateTime? LockedOutUntil { get; set; }
     }
 }

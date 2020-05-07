@@ -37,18 +37,18 @@
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.btnUserMenu = new Healthcare020.WinUI.CustomElements.UserMenuButton();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlUserMenuDropdown = new Healthcare020.WinUI.CustomElements.UserMenuDropdownPanel();
+            this.btnUserMenu = new Healthcare020.WinUI.CustomElements.UserMenuButton();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
             this.pnlTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
             this.pnlBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -197,29 +197,14 @@
             this.pnlTop.TabIndex = 2;
             this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
-            // btnUserMenu
-            // 
-            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
-            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
-            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconSize = 44;
-            this.btnUserMenu.Location = new System.Drawing.Point(720, 9);
-            this.btnUserMenu.Name = "btnUserMenu";
-            this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
-            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnUserMenu.TabIndex = 2;
-            this.btnUserMenu.TabStop = false;
-            // 
             // lblTitleChildForm
             // 
             this.lblTitleChildForm.AutoSize = true;
+            this.lblTitleChildForm.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleChildForm.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblTitleChildForm.Location = new System.Drawing.Point(55, 31);
+            this.lblTitleChildForm.Location = new System.Drawing.Point(55, 26);
             this.lblTitleChildForm.Name = "lblTitleChildForm";
-            this.lblTitleChildForm.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleChildForm.Size = new System.Drawing.Size(45, 18);
             this.lblTitleChildForm.TabIndex = 3;
             this.lblTitleChildForm.Text = "Home";
             // 
@@ -236,11 +221,10 @@
             this.iconCurrentChildForm.Size = new System.Drawing.Size(32, 32);
             this.iconCurrentChildForm.TabIndex = 0;
             this.iconCurrentChildForm.TabStop = false;
-            this.iconCurrentChildForm.Click += new System.EventHandler(this.iconCurrentChildForm_Click);
             // 
             // pnlBody
             // 
-            this.pnlBody.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlBody.BackColor = System.Drawing.Color.White;
             this.pnlBody.Controls.Add(this.pnlUserMenuDropdown);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(220, 60);
@@ -260,12 +244,28 @@
             this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
             this.pnlUserMenuDropdown.Visible = false;
             // 
+            // btnUserMenu
+            // 
+            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
+            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconSize = 44;
+            this.btnUserMenu.Location = new System.Drawing.Point(720, 9);
+            this.btnUserMenu.Name = "btnUserMenu";
+            this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
+            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.btnUserMenu.TabIndex = 2;
+            this.btnUserMenu.TabStop = false;
+            // 
             // frmStartMenuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(996, 546);
             this.ControlBox = false;
             this.Controls.Add(this.pnlBody);
@@ -277,16 +277,15 @@
             this.MinimizeBox = false;
             this.Name = "frmStartMenuAdmin";
             this.ShowIcon = false;
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmStartMenuAdmin_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
             this.pnlBody.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.ResumeLayout(false);
 
         }

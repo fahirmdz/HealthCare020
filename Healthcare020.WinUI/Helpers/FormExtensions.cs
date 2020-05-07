@@ -1,5 +1,7 @@
 ﻿using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Healthcare020.WinUI.AdminDashboard;
 
 namespace Healthcare020.WinUI.Helpers
 {
@@ -20,7 +22,27 @@ namespace Healthcare020.WinUI.Helpers
             form.AutoScroll = false;
             form.BringToFront();
             form.Show();
+        }
 
+
+        public static void ShowDialogWithBlurryBackground(this Form dialog)
+        {
+            var panel = new Panel();
+            dialog.TopLevel = false;
+            panel.Controls.Add(dialog);
+            panel.Tag = dialog;
+            panel.Dock = DockStyle.Fill;
+            panel.BackColor=Color.FromArgb(25,Color.Black);
+            panel.BringToFront();
+            frmStartMenuAdmin.Instance.Controls.Add(panel);
+
+            panel.Show();
+        }
+
+        public static async Task CloseAfterDelay(this Form form, int millisecondsDelay )
+        {
+            await Task.Delay( millisecondsDelay );
+            form.Close();
         }
     }
 }

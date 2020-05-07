@@ -16,6 +16,8 @@ namespace HealthCare020.Core.Entities
         public string PasswordSalt { get; set; }
         public DateTime LastOnline { get; set; }
         public DateTime DateCreated { get; set; }
+        public bool LockedOut { get; set; } = false;
+        public DateTime? LockedOutUntil { get; set; }
 
         public virtual ICollection<RoleKorisnickiNalog> RolesKorisnickiNalog { get; set; }
     }

@@ -36,6 +36,9 @@
     <ApplicationIcon>Healthcare020_Logo_108x108.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Flurl, Version=2.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.2.8.2\lib\net40\Flurl.dll</HintPath>
     </Reference>
@@ -127,12 +130,37 @@
     <Compile Include="CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomElements\PanelCheckInternetConnection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomElements\PanelCheckInternetConnection.Designer.cs">
+      <DependentUpon>PanelCheckInternetConnection.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomElements\UserMenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomElements\UserMenuDropdown.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Dialogs\dlgAccountLock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\dlgAccountLock.Designer.cs">
+      <DependentUpon>dlgAccountLock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\dlgError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\dlgError.Designer.cs">
+      <DependentUpon>dlgError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\dlgPropmpt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\dlgPropmpt.Designer.cs">
+      <DependentUpon>dlgPropmpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Gradovi\frmGradoviPrikaz.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +168,7 @@
       <DependentUpon>frmGradoviPrikaz.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Auth.cs" />
+    <Compile Include="Helpers\ConnectionCheck.cs" />
     <Compile Include="Helpers\DynamicTypesExntesions.cs" />
     <Compile Include="Helpers\FormExtensions.cs" />
     <Compile Include="Helpers\StyleExtensions.cs" />
@@ -155,12 +184,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainFormContainer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainFormContainer.Designer.cs">
-      <DependentUpon>MainFormContainer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\APIServiceResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,6 +197,18 @@
     <EmbeddedResource Include="AdminDashboard\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomElements\PanelCheckInternetConnection.resx">
+      <DependentUpon>PanelCheckInternetConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\dlgAccountLock.resx">
+      <DependentUpon>dlgAccountLock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\dlgError.resx">
+      <DependentUpon>dlgError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\dlgPropmpt.resx">
+      <DependentUpon>dlgPropmpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Gradovi\frmGradoviPrikaz.resx">
       <DependentUpon>frmGradoviPrikaz.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,9 +217,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainFormContainer.resx">
-      <DependentUpon>MainFormContainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -227,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filters\" />
+    <Folder Include="Mappers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
