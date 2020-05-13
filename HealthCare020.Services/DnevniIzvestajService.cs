@@ -1,24 +1,26 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
-    public class DnevniIzvestajService:BaseCRUDService<DnevniIzvestajDtoLL,DnevniIzvestajDtoEL,DnevniIzvestajResourceParameters,DnevniIzvestaj,DnevniIzvestajUpsertDto,DnevniIzvestajUpsertDto>
+    public class DnevniIzvestajService : BaseCRUDService<DnevniIzvestajDtoLL, DnevniIzvestajDtoEL, DnevniIzvestajResourceParameters, DnevniIzvestaj, DnevniIzvestajUpsertDto, DnevniIzvestajUpsertDto>
     {
         public DnevniIzvestajService(IMapper mapper,
-            HealthCare020DbContext dbContext, 
+            HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor)
@@ -43,39 +45,47 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<DnevniIzvestajDtoLL> Insert(DnevniIzvestajUpsertDto dtoForCreation)
+        public override async Task<ServiceResult<DnevniIzvestajDtoLL>> Insert(DnevniIzvestajUpsertDto dtoForCreation)
         {
             var loggedInDoktor = await GetLoggedInDoktor();
+            if (loggedInDoktor == null)
+                return new ServiceResult<DnevniIzvestajDtoLL>(HttpStatusCode.Forbidden, $"Samo doktori mogu kreirati dnevne izvestaje.");
 
-            await ValidateRelationshipsExist(dtoForCreation);
+            var validateRelationshipsResult = await ValidateRelationshipsExist(dtoForCreation);
+            if (!validateRelationshipsResult.Succeded)
+                return new ServiceResult<DnevniIzvestajDtoLL>(HttpStatusCode.BadRequest, validateRelationshipsResult.Message);
 
             var newDnevniIzvestaj = _mapper.Map<DnevniIzvestaj>(dtoForCreation);
-            newDnevniIzvestaj.DatumVreme=DateTime.Now;
+            newDnevniIzvestaj.DatumVreme = DateTime.Now;
             newDnevniIzvestaj.DoktorId = loggedInDoktor.Id;
 
             await _dbContext.AddAsync(newDnevniIzvestaj);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<DnevniIzvestajDtoLL>(newDnevniIzvestaj);
+            return new ServiceResult<DnevniIzvestajDtoLL>(_mapper.Map<DnevniIzvestajDtoLL>(newDnevniIzvestaj));
         }
 
-        public override async Task<DnevniIzvestajDtoLL> Update(int id, DnevniIzvestajUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult<DnevniIzvestajDtoLL>> Update(int id, DnevniIzvestajUpsertDto dtoForUpdate)
         {
             var loggedInDoktor = await GetLoggedInDoktor();
+            if (loggedInDoktor == null)
+                return new ServiceResult<DnevniIzvestajDtoLL>(HttpStatusCode.Forbidden, $"Samo doktori mogu kreirati dnevne izvestaje.");
 
             var dnevniIzvestajFromDb = await _dbContext.DnevniIzvestaji.FindAsync(id);
 
-            if(dnevniIzvestajFromDb==null)
+            if (dnevniIzvestajFromDb == null)
                 throw new NotFoundException($"Dnevni izvestaj sa ID-em {id} nije pronadjen.");
 
-            await ValidateRelationshipsExist(dtoForUpdate);
+            var validateRelationshipsResult = await ValidateRelationshipsExist(dtoForUpdate);
+            if (!validateRelationshipsResult.Succeded)
+                return new ServiceResult<DnevniIzvestajDtoLL>(HttpStatusCode.BadRequest, validateRelationshipsResult.Message);
 
             _mapper.Map(dtoForUpdate, dnevniIzvestajFromDb);
 
             _dbContext.Update(dnevniIzvestajFromDb);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<DnevniIzvestajDtoLL>(dnevniIzvestajFromDb);
+            return new ServiceResult<DnevniIzvestajDtoLL>(_mapper.Map<DnevniIzvestajDtoLL>(dnevniIzvestajFromDb));
         }
 
         public override async Task<PagedList<DnevniIzvestaj>> FilterAndPrepare(IQueryable<DnevniIzvestaj> result, DnevniIzvestajResourceParameters resourceParameters)
@@ -135,13 +145,15 @@ namespace HealthCare020.Services
             return await base.FilterAndPrepare(result, resourceParameters);
         }
 
-        private async Task ValidateRelationshipsExist(DnevniIzvestajUpsertDto dto)
+        private async Task<(bool Succeded, string Message)> ValidateRelationshipsExist(DnevniIzvestajUpsertDto dto)
         {
-            if(!await _dbContext.Pacijenti.AnyAsync(x=>x.Id==dto.PacijentId))
-                throw new NotFoundException($"Pacijent sa ID-em {dto.PacijentId} nije pronadjen.");
+            if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dto.PacijentId))
+                return (false, $"Pacijent sa ID-em {dto.PacijentId} nije pronadjen.");
 
-            if(!await _dbContext.ZdravstvenaStanja.AnyAsync(x=>x.Id==dto.ZdravstvenoStanjeId))
-                throw new NotFoundException($"Zdravstveno stanje sa ID-em {dto.PacijentId} nije pronadjeno.");
+            if (!await _dbContext.ZdravstvenaStanja.AnyAsync(x => x.Id == dto.ZdravstvenoStanjeId))
+                return (false, $"Zdravstveno stanje sa ID-em {dto.PacijentId} nije pronadjeno.");
+
+            return (true, string.Empty);
         }
 
         private async Task<Doktor> GetLoggedInDoktor()
@@ -155,9 +167,6 @@ namespace HealthCare020.Services
 
             var loggedInDoktor = await _dbContext.Doktori
                 .FirstOrDefaultAsync(x => x.Radnik.KorisnickiNalogId == loggedInUserId);
-
-            if (loggedInDoktor == null)
-                throw new ForbiddenException($"Samo doktori mogu kreirati dnevne izvestaje.");
 
             return loggedInDoktor;
         }

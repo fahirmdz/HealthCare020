@@ -1,4 +1,6 @@
-﻿namespace Healthcare020.WinUI.CustomElements
+﻿using Healthcare020.WinUI.Helpers.CustomElements;
+
+namespace Healthcare020.WinUI.CustomElements
 {
     partial class PanelCheckInternetConnection
     {
@@ -33,7 +35,7 @@
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblDescriptionTwo = new System.Windows.Forms.Label();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.btnRetryConnection = new ePOSOne.btnProduct.Button_WOC();
+            this.btnRetryConnection = new Button_WOC();
             ((System.ComponentModel.ISupportInitialize)(this.icnExclamation)).BeginInit();
             this.pnlBody.SuspendLayout();
             this.SuspendLayout();
@@ -147,6 +149,6 @@
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblDescriptionTwo;
         private System.Windows.Forms.Panel pnlBody;
-        private ePOSOne.btnProduct.Button_WOC btnRetryConnection;
+        private Button_WOC btnRetryConnection;
     }
 }

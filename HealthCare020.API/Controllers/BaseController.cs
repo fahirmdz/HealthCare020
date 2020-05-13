@@ -2,6 +2,7 @@
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -23,7 +24,10 @@ namespace HealthCare020.API.Controllers
         {
             var result = await _service.Get(resourceParameters);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.PaginationMetadata));
+            if (!result.Succeeded)
+                return WithStatusCode(result.StatusCode, result.Message);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.Data.PaginationMetadata));
 
             return Ok(result.Data);
         }
@@ -32,11 +36,28 @@ namespace HealthCare020.API.Controllers
         public async Task<IActionResult> GetById(int id, [FromQuery]TResourceParameters resourceParameters)
         {
             var result = await _service.GetById(id, resourceParameters);
-
-            if (result == null)
-                return NotFound();
+            if (!result.Succeeded)
+                return WithStatusCode(result.StatusCode, result.Message);
 
             return Ok(result);
+        }
+
+        protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")
+        {
+            switch (statusCode)
+            {
+                case HttpStatusCode.NotFound:
+                    return NotFound(message);
+
+                case HttpStatusCode.Forbidden:
+                    return StatusCode(403);
+
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized();
+
+                default:
+                    return BadRequest();
+            }
         }
 
         //----HATEOAS support----

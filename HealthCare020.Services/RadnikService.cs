@@ -3,11 +3,12 @@ using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -29,10 +30,10 @@ namespace HealthCare020.Services
             _mapper = mapper;
         }
 
-        public async Task<Radnik> Insert(RadnikUpsertDto radnikDto)
+        public async Task<ServiceResult<Radnik>> Insert(RadnikUpsertDto radnikDto)
         {
             if (!await _dbContext.StacionarnaOdeljenja.AnyAsync(x => x.Id == radnikDto.StacionarnoOdeljenjeId))
-                throw new NotFoundException($"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
+                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
 
             var licniPodaciResult = await _licniPodaciService.Insert(radnikDto.LicniPodaci);
 
@@ -40,21 +41,21 @@ namespace HealthCare020.Services
 
             var radnik = new Radnik
             {
-                KorisnickiNalogId = korisnickiNalogResult.Id,
-                LicniPodaciId=licniPodaciResult.Id,
+                KorisnickiNalogId = korisnickiNalogResult.Data.Id,
+                LicniPodaciId = licniPodaciResult.Data.Id,
                 StacionarnoOdeljenjeId = radnikDto.StacionarnoOdeljenjeId
             };
 
             await _dbContext.AddAsync(radnik);
             await _dbContext.SaveChangesAsync();
 
-            return radnik;
+            return new ServiceResult<Radnik>(radnik);
         }
 
-        public async Task<Radnik> Update(int id, RadnikUpsertDto radnikDto)
+        public async Task<ServiceResult<Radnik>> Update(int id, RadnikUpsertDto radnikDto)
         {
             if (!_dbContext.StacionarnaOdeljenja.Any(x => x.Id == radnikDto.StacionarnoOdeljenjeId))
-                throw new NotFoundException($"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
+                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
 
             var entity = await _dbContext.Radnici
                 .Include(x => x.KorisnickiNalog)
@@ -62,7 +63,7 @@ namespace HealthCare020.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (entity == null)
-                throw new NotFoundException($"Radnik sa ID-em {id} nije pronadjen");
+                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Radnik sa ID-em {id} nije pronadjen");
 
             await _korisnikService.Update(entity.KorisnickiNalogId, radnikDto.KorisnickiNalog);
             await _licniPodaciService.Update(entity.LicniPodaciId, radnikDto.LicniPodaci);
@@ -76,20 +77,22 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return entity;
+            return new ServiceResult<Radnik>(entity);
         }
 
-        public async Task Delete(int id)
+        public async Task<ServiceResult<Radnik>> Delete(int id)
         {
             var entity = await _dbContext.Radnici.FindAsync(id);
 
             if (entity == null)
-                throw new NotFoundException($"Radnik sa ID-em {id} nije pronadjen");
+                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Radnik sa ID-em {id} nije pronadjen");
 
             await _licniPodaciService.Delete(entity.LicniPodaciId);
             await _korisnikService.Delete(entity.KorisnickiNalogId);
 
             await Task.Run(() => { _dbContext.Remove(entity); });
+
+            return new ServiceResult<Radnik>();
         }
     }
 }

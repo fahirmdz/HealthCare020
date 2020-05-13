@@ -3,25 +3,26 @@ using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace HealthCare020.Services
 {
     public class GradService : BaseCRUDService<GradDtoLL, GradDtoEL, GradResourceParameters, Grad, GradUpsertDto, GradUpsertDto>
     {
-        public GradService(IMapper mapper, 
+        public GradService(IMapper mapper,
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
-            IHttpContextAccessor httpContextAccessor) 
-            : base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor)
+            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
         {
         }
 
@@ -35,11 +36,11 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<GradDtoLL> Insert(GradUpsertDto request)
+        public override async Task<ServiceResult<GradDtoLL>> Insert(GradUpsertDto request)
         {
             if (!await _dbContext.Drzave.AnyAsync(x => x.Id == request.DrzavaId))
             {
-                throw new NotFoundException($"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
+                return new ServiceResult<GradDtoLL>(HttpStatusCode.NotFound, $"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
             }
 
             var entity = _mapper.Map<Grad>(request);
@@ -47,23 +48,21 @@ namespace HealthCare020.Services
             await _dbContext.Gradovi.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<GradDtoLL>(entity);
+            return new ServiceResult<GradDtoLL>(_mapper.Map<GradDtoLL>(entity));
         }
 
-        public override async Task<GradDtoLL> Update(int id, GradUpsertDto request)
+        public override async Task<ServiceResult<GradDtoLL>> Update(int id, GradUpsertDto request)
         {
             var entity = await _dbContext.Gradovi.FindAsync(id);
+            if (entity == null)
+                return new ServiceResult<GradDtoLL>(HttpStatusCode.NotFound, "Grad nije pronadjen");
 
+            if (!_dbContext.Drzave.Any(x => x.Id == request.DrzavaId))
+            {
+                return new ServiceResult<GradDtoLL>(HttpStatusCode.NotFound, $"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
+            }
             await Task.Run(() =>
             {
-                if (entity == null)
-                    throw new NotFoundException("Grad nije pronadjen");
-
-                if (!_dbContext.Drzave.Any(x => x.Id == request.DrzavaId))
-                {
-                    throw new NotFoundException($"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
-                }
-
                 _mapper.Map(request, entity);
 
                 _dbContext.Gradovi.Update(entity);
@@ -71,7 +70,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<GradDtoLL>(entity);
+            return new ServiceResult<GradDtoLL>(_mapper.Map<GradDtoLL>(entity));
         }
 
         public override async Task<PagedList<Grad>> FilterAndPrepare(IQueryable<Grad> result, GradResourceParameters resourceParameters)

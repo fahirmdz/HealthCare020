@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
+using HealthCare020.Core.ResponseModels;
 
-namespace HealthCare020.Services.Helpers
+namespace HealthCare020.Core.ServiceModels
 {
     /// <summary>
     /// Includes pagination metedata, data and indicators for previous and next page
     /// </summary>
-    public class ServiceSequenceResult
+    public class SequenceResult
     {
         public PaginationMetadata PaginationMetadata { get; set; }
         public bool HasNext { get; set; }

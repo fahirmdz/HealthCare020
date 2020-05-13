@@ -1,14 +1,11 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
-using Microsoft.AspNetCore.JsonPatch;
-using System.Threading.Tasks;
-using HealthCare020.Core.Entities;
-using HealthCare020.Services.Helpers;
 using Microsoft.AspNetCore.Http;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
@@ -22,35 +19,32 @@ namespace HealthCare020.Services
 
         public BaseCRUDService(IMapper mapper, HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
-            IPropertyCheckerService propertyCheckerService, 
-            IHttpContextAccessor httpContextAccessor) : 
+            IPropertyCheckerService propertyCheckerService,
+            IHttpContextAccessor httpContextAccessor) :
             base(mapper, dbContext, propertyMappingService, propertyCheckerService)
         {
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public virtual async Task<TDto> Insert(TDtoForCreation dtoForCreation)
+        public virtual async Task<ServiceResult<TDto>> Insert(TDtoForCreation dtoForCreation)
         {
-            
-
             var entity = _mapper.Map<TEntity>(dtoForCreation);
 
             await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<TDto>(entity);
+            return new ServiceResult<TDto>(_mapper.Map<TDto>(entity));
         }
 
-        public virtual async Task<TDto> Update(int id, TDtoForUpdate dtoForUpdate)
+        public virtual async Task<ServiceResult<TDto>> Update(int id, TDtoForUpdate dtoForUpdate)
         {
             var query = _dbContext.Set<TEntity>();
             var entity = await query.FindAsync(id);
+            if (entity == null)
+                return new ServiceResult<TDto>(HttpStatusCode.NotFound);
 
             await Task.Run(() =>
            {
-               if (entity == null)
-                   throw new NotFoundException("Not Found");
-
                entity = _mapper.Map(dtoForUpdate, entity);
 
                query.Update(entity);
@@ -58,33 +52,34 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<TDto>(entity);
+            return new ServiceResult<TDto>(_mapper.Map<TDto>(entity));
         }
 
-        public async Task<TDtoForUpdate> GetAsUpdateDto(int id)
+        public async Task<ServiceResult<TDtoForUpdate>> GetAsUpdateDto(int id)
         {
             var entity = await _dbContext.Set<TEntity>().FindAsync(id);
 
-            if(entity==null)
-                throw new NotFoundException(string.Empty);
+            if (entity == null)
+                return new ServiceResult<TDtoForUpdate>(HttpStatusCode.NotFound);
 
-            return _mapper.Map<TDtoForUpdate>(entity);
+            return new ServiceResult<TDtoForUpdate>(_mapper.Map<TDtoForUpdate>(entity));
         }
 
-        public virtual async Task Delete(int id)
+        public virtual async Task<ServiceResult<TDto>> Delete(int id)
         {
             var query = _dbContext.Set<TEntity>();
 
             var entity = await query.FindAsync(id);
+            if (entity == null)
+                return new ServiceResult<TDto>(HttpStatusCode.NotFound);
 
             await Task.Run(() =>
            {
-               if (entity == null)
-                   throw new NotFoundException("Not Found");
-
                query.Remove(entity);
            });
             await _dbContext.SaveChangesAsync();
+
+            return new ServiceResult<TDto>();
         }
     }
 }

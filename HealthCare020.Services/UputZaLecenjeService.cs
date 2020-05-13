@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
@@ -47,20 +49,20 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<UputZaLecenjeDtoLL> Insert(UputZaLecenjeUpsertDto dtoForCreation)
+        public override async Task<ServiceResult<UputZaLecenjeDtoLL>> Insert(UputZaLecenjeUpsertDto dtoForCreation)
         {
             var userId = base._httpContextAccessor.HttpContext.GetUserIdFromIdentityClaim();
 
             var user = await _dbContext.Set<KorisnickiNalog>().FindAsync(userId);
 
             if(user==null)
-                throw new UnauthorizedException("Unauthorized access");
+                return new ServiceResult<UputZaLecenjeDtoLL>(HttpStatusCode.Unauthorized);
 
             var doktorLoggedIn = await _dbContext.Set<Doktor>()
                 .FirstOrDefaultAsync(x => x.Radnik.KorisnickiNalogId == user.Id);
 
             if(doktorLoggedIn==null)
-                throw new ForbiddenException("Samo doktori imaju mogucnost kreiranja novog uputa za lecenje.");
+                return new ServiceResult<UputZaLecenjeDtoLL>(HttpStatusCode.Forbidden,"Samo doktori imaju mogucnost kreiranja novog uputa za lecenje.");
 
             var licniPodaciResult=await _licniPodaciService.Insert(dtoForCreation.LicniPodaci);
 
@@ -68,22 +70,22 @@ namespace HealthCare020.Services
             {
                 DatumVreme = DateTime.Now,
                 DoktorId = doktorLoggedIn.Id,
-                LicniPodaciId = licniPodaciResult.Id,
+                LicniPodaciId = licniPodaciResult.Data.Id,
                 OpisStanja = dtoForCreation.OpisStanja
             };
 
             await _dbContext.AddAsync(newEntity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<UputZaLecenjeDtoLL>(newEntity);
+            return new ServiceResult<UputZaLecenjeDtoLL>(_mapper.Map<UputZaLecenjeDtoLL>(newEntity));
         }
 
-        public override async Task<UputZaLecenjeDtoLL> Update(int id, UputZaLecenjeUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult<UputZaLecenjeDtoLL>> Update(int id, UputZaLecenjeUpsertDto dtoForUpdate)
         {
             var entity = await _dbContext.Set<UputZaLecenje>().FindAsync(id);
 
             if (entity == null)
-                throw new NotFoundException($"Uput za lecenje sa ID-em {id} nije pronadjen");
+                return new ServiceResult<UputZaLecenjeDtoLL>(HttpStatusCode.NotFound,$"Uput za lecenje sa ID-em {id} nije pronadjen");
 
             await _licniPodaciService.Update(entity.LicniPodaciId, dtoForUpdate.LicniPodaci);
 
@@ -95,22 +97,24 @@ namespace HealthCare020.Services
             });
 
              await _dbContext.SaveChangesAsync();
-            return _mapper.Map<UputZaLecenjeDtoLL>(entity);
+            return new ServiceResult<UputZaLecenjeDtoLL>(_mapper.Map<UputZaLecenjeDtoLL>(entity));
         }
 
-        public override async Task Delete(int id)
+        public override async Task<ServiceResult<UputZaLecenjeDtoLL>> Delete(int id)
         {
             var query = _dbContext.Set<UputZaLecenje>();
 
             var entity = await query.FindAsync(id);
             if (entity == null)
-                throw new NotFoundException("Not Found");
+               return new ServiceResult<UputZaLecenjeDtoLL>(HttpStatusCode.NotFound);
 
             await _licniPodaciService.Delete(entity.LicniPodaciId);
             await Task.Run(() =>
             {
                 query.Remove(entity);
             });
+
+            return new ServiceResult<UputZaLecenjeDtoLL>();
         }
 
         public override async Task<PagedList<UputZaLecenje>> FilterAndPrepare(IQueryable<UputZaLecenje> result, UputZaLecenjeResourceParameters resourceParameters)

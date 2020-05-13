@@ -9,7 +9,9 @@ using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Core.ServiceModels;
 using Microsoft.AspNetCore.Http;
 
 namespace HealthCare020.Services
@@ -46,47 +48,47 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<RadnikPrijemDtoLL> Insert(RadnikPrijemUpsertDto request)
+        public override async Task<ServiceResult<RadnikPrijemDtoLL>> Insert(RadnikPrijemUpsertDto request)
         {
             var radnikInsert = await _radnikService.Insert(request);
 
-            var entity = new RadnikPrijem { RadnikId = radnikInsert.Id };
+            var entity = new RadnikPrijem { RadnikId = radnikInsert.Data.Id };
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<RadnikPrijemDtoLL>(entity);
+            return new ServiceResult<RadnikPrijemDtoLL>(_mapper.Map<RadnikPrijemDtoLL>(entity));
         }
 
-        public override async Task<RadnikPrijemDtoLL> Update(int id, RadnikPrijemUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult<RadnikPrijemDtoLL>> Update(int id, RadnikPrijemUpsertDto dtoForUpdate)
         {
             var radnikPrijemFromDb = await _dbContext.RadniciPrijem
                 .Include(x => x.Radnik)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (radnikPrijemFromDb == null)
-                throw new NotFoundException($"Radnik sa ID-em {id} nije pronadjen");
+               return new ServiceResult<RadnikPrijemDtoLL>(HttpStatusCode.NotFound,$"Radnik sa ID-em {id} nije pronadjen");
 
             _mapper.Map(dtoForUpdate, radnikPrijemFromDb.Radnik);
             var radnikUpdated = await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
 
-            return _mapper.Map<RadnikPrijemDtoLL>(radnikPrijemFromDb);
+            return new ServiceResult<RadnikPrijemDtoLL>(_mapper.Map<RadnikPrijemDtoLL>(radnikPrijemFromDb));
         }
 
-        public override async Task Delete(int id)
+        public override async Task<ServiceResult<RadnikPrijemDtoLL>> Delete(int id)
         {
             var entity = await _dbContext.RadniciPrijem.FindAsync(id);
-
+            if (entity == null)
+                return new ServiceResult<RadnikPrijemDtoLL>(HttpStatusCode.NotFound,$"RadnikPrijem sa ID-em {id} nije pronadjen.");
             await Task.Run(() =>
             {
-                if (entity == null)
-                    throw new NotFoundException($"RadnikPrijem sa ID-em {id} nije pronadjen.");
                 _radnikService.Delete(id);
 
                 _dbContext.Remove(entity);
             });
 
             await _dbContext.SaveChangesAsync();
+            return new ServiceResult<RadnikPrijemDtoLL>();
         }
 
         public override async Task<PagedList<RadnikPrijem>> FilterAndPrepare(IQueryable<RadnikPrijem> result, RadnikPrijemResourceParameters resourceParameters)

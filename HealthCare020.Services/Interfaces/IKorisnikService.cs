@@ -1,19 +1,16 @@
-﻿using HealthCare020.Core.Entities;
+﻿using System;
+using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using System.Threading.Tasks;
+using HealthCare020.Core.ServiceModels;
 
 namespace HealthCare020.Services.Interfaces
 {
-    public interface IKorisnikService : IService<KorisnickiNalog, KorisnickiNalogResourceParameters>
+    public interface IKorisnikService :ICRUDService<KorisnickiNalog,KorisnickiNalogDtoLL,KorisnickiNalogDtoEL,KorisnickiNalogResourceParameters,KorisnickiNalogUpsertDto,KorisnickiNalogUpsertDto>
     {
         Task<KorisnickiNalogDtoLL> Authenticate(string username, string password);
-
-        Task<KorisnickiNalogDtoLL> Insert(KorisnickiNalogUpsertDto request);
-
-        Task<KorisnickiNalogDtoLL> Update(int id, KorisnickiNalogUpsertDto request);
-
-        Task Delete(int id);
+        Task<ServiceResult<KorisnickiNalogDtoLL>> ToggleLock(int id, bool isForLockout, DateTime? until = null);
     }
 }

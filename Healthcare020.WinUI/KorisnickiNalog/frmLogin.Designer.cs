@@ -1,4 +1,6 @@
-﻿namespace Healthcare020.WinUI.KorisnickiNalog
+﻿using Healthcare020.WinUI.Helpers.CustomElements;
+
+namespace Healthcare020.WinUI.KorisnickiNalog
 {
     partial class frmLogin
     {
@@ -33,17 +35,16 @@
             this.err = new System.Windows.Forms.ErrorProvider(this.components);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.cbxRememberMe = new MaterialSkin.Controls.MaterialCheckBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtPassword = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.btnLogin = new ePOSOne.btnProduct.Button_WOC();
             this.txtUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.pnlTop = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.pnlBody.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // err
@@ -62,26 +63,25 @@
             // 
             this.pnlBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlBody.BackColor = System.Drawing.Color.White;
-            this.pnlBody.Controls.Add(this.pictureBox3);
+            this.pnlBody.Controls.Add(this.picLogo);
             this.pnlBody.Controls.Add(this.lblUsername);
             this.pnlBody.Controls.Add(this.cbxRememberMe);
             this.pnlBody.Controls.Add(this.lblPassword);
             this.pnlBody.Controls.Add(this.txtPassword);
-            this.pnlBody.Controls.Add(this.btnLogin);
             this.pnlBody.Controls.Add(this.txtUsername);
             this.pnlBody.Location = new System.Drawing.Point(264, 25);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Size = new System.Drawing.Size(516, 494);
             this.pnlBody.TabIndex = 19;
             // 
-            // pictureBox3
+            // picLogo
             // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(148, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(200, 187);
-            this.pictureBox3.TabIndex = 7;
-            this.pictureBox3.TabStop = false;
+            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
+            this.picLogo.Location = new System.Drawing.Point(148, 3);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(200, 187);
+            this.picLogo.TabIndex = 7;
+            this.picLogo.TabStop = false;
             // 
             // lblUsername
             // 
@@ -137,27 +137,6 @@
             this.txtPassword.UseSystemPasswordChar = false;
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress_1);
             // 
-            // btnLogin
-            // 
-            this.btnLogin.BorderColor = System.Drawing.Color.Transparent;
-            this.btnLogin.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(108, 389);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.OnHoverBorderColor = System.Drawing.Color.Empty;
-            this.btnLogin.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(210)))), ((int)(((byte)(204)))));
-            this.btnLogin.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnLogin.Size = new System.Drawing.Size(268, 33);
-            this.btnLogin.TabIndex = 10;
-            this.btnLogin.Text = "Log in";
-            this.btnLogin.TextColor = System.Drawing.Color.White;
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
             // txtUsername
             // 
             this.txtUsername.Depth = 0;
@@ -205,7 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.pnlBody.ResumeLayout(false);
             this.pnlBody.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -214,12 +193,12 @@
         private System.Windows.Forms.ErrorProvider err;
         private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
         private System.Windows.Forms.Panel pnlBody;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Label lblUsername;
         private MaterialSkin.Controls.MaterialCheckBox cbxRememberMe;
         private System.Windows.Forms.Label lblPassword;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtPassword;
-        private ePOSOne.btnProduct.Button_WOC btnLogin;
+        private Button_WOC btnLogin;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtUsername;
         private System.Windows.Forms.Panel pnlTop;
     }

@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
@@ -21,17 +20,17 @@ namespace HealthCare020.Services
         private readonly IRadnikService _radnikService;
 
         public MedicinskiTehnicarService(IMapper mapper,
-            HealthCare020DbContext dbContext, 
+            HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
-            IPropertyCheckerService propertyCheckerService, 
+            IPropertyCheckerService propertyCheckerService,
             IRadnikService radnikService,
             IHttpContextAccessor httpContextAccessor) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
         {
             _radnikService = radnikService;
         }
 
-         public override IQueryable<MedicinskiTehnicar> GetWithEagerLoad(int? id = null)
+        public override IQueryable<MedicinskiTehnicar> GetWithEagerLoad(int? id = null)
         {
             var result = _dbContext.MedicinskiTehnicari
                 .Include(x => x.Radnik)
@@ -49,47 +48,49 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<MedicinskiTehnicarDtoLL> Insert(MedicinskiTehnicarUpsertDto request)
+        public override async Task<ServiceResult<MedicinskiTehnicarDtoLL>> Insert(MedicinskiTehnicarUpsertDto request)
         {
             var radnikInsert = await _radnikService.Insert(request);
 
-            var entity = new MedicinskiTehnicar { RadnikId = radnikInsert.Id };
+            var entity = new MedicinskiTehnicar { RadnikId = radnikInsert.Data.Id };
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<MedicinskiTehnicarDtoLL>(entity);
+            return new ServiceResult<MedicinskiTehnicarDtoLL>(_mapper.Map<MedicinskiTehnicarDtoLL>(entity));
         }
 
-        public override async Task<MedicinskiTehnicarDtoLL> Update(int id, MedicinskiTehnicarUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult<MedicinskiTehnicarDtoLL>> Update(int id, MedicinskiTehnicarUpsertDto dtoForUpdate)
         {
-            var radnikPrijemFromDb = await _dbContext.RadniciPrijem
+            var medicinskiTehnicarFromDb = await _dbContext.MedicinskiTehnicari
                 .Include(x => x.Radnik)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            if (radnikPrijemFromDb == null)
-                throw new NotFoundException($"Medicinski tehnicar sa ID-em {id} nije pronadjen");
+            if (medicinskiTehnicarFromDb == null)
+                return new ServiceResult<MedicinskiTehnicarDtoLL>(HttpStatusCode.NotFound, $"Medicinski tehnicar sa ID-em {id} nije pronadjen");
 
-            _mapper.Map(dtoForUpdate, radnikPrijemFromDb.Radnik);
-            var radnikUpdated = await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
+            _mapper.Map(dtoForUpdate, medicinskiTehnicarFromDb.Radnik);
+            var radnikUpdated = await _radnikService.Update(medicinskiTehnicarFromDb.RadnikId, dtoForUpdate);
 
-            return _mapper.Map<MedicinskiTehnicarDtoLL>(radnikPrijemFromDb);
+            return new ServiceResult<MedicinskiTehnicarDtoLL>(_mapper.Map<MedicinskiTehnicarDtoLL>(medicinskiTehnicarFromDb));
         }
 
-        public override async Task Delete(int id)
+        public override async Task<ServiceResult<MedicinskiTehnicarDtoLL>> Delete(int id)
         {
-            var entity = await _dbContext.RadniciPrijem.FindAsync(id);
+            var entity = await _dbContext.MedicinskiTehnicari.FindAsync(id);
+            if (entity == null)
+                return new ServiceResult<MedicinskiTehnicarDtoLL>(HttpStatusCode.NotFound, $"Medicinski tehnicar sa ID-em {id} nije pronadjen.");
 
             await Task.Run(() =>
             {
-                if (entity == null)
-                    throw new NotFoundException($"Medicinski tehnicar sa ID-em {id} nije pronadjen.");
                 _radnikService.Delete(id);
 
                 _dbContext.Remove(entity);
             });
-            
+
             await _dbContext.SaveChangesAsync();
+
+            return new ServiceResult<MedicinskiTehnicarDtoLL>();
         }
 
         public override async Task<PagedList<MedicinskiTehnicar>> FilterAndPrepare(IQueryable<MedicinskiTehnicar> result, MedicinskiTehnicarResourceParameters resourceParameters)
@@ -115,6 +116,5 @@ namespace HealthCare020.Services
 
             return pagedResult;
         }
-       
     }
 }

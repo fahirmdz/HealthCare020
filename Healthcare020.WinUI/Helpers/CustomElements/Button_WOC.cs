@@ -1,8 +1,7 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace ePOSOne.btnProduct
+namespace Healthcare020.WinUI.Helpers.CustomElements
 {
     public class Button_WOC : Button
     {

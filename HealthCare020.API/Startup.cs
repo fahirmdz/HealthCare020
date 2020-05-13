@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using HealthCare020.API.Constants;
 
 namespace HealthCare020.API
 {
@@ -113,6 +114,19 @@ namespace HealthCare020.API
                     options.Authority = "https://localhost:5005/";
                     options.RequireHttpsMetadata = false;
                 });
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy(AuthorizationPolicies.AdminPolicy,
+                    policy => policy.RequireClaim("roles", "Administrator"));
+                opt.AddPolicy(AuthorizationPolicies.DoktorPolicy,
+                    policy => policy.RequireClaim("roles", "Doktor"));
+                opt.AddPolicy(AuthorizationPolicies.MedicinskiTehnicarPolicy,
+                    policy => policy.RequireClaim("roles", "MedicinskiTehnicar"));
+                opt.AddPolicy(AuthorizationPolicies.RadnikPrijemPolicy,
+                    policy => policy.RequireClaim("roles", "RadnikPrijem"));
+
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
