@@ -11,7 +11,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Core.ServiceModels;
 
 namespace HealthCare020.Services
 {
@@ -42,12 +44,17 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<CustomIzvestajDtoLL> Insert(CustomIzvestajUpsertDto dtoForCreation)
+        public override async Task<ServiceResult<CustomIzvestajDtoLL>> Insert(CustomIzvestajUpsertDto dtoForCreation)
         {
             var loggedInMedicinskiTehnicar = await GetLoggedInMedicinskiTehnicar();
 
+            if (loggedInMedicinskiTehnicar == null)
+            {
+                return new ServiceResult<CustomIzvestajDtoLL>(HttpStatusCode.Forbidden,$"Samo medicinski tehnicari mogu kreirati custom izvestaje.");
+            }
+
             if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dtoForCreation.PacijentId))
-                throw new NotFoundException($"Pacijent sa ID-em {dtoForCreation.PacijentId} nije pronadjen.");
+               return new ServiceResult<CustomIzvestajDtoLL>(HttpStatusCode.NotFound,$"Pacijent sa ID-em {dtoForCreation.PacijentId} nije pronadjen.");
 
             var newCustomIzvestaj = _mapper.Map<CustomIzvestaj>(dtoForCreation);
 
@@ -57,27 +64,32 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(newCustomIzvestaj);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<CustomIzvestajDtoLL>(newCustomIzvestaj);
+            return new ServiceResult<CustomIzvestajDtoLL>(_mapper.Map<CustomIzvestajDtoLL>(newCustomIzvestaj));
         }
 
-        public override async Task<CustomIzvestajDtoLL> Update(int id, CustomIzvestajUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult<CustomIzvestajDtoLL>> Update(int id, CustomIzvestajUpsertDto dtoForUpdate)
         {
             var loggedInMedicinskiTehnicar = await GetLoggedInMedicinskiTehnicar();
+
+            if (loggedInMedicinskiTehnicar == null)
+            {
+                return new ServiceResult<CustomIzvestajDtoLL>(HttpStatusCode.Forbidden,$"Samo medicinski tehnicari mogu kreirati custom izvestaje.");
+            }
 
             var customIzvestajFromDb = await _dbContext.CustomIzvestaji.FindAsync(id);
 
             if (customIzvestajFromDb == null)
-                throw new NotFoundException($"Custom izvestaj sa ID-em {id} nije pronadjen.");
+               return new ServiceResult<CustomIzvestajDtoLL>(HttpStatusCode.NotFound,$"Custom izvestaj sa ID-em {id} nije pronadjen.");
 
             if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dtoForUpdate.PacijentId))
-                throw new NotFoundException($"Pacijent sa ID-em {dtoForUpdate.PacijentId} nije pronadjen.");
+               return new ServiceResult<CustomIzvestajDtoLL>(HttpStatusCode.NotFound,$"Pacijent sa ID-em {dtoForUpdate.PacijentId} nije pronadjen.");
 
             _mapper.Map(dtoForUpdate, customIzvestajFromDb);
 
             _dbContext.Update(customIzvestajFromDb);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<CustomIzvestajDtoLL>(customIzvestajFromDb);
+            return new ServiceResult<CustomIzvestajDtoLL>(_mapper.Map<CustomIzvestajDtoLL>(customIzvestajFromDb));
         }
 
         public override async Task<PagedList<CustomIzvestaj>> FilterAndPrepare(IQueryable<CustomIzvestaj> result, CustomIzvestajResourceParameters resourceParameters)
@@ -145,9 +157,6 @@ namespace HealthCare020.Services
 
             var loggedInMedicinskiTehnicar = await _dbContext.MedicinskiTehnicari
                 .FirstOrDefaultAsync(x => x.Radnik.KorisnickiNalogId == loggedInUserId);
-
-            if (loggedInMedicinskiTehnicar == null)
-                throw new ForbiddenException($"Samo medicinski tehnicari mogu kreirati custom izvestaje.");
 
             return loggedInMedicinskiTehnicar;
         }

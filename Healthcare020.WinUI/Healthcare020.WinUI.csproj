@@ -127,37 +127,37 @@
     <Compile Include="AdminDashboard\frmUsers.Designer.cs">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomElements\Button_WOC.cs">
+    <Compile Include="Helpers\CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomElements\PanelCheckInternetConnection.cs">
+    <Compile Include="Helpers\CustomElements\PanelCheckInternetConnection.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomElements\PanelCheckInternetConnection.Designer.cs">
+    <Compile Include="Helpers\CustomElements\PanelCheckInternetConnection.Designer.cs">
       <DependentUpon>PanelCheckInternetConnection.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomElements\UserMenuButton.cs">
+    <Compile Include="Helpers\CustomElements\UserMenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomElements\UserMenuDropdown.cs">
+    <Compile Include="Helpers\CustomElements\UserMenuDropdown.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Dialogs\dlgAccountLock.cs">
+    <Compile Include="Helpers\Dialogs\dlgAccountLock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\dlgAccountLock.Designer.cs">
+    <Compile Include="Helpers\Dialogs\dlgAccountLock.Designer.cs">
       <DependentUpon>dlgAccountLock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\dlgError.cs">
+    <Compile Include="Helpers\Dialogs\dlgError.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\dlgError.Designer.cs">
+    <Compile Include="Helpers\Dialogs\dlgError.Designer.cs">
       <DependentUpon>dlgError.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\dlgPropmpt.cs">
+    <Compile Include="Helpers\Dialogs\dlgPropmpt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\dlgPropmpt.Designer.cs">
+    <Compile Include="Helpers\Dialogs\dlgPropmpt.Designer.cs">
       <DependentUpon>dlgPropmpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\UnauthorizedException.cs" />
@@ -197,16 +197,16 @@
     <EmbeddedResource Include="AdminDashboard\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomElements\PanelCheckInternetConnection.resx">
+    <EmbeddedResource Include="Helpers\CustomElements\PanelCheckInternetConnection.resx">
       <DependentUpon>PanelCheckInternetConnection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\dlgAccountLock.resx">
+    <EmbeddedResource Include="Helpers\Dialogs\dlgAccountLock.resx">
       <DependentUpon>dlgAccountLock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\dlgError.resx">
+    <EmbeddedResource Include="Helpers\Dialogs\dlgError.resx">
       <DependentUpon>dlgError.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\dlgPropmpt.resx">
+    <EmbeddedResource Include="Helpers\Dialogs\dlgPropmpt.resx">
       <DependentUpon>dlgPropmpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gradovi\frmGradoviPrikaz.resx">

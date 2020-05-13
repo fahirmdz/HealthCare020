@@ -3,15 +3,17 @@ using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
 using HealthCare020.Services.Exceptions;
+using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Services.Helpers;
 
 namespace HealthCare020.Services
 {
@@ -40,10 +42,10 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<TokenPosetaDtoLL> Insert(TokenPosetaUpsertDto dtoForCreation)
+        public override async Task<ServiceResult<TokenPosetaDtoLL>> Insert(TokenPosetaUpsertDto dtoForCreation)
         {
             if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dtoForCreation.PacijentId))
-                throw new NotFoundException($"Pacijent sa ID-em {dtoForCreation.PacijentId} nije pronadjen");
+                return new ServiceResult<TokenPosetaDtoLL>(HttpStatusCode.NotFound, $"Pacijent sa ID-em {dtoForCreation.PacijentId} nije pronadjen");
 
             var existingTokenPoseta =
                 await _dbContext.TokeniPoseta.FirstOrDefaultAsync(x => x.PacijentId == dtoForCreation.PacijentId);
@@ -62,22 +64,22 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(newToken);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<TokenPosetaDtoLL>(newToken);
+            return new ServiceResult<TokenPosetaDtoLL>(_mapper.Map<TokenPosetaDtoLL>(newToken));
         }
 
-        public override async Task<TokenPosetaDtoLL> Update(int id, TokenPosetaUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult<TokenPosetaDtoLL>> Update(int id, TokenPosetaUpsertDto dtoForUpdate)
         {
             var tokenFromDb = await _dbContext.TokeniPoseta.FindAsync(id);
 
             if (tokenFromDb == null)
-                throw new NotFoundException($"Token za posetu sa ID-em {id} nije pronadjen");
+               return new ServiceResult<TokenPosetaDtoLL>(HttpStatusCode.NotFound,$"Token za posetu sa ID-em {id} nije pronadjen");
 
             tokenFromDb.Value = GenerateTokenPoseta();
 
             _dbContext.Update(tokenFromDb);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<TokenPosetaDtoLL>(tokenFromDb);
+            return new ServiceResult<TokenPosetaDtoLL>(_mapper.Map<TokenPosetaDtoLL>(tokenFromDb));
         }
 
         public override async Task<PagedList<TokenPoseta>> FilterAndPrepare(IQueryable<TokenPoseta> result, TokenPosetaResourceParameters resourceParameters)

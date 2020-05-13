@@ -9,7 +9,9 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Update;
@@ -46,15 +48,15 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<PacijentDtoLL> Insert(PacijentUpsertDto dtoForCreation)
+        public override async Task<ServiceResult<PacijentDtoLL>> Insert(PacijentUpsertDto dtoForCreation)
         {
             var uputZaLecenjeFromDb = await _dbContext.Set<UputZaLecenje>().FindAsync(dtoForCreation.UputZaLecenjeId);
 
             if (uputZaLecenjeFromDb == null)
-                throw new NotFoundException($"Uput za lečenje sa ID-em {dtoForCreation.UputZaLecenjeId} nije pronadjen.");
+              return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound,$"Uput za lečenje sa ID-em {dtoForCreation.UputZaLecenjeId} nije pronadjen.");
 
             if(await _dbContext.Set<Pacijent>().AnyAsync(x=>x.LicniPodaciId==uputZaLecenjeFromDb.LicniPodaciId))
-                throw new UserException("Pacijent je vec prijavljen na lecenje");
+                return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound,"Pacijent je vec prijavljen na lecenje");
 
             var newEntity = new Pacijent
             {
@@ -72,19 +74,19 @@ namespace HealthCare020.Services
 
             await _dbContext.AddAsync(noviTokenPoseta);
             await _dbContext.SaveChangesAsync();
-            return _mapper.Map<PacijentDtoLL>(newEntity);
+            return new ServiceResult<PacijentDtoLL>(_mapper.Map<PacijentDtoLL>(newEntity));
         }
 
-        public override async Task<PacijentDtoLL> Update(int id, PacijentDtoForUpdate dtoForUpdate)
+        public override async Task<ServiceResult<PacijentDtoLL>> Update(int id, PacijentDtoForUpdate dtoForUpdate)
         {
             var entity = await _dbContext.Set<Pacijent>().FindAsync(id);
 
             if (entity == null)
-                throw new NotFoundException($"Pacijent sa ID-em {id} nije pronadjen.");
+                return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound,$"Pacijent sa ID-em {id} nije pronadjen.");
 
             await _licniPodaciService.Update(id, dtoForUpdate.LicniPodaci);
 
-            return _mapper.Map<PacijentDtoLL>(entity);
+            return new ServiceResult<PacijentDtoLL>(_mapper.Map<PacijentDtoLL>(entity));
         }
 
         public override async Task<PagedList<Pacijent>> FilterAndPrepare(IQueryable<Pacijent> result, PacijentResourceParameters resourceParameters)

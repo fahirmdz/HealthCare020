@@ -1,4 +1,6 @@
-﻿namespace Healthcare020.WinUI.Dialogs
+﻿using Healthcare020.WinUI.Helpers.CustomElements;
+
+namespace Healthcare020.WinUI.Dialogs
 {
     partial class dlgAccountLock
     {
@@ -33,7 +35,7 @@
             this.btnClose = new FontAwesome.Sharp.IconPictureBox();
             this.cmbBrojSati = new System.Windows.Forms.ComboBox();
             this.lblHours = new System.Windows.Forms.Label();
-            this.btnLockOk = new ePOSOne.btnProduct.Button_WOC();
+            this.btnLockOk = new Button_WOC();
             this.dlgPrompt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
@@ -142,7 +144,7 @@
         private System.Windows.Forms.Panel dlgPrompt;
         private System.Windows.Forms.ComboBox cmbBrojSati;
         private FontAwesome.Sharp.IconPictureBox btnClose;
-        private ePOSOne.btnProduct.Button_WOC btnLockOk;
+        private Button_WOC btnLockOk;
         private System.Windows.Forms.Label lblHours;
     }
 }

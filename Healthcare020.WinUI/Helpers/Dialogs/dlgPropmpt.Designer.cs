@@ -1,4 +1,6 @@
-﻿namespace Healthcare020.WinUI.Dialogs
+﻿using Healthcare020.WinUI.Helpers.CustomElements;
+
+namespace Healthcare020.WinUI.Dialogs
 {
     partial class dlgPropmpt
     {
@@ -31,8 +33,8 @@
             this.pnlBody = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.icnDanger = new FontAwesome.Sharp.IconPictureBox();
-            this.btnCancel = new ePOSOne.btnProduct.Button_WOC();
-            this.btnYes = new ePOSOne.btnProduct.Button_WOC();
+            this.btnCancel = new Button_WOC();
+            this.btnYes = new Button_WOC();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnDanger)).BeginInit();
             this.SuspendLayout();
@@ -148,8 +150,8 @@
 
         private System.Windows.Forms.Panel pnlBody;
         private FontAwesome.Sharp.IconPictureBox icnDanger;
-        private ePOSOne.btnProduct.Button_WOC btnYes;
+        private Button_WOC btnYes;
         private System.Windows.Forms.Label label1;
-        private ePOSOne.btnProduct.Button_WOC btnCancel;
+        private Button_WOC btnCancel;
     }
 }

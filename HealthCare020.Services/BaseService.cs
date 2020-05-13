@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ResponseModels;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -28,30 +29,34 @@ namespace HealthCare020.Services
             _propertyCheckerService = propertyCheckerService;
         }
 
-        public virtual async Task<ServiceSequenceResult> Get(TResourceParameters resourceParameters)
+        public virtual async Task<ServiceResult<SequenceResult>> Get(TResourceParameters resourceParameters)
         {
             IQueryable<TEntity> result;
 
             if (ShouldEagerLoad(resourceParameters))
             {
                 //check prop and prop mapping
-                PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
+                var propertyCheckResult = PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
+                if (!propertyCheckResult.Succeded)
+                    return new ServiceResult<SequenceResult>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
 
                 result = GetWithEagerLoad();
             }
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.OrderBy);
+                var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
+                if (!propertyCheckResult.Succeded)
+                    return new ServiceResult<SequenceResult>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
 
                 result = _dbContext.Set<TEntity>().AsQueryable();
             }
 
             var pagedResult = await FilterAndPrepare(result, resourceParameters) ?? new PagedList<TEntity>(new List<TEntity>(), 0, 0, 0);
 
-            var serviceResultToReturn = new ServiceSequenceResult
+            var serviceResultToReturn = new SequenceResult()
             {
-                PaginationMetadata = new PaginationMetadata
+                PaginationMetadata = new PaginationMetadata()
                 {
                     CurrentPage = pagedResult.CurrentPage,
                     PageSize = pagedResult.PageSize,
@@ -62,7 +67,7 @@ namespace HealthCare020.Services
                 HasNext = pagedResult.HasNext,
                 HasPrevious = pagedResult.HasPrevious
             };
-            return serviceResultToReturn;
+            return new ServiceResult<SequenceResult>(serviceResultToReturn);
         }
 
         public virtual IQueryable<TEntity> GetWithEagerLoad(int? id = null)
@@ -70,7 +75,7 @@ namespace HealthCare020.Services
             throw new NotImplementedException();
         }
 
-        public async Task<dynamic> GetById(int id, TResourceParameters resourceParameters)
+        public async Task<ServiceResult<dynamic>> GetById(int id, TResourceParameters resourceParameters)
         {
             TEntity result;
             var eagerLoad = ShouldEagerLoad(resourceParameters);
@@ -78,25 +83,29 @@ namespace HealthCare020.Services
             if (eagerLoad)
             {
                 //check prop and prop mapping
-                PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
+                var propertyCheckResult = PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
+                if (!propertyCheckResult.Succeded)
+                    return new ServiceResult<dynamic>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
 
                 result = GetWithEagerLoad(id).FirstOrDefault();
             }
             else
             {
                 //check prop and prop mapping
-                PropertyCheck<TDto>(resourceParameters.OrderBy);
+                var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
+                if (!propertyCheckResult.Succeded)
+                    return new ServiceResult<dynamic>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
 
                 result = await _dbContext.Set<TEntity>().FindAsync(id);
             }
 
             if (result == null)
-                throw new NotFoundException("Not Found");
+                return new ServiceResult<dynamic>(HttpStatusCode.NotFound);
 
             if (eagerLoad)
-                return PrepareDataForClient<TDtoEagerLoaded>(result, resourceParameters);
+                return new ServiceResult<dynamic>(PrepareDataForClient<TDtoEagerLoaded>(result, resourceParameters));
 
-            return PrepareDataForClient<TDto>(result, resourceParameters);
+            return new ServiceResult<dynamic>(PrepareDataForClient<TDto>(result, resourceParameters));
         }
 
         /// <summary>
@@ -166,7 +175,7 @@ namespace HealthCare020.Services
         /// <summary>
         /// Check if properties exist
         /// </summary>
-        public void PropertyCheck<TType>(string orderBy)
+        public (bool Succeded, string Message) PropertyCheck<TType>(string orderBy)
         {
             //if (!_propertyCheckerService.TypeHasProperties<TType>(fields))
             //{
@@ -175,8 +184,10 @@ namespace HealthCare020.Services
 
             if (!_propertyMappingService.ValidMappingExistsFor<TType, TEntity>(orderBy))
             {
-                throw new UserException($"Invalid OrderBy fields -> {orderBy}");
+                return (false, $"Invalid OrderBy fields -> {orderBy}");
             }
+
+            return (true, string.Empty);
         }
     }
 }

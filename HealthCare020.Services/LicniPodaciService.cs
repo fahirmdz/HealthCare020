@@ -3,12 +3,13 @@ using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -36,10 +37,10 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<LicniPodaciDto> Insert(LicniPodaciUpsertDto request)
+        public override async Task<ServiceResult<LicniPodaciDto>> Insert(LicniPodaciUpsertDto request)
         {
             if (!await _dbContext.Gradovi.AnyAsync(x => x.Id == request.GradId))
-                throw new NotFoundException($"Grad sa ID-em {request.GradId} nije pronadjen");
+                return new ServiceResult<LicniPodaciDto>(HttpStatusCode.NotFound, $"Grad sa ID-em {request.GradId} nije pronadjen");
 
             var entity = _mapper.Map<LicniPodaci>(request);
 
@@ -47,23 +48,21 @@ namespace HealthCare020.Services
             await _dbContext.SaveChangesAsync();
 
             entity.Grad = await _dbContext.Gradovi.Include(x => x.Drzava).FirstOrDefaultAsync(x => x.Id == entity.GradId);
-            return _mapper.Map<LicniPodaciDto>(entity);
+            return new ServiceResult<LicniPodaciDto>(_mapper.Map<LicniPodaciDto>(entity));
         }
 
-        public override async Task<LicniPodaciDto> Update(int id, LicniPodaciUpsertDto request)
+        public override async Task<ServiceResult<LicniPodaciDto>> Update(int id, LicniPodaciUpsertDto request)
         {
             var entity = await _dbContext.LicniPodaci.FindAsync(id);
+            if (entity == null)
+                return new ServiceResult<LicniPodaciDto>(HttpStatusCode.NotFound, "Licni podaci nisu pronadjeni");
 
+            if (!_dbContext.Gradovi.Any(x => x.Id == request.GradId))
+            {
+                return new ServiceResult<LicniPodaciDto>(HttpStatusCode.NotFound, $"Grad sa ID-em {request.GradId} nije pronadjen");
+            }
             await Task.Run(() =>
             {
-                if (entity == null)
-                    throw new NotFoundException("Licni podaci nisu pronadjeni");
-
-                if (!_dbContext.Gradovi.Any(x => x.Id == request.GradId))
-                {
-                    throw new NotFoundException($"Grad sa ID-em {request.GradId} nije pronadjen");
-                }
-
                 _mapper.Map(request, entity);
 
                 _dbContext.LicniPodaci.Update(entity);
@@ -71,7 +70,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<LicniPodaciDto>(entity);
+            return new ServiceResult<LicniPodaciDto>(_mapper.Map<LicniPodaciDto>(entity));
         }
     }
 }

@@ -111,27 +111,21 @@ namespace Healthcare020.WinUI.AdminDashboard
 
         private async void dgrvKorisnickiNalozi_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (!(dgrvKorisnickiNalozi.CurrentRow?.DataBoundItem is KorisnickiNalogDtoLL korisnik))
+                return;
             //Account lock out
             if (e.ColumnIndex == 3)
             {
-                var korisnik = dgrvKorisnickiNalozi.CurrentRow.DataBoundItem as KorisnickiNalogDtoLL;
-
-                if (korisnik == null)
-                    return;
-
                 Form promptDialog = null;
 
                 if (korisnik.LockedOut)
                 {
-                    promptDialog = new dlgPropmpt(korisnik);
+                    promptDialog = dlgPropmpt.ShowDialog();
                 }
                 else
                 {
-                    promptDialog = new dlgAccountLock(korisnik);
+                    promptDialog = dlgAccountLock.ShowDialog();
                 }
-
-                promptDialog.ShowDialog();
-                promptDialog.BringToFront();
 
                 DateTime? until = null;
                 bool isForLockout = promptDialog is dlgAccountLock;

@@ -3,14 +3,15 @@ using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -30,9 +31,9 @@ namespace HealthCare020.Services
         {
             var result = _dbContext.Posete
                 .Include(x => x.TokenPoseta)
-                .ThenInclude(x=>x.Pacijent)
-                .ThenInclude(x=>x.LicniPodaci)
-                .ThenInclude(x=>x.Grad)
+                .ThenInclude(x => x.Pacijent)
+                .ThenInclude(x => x.LicniPodaci)
+                .ThenInclude(x => x.Grad)
                 .AsQueryable();
 
             if (id.HasValue)
@@ -41,16 +42,16 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<PosetaDtoLL> Insert(PosetaUpsertDto dtoForCreation)
+        public override async Task<ServiceResult<PosetaDtoLL>> Insert(PosetaUpsertDto dtoForCreation)
         {
             var tokenPosetaFromDb = await _dbContext.TokeniPoseta
                 .FirstOrDefaultAsync(x => x.Value == dtoForCreation.TokenPoseta);
 
             if (tokenPosetaFromDb == null)
-                throw new NotFoundException($"Token sa vrijednoscu {dtoForCreation.TokenPoseta} nije pronadjen.");
+                return new ServiceResult<PosetaDtoLL>(HttpStatusCode.NotFound, $"Token sa vrijednoscu {dtoForCreation.TokenPoseta} nije pronadjen.");
 
             if (tokenPosetaFromDb.BrojPreostalihPoseta == 0)
-                throw new UserException($"Token za posetu {dtoForCreation.TokenPoseta} je dostigao maximalan broj poseta.");
+                return new ServiceResult<PosetaDtoLL>(HttpStatusCode.BadRequest, $"Token za posetu {dtoForCreation.TokenPoseta} je dostigao maximalan broj poseta.");
 
             tokenPosetaFromDb.BrojPreostalihPoseta -= 1;
             _dbContext.Update(tokenPosetaFromDb);
@@ -63,24 +64,24 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(newEntity);
             await _dbContext.SaveChangesAsync();
 
-            return _mapper.Map<PosetaDtoLL>(newEntity);
+            return new ServiceResult<PosetaDtoLL>(_mapper.Map<PosetaDtoLL>(newEntity));
         }
 
-        public override async Task<PosetaDtoLL> Update(int id, PosetaUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult<PosetaDtoLL>> Update(int id, PosetaUpsertDto dtoForUpdate)
         {
             var posetaFromDb = await _dbContext.Posete.FindAsync(id);
 
             if (posetaFromDb == null)
-                throw new NotFoundException($"Poseta sa ID-em {id} nije pronadjena.");
+                return new ServiceResult<PosetaDtoLL>(HttpStatusCode.NotFound, $"Poseta sa ID-em {id} nije pronadjena.");
 
             var tokenPosetaFromDb = await _dbContext.TokeniPoseta
                 .FirstOrDefaultAsync(x => x.Value == dtoForUpdate.TokenPoseta);
 
             if (tokenPosetaFromDb == null)
-                throw new NotFoundException($"Token sa vrijednoscu {dtoForUpdate.TokenPoseta} nije pronadjen.");
+                return new ServiceResult<PosetaDtoLL>(HttpStatusCode.NotFound, $"Token sa vrijednoscu {dtoForUpdate.TokenPoseta} nije pronadjen.");
 
             if (tokenPosetaFromDb.BrojPreostalihPoseta == 0)
-                throw new UserException($"Token za posetu {dtoForUpdate.TokenPoseta} je dostigao maximalan broj poseta.");
+                return new ServiceResult<PosetaDtoLL>(HttpStatusCode.BadRequest, $"Token za posetu {dtoForUpdate.TokenPoseta} je dostigao maximalan broj poseta.");
 
             await Task.Run(() =>
             {
@@ -89,7 +90,7 @@ namespace HealthCare020.Services
                 _dbContext.SaveChanges();
             });
 
-            return _mapper.Map<PosetaDtoLL>(posetaFromDb);
+            return new ServiceResult<PosetaDtoLL>(_mapper.Map<PosetaDtoLL>(posetaFromDb));
         }
 
         public override async Task<PagedList<Poseta>> FilterAndPrepare(IQueryable<Poseta> result, PosetaResourceParameters resourceParameters)

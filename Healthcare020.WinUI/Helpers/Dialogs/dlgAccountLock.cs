@@ -1,7 +1,4 @@
-﻿using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Models;
-using HealthCare020.Core.Request;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,17 +6,11 @@ namespace Healthcare020.WinUI.Dialogs
 {
     public partial class dlgAccountLock : Form
     {
-        private readonly APIService _apiServiceKorisnici;
-        private readonly KorisnickiNalogDtoLL _korisnik;
+        private static dlgAccountLock _instance = null;
         public int NumberOfHours = 2;
 
-        public dlgAccountLock(KorisnickiNalogDtoLL korisnik)
+        private dlgAccountLock()
         {
-            if (korisnik == null)
-                return;
-
-            _korisnik = korisnik;
-            _apiServiceKorisnici = new APIService("korisnici");
             InitializeComponent();
             this.Opacity = 50;
             this.FormBorderStyle = FormBorderStyle.None;
@@ -27,6 +18,19 @@ namespace Healthcare020.WinUI.Dialogs
             cmbBrojSati.Items.Add("2");
             cmbBrojSati.Items.Add("6");
             cmbBrojSati.Items.Add("18");
+        }
+
+        public new static dlgAccountLock ShowDialog()
+        {
+            if (_instance == null || _instance.IsDisposed)
+            {
+                _instance = new dlgAccountLock();
+            }
+
+            ShowDialog();
+            _instance.BringToFront();
+
+            return _instance;
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

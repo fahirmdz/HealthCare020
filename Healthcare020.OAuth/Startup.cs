@@ -1,4 +1,5 @@
 using Healthcare020.OAuth.Configuration;
+using Healthcare020.OAuth.Services;
 using Healthcare020.OAuth.Validators;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
@@ -39,7 +40,8 @@ namespace Healthcare020.OAuth
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
                 .AddDeveloperSigningCredential()
-                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
+                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
+                .AddProfileService<ProfileService>();
 
             services.AddHealthCare020Services();
         }
