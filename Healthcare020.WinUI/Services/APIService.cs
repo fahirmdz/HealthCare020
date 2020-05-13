@@ -1,5 +1,4 @@
 ﻿using System;
-using Flurl;
 using Flurl.Http;
 using Flurl.Http.Content;
 using Healthcare020.WinUI.Exceptions;
@@ -19,12 +18,14 @@ namespace Healthcare020.WinUI.Services
     public class APIService
     {
         private IFlurlRequest request;
+        private string BaseUrl;
 
         public APIService(string route)
         {
             try
             {
                 request = Auth.GetAuthorizedApiRequest(route);
+                BaseUrl = request.Url;
             }
             catch (UnauthorizedException ex)
             {
@@ -32,9 +33,26 @@ namespace Healthcare020.WinUI.Services
             }
         }
 
+        private void RevertToBaseRequest(object resourceParameters=null)
+        {
+            if (resourceParameters != null)
+            {
+                request.Url.RemoveQueryParams(resourceParameters.GetType().GetProperties().Select(x => x.Name));
+            }
+
+            request.Url = BaseUrl;
+        }
+
         public async Task<APIServiceResult<List<T>>> Get<T>(object resourceParameters = null)
         {
             var response = await request.SetQueryParams(resourceParameters).GetAsync();
+            RevertToBaseRequest(resourceParameters);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new APIServiceResult<List<T>>(response.StatusCode);
+            }
+
             var headers = response.Headers;
 
             var result = await response.Content.ReadAsAsync<List<T>>();
@@ -56,48 +74,58 @@ namespace Healthcare020.WinUI.Services
 
         public async Task<APIServiceResult<T>> Update<T>(int id, object dtoForUpdate)
         {
-            var tempReq = request;
-            tempReq.Url.AppendPathSegment(id);
+            request.Url.AppendPathSegment(id);
 
             try
             {
-                var response = await tempReq.PutJsonAsync(dtoForUpdate);
+                var response = await request.PutJsonAsync(dtoForUpdate);
+                RevertToBaseRequest();
+
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    return new APIServiceResult<T> { Success = false };
+                    return new APIServiceResult<T>(response.StatusCode);
                 }
                 var headers = response.Headers;
 
                 var result = await response.Content.ReadAsAsync<T>();
-                return new APIServiceResult<T>
-                {
-                    Data = result
-                };
+                return new APIServiceResult<T>(result);
             }
             catch (Exception ex)
             {
-
+                return APIServiceResult<T>.BadRequest;
             }
-            
-            return new APIServiceResult<T>{Success = false};
-            
         }
 
-        public async Task<APIServiceResult<T>> PartiallyUpdate<T>(object patchDocument)
+        public async Task<APIServiceResult<T>> PartiallyUpdate<T>(int id, object patchDocument)
         {
-            request.Headers.Add("Content-Type", "application/json-patch+json");
+            request.Url.AppendPathSegment(id);
 
             HttpContent content = new CapturedJsonContent(JsonConvert.SerializeObject(patchDocument));
 
-            var response = await request.PatchAsync(content);
-            var headers = response.Headers;
+            var response = await request.PatchJsonAsync(content);
+            RevertToBaseRequest();
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return new APIServiceResult<T>(response.StatusCode);
+            }
 
             var result = await response.Content.ReadAsAsync<T>();
 
-            return new APIServiceResult<T>
+            return new APIServiceResult<T>(result);
+        }
+
+        public async Task<APIServiceResult<T>> Delete<T>(int id)
+        {
+            request.Url.AppendPathSegment(id);
+
+            var response = await request.DeleteAsync();
+            RevertToBaseRequest();
+            if (response.StatusCode != HttpStatusCode.OK)
             {
-                Data = result
-            };
+                return new APIServiceResult<T>(response.StatusCode);
+            }
+
+            return APIServiceResult<T>.OK;
         }
     }
 }
