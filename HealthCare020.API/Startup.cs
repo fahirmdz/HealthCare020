@@ -1,7 +1,7 @@
+using HealthCare020.API.Configuration;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
 using HealthCare020.Services.Filters;
-using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +16,6 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using HealthCare020.API.Constants;
 
 namespace HealthCare020.API
 {
@@ -32,45 +31,46 @@ namespace HealthCare020.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HealthCare020DbContext>(x =>
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(true));
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                    .EnableSensitiveDataLogging(true));
 
             services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    x.SwaggerDoc("v1", new OpenApiInfo
-                    {
-                        Title = "HealthCare020 API",
-                        Version = "v1"
-                    });
-
-                    x.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                    {
-                        Type = SecuritySchemeType.OAuth2,
-                        Flows = new OpenApiOAuthFlows
-                        {
-                            Password = new OpenApiOAuthFlow
-                            {
-                                AuthorizationUrl = new Uri("https://localhost:5005/connect/authorize"),
-                                TokenUrl = new Uri("https://localhost:5005/connect/token")
-                            }
-                        },
-                        OpenIdConnectUrl = new Uri("https://localhost:5005/.well-known/openid-configuration"),
-                        Scheme = JwtBearerDefaults.AuthenticationScheme,
-                        BearerFormat = "JWT",
-                        Name = "Authorization",
-                        In = ParameterLocation.Header
-                    });
-
-                    x.AddSecurityRequirement(new OpenApiSecurityRequirement
-                    {
-                        {
-                            new OpenApiSecurityScheme
-                            {
-                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
-                            },
-                            new List<string>()
-                        }
-                    });
+                    Title = "HealthCare020 API",
+                    Version = "v1"
                 });
+
+                x.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Password = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri("https://localhost:5005/connect/authorize"),
+                            TokenUrl = new Uri("https://localhost:5005/connect/token")
+                        }
+                    },
+                    OpenIdConnectUrl = new Uri("https://localhost:5005/.well-known/openid-configuration"),
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                    BearerFormat = "JWT",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header
+                });
+
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}
+                        },
+                        new List<string>()
+                    }
+                });
+            });
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
@@ -81,11 +81,11 @@ namespace HealthCare020.API
                     cfg.Filters.Add(typeof(ErrorFilter));
                     cfg.ReturnHttpNotAcceptable = true;
                 }).AddNewtonsoftJson(setupAction =>
-                  {
-                      //Input and output JSON formatters
+                {
+                    //Input and output JSON formatters
 
-                      setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                  }).AddXmlDataContractSerializerFormatters()
+                    setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                }).AddXmlDataContractSerializerFormatters()
                 .ConfigureApiBehaviorOptions(config =>
                 {
                     config.InvalidModelStateResponseFactory = context =>
@@ -108,25 +108,7 @@ namespace HealthCare020.API
                     };
                 });
 
-            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "https://localhost:5005/";
-                    options.RequireHttpsMetadata = false;
-                });
-
-            services.AddAuthorization(opt =>
-            {
-                opt.AddPolicy(AuthorizationPolicies.AdminPolicy,
-                    policy => policy.RequireClaim("roles", "Administrator"));
-                opt.AddPolicy(AuthorizationPolicies.DoktorPolicy,
-                    policy => policy.RequireClaim("roles", "Doktor"));
-                opt.AddPolicy(AuthorizationPolicies.MedicinskiTehnicarPolicy,
-                    policy => policy.RequireClaim("roles", "MedicinskiTehnicar"));
-                opt.AddPolicy(AuthorizationPolicies.RadnikPrijemPolicy,
-                    policy => policy.RequireClaim("roles", "RadnikPrijem"));
-
-            });
+            services.AddAuthConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

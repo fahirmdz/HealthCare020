@@ -34,15 +34,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgrvKorisnickiNalozi = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Zaključaj = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnPrevPage = new FontAwesome.Sharp.IconButton();
             this.btnNextPage = new FontAwesome.Sharp.IconButton();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnNewUser = new FontAwesome.Sharp.IconButton();
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateCreated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Zaključaj = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgrvKorisnickiNalozi)).BeginInit();
             this.pnlBody.SuspendLayout();
             this.SuspendLayout();
@@ -96,53 +96,6 @@
             this.dgrvKorisnickiNalozi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvKorisnickiNalozi_CellContentClick);
             this.dgrvKorisnickiNalozi.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgrvKorisnickiNalozi_CellFormatting);
             this.dgrvKorisnickiNalozi.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvKorisnickiNalozi_CellValueChanged);
-            // 
-            // ID
-            // 
-            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ID.DataPropertyName = "Id";
-            this.ID.Frozen = true;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 147;
-            // 
-            // Username
-            // 
-            this.Username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Username.DataPropertyName = "Username";
-            this.Username.Frozen = true;
-            this.Username.HeaderText = "Username";
-            this.Username.Name = "Username";
-            this.Username.ReadOnly = true;
-            this.Username.Width = 148;
-            // 
-            // DateCreated
-            // 
-            this.DateCreated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.DateCreated.DataPropertyName = "DateCreated";
-            this.DateCreated.Frozen = true;
-            this.DateCreated.HeaderText = "Datum kreiranja";
-            this.DateCreated.Name = "DateCreated";
-            this.DateCreated.ReadOnly = true;
-            this.DateCreated.Width = 147;
-            // 
-            // Zaključaj
-            // 
-            this.Zaključaj.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.Zaključaj.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Zaključaj.HeaderText = "Akcija";
-            this.Zaključaj.Name = "Zaključaj";
-            this.Zaključaj.ReadOnly = true;
-            this.Zaključaj.Text = "Zaključaj";
-            this.Zaključaj.ToolTipText = "Zaključaj korisnički nalog na određeni broj sati";
-            this.Zaključaj.UseColumnTextForButtonValue = true;
             // 
             // btnPrevPage
             // 
@@ -213,6 +166,53 @@
             this.pnlBody.Size = new System.Drawing.Size(776, 486);
             this.pnlBody.TabIndex = 5;
             // 
+            // ID
+            // 
+            this.ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ID.DataPropertyName = "Id";
+            this.ID.Frozen = true;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 147;
+            // 
+            // Username
+            // 
+            this.Username.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Username.DataPropertyName = "Username";
+            this.Username.Frozen = true;
+            this.Username.HeaderText = "Username";
+            this.Username.Name = "Username";
+            this.Username.ReadOnly = true;
+            this.Username.Width = 148;
+            // 
+            // DateCreated
+            // 
+            this.DateCreated.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.DateCreated.DataPropertyName = "DateCreated";
+            this.DateCreated.Frozen = true;
+            this.DateCreated.HeaderText = "Datum kreiranja";
+            this.DateCreated.Name = "DateCreated";
+            this.DateCreated.ReadOnly = true;
+            this.DateCreated.Width = 147;
+            // 
+            // Zaključaj
+            // 
+            this.Zaključaj.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.Zaključaj.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Zaključaj.HeaderText = "Zaključavanje";
+            this.Zaključaj.Name = "Zaključaj";
+            this.Zaključaj.ReadOnly = true;
+            this.Zaključaj.Text = "Zaključaj";
+            this.Zaključaj.ToolTipText = "Zaključaj korisnički nalog na određeni broj sati";
+            this.Zaključaj.UseColumnTextForButtonValue = true;
+            // 
             // frmUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,10 +236,10 @@
         private FontAwesome.Sharp.IconButton btnNextPage;
         private System.Windows.Forms.ToolTip toolTip;
         private FontAwesome.Sharp.IconButton btnNewUser;
+        private System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Username;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateCreated;
         private System.Windows.Forms.DataGridViewButtonColumn Zaključaj;
-        private System.Windows.Forms.Panel pnlBody;
     }
 }

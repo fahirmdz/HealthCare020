@@ -3,16 +3,17 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Healthcare020.WinUI.Dialogs
+namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    public partial class dlgError : Form
+    public partial class dlgSuccess : Form
     {
-        private static dlgError _instance = null;
+        private static dlgSuccess _instance = null;
 
-        private dlgError()
+        private dlgSuccess()
         {
             InitializeComponent();
             this.Opacity = 50;
+            this.Dock = DockStyle.Fill;
             this.FormBorderStyle = FormBorderStyle.None;
             pnlBody.BackColor = Color.FromArgb(
                 245, 245, 245
@@ -23,7 +24,7 @@ namespace Healthcare020.WinUI.Dialogs
         {
             if (_instance == null || _instance.IsDisposed)
             {
-                _instance=new dlgError();
+                _instance = new dlgSuccess();
             }
 
             ((Form) _instance).ShowDialog();
@@ -37,24 +38,18 @@ namespace Healthcare020.WinUI.Dialogs
             }
         }
 
-        private void dlgError_Load(object sender, EventArgs e)
+        private async void dlgSuccess_Load(object sender, EventArgs e)
         {
-            this.Dock = DockStyle.Fill;
-            this.CenterToParent();
             this.BringToFront();
-        }
-
-        private void dlgError_Shown(object sender, EventArgs e)
-        {
-            pnlBody.PointToScreen(new Point(Width / 2, Height / 2));
-        }
-
-        protected override async void OnLoad(EventArgs e)
-        {
             base.OnLoad(e);
             await Task.Delay(1000);
             Close();
             Dispose();
+        }
+
+        private void dlgSuccess_Shown(object sender, EventArgs e)
+        {
+            pnlBody.PointToScreen(new Point(Width / 2, Height / 2));
         }
     }
 }

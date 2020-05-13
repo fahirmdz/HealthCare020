@@ -23,7 +23,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
-        [HttpPost("{id}")]
+        [HttpPost("{id}/lock")]
         public async Task<IActionResult> Lock(int id, KorisnickiNalogLockUpsertRequest request)
         {
             var result = await _korisnikService.ToggleLock(id, true, request.Until);
@@ -32,7 +32,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/lock")]
         public async Task<IActionResult> Lock(int id)
         {
             var result = await _korisnikService.ToggleLock(id, false);

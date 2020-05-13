@@ -29,7 +29,7 @@ namespace HealthCare020.API.Controllers
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.Data.PaginationMetadata));
 
-            return Ok(result.Data);
+            return Ok(result.Data.Data);
         }
 
         [HttpGet("{id}")]
@@ -39,7 +39,7 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")
