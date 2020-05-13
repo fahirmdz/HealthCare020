@@ -2,9 +2,8 @@
 
 namespace HealthCare020.Core.Models
 {
-    public class KorisnickiNalogDtoEL:KorisnickiNalogDto
+    public class KorisnickiNalogDtoEL : KorisnickiNalogDto
     {
-        public ICollection<TwoFieldsDto> Roles { get; set; }=new List<TwoFieldsDto>();
-
+        public List<TwoFieldsDto> Roles { get; set; }
     }
 }

@@ -137,24 +137,7 @@ namespace Healthcare020.WinUI.AdminDashboard
 
                 if (promptDialog?.DialogResult == DialogResult.OK)
                 {
-                    var upsertDto = new KorisnickiNalogUpsertDto
-                    {
-                        Username = korisnik.Username,
-                        Password = "testtest",
-                        ConfirmPassword = "testtest",
-                        LokedOutUntil = until,
-                        LockedOut = isForLockout
-                    };
-
-                    var result = await _apiServiceKorisnici.Update<KorisnickiNalogDtoLL>(korisnik.Id, upsertDto);
-                    if (result.Success)
-                        korisnik.LockedOut = isForLockout;
-                    else
-                    {
-                        var dlgError = new dlgError();
-                        dlgError.ShowDialog();
-                        dlgError.BringToFront();
-                    }
+                   
                 }
             }
         }

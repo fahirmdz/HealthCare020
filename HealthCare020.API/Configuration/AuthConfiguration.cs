@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using HealthCare020.API.Constants;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
@@ -25,9 +26,9 @@ namespace HealthCare020.API.Configuration
                         {
                             var roles = context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
 
-                            var listOfRoles = roles?.Split(",").ToList();
+                            var listOfRoles = roles?.Split(",").Select(x=>x.Trim()).ToList();
 
-                            return listOfRoles?.Contains("Administrator") ?? false;
+                            return listOfRoles?.Contains("Administrator",StringComparer.InvariantCultureIgnoreCase) ?? false;
                         }
                     );
                 });

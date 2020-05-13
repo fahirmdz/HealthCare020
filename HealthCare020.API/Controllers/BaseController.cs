@@ -56,7 +56,7 @@ namespace HealthCare020.API.Controllers
                     return Unauthorized();
 
                 default:
-                    return BadRequest();
+                    return BadRequest(message);
             }
         }
 

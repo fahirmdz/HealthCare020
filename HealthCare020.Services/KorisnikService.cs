@@ -55,12 +55,6 @@ namespace HealthCare020.Services
                 return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, "Lozinke se ne podudaraju");
             }
 
-            foreach (var roleId in request.Roles)
-            {
-                if (!await _dbContext.Roles.AnyAsync(x => x.Id == roleId))
-                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Rola sa ID-em {roleId} nije pronadjena");
-            }
-
             korisnickiNalog.PasswordSalt = GenerateSalt();
             korisnickiNalog.PasswordHash = GenerateHash(korisnickiNalog.PasswordSalt, request.Password);
 
@@ -69,19 +63,6 @@ namespace HealthCare020.Services
 
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
-
-            foreach (var roleId in request.Roles)
-            {
-                await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
-                {
-                    KorisnickiNalogId = korisnickiNalog.Id,
-                    RoleId = roleId
-                });
-            }
-            await _dbContext.SaveChangesAsync();
-
-            //Load RoleKorisnickiNalog relations
-            await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
             return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
@@ -104,41 +85,10 @@ namespace HealthCare020.Services
 
                 korisnickiNalog.DateCreated = DateTime.Now;
                 korisnickiNalog.LastOnline = DateTime.Now;
-                korisnickiNalog.LockedOut = dtoForUpdate.LockedOut;
-                korisnickiNalog.LockedOutUntil = dtoForUpdate.LokedOutUntil;
 
                 _dbContext.KorisnickiNalozi.Update(korisnickiNalog);
             });
 
-            await _dbContext.SaveChangesAsync();
-
-            if (dtoForUpdate.RolesToDelete.Any(x => dtoForUpdate.Roles.Contains(x)))
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, $"Liste rola za brisanje i dodavanje ne smiju sadrzati zajednicke elemente.");
-
-            foreach (var roleId in dtoForUpdate.Roles)
-            {
-                if (_dbContext.RolesKorisnickiNalozi.Any(x =>
-                    x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId))
-                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, $"Korisnik sa ID-em {korisnickiNalog.Id} vec poseduje role sa ID-em {roleId}");
-
-                await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
-                {
-                    KorisnickiNalogId = korisnickiNalog.Id,
-                    RoleId = roleId
-                });
-            }
-            await _dbContext.SaveChangesAsync();
-
-            foreach (var roleId in dtoForUpdate.RolesToDelete)
-            {
-                var roleKorisnik = await _dbContext.RolesKorisnickiNalozi.FirstOrDefaultAsync(x => x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId);
-                if (roleKorisnik == null)
-                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Rola sa ID-em {roleId} ne pripada ovom korisniku");
-                await Task.Run(() =>
-                {
-                    _dbContext.RolesKorisnickiNalozi.Remove(roleKorisnik);
-                });
-            }
             await _dbContext.SaveChangesAsync();
 
             //Load RoleKorisnickiNalog relations
@@ -204,14 +154,72 @@ namespace HealthCare020.Services
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
-            if(korisnickiNalog==null)
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound,$"Korisnicki nalog sa ID-em {id} nije pronadjen.");
+            if (korisnickiNalog == null)
+                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Korisnicki nalog sa ID-em {id} nije pronadjen.");
 
             korisnickiNalog.LockedOut = isForLockout;
-            if (isForLockout && until.HasValue)
-                korisnickiNalog.LockedOutUntil = until.Value;
+            korisnickiNalog.LockedOutUntil = until;
 
             await _dbContext.SaveChangesAsync();
+
+            return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+        }
+
+        public async Task<ServiceResult<KorisnickiNalogDtoLL>> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
+        {
+            var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
+
+            if (korisnickiNalog == null)
+                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Korisnicki nalog sa ID-em {id} nije pronadjen.");
+
+            foreach (var roleId in request.Roles)
+            {
+                if (!await _dbContext.Roles.AnyAsync(x => x.Id == roleId))
+                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Rola sa ID-em {roleId} nije pronadjena");
+                if (await _dbContext.RolesKorisnickiNalozi.AnyAsync(x => x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId))
+                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, $"Korisnik sa ID-em {id} vec poseduje role sa ID-em {roleId}");
+            }
+
+            foreach (var roleId in request.Roles)
+            {
+                await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
+                {
+                    KorisnickiNalogId = korisnickiNalog.Id,
+                    RoleId = roleId
+                });
+            }
+            await _dbContext.SaveChangesAsync();
+
+            await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
+
+            return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+        }
+
+        public async Task<ServiceResult<KorisnickiNalogDtoLL>> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request)
+        {
+            var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
+
+            if (korisnickiNalog == null)
+                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Korisnicki nalog sa ID-em {id} nije pronadjen.");
+
+            foreach (var roleId in request.Roles)
+            {
+                var roleKorisnickiNalog = await _dbContext.RolesKorisnickiNalozi.FirstOrDefaultAsync(x =>
+                    x.RoleId == roleId && korisnickiNalog.Id == x.KorisnickiNalogId);
+                if (roleKorisnickiNalog == null)
+                {
+                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, $"Korisnik sa ID-em {id} ne poseduje role sa ID-em {roleId}");
+                }
+
+                await Task.Run(() =>
+                {
+                    _dbContext.RolesKorisnickiNalozi.Remove(roleKorisnickiNalog);
+                });
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+            await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
             return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }

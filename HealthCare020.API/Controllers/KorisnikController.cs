@@ -1,12 +1,12 @@
-﻿using HealthCare020.Core.Entities;
+﻿using HealthCare020.API.Constants;
+using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using HealthCare020.API.Constants;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {
@@ -38,6 +38,34 @@ namespace HealthCare020.API.Controllers
             var result = await _korisnikService.ToggleLock(id, false);
 
             return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
+        }
+
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [HttpPost("{id}/roles")]
+        public async Task<IActionResult> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
+        {
+            var result = await _korisnikService.AddInRoles(id, request);
+
+            if (!result.Succeeded)
+            {
+                return WithStatusCode(result.StatusCode, result.Message);
+            }
+
+            return Ok(result.Data);
+        }
+
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [HttpDelete("{id}/roles")]
+        public async Task<IActionResult> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request)
+        {
+            var result = await _korisnikService.RemoveFromRoles(id, request);
+
+            if (!result.Succeeded)
+            {
+                return WithStatusCode(result.StatusCode, result.Message);
+            }
+
+            return Ok(result.Data);
         }
     }
 }
