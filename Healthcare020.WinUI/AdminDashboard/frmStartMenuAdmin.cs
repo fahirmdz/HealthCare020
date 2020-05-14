@@ -111,7 +111,6 @@ namespace Healthcare020.WinUI.AdminDashboard
             if (frmUsers != null)
             {
                 OpenChildForm(frmUsers.Instance);
-                SetClickEventToCloseUserMenu(frmUsers.Controls);
             }
             else
             {
@@ -150,7 +149,7 @@ namespace Healthcare020.WinUI.AdminDashboard
             lblTitleChildForm.Text = "Home";
         }
 
-        private void OpenChildForm(Form childForm)
+        public void OpenChildForm(Form childForm)
         {
             if (childForm == currentChildForm)
                 return;
@@ -170,6 +169,8 @@ namespace Healthcare020.WinUI.AdminDashboard
             childForm.BringToFront();
             lblTitleChildForm.Text = childForm.Text;
             childForm.Show();
+            SetClickEventToCloseUserMenu(childForm.Controls);
+
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)

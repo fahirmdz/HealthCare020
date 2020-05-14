@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -12,5 +13,7 @@ namespace HealthCare020.Services.Interfaces
     {
         Task<KorisnickiNalogDtoLL> Authenticate(string username, string password);
         Task<ServiceResult<KorisnickiNalogDtoLL>> ToggleLock(int id, bool isForLockout, DateTime? until = null);
+        Task<ServiceResult<KorisnickiNalogDtoLL>> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request);
+        Task<ServiceResult<KorisnickiNalogDtoLL>> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request);
     }
 }

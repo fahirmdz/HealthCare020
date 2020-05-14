@@ -7,15 +7,25 @@ namespace Healthcare020.WinUI.Dialogs
 {
     public partial class dlgError : Form
     {
-        public dlgError()
+        private static dlgError _instance = null;
+
+        private dlgError()
         {
-            InitializeComponent();
             InitializeComponent();
             this.Opacity = 50;
             this.FormBorderStyle = FormBorderStyle.None;
-            pnlBody.BackColor = Color.FromArgb(
-                245, 245, 245
-            );
+            var mainFormSize = MainForm.Instance.Size;
+            this.Size=new Size(mainFormSize.Width-14,mainFormSize.Height-14);
+        }
+
+        public new static void ShowDialog()
+        {
+            if (_instance == null || _instance.IsDisposed)
+            {
+                _instance=new dlgError();
+            }
+
+            ((Form) _instance).ShowDialog();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -40,9 +50,9 @@ namespace Healthcare020.WinUI.Dialogs
 
         protected override async void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-            await Task.Delay(1000);
+            await Task.Delay(1500);
             Close();
+            Dispose();
         }
     }
 }

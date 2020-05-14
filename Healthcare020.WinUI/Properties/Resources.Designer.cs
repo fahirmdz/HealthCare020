@@ -61,12 +61,57 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lozinke se ne podudaraju.
+        /// </summary>
+        public static string DifferentPasswords {
+            get {
+                return ResourceManager.GetString("DifferentPasswords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Novi korisnički nalog.
+        /// </summary>
+        public static string frmNewUser {
+            get {
+                return ResourceManager.GetString("frmNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administratorski meni.
+        /// </summary>
+        public static string frmStartMenuAdmin {
+            get {
+                return ResourceManager.GetString("frmStartMenuAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korisnički nalozi.
+        /// </summary>
+        public static string frmUsers {
+            get {
+                return ResourceManager.GetString("frmUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon Healthcare020_Icon {
             get {
                 object obj = ResourceManager.GetObject("Healthcare020_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obavezno polje.
+        /// </summary>
+        public static string RequiredField {
+            get {
+                return ResourceManager.GetString("RequiredField", resourceCulture);
             }
         }
     }

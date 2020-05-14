@@ -29,7 +29,7 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpPut("{id}")]
@@ -39,7 +39,7 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpDelete("{id}")]

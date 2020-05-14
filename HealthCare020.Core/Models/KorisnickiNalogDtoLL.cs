@@ -4,6 +4,6 @@ namespace HealthCare020.Core.Models
 {
     public class KorisnickiNalogDtoLL:KorisnickiNalogDto
     {
-        public ICollection<int> Roles { get; set; }=new List<int>();
+        public List<int> Roles { get; set; }
     }
 }

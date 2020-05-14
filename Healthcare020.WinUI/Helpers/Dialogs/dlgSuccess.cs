@@ -1,13 +1,15 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Healthcare020.WinUI.Dialogs
+namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    public partial class dlgPropmpt : Form
+    public partial class dlgSuccess : Form
     {
-        private static dlgPropmpt _instance = null;
+        private static dlgSuccess _instance = null;
 
-        private dlgPropmpt()
+        private dlgSuccess()
         {
             InitializeComponent();
             this.Opacity = 50;
@@ -16,17 +18,15 @@ namespace Healthcare020.WinUI.Dialogs
             this.FormBorderStyle = FormBorderStyle.None;
         }
 
-        public new static dlgPropmpt ShowDialog()
+        public new static void ShowDialog()
         {
             if (_instance == null || _instance.IsDisposed)
             {
-                _instance = new dlgPropmpt();
+                _instance = new dlgSuccess();
             }
 
-            ((Form)_instance).ShowDialog();
+            ((Form) _instance).ShowDialog();
             _instance.BringToFront();
-
-            return _instance;
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -37,21 +37,17 @@ namespace Healthcare020.WinUI.Dialogs
             }
         }
 
-        private void dlgPropmpt_Load(object sender, System.EventArgs e)
+        private async void dlgSuccess_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Fill;
-            this.CenterToParent();
-            this.BringToFront();
+            await Task.Delay(1500);
+            Close();
+            Dispose();
         }
 
-        private void dlgPropmpt_Shown(object sender, System.EventArgs e)
+        private void dlgSuccess_Shown(object sender, EventArgs e)
         {
             pnlBody.PointToScreen(new Point(Width / 2, Height / 2));
-        }
-
-        private async void btnYes_Click(object sender, System.EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
         }
     }
 }
