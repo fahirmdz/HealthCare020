@@ -43,9 +43,9 @@
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.pnlBody.Controls.Add(this.label1);
             this.pnlBody.Controls.Add(this.icnSuccess);
-            this.pnlBody.Location = new System.Drawing.Point(236, 123);
+            this.pnlBody.Location = new System.Drawing.Point(327, 165);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(358, 195);
+            this.pnlBody.Size = new System.Drawing.Size(371, 209);
             this.pnlBody.TabIndex = 1;
             // 
             // label1
@@ -54,7 +54,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label1.Location = new System.Drawing.Point(136, 128);
+            this.label1.Location = new System.Drawing.Point(143, 128);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 29);
             this.label1.TabIndex = 1;
@@ -67,7 +67,7 @@
             this.icnSuccess.IconChar = FontAwesome.Sharp.IconChar.CheckCircle;
             this.icnSuccess.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(184)))), ((int)(((byte)(92)))));
             this.icnSuccess.IconSize = 98;
-            this.icnSuccess.Location = new System.Drawing.Point(138, 27);
+            this.icnSuccess.Location = new System.Drawing.Point(145, 27);
             this.icnSuccess.Name = "icnSuccess";
             this.icnSuccess.Size = new System.Drawing.Size(109, 98);
             this.icnSuccess.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -78,7 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1012, 562);
             this.Controls.Add(this.pnlBody);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "dlgSuccess";

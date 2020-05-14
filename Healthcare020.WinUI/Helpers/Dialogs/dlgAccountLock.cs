@@ -14,7 +14,9 @@ namespace Healthcare020.WinUI.Dialogs
             InitializeComponent();
             this.Opacity = 50;
             this.FormBorderStyle = FormBorderStyle.None;
-            var size = MainForm.Instance.Size;
+            var mainFormSize = MainForm.Instance.Size;
+            this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
+
             cmbBrojSati.Items.Add("2");
             cmbBrojSati.Items.Add("6");
             cmbBrojSati.Items.Add("18");
@@ -27,7 +29,7 @@ namespace Healthcare020.WinUI.Dialogs
                 _instance = new dlgAccountLock();
             }
 
-            ShowDialog();
+            ((Form)_instance).ShowDialog();
             _instance.BringToFront();
 
             return _instance;

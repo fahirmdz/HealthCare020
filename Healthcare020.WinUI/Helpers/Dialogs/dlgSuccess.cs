@@ -13,11 +13,9 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         {
             InitializeComponent();
             this.Opacity = 50;
-            this.Dock = DockStyle.Fill;
+            var mainFormSize = MainForm.Instance.Size;
+            this.Size=new Size(mainFormSize.Width-14,mainFormSize.Height-14);
             this.FormBorderStyle = FormBorderStyle.None;
-            pnlBody.BackColor = Color.FromArgb(
-                245, 245, 245
-            );
         }
 
         public new static void ShowDialog()
@@ -28,6 +26,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             }
 
             ((Form) _instance).ShowDialog();
+            _instance.BringToFront();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -40,9 +39,8 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private async void dlgSuccess_Load(object sender, EventArgs e)
         {
-            this.BringToFront();
-            base.OnLoad(e);
-            await Task.Delay(1000);
+            this.Dock = DockStyle.Fill;
+            await Task.Delay(1500);
             Close();
             Dispose();
         }

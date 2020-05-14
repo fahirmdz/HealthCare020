@@ -1,11 +1,11 @@
-﻿using System;
-using Flurl.Http;
+﻿using Flurl.Http;
 using Flurl.Http.Content;
 using Healthcare020.WinUI.Exceptions;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Models;
 using HealthCare020.Core.ResponseModels;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -33,7 +33,7 @@ namespace Healthcare020.WinUI.Services
             }
         }
 
-        private void RevertToBaseRequest(object resourceParameters=null)
+        private void RevertToBaseRequest(object resourceParameters = null)
         {
             if (resourceParameters != null)
             {
@@ -43,8 +43,20 @@ namespace Healthcare020.WinUI.Services
             request.Url = BaseUrl;
         }
 
-        public async Task<APIServiceResult<List<T>>> Get<T>(object resourceParameters = null)
+        /// <summary>
+        /// GET request to the API
+        /// </summary>
+        /// <typeparam name="T">Type of return data</typeparam>
+        /// <param name="resourceParameters">Resource parameters that will be sent as query string params</param>
+        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
+        /// <returns></returns>
+        public async Task<APIServiceResult<List<T>>> Get<T>(object resourceParameters = null, string pathToAppend = "")
         {
+            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            {
+                request.Url.AppendPathSegment(pathToAppend);
+            }
+
             var response = await request.SetQueryParams(resourceParameters).GetAsync();
             RevertToBaseRequest(resourceParameters);
 
@@ -72,10 +84,52 @@ namespace Healthcare020.WinUI.Services
             };
         }
 
-        public async Task<APIServiceResult<T>> Update<T>(int id, object dtoForUpdate)
+        /// <summary>
+        /// POST request to the API
+        /// </summary>
+        /// <typeparam name="T">Type of return data</typeparam>
+        /// <param name="dtoForCreation">Data Transfer Object for creating new entity</param>
+        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
+        public async Task<APIServiceResult<T>> Post<T>(object dtoForCreation, string pathToAppend = "")
+        {
+            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            {
+                request.Url.AppendPathSegment(pathToAppend);
+            }
+            try
+            {
+                var response = await request.PostJsonAsync(dtoForCreation);
+                RevertToBaseRequest();
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return new APIServiceResult<T>(response.StatusCode);
+                }
+                var headers = response.Headers;
+
+                var result = await response.Content.ReadAsAsync<T>();
+                return new APIServiceResult<T>(result);
+            }
+            catch (Exception ex)
+            {
+                return APIServiceResult<T>.BadRequest;
+            }
+        }
+
+        /// <summary>
+        /// UPDATE request to the API
+        /// </summary>
+        /// <typeparam name="T">Type of return data</typeparam>
+        /// <param name="id">Unique identifier of entity that will be updated</param>
+        /// <param name="dtoForUpdate">Data Transfer Object for updating entity</param>
+        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
+        public async Task<APIServiceResult<T>> Update<T>(int id, object dtoForUpdate, string pathToAppend = "")
         {
             request.Url.AppendPathSegment(id);
-
+            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            {
+                request.Url.AppendPathSegment(pathToAppend);
+            }
             try
             {
                 var response = await request.PutJsonAsync(dtoForUpdate);
@@ -96,10 +150,20 @@ namespace Healthcare020.WinUI.Services
             }
         }
 
-        public async Task<APIServiceResult<T>> PartiallyUpdate<T>(int id, object patchDocument)
+        /// <summary>
+        /// PATCH request to the API
+        /// </summary>
+        /// <typeparam name="T">Type of return data</typeparam>
+        /// <param name="id">Unique identifier of entity that will be partially updated</param>
+        /// <param name="patchDocument">JSON patch document for updating entity</param>
+        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
+        public async Task<APIServiceResult<T>> PartiallyUpdate<T>(int id, object patchDocument, string pathToAppend = "")
         {
             request.Url.AppendPathSegment(id);
-
+            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            {
+                request.Url.AppendPathSegment(pathToAppend);
+            }
             HttpContent content = new CapturedJsonContent(JsonConvert.SerializeObject(patchDocument));
 
             var response = await request.PatchJsonAsync(content);
@@ -114,9 +178,19 @@ namespace Healthcare020.WinUI.Services
             return new APIServiceResult<T>(result);
         }
 
-        public async Task<APIServiceResult<T>> Delete<T>(int id)
+        /// <summary>
+        /// DELETE request to the API
+        /// </summary>
+        /// <typeparam name="T">Type of return data</typeparam>
+        /// <param name="id">Unique identifier of entity that will be partially updated</param>
+        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
+        public async Task<APIServiceResult<T>> Delete<T>(int id, string pathToAppend = "")
         {
             request.Url.AppendPathSegment(id);
+            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            {
+                request.Url.AppendPathSegment(pathToAppend);
+            }
 
             var response = await request.DeleteAsync();
             RevertToBaseRequest();
@@ -125,7 +199,9 @@ namespace Healthcare020.WinUI.Services
                 return new APIServiceResult<T>(response.StatusCode);
             }
 
-            return APIServiceResult<T>.OK;
+            var result = await response.Content?.ReadAsAsync<T>();
+
+            return result != null ? new APIServiceResult<T>(result) : APIServiceResult<T>.OK;
         }
     }
 }

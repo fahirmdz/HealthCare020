@@ -1,22 +1,27 @@
-﻿using Healthcare020.WinUI.Dialogs;
+﻿using Healthcare020.WinUI.CustomElements;
+using Healthcare020.WinUI.Dialogs;
 using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCare020.Core.Request;
-using Healthcare020.WinUI.CustomElements;
 
 namespace Healthcare020.WinUI.AdminDashboard
 {
     public partial class frmUsers : Form
     {
         private static frmUsers _instance;
-        private APIService _apiServiceKorisnici;
-        private PanelCheckInternetConnection _internetError;
+        private readonly APIService _apiServiceKorisnici;
+        private readonly PanelCheckInternetConnection _internetError;
+
+        private IBindingList _korisniciForDgrv;
         private int _currentDgrvPage = 1;
 
         public static frmUsers Instance
@@ -39,6 +44,10 @@ namespace Healthcare020.WinUI.AdminDashboard
             InitializeComponent();
             MainForm.Instance.SetCopyrightPanelColor(Color.FromArgb(240, 240, 240));
             _apiServiceKorisnici = new APIService("korisnici");
+            _korisniciForDgrv = new BindingSource();
+            this.Text = Properties.Resources.frmUsers;
+
+            //Main data grid view settings
             dgrvKorisnickiNalozi.EnableHeadersVisualStyles = false;
             dgrvKorisnickiNalozi.ReadOnly = false;
             dgrvKorisnickiNalozi.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -48,12 +57,15 @@ namespace Healthcare020.WinUI.AdminDashboard
             dgrvKorisnickiNalozi.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgrvKorisnickiNalozi.AutoGenerateColumns = false;
             dgrvKorisnickiNalozi.RowCount = 8;
+            btnPrevPage.Enabled = false;
+
+            //Tool tips
             this.toolTip.SetToolTip(btnPrevPage, "Previous page");
             this.toolTip.SetToolTip(btnNextPage, "Next page");
 
             if (!ConnectionCheck.CheckForInternetConnection())
             {
-                pnlBody.Hide(); 
+                pnlBody.Hide();
                 _internetError = new PanelCheckInternetConnection(this);
                 _internetError.Show();
                 _internetError.BringToFront();
@@ -73,19 +85,26 @@ namespace Healthcare020.WinUI.AdminDashboard
             }
         }
 
-        private async Task LoadData(int pageSize = 8, int pageNumber = 1)
+        private async Task LoadData(int pageSize = 8, int pageNumber = 1, string searchParameter = "")
         {
-            Cursor = Cursors.WaitCursor;
+            Application.UseWaitCursor = true;
 
             var result = await _apiServiceKorisnici
-                .Get<KorisnickiNalogDtoLL>(new KorisnickiNalogResourceParameters { PageSize = pageSize, PageNumber = pageNumber });
+                .Get<KorisnickiNalogDtoLL>(new KorisnickiNalogResourceParameters
+                {
+                    PageSize = pageSize,
+                    PageNumber = pageNumber,
+                    Username = string.IsNullOrWhiteSpace(searchParameter) ? null : searchParameter
+                });
 
-            dgrvKorisnickiNalozi.DataSource = result.Data;
+            _korisniciForDgrv = new BindingList<KorisnickiNalogDtoLL>(result.Data);
+            dgrvKorisnickiNalozi.DataSource = _korisniciForDgrv;
 
-            if (_currentDgrvPage == result.PaginationMetadata.TotalPages)
-                btnNextPage.Enabled = false;
+            btnNextPage.Enabled = _currentDgrvPage != result.PaginationMetadata.TotalPages;
+            btnPrevPage.Enabled = _currentDgrvPage != 1;
 
-            Cursor = Cursors.Default;
+            Application.UseWaitCursor = false;
+            dgrvKorisnickiNalozi.Cursor = this.Cursor;
         }
 
         private async void frmUsers_Load(object sender, EventArgs e)
@@ -137,7 +156,29 @@ namespace Healthcare020.WinUI.AdminDashboard
 
                 if (promptDialog?.DialogResult == DialogResult.OK)
                 {
-                   
+                    APIServiceResult<KorisnickiNalogDtoLL> result = null;
+
+                    if (isForLockout)
+                    {
+                        result = await _apiServiceKorisnici.Update<KorisnickiNalogDtoLL>(korisnik.Id, new KorisnickiNalogLockUpsertRequest
+                        {
+                            Until = until.Value
+                        }, "lock");
+                    }
+                    else
+                    {
+                        result = await _apiServiceKorisnici.Delete<KorisnickiNalogDtoLL>(korisnik.Id, "lock");
+                    }
+
+                    if (result.Succeeded)
+                    {
+                        korisnik.LockedOut = result.Data.LockedOut;
+                        dlgSuccess.ShowDialog();
+                    }
+                    else
+                    {
+                        dlgError.ShowDialog();
+                    }
                 }
             }
         }
@@ -157,6 +198,16 @@ namespace Healthcare020.WinUI.AdminDashboard
                     e.Value = isLockedOut.Value ? "Otključaj" : "Zaključaj";
                 }
             }
+        }
+
+        private async void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            await LoadData(searchParameter: string.IsNullOrWhiteSpace(txtSearch.Text) ? string.Empty : txtSearch.Text);
+        }
+
+        private void btnNewUser_Click(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmNewUser.Instance);
         }
     }
 }

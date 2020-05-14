@@ -23,7 +23,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
-        [HttpPost("{id}/lock")]
+        [HttpPut("{id}/lock")]
         public async Task<IActionResult> Lock(int id, KorisnickiNalogLockUpsertRequest request)
         {
             var result = await _korisnikService.ToggleLock(id, true, request.Until);
@@ -41,7 +41,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
-        [HttpPost("{id}/roles")]
+        [HttpPut("{id}/roles")]
         public async Task<IActionResult> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
         {
             var result = await _korisnikService.AddInRoles(id, request);

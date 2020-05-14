@@ -11,10 +11,9 @@ namespace Healthcare020.WinUI.Dialogs
         {
             InitializeComponent();
             this.Opacity = 50;
+            var mainFormSize = MainForm.Instance.Size;
+            this.Size=new Size(mainFormSize.Width-14,mainFormSize.Height-14);
             this.FormBorderStyle = FormBorderStyle.None;
-            pnlBody.BackColor = Color.FromArgb(
-                245, 245, 245
-            );
         }
 
         public new static dlgPropmpt ShowDialog()
@@ -24,7 +23,7 @@ namespace Healthcare020.WinUI.Dialogs
                 _instance = new dlgPropmpt();
             }
 
-            ShowDialog();
+            ((Form)_instance).ShowDialog();
             _instance.BringToFront();
 
             return _instance;

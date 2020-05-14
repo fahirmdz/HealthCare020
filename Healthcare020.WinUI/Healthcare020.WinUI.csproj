@@ -121,6 +121,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboard\frmNewUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\frmNewUser.Designer.cs">
+      <DependentUpon>frmNewUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\frmUsers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     <Compile Include="AdminDashboard\frmStartMenuAdmin.Designer.cs">
       <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminDashboard\frmNewUser.resx">
+      <DependentUpon>frmNewUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminDashboard\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>

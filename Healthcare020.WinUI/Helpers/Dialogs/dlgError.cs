@@ -14,9 +14,8 @@ namespace Healthcare020.WinUI.Dialogs
             InitializeComponent();
             this.Opacity = 50;
             this.FormBorderStyle = FormBorderStyle.None;
-            pnlBody.BackColor = Color.FromArgb(
-                245, 245, 245
-            );
+            var mainFormSize = MainForm.Instance.Size;
+            this.Size=new Size(mainFormSize.Width-14,mainFormSize.Height-14);
         }
 
         public new static void ShowDialog()
@@ -51,8 +50,7 @@ namespace Healthcare020.WinUI.Dialogs
 
         protected override async void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-            await Task.Delay(1000);
+            await Task.Delay(1500);
             Close();
             Dispose();
         }
