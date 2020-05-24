@@ -1,33 +1,36 @@
 ﻿using Healthcare020.WinUI.Dialogs;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using System;
-using System.Linq;
-using System.Windows.Forms;
 using MaterialSkin.Controls;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.AdminDashboard
 {
     public partial class frmNewUser : Form
     {
         private static frmNewUser _instance = null;
-        private readonly APIService _korisniciAPIService;
+        private readonly APIService _apiService;
 
         private frmNewUser()
         {
             InitializeComponent();
-            _korisniciAPIService = new APIService("korisnici");
+            _apiService = new APIService();
 
             this.Text = Properties.Resources.frmNewUser;
             foreach (var control in Controls.OfType<MaterialSingleLineTextField>())
             {
-                errors.SetIconPadding(control,10);
+                errors.SetIconPadding(control, 10);
             }
             foreach (var control in Controls.OfType<ComboBox>())
             {
-                errors.SetIconPadding(control,10);
+                errors.SetIconPadding(control, 10);
             }
         }
 
@@ -60,7 +63,7 @@ namespace Healthcare020.WinUI.AdminDashboard
                     ConfirmPassword = txtConfirmPassword.Text
                 };
 
-                var result = await _korisniciAPIService.Post<KorisnickiNalogDtoLL>(newUser);
+                var result = await _apiService.Post<KorisnickiNalogDtoLL>(newUser);
 
                 if (result.Succeeded)
                 {
@@ -82,9 +85,9 @@ namespace Healthcare020.WinUI.AdminDashboard
                 return false;
             }
 
-            if (cmbImePrezimeStacOd.SelectedIndex == -1)
+            if (cmbImePrezime.SelectedIndex == -1)
             {
-                errors.SetError(cmbImePrezimeStacOd, Properties.Resources.RequiredField);
+                errors.SetError(cmbImePrezime, Properties.Resources.RequiredField);
                 return false;
             }
 
@@ -111,6 +114,58 @@ namespace Healthcare020.WinUI.AdminDashboard
 
         private void frmNewUser_Load(object sender, EventArgs e)
         {
+            var typesOfUsers = new List<string>
+            {
+                "Doktor", "Medicinski tehnicar", "Radnik na prijemu"
+            };
+
+            cmbVrstaRadnika.DataSource = typesOfUsers;
         }
+
+        private async void cmbVrstaRadnika_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbVrstaRadnika.SelectedIndex == -1)
+                return;
+
+            List<RadnikDtoEL> radnici;
+
+            //switch (cmbVrstaRadnika.SelectedIndex)+
+            //{
+            //    case 0:
+            //        {
+            //            _apiService.AddRoute(Routes.DoktoriRoute);
+
+            //            break;
+            //        }
+            //    case 1:
+            //        {
+            //            _apiService.AddRoute(Routes.MedicinskiTehnicariRoute);
+            //            radnici = await GetRadnici<List<MedicinskiTehnicarDtoEL>>() as List<RadnikDtoEL>;
+            //            break;
+            //        }
+            //    case 2:
+            //        {
+            //            _apiService.AddRoute(Routes.RadniciPrijemRoute);
+            //            radnici = await GetRadnici<List<RadnikPrijemDtoEL>>() as List<RadnikDtoEL>;
+            //            break;
+            //        }
+            //}
+
+            //var listForCmbImePrezime = radnici.Select(x => new
+            //{
+            //    Id = x.
+            //})
+        }
+
+        //private async Task<bool> SetCmbImePrezime<T>()
+        //{
+        //    var result = await _apiService.Get<List<T>>();
+        //    if (!result.Succeeded)
+        //        return false;
+
+        //    var radnici = result.Data;
+
+        //    c
+        //}
     }
 }

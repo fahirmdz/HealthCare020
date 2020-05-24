@@ -7,10 +7,11 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using HealthCare020.Core.Constants;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("api/korisnici")]
+    [Route("api/"+Routes.KorisniciRoute)]
     public class KorisnikController : BaseCRUDController<KorisnickiNalog, KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto>
     {
         private IKorisnikService _korisnikService;

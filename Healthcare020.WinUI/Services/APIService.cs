@@ -20,7 +20,7 @@ namespace Healthcare020.WinUI.Services
         private IFlurlRequest request;
         private string BaseUrl;
 
-        public APIService(string route)
+        public APIService(string route="")
         {
             try
             {
@@ -41,6 +41,14 @@ namespace Healthcare020.WinUI.Services
             }
 
             request.Url = BaseUrl;
+        }
+
+        /// <summary>
+        /// Add route to the base request for the API. The route will be removed after the first request.
+        /// </summary>
+        public void AddRoute(string route)
+        {
+            request.Url.AppendPathSegments(route);
         }
 
         /// <summary>

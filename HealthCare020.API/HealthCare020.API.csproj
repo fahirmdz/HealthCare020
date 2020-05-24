@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HealthCare020.Core\HealthCare020.Core.csproj" />
     <ProjectReference Include="..\HealthCare020.Services\HealthCare020.Services.csproj" />
   </ItemGroup>
 
