@@ -4,7 +4,6 @@ using Healthcare020.OAuth.Validators;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
 using IdentityServer4.Services;
-using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -17,22 +16,27 @@ namespace Healthcare020.OAuth
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            Configuration = configuration;
+            Environment = Environment;
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddDbContext<HealthCare020DbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(true));
 
             var cors = new DefaultCorsPolicyService(new Logger<DefaultCorsPolicyService>(new LoggerFactory()))
             {
-                AllowedOrigins = {"https://localhost:5001"}
+                AllowedOrigins = { "https://localhost:5001" }
             };
             services.AddSingleton<ICorsPolicyService>(cors);
 

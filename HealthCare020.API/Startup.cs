@@ -21,12 +21,19 @@ namespace HealthCare020.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            Configuration = configuration;
+            Environment = Environment;
+
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json",optional:true,reloadOnChange:true)
+                .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json",optional:true,reloadOnChange:true);
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {

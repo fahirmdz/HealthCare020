@@ -34,7 +34,7 @@
             this.cmbVrstaRadnika = new System.Windows.Forms.ComboBox();
             this.lblVrstaRadnika = new MaterialSkin.Controls.MaterialLabel();
             this.lblImePrezimeOdeljenje = new MaterialSkin.Controls.MaterialLabel();
-            this.cmbImePrezimeStacOd = new System.Windows.Forms.ComboBox();
+            this.cmbImePrezime = new System.Windows.Forms.ComboBox();
             this.lblUsername = new MaterialSkin.Controls.MaterialLabel();
             this.txtUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblPassword = new MaterialSkin.Controls.MaterialLabel();
@@ -75,11 +75,14 @@
             // cmbVrstaRadnika
             // 
             this.cmbVrstaRadnika.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbVrstaRadnika.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbVrstaRadnika.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmbVrstaRadnika.FormattingEnabled = true;
             this.cmbVrstaRadnika.Location = new System.Drawing.Point(168, 91);
             this.cmbVrstaRadnika.Name = "cmbVrstaRadnika";
-            this.cmbVrstaRadnika.Size = new System.Drawing.Size(178, 21);
+            this.cmbVrstaRadnika.Size = new System.Drawing.Size(178, 26);
             this.cmbVrstaRadnika.TabIndex = 1;
+            this.cmbVrstaRadnika.SelectedIndexChanged += new System.EventHandler(this.cmbVrstaRadnika_SelectedIndexChanged);
             // 
             // lblVrstaRadnika
             // 
@@ -103,18 +106,19 @@
             this.lblImePrezimeOdeljenje.Location = new System.Drawing.Point(424, 56);
             this.lblImePrezimeOdeljenje.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblImePrezimeOdeljenje.Name = "lblImePrezimeOdeljenje";
-            this.lblImePrezimeOdeljenje.Size = new System.Drawing.Size(257, 19);
+            this.lblImePrezimeOdeljenje.Size = new System.Drawing.Size(103, 19);
             this.lblImePrezimeOdeljenje.TabIndex = 3;
-            this.lblImePrezimeOdeljenje.Text = "Ime i prezime - Stacionarno odeljenje";
+            this.lblImePrezimeOdeljenje.Text = "Ime i prezime ";
             // 
-            // cmbImePrezimeStacOd
+            // cmbImePrezime
             // 
-            this.cmbImePrezimeStacOd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbImePrezimeStacOd.FormattingEnabled = true;
-            this.cmbImePrezimeStacOd.Location = new System.Drawing.Point(438, 91);
-            this.cmbImePrezimeStacOd.Name = "cmbImePrezimeStacOd";
-            this.cmbImePrezimeStacOd.Size = new System.Drawing.Size(253, 21);
-            this.cmbImePrezimeStacOd.TabIndex = 4;
+            this.cmbImePrezime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbImePrezime.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbImePrezime.FormattingEnabled = true;
+            this.cmbImePrezime.Location = new System.Drawing.Point(438, 91);
+            this.cmbImePrezime.Name = "cmbImePrezime";
+            this.cmbImePrezime.Size = new System.Drawing.Size(253, 26);
+            this.cmbImePrezime.TabIndex = 4;
             // 
             // lblUsername
             // 
@@ -321,7 +325,7 @@
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblUsername);
-            this.Controls.Add(this.cmbImePrezimeStacOd);
+            this.Controls.Add(this.cmbImePrezime);
             this.Controls.Add(this.lblImePrezimeOdeljenje);
             this.Controls.Add(this.lblVrstaRadnika);
             this.Controls.Add(this.cmbVrstaRadnika);
@@ -342,7 +346,7 @@
         private System.Windows.Forms.ComboBox cmbVrstaRadnika;
         private MaterialSkin.Controls.MaterialLabel lblVrstaRadnika;
         private MaterialSkin.Controls.MaterialLabel lblImePrezimeOdeljenje;
-        private System.Windows.Forms.ComboBox cmbImePrezimeStacOd;
+        private System.Windows.Forms.ComboBox cmbImePrezime;
         private MaterialSkin.Controls.MaterialLabel lblUsername;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtUsername;
         private MaterialSkin.Controls.MaterialLabel lblPassword;
