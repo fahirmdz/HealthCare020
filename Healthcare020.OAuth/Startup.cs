@@ -16,9 +16,9 @@ namespace Healthcare020.OAuth
 {
     public class Startup
     {
-        public Startup()
+        public Startup(IWebHostEnvironment env)
         {
-            Environment = Environment;
+            Environment = env;
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);

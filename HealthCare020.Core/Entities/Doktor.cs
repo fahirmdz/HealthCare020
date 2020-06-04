@@ -16,9 +16,10 @@ namespace HealthCare020.Core.Entities
         public int NaucnaOblastId { get; set; }
         public NaucnaOblast NaucnaOblast { get; set; }
 
-        public virtual ICollection<UputZaLecenje> UputiZaLecenje { get; set; }
-        public virtual string ImePrezime => Radnik.LicniPodaci.Ime + " " + Radnik.LicniPodaci.Prezime;
-
-        public virtual ICollection<DnevniIzvestaj> DnevniIzvestaji { get; set; }
+        public ICollection<ZahtevZaPregled> ZahteviZaPregled { get; set; }
+        public ICollection<Pregled> Pregledi { get; set; }
+        public ICollection<Uputnica> UputniceUputio { get; set; }
+        public ICollection<Uputnica> UputnicePrimio { get; set; }
+        public ICollection<LekarskoUverenje> LekarskaUverenja { get; set; }
     }
 }

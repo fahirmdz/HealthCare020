@@ -21,9 +21,9 @@ namespace HealthCare020.API
 {
     public class Startup
     {
-        public Startup()
+        public Startup(IWebHostEnvironment env)
         {
-            Environment = Environment;
+            Environment = env;
 
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json",optional:true,reloadOnChange:true)

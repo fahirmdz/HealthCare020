@@ -1,14 +1,12 @@
 ﻿using Healthcare020.WinUI.Dialogs;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.AdminDashboard
@@ -122,6 +120,8 @@ namespace Healthcare020.WinUI.AdminDashboard
             cmbVrstaRadnika.DataSource = typesOfUsers;
         }
 
+#pragma warning disable 1998
+
         private async void cmbVrstaRadnika_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbVrstaRadnika.SelectedIndex == -1)
@@ -156,6 +156,8 @@ namespace Healthcare020.WinUI.AdminDashboard
             //    Id = x.
             //})
         }
+
+#pragma warning restore 1998
 
         //private async Task<bool> SetCmbImePrezime<T>()
         //{
