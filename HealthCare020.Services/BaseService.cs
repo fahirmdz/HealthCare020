@@ -108,6 +108,7 @@ namespace HealthCare020.Services
             return new ServiceResult<dynamic>(PrepareDataForClient<TDto>(result, resourceParameters));
         }
 
+        #pragma warning disable 1998
         /// <summary>
         /// Filtering and pagination
         /// </summary>
@@ -116,7 +117,7 @@ namespace HealthCare020.Services
             //Apply pagination
             return PagedList<TEntity>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
-
+        #pragma warning restore 1998
         /// <summary>
         /// Mapping entities to the data type for a client
         /// </summary>

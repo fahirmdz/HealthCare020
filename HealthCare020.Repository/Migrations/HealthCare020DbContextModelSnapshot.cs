@@ -19,78 +19,6 @@ namespace HealthCare020.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HealthCare020.Core.Entities.CustomIzvestaj", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DatumVreme")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("GlukozaUKrvi")
-                        .HasColumnType("float");
-
-                    b.Property<int>("KrvniPritisakDonji")
-                        .HasColumnType("int");
-
-                    b.Property<int>("KrvniPritisakGornji")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MedicinskiTehnicarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PacijentId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("TelesnaTemperatura")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MedicinskiTehnicarId");
-
-                    b.HasIndex("PacijentId");
-
-                    b.ToTable("CustomIzvestaji");
-                });
-
-            modelBuilder.Entity("HealthCare020.Core.Entities.DnevniIzvestaj", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DatumVreme")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DoktorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OpisStanja")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.Property<int>("PacijentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ZdravstvenoStanjeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoktorId");
-
-                    b.HasIndex("PacijentId");
-
-                    b.HasIndex("ZdravstvenoStanjeId");
-
-                    b.ToTable("DnevniIzvestaji");
-                });
-
             modelBuilder.Entity("HealthCare020.Core.Entities.Doktor", b =>
                 {
                     b.Property<int>("Id")
@@ -188,6 +116,37 @@ namespace HealthCare020.Repository.Migrations
                     b.ToTable("KorisnickiNalozi");
                 });
 
+            modelBuilder.Entity("HealthCare020.Core.Entities.LekarskoUverenje", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("DoktorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OpisStanja")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<int>("PregledId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZdravstvenoStanjeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoktorId");
+
+                    b.HasIndex("PregledId");
+
+                    b.HasIndex("ZdravstvenoStanjeId");
+
+                    b.ToTable("LekarskaUverenja");
+                });
+
             modelBuilder.Entity("HealthCare020.Core.Entities.LicniPodaci", b =>
                 {
                     b.Property<int>("Id")
@@ -273,14 +232,36 @@ namespace HealthCare020.Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("LicniPodaciId")
+                    b.Property<int>("KorisnickiNalogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZdravstvenaKnjizicaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LicniPodaciId");
+                    b.HasIndex("KorisnickiNalogId");
+
+                    b.HasIndex("ZdravstvenaKnjizicaId");
 
                     b.ToTable("Pacijenti");
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.PacijentNaLecenju", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("StacionarnoOdeljenjeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StacionarnoOdeljenjeId");
+
+                    b.ToTable("PacijentiNaLecenju");
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.Poseta", b =>
@@ -290,22 +271,54 @@ namespace HealthCare020.Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("BrojTelefonaPosetioca")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DatumVreme")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PacijentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TokenPosetaId")
+                    b.Property<int>("PacijentNaLecenjuId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PacijentId");
-
-                    b.HasIndex("TokenPosetaId");
+                    b.HasIndex("PacijentNaLecenjuId");
 
                     b.ToTable("Posete");
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.Pregled", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DatumPregleda")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DoktorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsOdradjen")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PacijentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZahtevZaPregledId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoktorId");
+
+                    b.HasIndex("PacijentId");
+
+                    b.HasIndex("ZahtevZaPregledId");
+
+                    b.ToTable("Pregledi");
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.Radnik", b =>
@@ -405,31 +418,7 @@ namespace HealthCare020.Repository.Migrations
                     b.ToTable("StacionarnaOdeljenja");
                 });
 
-            modelBuilder.Entity("HealthCare020.Core.Entities.TokenPoseta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BrojPreostalihPoseta")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PacijentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PacijentId");
-
-                    b.ToTable("TokeniPoseta");
-                });
-
-            modelBuilder.Entity("HealthCare020.Core.Entities.UputZaLecenje", b =>
+            modelBuilder.Entity("HealthCare020.Core.Entities.Uputnica", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -439,16 +428,78 @@ namespace HealthCare020.Repository.Migrations
                     b.Property<DateTime>("DatumVreme")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Napomena")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PacijentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Razlog")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UpucenKodDoktoraId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UputioDoktorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PacijentId");
+
+                    b.HasIndex("UpucenKodDoktoraId");
+
+                    b.HasIndex("UputioDoktorId");
+
+                    b.ToTable("Uputnice");
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.ZahtevZaPregled", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DoktorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Napomena")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<int>("PacijentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UputnicaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoktorId");
+
+                    b.HasIndex("PacijentId");
+
+                    b.HasIndex("UputnicaId");
+
+                    b.ToTable("ZahteviZaPregled");
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.ZdravstvenaKnjizica", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("DoktorId")
                         .HasColumnType("int");
 
                     b.Property<int>("LicniPodaciId")
                         .HasColumnType("int");
-
-                    b.Property<string>("OpisStanja")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
 
                     b.HasKey("Id");
 
@@ -456,7 +507,7 @@ namespace HealthCare020.Repository.Migrations
 
                     b.HasIndex("LicniPodaciId");
 
-                    b.ToTable("UputiZaLecenje");
+                    b.ToTable("ZdravstvenaKnjizica");
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.ZdravstvenoStanje", b =>
@@ -473,42 +524,6 @@ namespace HealthCare020.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ZdravstvenaStanja");
-                });
-
-            modelBuilder.Entity("HealthCare020.Core.Entities.CustomIzvestaj", b =>
-                {
-                    b.HasOne("HealthCare020.Core.Entities.MedicinskiTehnicar", "MedicinskiTehnicar")
-                        .WithMany("CustomIzvestaji")
-                        .HasForeignKey("MedicinskiTehnicarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
-                        .WithMany("CustomIzvestaji")
-                        .HasForeignKey("PacijentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("HealthCare020.Core.Entities.DnevniIzvestaj", b =>
-                {
-                    b.HasOne("HealthCare020.Core.Entities.Doktor", "Doktor")
-                        .WithMany("DnevniIzvestaji")
-                        .HasForeignKey("DoktorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
-                        .WithMany("DnevniIzvestaji")
-                        .HasForeignKey("PacijentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HealthCare020.Core.Entities.ZdravstvenoStanje", "ZdravstvenoStanje")
-                        .WithMany()
-                        .HasForeignKey("ZdravstvenoStanjeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.Doktor", b =>
@@ -535,6 +550,25 @@ namespace HealthCare020.Repository.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HealthCare020.Core.Entities.LekarskoUverenje", b =>
+                {
+                    b.HasOne("HealthCare020.Core.Entities.Doktor", null)
+                        .WithMany("LekarskaUverenja")
+                        .HasForeignKey("DoktorId");
+
+                    b.HasOne("HealthCare020.Core.Entities.Pregled", "Pregled")
+                        .WithMany()
+                        .HasForeignKey("PregledId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.ZdravstvenoStanje", "ZdravstvenoStanje")
+                        .WithMany()
+                        .HasForeignKey("ZdravstvenoStanjeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HealthCare020.Core.Entities.LicniPodaci", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.Grad", "Grad")
@@ -555,23 +589,55 @@ namespace HealthCare020.Repository.Migrations
 
             modelBuilder.Entity("HealthCare020.Core.Entities.Pacijent", b =>
                 {
-                    b.HasOne("HealthCare020.Core.Entities.LicniPodaci", "LicniPodaci")
+                    b.HasOne("HealthCare020.Core.Entities.KorisnickiNalog", "KorisnickiNalog")
                         .WithMany()
-                        .HasForeignKey("LicniPodaciId")
+                        .HasForeignKey("KorisnickiNalogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.ZdravstvenaKnjizica", "ZdravstvenaKnjizica")
+                        .WithMany()
+                        .HasForeignKey("ZdravstvenaKnjizicaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.PacijentNaLecenju", b =>
+                {
+                    b.HasOne("HealthCare020.Core.Entities.StacionarnoOdeljenje", "StacionarnoOdeljenje")
+                        .WithMany()
+                        .HasForeignKey("StacionarnoOdeljenjeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.Poseta", b =>
                 {
-                    b.HasOne("HealthCare020.Core.Entities.Pacijent", null)
-                        .WithMany("Posete")
-                        .HasForeignKey("PacijentId");
+                    b.HasOne("HealthCare020.Core.Entities.PacijentNaLecenju", "PacijentNaLecenju")
+                        .WithMany()
+                        .HasForeignKey("PacijentNaLecenjuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.HasOne("HealthCare020.Core.Entities.TokenPoseta", "TokenPoseta")
-                        .WithMany("Posete")
-                        .HasForeignKey("TokenPosetaId")
-                        .OnDelete(DeleteBehavior.Restrict)
+            modelBuilder.Entity("HealthCare020.Core.Entities.Pregled", b =>
+                {
+                    b.HasOne("HealthCare020.Core.Entities.Doktor", "Doktor")
+                        .WithMany("Pregledi")
+                        .HasForeignKey("DoktorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
+                        .WithMany("Pregledi")
+                        .HasForeignKey("PacijentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.ZahtevZaPregled", "ZahtevZaPregled")
+                        .WithMany()
+                        .HasForeignKey("ZahtevZaPregledId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -620,27 +686,58 @@ namespace HealthCare020.Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HealthCare020.Core.Entities.TokenPoseta", b =>
+            modelBuilder.Entity("HealthCare020.Core.Entities.Uputnica", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
-                        .WithMany()
+                        .WithMany("Uputnice")
                         .HasForeignKey("PacijentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.Doktor", "UpucenKodDoktora")
+                        .WithMany("UputnicePrimio")
+                        .HasForeignKey("UpucenKodDoktoraId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.Doktor", "UputioDoktor")
+                        .WithMany("UputniceUputio")
+                        .HasForeignKey("UputioDoktorId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HealthCare020.Core.Entities.UputZaLecenje", b =>
+            modelBuilder.Entity("HealthCare020.Core.Entities.ZahtevZaPregled", b =>
                 {
                     b.HasOne("HealthCare020.Core.Entities.Doktor", "Doktor")
-                        .WithMany("UputiZaLecenje")
+                        .WithMany("ZahteviZaPregled")
                         .HasForeignKey("DoktorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.Pacijent", "Pacijent")
+                        .WithMany("ZahteviZaPregled")
+                        .HasForeignKey("PacijentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HealthCare020.Core.Entities.Uputnica", "Uputnica")
+                        .WithMany()
+                        .HasForeignKey("UputnicaId");
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.ZdravstvenaKnjizica", b =>
+                {
+                    b.HasOne("HealthCare020.Core.Entities.Doktor", "Doktor")
+                        .WithMany()
+                        .HasForeignKey("DoktorId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HealthCare020.Core.Entities.LicniPodaci", "LicniPodaci")
                         .WithMany()
                         .HasForeignKey("LicniPodaciId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

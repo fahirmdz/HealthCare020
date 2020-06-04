@@ -26,20 +26,6 @@ namespace HealthCare020.Services.Helpers
                         {nameof(DrzavaDto.PozivniBroj),new PropertyMappingValue(new List<string>(){{nameof(Drzava.PozivniBroj)}}) },
                     })
                 },
-                {new PropertyMapping<TokenPosetaDtoLL,TokenPoseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(TokenPosetaDtoLL.Value),new PropertyMappingValue(new List<string>(){nameof(TokenPoseta.Value)})},
-                        {nameof(TokenPosetaDtoLL.Id),new PropertyMappingValue(new List<string>(){{nameof(TokenPoseta.Id)}}) },
-                        {nameof(TokenPosetaDtoLL.PacijentId),new PropertyMappingValue(new List<string>(){{nameof(TokenPoseta.PacijentId)}}) }
-                    })
-                },
-                {new PropertyMapping<TokenPosetaDtoEL,TokenPoseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(TokenPosetaDtoEL.Value),new PropertyMappingValue(new List<string>(){nameof(TokenPoseta.Value)})},
-                        {nameof(TokenPosetaDtoEL.Id),new PropertyMappingValue(new List<string>(){{nameof(TokenPoseta.Id)}}) },
-                        {nameof(TokenPosetaDtoEL.Pacijent),new PropertyMappingValue(new List<string>(){{nameof(TokenPoseta.Pacijent)}}) }
-                    })
-                },
                 {new PropertyMapping<ZdravstvenoStanjeDto,ZdravstvenoStanje>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(ZdravstvenoStanjeDto.Opis),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenoStanje.Opis)})},
@@ -134,97 +120,14 @@ namespace HealthCare020.Services.Helpers
                         {nameof(KorisnickiNalogDtoEL.Roles),new PropertyMappingValue(new List<string>(){{nameof(KorisnickiNalog.RolesKorisnickiNalog)}}) }
                     })
                 },
-                {new PropertyMapping<UputZaLecenjeDtoLL,UputZaLecenje>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(UputZaLecenjeDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(UputZaLecenje.Id)})},
-                        {nameof(UputZaLecenjeDtoLL.DoktorId),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.DoktorId)}}) },
-                        {nameof(UputZaLecenjeDtoLL.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.LicniPodaciId)}}) },
-                        {nameof(UputZaLecenjeDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.DatumVreme)}}) },
-                        {nameof(UputZaLecenjeDtoLL.OpisStanja),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.OpisStanja)}}) }
-                    })
-                },
-                {new PropertyMapping<UputZaLecenjeDtoEL,UputZaLecenje>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(UputZaLecenjeDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(UputZaLecenje.Id)})},
-                        {nameof(UputZaLecenjeDtoEL.Doktor),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.Doktor)}}) },
-                        {nameof(UputZaLecenjeDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.LicniPodaci)}}) },
-                        {nameof(UputZaLecenjeDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.DatumVreme)}}) },
-                        {nameof(UputZaLecenjeDtoEL.OpisStanja),new PropertyMappingValue(new List<string>(){{nameof(UputZaLecenje.OpisStanja)}}) }
-                    })
-                },
                 {new PropertyMapping<PacijentDtoLL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(PacijentDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
-                        {nameof(PacijentDtoLL.LicniPodaciId),new PropertyMappingValue(new List<string>(){{nameof(Pacijent.LicniPodaci)}}) }
                     })
                 },
                 {new PropertyMapping<PacijentDtoEL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(PacijentDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
-                        {nameof(PacijentDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(Pacijent.LicniPodaci)}}) }
-                    })
-                },
-                {new PropertyMapping<PosetaDtoEL,Poseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(PosetaDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Poseta.Id)})},
-                        {nameof(PosetaDtoEL.TokenPoseta),new PropertyMappingValue(new List<string>(){{nameof(Poseta.TokenPoseta)}})},
-                        {nameof(PosetaDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(Poseta.DatumVreme)}})}
-                    })
-                },
-                {new PropertyMapping<PosetaDtoLL,Poseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(PosetaDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Poseta.Id)})},
-                        {nameof(PosetaDtoLL.TokenPosetaId),new PropertyMappingValue(new List<string>(){{nameof(Poseta.TokenPosetaId)}})},
-                        {nameof(PosetaDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(Poseta.DatumVreme)}})}
-                    })
-                },
-                {new PropertyMapping<CustomIzvestajDtoLL,CustomIzvestaj>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(CustomIzvestajDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(CustomIzvestaj.Id)})},
-                        {nameof(CustomIzvestajDtoLL.TelesnaTemperatura),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.TelesnaTemperatura)}})},
-                        {nameof(CustomIzvestajDtoLL.KrvniPritisakGornji),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.KrvniPritisakGornji)}})},
-                        {nameof(CustomIzvestajDtoLL.KrvniPritisakDonji),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.KrvniPritisakDonji)}})},
-                        {nameof(CustomIzvestajDtoLL.GlukozaUKrvi),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.GlukozaUKrvi)}})},
-                        {nameof(CustomIzvestajDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.DatumVreme)}})},
-                        {nameof(CustomIzvestajDtoLL.MedicinskiTehnicarId),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.MedicinskiTehnicarId)}})},
-                        {nameof(CustomIzvestajDtoLL.PacijentId),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.PacijentId)}})}
-                    })
-                },
-                {new PropertyMapping<CustomIzvestajDtoEL,CustomIzvestaj>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(CustomIzvestajDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(CustomIzvestaj.Id)})},
-                        {nameof(CustomIzvestajDtoEL.TelesnaTemperatura),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.TelesnaTemperatura)}})},
-                        {nameof(CustomIzvestajDtoEL.KrvniPritisakGornji),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.KrvniPritisakGornji)}})},
-                        {nameof(CustomIzvestajDtoEL.KrvniPritisakDonji),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.KrvniPritisakDonji)}})},
-                        {nameof(CustomIzvestajDtoEL.GlukozaUKrvi),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.GlukozaUKrvi)}})},
-                        {nameof(CustomIzvestajDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.DatumVreme)}})},
-                        {nameof(CustomIzvestajDtoEL.MedicinskiTehnicarImePrezime),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.MedicinskiTehnicar.Radnik.LicniPodaci.Ime)},{nameof(CustomIzvestaj.MedicinskiTehnicar.Radnik.LicniPodaci.Prezime)}})},
-                        {nameof(CustomIzvestajDtoEL.PacijentImePrezime),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.Pacijent.LicniPodaci.Ime)},{nameof(CustomIzvestaj.Pacijent.LicniPodaci.Prezime)}})},
-                        {nameof(CustomIzvestajDtoEL.PacijentId),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.PacijentId)}})},
-                        {nameof(CustomIzvestajDtoEL.MedicinskiTehnicarId),new PropertyMappingValue(new List<string>(){{nameof(CustomIzvestaj.MedicinskiTehnicarId)}})}
-                    })
-                },
-                {new PropertyMapping<DnevniIzvestajDtoLL,DnevniIzvestaj>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(DnevniIzvestajDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(DnevniIzvestaj.Id)})},
-                        {nameof(DnevniIzvestajDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.DatumVreme)}})},
-                        {nameof(DnevniIzvestajDtoLL.OpisStanja),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.OpisStanja)}})},
-                        {nameof(DnevniIzvestajDtoLL.PacijentId),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.PacijentId)}})},
-                        {nameof(DnevniIzvestajDtoLL.DoktorId),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.DoktorId)}})},
-                        {nameof(DnevniIzvestajDtoLL.ZdravstvenoStanjeId),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.ZdravstvenoStanjeId)}})},
-                    })
-                },
-                {new PropertyMapping<DnevniIzvestajDtoEL,DnevniIzvestaj>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
-                    {
-                        {nameof(DnevniIzvestajDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(DnevniIzvestaj.Id)})},
-                        {nameof(DnevniIzvestajDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.DatumVreme)}})},
-                        {nameof(DnevniIzvestajDtoEL.OpisStanja),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.OpisStanja)}})},
-                        {nameof(DnevniIzvestajDtoEL.Doktor),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.Doktor.Radnik.LicniPodaci.Ime)},{nameof(DnevniIzvestaj.Doktor.Radnik.LicniPodaci.Prezime)}})},
-                        {nameof(DnevniIzvestajDtoEL.Pacijent),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.Pacijent.LicniPodaci.Ime)},{nameof(DnevniIzvestaj.Pacijent.LicniPodaci.Prezime)}})},
-                        {nameof(DnevniIzvestajDtoEL.PacijentId),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.PacijentId)}})},
-                        {nameof(DnevniIzvestajDtoEL.DoktorId),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.DoktorId)}})},
-                        {nameof(DnevniIzvestajDtoEL.ZdravstvenoStanje),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.ZdravstvenoStanje.Opis)}})},
-                        {nameof(DnevniIzvestajDtoEL.ZdravstvenoStanjeId),new PropertyMappingValue(new List<string>(){{nameof(DnevniIzvestaj.ZdravstvenoStanjeId)}})},
                     })
                 }
             };

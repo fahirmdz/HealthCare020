@@ -3,18 +3,15 @@ using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
+using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Core.ServiceModels;
-using HealthCare020.Services.Helpers;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.Update;
 
 namespace HealthCare020.Services
 {
@@ -23,13 +20,13 @@ namespace HealthCare020.Services
         private readonly ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters,
             LicniPodaciUpsertDto, LicniPodaciUpsertDto> _licniPodaciService;
 
-        public PacijentService(IMapper mapper, 
+        public PacijentService(IMapper mapper,
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService,
             IHttpContextAccessor httpContextAccessor) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
         {
             _licniPodaciService = licniPodaciService;
         }
@@ -37,7 +34,8 @@ namespace HealthCare020.Services
         public override IQueryable<Pacijent> GetWithEagerLoad(int? id = null)
         {
             var result = _dbContext.Set<Pacijent>()
-                .Include(x => x.LicniPodaci)
+                .Include(x=>x.ZdravstvenaKnjizica)
+                .ThenInclude(x => x.LicniPodaci)
                 .ThenInclude(x => x.Grad)
                 .ThenInclude(x => x.Drzava)
                 .AsQueryable();
@@ -50,30 +48,10 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult<PacijentDtoLL>> Insert(PacijentUpsertDto dtoForCreation)
         {
-            var uputZaLecenjeFromDb = await _dbContext.Set<UputZaLecenje>().FindAsync(dtoForCreation.UputZaLecenjeId);
-
-            if (uputZaLecenjeFromDb == null)
-              return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound,$"Uput za lečenje sa ID-em {dtoForCreation.UputZaLecenjeId} nije pronadjen.");
-
-            if(await _dbContext.Set<Pacijent>().AnyAsync(x=>x.LicniPodaciId==uputZaLecenjeFromDb.LicniPodaciId))
-                return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound,"Pacijent je vec prijavljen na lecenje");
-
             var newEntity = new Pacijent
             {
-                LicniPodaciId = uputZaLecenjeFromDb.LicniPodaciId
             };
 
-            await _dbContext.AddAsync(newEntity);
-            await _dbContext.SaveChangesAsync();
-
-            var noviTokenPoseta = new TokenPoseta
-            {
-                Value = GenerateTokenPoseta(),
-                PacijentId = newEntity.Id
-            };
-
-            await _dbContext.AddAsync(noviTokenPoseta);
-            await _dbContext.SaveChangesAsync();
             return new ServiceResult<PacijentDtoLL>(_mapper.Map<PacijentDtoLL>(newEntity));
         }
 
@@ -82,7 +60,7 @@ namespace HealthCare020.Services
             var entity = await _dbContext.Set<Pacijent>().FindAsync(id);
 
             if (entity == null)
-                return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound,$"Pacijent sa ID-em {id} nije pronadjen.");
+                return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound, $"Pacijent sa ID-em {id} nije pronadjen.");
 
             await _licniPodaciService.Update(id, dtoForUpdate.LicniPodaci);
 
@@ -93,29 +71,16 @@ namespace HealthCare020.Services
         {
             if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Ime))
             {
-                result = result.Where(x => x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
+                result = result.Where(x => x.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
             }
 
             if (!string.IsNullOrWhiteSpace(resourceParameters.Prezime) && await result.AnyAsync())
             {
                 result = result.Where(x =>
-                    x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
+                    x.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
             }
 
             return await base.FilterAndPrepare(result, resourceParameters);
-        }
-
-        private string GenerateTokenPoseta()
-        {
-            var rand = new Random();
-            string token = string.Empty;
-
-            do
-            {
-                token = rand.Next(100000, 999999).ToString("D6");
-            } while (_dbContext.Set<TokenPoseta>().Any(x => x.Value == token));
-
-            return token;
         }
     }
 }

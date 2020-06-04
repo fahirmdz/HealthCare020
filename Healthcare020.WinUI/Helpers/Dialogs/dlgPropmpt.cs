@@ -12,7 +12,7 @@ namespace Healthcare020.WinUI.Dialogs
             InitializeComponent();
             this.Opacity = 50;
             var mainFormSize = MainForm.Instance.Size;
-            this.Size=new Size(mainFormSize.Width-14,mainFormSize.Height-14);
+            this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
             this.FormBorderStyle = FormBorderStyle.None;
         }
 
@@ -49,9 +49,13 @@ namespace Healthcare020.WinUI.Dialogs
             pnlBody.PointToScreen(new Point(Width / 2, Height / 2));
         }
 
+#pragma warning disable 1998
+
         private async void btnYes_Click(object sender, System.EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
+
+#pragma warning restore 1998
     }
 }

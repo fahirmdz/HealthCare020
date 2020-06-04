@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthCare020.Core.Entities
@@ -7,10 +8,16 @@ namespace HealthCare020.Core.Entities
     {
         public int Id { get; set; }
 
+        [ForeignKey(nameof(PacijentNaLecenju))]
+        [Required]
+        public int PacijentNaLecenjuId { get; set; }
+        public PacijentNaLecenju PacijentNaLecenju { get; set; }
+
+        [Required]
         public DateTime DatumVreme { get; set; }
 
-        [ForeignKey(nameof(TokenPoseta))]
-        public int TokenPosetaId { get; set; }
-        public TokenPoseta TokenPoseta { get; set; }
+        [Phone]
+        [Required]
+        public string BrojTelefonaPosetioca { get; set; }
     }
 }

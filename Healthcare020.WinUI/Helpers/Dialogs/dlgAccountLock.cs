@@ -61,7 +61,8 @@ namespace Healthcare020.WinUI.Dialogs
             Dispose();
         }
 
-        private async void btnLockOk_Click(object sender, EventArgs e)
+
+        private  void btnLockOk_Click(object sender, EventArgs e)
         {
             if (cmbBrojSati.SelectedIndex == -1)
             {
