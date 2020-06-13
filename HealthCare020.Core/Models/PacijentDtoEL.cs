@@ -3,6 +3,8 @@
     //EL -> Eager Loaded
     public class PacijentDtoEL : PacijentDto
     {
-        public LicniPodaciDto LicniPodaci { get; set; }
+        public ZdravstvenaKnjizicaDtoEL ZdravstvenaKnjizica { get; set; }
+
+        public KorisnickiNalogDtoEL KorisnickiNalog { get; set; }
     }
 }

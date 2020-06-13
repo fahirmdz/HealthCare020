@@ -1,5 +1,4 @@
 ﻿using HealthCare020.Core.Models;
-using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HealthCare020.Core.ServiceModels;
 
 namespace Healthcare020.OAuth.Services
 {
@@ -45,13 +45,12 @@ namespace Healthcare020.OAuth.Services
 
         private async Task<KorisnickiNalogDtoEL> GetKorisnickiNalog(int id)
         {
-            var result = await _korisnikService.GetById(id,
-                new KorisnickiNalogResourceParameters { EagerLoaded = true });
+            var result = await _korisnikService.GetById(id,true);
 
             if (!result.Succeeded)
                 return null;
 
-            return result.Data as KorisnickiNalogDtoEL;
+            return (result as ServiceResult<object>).Data as KorisnickiNalogDtoEL;
         }
     }
 }

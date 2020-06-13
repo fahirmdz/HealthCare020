@@ -29,7 +29,7 @@ namespace HealthCare020.Services
             _propertyCheckerService = propertyCheckerService;
         }
 
-        public virtual async Task<ServiceResult<SequenceResult>> Get(TResourceParameters resourceParameters)
+        public virtual async Task<ServiceResult> Get(TResourceParameters resourceParameters)
         {
             IQueryable<TEntity> result;
 
@@ -38,7 +38,7 @@ namespace HealthCare020.Services
                 //check prop and prop mapping
                 var propertyCheckResult = PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
                 if (!propertyCheckResult.Succeded)
-                    return new ServiceResult<SequenceResult>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
+                    return ServiceResult.BadRequest(propertyCheckResult.Message);
 
                 result = GetWithEagerLoad();
             }
@@ -47,7 +47,7 @@ namespace HealthCare020.Services
                 //check prop and prop mapping
                 var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
                 if (!propertyCheckResult.Succeded)
-                    return new ServiceResult<SequenceResult>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
+                    return ServiceResult.BadRequest(propertyCheckResult.Message);
 
                 result = _dbContext.Set<TEntity>().AsQueryable();
             }
@@ -63,11 +63,11 @@ namespace HealthCare020.Services
                     TotalCount = pagedResult.TotalCount,
                     TotalPages = pagedResult.TotalPages
                 },
-                Data = PrepareDataForClient(pagedResult, resourceParameters),
+                Data = PrepareDataForClient(pagedResult, resourceParameters:resourceParameters),
                 HasNext = pagedResult.HasNext,
                 HasPrevious = pagedResult.HasPrevious
             };
-            return new ServiceResult<SequenceResult>(serviceResultToReturn);
+            return ServiceResult<SequenceResult>.OK(serviceResultToReturn);
         }
 
         public virtual IQueryable<TEntity> GetWithEagerLoad(int? id = null)
@@ -75,40 +75,30 @@ namespace HealthCare020.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResult<dynamic>> GetById(int id, TResourceParameters resourceParameters)
+        public async Task<ServiceResult> GetById(int id, bool EagerLoaded)
         {
             TEntity result;
-            var eagerLoad = ShouldEagerLoad(resourceParameters);
 
-            if (eagerLoad)
+            if (EagerLoaded)
             {
-                //check prop and prop mapping
-                var propertyCheckResult = PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
-                if (!propertyCheckResult.Succeded)
-                    return new ServiceResult<dynamic>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
-
                 result = GetWithEagerLoad(id).FirstOrDefault();
             }
             else
             {
-                //check prop and prop mapping
-                var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
-                if (!propertyCheckResult.Succeded)
-                    return new ServiceResult<dynamic>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
-
                 result = await _dbContext.Set<TEntity>().FindAsync(id);
             }
 
             if (result == null)
                 return new ServiceResult<dynamic>(HttpStatusCode.NotFound);
 
-            if (eagerLoad)
-                return new ServiceResult<dynamic>(PrepareDataForClient<TDtoEagerLoaded>(result, resourceParameters));
+            if (EagerLoaded)
+                return new ServiceResult<dynamic>(PrepareDataForClient<TDtoEagerLoaded>(result));
 
-            return new ServiceResult<dynamic>(PrepareDataForClient<TDto>(result, resourceParameters));
+            return ServiceResult<dynamic>.OK(PrepareDataForClient<TDto>(result));
         }
 
-        #pragma warning disable 1998
+#pragma warning disable 1998
+
         /// <summary>
         /// Filtering and pagination
         /// </summary>
@@ -117,7 +107,9 @@ namespace HealthCare020.Services
             //Apply pagination
             return PagedList<TEntity>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
-        #pragma warning restore 1998
+
+#pragma warning restore 1998
+
         /// <summary>
         /// Mapping entities to the data type for a client
         /// </summary>
@@ -127,13 +119,13 @@ namespace HealthCare020.Services
             {
                 var dataWithFinalTypeEagerLoaded = data.Select(x => _mapper.Map<TDtoEagerLoaded>(x));
 
-                if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
+                if (resourceParameters != null && !string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
                 {
                     var propertyMappingDictionary =
                         _propertyMappingService.GetPropertyMapping<TDtoEagerLoaded, TEntity>();
 
                     dataWithFinalTypeEagerLoaded = dataWithFinalTypeEagerLoaded.AsQueryable()
-                       .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
+                        .ApplySort(resourceParameters.OrderBy, propertyMappingDictionary);
                 }
 
                 return dataWithFinalTypeEagerLoaded;
@@ -142,7 +134,7 @@ namespace HealthCare020.Services
 
             var dataWithFinalTypeLazyLoaded = data.Select(x => _mapper.Map<TDto>(x));
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
+            if (resourceParameters != null && !string.IsNullOrWhiteSpace(resourceParameters.OrderBy))
             {
                 var propertyMappingDictionary =
                     _propertyMappingService.GetPropertyMapping<TDto, TEntity>();
@@ -158,7 +150,7 @@ namespace HealthCare020.Services
         /// <summary>
         /// Mapping entity to the data type for a client
         /// </summary>
-        public virtual T PrepareDataForClient<T>(TEntity data, TResourceParameters resourceParameters)
+        public virtual T PrepareDataForClient<T>(TEntity data)
         {
             return _mapper.Map<T>(data);
         }

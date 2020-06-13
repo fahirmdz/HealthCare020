@@ -46,7 +46,7 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<ServiceResult<PacijentDtoLL>> Insert(PacijentUpsertDto dtoForCreation)
+        public override async Task<ServiceResult> Insert(PacijentUpsertDto dtoForCreation)
         {
             var newEntity = new Pacijent
             {
@@ -55,12 +55,12 @@ namespace HealthCare020.Services
             return new ServiceResult<PacijentDtoLL>(_mapper.Map<PacijentDtoLL>(newEntity));
         }
 
-        public override async Task<ServiceResult<PacijentDtoLL>> Update(int id, PacijentDtoForUpdate dtoForUpdate)
+        public override async Task<ServiceResult> Update(int id, PacijentDtoForUpdate dtoForUpdate)
         {
             var entity = await _dbContext.Set<Pacijent>().FindAsync(id);
 
             if (entity == null)
-                return new ServiceResult<PacijentDtoLL>(HttpStatusCode.NotFound, $"Pacijent sa ID-em {id} nije pronadjen.");
+                return ServiceResult.NotFound($"Pacijent sa ID-em {id} nije pronadjen.");
 
             await _licniPodaciService.Update(id, dtoForUpdate.LicniPodaci);
 

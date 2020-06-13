@@ -1,17 +1,18 @@
 ﻿using HealthCare020.API.Constants;
+using HealthCare020.Core.Constants;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using HealthCare020.Core.Constants;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("api/"+Routes.KorisniciRoute)]
+    [Route("api/" + Routes.KorisniciRoute)]
     public class KorisnikController : BaseCRUDController<KorisnickiNalog, KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto>
     {
         private IKorisnikService _korisnikService;
@@ -29,7 +30,7 @@ namespace HealthCare020.API.Controllers
         {
             var result = await _korisnikService.ToggleLock(id, true, request.Until);
 
-            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
+            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
@@ -38,7 +39,7 @@ namespace HealthCare020.API.Controllers
         {
             var result = await _korisnikService.ToggleLock(id, false);
 
-            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
+            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
@@ -52,7 +53,7 @@ namespace HealthCare020.API.Controllers
                 return WithStatusCode(result.StatusCode, result.Message);
             }
 
-            return Ok(result.Data);
+            return Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
@@ -66,7 +67,7 @@ namespace HealthCare020.API.Controllers
                 return WithStatusCode(result.StatusCode, result.Message);
             }
 
-            return Ok(result.Data);
+            return Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
         }
     }
 }

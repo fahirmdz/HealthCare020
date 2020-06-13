@@ -36,11 +36,11 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<ServiceResult<GradDtoLL>> Insert(GradUpsertDto request)
+        public override async Task<ServiceResult> Insert(GradUpsertDto request)
         {
             if (!await _dbContext.Drzave.AnyAsync(x => x.Id == request.DrzavaId))
             {
-                return new ServiceResult<GradDtoLL>(HttpStatusCode.NotFound, $"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
+                return ServiceResult.NotFound($"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
             }
 
             var entity = _mapper.Map<Grad>(request);
@@ -51,15 +51,15 @@ namespace HealthCare020.Services
             return new ServiceResult<GradDtoLL>(_mapper.Map<GradDtoLL>(entity));
         }
 
-        public override async Task<ServiceResult<GradDtoLL>> Update(int id, GradUpsertDto request)
+        public override async Task<ServiceResult> Update(int id, GradUpsertDto request)
         {
             var entity = await _dbContext.Gradovi.FindAsync(id);
             if (entity == null)
-                return new ServiceResult<GradDtoLL>(HttpStatusCode.NotFound, "Grad nije pronadjen");
+                return ServiceResult.NotFound("Grad nije pronadjen");
 
             if (!_dbContext.Drzave.Any(x => x.Id == request.DrzavaId))
             {
-                return new ServiceResult<GradDtoLL>(HttpStatusCode.NotFound, $"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
+                return ServiceResult.NotFound($"Drzava sa ID-em {request.DrzavaId} nije pronadjena");
             }
             await Task.Run(() =>
             {
