@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using HealthCare020.Core.ServiceModels;
 
 namespace HealthCare020.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace HealthCare020.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
-            var result = await _service.Get(resourceParameters);
+            var result = await _service.Get(resourceParameters) as ServiceResult<SequenceResult>;
 
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
@@ -36,10 +37,14 @@ namespace HealthCare020.API.Controllers
         public async Task<IActionResult> GetById(int id, [FromQuery]bool? EagerLoaded=false)
         {
             var result = await _service.GetById(id, EagerLoaded ?? false);
+
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok(result.Data);
+            var resultTemp = result as ServiceResult<object>;
+            
+                return Ok(resultTemp.Data);
+            
         }
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")

@@ -26,7 +26,7 @@ namespace HealthCare020.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public virtual async Task<ServiceResult<TDto>> Insert(TDtoForCreation dtoForCreation)
+        public virtual async Task<ServiceResult> Insert(TDtoForCreation dtoForCreation)
         {
             var entity = _mapper.Map<TEntity>(dtoForCreation);
 
@@ -36,12 +36,12 @@ namespace HealthCare020.Services
             return new ServiceResult<TDto>(_mapper.Map<TDto>(entity));
         }
 
-        public virtual async Task<ServiceResult<TDto>> Update(int id, TDtoForUpdate dtoForUpdate)
+        public virtual async Task<ServiceResult> Update(int id, TDtoForUpdate dtoForUpdate)
         {
             var query = _dbContext.Set<TEntity>();
             var entity = await query.FindAsync(id);
             if (entity == null)
-                return new ServiceResult<TDto>(HttpStatusCode.NotFound);
+                return ServiceResult.NotFound();
 
             await Task.Run(() =>
            {
@@ -52,7 +52,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<TDto>(_mapper.Map<TDto>(entity));
+            return ServiceResult<TDto>.OK(_mapper.Map<TDto>(entity));
         }
 
         public async Task<ServiceResult<TDtoForUpdate>> GetAsUpdateDto(int id)
@@ -60,18 +60,18 @@ namespace HealthCare020.Services
             var entity = await _dbContext.Set<TEntity>().FindAsync(id);
 
             if (entity == null)
-                return new ServiceResult<TDtoForUpdate>(HttpStatusCode.NotFound);
+                return new ServiceResult<TDtoForUpdate>(HttpStatusCode.NotFound,false);
 
             return new ServiceResult<TDtoForUpdate>(_mapper.Map<TDtoForUpdate>(entity));
         }
 
-        public virtual async Task<ServiceResult<TDto>> Delete(int id)
+        public virtual async Task<ServiceResult> Delete(int id)
         {
             var query = _dbContext.Set<TEntity>();
 
             var entity = await query.FindAsync(id);
             if (entity == null)
-                return new ServiceResult<TDto>(HttpStatusCode.NotFound);
+                return ServiceResult.NotFound();
 
             await Task.Run(() =>
            {
@@ -79,7 +79,7 @@ namespace HealthCare020.Services
            });
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<TDto>();
+            return ServiceResult<TDto>.NoContent();
         }
     }
 }

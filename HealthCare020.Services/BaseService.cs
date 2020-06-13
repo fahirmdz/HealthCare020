@@ -29,7 +29,7 @@ namespace HealthCare020.Services
             _propertyCheckerService = propertyCheckerService;
         }
 
-        public virtual async Task<ServiceResult<SequenceResult>> Get(TResourceParameters resourceParameters)
+        public virtual async Task<ServiceResult> Get(TResourceParameters resourceParameters)
         {
             IQueryable<TEntity> result;
 
@@ -38,7 +38,7 @@ namespace HealthCare020.Services
                 //check prop and prop mapping
                 var propertyCheckResult = PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
                 if (!propertyCheckResult.Succeded)
-                    return new ServiceResult<SequenceResult>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
+                    return ServiceResult.BadRequest(propertyCheckResult.Message);
 
                 result = GetWithEagerLoad();
             }
@@ -47,7 +47,7 @@ namespace HealthCare020.Services
                 //check prop and prop mapping
                 var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
                 if (!propertyCheckResult.Succeded)
-                    return new ServiceResult<SequenceResult>(HttpStatusCode.BadRequest, propertyCheckResult.Message);
+                    return ServiceResult.BadRequest(propertyCheckResult.Message);
 
                 result = _dbContext.Set<TEntity>().AsQueryable();
             }
@@ -67,7 +67,7 @@ namespace HealthCare020.Services
                 HasNext = pagedResult.HasNext,
                 HasPrevious = pagedResult.HasPrevious
             };
-            return new ServiceResult<SequenceResult>(serviceResultToReturn);
+            return ServiceResult<SequenceResult>.OK(serviceResultToReturn);
         }
 
         public virtual IQueryable<TEntity> GetWithEagerLoad(int? id = null)
@@ -75,7 +75,7 @@ namespace HealthCare020.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResult<dynamic>> GetById(int id, bool EagerLoaded)
+        public async Task<ServiceResult> GetById(int id, bool EagerLoaded)
         {
             TEntity result;
 
@@ -94,7 +94,7 @@ namespace HealthCare020.Services
             if (EagerLoaded)
                 return new ServiceResult<dynamic>(PrepareDataForClient<TDtoEagerLoaded>(result));
 
-            return new ServiceResult<dynamic>(PrepareDataForClient<TDto>(result));
+            return ServiceResult<dynamic>.OK(PrepareDataForClient<TDto>(result));
         }
 
 #pragma warning disable 1998

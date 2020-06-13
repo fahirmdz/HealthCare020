@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using HealthCare020.Core.Constants;
+using HealthCare020.Core.ServiceModels;
 
 namespace HealthCare020.API.Controllers
 {
@@ -27,7 +28,7 @@ namespace HealthCare020.API.Controllers
         [HttpPut("{id}/lock")]
         public async Task<IActionResult> Lock(int id, KorisnickiNalogLockUpsertRequest request)
         {
-            var result = await _korisnikService.ToggleLock(id, true, request.Until);
+            var result = await _korisnikService.ToggleLock(id, true, request.Until) as ServiceResult<KorisnickiNalogDtoLL>;
 
             return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
         }
@@ -36,7 +37,7 @@ namespace HealthCare020.API.Controllers
         [HttpDelete("{id}/lock")]
         public async Task<IActionResult> Lock(int id)
         {
-            var result = await _korisnikService.ToggleLock(id, false);
+            var result = await _korisnikService.ToggleLock(id, false) as ServiceResult<KorisnickiNalogDtoLL>;
 
             return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
         }
@@ -45,7 +46,7 @@ namespace HealthCare020.API.Controllers
         [HttpPut("{id}/roles")]
         public async Task<IActionResult> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
         {
-            var result = await _korisnikService.AddInRoles(id, request);
+            var result = await _korisnikService.AddInRoles(id, request) as ServiceResult<KorisnickiNalogDtoLL>;
 
             if (!result.Succeeded)
             {
@@ -59,7 +60,7 @@ namespace HealthCare020.API.Controllers
         [HttpDelete("{id}/roles")]
         public async Task<IActionResult> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request)
         {
-            var result = await _korisnikService.RemoveFromRoles(id, request);
+            var result = await _korisnikService.RemoveFromRoles(id, request) as ServiceResult<KorisnickiNalogDtoLL>;
 
             if (!result.Succeeded)
             {

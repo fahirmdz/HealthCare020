@@ -13,7 +13,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,13 +45,13 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<ServiceResult<KorisnickiNalogDtoLL>> Insert(KorisnickiNalogUpsertDto request)
+        public override async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request)
         {
             var korisnickiNalog = _mapper.Map<KorisnickiNalog>(request);
 
             if (request.ConfirmPassword != request.Password)
             {
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, "Lozinke se ne podudaraju");
+                return ServiceResult.BadRequest("Lozinke se ne podudaraju");
             }
 
             korisnickiNalog.PasswordSalt = GenerateSalt();
@@ -64,19 +63,19 @@ namespace HealthCare020.Services
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
-        public override async Task<ServiceResult<KorisnickiNalogDtoLL>> Update(int id, KorisnickiNalogUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult> Update(int id, KorisnickiNalogUpsertDto dtoForUpdate)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
             if (korisnickiNalog == null)
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, "Korisnicki nalog nije pronadjen");
+                return ServiceResult.NotFound("Korisnicki nalog nije pronadjen");
 
             _mapper.Map(dtoForUpdate, korisnickiNalog);
 
             if (!string.IsNullOrEmpty(dtoForUpdate.Password) && dtoForUpdate.Password != dtoForUpdate.ConfirmPassword)
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, "Lozinke se ne podudaraju");
+                return ServiceResult.BadRequest("Lozinke se ne podudaraju");
 
             await Task.Run(() =>
             {
@@ -94,14 +93,14 @@ namespace HealthCare020.Services
             //Load RoleKorisnickiNalog relations
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
-            return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
-        public override async Task<ServiceResult<KorisnickiNalogDtoLL>> Delete(int id)
+        public override async Task<ServiceResult> Delete(int id)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
             if (korisnickiNalog == null)
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, "Korisnicki nalog nije pronadjen");
+                return ServiceResult.NotFound("Korisnicki nalog nije pronadjen");
 
             await Task.Run(() =>
             {
@@ -110,7 +109,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<KorisnickiNalogDtoLL>();
+            return ServiceResult<KorisnickiNalogDtoLL>.NoContent();
         }
 
         public override async Task<PagedList<KorisnickiNalog>> FilterAndPrepare(IQueryable<KorisnickiNalog> result, KorisnickiNalogResourceParameters resourceParameters)
@@ -150,34 +149,34 @@ namespace HealthCare020.Services
             return null;
         }
 
-        public async Task<ServiceResult<KorisnickiNalogDtoLL>> ToggleLock(int id, bool isForLockout, DateTime? until = null)
+        public async Task<ServiceResult> ToggleLock(int id, bool isForLockout, DateTime? until = null)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
             if (korisnickiNalog == null)
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Korisnicki nalog sa ID-em {id} nije pronadjen.");
+                return ServiceResult.NotFound($"Korisnicki nalog sa ID-em {id} nije pronadjen.");
 
             korisnickiNalog.LockedOut = isForLockout;
             korisnickiNalog.LockedOutUntil = until;
 
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
-        public async Task<ServiceResult<KorisnickiNalogDtoLL>> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
+        public async Task<ServiceResult> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
             if (korisnickiNalog == null)
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Korisnicki nalog sa ID-em {id} nije pronadjen.");
+                return ServiceResult.NotFound($"Korisnicki nalog sa ID-em {id} nije pronadjen.");
 
             foreach (var roleId in request.Roles)
             {
                 if (!await _dbContext.Roles.AnyAsync(x => x.Id == roleId))
-                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Rola sa ID-em {roleId} nije pronadjena");
+                    return ServiceResult.NotFound($"Rola sa ID-em {roleId} nije pronadjena");
                 if (await _dbContext.RolesKorisnickiNalozi.AnyAsync(x => x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId))
-                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, $"Korisnik sa ID-em {id} vec poseduje role sa ID-em {roleId}");
+                    return ServiceResult.BadRequest($"Korisnik sa ID-em {id} vec poseduje role sa ID-em {roleId}");
             }
 
             foreach (var roleId in request.Roles)
@@ -195,12 +194,12 @@ namespace HealthCare020.Services
             return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
-        public async Task<ServiceResult<KorisnickiNalogDtoLL>> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request)
+        public async Task<ServiceResult> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
 
             if (korisnickiNalog == null)
-                return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.NotFound, $"Korisnicki nalog sa ID-em {id} nije pronadjen.");
+                return ServiceResult.NotFound($"Korisnicki nalog sa ID-em {id} nije pronadjen.");
 
             foreach (var roleId in request.Roles)
             {
@@ -208,7 +207,7 @@ namespace HealthCare020.Services
                     x.RoleId == roleId && korisnickiNalog.Id == x.KorisnickiNalogId);
                 if (roleKorisnickiNalog == null)
                 {
-                    return new ServiceResult<KorisnickiNalogDtoLL>(HttpStatusCode.BadRequest, $"Korisnik sa ID-em {id} ne poseduje role sa ID-em {roleId}");
+                    return ServiceResult.BadRequest($"Korisnik sa ID-em {id} ne poseduje role sa ID-em {roleId}");
                 }
 
                 await Task.Run(() =>
@@ -221,7 +220,7 @@ namespace HealthCare020.Services
 
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
-            return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
         private string GenerateSalt()

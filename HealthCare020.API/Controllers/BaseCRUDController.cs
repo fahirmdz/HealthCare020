@@ -1,4 +1,5 @@
 ﻿using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace HealthCare020.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Insert(TDtoForCreation dtoForCreation)
         {
-            var result = await _crudService.Insert(dtoForCreation);
+            var result = await _crudService.Insert(dtoForCreation) as ServiceResult<TDto>;
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
@@ -35,7 +36,7 @@ namespace HealthCare020.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TDtoForUpdate dtoForUpdate)
         {
-            var result = await _crudService.Update(id, dtoForUpdate);
+            var result = await _crudService.Update(id, dtoForUpdate) as ServiceResult<TDto>; ;
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 

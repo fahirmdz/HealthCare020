@@ -8,7 +8,6 @@ using HealthCare020.Repository;
 using HealthCare020.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -30,14 +29,20 @@ namespace HealthCare020.Services
             _mapper = mapper;
         }
 
-        public async Task<ServiceResult<Radnik>> Insert(RadnikUpsertDto radnikDto)
+        public async Task<ServiceResult> Insert(RadnikUpsertDto radnikDto)
         {
             if (!await _dbContext.StacionarnaOdeljenja.AnyAsync(x => x.Id == radnikDto.StacionarnoOdeljenjeId))
-                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
+                return ServiceResult.NotFound($"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
 
-            var licniPodaciResult = await _licniPodaciService.Insert(radnikDto.LicniPodaci);
+            var licniPodaciResultTemp = await _licniPodaciService.Insert(radnikDto.LicniPodaci);
+            if (!licniPodaciResultTemp.Succeeded)
+                return ServiceResult.WithStatusCode(licniPodaciResultTemp.StatusCode, licniPodaciResultTemp.Message);
+            var licniPodaciResult = licniPodaciResultTemp as ServiceResult<LicniPodaciDto>;
 
-            var korisnickiNalogResult = await _korisnikService.Insert(radnikDto.KorisnickiNalog);
+            var korisnickiNalogResultTemp = await _korisnikService.Insert(radnikDto.KorisnickiNalog);
+            if (!korisnickiNalogResultTemp.Succeeded)
+                return ServiceResult.WithStatusCode(korisnickiNalogResultTemp.StatusCode, korisnickiNalogResultTemp.Message);
+            var korisnickiNalogResult = korisnickiNalogResultTemp as ServiceResult<KorisnickiNalogDtoLL>;
 
             var radnik = new Radnik
             {
@@ -49,13 +54,13 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(radnik);
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<Radnik>(radnik);
+            return ServiceResult<Radnik>.OK(radnik);
         }
 
-        public async Task<ServiceResult<Radnik>> Update(int id, RadnikUpsertDto radnikDto)
+        public async Task<ServiceResult> Update(int id, RadnikUpsertDto radnikDto)
         {
             if (!_dbContext.StacionarnaOdeljenja.Any(x => x.Id == radnikDto.StacionarnoOdeljenjeId))
-                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
+                return ServiceResult.NotFound($"Stacionarno odeljenje sa ID-em {radnikDto.StacionarnoOdeljenjeId} nije pronadjeno");
 
             var entity = await _dbContext.Radnici
                 .Include(x => x.KorisnickiNalog)
@@ -63,7 +68,7 @@ namespace HealthCare020.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (entity == null)
-                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Radnik sa ID-em {id} nije pronadjen");
+                return ServiceResult.NotFound($"Radnik sa ID-em {id} nije pronadjen");
 
             await _korisnikService.Update(entity.KorisnickiNalogId, radnikDto.KorisnickiNalog);
             await _licniPodaciService.Update(entity.LicniPodaciId, radnikDto.LicniPodaci);
@@ -77,22 +82,22 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<Radnik>(entity);
+            return ServiceResult<Radnik>.OK(entity);
         }
 
-        public async Task<ServiceResult<Radnik>> Delete(int id)
+        public async Task<ServiceResult> Delete(int id)
         {
             var entity = await _dbContext.Radnici.FindAsync(id);
 
             if (entity == null)
-                return new ServiceResult<Radnik>(HttpStatusCode.NotFound, $"Radnik sa ID-em {id} nije pronadjen");
+                return ServiceResult.NotFound($"Radnik sa ID-em {id} nije pronadjen");
 
             await _licniPodaciService.Delete(entity.LicniPodaciId);
             await _korisnikService.Delete(entity.KorisnickiNalogId);
 
             await Task.Run(() => { _dbContext.Remove(entity); });
 
-            return new ServiceResult<Radnik>();
+            return ServiceResult<Radnik>.NoContent();
         }
     }
 }

@@ -10,7 +10,6 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -47,45 +46,47 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<ServiceResult<DoktorDtoLL>> Insert(DoktorUpsertDto request)
+        public override async Task<ServiceResult> Insert(DoktorUpsertDto request)
         {
             if (!await _dbContext.NaucneOblasti.AnyAsync(x => x.Id == request.NaucnaOblastId))
-                return new ServiceResult<DoktorDtoLL>(HttpStatusCode.NotFound, $"Naucna oblast sa ID-em {request.NaucnaOblastId} nije pronadjena.");
+                return ServiceResult.NotFound($"Naucna oblast sa ID-em {request.NaucnaOblastId} nije pronadjena.");
 
-            var radnikInsert = await _radnikService.Insert(request);
+            var radnikInsertResult = await _radnikService.Insert(request) as ServiceResult<Radnik>;
+            if (!radnikInsertResult.Succeeded)
+                return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
             var entity = _mapper.Map<Doktor>(request);
-            entity.RadnikId = radnikInsert.Data.Id;
+            entity.RadnikId = radnikInsertResult.Data.Id;
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<DoktorDtoLL>(_mapper.Map<DoktorDtoLL>(entity));
+            return ServiceResult<DoktorDtoLL>.OK(_mapper.Map<DoktorDtoLL>(entity));
         }
 
-        public override async Task<ServiceResult<DoktorDtoLL>> Update(int id, DoktorUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult> Update(int id, DoktorUpsertDto dtoForUpdate)
         {
             var radnikPrijemFromDb = await _dbContext.RadniciPrijem
                 .Include(x => x.Radnik)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (radnikPrijemFromDb == null)
-                return new ServiceResult<DoktorDtoLL>(HttpStatusCode.NotFound, $"Doktor sa ID-em {id} nije pronadjen");
+                return ServiceResult.NotFound($"Doktor sa ID-em {id} nije pronadjen");
 
             if (!await _dbContext.NaucneOblasti.AnyAsync(x => x.Id == dtoForUpdate.NaucnaOblastId))
-                return new ServiceResult<DoktorDtoLL>(HttpStatusCode.NotFound, $"Naucna oblast sa ID-em {dtoForUpdate.NaucnaOblastId} nije pronadjena.");
+                return ServiceResult.NotFound($"Naucna oblast sa ID-em {dtoForUpdate.NaucnaOblastId} nije pronadjena.");
 
             _mapper.Map(dtoForUpdate, radnikPrijemFromDb.Radnik);
             var radnikUpdated = await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
 
-            return new ServiceResult<DoktorDtoLL>(_mapper.Map<DoktorDtoLL>(radnikPrijemFromDb));
+            return ServiceResult<DoktorDtoLL>.OK(_mapper.Map<DoktorDtoLL>(radnikPrijemFromDb));
         }
 
-        public override async Task<ServiceResult<DoktorDtoLL>> Delete(int id)
+        public override async Task<ServiceResult> Delete(int id)
         {
             var entity = await _dbContext.RadniciPrijem.FindAsync(id);
             if (entity == null)
-                return new ServiceResult<DoktorDtoLL>(HttpStatusCode.NotFound, $"Doktor sa ID-em {id} nije pronadjen.");
+                return ServiceResult.NotFound($"Doktor sa ID-em {id} nije pronadjen.");
 
             await Task.Run(() =>
             {
@@ -96,7 +97,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<DoktorDtoLL>();
+            return ServiceResult<DoktorDtoLL>.NoContent();
         }
 
         public override async Task<PagedList<Doktor>> FilterAndPrepare(IQueryable<Doktor> result, DoktorResourceParameters resourceParameters)

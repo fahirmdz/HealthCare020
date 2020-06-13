@@ -3,16 +3,14 @@ using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Core.ServiceModels;
-using Microsoft.AspNetCore.Http;
 
 namespace HealthCare020.Services
 {
@@ -25,7 +23,7 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IRadnikService radnikService,
             IHttpContextAccessor httpContextAccessor) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService,httpContextAccessor)
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
         {
             _radnikService = radnikService;
         }
@@ -48,11 +46,13 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<ServiceResult<RadnikPrijemDtoLL>> Insert(RadnikPrijemUpsertDto request)
+        public override async Task<ServiceResult> Insert(RadnikPrijemUpsertDto request)
         {
-            var radnikInsert = await _radnikService.Insert(request);
+            var radnikInsertResult = await _radnikService.Insert(request) as ServiceResult<Radnik>; 
+            if (!radnikInsertResult.Succeeded)
+                return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
-            var entity = new RadnikPrijem { RadnikId = radnikInsert.Data.Id };
+            var entity = new RadnikPrijem { RadnikId = radnikInsertResult.Data.Id };
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
@@ -60,14 +60,14 @@ namespace HealthCare020.Services
             return new ServiceResult<RadnikPrijemDtoLL>(_mapper.Map<RadnikPrijemDtoLL>(entity));
         }
 
-        public override async Task<ServiceResult<RadnikPrijemDtoLL>> Update(int id, RadnikPrijemUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult> Update(int id, RadnikPrijemUpsertDto dtoForUpdate)
         {
             var radnikPrijemFromDb = await _dbContext.RadniciPrijem
                 .Include(x => x.Radnik)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (radnikPrijemFromDb == null)
-               return new ServiceResult<RadnikPrijemDtoLL>(HttpStatusCode.NotFound,$"Radnik sa ID-em {id} nije pronadjen");
+                return ServiceResult.NotFound($"Radnik sa ID-em {id} nije pronadjen");
 
             _mapper.Map(dtoForUpdate, radnikPrijemFromDb.Radnik);
             var radnikUpdated = await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
@@ -75,11 +75,11 @@ namespace HealthCare020.Services
             return new ServiceResult<RadnikPrijemDtoLL>(_mapper.Map<RadnikPrijemDtoLL>(radnikPrijemFromDb));
         }
 
-        public override async Task<ServiceResult<RadnikPrijemDtoLL>> Delete(int id)
+        public override async Task<ServiceResult> Delete(int id)
         {
             var entity = await _dbContext.RadniciPrijem.FindAsync(id);
             if (entity == null)
-                return new ServiceResult<RadnikPrijemDtoLL>(HttpStatusCode.NotFound,$"RadnikPrijem sa ID-em {id} nije pronadjen.");
+                return ServiceResult.NotFound($"RadnikPrijem sa ID-em {id} nije pronadjen.");
             await Task.Run(() =>
             {
                 _radnikService.Delete(id);
