@@ -14,5 +14,6 @@
         public const string StacionarnaOdeljenjaRoute = "stacionarna-odeljenja";
         public const string ZdravstvenaStanjaRoute = "zdravstvena-stanja";
         public const string ZahteviZaPregledRoute = "zahtev-za-pregled";
+        public const string PreglediRoute = "pregledi";
     }
 }
