@@ -142,8 +142,28 @@ namespace HealthCare020.Services.Mappers
 
             //Pacijent
             CreateMap<Pacijent, PacijentDtoLL>();
-
             CreateMap<Pacijent, PacijentDtoEL>();
+
+            //ZahtevZaPregled
+            CreateMap<ZahtevZaPregled, ZahtevZaPregledDtoLL>();
+            CreateMap<ZahtevZaPregled, ZahtevZaPregledDtoEL>()
+                .ForMember(dest => dest.Doktor,
+                    opt => opt.MapFrom(x => x.Doktor))
+                .ForMember(dest => dest.Pacijent,
+                    opt => opt.MapFrom(x => x.Pacijent))
+                .ForMember(dest => dest.Uputnica,
+                    opt => opt.MapFrom(x => x.Uputnica));
+
+            //Pregled
+            CreateMap<Pregled, PregledDtoLL>();
+            CreateMap<Pregled,PregledDtoEL>()
+                .ForMember(dest => dest.Doktor,
+                    opt => opt.MapFrom(x => x.Doktor))
+                .ForMember(dest => dest.Pacijent,
+                    opt => opt.MapFrom(x => x.Pacijent))
+                .ForMember(dest => dest.ZahtevZaPregled,
+                    opt => opt.MapFrom(x => x.ZahtevZaPregled));
+
         }
     }
 }

@@ -51,6 +51,11 @@ namespace HealthCare020.Services.Configuration
                 .AddScoped<ICRUDService<ZahtevZaPregled, ZahtevZaPregledDtoLL, ZahtevZaPregledDtoEL,
                         ZahtevZaPregledResourceParameters, ZahtevZaPregledUpsertDto, ZahtevZaPregledUpsertDto>,
                     ZahtevZaPregledService>();
+
+            services
+                .AddScoped<ICRUDService<Pregled, PregledDtoLL, PregledDtoEL, PregledResourceParameters, PregledUpsertDto
+                    , PregledUpsertDto>, PregledService>();
+
             services.AddScoped<IRadnikService, RadnikService>();
 
             services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();

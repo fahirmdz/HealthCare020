@@ -99,7 +99,7 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.PacijentIme))
+            if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
             {
                 result = result.Where(x =>x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.PacijentIme.ToLower()));
             }
