@@ -1,7 +1,8 @@
 ﻿namespace HealthCare020.Core.Models
 {
-    public class PacijentDtoLL:PacijentDto
+    public class PacijentDtoLL : PacijentDto
     {
-        public int LicniPodaciId { get; set; }
+        public int ZdravstvenaKnjizicaId { get; set; }
+        public int KorisnickiNalogId { get; set; }
     }
 }

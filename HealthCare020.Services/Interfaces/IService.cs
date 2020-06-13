@@ -13,7 +13,7 @@ namespace HealthCare020.Services.Interfaces
 
         IQueryable<TEntity> GetWithEagerLoad(int? id = null);
 
-        Task<ServiceResult<dynamic>> GetById(int id, TResourceParameters resourceParameters);
+        Task<ServiceResult<dynamic>> GetById(int id, bool EagerLoaded);
 
         Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters);
 

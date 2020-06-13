@@ -4,7 +4,11 @@ namespace HealthCare020.Core.Request
 {
     public class PacijentUpsertDto
     {
-        [Required(ErrorMessage = "Morate unijeti ID uputa za lecenje")]
-        public int UputZaLecenjeId { get; set; }
+        [Required]
+        public int ZdravstvenaKnjizicaId { get; set; }
+
+        [Required]
+        public int KorisnickiNalogId { get; set; }
+
     }
 }

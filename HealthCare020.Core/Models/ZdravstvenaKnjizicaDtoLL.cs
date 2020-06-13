@@ -1,6 +1,6 @@
 ﻿namespace HealthCare020.Core.Models
 {
-    public class UputZaLecenjeDtoLL:UputZaLecenjeDto
+    public class ZdravstvenaKnjizicaDtoLL:ZdravstvenaKnjizicaDto
     {
         public int LicniPodaciId { get; set; }
 

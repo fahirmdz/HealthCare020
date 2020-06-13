@@ -4,6 +4,8 @@
     {
         public string Ime { get; set; }
         public string Prezime { get; set; }
+        public string Username { get; set; }
+        public int? ZdravstvenaKnjizicaId { get; set; }
         public bool EagerLoaded { get; set; } = false;
     }
 }

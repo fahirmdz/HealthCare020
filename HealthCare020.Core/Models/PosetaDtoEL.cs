@@ -3,7 +3,6 @@
     //EL -> Eager Loaded
     public class PosetaDtoEL:PosetaDto
     {
-        public TokenPosetaDtoEL TokenPoseta { get; set; }
-
+        public PacijentNaLecenjuDtoEL PacijentNaLecenju { get; set; }
     }
 }

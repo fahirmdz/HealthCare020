@@ -123,13 +123,135 @@ namespace HealthCare020.Services.Helpers
                 {new PropertyMapping<PacijentDtoLL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(PacijentDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
+                        {nameof(PacijentDtoLL.ZdravstvenaKnjizicaId),new PropertyMappingValue(new List<string>(){nameof(Pacijent.ZdravstvenaKnjizicaId)})},
+                        {nameof(PacijentDtoLL.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalogId)})}
                     })
                 },
                 {new PropertyMapping<PacijentDtoEL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(PacijentDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
+                        {nameof(PacijentDtoEL.KorisnickiNalog),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalog)})},
+                        {nameof(PacijentDtoEL.ZdravstvenaKnjizica),new PropertyMappingValue(new List<string>(){nameof(Pacijent.ZdravstvenaKnjizica)})},
                     })
-                }
+                },
+                {new PropertyMapping<PosetaDtoLL,Poseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PosetaDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Poseta.Id)})},
+                        {nameof(PosetaDtoLL.PacijentNaLecenjuId),new PropertyMappingValue(new List<string>(){nameof(Poseta.PacijentNaLecenjuId)})},
+                        {nameof(PosetaDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(Poseta.DatumVreme)})},
+                        {nameof(PosetaDtoLL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(Poseta.BrojTelefonaPosetioca)})}
+                    })
+                },
+                {new PropertyMapping<PosetaDtoEL,Poseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PosetaDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Poseta.Id)})},
+                        {nameof(PosetaDtoEL.PacijentNaLecenju),new PropertyMappingValue(new List<string>(){nameof(Poseta.PacijentNaLecenju)})},
+                        {nameof(PosetaDtoEL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(Poseta.BrojTelefonaPosetioca)})},
+                        {nameof(PosetaDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(Poseta.DatumVreme)})}
+                    })
+                },
+                {new PropertyMapping<PacijentNaLecenjuDtoLL,PacijentNaLecenju>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PacijentNaLecenjuDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(PacijentNaLecenju.Id)})},
+                        {nameof(PacijentNaLecenjuDtoLL.StacionarnoOdeljenjeId),new PropertyMappingValue(new List<string>(){nameof(PacijentNaLecenju.StacionarnoOdeljenjeId)})}
+                    })
+                },
+                {new PropertyMapping<PacijentNaLecenjuDtoEL,PacijentNaLecenju>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PacijentNaLecenjuDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(PacijentNaLecenju.Id)})},
+                        {nameof(PacijentNaLecenjuDtoEL.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){nameof(PacijentNaLecenju.StacionarnoOdeljenje)})}
+                    })
+                },
+                {new PropertyMapping<ZdravstvenaKnjizicaDtoLL,ZdravstvenaKnjizica>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(ZdravstvenaKnjizicaDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.Id)})},
+                        {nameof(ZdravstvenaKnjizicaDtoLL.LicniPodaciId),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.LicniPodaciId)})},
+                        {nameof(ZdravstvenaKnjizicaDtoLL.DoktorId),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.DoktorId)})}
+                    })
+                },
+                {new PropertyMapping<ZdravstvenaKnjizicaDtoEL,ZdravstvenaKnjizica>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(ZdravstvenaKnjizicaDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.Id)})},
+                        {nameof(ZdravstvenaKnjizicaDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.LicniPodaci)})},
+                        {nameof(ZdravstvenaKnjizicaDtoEL.Doktor),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.Doktor)})}
+                    })
+                },
+                {new PropertyMapping<ZahtevZaPregledDtoLL,ZahtevZaPregled>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(ZahtevZaPregledDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.Id)})},
+                        {nameof(ZahtevZaPregledDtoLL.PacijentId),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.PacijentId)})},
+                        {nameof(ZahtevZaPregledDtoLL.DoktorId),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.DoktorId)})},
+                        {nameof(ZahtevZaPregledDtoLL.UputnicaId),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.UputnicaId)})},
+                        {nameof(ZahtevZaPregledDtoLL.Napomena),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.Napomena)})}
+                    })
+                },
+                {new PropertyMapping<ZahtevZaPregledDtoEL,ZahtevZaPregled>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(ZahtevZaPregledDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.Id)})},
+                        {nameof(ZahtevZaPregledDtoEL.Pacijent),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.Pacijent)})},
+                        {nameof(ZahtevZaPregledDtoEL.Doktor),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.Doktor)})},
+                        {nameof(ZahtevZaPregledDtoEL.Uputnica),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.Uputnica)})},
+                        {nameof(ZahtevZaPregledDtoEL.Napomena),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPregled.Napomena)})}
+                    })
+                },
+                {new PropertyMapping<UputnicaDtoLL,Uputnica>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(UputnicaDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Uputnica.Id)})},
+                        {nameof(UputnicaDtoLL.PacijentId),new PropertyMappingValue(new List<string>(){nameof(Uputnica.PacijentId)})},
+                        {nameof(UputnicaDtoLL.UputioDoktorId),new PropertyMappingValue(new List<string>(){nameof(Uputnica.UputioDoktorId)})},
+                        {nameof(UputnicaDtoLL.UpucenKodDoktoraId),new PropertyMappingValue(new List<string>(){nameof(Uputnica.UpucenKodDoktoraId)})},
+                        {nameof(UputnicaDtoLL.Napomena),new PropertyMappingValue(new List<string>(){nameof(Uputnica.Napomena)})},
+                        {nameof(UputnicaDtoLL.Razlog),new PropertyMappingValue(new List<string>(){nameof(Uputnica.Razlog)})},
+                        {nameof(UputnicaDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(Uputnica.DatumVreme)})}
+                    })
+                },
+                {new PropertyMapping<UputnicaDtoEL,Uputnica>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(UputnicaDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Uputnica.Id)})},
+                        {nameof(UputnicaDtoEL.Pacijent),new PropertyMappingValue(new List<string>(){nameof(Uputnica.Pacijent)})},
+                        {nameof(UputnicaDtoEL.UputioDoktor),new PropertyMappingValue(new List<string>(){nameof(Uputnica.UputioDoktor)})},
+                        {nameof(UputnicaDtoEL.UpucenKodDoktora),new PropertyMappingValue(new List<string>(){nameof(Uputnica.UpucenKodDoktora)})},
+                        {nameof(UputnicaDtoEL.Napomena),new PropertyMappingValue(new List<string>(){nameof(Uputnica.Napomena)})},
+                        {nameof(UputnicaDtoEL.Razlog),new PropertyMappingValue(new List<string>(){nameof(Uputnica.Razlog)})},
+                        {nameof(UputnicaDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(Uputnica.DatumVreme)})}
+                    })
+                },
+                {new PropertyMapping<PregledDtoLL,Pregled>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PregledDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Pregled.Id)})},
+                        {nameof(PregledDtoLL.PacijentId),new PropertyMappingValue(new List<string>(){nameof(Pregled.PacijentId)})},
+                        {nameof(PregledDtoLL.DoktorId),new PropertyMappingValue(new List<string>(){nameof(Pregled.DoktorId)})},
+                        {nameof(PregledDtoLL.ZahtevZaPregledId),new PropertyMappingValue(new List<string>(){nameof(Pregled.ZahtevZaPregledId)})},
+                        {nameof(PregledDtoLL.DatumPregleda),new PropertyMappingValue(new List<string>(){nameof(Pregled.DatumPregleda)})},
+                        {nameof(PregledDtoLL.IsOdradjen),new PropertyMappingValue(new List<string>(){nameof(Pregled.IsOdradjen)})}
+                    })
+                },
+                {new PropertyMapping<PregledDtoEL,Pregled>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(PregledDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Pregled.Id)})},
+                        {nameof(PregledDtoEL.Pacijent),new PropertyMappingValue(new List<string>(){nameof(Pregled.Pacijent)})},
+                        {nameof(PregledDtoEL.Doktor),new PropertyMappingValue(new List<string>(){nameof(Pregled.Doktor)})},
+                        {nameof(PregledDtoEL.ZahtevZaPregled),new PropertyMappingValue(new List<string>(){nameof(Pregled.ZahtevZaPregled)})},
+                        {nameof(PregledDtoEL.DatumPregleda),new PropertyMappingValue(new List<string>(){nameof(Pregled.DatumPregleda)})},
+                        {nameof(PregledDtoEL.IsOdradjen),new PropertyMappingValue(new List<string>(){nameof(Pregled.IsOdradjen)})}
+                    })
+                },
+                {new PropertyMapping<LekarskoUverenjeDtoLL,LekarskoUverenje>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(LekarskoUverenjeDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.Id)})},
+                        {nameof(LekarskoUverenjeDtoLL.PregledId),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.PregledId)})},
+                        {nameof(LekarskoUverenjeDtoLL.ZdravstvenoStanjeId),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.ZdravstvenoStanjeId)})},
+                        {nameof(LekarskoUverenjeDtoLL.OpisStanja),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.OpisStanja)})}
+                    })
+                },
+                {new PropertyMapping<LekarskoUverenjeDtoEL,LekarskoUverenje>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                    {
+                        {nameof(LekarskoUverenjeDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.Id)})},
+                        {nameof(LekarskoUverenjeDtoEL.Pregled),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.Pregled)})},
+                        {nameof(LekarskoUverenjeDtoEL.ZdravstvenoStanje),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.ZdravstvenoStanje)})},
+                        {nameof(LekarskoUverenjeDtoEL.OpisStanja),new PropertyMappingValue(new List<string>(){nameof(LekarskoUverenje.OpisStanja)})}
+                    })
+                },
             };
     }
 }

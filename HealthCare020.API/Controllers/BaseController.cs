@@ -33,9 +33,9 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id, [FromQuery]TResourceParameters resourceParameters)
+        public async Task<IActionResult> GetById(int id, [FromQuery]bool? EagerLoaded=false)
         {
-            var result = await _service.GetById(id, resourceParameters);
+            var result = await _service.GetById(id, EagerLoaded ?? false);
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
