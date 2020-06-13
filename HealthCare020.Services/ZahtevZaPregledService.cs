@@ -5,12 +5,12 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
+using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using HealthCare020.Services.Helpers;
 
 namespace HealthCare020.Services
 {
@@ -92,6 +92,56 @@ namespace HealthCare020.Services
             await _dbContext.SaveChangesAsync();
 
             return ServiceResult<ZahtevZaPregledDtoLL>.OK(_mapper.Map<ZahtevZaPregledDtoLL>(zahtevFromDb));
+        }
+
+        public override async Task<PagedList<ZahtevZaPregled>> FilterAndPrepare(IQueryable<ZahtevZaPregled> result, ZahtevZaPregledResourceParameters resourceParameters)
+        {
+            if (!await result.AnyAsync())
+                return null;
+
+            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.PacijentIme))
+            {
+                result = result.Where(x =>x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.PacijentIme.ToLower()));
+            }
+
+            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime))
+            {
+                result = result.Where(x =>x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.PacijentPrezime.ToLower()));
+            }
+
+            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorIme))
+            {
+                result = result.Where(x =>x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.DoktorIme.ToLower()));
+            }
+
+            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorPrezime))
+            {
+                result = result.Where(x =>x.Doktor.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.DoktorPrezime.ToLower()));
+            }
+
+            if (await result.AnyAsync() && resourceParameters.PacijentId.HasValue)
+            {
+                result = result.Where(x => x.PacijentId == resourceParameters.PacijentId);
+            }
+
+            if(await result.AnyAsync() && resourceParameters.DoktorId.HasValue)
+            {
+                result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+            }
+
+            if(await result.AnyAsync() && resourceParameters.UputnicaId.HasValue)
+            {
+                result = result.Where(x => x.UputnicaId == resourceParameters.UputnicaId);
+            }
+
+            if(await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Napomena))
+            {
+                result = result.Where(x => x.Napomena.ToLower().Contains(resourceParameters.Napomena.ToLower()));
+            }
+
+            var pagedResult = PagedList<ZahtevZaPregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
+
+            return pagedResult;
         }
     }
 }

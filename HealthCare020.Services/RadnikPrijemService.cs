@@ -48,11 +48,11 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Insert(RadnikPrijemUpsertDto request)
         {
-            var radnikInsertResult = await _radnikService.Insert(request) as ServiceResult<Radnik>; 
+            var radnikInsertResult = await _radnikService.Insert(request);
             if (!radnikInsertResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
-            var entity = new RadnikPrijem { RadnikId = radnikInsertResult.Data.Id };
+            var entity = new RadnikPrijem { RadnikId = (radnikInsertResult as ServiceResult<Radnik>).Data.Id };
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
@@ -106,9 +106,6 @@ namespace HealthCare020.Services
                 result = result.Where(x => x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
 
             result = result.Include(x => x.Radnik.LicniPodaci);
-
-            if (resourceParameters.EagerLoaded)
-                PropertyCheck<RadnikPrijemDtoEL>(resourceParameters.OrderBy);
 
             var pagedResult = PagedList<RadnikPrijem>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
 

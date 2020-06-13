@@ -12,7 +12,7 @@ namespace HealthCare020.Core.ServiceModels
         {
         }
 
-        public static ServiceResult<T> OK(T data, string message = "") => new ServiceResult<T> { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK };
+        public static ServiceResult<T> OK(T data, string message = "") => new ServiceResult<T> { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
 
         public static ServiceResult<T> NoContent(string message = "") => new ServiceResult<T>(HttpStatusCode.NoContent, true, message);
 
@@ -29,6 +29,7 @@ namespace HealthCare020.Core.ServiceModels
         public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
         public bool Succeeded { get; set; } = true;
         public string Message { get; set; } = string.Empty;
+        public bool HasData { get; set; } = false;
 
         public ServiceResult()
         {

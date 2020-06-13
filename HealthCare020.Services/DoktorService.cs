@@ -51,12 +51,12 @@ namespace HealthCare020.Services
             if (!await _dbContext.NaucneOblasti.AnyAsync(x => x.Id == request.NaucnaOblastId))
                 return ServiceResult.NotFound($"Naucna oblast sa ID-em {request.NaucnaOblastId} nije pronadjena.");
 
-            var radnikInsertResult = await _radnikService.Insert(request) as ServiceResult<Radnik>;
+            var radnikInsertResult = await _radnikService.Insert(request);
             if (!radnikInsertResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
             var entity = _mapper.Map<Doktor>(request);
-            entity.RadnikId = radnikInsertResult.Data.Id;
+            entity.RadnikId = (radnikInsertResult as ServiceResult<Radnik>).Data.Id;
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();

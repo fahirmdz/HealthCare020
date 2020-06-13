@@ -26,21 +26,21 @@ namespace HealthCare020.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Insert(TDtoForCreation dtoForCreation)
         {
-            var result = await _crudService.Insert(dtoForCreation) as ServiceResult<TDto>;
+            var result = await _crudService.Insert(dtoForCreation);
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok(result.Data);
+            return Ok((result as ServiceResult<TDto>).Data);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TDtoForUpdate dtoForUpdate)
         {
-            var result = await _crudService.Update(id, dtoForUpdate) as ServiceResult<TDto>; ;
+            var result = await _crudService.Update(id, dtoForUpdate);
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok(result.Data);
+            return Ok((result as ServiceResult<TDto>).Data);
         }
 
         [HttpDelete("{id}")]
@@ -73,7 +73,7 @@ namespace HealthCare020.API.Controllers
             if (!updateResult.Succeeded)
                 return WithStatusCode(updateResult.StatusCode, updateResult.Message);
 
-            return Ok(result);
+            return Ok((updateResult as ServiceResult<TDto>).Data);
         }
 
         [HttpOptions]

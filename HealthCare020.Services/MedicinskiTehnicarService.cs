@@ -49,11 +49,11 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Insert(MedicinskiTehnicarUpsertDto request)
         {
-            var radnikInsertResult = await _radnikService.Insert(request) as ServiceResult<Radnik>;
+            var radnikInsertResult = await _radnikService.Insert(request);
             if (!radnikInsertResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
-            var entity = new MedicinskiTehnicar { RadnikId = radnikInsertResult.Data.Id };
+            var entity = new MedicinskiTehnicar { RadnikId = (radnikInsertResult as ServiceResult<Radnik>).Data.Id };
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
