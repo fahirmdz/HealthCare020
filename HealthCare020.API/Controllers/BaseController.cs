@@ -21,30 +21,30 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
+        public virtual async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
-            var result = await _service.Get(resourceParameters) as ServiceResult<SequenceResult>;
+            var result = await _service.Get(resourceParameters);
 
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.Data.PaginationMetadata));
+            var resultWithData = result as ServiceResult<SequenceResult>;
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultWithData.Data.PaginationMetadata));
 
-            return Ok(result.Data.Data);
+            return Ok(resultWithData.Data.Data);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id, [FromQuery]bool? EagerLoaded=false)
+        public virtual async Task<IActionResult> GetById(int id, [FromQuery]bool? EagerLoaded=false)
         {
             var result = await _service.GetById(id, EagerLoaded ?? false);
 
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            var resultTemp = result as ServiceResult<object>;
+            var resultWithData = result as ServiceResult<object>;
             
-                return Ok(resultTemp.Data);
-            
+                return Ok(resultWithData.Data);
         }
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")

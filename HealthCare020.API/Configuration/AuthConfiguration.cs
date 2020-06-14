@@ -1,9 +1,11 @@
-﻿using System;
-using System.Linq;
-using HealthCare020.API.Constants;
+﻿using HealthCare020.API.Constants;
 using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace HealthCare020.API.Configuration
 {
@@ -11,64 +13,56 @@ namespace HealthCare020.API.Configuration
     {
         public static IServiceCollection AddAuthConfiguration(this IServiceCollection services)
         {
-             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "https://localhost:5005/";
-                    options.RequireHttpsMetadata = false;
-                });
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+               .AddIdentityServerAuthentication(options =>
+               {
+                   options.Authority = "https://localhost:5005/";
+                   options.RequireHttpsMetadata = false;
+               });
 
             services.AddAuthorization(opt =>
             {
                 opt.AddPolicy(AuthorizationPolicies.AdminPolicy, policy =>
                 {
-                    policy.RequireAssertion(context =>
-                        {
-                            var roles = context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
+                    policy.RequireAssertion(context=>authorizationHandler(context,AuthorizationPolicies.AdminPolicy).Invoke(context));
 
-                            var listOfRoles = roles?.Split(",").Select(x=>x.Trim()).ToList();
-
-                            return listOfRoles?.Contains("Administrator",StringComparer.InvariantCultureIgnoreCase) ?? false;
-                        }
-                    );
                 });
                 opt.AddPolicy(AuthorizationPolicies.DoktorPolicy, policy =>
                 {
-                    policy.RequireAssertion(context =>
-                        {
-                            var roles = context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
+                    policy.RequireAssertion(context=>authorizationHandler(context,AuthorizationPolicies.DoktorPolicy).Invoke(context));
 
-                            var listOfRoles = roles?.Split(",").ToList();
-
-                            return listOfRoles?.Contains("Doktor") ?? false;
-                        }
-                    );
                 });
                 opt.AddPolicy(AuthorizationPolicies.MedicinskiTehnicarPolicy, policy =>
                 {
-                    policy.RequireAssertion(context =>
-                        {
-                            var roles = context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
-
-                            var listOfRoles = roles?.Split(",").ToList();
-
-                            return listOfRoles?.Contains("MedicinskiTehnicar") ?? false;
-                        }
-                    );
+                    policy.RequireAssertion(context=>authorizationHandler(context,AuthorizationPolicies.MedicinskiTehnicarPolicy).Invoke(context));
                 });
                 opt.AddPolicy(AuthorizationPolicies.RadnikPrijemPolicy, policy =>
                 {
-                    policy.RequireAssertion(context =>
-                        {
-                            var roles = context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
-
-                            var listOfRoles = roles?.Split(",").ToList();
-
-                            return listOfRoles?.Contains("RadnikPrijem") ?? false;
-                        }
-                    );
+                    policy.RequireAssertion(context=>authorizationHandler(context,AuthorizationPolicies.RadnikPrijemPolicy).Invoke(context));
+                });
+                opt.AddPolicy(AuthorizationPolicies.PacijentPolicy, policy =>
+                {
+                    policy.RequireAssertion(context=>
+                    {
+                        var roles = GetRoles(context)?.Trim()?.ToLower();
+                        return !string.IsNullOrWhiteSpace(roles) && (roles.Contains(AuthorizationPolicies.PacijentPolicy.ToLower()) || roles.Contains(AuthorizationPolicies.AdminPolicy.ToLower()));
+                    });
                 });
             });
+
+            Func<AuthorizationHandlerContext,bool> authorizationHandler(AuthorizationHandlerContext context, string policy)
+            {
+                var roles = GetRoles(context);
+
+                var listOfRoles = roles?.Split(",").Select(x=>x.Trim()).ToList();
+
+                var isInRole = listOfRoles?.Any(x => x.Equals(policy, StringComparison.CurrentCultureIgnoreCase)) ??
+                               false;
+
+                return handlerContext => isInRole;
+            }
+
+            string GetRoles(AuthorizationHandlerContext context) => context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
 
             return services;
         }

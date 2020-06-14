@@ -24,6 +24,12 @@ namespace HealthCare020.API.Controllers
             _korisnikService = _crudService as IKorisnikService;
         }
 
+        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
+        public override Task<IActionResult> Get(KorisnickiNalogResourceParameters resourceParameters)
+        {
+            return base.Get(resourceParameters);
+        }
+
         [Authorize(AuthorizationPolicies.AdminPolicy)]
         [HttpPut("{id}/lock")]
         public async Task<IActionResult> Lock(int id, KorisnickiNalogLockUpsertRequest request)

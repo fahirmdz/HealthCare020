@@ -42,12 +42,12 @@ namespace HealthCare020.Core.ServiceModels
             Message = message;
         }
 
-        public static ServiceResult WithStatusCode(HttpStatusCode statusCode, string message = "") => new ServiceResult { StatusCode = statusCode, Succeeded = (int)statusCode - 200 > 100, Message = message };
+        public static ServiceResult WithStatusCode(HttpStatusCode statusCode, string message = "") => new ServiceResult { StatusCode = statusCode, Succeeded = (int)statusCode - 200 < 100, Message = message };
 
         public static ServiceResult BadRequest(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.BadRequest, Succeeded = false, Message = message };
 
         public static ServiceResult NotFound(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.NotFound, Succeeded = false, Message = message };
-
+        
         public static ServiceResult Unauthorized(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.Unauthorized, Succeeded = false, Message = message };
 
         public static ServiceResult Forbidden(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.Forbidden, Succeeded = false, Message = message };

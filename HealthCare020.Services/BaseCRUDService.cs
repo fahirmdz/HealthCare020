@@ -20,8 +20,9 @@ namespace HealthCare020.Services
         public BaseCRUDService(IMapper mapper, HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
-            IHttpContextAccessor httpContextAccessor) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService)
+            IHttpContextAccessor httpContextAccessor,
+            IAuthService authService) :
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService,authService)
         {
             _httpContextAccessor = httpContextAccessor;
         }

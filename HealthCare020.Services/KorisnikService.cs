@@ -13,8 +13,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -23,13 +21,17 @@ namespace HealthCare020.Services
     public class KorisnikService : BaseCRUDService<KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalog, KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto>,
         IKorisnikService
     {
+        private readonly ISecurityService _securityService;
+
         public KorisnikService(IMapper mapper,
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
-            IHttpContextAccessor httpContextAccessor)
-            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            ISecurityService securityService,
+            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
         {
+            _securityService = securityService;
         }
 
         public override IQueryable<KorisnickiNalog> GetWithEagerLoad(int? id = null)
@@ -54,8 +56,8 @@ namespace HealthCare020.Services
                 return ServiceResult.BadRequest("Lozinke se ne podudaraju");
             }
 
-            korisnickiNalog.PasswordSalt = GenerateSalt();
-            korisnickiNalog.PasswordHash = GenerateHash(korisnickiNalog.PasswordSalt, request.Password);
+            korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
+            korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, request.Password);
 
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;
@@ -79,8 +81,8 @@ namespace HealthCare020.Services
 
             await Task.Run(() =>
             {
-                korisnickiNalog.PasswordSalt = GenerateSalt();
-                korisnickiNalog.PasswordHash = GenerateHash(korisnickiNalog.PasswordSalt, dtoForUpdate.Password);
+                korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
+                korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, dtoForUpdate.Password);
 
                 korisnickiNalog.DateCreated = DateTime.Now;
                 korisnickiNalog.LastOnline = DateTime.Now;
@@ -114,6 +116,9 @@ namespace HealthCare020.Services
 
         public override async Task<PagedList<KorisnickiNalog>> FilterAndPrepare(IQueryable<KorisnickiNalog> result, KorisnickiNalogResourceParameters resourceParameters)
         {
+            if (!await result.AnyAsync())
+                return null;
+
             if (!string.IsNullOrWhiteSpace(resourceParameters.Username) && await result.AnyAsync())
             {
                 result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
@@ -135,13 +140,19 @@ namespace HealthCare020.Services
             return base.PrepareDataForClient(data, resourceParameters);
         }
 
+        public override T PrepareDataForClient<T>(KorisnickiNalog data)
+        {
+            _dbContext.Entry(data).Collection(c => c.RolesKorisnickiNalog).Load();
+            return _mapper.Map<T>(data);
+        }
+
         public async Task<KorisnickiNalogDtoLL> Authenticate(string username, string password)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FirstOrDefaultAsync(x => x.Username == username);
 
             if (korisnickiNalog != null)
             {
-                var newHash = GenerateHash(korisnickiNalog.PasswordSalt, password);
+                var newHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, password);
 
                 if (newHash == korisnickiNalog.PasswordHash)
                     return _mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog);
@@ -221,27 +232,6 @@ namespace HealthCare020.Services
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
             return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
-        }
-
-        private string GenerateSalt()
-        {
-            var buf = new byte[16];
-            (new RNGCryptoServiceProvider()).GetBytes(buf);
-            return Convert.ToBase64String(buf);
-        }
-
-        private string GenerateHash(string salt, string password)
-        {
-            byte[] src = Convert.FromBase64String(salt);
-            byte[] bytes = Encoding.Unicode.GetBytes(password);
-            byte[] dst = new byte[src.Length + bytes.Length];
-
-            System.Buffer.BlockCopy(src, 0, dst, 0, src.Length);
-            System.Buffer.BlockCopy(bytes, 0, dst, src.Length, bytes.Length);
-
-            HashAlgorithm algorithm = HashAlgorithm.Create("SHA512");
-            byte[] inArray = algorithm.ComputeHash(dst);
-            return Convert.ToBase64String(inArray);
         }
     }
 }

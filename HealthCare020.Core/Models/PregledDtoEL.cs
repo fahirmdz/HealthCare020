@@ -4,7 +4,7 @@
     {
         public ZahtevZaPregledDtoEL ZahtevZaPregled { get; set; }
 
-        public DoktorDtoEL Doktor { get; set; }
+        public string Doktor { get; set; }
 
         public PacijentDtoEL Pacijent { get; set; }
     }

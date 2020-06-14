@@ -35,5 +35,7 @@ namespace HealthCare020.Core.Entities
         [ForeignKey(nameof(Grad))]
         public int GradId { get; set; }
         public Grad Grad { get; set; }
+
+        public virtual string ImePrezime() => Ime + " " + Prezime;
     }
 }

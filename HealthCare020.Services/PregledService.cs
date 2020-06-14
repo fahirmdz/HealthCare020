@@ -18,8 +18,9 @@ namespace HealthCare020.Services
     public class PregledService:BaseCRUDService<PregledDtoLL,PregledDtoEL,PregledResourceParameters,Pregled,PregledUpsertDto,PregledUpsertDto>
     {
         public PregledService(IMapper mapper, HealthCare020DbContext dbContext,
-            IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, IHttpContextAccessor httpContextAccessor)
-            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
+            IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, IHttpContextAccessor httpContextAccessor,
+            IAuthService authService) :
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
         { }
 
         public override IQueryable<Pregled> GetWithEagerLoad(int? id = null)

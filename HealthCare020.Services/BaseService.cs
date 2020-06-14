@@ -20,13 +20,16 @@ namespace HealthCare020.Services
         protected readonly IMapper _mapper;
         protected readonly IPropertyMappingService _propertyMappingService;
         protected readonly IPropertyCheckerService _propertyCheckerService;
+        protected readonly IAuthService _authService;
 
-        public BaseService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService)
+        public BaseService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, 
+            IAuthService authService)
         {
             _mapper = mapper;
             _dbContext = dbContext;
             _propertyMappingService = propertyMappingService;
             _propertyCheckerService = propertyCheckerService;
+            _authService = authService;
         }
 
         public virtual async Task<ServiceResult> Get(TResourceParameters resourceParameters)
