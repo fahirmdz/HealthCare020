@@ -42,7 +42,7 @@ namespace HealthCare020.Core.ServiceModels
             Message = message;
         }
 
-        public static ServiceResult WithStatusCode(HttpStatusCode statusCode, string message = "") => new ServiceResult { StatusCode = statusCode, Succeeded = (int)statusCode - 200 > 100, Message = message };
+        public static ServiceResult WithStatusCode(HttpStatusCode statusCode, string message = "") => new ServiceResult { StatusCode = statusCode, Succeeded = (int)statusCode - 200 < 100, Message = message };
 
         public static ServiceResult BadRequest(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.BadRequest, Succeeded = false, Message = message };
 

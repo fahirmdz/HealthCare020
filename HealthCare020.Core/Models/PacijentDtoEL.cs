@@ -4,7 +4,5 @@
     public class PacijentDtoEL : PacijentDto
     {
         public ZdravstvenaKnjizicaDtoEL ZdravstvenaKnjizica { get; set; }
-
-        public KorisnickiNalogDtoEL KorisnickiNalog { get; set; }
     }
 }

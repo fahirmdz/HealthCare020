@@ -124,13 +124,14 @@ namespace HealthCare020.Services.Helpers
                     {
                         {nameof(PacijentDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
                         {nameof(PacijentDtoLL.ZdravstvenaKnjizicaId),new PropertyMappingValue(new List<string>(){nameof(Pacijent.ZdravstvenaKnjizicaId)})},
+                        {nameof(PacijentDtoEL.Username),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalog.Username)})},
                         {nameof(PacijentDtoLL.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalogId)})}
                     })
                 },
                 {new PropertyMapping<PacijentDtoEL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(PacijentDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
-                        {nameof(PacijentDtoEL.KorisnickiNalog),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalog)})},
+                        {nameof(PacijentDtoEL.Username),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalog.Username)})},
                         {nameof(PacijentDtoEL.ZdravstvenaKnjizica),new PropertyMappingValue(new List<string>(){nameof(Pacijent.ZdravstvenaKnjizica)})},
                     })
                 },
@@ -173,7 +174,8 @@ namespace HealthCare020.Services.Helpers
                     {
                         {nameof(ZdravstvenaKnjizicaDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.Id)})},
                         {nameof(ZdravstvenaKnjizicaDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.LicniPodaci)})},
-                        {nameof(ZdravstvenaKnjizicaDtoEL.Doktor),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.Doktor)})}
+                        {nameof(ZdravstvenaKnjizicaDtoEL.Doktor),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.Doktor)})},
+                        {nameof(ZdravstvenaKnjizicaDtoEL.DoktorId),new PropertyMappingValue(new List<string>(){nameof(ZdravstvenaKnjizica.DoktorId)})}
                     })
                 },
                 {new PropertyMapping<ZahtevZaPregledDtoLL,ZahtevZaPregled>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)

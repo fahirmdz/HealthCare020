@@ -3,7 +3,6 @@
     public class ZdravstvenaKnjizicaDtoEL:ZdravstvenaKnjizicaDto
     {
         public LicniPodaciDto LicniPodaci { get; set; }
-
-        public DoktorDtoEL Doktor { get; set; }
+        public string Doktor { get; set; }
     }
 }

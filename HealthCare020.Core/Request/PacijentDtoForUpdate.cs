@@ -2,6 +2,5 @@
 {
     public class PacijentDtoForUpdate
     {
-        public LicniPodaciUpsertDto LicniPodaci { get; set; }
     }
 }

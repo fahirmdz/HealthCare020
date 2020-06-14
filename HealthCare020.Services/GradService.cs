@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Services.Constants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.Services
 {

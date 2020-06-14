@@ -4,8 +4,6 @@
     {
         public int ZahtevZaPregledId { get; set; }
 
-        public int DoktorId { get; set; }
-
         public int PacijentId { get; set; }
     }
 }
