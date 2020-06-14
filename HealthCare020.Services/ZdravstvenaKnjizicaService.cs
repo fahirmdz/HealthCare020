@@ -23,8 +23,9 @@ namespace HealthCare020.Services
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
-            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService)
-            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
+            ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService,
+            IAuthService authService) :
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
         {
             _licniPodaciService = licniPodaciService;
         }

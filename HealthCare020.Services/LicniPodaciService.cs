@@ -20,8 +20,8 @@ namespace HealthCare020.Services
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
-            IHttpContextAccessor httpContextAccessor)
-            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
         {
         }
 

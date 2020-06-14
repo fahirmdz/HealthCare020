@@ -40,11 +40,19 @@ namespace HealthCare020.API.Configuration
                 {
                     policy.RequireAssertion(context=>authorizationHandler(context,AuthorizationPolicies.RadnikPrijemPolicy).Invoke(context));
                 });
+                opt.AddPolicy(AuthorizationPolicies.PacijentPolicy, policy =>
+                {
+                    policy.RequireAssertion(context=>
+                    {
+                        var roles = GetRoles(context)?.Trim()?.ToLower();
+                        return !string.IsNullOrWhiteSpace(roles) && (roles.Contains(AuthorizationPolicies.PacijentPolicy.ToLower()) || roles.Contains(AuthorizationPolicies.AdminPolicy.ToLower()));
+                    });
+                });
             });
 
             Func<AuthorizationHandlerContext,bool> authorizationHandler(AuthorizationHandlerContext context, string policy)
             {
-                var roles = context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
+                var roles = GetRoles(context);
 
                 var listOfRoles = roles?.Split(",").Select(x=>x.Trim()).ToList();
 
@@ -53,6 +61,9 @@ namespace HealthCare020.API.Configuration
 
                 return handlerContext => isInRole;
             }
+
+            string GetRoles(AuthorizationHandlerContext context) => context.User.Claims.FirstOrDefault(x => x.Type == "roles")?.Value;
+
             return services;
         }
     }

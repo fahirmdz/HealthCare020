@@ -47,7 +47,7 @@ namespace HealthCare020.Core.ServiceModels
         public static ServiceResult BadRequest(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.BadRequest, Succeeded = false, Message = message };
 
         public static ServiceResult NotFound(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.NotFound, Succeeded = false, Message = message };
-
+        
         public static ServiceResult Unauthorized(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.Unauthorized, Succeeded = false, Message = message };
 
         public static ServiceResult Forbidden(string message = "") => new ServiceResult { StatusCode = HttpStatusCode.Forbidden, Succeeded = false, Message = message };

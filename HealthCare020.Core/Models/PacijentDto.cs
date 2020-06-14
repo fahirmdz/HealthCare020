@@ -4,5 +4,6 @@
     {
         public int Id { get; set; }
         public string Username { get; set; }
+        public int KorisnickiNalogId { get; set; }
     }
 }

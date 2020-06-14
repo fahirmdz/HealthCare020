@@ -22,7 +22,8 @@ namespace HealthCare020.Services
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IRadnikService radnikService,
-            IHttpContextAccessor httpContextAccessor) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
         {
             _radnikService = radnikService;
         }

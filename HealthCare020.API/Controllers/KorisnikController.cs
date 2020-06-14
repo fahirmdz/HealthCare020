@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace HealthCare020.API.Controllers
 {
-    [Authorize(AuthorizationPolicies.AdminPolicy)]
     [Route("api/" + Routes.KorisniciRoute)]
     public class KorisnikController : BaseCRUDController<KorisnickiNalog, KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto>
     {
@@ -29,12 +28,6 @@ namespace HealthCare020.API.Controllers
         public override Task<IActionResult> Get(KorisnickiNalogResourceParameters resourceParameters)
         {
             return base.Get(resourceParameters);
-        }
-
-        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
-        public override Task<IActionResult> GetById(int id, bool? EagerLoaded)
-        {
-            return base.GetById(id, EagerLoaded);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]

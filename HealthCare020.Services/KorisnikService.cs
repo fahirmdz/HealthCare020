@@ -27,8 +27,9 @@ namespace HealthCare020.Services
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
-            IHttpContextAccessor httpContextAccessor, ISecurityService securityService)
-            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            ISecurityService securityService,
+            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
         {
             _securityService = securityService;
         }
@@ -115,6 +116,9 @@ namespace HealthCare020.Services
 
         public override async Task<PagedList<KorisnickiNalog>> FilterAndPrepare(IQueryable<KorisnickiNalog> result, KorisnickiNalogResourceParameters resourceParameters)
         {
+            if (!await result.AnyAsync())
+                return null;
+
             if (!string.IsNullOrWhiteSpace(resourceParameters.Username) && await result.AnyAsync())
             {
                 result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
@@ -134,6 +138,12 @@ namespace HealthCare020.Services
                 _dbContext.Entry(x).Collection(c => c.RolesKorisnickiNalog).Load();
             }
             return base.PrepareDataForClient(data, resourceParameters);
+        }
+
+        public override T PrepareDataForClient<T>(KorisnickiNalog data)
+        {
+            _dbContext.Entry(data).Collection(c => c.RolesKorisnickiNalog).Load();
+            return _mapper.Map<T>(data);
         }
 
         public async Task<KorisnickiNalogDtoLL> Authenticate(string username, string password)
