@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthCare020.Core.Enums;
 
 namespace HealthCare020.Services
 {
@@ -45,11 +46,16 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Insert(ZahtevZaPregledUpsertDto dtoForCreation)
         {
+            var user = await _authService.LoggedInUser();
+            if(user==null)
+                return ServiceResult.Unauthorized();
+
+            var pacijent = await _dbContext.Pacijenti.FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
+            if(pacijent==null)
+                return ServiceResult.Forbidden($"Samo pacijenti mogu kreirati zahtev za pregled.");
+
             if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.DoktorId == dtoForCreation.DoktorId))
                 return ServiceResult.NotFound($"Doktor sa ID-em {dtoForCreation.DoktorId} nije pronadjen.");
-
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.PacijentId == dtoForCreation.PacijentId))
-                return ServiceResult.NotFound($"Pacijent sa ID-em {dtoForCreation.DoktorId} nije pronadjen.");
 
             if (dtoForCreation.UputnicaId.HasValue && !await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dtoForCreation.UputnicaId))
                 return ServiceResult.NotFound($"Uputnica sa ID-em {dtoForCreation.DoktorId} nije pronadjena.");
@@ -57,7 +63,7 @@ namespace HealthCare020.Services
             var entity = new ZahtevZaPregled
             {
                 DoktorId = dtoForCreation.DoktorId,
-                PacijentId = dtoForCreation.PacijentId,
+                PacijentId = pacijent.Id,
                 UputnicaId = dtoForCreation.UputnicaId,
                 Napomena = dtoForCreation.Napomena
             };
@@ -70,6 +76,9 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Update(int id, ZahtevZaPregledUpsertDto dtoForUpdate)
         {
+            if(!await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
+                return ServiceResult.Forbidden($"Samo pacijenti imaju pristup ovom resursu.");
+
             var zahtevFromDb = await _dbContext.ZahteviZaPregled.FindAsync(id);
 
             if (zahtevFromDb == null)
@@ -77,9 +86,6 @@ namespace HealthCare020.Services
 
             if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.DoktorId == dtoForUpdate.DoktorId))
                 return ServiceResult.NotFound($"Doktor sa ID-em {dtoForUpdate.DoktorId} nije pronadjen.");
-
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.PacijentId == dtoForUpdate.PacijentId))
-                return ServiceResult.NotFound($"Pacijent sa ID-em {dtoForUpdate.DoktorId} nije pronadjen.");
 
             if (dtoForUpdate.UputnicaId.HasValue &&
                 !await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dtoForUpdate.UputnicaId))
@@ -101,49 +107,57 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
+            if(resourceParameters!=null)
             {
-                result = result.Where(x =>x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.PacijentIme.ToLower()));
+                if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
+                {
+                    result = result.Where(x =>
+                        x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
+                            .StartsWith(resourceParameters.PacijentIme.ToLower()));
+                }
+
+                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime))
+                {
+                    result = result.Where(x =>
+                        x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
+                            .StartsWith(resourceParameters.PacijentPrezime.ToLower()));
+                }
+
+                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorIme))
+                {
+                    result = result.Where(x =>
+                        x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.DoktorIme.ToLower()));
+                }
+
+                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorPrezime))
+                {
+                    result = result.Where(x =>
+                        x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
+                            .StartsWith(resourceParameters.DoktorPrezime.ToLower()));
+                }
+
+                if (await result.AnyAsync() && resourceParameters.PacijentId.HasValue)
+                {
+                    result = result.Where(x => x.PacijentId == resourceParameters.PacijentId);
+                }
+
+                if (await result.AnyAsync() && resourceParameters.DoktorId.HasValue)
+                {
+                    result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+                }
+
+                if (await result.AnyAsync() && resourceParameters.UputnicaId.HasValue)
+                {
+                    result = result.Where(x => x.UputnicaId == resourceParameters.UputnicaId);
+                }
+
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Napomena))
+                {
+                    result = result.Where(x => x.Napomena.ToLower().Contains(resourceParameters.Napomena.ToLower()));
+                }
             }
 
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime))
-            {
-                result = result.Where(x =>x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.PacijentPrezime.ToLower()));
-            }
-
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorIme))
-            {
-                result = result.Where(x =>x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.DoktorIme.ToLower()));
-            }
-
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorPrezime))
-            {
-                result = result.Where(x =>x.Doktor.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.DoktorPrezime.ToLower()));
-            }
-
-            if (await result.AnyAsync() && resourceParameters.PacijentId.HasValue)
-            {
-                result = result.Where(x => x.PacijentId == resourceParameters.PacijentId);
-            }
-
-            if(await result.AnyAsync() && resourceParameters.DoktorId.HasValue)
-            {
-                result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
-            }
-
-            if(await result.AnyAsync() && resourceParameters.UputnicaId.HasValue)
-            {
-                result = result.Where(x => x.UputnicaId == resourceParameters.UputnicaId);
-            }
-
-            if(await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Napomena))
-            {
-                result = result.Where(x => x.Napomena.ToLower().Contains(resourceParameters.Napomena.ToLower()));
-            }
-
-            var pagedResult = PagedList<ZahtevZaPregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
-
-            return pagedResult;
+            return await base.FilterAndPrepare(result, resourceParameters);
         }
     }
 }

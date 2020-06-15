@@ -4,14 +4,16 @@ using HealthCare020.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthCare020.Repository.Migrations
 {
     [DbContext(typeof(HealthCare020DbContext))]
-    partial class HealthCare020DbContextModelSnapshot : ModelSnapshot
+    [Migration("20200615092815_Renamed_Posete_Table_to_ZahteviZaPosete")]
+    partial class Renamed_Posete_Table_to_ZahteviZaPosete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,15 +256,10 @@ namespace HealthCare020.Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("LicniPodaciId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StacionarnoOdeljenjeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LicniPodaciId");
 
                     b.HasIndex("StacionarnoOdeljenjeId");
 
@@ -609,12 +606,6 @@ namespace HealthCare020.Repository.Migrations
 
             modelBuilder.Entity("HealthCare020.Core.Entities.PacijentNaLecenju", b =>
                 {
-                    b.HasOne("HealthCare020.Core.Entities.LicniPodaci", "LicniPodaci")
-                        .WithMany()
-                        .HasForeignKey("LicniPodaciId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("HealthCare020.Core.Entities.StacionarnoOdeljenje", "StacionarnoOdeljenje")
                         .WithMany()
                         .HasForeignKey("StacionarnoOdeljenjeId")

@@ -9,7 +9,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -22,7 +21,7 @@ namespace HealthCare020.Services
         protected readonly IPropertyCheckerService _propertyCheckerService;
         protected readonly IAuthService _authService;
 
-        public BaseService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, 
+        public BaseService(IMapper mapper, HealthCare020DbContext dbContext, IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService,
             IAuthService authService)
         {
             _mapper = mapper;
@@ -36,24 +35,26 @@ namespace HealthCare020.Services
         {
             IQueryable<TEntity> result;
 
-            if (ShouldEagerLoad(resourceParameters))
+            if (resourceParameters != null)
             {
-                //check prop and prop mapping
-                var propertyCheckResult = PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
-                if (!propertyCheckResult.Succeded)
-                    return ServiceResult.BadRequest(propertyCheckResult.Message);
+                if (ShouldEagerLoad(resourceParameters))
+                {
+                    //check prop and prop mapping
+                    var propertyCheckResult = PropertyCheck<TDtoEagerLoaded>(resourceParameters.OrderBy);
+                    if (!propertyCheckResult.Succeded)
+                        return ServiceResult.BadRequest(propertyCheckResult.Message);
 
-                result = GetWithEagerLoad();
+                    result = GetWithEagerLoad();
+                }
+                else
+                {
+                    //check prop and prop mapping
+                    var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
+                    if (!propertyCheckResult.Succeded)
+                        return ServiceResult.BadRequest(propertyCheckResult.Message);
+                }
             }
-            else
-            {
-                //check prop and prop mapping
-                var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
-                if (!propertyCheckResult.Succeded)
-                    return ServiceResult.BadRequest(propertyCheckResult.Message);
-
-                result = _dbContext.Set<TEntity>().AsQueryable();
-            }
+            result = _dbContext.Set<TEntity>().AsQueryable();
 
             var pagedResult = await FilterAndPrepare(result, resourceParameters) ?? new PagedList<TEntity>(new List<TEntity>(), 0, 0, 0);
 
@@ -66,7 +67,7 @@ namespace HealthCare020.Services
                     TotalCount = pagedResult.TotalCount,
                     TotalPages = pagedResult.TotalPages
                 },
-                Data = PrepareDataForClient(pagedResult, resourceParameters:resourceParameters),
+                Data = PrepareDataForClient(pagedResult, resourceParameters: resourceParameters),
                 HasNext = pagedResult.HasNext,
                 HasPrevious = pagedResult.HasPrevious
             };
@@ -78,7 +79,7 @@ namespace HealthCare020.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResult> GetById(int id, bool EagerLoaded)
+        public virtual async Task<ServiceResult> GetById(int id, bool EagerLoaded)
         {
             TEntity result;
 
@@ -92,10 +93,10 @@ namespace HealthCare020.Services
             }
 
             if (result == null)
-                return new ServiceResult<dynamic>(HttpStatusCode.NotFound);
+                return ServiceResult.NotFound();
 
             if (EagerLoaded)
-                return new ServiceResult<dynamic>(PrepareDataForClient<TDtoEagerLoaded>(result));
+                return ServiceResult<dynamic>.OK(PrepareDataForClient<TDtoEagerLoaded>(result));
 
             return ServiceResult<dynamic>.OK(PrepareDataForClient<TDto>(result));
         }
@@ -108,7 +109,7 @@ namespace HealthCare020.Services
         public virtual async Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters)
         {
             //Apply pagination
-            return PagedList<TEntity>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
+            return PagedList<TEntity>.Create(result, resourceParameters?.PageNumber ?? 1, resourceParameters?.PageSize ?? 6);
         }
 
 #pragma warning restore 1998
@@ -163,7 +164,7 @@ namespace HealthCare020.Services
         /// </summary>
         public bool ShouldEagerLoad(TResourceParameters resourceParameters)
         {
-            var eagerLoadedProp = resourceParameters.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
+            var eagerLoadedProp = resourceParameters?.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
 
             return eagerLoadedProp != null && (bool)eagerLoadedProp;
         }

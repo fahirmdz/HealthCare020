@@ -116,24 +116,27 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.DoktorIme))
-                result = result.Where(x =>
-                    x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.DoktorIme.ToLower()));
+            if(resourceParameters!=null)
+            {
+                if (!string.IsNullOrWhiteSpace(resourceParameters.DoktorIme))
+                    result = result.Where(x =>
+                        x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.DoktorIme.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.DoktorPrezime))
-                result = result.Where(x =>x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.DoktorPrezime))
+                    result = result.Where(x => x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
                         .StartsWith(resourceParameters.DoktorPrezime.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Ime))
-                result = result.Where(x => x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Ime))
+                    result = result.Where(x => x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime));
 
-            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
-                result = result.Where(x => x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
+                    result = result.Where(x => x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime));
 
-            if (await result.AnyAsync() && resourceParameters.DoktorId.HasValue)
-                result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+                if (await result.AnyAsync() && resourceParameters.DoktorId.HasValue)
+                    result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+            }
 
-            return PagedList<ZdravstvenaKnjizica>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
+            return await base.FilterAndPrepare(result,resourceParameters);
         }
     }
 }

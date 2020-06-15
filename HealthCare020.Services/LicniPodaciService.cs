@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.Entities;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
@@ -9,7 +10,6 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -21,8 +21,24 @@ namespace HealthCare020.Services
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
+            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
+        }
+
+        public override async Task<ServiceResult> GetById(int id, bool EagerLoaded)
+        {
+            if (await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
+            {
+                var user = await _authService.LoggedInUser();
+                if (!await _dbContext.Pacijenti
+                        .Include(x => x.ZdravstvenaKnjizica)
+                        .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.ZdravstvenaKnjizica.LicniPodaciId == id))
+                {
+                    return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih pacijenata.");
+                }
+            }
+
+            return await base.GetById(id, EagerLoaded);
         }
 
         public override IQueryable<LicniPodaci> GetWithEagerLoad(int? id = null)

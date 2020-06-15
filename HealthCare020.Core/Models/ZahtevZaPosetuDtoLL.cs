@@ -1,6 +1,6 @@
 ﻿namespace HealthCare020.Core.Models
 {
-    public class PosetaDtoLL : PosetaDto
+    public class ZahtevZaPosetuDtoLL : ZahtevZaPosetuDto
     {
         public int PacijentNaLecenjuId { get; set; }
     }

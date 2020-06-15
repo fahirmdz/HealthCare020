@@ -10,7 +10,7 @@ namespace HealthCore020.Test
         {
         }
 
-        public void Seed_ZdravstvenoStanje(HealthCare020DbContext context)
+        public static void Seed_ZdravstvenoStanje(HealthCare020DbContext context)
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
@@ -27,7 +27,7 @@ namespace HealthCore020.Test
             context.SaveChanges();
         }
 
-        public void Seed_Drzave(HealthCare020DbContext context)
+        public static void Seed_Drzave(HealthCare020DbContext context)
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
@@ -45,7 +45,7 @@ namespace HealthCore020.Test
         }
 
 
-        public void Seed_Korisnik(HealthCare020DbContext context)
+        public static void Seed_Korisnik(HealthCare020DbContext context)
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();

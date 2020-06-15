@@ -1,42 +1,38 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
 using HealthCare020.API.Controllers;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Repository;
 using HealthCare020.Services;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Services;
+using HealthCore020.Test.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using Xunit;
 
-namespace HealthCore020.Test
+namespace HealthCore020.Test.UnitTests
 {
-    public class DrzavaControllerUnitTestController
+    public class DrzavaControllerUnitTest
     {
         private readonly DrzavaService _service;
-        public static DbContextOptions<HealthCare020DbContext> dbContextOptions { get; set; }
-        public static string connectionString = "Server=.;Database=Healthcare020_Test;Trusted_Connection=true;";
+        public HealthCare020DbContext _dbContext;
 
-        static DrzavaControllerUnitTestController()
+        public DrzavaControllerUnitTest()
         {
-            dbContextOptions = new DbContextOptionsBuilder<HealthCare020DbContext>().UseSqlServer(connectionString).Options;
-        }
-
-        public DrzavaControllerUnitTestController()
-        {
-            var context = new HealthCare020DbContext(dbContextOptions);
-
-            HealthCore020DataDBInitializer db = new HealthCore020DataDBInitializer();
-            db.Seed_Drzave(context);
+            _dbContext = DbService.Instance.GetDbContext();
+            HealthCore020DataDBInitializer.Seed_Drzave(_dbContext);
 
             _service = new DrzavaService(
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context,new PropertyMappingService(), new PropertyCheckerService());
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),
+                _dbContext,
+                new PropertyMappingService(),
+                new PropertyCheckerService(),
+                new HttpContextAccessor(),
+                new AuthService(new HttpContextAccessor(), _dbContext));
         }
 
-        
         #region Get By Id
 
         [Fact]
@@ -61,10 +57,10 @@ namespace HealthCore020.Test
             var drzavaId = 10;
 
             //Act
-            NotFoundException ex = await Assert.ThrowsAsync<NotFoundException>(() => controller.GetById(drzavaId));
+            var result = await controller.GetById(drzavaId);
 
             //Assert
-            Assert.Equal("Not Found", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
         [Fact]
@@ -85,7 +81,6 @@ namespace HealthCore020.Test
 
             Assert.Equal("TestNaziv1", drzava.Naziv);
             Assert.Equal("+123", drzava.PozivniBroj);
-
         }
 
         #endregion Get By Id
@@ -97,6 +92,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new DrzavaController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
 
             //Act
             var data = await controller.Get(null);
@@ -110,6 +106,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new DrzavaController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
 
             //Act
             var data = await controller.Get(null);
@@ -120,8 +117,8 @@ namespace HealthCore020.Test
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
             var zdravstvenaStanja = okResult.Value.Should().BeOfType<List<DrzavaDto>>().Subject;
 
-            Assert.Equal("TestNaziv1", zdravstvenaStanja[0].Naziv);
-            Assert.Equal("TestNaziv2", zdravstvenaStanja[1].Naziv);
+            Assert.Single(zdravstvenaStanja, item => item.Naziv.StartsWith("TestNaziv1"));
+            Assert.Single(zdravstvenaStanja, item => item.Naziv.StartsWith("TestNaziv2"));
         }
 
         #endregion Get All
@@ -191,42 +188,36 @@ namespace HealthCore020.Test
             var okResult = existingEntity.Should().BeOfType<OkObjectResult>().Subject;
             var result = okResult.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
 
+            //Assert
             Assert.NotNull(result);
 
+            //Act
             var drzava = new DrzavaUpsertRequest
             {
                 Naziv = "UpdatedNaziv1",
                 PozivniBroj = "UpdatedPozBr1"
             };
 
-            var updatedData = controller.Update(drzavaId, drzava);
+            var updatedData = await controller.Update(drzavaId, drzava);
             var okResultUpdated = updatedData.Should().BeOfType<OkObjectResult>().Subject;
             var resultUpdated = okResultUpdated.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
 
             //Assert
-            Assert.IsType<OkObjectResult>(updatedData);
-            Assert.Equal("UpdatedNaziv1",resultUpdated.Naziv);
-            Assert.Equal("UpdatedPozBr1",resultUpdated.PozivniBroj);
+            Assert.NotNull(resultUpdated);
 
+            Assert.IsType<OkObjectResult>(updatedData);
+            Assert.Equal("UpdatedNaziv1", resultUpdated.Naziv);
+            Assert.Equal("UpdatedPozBr1", resultUpdated.PozivniBroj);
         }
 
-
         [Fact]
-        public async void Task_Update_Drzava_InvalidData_Return_ModelStateIsNotValid()
+        public void Task_Update_Drzava_InvalidData_Return_ModelStateIsNotValid()
         {
             //Arrange
             var controller = new DrzavaController(_service);
-            var drzavaId = 2;
-
-            var entity = await controller.GetById(drzavaId);
-            var okResult = entity.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<DrzavaDto>().Subject;
-
-            Assert.NotNull(result);
-
-            var drzavaUpsertRequest = new DrzavaUpsertRequest() { Naziv = "A" }; //Mora imati 2 ili vise slova
 
             //Act
+            var drzavaUpsertRequest = new DrzavaUpsertRequest() { Naziv = "A" }; //Mora imati 2 ili vise slova
             controller.ValidateViewModel(drzavaUpsertRequest);
 
             //Assert
@@ -234,19 +225,18 @@ namespace HealthCore020.Test
         }
 
         [Fact]
-        public async void Task_Update_Drzava_InvalidData_Return_NotFound()
+        public async void Task_Update_Drzava_InvalidId_Return_NotFound()
         {
             //Arrange
             var controller = new DrzavaController(_service);
-            var drzavaId = 10;
-
-            var drzavaUpsertRequest = new DrzavaUpsertRequest() { Naziv = "Bugarska",PozivniBroj ="+03"}; 
+            var drzavaId = 22;
 
             //Act
-            NotFoundException ex =  Assert.Throws<NotFoundException>(() => controller.Update(drzavaId,drzavaUpsertRequest));
+            var drzavaUpsertRequest = new DrzavaUpsertRequest() { Naziv = "Bugarska", PozivniBroj = "+03" };
+            var result = await controller.Update(drzavaId, drzavaUpsertRequest);
 
             //Assert
-            Assert.Equal("Not Found", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
         #endregion Update Existing Drzava
@@ -254,19 +244,18 @@ namespace HealthCore020.Test
         #region Delete Zdravstveno Stanje
 
         [Fact]
-        public async void Task_Delete_Drzava_Return_OkResult()
+        public async void Task_Delete_Drzava_Return_NoContentResult()
         {
             //Arrange
             var controller = new DrzavaController(_service);
             var id = 2;
 
             //Act
-            var result =  controller.Delete(id);
+            var result = await controller.Delete(id);
 
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<NoContentResult>(result);
         }
-
 
         [Fact]
         public async void Task_Delete_Drzava_Return_NotFound()
@@ -276,14 +265,12 @@ namespace HealthCore020.Test
             var id = 10;
 
             //Act
-            NotFoundException ex =  Assert.Throws<NotFoundException>(() => controller.Delete(id));
+            var result = await controller.Delete(id);
 
             //Assert
-            Assert.Equal("Not Found", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
-        
-        #endregion
 
-
+        #endregion Delete Zdravstveno Stanje
     }
 }

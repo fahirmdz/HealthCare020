@@ -1,11 +1,13 @@
-﻿using HealthCare020.Core.ResourceParameters;
+﻿using System.Collections.Generic;
+using System.Linq;
+using HealthCare020.Core.ResourceParameters;
+using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
-using HealthCare020.Core.ServiceModels;
 
 namespace HealthCare020.API.Controllers
 {
@@ -31,11 +33,13 @@ namespace HealthCare020.API.Controllers
             var resultWithData = result as ServiceResult<SequenceResult>;
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultWithData.Data.PaginationMetadata));
 
-            return Ok(resultWithData.Data.Data);
+            if(ShouldEagerLoad(resourceParameters))
+                return Ok((resultWithData.Data.Data as IEnumerable<TDtoEagerLoaded>).ToList());
+            return Ok((resultWithData.Data.Data as IEnumerable<TDto>).ToList());
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<IActionResult> GetById(int id, [FromQuery]bool? EagerLoaded=false)
+        public virtual async Task<IActionResult> GetById(int id, [FromQuery] bool? EagerLoaded = false)
         {
             var result = await _service.GetById(id, EagerLoaded ?? false);
 
@@ -43,8 +47,8 @@ namespace HealthCare020.API.Controllers
                 return WithStatusCode(result.StatusCode, result.Message);
 
             var resultWithData = result as ServiceResult<object>;
-            
-                return Ok(resultWithData.Data);
+
+            return Ok(resultWithData.Data);
         }
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")
@@ -55,10 +59,11 @@ namespace HealthCare020.API.Controllers
                     return NotFound(message);
 
                 case HttpStatusCode.Forbidden:
-                    return StatusCode(403);
+                    return StatusCode(403,message);
 
                 case HttpStatusCode.Unauthorized:
                     return Unauthorized();
+
 
                 default:
                     return BadRequest(message);
@@ -125,5 +130,15 @@ namespace HealthCare020.API.Controllers
 
         //    return links;
         //}
+
+        /// <summary>
+        /// Get the value of EagerLoad property from ResourceParameters if it exists.
+        /// </summary>
+        public bool ShouldEagerLoad(TResourceParameters resourceParameters)
+        {
+            var eagerLoadedProp = resourceParameters?.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
+
+            return eagerLoadedProp != null && (bool)eagerLoadedProp;
+        }
     }
 }

@@ -6,6 +6,10 @@ namespace HealthCare020.Core.Entities
     {
         public int Id { get; set; }
 
+        [ForeignKey(nameof(LicniPodaci))]
+        public int LicniPodaciId { get; set; }
+        public LicniPodaci LicniPodaci { get; set; }
+
         [ForeignKey(nameof(StacionarnoOdeljenje))]
         public int StacionarnoOdeljenjeId { get; set; }
         public StacionarnoOdeljenje StacionarnoOdeljenje { get; set; }

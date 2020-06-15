@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.Entities;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
@@ -29,7 +30,7 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
             ISecurityService securityService,
-            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
+            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _securityService = securityService;
         }
@@ -119,14 +120,17 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.Username) && await result.AnyAsync())
+            if (resourceParameters != null)
             {
-                result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
-            }
+                if (!string.IsNullOrWhiteSpace(resourceParameters.Username) && await result.AnyAsync())
+                {
+                    result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
+                }
 
-            if (resourceParameters.LockedOut)
-            {
-                result = result.Where(x => x.LockedOut);
+                if (resourceParameters.LockedOut)
+                {
+                    result = result.Where(x => x.LockedOut);
+                }
             }
             return await base.FilterAndPrepare(result, resourceParameters);
         }
@@ -182,20 +186,21 @@ namespace HealthCare020.Services
             if (korisnickiNalog == null)
                 return ServiceResult.NotFound($"Korisnicki nalog sa ID-em {id} nije pronadjen.");
 
-            foreach (var roleId in request.Roles)
-            {
-                if (!await _dbContext.Roles.AnyAsync(x => x.Id == roleId))
-                    return ServiceResult.NotFound($"Rola sa ID-em {roleId} nije pronadjena");
-                if (await _dbContext.RolesKorisnickiNalozi.AnyAsync(x => x.KorisnickiNalogId == korisnickiNalog.Id && x.RoleId == roleId))
-                    return ServiceResult.BadRequest($"Korisnik sa ID-em {id} vec poseduje role sa ID-em {roleId}");
-            }
+            if (!await _dbContext.Roles.AnyAsync(x => x.Id == request.RoleId))
+                return ServiceResult.NotFound($"Rola sa ID-em {request.RoleId} nije pronadjena.");
 
-            foreach (var roleId in request.Roles)
+            var rolesToAdd = RolesToAdd((RoleType)request.RoleId); //Roles sa manje persmisija, a koje se dodaju uz role sa vecim permisijama
+
+            var oldRoles = _dbContext.RolesKorisnickiNalozi.Where(x => x.KorisnickiNalog.Id == korisnickiNalog.Id);
+            if (await oldRoles.AnyAsync())
+                _dbContext.RemoveRange(oldRoles);
+
+            foreach (var roleId in rolesToAdd)
             {
                 await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
                 {
                     KorisnickiNalogId = korisnickiNalog.Id,
-                    RoleId = roleId
+                    RoleId = roleId.ToInt()
                 });
             }
             await _dbContext.SaveChangesAsync();
@@ -212,26 +217,44 @@ namespace HealthCare020.Services
             if (korisnickiNalog == null)
                 return ServiceResult.NotFound($"Korisnicki nalog sa ID-em {id} nije pronadjen.");
 
-            foreach (var roleId in request.Roles)
+            var roleKorisnickiNalog = await _dbContext.RolesKorisnickiNalozi.FirstOrDefaultAsync(x =>
+                x.RoleId == request.RoleId && korisnickiNalog.Id == x.KorisnickiNalogId);
+            if (roleKorisnickiNalog == null)
             {
-                var roleKorisnickiNalog = await _dbContext.RolesKorisnickiNalozi.FirstOrDefaultAsync(x =>
-                    x.RoleId == roleId && korisnickiNalog.Id == x.KorisnickiNalogId);
-                if (roleKorisnickiNalog == null)
-                {
-                    return ServiceResult.BadRequest($"Korisnik sa ID-em {id} ne poseduje role sa ID-em {roleId}");
-                }
-
-                await Task.Run(() =>
-                {
-                    _dbContext.RolesKorisnickiNalozi.Remove(roleKorisnickiNalog);
-                });
+                return ServiceResult.BadRequest($"Korisnik sa ID-em {id} ne poseduje role sa ID-em {request.RoleId}");
             }
+
+            await Task.Run(() =>
+            {
+                _dbContext.RolesKorisnickiNalozi.Remove(roleKorisnickiNalog);
+            });
 
             await _dbContext.SaveChangesAsync();
 
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
             return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+        }
+
+        private List<RoleType> RolesToAdd(RoleType roleParent)
+        {
+            switch (roleParent)
+            {
+                case RoleType.Administrator:
+                    return new List<RoleType> { RoleType.Administrator, RoleType.Doktor, RoleType.MedicinskiTehnicar, RoleType.RadnikPrijem, RoleType.Pacijent };
+
+                case RoleType.Doktor:
+                    return new List<RoleType> { RoleType.Doktor, RoleType.MedicinskiTehnicar, RoleType.RadnikPrijem, RoleType.Pacijent };
+
+                case RoleType.MedicinskiTehnicar:
+                    return new List<RoleType> { RoleType.MedicinskiTehnicar, RoleType.RadnikPrijem, RoleType.Pacijent };
+
+                case RoleType.RadnikPrijem:
+                    return new List<RoleType> { RoleType.RadnikPrijem, RoleType.Pacijent };
+
+                default:
+                    return new List<RoleType> { RoleType.Pacijent };
+            }
         }
     }
 }

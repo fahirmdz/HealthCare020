@@ -1,19 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using HealthCare020.Core.ValidationAttributes;
 
-namespace HealthCare020.Core.Entities
+namespace HealthCare020.Core.Request
 {
-    public class Poseta
+    public class ZahtevZaPosetuUpsertDto
     {
-        public int Id { get; set; }
-
-        [ForeignKey(nameof(PacijentNaLecenju))]
         [Required]
         public int PacijentNaLecenjuId { get; set; }
-        public PacijentNaLecenju PacijentNaLecenju { get; set; }
 
         [Required]
+        [FutureDateTime(ErrorMessage = "Datum i vrijeme posete moraju biti u buducnosti")]
         public DateTime DatumVreme { get; set; }
 
         [Phone]

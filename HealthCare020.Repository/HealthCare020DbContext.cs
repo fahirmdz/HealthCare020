@@ -60,6 +60,16 @@ namespace HealthCare020.Repository
                 .HasOne(x => x.LicniPodaci)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<PacijentNaLecenju>()
+                .HasOne(x => x.LicniPodaci)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Pacijent>()
+                .HasOne(x => x.ZdravstvenaKnjizica)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Drzava> Drzave { get; set; }
@@ -77,7 +87,7 @@ namespace HealthCare020.Repository
         public DbSet<Pacijent> Pacijenti { get; set; }
         public DbSet<ZdravstvenoStanje> ZdravstvenaStanja { get; set; }
         public DbSet<PacijentNaLecenju> PacijentiNaLecenju { get; set; }
-        public DbSet<Poseta> Posete { get; set; }
+        public DbSet<ZahtevZaPosetu> ZahteviZaPosetu { get; set; }
         public DbSet<ZahtevZaPregled> ZahteviZaPregled { get; set; }
         public DbSet<Uputnica> Uputnice { get; set; }
         public DbSet<Pregled> Pregledi { get; set; }

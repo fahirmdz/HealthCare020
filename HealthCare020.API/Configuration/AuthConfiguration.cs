@@ -44,8 +44,10 @@ namespace HealthCare020.API.Configuration
                 {
                     policy.RequireAssertion(context=>
                     {
-                        var roles = GetRoles(context)?.Trim()?.ToLower();
-                        return !string.IsNullOrWhiteSpace(roles) && (roles.Contains(AuthorizationPolicies.PacijentPolicy.ToLower()) || roles.Contains(AuthorizationPolicies.AdminPolicy.ToLower()));
+                        var roles = GetRoles(context)?.Trim().ToLower();
+                        return !string.IsNullOrWhiteSpace(roles) &&
+                               (roles.Contains(AuthorizationPolicies.PacijentPolicy.ToLower()) ||
+                                roles.Contains(AuthorizationPolicies.AdminPolicy.ToLower()));
                     });
                 });
             });

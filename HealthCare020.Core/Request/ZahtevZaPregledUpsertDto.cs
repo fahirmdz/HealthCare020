@@ -5,9 +5,6 @@ namespace HealthCare020.Core.Request
     public class ZahtevZaPregledUpsertDto
     {
         [Required]
-        public int PacijentId { get; set; }
-
-        [Required]
         public int DoktorId { get; set; }
 
         public int? UputnicaId { get; set; }

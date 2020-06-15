@@ -30,6 +30,18 @@ namespace HealthCare020.Services.Services
             return GetClaim("roles").ToLower().Contains(role.ToDescriptionString().ToLower());
         }
 
+        public RoleType? TypeOfCurrentUser()
+        {
+            if (IsAuthenticated().Result)
+            {
+                var roles = GetClaim("roles").Trim().Split(",");
+                if (roles.Any())
+                    return RoleTypeManager.RoleTypeFromString(roles[0]);
+            }
+
+            return null;
+        }
+
         public async Task<KorisnickiNalog> LoggedInUser()
         {
             var subClaim = GetClaim("sub");

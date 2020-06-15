@@ -1,12 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HealthCare020.Core.Request
+namespace HealthCare020.Core.Entities
 {
-    public class PosetaUpsertDto
+    public class ZahtevZaPosetu
     {
+        public int Id { get; set; }
+
+        [ForeignKey(nameof(PacijentNaLecenju))]
         [Required]
         public int PacijentNaLecenjuId { get; set; }
+        public PacijentNaLecenju PacijentNaLecenju { get; set; }
 
         [Required]
         public DateTime DatumVreme { get; set; }
