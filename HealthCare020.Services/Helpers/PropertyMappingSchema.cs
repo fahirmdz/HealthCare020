@@ -135,20 +135,20 @@ namespace HealthCare020.Services.Helpers
                         {nameof(PacijentDtoEL.ZdravstvenaKnjizica),new PropertyMappingValue(new List<string>(){nameof(Pacijent.ZdravstvenaKnjizica)})},
                     })
                 },
-                {new PropertyMapping<PosetaDtoLL,Poseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                {new PropertyMapping<ZahtevZaPosetuDtoLL,ZahtevZaPosetu>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
-                        {nameof(PosetaDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Poseta.Id)})},
-                        {nameof(PosetaDtoLL.PacijentNaLecenjuId),new PropertyMappingValue(new List<string>(){nameof(Poseta.PacijentNaLecenjuId)})},
-                        {nameof(PosetaDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(Poseta.DatumVreme)})},
-                        {nameof(PosetaDtoLL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(Poseta.BrojTelefonaPosetioca)})}
+                        {nameof(ZahtevZaPosetuDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.Id)})},
+                        {nameof(ZahtevZaPosetuDtoLL.PacijentNaLecenjuId),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.PacijentNaLecenjuId)})},
+                        {nameof(ZahtevZaPosetuDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.DatumVreme)})},
+                        {nameof(ZahtevZaPosetuDtoLL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.BrojTelefonaPosetioca)})}
                     })
                 },
-                {new PropertyMapping<PosetaDtoEL,Poseta>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
+                {new PropertyMapping<ZahtevZaPosetuDtoEL,ZahtevZaPosetu>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
-                        {nameof(PosetaDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Poseta.Id)})},
-                        {nameof(PosetaDtoEL.PacijentNaLecenju),new PropertyMappingValue(new List<string>(){nameof(Poseta.PacijentNaLecenju)})},
-                        {nameof(PosetaDtoEL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(Poseta.BrojTelefonaPosetioca)})},
-                        {nameof(PosetaDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(Poseta.DatumVreme)})}
+                        {nameof(ZahtevZaPosetuDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.Id)})},
+                        {nameof(ZahtevZaPosetuDtoEL.PacijentNaLecenju),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.PacijentNaLecenju)})},
+                        {nameof(ZahtevZaPosetuDtoEL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.BrojTelefonaPosetioca)})},
+                        {nameof(ZahtevZaPosetuDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.DatumVreme)})}
                     })
                 },
                 {new PropertyMapping<PacijentNaLecenjuDtoLL,PacijentNaLecenju>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)

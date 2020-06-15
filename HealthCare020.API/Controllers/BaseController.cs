@@ -6,6 +6,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HealthCare020.Core.ServiceModels;
+using HealthCare020.Services.Constants;
 
 namespace HealthCare020.API.Controllers
 {

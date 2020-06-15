@@ -258,11 +258,11 @@ namespace HealthCare020.Services.Mappers
 
             #region Poseta
 
-            CreateMap<Poseta, PosetaDtoLL>();
-            CreateMap<Poseta, PosetaDtoEL>()
+            CreateMap<ZahtevZaPosetu, ZahtevZaPosetuDtoLL>();
+            CreateMap<ZahtevZaPosetu, ZahtevZaPosetuDtoEL>()
                 .ForMember(dest => dest.PacijentNaLecenju,
                     opt => opt.MapFrom(x => x.PacijentNaLecenju));
-            CreateMap<PosetaUpsertDto, Poseta>();
+            CreateMap<ZahtevZaPosetuUpsertDto, ZahtevZaPosetu>();
 
             #endregion
 
@@ -271,7 +271,9 @@ namespace HealthCare020.Services.Mappers
             CreateMap<PacijentNaLecenju, PacijentNaLecenjuDtoLL>();
             CreateMap<PacijentNaLecenju, PacijentNaLecenjuDtoEL>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
-                    opt => opt.MapFrom(x => x.StacionarnoOdeljenje));
+                    opt => opt.MapFrom(x => x.StacionarnoOdeljenje))
+                .ForMember(dest => dest.LicniPodaci,
+                    opt => opt.MapFrom(x => x.LicniPodaci));
             CreateMap<PacijentNaLecenjuUpsertDto, PacijentNaLecenju>();
 
             #endregion

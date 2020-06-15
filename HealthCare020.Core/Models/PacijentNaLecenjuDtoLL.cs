@@ -2,6 +2,7 @@
 {
     public class PacijentNaLecenjuDtoLL:PacijentNaLecenjuDto
     {
+        public int LicniPodaciId { get; set; }
         public int StacionarnoOdeljenjeId { get; set; }
     }
 }

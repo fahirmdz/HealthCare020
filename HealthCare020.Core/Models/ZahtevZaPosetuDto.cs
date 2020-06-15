@@ -2,7 +2,7 @@
 
 namespace HealthCare020.Core.Models
 {
-    public abstract class PosetaDto
+    public abstract class ZahtevZaPosetuDto
     {
         public int Id { get; set; }
 

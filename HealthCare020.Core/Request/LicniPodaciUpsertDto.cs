@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
@@ -23,6 +24,7 @@ namespace HealthCare020.Core.Request
 
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
         [DefaultValue("M")]
+        [GenderAbbr]
         public char Pol { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]

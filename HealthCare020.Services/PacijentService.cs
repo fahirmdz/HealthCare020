@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.Entities;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
@@ -115,11 +116,23 @@ namespace HealthCare020.Services
             if (user == null)
                 return ServiceResult.Unauthorized();
 
-            var pacijent = await _dbContext.Pacijenti
-                .Include(x => x.KorisnickiNalog)
-                .FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
+            Pacijent pacijent = null;
+            bool isAdmin = await _authService.CurrentUserIsInRoleAsync(RoleType.Administrator);
+            if (isAdmin)
+            {
+                pacijent = await _dbContext.Pacijenti
+                    .Include(x => x.KorisnickiNalog)
+                    .FirstOrDefaultAsync(x => x.Id == id);
+            }
+            else
+            {
+                pacijent = await _dbContext.Pacijenti
+                    .Include(x => x.KorisnickiNalog)
+                    .FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
+            }
+
             if (pacijent == null)
-                return ServiceResult.NotFound($"Ovaj korisnicki nalog ne koristi ni jedan pacijent.");
+                return ServiceResult.NotFound(isAdmin?$"Pacijent sa ID-em {id} nije pronadjen.":"Ovaj korisnicki nalog ne koristi ni jedan pacijent.");
 
             await Task.Run(() =>
             {
@@ -145,7 +158,7 @@ namespace HealthCare020.Services
 
                 var rolesKorisnickiNalog =
                     _dbContext.RolesKorisnickiNalozi.Where(x => x.KorisnickiNalogId == pacijent.KorisnickiNalogId);
-                if(rolesKorisnickiNalog.Any())
+                if (rolesKorisnickiNalog.Any())
                     _dbContext.RemoveRange(rolesKorisnickiNalog);
 
                 _dbContext.Remove(pacijent.KorisnickiNalog);
@@ -177,7 +190,6 @@ namespace HealthCare020.Services
             if (await result.AnyAsync() && resourceParameters.ZdravstvenaKnjizicaId.HasValue)
                 result = result.Where(x => x.ZdravstvenaKnjizicaId == resourceParameters.ZdravstvenaKnjizicaId);
 
-            
             return await base.FilterAndPrepare(result, resourceParameters);
         }
 

@@ -18,7 +18,6 @@ namespace HealthCare020.Services.Configuration
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISecurityService, SecurityService>();
 
-
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICRUDService<ZdravstvenoStanje, ZdravstvenoStanjeDto, ZdravstvenoStanjeDto, ZdravstvenoStanjeResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
@@ -59,13 +58,22 @@ namespace HealthCare020.Services.Configuration
 
             services
                 .AddScoped<ICRUDService<Pregled, PregledDtoLL, PregledDtoEL, PregledResourceParameters, PregledUpsertDto
-                    ,PregledUpsertDto>, PregledService>();
+                    , PregledUpsertDto>, PregledService>();
 
             services
                 .AddScoped<ICRUDService<ZdravstvenaKnjizica, ZdravstvenaKnjizicaDtoLL, ZdravstvenaKnjizicaDtoEL,
                         ZdravstvenaKnjizicaResourceParameters, ZdravstvenaKnjizicaUpsertDto,
                         ZdravstvenaKnjizicaUpsertDto>,
                     ZdravstvenaKnjizicaService>();
+
+            services
+                .AddScoped<ICRUDService<ZahtevZaPosetu, ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL,
+                        ZahtevZaPosetuResourceParameters, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuUpsertDto>,
+                    ZahtevZaPosetuService>();
+
+            services.AddScoped<ICRUDService<PacijentNaLecenju, PacijentNaLecenjuDtoLL, PacijentNaLecenjuDtoEL,
+               PacijentNaLecenjuResourceParameters, PacijentNaLecenjuUpsertDto, PacijentNaLecenjuUpsertDto>
+                , PacijentNaLecenjuService>();
 
             services.AddScoped<IRadnikService, RadnikService>();
 

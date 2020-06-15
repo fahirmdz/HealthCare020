@@ -45,17 +45,17 @@ namespace HealthCare020.API.Controllers
         }
 
         [NonAction]
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
         public override Task<IActionResult> Delete(int id)
         {
             return base.Delete(id);
         }
 
         [HttpDelete]
-        [Authorize(AuthorizationPolicies.PacijentPolicy)]
-        public async Task<IActionResult> NewDelete()
+        public async Task<IActionResult> NewDelete(int id=0)
         {
             //0 zbog toga sto se u servisu uzima trenutno logirani pacijent
-            var result = await _crudService.Delete(0);
+            var result = await _crudService.Delete(id);
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
