@@ -5,13 +5,15 @@ namespace HealthCare020.Core.Enums
     public enum RoleType
     {
         [Description("Admin")]
-        Administrator,
+        Administrator=1, //Numbering based on unique identifier from db
         [Description("Doktor")]
         Doktor,
+        [Description("MedicinskiTehnicar")]
+        MedicinskiTehnicar,
         [Description("RadnikPrijem")]
         RadnikPrijem,
-        [Description("MedicinskiTehnicar")]
-        MedicinskiTehnicar
+        [Description("Pacijent")]
+        Pacijent
     }
 
     public static class EnumExtension
@@ -24,5 +26,7 @@ namespace HealthCare020.Core.Enums
                 .GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attributes.Length > 0 ? attributes[0].Description : string.Empty;
         }
+
+        public static int ToInt(this RoleType val) => (int) val;
     } 
 }
