@@ -2,8 +2,9 @@
 {
     public class RadnikDtoEL
     {
-        public KorisnickiNalogDtoEL KorisnickiNalog { get; set; }
-        public LicniPodaciDto LicniPodaci { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
         public TwoFieldsDto StacionarnoOdeljenje { get; set; }
+        public int LicniPodaciId { get; set; }
     }
 }

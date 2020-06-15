@@ -1,4 +1,5 @@
-﻿using HealthCare020.Services.Exceptions;
+﻿using System;
+using HealthCare020.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
@@ -24,14 +25,15 @@ namespace HealthCare020.Services.Filters
             {
                 context.ModelState.AddModelError("Unauthorized access", context.Exception.Message);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            }else if (context.Exception is ForbiddenException)
+            }
+            else if (context.Exception is ForbiddenException)
             {
                 context.ModelState.AddModelError("Missing permission for this action", context.Exception.Message);
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
             }
             else
             {
-                context.ModelState.AddModelError("ERROR", "Greska na serveru");
+                context.ModelState.AddModelError("ERROR", $"{context.Exception?.Message??string.Empty} - {context.Exception?.InnerException?.Message??string.Empty}");
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
 

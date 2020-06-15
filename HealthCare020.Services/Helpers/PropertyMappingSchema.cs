@@ -61,8 +61,6 @@ namespace HealthCare020.Services.Helpers
                 {new PropertyMapping<RadnikPrijemDtoEL,RadnikPrijem>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(RadnikPrijemDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(RadnikPrijem.Id)})},
-                        {nameof(RadnikPrijemDtoEL.KorisnickiNalog),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.KorisnickiNalog)}})},
-                        {nameof(RadnikPrijemDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.LicniPodaci)}})},
                         {nameof(RadnikPrijemDtoEL.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){{nameof(RadnikPrijem.Radnik.StacionarnoOdeljenje)}})},
                     })
                 },
@@ -77,8 +75,6 @@ namespace HealthCare020.Services.Helpers
                 {new PropertyMapping<MedicinskiTehnicarDtoEL,MedicinskiTehnicar>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(MedicinskiTehnicarDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(MedicinskiTehnicar.Id)})},
-                        {nameof(MedicinskiTehnicarDtoEL.KorisnickiNalog),new PropertyMappingValue(new List<string>(){{nameof(MedicinskiTehnicar.Radnik.KorisnickiNalog)}})},
-                        {nameof(MedicinskiTehnicarDtoEL.LicniPodaci),new PropertyMappingValue(new List<string>(){{nameof(MedicinskiTehnicar.Radnik.LicniPodaci)}})},
                         {nameof(MedicinskiTehnicarDtoEL.StacionarnoOdeljenje),new PropertyMappingValue(new List<string>(){{nameof(MedicinskiTehnicar.Radnik.StacionarnoOdeljenje)}})},
                     })
                 },

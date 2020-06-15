@@ -132,7 +132,7 @@ namespace HealthCare020.Services
             }
 
             if (pacijent == null)
-                return ServiceResult.NotFound(isAdmin?$"Pacijent sa ID-em {id} nije pronadjen.":"Ovaj korisnicki nalog ne koristi ni jedan pacijent.");
+                return ServiceResult.NotFound(isAdmin ? $"Pacijent sa ID-em {id} nije pronadjen." : "Ovaj korisnicki nalog ne koristi ni jedan pacijent.");
 
             await Task.Run(() =>
             {
@@ -176,19 +176,24 @@ namespace HealthCare020.Services
             result = result.Include(x => x.KorisnickiNalog)
                 .ThenInclude(x => x.RolesKorisnickiNalog);
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.Ime))
-                result = result.Where(x => x.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
+            if (resourceParameters != null)
+            {
+                if (!string.IsNullOrWhiteSpace(resourceParameters.Ime))
+                    result = result.Where(x =>
+                        x.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
-                result = result.Where(x =>
-                    x.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
+                    result = result.Where(x =>
+                        x.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
+                            .StartsWith(resourceParameters.Prezime.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Username))
-                result = result.Where(x =>
-                    x.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Username))
+                    result = result.Where(x =>
+                        x.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
 
-            if (await result.AnyAsync() && resourceParameters.ZdravstvenaKnjizicaId.HasValue)
-                result = result.Where(x => x.ZdravstvenaKnjizicaId == resourceParameters.ZdravstvenaKnjizicaId);
+                if (await result.AnyAsync() && resourceParameters.ZdravstvenaKnjizicaId.HasValue)
+                    result = result.Where(x => x.ZdravstvenaKnjizicaId == resourceParameters.ZdravstvenaKnjizicaId);
+            }
 
             return await base.FilterAndPrepare(result, resourceParameters);
         }

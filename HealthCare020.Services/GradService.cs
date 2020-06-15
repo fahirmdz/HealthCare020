@@ -10,10 +10,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Services.Constants;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.Services
 {
@@ -24,7 +21,7 @@ namespace HealthCare020.Services
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
+            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
         }
 
@@ -77,22 +74,24 @@ namespace HealthCare020.Services
 
         public override async Task<PagedList<Grad>> FilterAndPrepare(IQueryable<Grad> result, GradResourceParameters resourceParameters)
         {
-            if (!string.IsNullOrWhiteSpace(resourceParameters.Naziv) && await result.AnyAsync())
+            if (resourceParameters != null)
             {
-                result = result.Where(x => x.Naziv.ToLower().StartsWith(resourceParameters.Naziv.ToLower()));
-            }
+                if (!string.IsNullOrWhiteSpace(resourceParameters.Naziv) && await result.AnyAsync())
+                {
+                    result = result.Where(x => x.Naziv.ToLower().StartsWith(resourceParameters.Naziv.ToLower()));
+                }
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.DrzavaNaziv) && await result.AnyAsync())
-            {
-                result = result.Where(
-                    x => x.Drzava.Naziv.ToLower().StartsWith(resourceParameters.DrzavaNaziv.ToLower()));
-            }
+                if (!string.IsNullOrWhiteSpace(resourceParameters.DrzavaNaziv) && await result.AnyAsync())
+                {
+                    result = result.Where(
+                        x => x.Drzava.Naziv.ToLower().StartsWith(resourceParameters.DrzavaNaziv.ToLower()));
+                }
 
-            if (resourceParameters.DrzavaId.HasValue && await result.AnyAsync())
-            {
-                result = result.Where(x => x.DrzavaId == resourceParameters.DrzavaId);
+                if (resourceParameters.DrzavaId.HasValue && await result.AnyAsync())
+                {
+                    result = result.Where(x => x.DrzavaId == resourceParameters.DrzavaId);
+                }
             }
-
             return await base.FilterAndPrepare(result, resourceParameters);
         }
     }

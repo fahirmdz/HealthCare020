@@ -115,16 +115,19 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.Ime))
-                result = result.Where(x =>
-                    x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.Trim().ToLower()));
+            if(resourceParameters!=null)
+            {
+                if (!string.IsNullOrWhiteSpace(resourceParameters.Ime))
+                    result = result.Where(x =>
+                        x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.Trim().ToLower()));
 
-            if(await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
-                result = result.Where(x =>
-                    x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.Trim().ToLower()));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
+                    result = result.Where(x =>
+                        x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.Trim().ToLower()));
 
-            if (await result.AnyAsync() && resourceParameters.StacionarnoOdeljenjeId.HasValue)
-                result = result.Where(x => x.StacionarnoOdeljenjeId == resourceParameters.StacionarnoOdeljenjeId);
+                if (await result.AnyAsync() && resourceParameters.StacionarnoOdeljenjeId.HasValue)
+                    result = result.Where(x => x.StacionarnoOdeljenjeId == resourceParameters.StacionarnoOdeljenjeId);
+            }
 
             return await base.FilterAndPrepare(result, resourceParameters);
         }

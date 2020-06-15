@@ -19,28 +19,28 @@ namespace HealthCare020.API.Controllers
         {
         }
 
-        [Authorize(AuthorizationPolicies.DoktorPolicy)]
-        public override Task<IActionResult> Insert(MedicinskiTehnicarUpsertDto dtoForCreation)
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        public override async Task<IActionResult> Insert(MedicinskiTehnicarUpsertDto dtoForCreation)
         {
-            return base.Insert(dtoForCreation);
+            return await base.Insert(dtoForCreation);
         }
 
         [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
-        public override Task<IActionResult> Update(int id, MedicinskiTehnicarUpsertDto dtoForUpdate)
+        public override async Task<IActionResult> Update(int id, MedicinskiTehnicarUpsertDto dtoForUpdate)
         {
-            return base.Update(id, dtoForUpdate);
+            return await base.Update(id, dtoForUpdate);
         }
 
         [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
-        public override Task<IActionResult> Delete(int id)
+        public override async Task<IActionResult> Delete(int id)
         {
-            return base.Delete(id);
+            return await base.Delete(id);
         }
 
         [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
-        public override Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<MedicinskiTehnicarUpsertDto> patchDocument)
+        public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<MedicinskiTehnicarUpsertDto> patchDocument)
         {
-            return base.PartiallyUpdate(id, patchDocument);
+            return await base.PartiallyUpdate(id, patchDocument);
         }
     }
 }

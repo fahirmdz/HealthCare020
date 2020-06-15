@@ -4,6 +4,7 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using System.Globalization;
 using System.Linq;
+using HealthCare020.Services.Helpers;
 
 namespace HealthCare020.Services.Mappers
 {
@@ -101,7 +102,11 @@ namespace HealthCare020.Services.Mappers
             CreateMap<Radnik, RadnikPrijemDtoEL>()
                 .ForMember(dest => dest.Id,
                     opt => opt.Ignore());
-            CreateMap<Radnik, RadnikDtoEL>();
+            CreateMap<Radnik, RadnikDtoEL>()
+                .ForMember(dest=>dest.Ime,
+                    opt=>opt.MapFrom(x=>x.LicniPodaci.Ime))
+                .ForMember(dest=>dest.Prezime,
+                    opt=>opt.MapFrom(x=>x.LicniPodaci.Prezime));
 
             #endregion Radnik
 
@@ -130,11 +135,7 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<RadnikPrijem, RadnikPrijemDtoEL>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
-                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje))
-                .ForMember(dest => dest.LicniPodaci,
-                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci))
-                .ForMember(dest => dest.KorisnickiNalog,
-                    opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog));
+                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje));
 
             CreateMap<RadnikPrijemUpsertDto, Radnik>().ReverseMap();
 
@@ -152,11 +153,7 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<MedicinskiTehnicar, MedicinskiTehnicarDtoEL>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
-                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje))
-                .ForMember(dest => dest.LicniPodaci,
-                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci))
-                .ForMember(dest => dest.KorisnickiNalog,
-                    opt => opt.MapFrom(x => x.Radnik.KorisnickiNalog));
+                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje));
 
             CreateMap<MedicinskiTehnicarUpsertDto, Radnik>().ReverseMap();
 

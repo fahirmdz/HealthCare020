@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/" + Routes.PacijentiRoute)]
+    [Authorize(AuthorizationPolicies.PacijentPolicy)]
     public class PacijentController : BaseCRUDController<Pacijent, PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters, PacijentUpsertDto, PacijentUpsertDto>
     {
         public PacijentController(ICRUDService<Pacijent, PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters, PacijentUpsertDto, PacijentUpsertDto> crudService) :
@@ -20,46 +21,17 @@ namespace HealthCare020.API.Controllers
         {
         }
 
+        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
+        public override async Task<IActionResult> Get(PacijentResourceParameters resourceParameters)
+        {
+            return await base.Get(resourceParameters);
+        }
+
+
         [AllowAnonymous]
-        public override Task<IActionResult> Insert(PacijentUpsertDto dtoForCreation)
+        public override async Task<IActionResult> Insert(PacijentUpsertDto dtoForCreation)
         {
-            return base.Insert(dtoForCreation);
-        }
-
-        [NonAction]
-        public override Task<IActionResult> Update(int id, PacijentUpsertDto dtoForUpdate)
-        {
-            return base.Update(id, dtoForUpdate);
-        }
-
-        [HttpPut]
-        [Authorize(AuthorizationPolicies.PacijentPolicy)]
-        public async Task<IActionResult> UpdateNew(PacijentUpsertDto dtoForUpdate)
-        {
-            //0 zbog toga sto se u servisu uzima trenutno logirani pacijent
-            var result = await _crudService.Update(0, dtoForUpdate);
-            if (!result.Succeeded)
-                return WithStatusCode(result.StatusCode, result.Message);
-
-            return Ok((result as ServiceResult<PacijentDtoLL>).Data);
-        }
-
-        [NonAction]
-        [Authorize(AuthorizationPolicies.PacijentPolicy)]
-        public override Task<IActionResult> Delete(int id)
-        {
-            return base.Delete(id);
-        }
-
-        [HttpDelete]
-        public async Task<IActionResult> NewDelete(int id=0)
-        {
-            //0 zbog toga sto se u servisu uzima trenutno logirani pacijent
-            var result = await _crudService.Delete(id);
-            if (!result.Succeeded)
-                return WithStatusCode(result.StatusCode, result.Message);
-
-            return NoContent();
+            return await base.Insert(dtoForCreation);
         }
     }
 }

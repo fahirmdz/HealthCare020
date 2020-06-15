@@ -65,6 +65,11 @@ namespace HealthCare020.Repository
                 .HasOne(x => x.LicniPodaci)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Pacijent>()
+                .HasOne(x => x.ZdravstvenaKnjizica)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Drzava> Drzave { get; set; }

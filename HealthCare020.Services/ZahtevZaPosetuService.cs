@@ -84,20 +84,25 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentIme))
-                result = result.Where(x =>
-                    x.PacijentNaLecenju.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.PacijentIme.Trim().ToLower()));
+            if (resourceParameters != null)
+            {
+                if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentIme))
+                    result = result.Where(x =>
+                        x.PacijentNaLecenju.LicniPodaci.Ime.ToLower()
+                            .StartsWith(resourceParameters.PacijentIme.Trim().ToLower()));
 
-            if(await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.PacijentPrezime))
-                result = result.Where(x =>
-                    x.PacijentNaLecenju.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.PacijentPrezime.Trim().ToLower()));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.PacijentPrezime))
+                    result = result.Where(x =>
+                        x.PacijentNaLecenju.LicniPodaci.Prezime.ToLower()
+                            .StartsWith(resourceParameters.PacijentPrezime.Trim().ToLower()));
 
-            if(await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.BrojTelefonaPosetioca))
-                result = result.Where(x =>
-                    x.BrojTelefonaPosetioca.StartsWith(resourceParameters.BrojTelefonaPosetioca.Trim()));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.BrojTelefonaPosetioca))
+                    result = result.Where(x =>
+                        x.BrojTelefonaPosetioca.StartsWith(resourceParameters.BrojTelefonaPosetioca.Trim()));
 
-            if (await result.AnyAsync() && resourceParameters.Datum.HasValue)
-                result = result.Where(x => x.DatumVreme.Date == resourceParameters.Datum.Value.Date);
+                if (await result.AnyAsync() && resourceParameters.Datum.HasValue)
+                    result = result.Where(x => x.DatumVreme.Date == resourceParameters.Datum.Value.Date);
+            }
 
             return await base.FilterAndPrepare(result, resourceParameters);
         }

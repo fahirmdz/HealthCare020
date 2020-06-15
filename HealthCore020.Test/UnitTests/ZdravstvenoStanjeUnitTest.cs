@@ -5,41 +5,38 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Repository;
 using HealthCare020.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Services;
+using HealthCore020.Test.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using Xunit;
 
-namespace HealthCore020.Test
+namespace HealthCore020.Test.UnitTests
 {
-    public class ZdravstvenoStanjeUnitTestController
+    public class ZdravstvenoStanjeUnitTest
     {
         private readonly ZdravstvenoStanjeService _service;
-        public static DbContextOptions<HealthCare020DbContext> dbContextOptions { get; set; }
-        public static string connectionString = "Server=.;Database=Healthcare020_Test;Trusted_Connection=true;";
+        public HealthCare020DbContext _dbContext;
 
-        static ZdravstvenoStanjeUnitTestController()
+        public ZdravstvenoStanjeUnitTest()
         {
-            dbContextOptions = new DbContextOptionsBuilder<HealthCare020DbContext>().UseSqlServer(connectionString).Options;
-        }
-
-        public ZdravstvenoStanjeUnitTestController()
-        {
-            var context = new HealthCare020DbContext(dbContextOptions);
-
-            HealthCore020DataDBInitializer db = new HealthCore020DataDBInitializer();
-            db.Seed_ZdravstvenoStanje(context);
-
+            _dbContext = DbService.Instance.GetDbContext();
             _service = new ZdravstvenoStanjeService(
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context,new PropertyMappingService(),new PropertyCheckerService());
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),
+                _dbContext,
+                new PropertyMappingService(),
+                new PropertyCheckerService(),
+                new HttpContextAccessor(),
+                new AuthService(new HttpContextAccessor(), _dbContext));
+
+            HealthCore020DataDBInitializer.Seed_ZdravstvenoStanje(_dbContext);
         }
 
         #region Get By Id
 
         [Fact]
-        public async void Task_GetPostById_Return_OkResult()
+        public async void Task_GetZdravstvenoStanjeById_Return_OkResult()
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
@@ -60,10 +57,10 @@ namespace HealthCore020.Test
             var zdravstvenoStanjeId = 10;
 
             //Act
-            NotFoundException ex = await Assert.ThrowsAsync<NotFoundException>(() => controller.GetById(zdravstvenoStanjeId));
+            var result = await controller.GetById(zdravstvenoStanjeId);
 
             //Assert
-            Assert.Equal("Not Found", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
         [Fact]
@@ -80,9 +77,9 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var zdravstvenoStanje = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
+            var zdravstvenoStanje = okResult.Value.Should().BeAssignableTo<ZdravstvenoStanjeDto>().Subject;
 
-            Assert.Equal("TestOpis1", zdravstvenoStanje.Value);
+            Assert.Equal("TestOpis1", zdravstvenoStanje.Opis);
         }
 
         #endregion Get By Id
@@ -94,12 +91,17 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
 
             //Act
             var data = await controller.Get(null);
 
             //Assert
             Assert.IsType<OkObjectResult>(data);
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            var serviceResult = okResult.Value.Should().BeOfType<List<ZdravstvenoStanjeDto>>().Subject;
+
+            Assert.Equal(6, serviceResult?.Count ?? 0);
         }
 
         [Fact]
@@ -107,6 +109,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
 
             //Act
             var data = await controller.Get(null);
@@ -115,10 +118,10 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var zdravstvenaStanja = okResult.Value.Should().BeOfType<List<TwoFieldsDto>>().Subject;
+            var zdravstvenaStanja = okResult.Value.Should().BeOfType<List<ZdravstvenoStanjeDto>>().Subject;
 
-            Assert.Equal("TestOpis1", zdravstvenaStanja[0].Value);
-            Assert.Equal("TestOpis2", zdravstvenaStanja[1].Value);
+            Assert.Equal("TestOpis1", zdravstvenaStanja[0].Opis);
+            Assert.Equal("TestOpis2", zdravstvenaStanja[1].Opis);
         }
 
         #endregion Get All
@@ -130,6 +133,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
             var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "Odlicno" };
 
             //Act
@@ -158,7 +162,7 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "Sjajno" }; //Mora imati 3 ili vise slova
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "Sjajno" };
 
             //Act
             var data = await controller.Insert(zdravstvenoStanjeUpsertRequest);
@@ -167,9 +171,9 @@ namespace HealthCore020.Test
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<ZdravstvenoStanjeDto>().Subject;
 
-            Assert.Equal("Sjajno", result.Value);
+            Assert.Equal("Sjajno", result.Opis);
         }
 
         #endregion Add New ZdravstvenoStanje
@@ -181,13 +185,16 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
+
             var zdravstvenoStanjeId = 2;
 
             //Act
             var existingEntity = await controller.GetById(zdravstvenoStanjeId);
             var okResult = existingEntity.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<ZdravstvenoStanjeDto>().Subject;
 
+            //Assert
             Assert.NotNull(result);
 
             var zdravstvenoStanje = new ZdravstvenoStanjeUpsertDto
@@ -195,26 +202,23 @@ namespace HealthCore020.Test
                 Opis = "UpdatedOpis1"
             };
 
-            var updatedData = controller.Update(zdravstvenoStanjeId, zdravstvenoStanje);
-
-            //Assert
+            var updatedData = await controller.Update(zdravstvenoStanjeId, zdravstvenoStanje);
             Assert.IsType<OkObjectResult>(updatedData);
-        }
 
+            var okResultOfUpdate = updatedData.Should().BeOfType<OkObjectResult>().Subject;
+            var resultOfUpdate = okResultOfUpdate.Value.Should().BeAssignableTo<ZdravstvenoStanjeDto>().Subject;
+
+            Assert.Equal("UpdatedOpis1", resultOfUpdate.Opis);
+        }
 
         [Fact]
         public async void Task_Update_InvalidData_Return_ModelStateIsNotValid()
         {
             //Arrange
             var controller = new ZdravstvenoStanjeController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
+
             var zdravstvenoStanjeId = 2;
-
-            var entity = await controller.GetById(zdravstvenoStanjeId);
-            var okResult = entity.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<TwoFieldsDto>().Subject;
-
-            Assert.NotNull(result);
-
             var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "a" }; //Mora imati 3 ili vise slova
 
             //Act
@@ -231,13 +235,13 @@ namespace HealthCore020.Test
             var controller = new ZdravstvenoStanjeController(_service);
             var zdravstvenoStanjeId = 10;
 
-            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "aaaaa" }; 
+            var zdravstvenoStanjeUpsertRequest = new ZdravstvenoStanjeUpsertDto() { Opis = "aaaaa" };
 
             //Act
-            NotFoundException ex =  Assert.Throws<NotFoundException>(() => controller.Update(zdravstvenoStanjeId,zdravstvenoStanjeUpsertRequest));
+            var result = await controller.Update(zdravstvenoStanjeId, zdravstvenoStanjeUpsertRequest);
 
             //Assert
-            Assert.Equal("Not Found", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
         #endregion Update Existing ZdravstvenoStanje
@@ -252,12 +256,11 @@ namespace HealthCore020.Test
             var id = 2;
 
             //Act
-            var result =  controller.Delete(id);
+            var result = await controller.Delete(id);
 
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<NoContentResult>(result);
         }
-
 
         [Fact]
         public async void Task_Delete_ZdravstvenoStanje_Return_NotFound()
@@ -267,12 +270,12 @@ namespace HealthCore020.Test
             var id = 10;
 
             //Act
-            NotFoundException ex =  Assert.Throws<NotFoundException>(() => controller.Delete(id));
+            var result = await controller.Delete(id);
 
             //Assert
-            Assert.Equal("Not Found", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
-        
-        #endregion
+
+        #endregion Delete Zdravstveno Stanje
     }
 }

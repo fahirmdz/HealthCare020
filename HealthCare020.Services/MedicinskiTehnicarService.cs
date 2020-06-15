@@ -101,23 +101,27 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrEmpty(resourceParameters.Ime) && await result.AnyAsync())
-                result = result.Where(x => x.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
+            if(resourceParameters!=null)
+            {
+                if (!string.IsNullOrEmpty(resourceParameters.Ime) && await result.AnyAsync())
+                    result = result.Where(x =>
+                        x.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.Prezime))
-                result = result.Where(x => x.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
+                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.Prezime))
+                    result = result.Where(x =>
+                        x.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
 
-            if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.Username))
-                result = result.Where(x => x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
+                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.Username))
+                    result = result.Where(x =>
+                        x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
 
-            result = result.Include(x => x.Radnik.LicniPodaci);
+                result = result.Include(x => x.Radnik.LicniPodaci);
 
-            if (resourceParameters.EagerLoaded)
-                PropertyCheck<MedicinskiTehnicarDtoEL>(resourceParameters.OrderBy);
+                if (resourceParameters.EagerLoaded)
+                    PropertyCheck<MedicinskiTehnicarDtoEL>(resourceParameters.OrderBy);
+            }
 
-            var pagedResult = PagedList<MedicinskiTehnicar>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
-
-            return pagedResult;
+            return await base.FilterAndPrepare(result, resourceParameters);
         }
     }
 }

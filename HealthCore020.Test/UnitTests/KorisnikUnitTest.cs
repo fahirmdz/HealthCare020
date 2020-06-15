@@ -3,38 +3,38 @@ using FluentAssertions;
 using HealthCare020.API.Controllers;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
+using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Repository;
 using HealthCare020.Services;
 using HealthCare020.Services.Exceptions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Services;
+using HealthCore020.Test.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using Xunit;
 
-namespace HealthCore020.Test
+namespace HealthCore020.Test.UnitTests
 {
-    public class KorisnikUnitTestController
+    public class KorisnikUnitTest
     {
         private readonly KorisnikService _service;
-        public static DbContextOptions<HealthCare020DbContext> dbContextOptions { get; set; }
-        public static string connectionString = "Server=.;Database=Healthcare020_Test;Trusted_Connection=true;";
+        public HealthCare020DbContext _dbContext;
 
-        static KorisnikUnitTestController()
+        public KorisnikUnitTest()
         {
-            dbContextOptions = new DbContextOptionsBuilder<HealthCare020DbContext>().UseSqlServer(connectionString).Options;
-        }
+            _dbContext = DbService.Instance.GetDbContext();
+            HealthCore020DataDBInitializer.Seed_Korisnik(_dbContext);
 
-        public KorisnikUnitTestController()
-        {
-            var context = new HealthCare020DbContext(dbContextOptions);
-
-            HealthCore020DataDBInitializer db = new HealthCore020DataDBInitializer();
-            db.Seed_Korisnik(context);
-
-            _service = new KorisnikService( new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),context,
-                new PropertyMappingService(), new PropertyCheckerService());
+            _service = new KorisnikService(
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),
+                _dbContext,
+                new PropertyMappingService(),
+                new PropertyCheckerService(),
+                new HttpContextAccessor(),
+                new SecurityService(),
+                new AuthService(new HttpContextAccessor(),
+                    _dbContext));
         }
 
         #region Get By Id
@@ -61,13 +61,10 @@ namespace HealthCore020.Test
             var korisnickiNalogId = 10;
 
             //Act
-            NotFoundException ex = await Assert.ThrowsAsync<NotFoundException>(() =>
-             {
-                 return controller.GetById(korisnickiNalogId);
-             });
+            var result = await controller.GetById(korisnickiNalogId);
 
             //Assert
-            Assert.Equal("Korisnicki nalog nije pronadjen", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
         [Fact]
@@ -80,7 +77,7 @@ namespace HealthCore020.Test
             //Act
             var data = await controller.GetById(korisnickiNalogId);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDto>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDtoLL>().Subject;
 
             //Assert
             Assert.Equal("testuser1", result.Username);
@@ -95,9 +92,10 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
 
             //Act
-            var data = await controller.Get(new KorisnickiNalogResourceParameters());
+            var data = await controller.Get(null);
 
             //Assert
             Assert.IsType<OkObjectResult>(data);
@@ -108,12 +106,13 @@ namespace HealthCore020.Test
         {
             //Arrange
             var controller = new KorisnikController(_service);
+            controller.SetFakeAuthenticatedControllerContext();
             var korisnickiNalogSearchRequest = new KorisnickiNalogResourceParameters { Username = "testuser1" };
 
             //Act
             var data = await controller.Get(korisnickiNalogSearchRequest);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<List<KorisnickiNalogDto>>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<List<KorisnickiNalogDtoLL>>().Subject;
 
             //Assert
             Assert.Equal("testuser1", result[0].Username);
@@ -143,7 +142,7 @@ namespace HealthCore020.Test
         }
 
         [Fact]
-        public async void Task_Add_InvalidData_Return_InvalidModelState()
+        public void Task_Add_InvalidData_Return_InvalidModelState()
         {
             //Arrange
             var controller = new KorisnikController(_service);
@@ -174,10 +173,10 @@ namespace HealthCore020.Test
             };
 
             //Act
-            UserException ex = await Assert.ThrowsAsync<UserException>(() => controller.Insert(korisnickiNalogInsertRequest));
+            var result = await controller.Insert(korisnickiNalogInsertRequest);
 
             //Assert
-            Assert.Equal("Lozinke se ne podudaraju", ex.Message);
+            Assert.IsType<BadRequestObjectResult>(result);
         }
 
         [Fact]
@@ -195,7 +194,7 @@ namespace HealthCore020.Test
             //Act
             var data = await controller.Insert(korisnickiNalogInsertRequest);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDto>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDtoLL>().Subject;
 
             //Assert
             Assert.Equal("test2020", result.Username);
@@ -218,33 +217,15 @@ namespace HealthCore020.Test
             };
 
             //Act
-            var data = controller.Update(1, korisnickiNalogInsertRequest);
+            var data = await controller.Update(1, korisnickiNalogInsertRequest);
 
             //Assert
             Assert.IsType<OkObjectResult>(data);
         }
 
-        [Fact]
-        public async void Task_Update_InvalidData_Return_InvalidModelState()
-        {
-            //Arrange
-            var controller = new KorisnikController(_service);
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
-            {
-                Username = "testtest",
-                Password = "lowe", //should be at least 6 characters
-                ConfirmPassword = "lowe"
-            };
-
-            //Act
-            controller.ValidateViewModel(korisnickiNalogInsertRequest);
-
-            //Assert
-            Assert.False(controller.ModelState.IsValid);
-        }
 
         [Fact]
-        public async void Task_Update_InvalidData_Throw_UserException()
+        public async void Task_Update_InvalidId_Return_NotFoundObjectResult()
         {
             //Arrange
             var controller = new KorisnikController(_service);
@@ -256,10 +237,10 @@ namespace HealthCore020.Test
             };
 
             //Act
-            UserException ex = Assert.Throws<UserException>(() => controller.Update(1, korisnickiNalogInsertRequest));
+            var result = await controller.Update(50, korisnickiNalogInsertRequest);
 
             //Assert
-            Assert.Equal("Lozinke se ne podudaraju", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
         [Fact]
@@ -275,35 +256,12 @@ namespace HealthCore020.Test
             };
 
             //Act
-            var data = controller.Update(1, korisnickiNalogInsertRequest);
+            var data = await controller.Update(1, korisnickiNalogInsertRequest);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
-            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDto>().Subject;
+            var result = okResult.Value.Should().BeAssignableTo<KorisnickiNalogDtoLL>().Subject;
 
             //Assert
             Assert.Equal("test2020", result.Username);
-        }
-
-        [Fact]
-        public async void Task_Update_ValidData_Throw_NotFoundException()
-        {
-            //Arrange
-            var controller = new KorisnikController(_service);
-            var korisnickiNalogId = 10;
-            var korisnickiNalogInsertRequest = new KorisnickiNalogUpsertDto
-            {
-                Username = "test2020",
-                Password = "test1111",
-                ConfirmPassword = "test1111"
-            };
-
-            //Act
-            NotFoundException ex = Assert.Throws<NotFoundException>(() =>
-            {
-                controller.Update(korisnickiNalogId, korisnickiNalogInsertRequest);
-            });
-
-            //Assert
-            Assert.Equal("Korisnicki nalog nije pronadjen", ex.Message);
         }
 
         #endregion Update Existing KorisnickiNalog
@@ -311,34 +269,31 @@ namespace HealthCore020.Test
         #region Delete Korisnicki nalog
 
         [Fact]
-        public async void Task_Delete_KorisnickiNalog_Return_OkResult()
+        public async void Task_Delete_KorisnickiNalog_Return_NoContentResult()
         {
             //Arrange
             var controller = new KorisnikController(_service);
             var id = 2;
 
             //Act
-            var result = controller.Delete(id);
+            var result = await controller.Delete(id);
 
             //Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
-        public async void Task_Delete_KorisnickiNalog_Throw_NotFoundException()
+        public async void Task_Delete_KorisnickiNalog_Return_NotFoundObjectResult()
         {
             //Arrange
             var controller = new KorisnikController(_service);
             var korisnickiNalogId = 10;
 
             //Act
-            NotFoundException ex = Assert.Throws<NotFoundException>(() =>
-            {
-                controller.Delete(korisnickiNalogId);
-            });
+            var result = await controller.Delete(korisnickiNalogId);
 
             //Assert
-            Assert.Equal("Korisnicki nalog nije pronadjen", ex.Message);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
         #endregion Delete Korisnicki nalog

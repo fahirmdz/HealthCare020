@@ -120,14 +120,17 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if (!string.IsNullOrWhiteSpace(resourceParameters.Username) && await result.AnyAsync())
+            if (resourceParameters != null)
             {
-                result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
-            }
+                if (!string.IsNullOrWhiteSpace(resourceParameters.Username) && await result.AnyAsync())
+                {
+                    result = result.Where(x => x.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
+                }
 
-            if (resourceParameters.LockedOut)
-            {
-                result = result.Where(x => x.LockedOut);
+                if (resourceParameters.LockedOut)
+                {
+                    result = result.Where(x => x.LockedOut);
+                }
             }
             return await base.FilterAndPrepare(result, resourceParameters);
         }
@@ -183,13 +186,13 @@ namespace HealthCare020.Services
             if (korisnickiNalog == null)
                 return ServiceResult.NotFound($"Korisnicki nalog sa ID-em {id} nije pronadjen.");
 
-            if(!await _dbContext.Roles.AnyAsync(x=>x.Id==request.RoleId))
+            if (!await _dbContext.Roles.AnyAsync(x => x.Id == request.RoleId))
                 return ServiceResult.NotFound($"Rola sa ID-em {request.RoleId} nije pronadjena.");
 
             var rolesToAdd = RolesToAdd((RoleType)request.RoleId); //Roles sa manje persmisija, a koje se dodaju uz role sa vecim permisijama
 
             var oldRoles = _dbContext.RolesKorisnickiNalozi.Where(x => x.KorisnickiNalog.Id == korisnickiNalog.Id);
-            if(await oldRoles.AnyAsync())
+            if (await oldRoles.AnyAsync())
                 _dbContext.RemoveRange(oldRoles);
 
             foreach (var roleId in rolesToAdd)

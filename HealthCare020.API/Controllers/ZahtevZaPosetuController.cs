@@ -22,21 +22,21 @@ namespace HealthCare020.API.Controllers
         { }
 
         [AllowAnonymous]
-        public override Task<IActionResult> Insert(ZahtevZaPosetuUpsertDto dtoForCreation)
+        public override async Task<IActionResult> Insert(ZahtevZaPosetuUpsertDto dtoForCreation)
         {
-            return base.Insert(dtoForCreation);
+            return await base.Insert(dtoForCreation);
         }
 
         [NonAction]
-        public override Task<IActionResult> Update(int id, ZahtevZaPosetuUpsertDto dtoForUpdate)
+        public override async Task<IActionResult> Update(int id, ZahtevZaPosetuUpsertDto dtoForUpdate)
         {
-            return base.Update(id, dtoForUpdate);
+            return await base.Update(id, dtoForUpdate);
         }
 
         [NonAction]
-        public override Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<ZahtevZaPosetuUpsertDto> patchDocument)
+        public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<ZahtevZaPosetuUpsertDto> patchDocument)
         {
-            return base.PartiallyUpdate(id, patchDocument);
+            return await base.PartiallyUpdate(id, patchDocument);
         }
     }
 }
