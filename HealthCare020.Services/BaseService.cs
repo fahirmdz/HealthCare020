@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ResponseModels;
 using HealthCare020.Core.ServiceModels;
@@ -52,9 +53,13 @@ namespace HealthCare020.Services
                     var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
                     if (!propertyCheckResult.Succeded)
                         return ServiceResult.BadRequest(propertyCheckResult.Message);
+                    result = _dbContext.Set<TEntity>().AsQueryable();
                 }
             }
-            result = _dbContext.Set<TEntity>().AsQueryable();
+            else
+            {
+                result = _dbContext.Set<TEntity>().AsQueryable();
+            }
 
             var pagedResult = await FilterAndPrepare(result, resourceParameters) ?? new PagedList<TEntity>(new List<TEntity>(), 0, 0, 0);
 
@@ -92,6 +97,9 @@ namespace HealthCare020.Services
                 result = await _dbContext.Set<TEntity>().FindAsync(id);
             }
 
+            if (_authService.UserIsPacijent() && !await AuthorizePacijentForGetById(id))
+                return ServiceResult.Forbidden();
+
             if (result == null)
                 return ServiceResult.NotFound();
 
@@ -110,6 +118,12 @@ namespace HealthCare020.Services
         {
             //Apply pagination
             return PagedList<TEntity>.Create(result, resourceParameters?.PageNumber ?? 1, resourceParameters?.PageSize ?? 6);
+        }
+
+        public virtual async Task<bool> AuthorizePacijentForGetById(int id)
+        {
+
+            return true;
         }
 
 #pragma warning restore 1998

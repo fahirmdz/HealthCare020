@@ -75,6 +75,15 @@ namespace HealthCare020.Services.Configuration
                PacijentNaLecenjuResourceParameters, PacijentNaLecenjuUpsertDto, PacijentNaLecenjuUpsertDto>
                 , PacijentNaLecenjuService>();
 
+            services.AddScoped<
+                ICRUDService<LekarskoUverenje, LekarskoUverenjeDtoLL, LekarskoUverenjeDtoEL,
+                    LekarskoUverenjeResourceParameters, LekarskoUverenjeUpsertDto, LekarskoUverenjeUpsertDto>,
+                LekarskoUverenjeService>();
+
+            services
+                .AddScoped<ICRUDService<Uputnica, UputnicaDtoLL, UputnicaDtoEL, UputnicaResourceParameters,
+                    UputnicaUpsertDto, UputnicaUpsertDto>, UputnicaService>();
+
             services.AddScoped<IRadnikService, RadnikService>();
 
             services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();

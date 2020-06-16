@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -46,21 +47,16 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Insert(PregledUpsertDto dtoForCreation)
         {
-            if (!await _dbContext.Doktori.AnyAsync(x => x.Id == dtoForCreation.DoktorId))
-                return ServiceResult.NotFound($"Doktor sa ID-em {dtoForCreation.DoktorId} nije pronadjen.");
+            var doktor = await _authService.GetCurrentLoggedInDoktor();
+            if (doktor == null)
+                return ServiceResult.Forbidden($"Samo doktori mogu kreirati novi pregled.");
 
-            if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dtoForCreation.PacijentId))
-                return ServiceResult.NotFound($"Pacijent sa ID-em {dtoForCreation.PacijentId} nije pronadjen.");
-
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.Id == dtoForCreation.ZahtevZaPregledId))
-                return ServiceResult.NotFound($"Zahtev za pregled sa ID-em {dtoForCreation.ZahtevZaPregledId} nije pronadjen.");
-
-            if (dtoForCreation.DatumPregleda.Year < DateTime.Now.Year)
-                return ServiceResult.BadRequest($"Datum pregleda nije validan.");
+            if (await ValidateModel(dtoForCreation) is { } result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             var entity = new Pregled
             {
-                DoktorId = dtoForCreation.DoktorId,
+                DoktorId = doktor.Id,
                 PacijentId = dtoForCreation.PacijentId,
                 ZahtevZaPregledId = dtoForCreation.ZahtevZaPregledId,
                 DatumPregleda = dtoForCreation.DatumPregleda,
@@ -75,26 +71,39 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Update(int id, PregledUpsertDto dtoForUpdate)
         {
-            var pregledFromDb = await _dbContext.Pregledi.FindAsync(id);
+            var getPregledResult = await GetPregledForManipulation(id);
+            if(!getPregledResult.Succeeded)
+                return ServiceResult.WithStatusCode(getPregledResult.StatusCode,getPregledResult.Message);
 
-            if (pregledFromDb == null)
-                return ServiceResult.NotFound($"Pregled sa ID-em {id} nije pronadjen.");
+            var pregledFromDb = (getPregledResult as ServiceResult<Pregled>).Data;
 
-            if (!await _dbContext.Doktori.AnyAsync(x => x.Id == dtoForUpdate.DoktorId))
-                return ServiceResult.NotFound($"Doktor sa ID-em {dtoForUpdate.DoktorId} nije pronadjen.");
-
-            if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dtoForUpdate.PacijentId))
-                return ServiceResult.NotFound($"Pacijent sa ID-em {dtoForUpdate.PacijentId} nije pronadjen.");
-
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.Id == dtoForUpdate.ZahtevZaPregledId))
-                return ServiceResult.NotFound($"Zahtev za pregled sa ID-em {dtoForUpdate.ZahtevZaPregledId} nije pronadjen.");
-
-            if (dtoForUpdate.DatumPregleda.Year < DateTime.Now.Year)
-                return ServiceResult.BadRequest($"Datum pregleda nije validan.");
+            if (await ValidateModel(dtoForUpdate) is { } result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             _mapper.Map(dtoForUpdate, pregledFromDb);
 
             return ServiceResult<PregledDtoLL>.OK(_mapper.Map<PregledDtoLL>(pregledFromDb));
+        }
+
+        public override async Task<ServiceResult> Delete(int id)
+        {
+            var getPregledResult = await GetPregledForManipulation(id);
+            if(!getPregledResult.Succeeded)
+                return ServiceResult.WithStatusCode(getPregledResult.StatusCode,getPregledResult.Message);
+
+            var pregledFromDb = (getPregledResult as ServiceResult<Pregled>).Data;
+
+            if(await _dbContext.LekarskaUverenja.AnyAsync(x=>x.PregledId==id))
+                return ServiceResult.BadRequest($"Ne mozete brisati pregled sve dok ima lekarskih uverenja povezanih sa ovim pregledom.");
+
+            await Task.Run(() =>
+            {
+                _dbContext.Remove(pregledFromDb);
+            });
+
+            await _dbContext.SaveChangesAsync();
+
+            return ServiceResult<PregledDtoLL>.NoContent();
         }
 
         public override async Task<PagedList<Pregled>> FilterAndPrepare(IQueryable<Pregled> result, PregledResourceParameters resourceParameters)
@@ -157,7 +166,57 @@ namespace HealthCare020.Services
                 }
             }
 
+            //CONSTRAINT -> Pacijent moze samo svoje preglede videti
+            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                result = result.Where(x => x.PacijentId == pacijent.Id);
+
             return PagedList<Pregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
+        }
+
+        /// <summary>
+        /// Returns Pregled if Doktor is authorized for it
+        /// </summary>
+        /// <returns></returns>
+        private async Task<ServiceResult> GetPregledForManipulation(int id)
+        {
+            var doktor = await _authService.GetCurrentLoggedInDoktor();
+            if (doktor == null)
+                return ServiceResult.Forbidden($"Samo doktori mogu vrsiti izmene pregleda.");
+
+            var pregledFromDb = await _dbContext.Pregledi.FindAsync(id);
+            if (pregledFromDb == null)
+                return ServiceResult.NotFound($"Pregled sa ID-em {id} nije pronadjen.");
+
+            if (pregledFromDb.DoktorId != doktor.Id)
+                return ServiceResult.Forbidden($"Nemate permisije za izmenu pregleda koje je kreirao drugi doktor.");
+
+            return ServiceResult<Pregled>.OK(pregledFromDb);
+        }
+
+        public override async Task<bool> AuthorizePacijentForGetById(int id)
+        {
+            var pacijent = await _authService.GetCurrentLoggedInPacijent();
+            if (pacijent == null)
+                return false;
+
+            return await _dbContext.Pregledi.AnyAsync(x => x.PacijentId == pacijent.Id && x.Id == id);
+        }
+
+        private async Task<ServiceResult> ValidateModel(PregledUpsertDto dto)
+        {
+            if (await _dbContext.Pregledi.AnyAsync(x => x.ZahtevZaPregledId == dto.ZahtevZaPregledId))
+                return ServiceResult.BadRequest($"Na zahtev sa ID-em {dto.ZahtevZaPregledId}, vec je odradjen pregled.");
+
+            if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dto.PacijentId))
+                return ServiceResult.NotFound($"Pacijent sa ID-em {dto.PacijentId} nije pronadjen.");
+
+            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.Id == dto.ZahtevZaPregledId))
+                return ServiceResult.NotFound($"Zahtev za pregled sa ID-em {dto.ZahtevZaPregledId} nije pronadjen.");
+
+            if (dto.DatumPregleda.Year < DateTime.Now.Year)
+                return ServiceResult.BadRequest($"Datum pregleda nije validan.");
+
+            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
     }
 }

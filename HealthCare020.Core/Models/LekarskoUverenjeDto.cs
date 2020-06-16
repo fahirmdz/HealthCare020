@@ -1,4 +1,6 @@
-﻿namespace HealthCare020.Core.Models
+﻿using System;
+
+namespace HealthCare020.Core.Models
 {
     public abstract class LekarskoUverenjeDto
     {

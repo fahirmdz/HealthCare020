@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
@@ -19,15 +20,18 @@ namespace HealthCare020.Services
     public class DoktorService : BaseCRUDService<DoktorDtoLL, DoktorDtoEL, DoktorResourceParameters, Doktor, DoktorUpsertDto, DoktorUpsertDto>
     {
         private readonly IRadnikService _radnikService;
+        private readonly IKorisnikService _korisnikService;
 
         public DoktorService(IMapper mapper, HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IRadnikService radnikService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
+            IAuthService authService, 
+            IKorisnikService korisnikService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _radnikService = radnikService;
+            _korisnikService = korisnikService;
         }
 
         public override IQueryable<Doktor> GetWithEagerLoad(int? id = null)
@@ -58,8 +62,18 @@ namespace HealthCare020.Services
             if (!radnikInsertResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
+            var radnik = (radnikInsertResult as ServiceResult<Radnik>).Data;
+
+            if (radnik == null)
+                throw new NullReferenceException();
+
+            var rolesAddResult = await _korisnikService.AddInRoles(radnik.KorisnickiNalogId,
+                new KorisnickiNalogRolesUpsertDto {RoleId = RoleType.Doktor.ToInt()});
+            if(!rolesAddResult.Succeeded)
+                return ServiceResult.WithStatusCode(rolesAddResult.StatusCode,rolesAddResult.Message);
+
             var entity = _mapper.Map<Doktor>(request);
-            entity.RadnikId = (radnikInsertResult as ServiceResult<Radnik>).Data.Id;
+            entity.RadnikId = radnik.Id;
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
@@ -118,9 +132,10 @@ namespace HealthCare020.Services
             if (await _dbContext.ZdravstvenaKnjizica.AnyAsync(x => x.DoktorId == doktorFromDb.Id))
                 return ServiceResult.BadRequest("Ne mozete izbrisati profil doktora sve dok ima zdravstvenih knjizica koje su povezane sa ovim doktorom.");
 
+            await _radnikService.Delete(doktorFromDb.RadnikId);
+
             await Task.Run(() =>
             {
-                _radnikService.Delete(doktorFromDb.RadnikId);
                 _dbContext.Remove(doktorFromDb);
             });
 

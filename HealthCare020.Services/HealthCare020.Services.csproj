@@ -24,4 +24,8 @@
     <ProjectReference Include="..\HealthCare020.Repository\HealthCare020.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

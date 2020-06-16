@@ -8,5 +8,6 @@ namespace HealthCare020.Core.Models
         public int DoktorId { get; set; }
         public DateTime DatumPregleda { get; set; }
         public bool IsOdradjen { get; set; }
+        public int ZahtevZaPregledId { get; set; }
     }
 }

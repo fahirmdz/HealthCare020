@@ -10,7 +10,10 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthCare020.Services
 {
@@ -27,14 +30,26 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> GetById(int id, bool EagerLoaded)
         {
+            var user = await _authService.LoggedInUser();
+
             if (await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
             {
-                var user = await _authService.LoggedInUser();
                 if (!await _dbContext.Pacijenti
                         .Include(x => x.ZdravstvenaKnjizica)
                         .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.ZdravstvenaKnjizica.LicniPodaciId == id))
                 {
                     return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih pacijenata.");
+                }
+            }
+            else if(await _authService.CurrentUserIsInRoleAsync(RoleType.RadnikPrijem) || 
+                    await _authService.CurrentUserIsInRoleAsync(RoleType.MedicinskiTehnicar) ||
+                    await _authService.CurrentUserIsInRoleAsync(RoleType.Doktor))
+            {
+                
+                if (!await _dbContext.Radnici
+                    .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.LicniPodaciId==id))
+                {
+                    return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih uposlenika.");
                 }
             }
 
@@ -87,6 +102,11 @@ namespace HealthCare020.Services
             await _dbContext.SaveChangesAsync();
 
             return new ServiceResult<LicniPodaciDto>(_mapper.Map<LicniPodaciDto>(entity));
+        }
+
+        public override async Task<ServiceResult> Delete(int id)
+        {
+            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
     }
 }

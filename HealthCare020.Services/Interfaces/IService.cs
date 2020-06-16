@@ -17,6 +17,8 @@ namespace HealthCare020.Services.Interfaces
 
         Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters);
 
+        Task<bool> AuthorizePacijentForGetById(int id);
+
         IEnumerable PrepareDataForClient(IEnumerable<TEntity> data, TResourceParameters resourceParameters);
 
         bool ShouldEagerLoad(TResourceParameters resourceParameters);

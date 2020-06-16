@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
@@ -9,18 +10,17 @@ namespace HealthCare020.Core.Request
         public int PacijentId { get; set; }
 
         [Required]
-        public int UputioDoktorId { get; set; }
-
-        [Required]
         public int UpucenKodDoktoraId { get; set; }
 
         [Required]
         public string Razlog { get; set; }
 
         [Required]
+        [MaxLength(255)]
         public string Napomena { get; set; }
 
         [Required]
+        [FutureDateTime]
         public DateTime DatumVreme { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthCare020.Core.Enums;
 using HealthCare020.Services.Constants;
 using Microsoft.AspNetCore.Authorization;
 
@@ -19,6 +21,7 @@ namespace HealthCare020.Services
     public class MedicinskiTehnicarService : BaseCRUDService<MedicinskiTehnicarDtoLL, MedicinskiTehnicarDtoEL, MedicinskiTehnicarResourceParameters, MedicinskiTehnicar, MedicinskiTehnicarUpsertDto, MedicinskiTehnicarUpsertDto>
     {
         private readonly IRadnikService _radnikService;
+        private readonly IKorisnikService _korisnikService;
 
         public MedicinskiTehnicarService(IMapper mapper,
             HealthCare020DbContext dbContext,
@@ -26,9 +29,11 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IRadnikService radnikService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
+            IAuthService authService,
+            IKorisnikService korisnikService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
         {
             _radnikService = radnikService;
+            _korisnikService = korisnikService;
         }
 
         public override IQueryable<MedicinskiTehnicar> GetWithEagerLoad(int? id = null)
@@ -55,7 +60,16 @@ namespace HealthCare020.Services
             if (!radnikInsertResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
-            var entity = new MedicinskiTehnicar { RadnikId = (radnikInsertResult as ServiceResult<Radnik>).Data.Id };
+            var radnik = (radnikInsertResult as ServiceResult<Radnik>).Data;
+            if(radnik==null)
+                throw new NullReferenceException();
+
+            var rolesAddResult = await _korisnikService.AddInRoles(radnik.KorisnickiNalogId,
+                new KorisnickiNalogRolesUpsertDto {RoleId = RoleType.MedicinskiTehnicar.ToInt()});
+            if(!rolesAddResult.Succeeded)
+                return ServiceResult.WithStatusCode(rolesAddResult.StatusCode,rolesAddResult.Message);
+
+            var entity = new MedicinskiTehnicar { RadnikId = radnik.Id };
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();

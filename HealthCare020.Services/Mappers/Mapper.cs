@@ -4,7 +4,6 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using System.Globalization;
 using System.Linq;
-using HealthCare020.Services.Helpers;
 
 namespace HealthCare020.Services.Mappers
 {
@@ -20,14 +19,16 @@ namespace HealthCare020.Services.Mappers
                 .ForMember(x => x.Id, opt => opt.Ignore())
                 .ReverseMap();
 
-            #endregion
+            #endregion ZdravstvenoStanje
 
             #region Role
+
             CreateMap<Role, TwoFieldsDto>()
                 .ForMember(x => x.Naziv, opt => opt.MapFrom(x => x.Naziv))
                 .ReverseMap();
             CreateMap<RoleUpsertDto, Role>().ReverseMap();
-            #endregion
+
+            #endregion Role
 
             #region NaucnaOblast
 
@@ -36,7 +37,7 @@ namespace HealthCare020.Services.Mappers
                 .ReverseMap();
             CreateMap<NaucnaOblastUpsertDto, NaucnaOblast>().ReverseMap();
 
-            #endregion MyRegion
+            #endregion NaucnaOblast
 
             #region Drzava
 
@@ -103,10 +104,10 @@ namespace HealthCare020.Services.Mappers
                 .ForMember(dest => dest.Id,
                     opt => opt.Ignore());
             CreateMap<Radnik, RadnikDtoEL>()
-                .ForMember(dest=>dest.Ime,
-                    opt=>opt.MapFrom(x=>x.LicniPodaci.Ime))
-                .ForMember(dest=>dest.Prezime,
-                    opt=>opt.MapFrom(x=>x.LicniPodaci.Prezime));
+                .ForMember(dest => dest.Ime,
+                    opt => opt.MapFrom(x => x.LicniPodaci.Ime))
+                .ForMember(dest => dest.Prezime,
+                    opt => opt.MapFrom(x => x.LicniPodaci.Prezime));
 
             #endregion Radnik
 
@@ -179,13 +180,13 @@ namespace HealthCare020.Services.Mappers
             #region Pacijent
 
             CreateMap<Pacijent, PacijentDtoLL>()
-                .ForMember(dest=>dest.Username,
-                    opt=>opt.MapFrom(x=>x.KorisnickiNalog.Username));
+                .ForMember(dest => dest.Username,
+                    opt => opt.MapFrom(x => x.KorisnickiNalog.Username));
             CreateMap<Pacijent, PacijentDtoEL>()
-                .ForMember(dest=>dest.ZdravstvenaKnjizica,
-                    opt=>opt.MapFrom(x=>x.ZdravstvenaKnjizica))
-                .ForMember(dest=>dest.Username,
-                    opt=>opt.MapFrom(x=>x.KorisnickiNalog.Username));
+                .ForMember(dest => dest.ZdravstvenaKnjizica,
+                    opt => opt.MapFrom(x => x.ZdravstvenaKnjizica))
+                .ForMember(dest => dest.Username,
+                    opt => opt.MapFrom(x => x.KorisnickiNalog.Username));
             CreateMap<PacijentUpsertDto, Pacijent>();
 
             #endregion Pacijent
@@ -210,9 +211,7 @@ namespace HealthCare020.Services.Mappers
                 .ForMember(dest => dest.Doktor,
                     opt => opt.MapFrom(x => x.Doktor.Radnik.LicniPodaci.ImePrezime()))
                 .ForMember(dest => dest.Pacijent,
-                    opt => opt.MapFrom(x => x.Pacijent))
-                .ForMember(dest => dest.ZahtevZaPregled,
-                    opt => opt.MapFrom(x => x.ZahtevZaPregled));
+                    opt => opt.MapFrom(x => x.Pacijent));
 
             #endregion Pregled
 
@@ -239,7 +238,7 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.UputioDoktor.Radnik.LicniPodaci.ImePrezime()));
             CreateMap<UputnicaUpsertDto, Uputnica>();
 
-            #endregion
+            #endregion Uputnica
 
             #region LekarskoUverenje
 
@@ -251,7 +250,7 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.ZdravstvenoStanje));
             CreateMap<LekarskoUverenjeUpsertDto, LekarskoUverenje>();
 
-            #endregion
+            #endregion LekarskoUverenje
 
             #region Poseta
 
@@ -261,7 +260,7 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.PacijentNaLecenju));
             CreateMap<ZahtevZaPosetuUpsertDto, ZahtevZaPosetu>();
 
-            #endregion
+            #endregion Poseta
 
             #region PacijentNaLecenju
 
@@ -273,7 +272,7 @@ namespace HealthCare020.Services.Mappers
                     opt => opt.MapFrom(x => x.LicniPodaci));
             CreateMap<PacijentNaLecenjuUpsertDto, PacijentNaLecenju>();
 
-            #endregion
+            #endregion PacijentNaLecenju
         }
     }
 }
