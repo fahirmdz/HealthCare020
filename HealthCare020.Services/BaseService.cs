@@ -53,9 +53,13 @@ namespace HealthCare020.Services
                     var propertyCheckResult = PropertyCheck<TDto>(resourceParameters.OrderBy);
                     if (!propertyCheckResult.Succeded)
                         return ServiceResult.BadRequest(propertyCheckResult.Message);
+                    result = _dbContext.Set<TEntity>().AsQueryable();
                 }
             }
-            result = _dbContext.Set<TEntity>().AsQueryable();
+            else
+            {
+                result = _dbContext.Set<TEntity>().AsQueryable();
+            }
 
             var pagedResult = await FilterAndPrepare(result, resourceParameters) ?? new PagedList<TEntity>(new List<TEntity>(), 0, 0, 0);
 

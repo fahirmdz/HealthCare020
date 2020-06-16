@@ -140,6 +140,10 @@ namespace HealthCare020.Services
                 }
             }
 
+            //CONSTRAINT -> Pacijent moze samo svoje preglede videti
+            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                result = result.Where(x => x.PacijentId == pacijent.Id);
+
             return PagedList<Pregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
 

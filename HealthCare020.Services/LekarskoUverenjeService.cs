@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.Entities;
-using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
@@ -37,7 +36,6 @@ namespace HealthCare020.Services
 
             return id.HasValue ? result = result.Where(x => x.Id == id) : result;
         }
-
 
         public override async Task<ServiceResult> Insert(LekarskoUverenjeUpsertDto dtoForCreation)
         {
@@ -85,6 +83,10 @@ namespace HealthCare020.Services
                 if (await result.AnyAsync() && resourceParameters.ZdravstvenoStanjeId.HasValue)
                     result = result.Where(x => x.ZdravstvenoStanjeId == resourceParameters.ZdravstvenoStanjeId);
             }
+
+            //CONSTRAINT -> Pacijent moze samo svoje preglede videti
+            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                result = result.Where(x => x.Pregled.PacijentId == pacijent.Id);
 
             return await base.FilterAndPrepare(result, resourceParameters);
         }

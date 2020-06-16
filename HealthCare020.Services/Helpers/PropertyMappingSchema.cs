@@ -229,7 +229,6 @@ namespace HealthCare020.Services.Helpers
                         {nameof(PregledDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Pregled.Id)})},
                         {nameof(PregledDtoEL.Pacijent),new PropertyMappingValue(new List<string>(){nameof(Pregled.Pacijent)})},
                         {nameof(PregledDtoEL.Doktor),new PropertyMappingValue(new List<string>(){nameof(Pregled.Doktor)})},
-                        {nameof(PregledDtoEL.ZahtevZaPregled),new PropertyMappingValue(new List<string>(){nameof(Pregled.ZahtevZaPregled)})},
                         {nameof(PregledDtoEL.DatumPregleda),new PropertyMappingValue(new List<string>(){nameof(Pregled.DatumPregleda)})},
                         {nameof(PregledDtoEL.IsOdradjen),new PropertyMappingValue(new List<string>(){nameof(Pregled.IsOdradjen)})}
                     })

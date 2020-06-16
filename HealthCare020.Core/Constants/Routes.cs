@@ -19,5 +19,6 @@
         public const string ZdravstvenaKnjizicaRoute = "zdravstvene-knjizice";
         public const string ZahtevZaPosetuRoute = "zahtevi-za-posetu";
         public const string PacijentNaLecenjuRoute = "pacijenti-na-lecenju";
+        public const string LekarskoUverenjeRoute = "lekarska-uverenja";
     }
 }

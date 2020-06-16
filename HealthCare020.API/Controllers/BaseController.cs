@@ -134,7 +134,7 @@ namespace HealthCare020.API.Controllers
         /// <summary>
         /// Get the value of EagerLoad property from ResourceParameters if it exists.
         /// </summary>
-        public bool ShouldEagerLoad(TResourceParameters resourceParameters)
+        protected bool ShouldEagerLoad(TResourceParameters resourceParameters)
         {
             var eagerLoadedProp = resourceParameters?.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
 

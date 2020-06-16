@@ -138,5 +138,14 @@ namespace HealthCare020.Services
 
             return await base.FilterAndPrepare(result,resourceParameters);
         }
+
+        public override async Task<bool> AuthorizePacijentForGetById(int id)
+        {
+            var pacijent = await _authService.GetCurrentLoggedInPacijent();
+            if (pacijent == null)
+                return false;
+
+            return pacijent.ZdravstvenaKnjizicaId == id;
+        }
     }
 }

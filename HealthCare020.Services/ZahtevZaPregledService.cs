@@ -151,6 +151,10 @@ namespace HealthCare020.Services
                 }
             }
 
+            //CONSTRAINT -> Pacijent moze samo svoje zahteve za pregled videti
+            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                result = result.Where(x => x.PacijentId == pacijent.Id);
+
             return await base.FilterAndPrepare(result, resourceParameters);
         }
 
@@ -168,10 +172,10 @@ namespace HealthCare020.Services
             if (dto.UputnicaId.HasValue && await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dto.UputnicaId))
                 return ServiceResult.BadRequest($"Vec postoji zahtev za pregled povezan sa uputnicom {dto.UputnicaId}.");
 
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.DoktorId == dto.DoktorId))
+            if (!await _dbContext.Doktori.AnyAsync(x => x.Id == dto.DoktorId))
                 return ServiceResult.NotFound($"Doktor sa ID-em {dto.DoktorId} nije pronadjen.");
 
-            if (dto.UputnicaId.HasValue && !await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dto.UputnicaId))
+            if (dto.UputnicaId.HasValue && !await _dbContext.Uputnice.AnyAsync(x => x.Id == dto.UputnicaId))
                 return ServiceResult.NotFound($"Uputnica sa ID-em {dto.DoktorId} nije pronadjena.");
 
             return ServiceResult.WithStatusCode(HttpStatusCode.OK);
