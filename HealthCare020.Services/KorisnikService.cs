@@ -48,7 +48,7 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request)
+        public  async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request,RoleType roleType=0)
         {
             var korisnickiNalog = _mapper.Map<KorisnickiNalog>(request);
 
@@ -65,6 +65,21 @@ namespace HealthCare020.Services
 
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
+
+            if(roleType!=0)
+            {
+                var rolesToAdd = RolesToAdd(roleType);
+                foreach (var roleId in rolesToAdd)
+                {
+                    await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
+                    {
+                        KorisnickiNalogId = korisnickiNalog.Id,
+                        RoleId = roleId.ToInt()
+                    });
+                }
+
+                await _dbContext.SaveChangesAsync();
+            }
 
             return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
@@ -104,6 +119,10 @@ namespace HealthCare020.Services
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
             if (korisnickiNalog == null)
                 return ServiceResult.NotFound("Korisnicki nalog nije pronadjen");
+
+            var rolesToDelete = _dbContext.RolesKorisnickiNalozi.Where(x => x.KorisnickiNalogId == korisnickiNalog.Id).ToList();
+            if (rolesToDelete.Any())
+                _dbContext.RemoveRange(rolesToDelete);
 
             await Task.Run(() =>
             {
@@ -202,8 +221,8 @@ namespace HealthCare020.Services
                     KorisnickiNalogId = korisnickiNalog.Id,
                     RoleId = roleId.ToInt()
                 });
+                await _dbContext.SaveChangesAsync();
             }
-            await _dbContext.SaveChangesAsync();
 
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 

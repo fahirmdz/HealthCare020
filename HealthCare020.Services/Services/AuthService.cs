@@ -67,6 +67,15 @@ namespace HealthCare020.Services.Services
             return await _dbContext.Pacijenti.FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
         }
 
+        public async Task<Doktor> GetCurrentLoggedInDoktor()
+        {
+            var user = await LoggedInUser();
+            if (user == null)
+                return null;
+
+            return await _dbContext.Doktori.FirstOrDefaultAsync(x => x.Radnik.KorisnickiNalogId == user.Id);
+        }
+
         private string GetClaim(string type) =>
             _httpContextAccessor.HttpContext.User?.Claims.FirstOrDefault(x => x.Type == type)?.Value??string.Empty;
     }

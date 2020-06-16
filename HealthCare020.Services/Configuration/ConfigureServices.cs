@@ -80,6 +80,10 @@ namespace HealthCare020.Services.Configuration
                     LekarskoUverenjeResourceParameters, LekarskoUverenjeUpsertDto, LekarskoUverenjeUpsertDto>,
                 LekarskoUverenjeService>();
 
+            services
+                .AddScoped<ICRUDService<Uputnica, UputnicaDtoLL, UputnicaDtoEL, UputnicaResourceParameters,
+                    UputnicaUpsertDto, UputnicaUpsertDto>, UputnicaService>();
+
             services.AddScoped<IRadnikService, RadnikService>();
 
             services.AddTransient<IPropertyCheckerService, PropertyCheckerService>();
