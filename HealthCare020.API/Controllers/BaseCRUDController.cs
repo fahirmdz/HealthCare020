@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
-using HealthCare020.API.Filters;
 
 namespace HealthCare020.API.Controllers
 {
@@ -25,7 +24,6 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpPost]
-        [TrimInputStrings]
         public virtual async Task<IActionResult> Insert(TDtoForCreation dtoForCreation)
         {
             var result = await _crudService.Insert(dtoForCreation);
@@ -36,7 +34,6 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [TrimInputStrings]
         public virtual async Task<IActionResult> Update(int id, TDtoForUpdate dtoForUpdate)
         {
             var result = await _crudService.Update(id, dtoForUpdate);
@@ -47,7 +44,6 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [TrimInputStrings]
         public virtual async Task<IActionResult> Delete(int id)
         {
             var result = await _crudService.Delete(id);
@@ -58,7 +54,6 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpPatch("{id}")]
-        [TrimInputStrings]
         public virtual async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<TDtoForUpdate> patchDocument)
         {
             var result = await _crudService.GetAsUpdateDto(id);

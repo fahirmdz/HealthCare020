@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Services.Filters;
 
 namespace HealthCare020.Services
 
@@ -47,6 +48,11 @@ namespace HealthCare020.Services
                 result = result.Where(x => x.Id == id);
 
             return result;
+        }
+
+        public override async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto dtoForCreation)
+        {
+            return await Insert(dtoForCreation, 0);
         }
 
         public async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request, RoleType roleType = 0)
