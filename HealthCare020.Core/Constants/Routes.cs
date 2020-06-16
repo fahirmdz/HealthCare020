@@ -6,6 +6,7 @@
         public const string DrzaveRoute = "drzave";
         public const string GradoviRoute = "gradovi";
         public const string KorisniciRoute = "korisnici";
+        public const string LicniPodaciRoute = "licni-podaci";
         public const string MedicinskiTehnicariRoute = "medicinski-tehnicari";
         public const string NaucneOblastiRoute = "naucne-oblasti";
         public const string PacijentiRoute = "pacijenti";
