@@ -14,6 +14,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -48,8 +49,11 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public  async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request,RoleType roleType=0)
+        public async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request, RoleType roleType = 0)
         {
+            if (await ValidateModel(request) is { } validationResult && !validationResult.Succeeded)
+                return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
+
             var korisnickiNalog = _mapper.Map<KorisnickiNalog>(request);
 
             if (request.ConfirmPassword != request.Password)
@@ -66,7 +70,7 @@ namespace HealthCare020.Services
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
 
-            if(roleType!=0)
+            if (roleType != 0)
             {
                 var rolesToAdd = RolesToAdd(roleType);
                 foreach (var roleId in rolesToAdd)
@@ -89,6 +93,9 @@ namespace HealthCare020.Services
             var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(id);
             if (korisnickiNalog == null)
                 return ServiceResult.NotFound("Korisnicki nalog nije pronadjen");
+
+            if (await ValidateModel(dtoForUpdate) is { } validationResult && !validationResult.Succeeded)
+                return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
 
             _mapper.Map(dtoForUpdate, korisnickiNalog);
 
@@ -274,6 +281,17 @@ namespace HealthCare020.Services
                 default:
                     return new List<RoleType> { RoleType.Pacijent };
             }
+        }
+
+        private async Task<ServiceResult> ValidateModel(KorisnickiNalogUpsertDto dto)
+        {
+            if (dto == null)
+                return ServiceResult.BadRequest();
+
+            if (await _dbContext.KorisnickiNalozi.AnyAsync(x => x.Username.ToLower() == dto.Username.ToLower()))
+                return ServiceResult.BadRequest($"Vec postoji korisnicki nalog koji koristi username {dto.Username}.");
+
+            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
     }
 }
