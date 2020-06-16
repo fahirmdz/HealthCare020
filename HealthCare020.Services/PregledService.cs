@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
@@ -46,17 +47,8 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Insert(PregledUpsertDto dtoForCreation)
         {
-            if (!await _dbContext.Doktori.AnyAsync(x => x.Id == dtoForCreation.DoktorId))
-                return ServiceResult.NotFound($"Doktor sa ID-em {dtoForCreation.DoktorId} nije pronadjen.");
-
-            if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dtoForCreation.PacijentId))
-                return ServiceResult.NotFound($"Pacijent sa ID-em {dtoForCreation.PacijentId} nije pronadjen.");
-
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.Id == dtoForCreation.ZahtevZaPregledId))
-                return ServiceResult.NotFound($"Zahtev za pregled sa ID-em {dtoForCreation.ZahtevZaPregledId} nije pronadjen.");
-
-            if (dtoForCreation.DatumPregleda.Year < DateTime.Now.Year)
-                return ServiceResult.BadRequest($"Datum pregleda nije validan.");
+            if (await ValidateModel(dtoForCreation) is { } result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             var entity = new Pregled
             {
@@ -80,17 +72,8 @@ namespace HealthCare020.Services
             if (pregledFromDb == null)
                 return ServiceResult.NotFound($"Pregled sa ID-em {id} nije pronadjen.");
 
-            if (!await _dbContext.Doktori.AnyAsync(x => x.Id == dtoForUpdate.DoktorId))
-                return ServiceResult.NotFound($"Doktor sa ID-em {dtoForUpdate.DoktorId} nije pronadjen.");
-
-            if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dtoForUpdate.PacijentId))
-                return ServiceResult.NotFound($"Pacijent sa ID-em {dtoForUpdate.PacijentId} nije pronadjen.");
-
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.Id == dtoForUpdate.ZahtevZaPregledId))
-                return ServiceResult.NotFound($"Zahtev za pregled sa ID-em {dtoForUpdate.ZahtevZaPregledId} nije pronadjen.");
-
-            if (dtoForUpdate.DatumPregleda.Year < DateTime.Now.Year)
-                return ServiceResult.BadRequest($"Datum pregleda nije validan.");
+            if (await ValidateModel(dtoForUpdate) is { } result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             _mapper.Map(dtoForUpdate, pregledFromDb);
 
@@ -158,6 +141,26 @@ namespace HealthCare020.Services
             }
 
             return PagedList<Pregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
+        }
+
+        private async Task<ServiceResult> ValidateModel(PregledUpsertDto dto)
+        {
+            if (await _dbContext.Pregledi.AnyAsync(x => x.ZahtevZaPregledId == dto.ZahtevZaPregledId))
+                return ServiceResult.BadRequest($"Na zahtev sa ID-em {dto.ZahtevZaPregledId}, vec je odradjen pregled.");
+
+            if (!await _dbContext.Doktori.AnyAsync(x => x.Id == dto.DoktorId))
+                return ServiceResult.NotFound($"Doktor sa ID-em {dto.DoktorId} nije pronadjen.");
+
+            if (!await _dbContext.Pacijenti.AnyAsync(x => x.Id == dto.PacijentId))
+                return ServiceResult.NotFound($"Pacijent sa ID-em {dto.DoktorId} nije pronadjen.");
+
+            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.Id == dto.ZahtevZaPregledId))
+                return ServiceResult.NotFound($"Zahtev za pregled sa ID-em {dto.DoktorId} nije pronadjen.");
+
+            if (dto.DatumPregleda.Year < DateTime.Now.Year)
+                return ServiceResult.BadRequest($"Datum pregleda nije validan.");
+
+            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
     }
 }

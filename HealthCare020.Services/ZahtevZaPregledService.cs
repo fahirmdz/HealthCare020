@@ -10,6 +10,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using HealthCare020.Core.Enums;
 
@@ -54,11 +55,8 @@ namespace HealthCare020.Services
             if(pacijent==null)
                 return ServiceResult.Forbidden($"Samo pacijenti mogu kreirati zahtev za pregled.");
 
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.DoktorId == dtoForCreation.DoktorId))
-                return ServiceResult.NotFound($"Doktor sa ID-em {dtoForCreation.DoktorId} nije pronadjen.");
-
-            if (dtoForCreation.UputnicaId.HasValue && !await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dtoForCreation.UputnicaId))
-                return ServiceResult.NotFound($"Uputnica sa ID-em {dtoForCreation.DoktorId} nije pronadjena.");
+            if(await ValidateModel(dtoForCreation) is {} result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode,result.Message);
 
             var entity = new ZahtevZaPregled
             {
@@ -84,12 +82,8 @@ namespace HealthCare020.Services
             if (zahtevFromDb == null)
                 return new ServiceResult<ZahtevZaPregledDtoLL>();
 
-            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.DoktorId == dtoForUpdate.DoktorId))
-                return ServiceResult.NotFound($"Doktor sa ID-em {dtoForUpdate.DoktorId} nije pronadjen.");
-
-            if (dtoForUpdate.UputnicaId.HasValue &&
-                !await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dtoForUpdate.UputnicaId))
-                return ServiceResult.NotFound($"Uputnica sa ID-em {dtoForUpdate.DoktorId} nije pronadjena.");
+            if(await ValidateModel(dtoForUpdate) is {} result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode,result.Message);
 
             _mapper.Map(dtoForUpdate, zahtevFromDb);
 
@@ -158,6 +152,20 @@ namespace HealthCare020.Services
             }
 
             return await base.FilterAndPrepare(result, resourceParameters);
+        }
+
+        private async Task<ServiceResult> ValidateModel(ZahtevZaPregledUpsertDto dto)
+        {
+            if(dto.UputnicaId.HasValue && await _dbContext.ZahteviZaPregled.AnyAsync(x=>x.UputnicaId==dto.UputnicaId))
+                return ServiceResult.BadRequest($"Vec postoji zahtev za pregled povezan sa uputnicom {dto.UputnicaId}.");
+
+            if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.DoktorId == dto.DoktorId))
+                return ServiceResult.NotFound($"Doktor sa ID-em {dto.DoktorId} nije pronadjen.");
+
+            if (dto.UputnicaId.HasValue && !await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dto.UputnicaId))
+                return ServiceResult.NotFound($"Uputnica sa ID-em {dto.DoktorId} nije pronadjena.");
+
+            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
     }
 }
