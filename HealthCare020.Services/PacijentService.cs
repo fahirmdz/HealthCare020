@@ -198,6 +198,15 @@ namespace HealthCare020.Services
             return await base.FilterAndPrepare(result, resourceParameters);
         }
 
+        public override async Task<bool> AuthorizePacijentForGetById(int id)
+        {
+            var pacijent = await _authService.GetCurrentLoggedInPacijent();
+            if (pacijent == null)
+                return false;
+
+            return id == pacijent.Id;
+        }
+
         private async Task<(bool Succeeded, HttpStatusCode StatusCode, string Message)> ValidateUpsertData(PacijentUpsertDto dto, ZdravstvenaKnjizica zdravstvenaKnjizica)
         {
             if (zdravstvenaKnjizica == null)

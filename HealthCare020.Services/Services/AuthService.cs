@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Enums;
 using HealthCare020.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services.Services
 {
@@ -30,6 +32,8 @@ namespace HealthCare020.Services.Services
             return GetClaim("roles").ToLower().Contains(role.ToDescriptionString().ToLower());
         }
 
+        public bool UserIsPacijent() => GetClaim("roles").ToLower().Trim() == RoleType.Pacijent.ToDescriptionString().ToLower();
+
         public RoleType? TypeOfCurrentUser()
         {
             if (IsAuthenticated().Result)
@@ -52,6 +56,15 @@ namespace HealthCare020.Services.Services
             int.TryParse(subClaim, out int userId);
 
             return await _dbContext.KorisnickiNalozi.FindAsync(userId);
+        }
+
+        public async Task<Pacijent> GetCurrentLoggedInPacijent()
+        {
+            var user = await LoggedInUser();
+            if (user == null)
+                return null;
+
+            return await _dbContext.Pacijenti.FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
         }
 
         private string GetClaim(string type) =>

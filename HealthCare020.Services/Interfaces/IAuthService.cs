@@ -8,8 +8,10 @@ namespace HealthCare020.Services.Interfaces
     {
         public Task<bool> IsAuthenticated();
         public Task<bool> CurrentUserIsInRoleAsync(RoleType role);
+        public bool UserIsPacijent();
         public RoleType? TypeOfCurrentUser();
         public Task<KorisnickiNalog> LoggedInUser();
+        public Task<Pacijent> GetCurrentLoggedInPacijent();
 
     }
 }

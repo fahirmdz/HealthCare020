@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.Entities;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
@@ -12,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Core.Enums;
 
 namespace HealthCare020.Services
 {
@@ -23,7 +23,7 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
             IAuthService authService) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
         }
 
@@ -48,15 +48,15 @@ namespace HealthCare020.Services
         public override async Task<ServiceResult> Insert(ZahtevZaPregledUpsertDto dtoForCreation)
         {
             var user = await _authService.LoggedInUser();
-            if(user==null)
+            if (user == null)
                 return ServiceResult.Unauthorized();
 
             var pacijent = await _dbContext.Pacijenti.FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
-            if(pacijent==null)
+            if (pacijent == null)
                 return ServiceResult.Forbidden($"Samo pacijenti mogu kreirati zahtev za pregled.");
 
-            if(await ValidateModel(dtoForCreation) is {} result && !result.Succeeded)
-                return ServiceResult.WithStatusCode(result.StatusCode,result.Message);
+            if (await ValidateModel(dtoForCreation) is { } result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             var entity = new ZahtevZaPregled
             {
@@ -74,7 +74,7 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Update(int id, ZahtevZaPregledUpsertDto dtoForUpdate)
         {
-            if(!await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
+            if (!await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
                 return ServiceResult.Forbidden($"Samo pacijenti imaju pristup ovom resursu.");
 
             var zahtevFromDb = await _dbContext.ZahteviZaPregled.FindAsync(id);
@@ -82,8 +82,8 @@ namespace HealthCare020.Services
             if (zahtevFromDb == null)
                 return new ServiceResult<ZahtevZaPregledDtoLL>();
 
-            if(await ValidateModel(dtoForUpdate) is {} result && !result.Succeeded)
-                return ServiceResult.WithStatusCode(result.StatusCode,result.Message);
+            if (await ValidateModel(dtoForUpdate) is { } result && !result.Succeeded)
+                return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             _mapper.Map(dtoForUpdate, zahtevFromDb);
 
@@ -101,7 +101,7 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if(resourceParameters!=null)
+            if (resourceParameters != null)
             {
                 if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
                 {
@@ -154,9 +154,18 @@ namespace HealthCare020.Services
             return await base.FilterAndPrepare(result, resourceParameters);
         }
 
+        public override async Task<bool> AuthorizePacijentForGetById(int id)
+        {
+            var pacijent = await _authService.GetCurrentLoggedInPacijent();
+            if (pacijent == null)
+                return false;
+
+            return await _dbContext.ZahteviZaPregled.AnyAsync(x => x.PacijentId == pacijent.Id && x.Id == id);
+        }
+
         private async Task<ServiceResult> ValidateModel(ZahtevZaPregledUpsertDto dto)
         {
-            if(dto.UputnicaId.HasValue && await _dbContext.ZahteviZaPregled.AnyAsync(x=>x.UputnicaId==dto.UputnicaId))
+            if (dto.UputnicaId.HasValue && await _dbContext.ZahteviZaPregled.AnyAsync(x => x.UputnicaId == dto.UputnicaId))
                 return ServiceResult.BadRequest($"Vec postoji zahtev za pregled povezan sa uputnicom {dto.UputnicaId}.");
 
             if (!await _dbContext.ZahteviZaPregled.AnyAsync(x => x.DoktorId == dto.DoktorId))

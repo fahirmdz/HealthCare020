@@ -143,6 +143,15 @@ namespace HealthCare020.Services
             return PagedList<Pregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }
 
+        public override async Task<bool> AuthorizePacijentForGetById(int id)
+        {
+            var pacijent = await _authService.GetCurrentLoggedInPacijent();
+            if (pacijent == null)
+                return false;
+
+            return await _dbContext.Pregledi.AnyAsync(x => x.PacijentId == pacijent.Id && x.Id == id);
+        }
+
         private async Task<ServiceResult> ValidateModel(PregledUpsertDto dto)
         {
             if (await _dbContext.Pregledi.AnyAsync(x => x.ZahtevZaPregledId == dto.ZahtevZaPregledId))
