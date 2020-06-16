@@ -28,6 +28,10 @@ namespace HealthCare020.Core.Entities
         [DefaultValue("M")]
         public char Pol { get; set; }
 
+        [EmailAddress]
+        [Required(AllowEmptyStrings = false)]
+        public string EmailAddress { get; set; }
+
         [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
         [DataType(DataType.PhoneNumber)]
         public string BrojTelefona { get; set; }
