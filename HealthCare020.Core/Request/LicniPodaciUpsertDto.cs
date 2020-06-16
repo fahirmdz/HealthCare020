@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using HealthCare020.Core.ValidationAttributes;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
@@ -19,13 +19,17 @@ namespace HealthCare020.Core.Request
         public string Adresa { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
-        [StringLength(maximumLength:12,MinimumLength = 9)]
+        [StringLength(maximumLength: 12, MinimumLength = 9)]
         public string JMBG { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
         [DefaultValue("M")]
         [GenderAbbr]
         public char Pol { get; set; }
+
+        [EmailAddress]
+        [Required(AllowEmptyStrings = false)]
+        public string EmailAddress { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
         [DataType(DataType.PhoneNumber)]

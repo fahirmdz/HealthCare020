@@ -12,8 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthCare020.Services
 {
@@ -41,13 +39,12 @@ namespace HealthCare020.Services
                     return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih pacijenata.");
                 }
             }
-            else if(await _authService.CurrentUserIsInRoleAsync(RoleType.RadnikPrijem) || 
+            else if (await _authService.CurrentUserIsInRoleAsync(RoleType.RadnikPrijem) ||
                     await _authService.CurrentUserIsInRoleAsync(RoleType.MedicinskiTehnicar) ||
                     await _authService.CurrentUserIsInRoleAsync(RoleType.Doktor))
             {
-                
                 if (!await _dbContext.Radnici
-                    .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.LicniPodaciId==id))
+                    .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.LicniPodaciId == id))
                 {
                     return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih uposlenika.");
                 }
@@ -70,8 +67,8 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Insert(LicniPodaciUpsertDto request)
         {
-            if (!await _dbContext.Gradovi.AnyAsync(x => x.Id == request.GradId))
-                return ServiceResult.NotFound($"Grad sa ID-em {request.GradId} nije pronadjen");
+            if (await ValidateModel(request) is { } validationResult && !validationResult.Succeeded)
+                return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
 
             var entity = _mapper.Map<LicniPodaci>(request);
 
@@ -84,6 +81,9 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Update(int id, LicniPodaciUpsertDto request)
         {
+            if (await ValidateModel(request) is { } validationResult && !validationResult.Succeeded)
+                return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
+
             var entity = await _dbContext.LicniPodaci.FindAsync(id);
             if (entity == null)
                 return ServiceResult.NotFound("Licni podaci nisu pronadjeni");
@@ -106,6 +106,23 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Delete(int id)
         {
+            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
+        }
+
+        private async Task<ServiceResult> ValidateModel(LicniPodaciUpsertDto dto)
+        {
+            if (!await _dbContext.Gradovi.AnyAsync(x => x.Id == dto.GradId))
+                return ServiceResult.NotFound($"Grad sa ID-em {dto.GradId} nije pronadjen");
+
+            if (await _dbContext.LicniPodaci.AnyAsync(x => x.JMBG == dto.JMBG))
+                return ServiceResult.BadRequest($"Vec postoji korisnik sa istim JMBG.");
+
+            if (await _dbContext.LicniPodaci.AnyAsync(x => x.BrojTelefona == dto.BrojTelefona.Trim()))
+                return ServiceResult.BadRequest($"Vec postoji korisnik koji koristi broj telefona -> {dto.BrojTelefona}");
+
+            if (await _dbContext.LicniPodaci.AnyAsync(x => x.EmailAddress == dto.EmailAddress.Trim()))
+                return ServiceResult.BadRequest($"Vec postoji korisnik koji koristi e-mail adresu -> {dto.EmailAddress}");
+
             return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
     }

@@ -12,7 +12,7 @@
         public string Adresa { get; set; }
 
         public char Pol { get; set; }
-
+        public string EmailAddress { get; set; }
         public string BrojTelefona { get; set; }
 
         public GradDtoLL Grad { get; set; }
