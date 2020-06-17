@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using FontAwesome.Sharp;
-using Healthcare020.WinUI.Helpers.Dialogs;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -38,7 +38,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
             panelMenu.Controls.Add(leftBorderBtn);
-            
         }
 
         private void frmStartMenuAdmin_Load(object sender, EventArgs e)
@@ -48,11 +47,12 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             SetClickEventToCloseUserMenu(pnlTop.Controls);
         }
 
-        private void SetClickEventToCloseUserMenu(Control.ControlCollection controls)
+        public void SetClickEventToCloseUserMenu(Control.ControlCollection controls)
         {
-            foreach (Control control in Controls)
+            foreach (Control control in controls)
             {
-                control.Click += control_Click;
+                if (control.Name != "btnUserMenu")
+                    control.MouseClick += new MouseEventHandler(control_Click);
             }
         }
 
@@ -171,7 +171,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             lblTitleChildForm.Text = childForm.Text;
             childForm.Show();
             SetClickEventToCloseUserMenu(childForm.Controls);
-
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -188,7 +187,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 pnlUserMenuDropdown.Hide();
         }
 
-        private void control_Click(object sender, EventArgs e)
+        public void control_Click(object sender, EventArgs e)
         {
             CloseUserDropdownMenu();
         }

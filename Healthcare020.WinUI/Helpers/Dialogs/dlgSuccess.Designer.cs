@@ -37,13 +37,13 @@
             // 
             // pnlBody
             // 
-            this.pnlBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.pnlBody.Controls.Add(this.label1);
             this.pnlBody.Controls.Add(this.icnSuccess);
             this.pnlBody.Location = new System.Drawing.Point(327, 165);
+            this.pnlBody.MaximumSize = new System.Drawing.Size(371, 209);
+            this.pnlBody.MinimumSize = new System.Drawing.Size(371, 209);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Size = new System.Drawing.Size(371, 209);
             this.pnlBody.TabIndex = 1;

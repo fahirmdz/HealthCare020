@@ -29,34 +29,45 @@
         private void InitializeComponent()
         {
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.lblError = new System.Windows.Forms.Label();
             this.icnError = new FontAwesome.Sharp.IconPictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlBody.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.icnError)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.icnError)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBody
             // 
-            this.pnlBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.pnlBody.Controls.Add(this.panel1);
             this.pnlBody.Controls.Add(this.icnError);
             this.pnlBody.Location = new System.Drawing.Point(320, 165);
+            this.pnlBody.MaximumSize = new System.Drawing.Size(362, 199);
+            this.pnlBody.MinimumSize = new System.Drawing.Size(362, 199);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Size = new System.Drawing.Size(362, 199);
             this.pnlBody.TabIndex = 1;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblError);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 99);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(362, 100);
+            this.panel1.TabIndex = 2;
+            // 
             // lblError
             // 
+            this.lblError.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblError.BackColor = System.Drawing.Color.Transparent;
-            this.lblError.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblError.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.lblError.Location = new System.Drawing.Point(0, 0);
+            this.lblError.MaximumSize = new System.Drawing.Size(362, 100);
+            this.lblError.MinimumSize = new System.Drawing.Size(362, 100);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(362, 100);
             this.lblError.TabIndex = 1;
@@ -77,15 +88,6 @@
             this.icnError.TabIndex = 0;
             this.icnError.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lblError);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 99);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(362, 100);
-            this.panel1.TabIndex = 2;
-            // 
             // dlgError
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,8 +106,8 @@
             this.Load += new System.EventHandler(this.dlgError_Load);
             this.Shown += new System.EventHandler(this.dlgError_Shown);
             this.pnlBody.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.icnError)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.icnError)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -3,7 +3,6 @@ using System.Linq;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
@@ -24,6 +23,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public virtual async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
             var result = await _service.Get(resourceParameters);

@@ -52,11 +52,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         {
             frmStartMenuAdmin.Instance.OpenChildForm(frmUsers.Instance);
         }
-
         
 
         private void frmNewUser_Load(object sender, EventArgs e)
         {
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlBody.Controls);
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
