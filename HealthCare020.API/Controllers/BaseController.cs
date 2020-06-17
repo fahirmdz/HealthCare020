@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using HealthCare020.API.Constants;
 
 namespace HealthCare020.API.Controllers
 {
-    [Authorize]
     [ApiController]
+    [ResponseCache(VaryByHeader = "User-Agent",CacheProfileName = CacheProfilesConstants.CacheProfile240Seconds)]
     public class BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters> : ControllerBase where TResourceParameters : BaseResourceParameters
     {
         private readonly IService<TEntity, TResourceParameters> _service;

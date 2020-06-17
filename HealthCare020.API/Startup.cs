@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using HealthCare020.API.Constants;
 
 namespace HealthCare020.API
 {
@@ -83,10 +84,17 @@ namespace HealthCare020.API
             services.AddHttpContextAccessor();
             services.AddHealthCare020Services();
 
+
+
+            services.AddResponseCaching();
+
+
             services.AddControllers(cfg =>
                 {
                     cfg.Filters.Add(typeof(ErrorFilter));
                     cfg.ReturnHttpNotAcceptable = true;
+                    cfg.CacheProfiles.Add(CacheProfilesConstants.CacheProfile240Seconds,new CacheProfile{Duration = 240});
+
                 }).AddNewtonsoftJson(setupAction =>
                 {
                     //Input and output JSON formatters
@@ -138,6 +146,8 @@ namespace HealthCare020.API
                 c.OAuthClientSecret("devsecret");
             });
             app.UseHttpsRedirection();
+            app.UseResponseCaching();
+
 
             app.UseRouting();
 
