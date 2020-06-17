@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI
+﻿namespace Healthcare020.WinUI.Forms
 {
     partial class MainForm
     {

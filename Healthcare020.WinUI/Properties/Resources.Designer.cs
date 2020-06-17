@@ -61,6 +61,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nemate potrebne permisije.
+        /// </summary>
+        public static string AccessDenied {
+            get {
+                return ResourceManager.GetString("AccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lozinke se ne podudaraju.
         /// </summary>
         public static string DifferentPasswords {

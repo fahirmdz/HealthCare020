@@ -3,16 +3,16 @@ using System.Linq;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using HealthCare020.API.Constants;
 
 namespace HealthCare020.API.Controllers
 {
-    [Authorize]
     [ApiController]
+    [ResponseCache(VaryByHeader = "User-Agent",CacheProfileName = CacheProfilesConstants.CacheProfile240Seconds)]
     public class BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters> : ControllerBase where TResourceParameters : BaseResourceParameters
     {
         private readonly IService<TEntity, TResourceParameters> _service;
@@ -23,6 +23,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet]
+        [HttpHead]
         public virtual async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
             var result = await _service.Get(resourceParameters);

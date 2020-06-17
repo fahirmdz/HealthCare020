@@ -1,10 +1,10 @@
-﻿using Healthcare020.WinUI.Helpers;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Healthcare020.WinUI.AdminDashboard;
+using Healthcare020.WinUI.Forms.AdminDashboard;
+using Healthcare020.WinUI.Helpers;
 
-namespace Healthcare020.WinUI.KorisnickiNalog
+namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
     public partial class frmLogin : Form
     {

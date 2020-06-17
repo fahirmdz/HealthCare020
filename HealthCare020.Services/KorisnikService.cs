@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Services.Filters;
 
 namespace HealthCare020.Services
 
@@ -50,12 +49,7 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public override async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto dtoForCreation)
-        {
-            return await Insert(dtoForCreation, 0);
-        }
-
-        public async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request, RoleType roleType = 0)
+        public async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request)
         {
             if (await ValidateModel(request) is { } validationResult && !validationResult.Succeeded)
                 return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
@@ -76,20 +70,10 @@ namespace HealthCare020.Services
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
 
-            if (roleType != 0)
-            {
-                var rolesToAdd = RolesToAdd(roleType);
-                foreach (var roleId in rolesToAdd)
-                {
-                    await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
-                    {
-                        KorisnickiNalogId = korisnickiNalog.Id,
-                        RoleId = roleId.ToInt()
-                    });
-                }
+            var roleType = RoleTypeManager.RoleTypeFromString(request.RoleType);
 
-                await _dbContext.SaveChangesAsync();
-            }
+            if (roleType.HasValue)
+                await AddInRole(korisnickiNalog.Id, roleType.Value);
 
             return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
@@ -118,6 +102,11 @@ namespace HealthCare020.Services
 
                 _dbContext.KorisnickiNalozi.Update(korisnickiNalog);
             });
+
+            var roleType = RoleTypeManager.RoleTypeFromString(dtoForUpdate.RoleType);
+
+            if (roleType.HasValue)
+                await AddInRole(id, roleType.Value);
 
             await _dbContext.SaveChangesAsync();
 
@@ -287,6 +276,23 @@ namespace HealthCare020.Services
                 default:
                     return new List<RoleType> { RoleType.Pacijent };
             }
+        }
+
+        private async Task<ServiceResult> AddInRole(int korisnickiNalogId, RoleType roleType)
+        {
+            var rolesToAdd = RolesToAdd(roleType);
+            foreach (var roleId in rolesToAdd)
+            {
+                await _dbContext.RolesKorisnickiNalozi.AddAsync(new RoleKorisnickiNalog
+                {
+                    KorisnickiNalogId = korisnickiNalogId,
+                    RoleId = roleId.ToInt()
+                });
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
 
         private async Task<ServiceResult> ValidateModel(KorisnickiNalogUpsertDto dto)

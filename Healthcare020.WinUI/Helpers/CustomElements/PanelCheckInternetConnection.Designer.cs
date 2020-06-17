@@ -1,6 +1,4 @@
-﻿using Healthcare020.WinUI.Helpers.CustomElements;
-
-namespace Healthcare020.WinUI.CustomElements
+﻿namespace Healthcare020.WinUI.Helpers.CustomElements
 {
     partial class PanelCheckInternetConnection
     {

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms;
 
-namespace Healthcare020.WinUI.CustomElements
+namespace Healthcare020.WinUI.Helpers.CustomElements
 {
     public partial class PanelCheckInternetConnection : UserControl
     {

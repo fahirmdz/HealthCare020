@@ -1,6 +1,5 @@
-﻿using Healthcare020.WinUI.CustomElements;
-using Healthcare020.WinUI.Dialogs;
-using Healthcare020.WinUI.Helpers;
+﻿using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.CustomElements;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Models;
 using Healthcare020.WinUI.Services;
@@ -13,7 +12,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Healthcare020.WinUI.AdminDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmUsers : Form
     {
@@ -23,6 +22,7 @@ namespace Healthcare020.WinUI.AdminDashboard
 
         private IBindingList _korisniciForDgrv;
         private int _currentDgrvPage = 1;
+        private int CurrentRowCount;
 
         public static frmUsers Instance
         {
@@ -42,6 +42,7 @@ namespace Healthcare020.WinUI.AdminDashboard
         private frmUsers()
         {
             InitializeComponent();
+            CurrentRowCount = 8;
             MainForm.Instance.SetCopyrightPanelColor(Color.FromArgb(240, 240, 240));
             _apiServiceKorisnici = new APIService("korisnici");
             _korisniciForDgrv = new BindingSource();
@@ -65,7 +66,9 @@ namespace Healthcare020.WinUI.AdminDashboard
 
             if (!ConnectionCheck.CheckForInternetConnection())
             {
-                pnlBody.Hide();
+                pnlTop.Hide();
+                dgrvKorisnickiNalozi.Hide();
+                pnlNavButtons.Hide();
                 _internetError = new PanelCheckInternetConnection(this);
                 _internetError.Show();
                 _internetError.BringToFront();
@@ -79,20 +82,21 @@ namespace Healthcare020.WinUI.AdminDashboard
             if (ConnectionCheck.CheckForInternetConnection())
             {
                 _internetError.Hide();
-                pnlBody.Show();
-                pnlBody.BringToFront();
+                pnlTop.Show();
+                dgrvKorisnickiNalozi.Show();
+                pnlNavButtons.Show();
                 await LoadData();
             }
         }
 
-        private async Task LoadData(int pageSize = 8, int pageNumber = 1, string searchParameter = "")
+        private async Task LoadData(int pageNumber = 1, string searchParameter = "")
         {
             Application.UseWaitCursor = true;
 
             var result = await _apiServiceKorisnici
                 .Get<KorisnickiNalogDtoLL>(new KorisnickiNalogResourceParameters
                 {
-                    PageSize = pageSize,
+                    PageSize = CurrentRowCount,
                     PageNumber = pageNumber,
                     Username = string.IsNullOrWhiteSpace(searchParameter) ? null : searchParameter
                 });
@@ -109,19 +113,23 @@ namespace Healthcare020.WinUI.AdminDashboard
 
         private async void frmUsers_Load(object sender, EventArgs e)
         {
-            if (pnlBody.Visible)
+            if (dgrvKorisnickiNalozi.Visible)
                 await LoadData();
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(Controls);
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlSearch.Controls);
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlTop.Controls);
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlNavButtons.Controls);
         }
 
         private async void btnNextPage_Click_1(object sender, EventArgs e)
         {
-            await LoadData(8, ++_currentDgrvPage);
+            await LoadData(++_currentDgrvPage);
             btnPrevPage.Enabled = true;
         }
 
         private async void btnPrevPage_Click_1(object sender, EventArgs e)
         {
-            await LoadData(8, --_currentDgrvPage);
+            await LoadData(--_currentDgrvPage);
 
             if (_currentDgrvPage == 1)
                 btnPrevPage.Enabled = false;
@@ -175,10 +183,6 @@ namespace Healthcare020.WinUI.AdminDashboard
                         korisnik.LockedOut = result.Data.LockedOut;
                         dlgSuccess.ShowDialog();
                     }
-                    else
-                    {
-                        dlgError.ShowDialog();
-                    }
                 }
             }
         }
@@ -208,6 +212,18 @@ namespace Healthcare020.WinUI.AdminDashboard
         private void btnNewUser_Click(object sender, EventArgs e)
         {
             frmStartMenuAdmin.Instance.OpenChildForm(frmNewUser.Instance);
+        }
+
+        private void pnlBody_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private async void frmUsers_SizeChanged(object sender, EventArgs e)
+        {
+            dgrvKorisnickiNalozi.DataSource = null;
+            CurrentRowCount = (dgrvKorisnickiNalozi.Height - dgrvKorisnickiNalozi.ColumnHeadersHeight) / dgrvKorisnickiNalozi.RowTemplate.Height - 1;
+            dgrvKorisnickiNalozi.RowCount = CurrentRowCount;
+            await LoadData(1);
         }
     }
 }

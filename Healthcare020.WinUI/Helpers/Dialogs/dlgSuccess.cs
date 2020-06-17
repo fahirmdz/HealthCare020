@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms;
 
 namespace Healthcare020.WinUI.Helpers.Dialogs
 {
@@ -40,7 +41,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private async void dlgSuccess_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Fill;
-            await Task.Delay(1500);
+            await Task.Delay(1200);
             Close();
             Dispose();
         }

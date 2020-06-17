@@ -9,6 +9,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace HealthCare020.API.Controllers
 {
@@ -22,6 +23,30 @@ namespace HealthCare020.API.Controllers
             : base(crudService)
         {
             _korisnikService = _crudService as IKorisnikService;
+        }
+
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        public override async Task<IActionResult> Insert(KorisnickiNalogUpsertDto dtoForCreation)
+        {
+            return await base.Insert(dtoForCreation);
+        }
+
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        public override async Task<IActionResult> Update(int id, KorisnickiNalogUpsertDto dtoForUpdate)
+        {
+            return await base.Update(id, dtoForUpdate);
+        }
+
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        public override async Task<IActionResult> Delete(int id)
+        {
+            return await base.Delete(id);
+        }
+
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<KorisnickiNalogUpsertDto> patchDocument)
+        {
+            return await base.PartiallyUpdate(id, patchDocument);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]

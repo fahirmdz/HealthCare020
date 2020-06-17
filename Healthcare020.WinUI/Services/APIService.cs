@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Helpers.Dialogs;
 
 namespace Healthcare020.WinUI.Services
 {
@@ -20,11 +21,15 @@ namespace Healthcare020.WinUI.Services
         private IFlurlRequest request;
         private string BaseUrl;
 
+        /// <summary>
+        /// Create new API service with specific route
+        /// </summary>
+        /// <param name="route">Specific route </param>
         public APIService(string route="")
         {
             try
             {
-                request = Auth.GetAuthorizedApiRequest(route);
+                request = Auth.GetAuthorizedApiRequest(route).AllowAnyHttpStatus();
                 BaseUrl = request.Url;
             }
             catch (UnauthorizedException ex)
@@ -70,7 +75,7 @@ namespace Healthcare020.WinUI.Services
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                return new APIServiceResult<List<T>>(response.StatusCode);
+                return APIServiceResult<List<T>>.WithStatusCode(response.StatusCode);
             }
 
             var headers = response.Headers;
@@ -104,23 +109,28 @@ namespace Healthcare020.WinUI.Services
             {
                 request.Url.AppendPathSegment(pathToAppend);
             }
+
+            HttpResponseMessage response=null;
             try
             {
-                var response = await request.PostJsonAsync(dtoForCreation);
+                 response = await request.PostJsonAsync(dtoForCreation);
                 RevertToBaseRequest();
 
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    return new APIServiceResult<T>(response.StatusCode);
+                    if(response.StatusCode==HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                    return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
                 var headers = response.Headers;
 
                 var result = await response.Content.ReadAsAsync<T>();
-                return new APIServiceResult<T>(result);
+                return  APIServiceResult<T>.OK(result);
             }
             catch (Exception ex)
             {
-                return APIServiceResult<T>.BadRequest;
+                return APIServiceResult<T>.WithStatusCode(response?.StatusCode??HttpStatusCode.InternalServerError);
             }
         }
 
@@ -138,23 +148,29 @@ namespace Healthcare020.WinUI.Services
             {
                 request.Url.AppendPathSegment(pathToAppend);
             }
+            HttpResponseMessage response=null;
+
             try
             {
-                var response = await request.PutJsonAsync(dtoForUpdate);
+                 response = await request.PutJsonAsync(dtoForUpdate);
                 RevertToBaseRequest();
 
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    return new APIServiceResult<T>(response.StatusCode);
+                    if(response.StatusCode==HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                    return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
                 var headers = response.Headers;
 
                 var result = await response.Content.ReadAsAsync<T>();
-                return new APIServiceResult<T>(result);
+                return APIServiceResult<T>.OK(result);
             }
             catch (Exception ex)
             {
-                return APIServiceResult<T>.BadRequest;
+                dlgError.ShowDialog();
+                return APIServiceResult<T>.WithStatusCode(response?.StatusCode??HttpStatusCode.InternalServerError);
             }
         }
 
@@ -178,12 +194,12 @@ namespace Healthcare020.WinUI.Services
             RevertToBaseRequest();
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                return new APIServiceResult<T>(response.StatusCode);
+                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
             }
 
             var result = await response.Content.ReadAsAsync<T>();
 
-            return new APIServiceResult<T>(result);
+            return APIServiceResult<T>.OK(result);
         }
 
         /// <summary>
@@ -204,12 +220,12 @@ namespace Healthcare020.WinUI.Services
             RevertToBaseRequest();
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                return new APIServiceResult<T>(response.StatusCode);
+                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
             }
 
             var result = await response.Content?.ReadAsAsync<T>();
 
-            return result != null ? new APIServiceResult<T>(result) : APIServiceResult<T>.OK;
+            return result != null ? APIServiceResult<T>.OK(result) : APIServiceResult<T>.NoContent();
         }
     }
 }

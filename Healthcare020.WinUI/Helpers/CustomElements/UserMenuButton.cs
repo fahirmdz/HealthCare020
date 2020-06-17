@@ -1,8 +1,8 @@
-﻿using FontAwesome.Sharp;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
 
-namespace Healthcare020.WinUI.CustomElements
+namespace Healthcare020.WinUI.Helpers.CustomElements
 {
     public class UserMenuButton : IconPictureBox
     {

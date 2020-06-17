@@ -4,7 +4,11 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using AuthorizationPolicies = HealthCare020.API.Constants.AuthorizationPolicies;
 
 namespace HealthCare020.API.Controllers
 {
@@ -13,6 +17,24 @@ namespace HealthCare020.API.Controllers
     {
         public LekarskoUverenjeController(ICRUDService<LekarskoUverenje, LekarskoUverenjeDtoLL, LekarskoUverenjeDtoEL, LekarskoUverenjeResourceParameters, LekarskoUverenjeUpsertDto, LekarskoUverenjeUpsertDto> crudService) : base(crudService)
         {
+        }
+
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
+        public override async Task<IActionResult> Insert(LekarskoUverenjeUpsertDto dtoForCreation)
+        {
+            return await base.Insert(dtoForCreation);
+        }
+
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
+        public override async Task<IActionResult> Update(int id, LekarskoUverenjeUpsertDto dtoForUpdate)
+        {
+            return await base.Update(id, dtoForUpdate);
+        }
+
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
+        public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<LekarskoUverenjeUpsertDto> patchDocument)
+        {
+            return await base.PartiallyUpdate(id, patchDocument);
         }
     }
 }

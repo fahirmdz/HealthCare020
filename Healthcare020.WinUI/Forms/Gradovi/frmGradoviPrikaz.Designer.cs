@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI.Gradovi
+﻿namespace Healthcare020.WinUI.Forms.Gradovi
 {
     partial class frmGradoviPrikaz
     {

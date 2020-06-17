@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Healthcare020.WinUI.AdminDashboard;
+using Healthcare020.WinUI.Forms.AdminDashboard;
 
 namespace Healthcare020.WinUI.Helpers
 {

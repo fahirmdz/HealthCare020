@@ -1,10 +1,10 @@
-﻿using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Models;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
+using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Gradovi
+namespace Healthcare020.WinUI.Forms.Gradovi
 {
     public partial class frmGradoviPrikaz : Form
     {

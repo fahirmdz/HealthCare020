@@ -1,15 +1,17 @@
-﻿using Healthcare020.WinUI.Dialogs;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Models;
-using HealthCare020.Core.Request;
-using MaterialSkin.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
+using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Services;
+using MaterialSkin.Controls;
 
-namespace Healthcare020.WinUI.AdminDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmNewUser : Form
     {
@@ -19,9 +21,10 @@ namespace Healthcare020.WinUI.AdminDashboard
         private frmNewUser()
         {
             InitializeComponent();
-            _apiService = new APIService();
+            _apiService = new APIService(Routes.KorisniciRoute);
 
-            this.Text = Properties.Resources.frmNewUser;
+            TopLevel = false;
+            Text = Properties.Resources.frmNewUser;
             foreach (var control in Controls.OfType<MaterialSingleLineTextField>())
             {
                 errors.SetIconPadding(control, 10);
@@ -49,16 +52,29 @@ namespace Healthcare020.WinUI.AdminDashboard
         {
             frmStartMenuAdmin.Instance.OpenChildForm(frmUsers.Instance);
         }
+        
+
+        private void frmNewUser_Load(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlBody.Controls);
+        }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (ValidateInputValues())
             {
+                string roleTypeChecked=string.Empty;
+                if (rbtnAdmin.Checked) roleTypeChecked = RoleType.Administrator.ToDescriptionString();
+                if (rbtnDoktor.Checked) roleTypeChecked = RoleType.Doktor.ToDescriptionString();
+                if (rbtnRadnikPrijem.Checked) roleTypeChecked = RoleType.RadnikPrijem.ToDescriptionString();
+                if (rbtnMedTehnicar.Checked) roleTypeChecked = RoleType.MedicinskiTehnicar.ToDescriptionString();
+
                 var newUser = new KorisnickiNalogUpsertDto
                 {
-                    Username = txtUsername.Text,
+                    Username=txtUsername.Text,
                     Password = txtPassword.Text,
-                    ConfirmPassword = txtConfirmPassword.Text
+                    ConfirmPassword = txtConfirmPassword.Text,
+                    RoleType = roleTypeChecked
                 };
 
                 var result = await _apiService.Post<KorisnickiNalogDtoLL>(newUser);
@@ -68,24 +84,14 @@ namespace Healthcare020.WinUI.AdminDashboard
                     dlgSuccess.ShowDialog();
                     frmStartMenuAdmin.Instance.OpenChildForm(frmUsers.Instance);
                 }
-                else
-                {
-                    dlgError.ShowDialog();
-                }
             }
         }
 
         private bool ValidateInputValues()
         {
-            if (cmbVrstaRadnika.SelectedIndex == -1)
+            if (string.IsNullOrWhiteSpace(txtImePrezime.Text))
             {
-                errors.SetError(cmbVrstaRadnika, Properties.Resources.RequiredField);
-                return false;
-            }
-
-            if (cmbImePrezime.SelectedIndex == -1)
-            {
-                errors.SetError(cmbImePrezime, Properties.Resources.RequiredField);
+                errors.SetError(txtImePrezime, Properties.Resources.RequiredField);
                 return false;
             }
 
@@ -101,32 +107,20 @@ namespace Healthcare020.WinUI.AdminDashboard
                 return false;
             }
 
-            if (txtPassword.Text == txtConfirmPassword.Text)
+            if (txtPassword.Text != txtConfirmPassword.Text)
             {
                 errors.SetError(txtConfirmPassword, Properties.Resources.DifferentPasswords);
                 return false;
             }
 
+            errors.Clear();
             return true;
-        }
-
-        private void frmNewUser_Load(object sender, EventArgs e)
-        {
-            var typesOfUsers = new List<string>
-            {
-                "Doktor", "Medicinski tehnicar", "Radnik na prijemu"
-            };
-
-            cmbVrstaRadnika.DataSource = typesOfUsers;
         }
 
 #pragma warning disable 1998
 
         private async void cmbVrstaRadnika_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbVrstaRadnika.SelectedIndex == -1)
-                return;
-
             List<RadnikDtoEL> radnici;
 
             //switch (cmbVrstaRadnika.SelectedIndex)+
@@ -156,6 +150,13 @@ namespace Healthcare020.WinUI.AdminDashboard
             //    Id = x.
             //})
         }
+
+        private void frmNewUser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            errors.Clear();
+        }
+
+
 
 #pragma warning restore 1998
 
