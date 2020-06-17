@@ -121,16 +121,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminDashboard\frmNewUser.cs">
+    <Compile Include="Forms\AdminDashboard\frmNewUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminDashboard\frmNewUser.Designer.cs">
+    <Compile Include="Forms\AdminDashboard\frmNewUser.Designer.cs">
       <DependentUpon>frmNewUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminDashboard\frmUsers.cs">
+    <Compile Include="Forms\AdminDashboard\frmUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminDashboard\frmUsers.Designer.cs">
+    <Compile Include="Forms\AdminDashboard\frmUsers.Designer.cs">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
@@ -167,10 +167,10 @@
       <DependentUpon>dlgPropmpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\UnauthorizedException.cs" />
-    <Compile Include="Gradovi\frmGradoviPrikaz.cs">
+    <Compile Include="Forms\Gradovi\frmGradoviPrikaz.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradovi\frmGradoviPrikaz.Designer.cs">
+    <Compile Include="Forms\Gradovi\frmGradoviPrikaz.Designer.cs">
       <DependentUpon>frmGradoviPrikaz.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Auth.cs" />
@@ -184,32 +184,32 @@
     <Compile Include="Helpers\DynamicTypesExntesions.cs" />
     <Compile Include="Helpers\FormExtensions.cs" />
     <Compile Include="Helpers\StyleExtensions.cs" />
-    <Compile Include="KorisnickiNalog\frmLogin.cs">
+    <Compile Include="Forms\KorisnickiNalog\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KorisnickiNalog\frmLogin.Designer.cs">
+    <Compile Include="Forms\KorisnickiNalog\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\APIServiceResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\APIService.cs" />
-    <Compile Include="AdminDashboard\frmStartMenuAdmin.cs">
+    <Compile Include="Forms\AdminDashboard\frmStartMenuAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminDashboard\frmStartMenuAdmin.Designer.cs">
+    <Compile Include="Forms\AdminDashboard\frmStartMenuAdmin.Designer.cs">
       <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AdminDashboard\frmNewUser.resx">
+    <EmbeddedResource Include="Forms\AdminDashboard\frmNewUser.resx">
       <DependentUpon>frmNewUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminDashboard\frmUsers.resx">
+    <EmbeddedResource Include="Forms\AdminDashboard\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\CustomElements\PanelCheckInternetConnection.resx">
@@ -224,16 +224,16 @@
     <EmbeddedResource Include="Helpers\Dialogs\dlgPropmpt.resx">
       <DependentUpon>dlgPropmpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradovi\frmGradoviPrikaz.resx">
+    <EmbeddedResource Include="Forms\Gradovi\frmGradoviPrikaz.resx">
       <DependentUpon>frmGradoviPrikaz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgSuccess.resx">
       <DependentUpon>dlgSuccess.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KorisnickiNalog\frmLogin.resx">
+    <EmbeddedResource Include="Forms\KorisnickiNalog\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -246,7 +246,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="AdminDashboard\frmStartMenuAdmin.resx">
+    <EmbeddedResource Include="Forms\AdminDashboard\frmStartMenuAdmin.resx">
       <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

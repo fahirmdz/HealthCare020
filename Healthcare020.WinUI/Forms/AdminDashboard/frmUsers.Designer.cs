@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI.AdminDashboard
+﻿namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     partial class frmUsers
     {

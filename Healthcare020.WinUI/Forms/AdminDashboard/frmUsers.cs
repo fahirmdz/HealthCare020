@@ -1,19 +1,18 @@
-﻿using Healthcare020.WinUI.CustomElements;
-using Healthcare020.WinUI.Dialogs;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Models;
-using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Models;
-using HealthCare020.Core.Request;
-using HealthCare020.Core.ResourceParameters;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
+using HealthCare020.Core.ResourceParameters;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.CustomElements;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.AdminDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmUsers : Form
     {
@@ -174,10 +173,6 @@ namespace Healthcare020.WinUI.AdminDashboard
                     {
                         korisnik.LockedOut = result.Data.LockedOut;
                         dlgSuccess.ShowDialog();
-                    }
-                    else
-                    {
-                        dlgError.ShowDialog();
                     }
                 }
             }

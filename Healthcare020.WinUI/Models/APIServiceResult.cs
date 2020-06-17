@@ -5,34 +5,38 @@ namespace Healthcare020.WinUI.Models
 {
     public class APIServiceResult<T>
     {
+        public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
+        public bool Succeeded { get; set; } = true;
+        public string Message { get; set; } = string.Empty;
+        public bool HasData { get; set; } = false;
+        public PaginationMetadata PaginationMetadata { get; set; }
+        public T Data { get; set; }
+
+
         public APIServiceResult()
         {
         }
 
-        public APIServiceResult(HttpStatusCode statusCode)
+        public APIServiceResult(HttpStatusCode statusCode, bool succeeded, string message = "")
         {
-            if (StatusCode != HttpStatusCode.OK)
-            {
-                Succeeded = false;
-            }
+            Succeeded = succeeded;
             StatusCode = statusCode;
+            Message = message;
         }
 
-        public APIServiceResult(T data)
-        {
-            Data = data;
-        }
+        public static APIServiceResult<T> WithStatusCode(HttpStatusCode statusCode, string message = "") => new APIServiceResult<T> { StatusCode = statusCode, Succeeded = (int)statusCode - 200 < 100, Message = message };
 
-        public static APIServiceResult<T> BadRequest => new APIServiceResult<T>(HttpStatusCode.BadRequest);
-        public static APIServiceResult<T> Unauthorized => new APIServiceResult<T>(HttpStatusCode.Unauthorized);
-        public static APIServiceResult<T> Forbidden => new APIServiceResult<T>(HttpStatusCode.Forbidden);
-        public static APIServiceResult<T> NotFound => new APIServiceResult<T>(HttpStatusCode.NotFound);
-        public static APIServiceResult<T> OK => new APIServiceResult<T>(HttpStatusCode.OK);
+        public static APIServiceResult<T> BadRequest(string message = "") => new APIServiceResult<T> { StatusCode = HttpStatusCode.BadRequest, Succeeded = false, Message = message };
 
+        public static APIServiceResult<T> NotFound(string message = "") => new APIServiceResult<T> { StatusCode = HttpStatusCode.NotFound, Succeeded = false, Message = message };
+        
+        public static APIServiceResult<T> Unauthorized(string message = "") => new APIServiceResult<T> { StatusCode = HttpStatusCode.Unauthorized, Succeeded = false, Message = message };
 
-        public T Data { get; set; }
-        public PaginationMetadata PaginationMetadata { get; set; }
-        public bool Succeeded { get; set; } = true;
-        public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
+        public static APIServiceResult<T> Forbidden(string message = "") => new APIServiceResult<T> { StatusCode = HttpStatusCode.Forbidden, Succeeded = false, Message = message };
+       
+        public static APIServiceResult<T> OK(T data, string message = "") => new APIServiceResult<T> { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
+
+        public static APIServiceResult<T> NoContent(string message = "") => new APIServiceResult<T>(HttpStatusCode.NoContent, true, message);
+
     }
 }

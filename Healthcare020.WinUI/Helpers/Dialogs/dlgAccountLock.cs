@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms;
 
-namespace Healthcare020.WinUI.Dialogs
+namespace Healthcare020.WinUI.Helpers.Dialogs
 {
     public partial class dlgAccountLock : Form
     {

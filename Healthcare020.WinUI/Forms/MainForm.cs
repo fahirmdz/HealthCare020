@@ -1,11 +1,12 @@
-﻿using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.KorisnickiNalog;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AdminDashboard;
+using Healthcare020.WinUI.Forms.KorisnickiNalog;
+using Healthcare020.WinUI.Helpers;
 
-namespace Healthcare020.WinUI
+namespace Healthcare020.WinUI.Forms
 {
     public partial class MainForm : Form
     {
@@ -40,7 +41,8 @@ namespace Healthcare020.WinUI
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
 
-            var loginForm = frmLogin.Instance;
+            Auth.AuthenticateWithPassword("testuser4", "testtest");
+            var loginForm = frmStartMenuAdmin.Instance;
             currentChild = loginForm;
             loginForm.ShowAsNextMdiChild(panelDesktop);
 

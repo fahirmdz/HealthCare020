@@ -19,5 +19,7 @@ namespace HealthCare020.Core.Request
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
+
+        public string RoleType { get; set; } = string.Empty;
     }
 }

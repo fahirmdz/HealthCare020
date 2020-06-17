@@ -1,6 +1,6 @@
 ﻿using Healthcare020.WinUI.Helpers.CustomElements;
 
-namespace Healthcare020.WinUI.Dialogs
+namespace Healthcare020.WinUI.Helpers.Dialogs
 {
     partial class dlgPropmpt
     {

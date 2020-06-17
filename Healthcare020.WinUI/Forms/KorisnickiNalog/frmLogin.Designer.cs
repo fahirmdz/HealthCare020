@@ -1,6 +1,6 @@
 ﻿using Healthcare020.WinUI.Helpers.CustomElements;
 
-namespace Healthcare020.WinUI.KorisnickiNalog
+namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
     partial class frmLogin
     {

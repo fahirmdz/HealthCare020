@@ -5,13 +5,11 @@ using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ServiceModels;
 using System;
 using System.Threading.Tasks;
-using HealthCare020.Core.Enums;
 
 namespace HealthCare020.Services.Interfaces
 {
     public interface IKorisnikService : ICRUDService<KorisnickiNalog, KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto>
     {
-        Task<ServiceResult> Insert(KorisnickiNalogUpsertDto dtoForCreation, RoleType roleType=0);
         Task<KorisnickiNalogDtoLL> Authenticate(string username, string password);
 
         Task<ServiceResult> ToggleLock(int id, bool isForLockout, DateTime? until = null);

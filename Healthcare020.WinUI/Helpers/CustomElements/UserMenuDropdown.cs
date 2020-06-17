@@ -1,12 +1,11 @@
-﻿using FontAwesome.Sharp;
-using Healthcare020.WinUI.Helpers;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
 
-namespace Healthcare020.WinUI.CustomElements
+namespace Healthcare020.WinUI.Helpers.CustomElements
 {
     public class UserMenuDropdownPanel : Panel
     {

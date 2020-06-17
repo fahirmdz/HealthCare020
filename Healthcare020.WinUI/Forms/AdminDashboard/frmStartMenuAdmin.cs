@@ -1,11 +1,10 @@
-﻿using FontAwesome.Sharp;
-using Healthcare020.WinUI.Exceptions;
-using Healthcare020.WinUI.Helpers;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
+using Healthcare020.WinUI.Helpers.Dialogs;
 
-namespace Healthcare020.WinUI.AdminDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmStartMenuAdmin : Form
     {
@@ -121,11 +120,13 @@ namespace Healthcare020.WinUI.AdminDashboard
         private void btnSecurity_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
+            dlgError.ShowDialog("Nemate permisije");
         }
 
         private void btnPredefinedData_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color3);
+            dlgSuccess.ShowDialog();
         }
 
         private void btnStatistics_Click(object sender, EventArgs e)

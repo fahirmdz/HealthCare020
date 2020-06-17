@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI.Dialogs
+﻿namespace Healthcare020.WinUI.Helpers.Dialogs
 {
     partial class dlgError
     {
@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             this.icnError = new FontAwesome.Sharp.IconPictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnError)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBody
@@ -41,24 +43,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
-            this.pnlBody.Controls.Add(this.label1);
+            this.pnlBody.Controls.Add(this.panel1);
             this.pnlBody.Controls.Add(this.icnError);
             this.pnlBody.Location = new System.Drawing.Point(320, 165);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Size = new System.Drawing.Size(362, 199);
             this.pnlBody.TabIndex = 1;
             // 
-            // label1
+            // lblError
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label1.Location = new System.Drawing.Point(143, 142);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 29);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Greška!";
+            this.lblError.BackColor = System.Drawing.Color.Transparent;
+            this.lblError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblError.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.lblError.Location = new System.Drawing.Point(0, 0);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(362, 100);
+            this.lblError.TabIndex = 1;
+            this.lblError.Text = "Greška!";
+            this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // icnError
             // 
@@ -67,12 +70,21 @@
             this.icnError.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.icnError.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(97)))), ((int)(((byte)(102)))));
             this.icnError.IconSize = 105;
-            this.icnError.Location = new System.Drawing.Point(133, 15);
+            this.icnError.Location = new System.Drawing.Point(128, 12);
             this.icnError.Name = "icnError";
             this.icnError.Size = new System.Drawing.Size(116, 105);
             this.icnError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.icnError.TabIndex = 0;
             this.icnError.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblError);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 99);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(362, 100);
+            this.panel1.TabIndex = 2;
             // 
             // dlgError
             // 
@@ -92,8 +104,8 @@
             this.Load += new System.EventHandler(this.dlgError_Load);
             this.Shown += new System.EventHandler(this.dlgError_Shown);
             this.pnlBody.ResumeLayout(false);
-            this.pnlBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnError)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -101,7 +113,8 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlBody;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblError;
         private FontAwesome.Sharp.IconPictureBox icnError;
+        private System.Windows.Forms.Panel panel1;
     }
 }

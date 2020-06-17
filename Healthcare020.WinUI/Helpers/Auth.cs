@@ -3,6 +3,7 @@ using System;
 using System.Net;
 using System.Security;
 using Healthcare020.WinUI.Exceptions;
+using Healthcare020.WinUI.Forms;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers

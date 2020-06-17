@@ -1,4 +1,6 @@
-﻿namespace Healthcare020.WinUI.AdminDashboard
+﻿using Healthcare020.WinUI.Helpers.CustomElements;
+
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     partial class frmStartMenuAdmin
     {
@@ -37,11 +39,11 @@
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.btnUserMenu = new Healthcare020.WinUI.CustomElements.UserMenuButton();
+            this.btnUserMenu = new UserMenuButton();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.pnlUserMenuDropdown = new Healthcare020.WinUI.CustomElements.UserMenuDropdownPanel();
+            this.pnlUserMenuDropdown = new UserMenuDropdownPanel();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -303,7 +305,7 @@
         private FontAwesome.Sharp.IconPictureBox iconCurrentChildForm;
         private System.Windows.Forms.Label lblTitleChildForm;
         private System.Windows.Forms.Panel pnlBody;
-        private CustomElements.UserMenuButton btnUserMenu;
-        private CustomElements.UserMenuDropdownPanel pnlUserMenuDropdown;
+        private UserMenuButton btnUserMenu;
+        private UserMenuDropdownPanel pnlUserMenuDropdown;
     }
 }
