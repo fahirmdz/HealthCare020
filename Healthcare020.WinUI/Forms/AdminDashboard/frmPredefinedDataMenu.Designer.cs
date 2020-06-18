@@ -141,6 +141,7 @@
             this.btnDrzave.Text = "Države";
             this.btnDrzave.TextColor = System.Drawing.Color.White;
             this.btnDrzave.UseVisualStyleBackColor = false;
+            this.btnDrzave.Click += new System.EventHandler(this.btnDrzave_Click);
             // 
             // btnGradovi
             // 

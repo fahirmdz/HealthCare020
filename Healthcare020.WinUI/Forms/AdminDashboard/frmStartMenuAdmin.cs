@@ -130,6 +130,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var frmPredefinedData = frmPredefinedDataMenu.Instance;
             if (frmPredefinedData != null)
             {
+                frmPredefinedData.ParentControl = pnlBody;
                 OpenChildForm(frmPredefinedData);
             }
             else

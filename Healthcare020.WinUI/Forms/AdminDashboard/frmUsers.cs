@@ -3,26 +3,21 @@ using Healthcare020.WinUI.Helpers.CustomElements;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Models;
 using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using HealthCare020.Core.ResourceParameters;
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Forms;
+using HealthCare020.Core.ResourceParameters;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    public partial class frmUsers : Form
+    public partial class frmUsers : DisplayDataForm<KorisnickiNalogDtoLL>
     {
         private static frmUsers _instance;
-        private readonly APIService _apiServiceKorisnici;
-        private readonly PanelCheckInternetConnection _internetError;
-
-        private IBindingList _korisniciForDgrv;
-        private int _currentDgrvPage = 1;
-        private int CurrentRowCount;
 
         public static frmUsers Instance
         {
@@ -41,106 +36,64 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private frmUsers()
         {
-            InitializeComponent();
-            CurrentRowCount = GetDgrvKorisniciHeight();
-            _apiServiceKorisnici = new APIService("korisnici");
-            _korisniciForDgrv = new BindingSource();
+            _apiService = new APIService(Routes.KorisniciRoute);
+            _dataForDgrv = new BindingSource();
             this.Text = Properties.Resources.frmUsers;
 
-            //Main data grid view settings
-            dgrvKorisnickiNalozi.EnableHeadersVisualStyles = false;
-            dgrvKorisnickiNalozi.ReadOnly = false;
-            dgrvKorisnickiNalozi.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgrvKorisnickiNalozi.BorderStyle = BorderStyle.None;
-            dgrvKorisnickiNalozi.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgrvKorisnickiNalozi.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 190, 190);
-            dgrvKorisnickiNalozi.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgrvKorisnickiNalozi.AutoGenerateColumns = false;
-            dgrvKorisnickiNalozi.RowCount = 8;
-            btnPrevPage.Enabled = false;
+            var ID = new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
+            ID.CellTemplate = new DataGridViewTextBoxCell();
 
-            //Tool tips
-            this.toolTip.SetToolTip(btnPrevPage, "Previous page");
-            this.toolTip.SetToolTip(btnNextPage, "Next page");
+            var Username = new DataGridViewColumn {
+                DataPropertyName = "Username", 
+                HeaderText = "Username",
+                Name = "Username",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
 
-            if (!ConnectionCheck.CheckForInternetConnection())
+            var LastOnline = new DataGridViewColumn {
+                DataPropertyName = "LastOnline", 
+                HeaderText = "Last online",
+                Name = "LastOnline",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
+
+            var DateCreated = new DataGridViewColumn {
+                DataPropertyName = "DateCreated", 
+                HeaderText = "Date created",
+                Name = "DateCreated",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
+
+            var Zakljucaj = new DataGridViewButtonColumn
             {
-                pnlTop.Hide();
-                dgrvKorisnickiNalozi.Hide();
-                pnlNavButtons.Hide();
-                _internetError = new PanelCheckInternetConnection(this);
-                _internetError.Show();
-                _internetError.BringToFront();
-                Controls.Add(_internetError);
-                _internetError.SetRetryConnectionEvent(RetryConnection);
-            }
+                HeaderText = "Zaključavanje",
+                Name = "Zaključaj",
+                Text = "Zaključaj",
+                ToolTipText = "Zaključaj korisnički nalog",
+                UseColumnTextForButtonValue = true,
+                CellTemplate = new DataGridViewButtonCell(),
+                DefaultCellStyle = new DataGridViewCellStyle{BackColor = Color.Transparent,SelectionBackColor = Color.Transparent},
+            };
+
+
+            base.DgrvColumnsStyle();
+
+            base.AddColumnsToMainDgrv(new[] { ID, Username,LastOnline,DateCreated,Zakljucaj });
+
+            Text = Properties.Resources.frmDrzave;
+            ResourceParameters = new KorisnickiNalogResourceParameters{ PageNumber = 1, PageSize = CurrentRowCount };
+
+            InitializeComponent();
         }
 
-        public async void RetryConnection(object sender, EventArgs e)
+        private void frmUsers_Load(object sender, EventArgs e)
         {
-            if (ConnectionCheck.CheckForInternetConnection())
-            {
-                _internetError.Hide();
-                pnlTop.Show();
-                dgrvKorisnickiNalozi.Show();
-                pnlNavButtons.Show();
-                await LoadData();
-            }
+            base.DisplayDataForm_Load(sender, e);
         }
 
-        private async Task LoadData(int pageNumber = 1, string searchParameter = "")
+        protected override async void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Application.UseWaitCursor = true;
-
-            var result = await _apiServiceKorisnici
-                .Get<KorisnickiNalogDtoLL>(new KorisnickiNalogResourceParameters
-                {
-                    PageSize = CurrentRowCount,
-                    PageNumber = pageNumber,
-                    Username = string.IsNullOrWhiteSpace(searchParameter) ? null : searchParameter
-                });
-
-            _korisniciForDgrv = new BindingList<KorisnickiNalogDtoLL>(result.Data);
-            dgrvKorisnickiNalozi.DataSource = _korisniciForDgrv;
-
-            btnNextPage.Enabled = _currentDgrvPage != result.PaginationMetadata.TotalPages;
-            btnPrevPage.Enabled = _currentDgrvPage != 1;
-
-            Application.UseWaitCursor = false;
-            dgrvKorisnickiNalozi.Cursor = this.Cursor;
-        }
-
-        private async void frmUsers_Load(object sender, EventArgs e)
-        {
-            if (dgrvKorisnickiNalozi.Visible)
-                await LoadData();
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(Controls);
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlSearch.Controls);
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlTop.Controls);
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlNavButtons.Controls);
-
-            dgrvKorisnickiNalozi.BorderStyle = BorderStyle.None;
-            dgrvKorisnickiNalozi.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(249,249,249);
-        }
-
-        private async void btnNextPage_Click_1(object sender, EventArgs e)
-        {
-            await LoadData(++_currentDgrvPage);
-            btnPrevPage.Enabled = true;
-        }
-
-        private async void btnPrevPage_Click_1(object sender, EventArgs e)
-        {
-            await LoadData(--_currentDgrvPage);
-
-            if (_currentDgrvPage == 1)
-                btnPrevPage.Enabled = false;
-            btnNextPage.Enabled = true;
-        }
-
-        private async void dgrvKorisnickiNalozi_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!(dgrvKorisnickiNalozi.CurrentRow?.DataBoundItem is KorisnickiNalogDtoLL korisnik))
+            if (!(MainDgrv.CurrentRow?.DataBoundItem is KorisnickiNalogDtoLL korisnik))
                 return;
             //Account lock out
             if (e.ColumnIndex == 3)
@@ -170,14 +123,14 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
                     if (isForLockout)
                     {
-                        result = await _apiServiceKorisnici.Update<KorisnickiNalogDtoLL>(korisnik.Id, new KorisnickiNalogLockUpsertRequest
+                        result = await _apiService.Update<KorisnickiNalogDtoLL>(korisnik.Id, new KorisnickiNalogLockUpsertRequest
                         {
                             Until = until.Value
                         }, "lock");
                     }
                     else
                     {
-                        result = await _apiServiceKorisnici.Delete<KorisnickiNalogDtoLL>(korisnik.Id, "lock");
+                        result = await _apiService.Delete<KorisnickiNalogDtoLL>(korisnik.Id, "lock");
                     }
 
                     if (result.Succeeded)
@@ -189,16 +142,17 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
         }
 
-        private void dgrvKorisnickiNalozi_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        protected override void dgrvMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            base.dgrvMain_CellValueChanged(sender, e);
         }
 
-        private void dgrvKorisnickiNalozi_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == 3)
             {
                 var isLockedOut =
-                    (dgrvKorisnickiNalozi.Rows[e.RowIndex]?.DataBoundItem as KorisnickiNalogDtoLL)?.LockedOut;
+                    (MainDgrv.Rows[e.RowIndex]?.DataBoundItem as KorisnickiNalogDtoLL)?.LockedOut;
                 if (isLockedOut.HasValue)
                 {
                     e.Value = isLockedOut.Value ? "Otključaj" : "Zaključaj";
@@ -206,30 +160,19 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
         }
 
-        private async void txtSearch_TextChanged(object sender, EventArgs e)
+        protected override async void txtSearch_Leave(object sender, EventArgs e)
         {
-            await LoadData(searchParameter: string.IsNullOrWhiteSpace(txtSearch.Text) ? string.Empty : txtSearch.Text);
-        }
+            base.txtSearch_Leave(sender, e);
 
-        private void btnNewUser_Click(object sender, EventArgs e)
-        {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmNewUser.Instance);
-        }
+            var korisnickiNalogResParams = ResourceParameters as KorisnickiNalogResourceParameters;
 
-        private void pnlBody_Paint(object sender, PaintEventArgs e)
-        {
-        }
+            bool ShouldLoad = SearchText != korisnickiNalogResParams.Username;
 
-        private async void frmUsers_SizeChanged(object sender, EventArgs e)
-        {
-            dgrvKorisnickiNalozi.DataSource = null;
-            CurrentRowCount = GetDgrvKorisniciHeight();
-            dgrvKorisnickiNalozi.RowCount = CurrentRowCount;
-            await LoadData(1);
+            if (ShouldLoad)
+            {
+                korisnickiNalogResParams.Username = SearchText.Trim();
+                await base.LoadData();
+            }
         }
-
-        private int GetDgrvKorisniciHeight() =>
-            (dgrvKorisnickiNalozi.Height - dgrvKorisnickiNalozi.ColumnHeadersHeight) /
-            dgrvKorisnickiNalozi.RowTemplate.Height -1;
     }
 }

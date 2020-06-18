@@ -139,8 +139,26 @@
     <Compile Include="Forms\AdminDashboard\frmUsers.Designer.cs">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmDrzave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmDrzave.Designer.cs">
+      <DependentUpon>frmDrzave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DisplayDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DisplayDataForm.Designer.cs">
+      <DependentUpon>DisplayDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helpers\CustomElements\NoDataPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Helpers\CustomElements\NoDataPanel.Designer.cs">
+      <DependentUpon>NoDataPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomElements\PanelCheckInternetConnection.cs">
       <SubType>UserControl</SubType>
@@ -148,12 +166,19 @@
     <Compile Include="Helpers\CustomElements\PanelCheckInternetConnection.Designer.cs">
       <DependentUpon>PanelCheckInternetConnection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomElements\pnlDisplayData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Helpers\CustomElements\pnlDisplayData.Designer.cs">
+      <DependentUpon>pnlDisplayData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\CustomElements\UserMenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Helpers\CustomElements\UserMenuDropdown.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Helpers\DesignConfigs\DgrvDesignConfig.cs" />
     <Compile Include="Helpers\Dialogs\dlgAccountLock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,8 +240,20 @@
     <EmbeddedResource Include="Forms\AdminDashboard\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmDrzave.resx">
+      <DependentUpon>frmDrzave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DisplayDataForm.resx">
+      <DependentUpon>DisplayDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\CustomElements\NoDataPanel.resx">
+      <DependentUpon>NoDataPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Helpers\CustomElements\PanelCheckInternetConnection.resx">
       <DependentUpon>PanelCheckInternetConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\CustomElements\pnlDisplayData.resx">
+      <DependentUpon>pnlDisplayData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgAccountLock.resx">
       <DependentUpon>dlgAccountLock.cs</DependentUpon>
