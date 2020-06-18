@@ -56,7 +56,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void frmNewUser_Load(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlBody.Controls);
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlTop.Controls);
+            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlMain.Controls);
+
+
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

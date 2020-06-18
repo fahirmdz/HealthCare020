@@ -50,6 +50,7 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<Grad, GradDtoLL>().ReverseMap();
             CreateMap<Grad, GradDtoEL>();
+            CreateMap<GradUpsertDto, Grad>();
 
             #endregion Grad
 

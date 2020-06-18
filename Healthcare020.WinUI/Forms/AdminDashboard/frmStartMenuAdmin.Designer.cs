@@ -39,17 +39,20 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.btnUserMenu = new UserMenuButton();
+            this.btnUserMenu = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuButton();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
+            this.pnlCopyright = new System.Windows.Forms.Panel();
+            this.lblCopyright = new System.Windows.Forms.Label();
+            this.pnlUserMenuDropdown = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuDropdownPanel();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.pnlUserMenuDropdown = new UserMenuDropdownPanel();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
+            this.pnlCopyright.SuspendLayout();
             this.pnlBody.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +76,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnStatistics.FlatAppearance.BorderSize = 0;
             this.btnStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStatistics.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnStatistics.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStatistics.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStatistics.ForeColor = System.Drawing.Color.White;
             this.btnStatistics.IconChar = FontAwesome.Sharp.IconChar.ChartPie;
             this.btnStatistics.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
@@ -97,7 +100,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnPredefinedData.FlatAppearance.BorderSize = 0;
             this.btnPredefinedData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPredefinedData.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnPredefinedData.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPredefinedData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPredefinedData.ForeColor = System.Drawing.Color.White;
             this.btnPredefinedData.IconChar = FontAwesome.Sharp.IconChar.Database;
             this.btnPredefinedData.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
@@ -121,7 +124,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnSecurity.FlatAppearance.BorderSize = 0;
             this.btnSecurity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSecurity.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnSecurity.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSecurity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSecurity.ForeColor = System.Drawing.Color.White;
             this.btnSecurity.IconChar = FontAwesome.Sharp.IconChar.Lock;
             this.btnSecurity.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
@@ -145,7 +148,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnUsers.FlatAppearance.BorderSize = 0;
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsers.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnUsers.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUsers.ForeColor = System.Drawing.Color.White;
             this.btnUsers.IconChar = FontAwesome.Sharp.IconChar.User;
             this.btnUsers.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
@@ -168,6 +171,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.panelLogo.Controls.Add(this.btnHome);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(220, 199);
@@ -218,11 +222,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             // lblTitleChildForm
             // 
             this.lblTitleChildForm.AutoSize = true;
-            this.lblTitleChildForm.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitleChildForm.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleChildForm.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblTitleChildForm.Location = new System.Drawing.Point(55, 26);
             this.lblTitleChildForm.Name = "lblTitleChildForm";
-            this.lblTitleChildForm.Size = new System.Drawing.Size(45, 18);
+            this.lblTitleChildForm.Size = new System.Drawing.Size(51, 20);
             this.lblTitleChildForm.TabIndex = 3;
             this.lblTitleChildForm.Text = "Home";
             // 
@@ -240,16 +244,27 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.iconCurrentChildForm.TabIndex = 0;
             this.iconCurrentChildForm.TabStop = false;
             // 
-            // pnlBody
+            // pnlCopyright
             // 
-            this.pnlBody.BackColor = System.Drawing.Color.White;
-            this.pnlBody.Controls.Add(this.pnlUserMenuDropdown);
-            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(220, 60);
-            this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(776, 486);
-            this.pnlBody.TabIndex = 3;
-            this.pnlBody.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBody_Paint);
+            this.pnlCopyright.BackColor = System.Drawing.Color.Transparent;
+            this.pnlCopyright.Controls.Add(this.lblCopyright);
+            this.pnlCopyright.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlCopyright.Location = new System.Drawing.Point(220, 523);
+            this.pnlCopyright.Name = "pnlCopyright";
+            this.pnlCopyright.Size = new System.Drawing.Size(776, 23);
+            this.pnlCopyright.TabIndex = 16;
+            // 
+            // lblCopyright
+            // 
+            this.lblCopyright.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblCopyright.AutoSize = true;
+            this.lblCopyright.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblCopyright.Location = new System.Drawing.Point(271, 1);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Size = new System.Drawing.Size(195, 13);
+            this.lblCopyright.TabIndex = 14;
+            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
             // 
             // pnlUserMenuDropdown
             // 
@@ -262,6 +277,17 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
             this.pnlUserMenuDropdown.Visible = false;
             // 
+            // pnlBody
+            // 
+            this.pnlBody.BackColor = System.Drawing.Color.White;
+            this.pnlBody.Controls.Add(this.pnlUserMenuDropdown);
+            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBody.Location = new System.Drawing.Point(220, 60);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(776, 486);
+            this.pnlBody.TabIndex = 3;
+            this.pnlBody.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBody_Paint);
+            // 
             // frmStartMenuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,6 +296,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(996, 546);
             this.ControlBox = false;
+            this.Controls.Add(this.pnlCopyright);
             this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.panelMenu);
@@ -287,6 +314,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
+            this.pnlCopyright.ResumeLayout(false);
+            this.pnlCopyright.PerformLayout();
             this.pnlBody.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -304,8 +333,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private System.Windows.Forms.Panel pnlTop;
         private FontAwesome.Sharp.IconPictureBox iconCurrentChildForm;
         private System.Windows.Forms.Label lblTitleChildForm;
-        private System.Windows.Forms.Panel pnlBody;
         private UserMenuButton btnUserMenu;
+        private System.Windows.Forms.Panel pnlCopyright;
+        private System.Windows.Forms.Label lblCopyright;
         private UserMenuDropdownPanel pnlUserMenuDropdown;
+        private System.Windows.Forms.Panel pnlBody;
     }
 }

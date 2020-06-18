@@ -79,11 +79,47 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Države.
+        /// </summary>
+        public static string frmDrzave {
+            get {
+                return ResourceManager.GetString("frmDrzave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Nova država.
+        /// </summary>
+        public static string frmNewDrzava {
+            get {
+                return ResourceManager.GetString("frmNewDrzava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Novi grad.
+        /// </summary>
+        public static string frmNewGrad {
+            get {
+                return ResourceManager.GetString("frmNewGrad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Novi korisnički nalog.
         /// </summary>
         public static string frmNewUser {
             get {
                 return ResourceManager.GetString("frmNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci.
+        /// </summary>
+        public static string frmPredefinedData {
+            get {
+                return ResourceManager.GetString("frmPredefinedData", resourceCulture);
             }
         }
         
@@ -112,6 +148,24 @@ namespace Healthcare020.WinUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Healthcare020_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neispravan format.
+        /// </summary>
+        public static string InvalidFormat {
+            get {
+                return ResourceManager.GetString("InvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Niste prijavljeni na sistem!&quot;.
+        /// </summary>
+        public static string NotLoggedIn {
+            get {
+                return ResourceManager.GetString("NotLoggedIn", resourceCulture);
             }
         }
         

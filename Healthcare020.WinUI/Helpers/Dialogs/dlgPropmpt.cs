@@ -25,8 +25,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             }
 
             ((Form)_instance).ShowDialog();
-            _instance.BringToFront();
-
             return _instance;
         }
 
@@ -41,8 +39,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private void dlgPropmpt_Load(object sender, System.EventArgs e)
         {
             this.Dock = DockStyle.Fill;
-            this.CenterToParent();
-            this.BringToFront();
         }
 
         private void dlgPropmpt_Shown(object sender, System.EventArgs e)

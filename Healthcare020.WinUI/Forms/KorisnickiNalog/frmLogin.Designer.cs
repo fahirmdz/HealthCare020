@@ -42,9 +42,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.txtPassword = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.pnlCopyright = new System.Windows.Forms.Panel();
+            this.lblCopyright = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            this.pnlCopyright.SuspendLayout();
             this.SuspendLayout();
             // 
             // err
@@ -162,6 +165,28 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlTop.Size = new System.Drawing.Size(996, 298);
             this.pnlTop.TabIndex = 20;
             // 
+            // pnlCopyright
+            // 
+            this.pnlCopyright.BackColor = System.Drawing.Color.Transparent;
+            this.pnlCopyright.Controls.Add(this.lblCopyright);
+            this.pnlCopyright.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlCopyright.Location = new System.Drawing.Point(0, 523);
+            this.pnlCopyright.Name = "pnlCopyright";
+            this.pnlCopyright.Size = new System.Drawing.Size(996, 23);
+            this.pnlCopyright.TabIndex = 21;
+            // 
+            // lblCopyright
+            // 
+            this.lblCopyright.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblCopyright.AutoSize = true;
+            this.lblCopyright.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblCopyright.Location = new System.Drawing.Point(398, 1);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Size = new System.Drawing.Size(195, 13);
+            this.lblCopyright.TabIndex = 14;
+            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,6 +195,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(996, 546);
             this.ControlBox = false;
+            this.Controls.Add(this.pnlCopyright);
             this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.pnlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -185,6 +211,8 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlBody.ResumeLayout(false);
             this.pnlBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            this.pnlCopyright.ResumeLayout(false);
+            this.pnlCopyright.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -201,5 +229,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         private Button_WOC btnLogin;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtUsername;
         private System.Windows.Forms.Panel pnlTop;
+        private System.Windows.Forms.Panel pnlCopyright;
+        private System.Windows.Forms.Label lblCopyright;
     }
 }

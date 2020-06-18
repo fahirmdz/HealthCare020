@@ -12,7 +12,6 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             InitializeComponent();
             Parent = parent;
             Size = new Size(parent.Width, parent.Height);
-            MainForm.Instance.SetCopyrightPanelColor(Color.FromArgb(255, 255, 255));
         }
 
         private void PanelCheckInternetConnection_Load(object sender, EventArgs e)

@@ -34,22 +34,18 @@
             this.picMinimize = new FontAwesome.Sharp.IconPictureBox();
             this.picClose = new FontAwesome.Sharp.IconPictureBox();
             this.panelDesktop = new System.Windows.Forms.Panel();
-            this.lblCopyright = new System.Windows.Forms.Label();
-            this.pnlCopyright = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
             this.pnlControlBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
-            this.pnlCopyright.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTop
             // 
-            this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.panelTop.Controls.Add(this.pnlControlBox);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(0);
             this.panelTop.Name = "panelTop";
@@ -120,37 +116,13 @@
             // 
             // panelDesktop
             // 
-            this.panelDesktop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelDesktop.BackColor = System.Drawing.Color.White;
+            this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(0, 37);
             this.panelDesktop.Name = "panelDesktop";
             this.panelDesktop.Size = new System.Drawing.Size(1000, 513);
             this.panelDesktop.TabIndex = 12;
             this.panelDesktop.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktop_Paint);
-            // 
-            // lblCopyright
-            // 
-            this.lblCopyright.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblCopyright.AutoSize = true;
-            this.lblCopyright.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblCopyright.Location = new System.Drawing.Point(192, 4);
-            this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(195, 13);
-            this.lblCopyright.TabIndex = 14;
-            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
-            // 
-            // pnlCopyright
-            // 
-            this.pnlCopyright.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pnlCopyright.BackColor = System.Drawing.Color.Transparent;
-            this.pnlCopyright.Controls.Add(this.lblCopyright);
-            this.pnlCopyright.Location = new System.Drawing.Point(228, 528);
-            this.pnlCopyright.Name = "pnlCopyright";
-            this.pnlCopyright.Size = new System.Drawing.Size(772, 23);
-            this.pnlCopyright.TabIndex = 15;
             // 
             // MainForm
             // 
@@ -160,7 +132,6 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 550);
             this.ControlBox = false;
-            this.Controls.Add(this.pnlCopyright);
             this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelTop);
             this.DoubleBuffered = true;
@@ -177,8 +148,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
-            this.pnlCopyright.ResumeLayout(false);
-            this.pnlCopyright.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -190,8 +159,6 @@
         private FontAwesome.Sharp.IconPictureBox picClose;
         private FontAwesome.Sharp.IconPictureBox picMaximize;
         private FontAwesome.Sharp.IconPictureBox picMinimize;
-        private System.Windows.Forms.Label lblCopyright;
-        private System.Windows.Forms.Panel pnlCopyright;
     }
 }
 

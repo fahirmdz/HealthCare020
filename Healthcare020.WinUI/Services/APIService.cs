@@ -75,6 +75,9 @@ namespace Healthcare020.WinUI.Services
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
+                if(response.StatusCode==HttpStatusCode.Forbidden)
+                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
                 return APIServiceResult<List<T>>.WithStatusCode(response.StatusCode);
             }
 
@@ -194,6 +197,9 @@ namespace Healthcare020.WinUI.Services
             RevertToBaseRequest();
             if (response.StatusCode != HttpStatusCode.OK)
             {
+                if(response.StatusCode==HttpStatusCode.Forbidden)
+                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
                 return APIServiceResult<T>.WithStatusCode(response.StatusCode);
             }
 
@@ -220,6 +226,9 @@ namespace Healthcare020.WinUI.Services
             RevertToBaseRequest();
             if (response.StatusCode != HttpStatusCode.OK)
             {
+                if(response.StatusCode==HttpStatusCode.Forbidden)
+                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
                 return APIServiceResult<T>.WithStatusCode(response.StatusCode);
             }
 
