@@ -5,6 +5,7 @@ using Healthcare020.WinUI.Helpers.DesignConfigs;
 using Healthcare020.WinUI.Services;
 using System;
 using System.ComponentModel;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCare020.Core.ResourceParameters;
@@ -155,7 +156,24 @@ namespace Healthcare020.WinUI.Forms
 
         protected virtual void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-
+            //Bind nested/complex types to DataGridView cell, e.g. Grad.Drzava.Naziv -> Drzava
+            DataGridView grid = (DataGridView)sender;
+            DataGridViewRow row = grid.Rows[e.RowIndex];
+            DataGridViewColumn col = grid.Columns[e.ColumnIndex];
+            if (row.DataBoundItem != null && col.DataPropertyName.Contains("."))
+            {
+                string[] props = col.DataPropertyName.Split('.');
+                PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
+                if (propInfo == null)
+                    return;
+                object val = propInfo.GetValue(row.DataBoundItem, null);
+                for (int i = 1; i < props.Length; i++)
+                {
+                    propInfo = val.GetType().GetProperty(props[i]);
+                    val = propInfo.GetValue(val, null);
+                }
+                e.Value = val;
+            }
         }
 
         protected virtual void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)

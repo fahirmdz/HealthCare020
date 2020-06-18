@@ -165,6 +165,7 @@
             this.btnGradovi.Text = "Gradovi";
             this.btnGradovi.TextColor = System.Drawing.Color.White;
             this.btnGradovi.UseVisualStyleBackColor = false;
+            this.btnGradovi.Click += new System.EventHandler(this.btnGradovi_Click);
             // 
             // frmPredefinedDataMenu
             // 

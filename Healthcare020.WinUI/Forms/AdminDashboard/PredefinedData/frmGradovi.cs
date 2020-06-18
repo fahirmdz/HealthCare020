@@ -1,0 +1,95 @@
+﻿using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Models;
+using HealthCare020.Core.ResourceParameters;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+{
+    public partial class frmGradovi : DisplayDataForm<GradDtoEL>
+    {
+        private static frmGradovi _instance = null;
+
+        public static frmGradovi Instance
+        {
+            get
+            {
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new frmGradovi();
+                return _instance;
+            }
+        }
+
+        private frmGradovi() : base()
+        {
+            var ID = new DataGridViewColumn
+            {
+                HeaderText = "ID",
+                DataPropertyName = "Id",
+                Name = "ID",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
+
+            var Naziv = new DataGridViewColumn { DataPropertyName = "Naziv", HeaderText = "Naziv", Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
+
+            var Drzava = new DataGridViewColumn
+            {
+                DataPropertyName = "Drzava.Naziv",
+                HeaderText = "Država",
+                Name = "Država",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
+
+            var Brisi = new DataGridViewButtonColumn
+            {
+                HeaderText = "Brisanje",
+                Name = "Izbriši",
+                Text = "Izbriši",
+                ToolTipText = "Izbriši grad",
+                UseColumnTextForButtonValue = true,
+                CellTemplate = new DataGridViewButtonCell { ToolTipText = "Izbriši grad", UseColumnTextForButtonValue = true },
+                DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent }
+            };
+
+            base.DgrvColumnsStyle();
+            base.AddColumnsToMainDgrv(new[] { ID, Naziv, Drzava, Brisi });
+
+            _apiService = new APIService(Routes.GradoviRoute);
+            Text = Properties.Resources.frmDrzave;
+            ResourceParameters = new GradResourceParameters { PageNumber = 1, PageSize = CurrentRowCount, EagerLoaded = true };
+
+            InitializeComponent();
+        }
+
+        private void frmGradovi_Load(object sender, System.EventArgs e)
+        {
+            DisplayDataForm_Load(sender, e);
+        }
+
+        protected override async void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            base.dgrvMain_CellContentClick(sender, e);
+        }
+
+        protected override void btnNew_Click(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmNewGrad.Instance);
+        }
+
+        protected override async void txtSearch_Leave(object sender, EventArgs e)
+        {
+            base.txtSearch_Leave(sender, e);
+
+            var gradResParams = ResourceParameters as GradResourceParameters;
+
+            if (gradResParams.Naziv != SearchText)
+            {
+                gradResParams.Naziv = SearchText.Trim();
+
+                await base.LoadData();
+            }
+        }
+    }
+}

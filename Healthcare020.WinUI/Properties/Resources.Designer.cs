@@ -97,6 +97,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Novi grad.
+        /// </summary>
+        public static string frmNewGrad {
+            get {
+                return ResourceManager.GetString("frmNewGrad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Novi korisnički nalog.
         /// </summary>
         public static string frmNewUser {

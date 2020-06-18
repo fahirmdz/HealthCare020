@@ -55,7 +55,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             };
 
 
-            base.DgrvColumnsStyle();
 
             base.AddColumnsToMainDgrv(new[] { ID, Naziv, PozivniBroj, Brisi });
 

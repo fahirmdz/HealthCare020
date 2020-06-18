@@ -37,5 +37,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         {
             frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Intance);
         }
+
+        private void btnGradovi_Click(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmGradovi.Instance);
+        }
     }
 }
