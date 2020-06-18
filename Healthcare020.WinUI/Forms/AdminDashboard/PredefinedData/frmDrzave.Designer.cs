@@ -38,7 +38,6 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmDrzave";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmDrzave";
             this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.frmDrzave_Load);
             this.ResumeLayout(false);

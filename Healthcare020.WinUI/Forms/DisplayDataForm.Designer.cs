@@ -175,7 +175,7 @@
             this.btnNew.Rotation = 0D;
             this.btnNew.Size = new System.Drawing.Size(84, 30);
             this.btnNew.TabIndex = 4;
-            this.btnNew.Text = "Novi ";
+            this.btnNew.Text = "Dodaj ";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);

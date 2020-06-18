@@ -1,17 +1,14 @@
 ﻿using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.CustomElements;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Models;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 using HealthCare020.Core.ResourceParameters;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -43,22 +40,25 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var ID = new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
             ID.CellTemplate = new DataGridViewTextBoxCell();
 
-            var Username = new DataGridViewColumn {
-                DataPropertyName = "Username", 
+            var Username = new DataGridViewColumn
+            {
+                DataPropertyName = "Username",
                 HeaderText = "Username",
                 Name = "Username",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            var LastOnline = new DataGridViewColumn {
-                DataPropertyName = "LastOnline", 
+            var LastOnline = new DataGridViewColumn
+            {
+                DataPropertyName = "LastOnline",
                 HeaderText = "Last online",
                 Name = "LastOnline",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            var DateCreated = new DataGridViewColumn {
-                DataPropertyName = "DateCreated", 
+            var DateCreated = new DataGridViewColumn
+            {
+                DataPropertyName = "DateCreated",
                 HeaderText = "Date created",
                 Name = "DateCreated",
                 CellTemplate = new DataGridViewTextBoxCell()
@@ -71,17 +71,16 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 Text = "Zaključaj",
                 ToolTipText = "Zaključaj korisnički nalog",
                 UseColumnTextForButtonValue = true,
-                CellTemplate = new DataGridViewButtonCell(),
-                DefaultCellStyle = new DataGridViewCellStyle{BackColor = Color.Transparent,SelectionBackColor = Color.Transparent},
+                CellTemplate = new DataGridViewButtonCell{UseColumnTextForButtonValue = true,ToolTipText ="Zaključaj korisnički nalog" },
+                DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent },
             };
-
 
             base.DgrvColumnsStyle();
 
-            base.AddColumnsToMainDgrv(new[] { ID, Username,LastOnline,DateCreated,Zakljucaj });
+            base.AddColumnsToMainDgrv(new[] { ID, Username, LastOnline, DateCreated, Zakljucaj });
 
-            Text = Properties.Resources.frmDrzave;
-            ResourceParameters = new KorisnickiNalogResourceParameters{ PageNumber = 1, PageSize = CurrentRowCount };
+            Text = Properties.Resources.frmUsers;
+            ResourceParameters = new KorisnickiNalogResourceParameters { PageNumber = 1, PageSize = CurrentRowCount };
 
             InitializeComponent();
         }
@@ -95,6 +94,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         {
             if (!(MainDgrv.CurrentRow?.DataBoundItem is KorisnickiNalogDtoLL korisnik))
                 return;
+
             //Account lock out
             if (e.ColumnIndex == 3)
             {
@@ -173,6 +173,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 korisnickiNalogResParams.Username = SearchText.Trim();
                 await base.LoadData();
             }
+        }
+
+        protected override void btnNew_Click(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmNewUser.Instance);
         }
     }
 }

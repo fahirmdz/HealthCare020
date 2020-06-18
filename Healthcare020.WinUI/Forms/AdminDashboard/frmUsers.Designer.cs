@@ -39,7 +39,6 @@
             this.ClientSize = new System.Drawing.Size(777, 487);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmUsers";
-            this.Text = "frmUsers";
             this.Load += new System.EventHandler(this.frmUsers_Load);
             this.ResumeLayout(false);
 

@@ -145,6 +145,12 @@
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmDrzave.Designer.cs">
       <DependentUpon>frmDrzave.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewDrzava.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewDrzava.Designer.cs">
+      <DependentUpon>frmNewDrzava.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DisplayDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmDrzave.resx">
       <DependentUpon>frmDrzave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNewDrzava.resx">
+      <DependentUpon>frmNewDrzava.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DisplayDataForm.resx">
       <DependentUpon>DisplayDataForm.cs</DependentUpon>

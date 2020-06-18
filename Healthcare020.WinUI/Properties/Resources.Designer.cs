@@ -88,6 +88,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Nova država.
+        /// </summary>
+        public static string frmNewDrzava {
+            get {
+                return ResourceManager.GetString("frmNewDrzava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Novi korisnički nalog.
         /// </summary>
         public static string frmNewUser {
@@ -130,6 +139,15 @@ namespace Healthcare020.WinUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Healthcare020_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neispravan format.
+        /// </summary>
+        public static string InvalidFormat {
+            get {
+                return ResourceManager.GetString("InvalidFormat", resourceCulture);
             }
         }
         

@@ -6,6 +6,9 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using HealthCare020.Core.Request;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
@@ -25,7 +28,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-        public frmDrzave() : base()
+        private frmDrzave() : base()
         {
             var ID = new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
             ID.CellTemplate = new DataGridViewTextBoxCell();
@@ -47,9 +50,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 Text = "Izbriši",
                 ToolTipText = "Izbriši državu",
                 UseColumnTextForButtonValue = true,
-                CellTemplate = new DataGridViewButtonCell(),
+                CellTemplate = new DataGridViewButtonCell{ToolTipText = "Izbriši državu",UseColumnTextForButtonValue = true},
                 DefaultCellStyle = new DataGridViewCellStyle{BackColor = Color.Transparent,SelectionBackColor = Color.Transparent}
             };
+
 
             base.DgrvColumnsStyle();
 
@@ -80,6 +84,34 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             if (ShouldLoad)
                 await base.LoadData();
+        }
+
+        protected override void btnNew_Click(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmNewDrzava.Instance);
+        }
+
+        protected override async void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(MainDgrv.CurrentRow?.DataBoundItem is DrzavaDto drzava))
+                return;
+
+            //Account lock out
+            if (e.ColumnIndex == 3)
+            {
+                var prompDialog = dlgPropmpt.ShowDialog();
+
+                if (prompDialog?.DialogResult == DialogResult.OK)
+                {
+                    var result = await _apiService.Delete<DrzavaDto>(drzava.Id);
+
+                    if (result.Succeeded)
+                    {
+                        _dataForDgrv.Remove(drzava);
+                        dlgSuccess.ShowDialog();
+                    }
+                }
+            }
         }
     }
 }

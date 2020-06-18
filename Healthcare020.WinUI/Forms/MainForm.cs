@@ -40,7 +40,7 @@ namespace Healthcare020.WinUI.Forms
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
 
-            Auth.AuthenticateWithPassword("testuser4", "testtest");
+            Auth.AuthenticateWithPassword("test", "testtest");
             var loginForm = frmStartMenuAdmin.Instance;
             currentChild = loginForm;
             loginForm.ShowAsNextMdiChild(panelDesktop);
