@@ -31,54 +31,28 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private void InitializeComponent()
         {
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.btnCancel = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
+            this.btnYes = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.label1 = new System.Windows.Forms.Label();
             this.icnDanger = new FontAwesome.Sharp.IconPictureBox();
-            this.btnCancel = new Button_WOC();
-            this.btnYes = new Button_WOC();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnDanger)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBody
             // 
-            this.pnlBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.pnlBody.Controls.Add(this.btnCancel);
             this.pnlBody.Controls.Add(this.btnYes);
             this.pnlBody.Controls.Add(this.label1);
             this.pnlBody.Controls.Add(this.icnDanger);
             this.pnlBody.Location = new System.Drawing.Point(315, 159);
+            this.pnlBody.MaximumSize = new System.Drawing.Size(358, 195);
+            this.pnlBody.MinimumSize = new System.Drawing.Size(358, 195);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Size = new System.Drawing.Size(358, 195);
             this.pnlBody.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label1.Location = new System.Drawing.Point(102, 104);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 29);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Jeste li sigurni?";
-            // 
-            // icnDanger
-            // 
-            this.icnDanger.BackColor = System.Drawing.Color.Transparent;
-            this.icnDanger.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(188)))), ((int)(((byte)(130)))));
-            this.icnDanger.IconChar = FontAwesome.Sharp.IconChar.ExclamationTriangle;
-            this.icnDanger.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(188)))), ((int)(((byte)(130)))));
-            this.icnDanger.IconSize = 98;
-            this.icnDanger.Location = new System.Drawing.Point(138, 3);
-            this.icnDanger.Name = "icnDanger";
-            this.icnDanger.Size = new System.Drawing.Size(109, 98);
-            this.icnDanger.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.icnDanger.TabIndex = 0;
-            this.icnDanger.TabStop = false;
             // 
             // btnCancel
             // 
@@ -123,6 +97,32 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.btnYes.TextColor = System.Drawing.Color.White;
             this.btnYes.UseVisualStyleBackColor = true;
             this.btnYes.Click += new System.EventHandler(this.btnYes_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.label1.Location = new System.Drawing.Point(102, 104);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 29);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Jeste li sigurni?";
+            // 
+            // icnDanger
+            // 
+            this.icnDanger.BackColor = System.Drawing.Color.Transparent;
+            this.icnDanger.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(188)))), ((int)(((byte)(130)))));
+            this.icnDanger.IconChar = FontAwesome.Sharp.IconChar.ExclamationTriangle;
+            this.icnDanger.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(188)))), ((int)(((byte)(130)))));
+            this.icnDanger.IconSize = 98;
+            this.icnDanger.Location = new System.Drawing.Point(138, 3);
+            this.icnDanger.Name = "icnDanger";
+            this.icnDanger.Size = new System.Drawing.Size(109, 98);
+            this.icnDanger.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.icnDanger.TabIndex = 0;
+            this.icnDanger.TabStop = false;
             // 
             // dlgPropmpt
             // 

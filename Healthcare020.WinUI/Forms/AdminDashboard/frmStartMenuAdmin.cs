@@ -12,7 +12,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         //Fields
         private IconButton currentBtn;
-
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
@@ -47,6 +46,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             SetClickEventToCloseUserMenu(pnlTop.Controls);
         }
 
+        /// <summary>
+        /// Add event for closing User dropdown menu on every click
+        /// </summary>
         public void SetClickEventToCloseUserMenu(Control.ControlCollection controls)
         {
             foreach (Control control in controls)
@@ -95,7 +97,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             if (currentBtn != null)
             {
                 currentBtn.BackColor = Color.FromArgb(0, 190, 190);
-                currentBtn.ForeColor = Color.Gainsboro;
+                currentBtn.ForeColor = Color.White;
                 currentBtn.TextAlign = ContentAlignment.MiddleLeft;
                 currentBtn.IconColor = Color.FromArgb(73, 96, 117);
                 currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -113,20 +115,27 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
             else
             {
-                MessageBox.Show("Niste prijavljeni na sistem!");
+                MessageBox.Show(Properties.Resources.NotLoggedIn);
             }
         }
 
         private void btnSecurity_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
-            dlgError.ShowDialog("Nemate permisije");
         }
 
         private void btnPredefinedData_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color3);
-            dlgSuccess.ShowDialog();
+            var frmPredefinedData = frmPredefinedDataMenu.Instance;
+            if (frmPredefinedData != null)
+            {
+                OpenChildForm(frmPredefinedData);
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.NotLoggedIn);
+            }
         }
 
         private void btnStatistics_Click(object sender, EventArgs e)

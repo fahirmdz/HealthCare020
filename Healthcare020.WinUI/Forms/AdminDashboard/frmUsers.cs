@@ -42,8 +42,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private frmUsers()
         {
             InitializeComponent();
-            CurrentRowCount = 8;
-            MainForm.Instance.SetCopyrightPanelColor(Color.FromArgb(240, 240, 240));
+            CurrentRowCount = GetDgrvKorisniciHeight();
             _apiServiceKorisnici = new APIService("korisnici");
             _korisniciForDgrv = new BindingSource();
             this.Text = Properties.Resources.frmUsers;
@@ -119,6 +118,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlSearch.Controls);
             frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlTop.Controls);
             frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlNavButtons.Controls);
+
+            dgrvKorisnickiNalozi.BorderStyle = BorderStyle.None;
+            dgrvKorisnickiNalozi.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(249,249,249);
         }
 
         private async void btnNextPage_Click_1(object sender, EventArgs e)
@@ -221,9 +223,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private async void frmUsers_SizeChanged(object sender, EventArgs e)
         {
             dgrvKorisnickiNalozi.DataSource = null;
-            CurrentRowCount = (dgrvKorisnickiNalozi.Height - dgrvKorisnickiNalozi.ColumnHeadersHeight) / dgrvKorisnickiNalozi.RowTemplate.Height - 1;
+            CurrentRowCount = GetDgrvKorisniciHeight();
             dgrvKorisnickiNalozi.RowCount = CurrentRowCount;
             await LoadData(1);
         }
+
+        private int GetDgrvKorisniciHeight() =>
+            (dgrvKorisnickiNalozi.Height - dgrvKorisnickiNalozi.ColumnHeadersHeight) /
+            dgrvKorisnickiNalozi.RowTemplate.Height -1;
     }
 }

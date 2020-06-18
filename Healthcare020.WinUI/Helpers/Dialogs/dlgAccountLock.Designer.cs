@@ -30,34 +30,40 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.dlgPrompt = new System.Windows.Forms.Panel();
+            this.lblHours = new System.Windows.Forms.Label();
             this.btnClose = new FontAwesome.Sharp.IconPictureBox();
             this.cmbBrojSati = new System.Windows.Forms.ComboBox();
-            this.lblHours = new System.Windows.Forms.Label();
-            this.btnLockOk = new Button_WOC();
+            this.btnLockOk = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.dlgPrompt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(826, 551);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 0;
-            // 
             // dlgPrompt
             // 
+            this.dlgPrompt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dlgPrompt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.dlgPrompt.Controls.Add(this.lblHours);
             this.dlgPrompt.Controls.Add(this.btnLockOk);
             this.dlgPrompt.Controls.Add(this.btnClose);
             this.dlgPrompt.Controls.Add(this.cmbBrojSati);
             this.dlgPrompt.Location = new System.Drawing.Point(375, 191);
+            this.dlgPrompt.MaximumSize = new System.Drawing.Size(264, 164);
+            this.dlgPrompt.MinimumSize = new System.Drawing.Size(264, 164);
             this.dlgPrompt.Name = "dlgPrompt";
             this.dlgPrompt.Size = new System.Drawing.Size(264, 164);
             this.dlgPrompt.TabIndex = 1;
+            // 
+            // lblHours
+            // 
+            this.lblHours.AutoSize = true;
+            this.lblHours.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHours.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblHours.Location = new System.Drawing.Point(57, 29);
+            this.lblHours.Name = "lblHours";
+            this.lblHours.Size = new System.Drawing.Size(155, 23);
+            this.lblHours.TabIndex = 14;
+            this.lblHours.Text = "Odaberite broj sati";
             // 
             // btnClose
             // 
@@ -83,17 +89,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.cmbBrojSati.Name = "cmbBrojSati";
             this.cmbBrojSati.Size = new System.Drawing.Size(157, 31);
             this.cmbBrojSati.TabIndex = 0;
-            // 
-            // lblHours
-            // 
-            this.lblHours.AutoSize = true;
-            this.lblHours.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHours.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblHours.Location = new System.Drawing.Point(57, 29);
-            this.lblHours.Name = "lblHours";
-            this.lblHours.Size = new System.Drawing.Size(155, 23);
-            this.lblHours.TabIndex = 14;
-            this.lblHours.Text = "Odaberite broj sati";
             // 
             // btnLockOk
             // 
@@ -124,7 +119,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.ClientSize = new System.Drawing.Size(996, 546);
             this.ControlBox = false;
             this.Controls.Add(this.dlgPrompt);
-            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "dlgAccountLock";
             this.Text = "dlgAccountLock";
@@ -139,8 +133,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel dlgPrompt;
         private System.Windows.Forms.ComboBox cmbBrojSati;
         private FontAwesome.Sharp.IconPictureBox btnClose;

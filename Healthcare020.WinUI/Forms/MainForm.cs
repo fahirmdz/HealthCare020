@@ -34,7 +34,6 @@ namespace Healthcare020.WinUI.Forms
             ControlBox = false;
             DoubleBuffered = true;
             KeyPreview = true;
-            MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -52,16 +51,15 @@ namespace Healthcare020.WinUI.Forms
             picClose.SizeMode = PictureBoxSizeMode.CenterImage;
             picClose.SizeMode = PictureBoxSizeMode.CenterImage;
             picMaximize.SizeMode = PictureBoxSizeMode.CenterImage;
-            lblCopyright.BringToFront();
         }
 
         //===== Draggable form =====
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
-        private extern static void ReleaseCapture();
+        private static extern void ReleaseCapture();
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private static extern void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void panelMainForm_MouseDown(object sender, MouseEventArgs e)
         {
@@ -137,12 +135,6 @@ namespace Healthcare020.WinUI.Forms
         {
         }
 
-        //Helper  methods
-        public void SetCopyrightPanelColor(Color color)
-        {
-            pnlCopyright.BackColor = color;
-        }
-
         private void MainForm_Resize(object sender, EventArgs e)
         {
         }
@@ -150,7 +142,6 @@ namespace Healthcare020.WinUI.Forms
         public void SetLoginAsChildForm()
         {
             var loginForm = frmLogin.Instance;
-            this.SetCopyrightPanelColor(Color.Transparent);
             currentChild = loginForm;
             loginForm.ShowAsNextMdiChild(panelDesktop);
             loginForm.BringToFront();

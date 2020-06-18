@@ -88,6 +88,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci.
+        /// </summary>
+        public static string frmPredefinedData {
+            get {
+                return ResourceManager.GetString("frmPredefinedData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administratorski meni.
         /// </summary>
         public static string frmStartMenuAdmin {
@@ -112,6 +121,15 @@ namespace Healthcare020.WinUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Healthcare020_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Niste prijavljeni na sistem!&quot;.
+        /// </summary>
+        public static string NotLoggedIn {
+            get {
+                return ResourceManager.GetString("NotLoggedIn", resourceCulture);
             }
         }
         

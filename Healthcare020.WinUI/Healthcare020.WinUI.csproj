@@ -127,6 +127,12 @@
     <Compile Include="Forms\AdminDashboard\frmNewUser.Designer.cs">
       <DependentUpon>frmNewUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\frmPredefinedDataMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\frmPredefinedDataMenu.Designer.cs">
+      <DependentUpon>frmPredefinedDataMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminDashboard\frmUsers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,12 +173,6 @@
       <DependentUpon>dlgPropmpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\UnauthorizedException.cs" />
-    <Compile Include="Forms\Gradovi\frmGradoviPrikaz.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Gradovi\frmGradoviPrikaz.Designer.cs">
-      <DependentUpon>frmGradoviPrikaz.cs</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\Auth.cs" />
     <Compile Include="Helpers\ConnectionCheck.cs" />
     <Compile Include="Helpers\Dialogs\dlgSuccess.cs">
@@ -209,6 +209,9 @@
     <EmbeddedResource Include="Forms\AdminDashboard\frmNewUser.resx">
       <DependentUpon>frmNewUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\frmPredefinedDataMenu.resx">
+      <DependentUpon>frmPredefinedDataMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
@@ -223,9 +226,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgPropmpt.resx">
       <DependentUpon>dlgPropmpt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Gradovi\frmGradoviPrikaz.resx">
-      <DependentUpon>frmGradoviPrikaz.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgSuccess.resx">
       <DependentUpon>dlgSuccess.cs</DependentUpon>
