@@ -118,6 +118,7 @@
             this.btnZdravstvenaStanja.Text = "Zdravstvena stanja";
             this.btnZdravstvenaStanja.TextColor = System.Drawing.Color.White;
             this.btnZdravstvenaStanja.UseVisualStyleBackColor = false;
+            this.btnZdravstvenaStanja.Click += new System.EventHandler(this.btnZdravstvenaStanja_Click);
             // 
             // btnDrzave
             // 

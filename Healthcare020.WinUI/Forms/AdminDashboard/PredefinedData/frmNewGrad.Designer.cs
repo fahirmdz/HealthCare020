@@ -34,11 +34,12 @@
             this.btnBack = new FontAwesome.Sharp.IconButton();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.cmbDrzave = new System.Windows.Forms.ComboBox();
+            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.lblDrzava = new MaterialSkin.Controls.MaterialLabel();
             this.txtNaziv = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblNaziv = new MaterialSkin.Controls.MaterialLabel();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
+            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.pnlTop.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
@@ -78,6 +79,7 @@
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.White;
+            this.pnlMain.Controls.Add(this.materialSingleLineTextField1);
             this.pnlMain.Controls.Add(this.cmbDrzave);
             this.pnlMain.Controls.Add(this.btnSave);
             this.pnlMain.Controls.Add(this.lblDrzava);
@@ -100,17 +102,39 @@
             this.cmbDrzave.Size = new System.Drawing.Size(203, 28);
             this.cmbDrzave.TabIndex = 23;
             // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
+            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(253, 231);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnSave.Size = new System.Drawing.Size(268, 34);
+            this.btnSave.TabIndex = 22;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextColor = System.Drawing.Color.White;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // lblDrzava
             // 
             this.lblDrzava.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDrzava.AutoSize = true;
             this.lblDrzava.Depth = 0;
-            this.lblDrzava.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblDrzava.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblDrzava.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblDrzava.Location = new System.Drawing.Point(280, 120);
             this.lblDrzava.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblDrzava.Name = "lblDrzava";
-            this.lblDrzava.Size = new System.Drawing.Size(55, 18);
+            this.lblDrzava.Size = new System.Drawing.Size(54, 19);
             this.lblDrzava.TabIndex = 18;
             this.lblDrzava.Text = "Države";
             // 
@@ -136,12 +160,12 @@
             this.lblNaziv.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblNaziv.AutoSize = true;
             this.lblNaziv.Depth = 0;
-            this.lblNaziv.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblNaziv.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblNaziv.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblNaziv.Location = new System.Drawing.Point(280, 29);
             this.lblNaziv.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNaziv.Name = "lblNaziv";
-            this.lblNaziv.Size = new System.Drawing.Size(45, 18);
+            this.lblNaziv.Size = new System.Drawing.Size(46, 19);
             this.lblNaziv.TabIndex = 19;
             this.lblNaziv.Text = "Naziv";
             // 
@@ -150,27 +174,21 @@
             this.Errors.ContainerControl = this;
             this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
             // 
-            // btnSave
+            // materialSingleLineTextField1
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(253, 231);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
-            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnSave.Size = new System.Drawing.Size(268, 34);
-            this.btnSave.TabIndex = 22;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextColor = System.Drawing.Color.White;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.materialSingleLineTextField1.Depth = 0;
+            this.materialSingleLineTextField1.Hint = "";
+            this.materialSingleLineTextField1.Location = new System.Drawing.Point(631, 186);
+            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
+            this.materialSingleLineTextField1.PasswordChar = '\0';
+            this.materialSingleLineTextField1.SelectedText = "";
+            this.materialSingleLineTextField1.SelectionLength = 0;
+            this.materialSingleLineTextField1.SelectionStart = 0;
+            this.materialSingleLineTextField1.Size = new System.Drawing.Size(8, 23);
+            this.materialSingleLineTextField1.TabIndex = 24;
+            this.materialSingleLineTextField1.Text = "materialSingleLineTextField1";
+            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
             // 
             // frmNewGrad
             // 
@@ -202,5 +220,6 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField txtNaziv;
         private MaterialSkin.Controls.MaterialLabel lblNaziv;
         private System.Windows.Forms.ErrorProvider Errors;
+        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
     }
 }

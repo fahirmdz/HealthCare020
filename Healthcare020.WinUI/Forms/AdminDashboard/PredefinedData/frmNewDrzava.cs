@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Models;
-using Healthcare020.WinUI.Services;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
@@ -29,20 +29,22 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         {
             if (_instance == null || _instance.IsDisposed)
                 _instance = new frmNewDrzava(drzava);
+            else
+                _instance.Drzava = drzava;
             return _instance;
         }
 
-        private frmNewDrzava(DrzavaDto drzava=null)
+        private frmNewDrzava(DrzavaDto drzava = null)
         {
             Drzava = drzava;
             InitializeComponent();
-            this.Text = Drzava!=null?Properties.Resources.frmNewDrzavaUpdate:Properties.Resources.frmNewDrzavaAdd;
-            _apiService=new APIService(Routes.DrzaveRoute);
+            this.Text = Drzava != null ? Properties.Resources.frmNewDrzavaUpdate : Properties.Resources.frmNewDrzavaAdd;
+            _apiService = new APIService(Routes.DrzaveRoute);
         }
 
         private void frmNewDrzava_Load(object sender, System.EventArgs e)
         {
-            if(Drzava!=null)
+            if (Drzava != null)
             {
                 txtNaziv.Text = Drzava.Naziv;
                 txtPozivniBroj.Text = Drzava.PozivniBroj;
@@ -70,7 +72,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 else
                 {
                     result = await _apiService.Update<DrzavaDto>(Drzava.Id,
-                        new DrzavaUpsertRequest {Naziv = txtNaziv.Text, PozivniBroj = txtPozivniBroj.Text});
+                        new DrzavaUpsertRequest { Naziv = txtNaziv.Text, PozivniBroj = txtPozivniBroj.Text });
                 }
 
                 if (result.Succeeded)
@@ -81,10 +83,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-
         private bool ValidateInput()
         {
-            if(string.IsNullOrWhiteSpace(txtNaziv.Text))
+            if (string.IsNullOrWhiteSpace(txtNaziv.Text))
             {
                 Errors.SetError(txtNaziv, Properties.Resources.RequiredField);
                 return false;
@@ -102,7 +103,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 return false;
             }
 
-            if(txtPozivniBroj.Text.Any(char.IsLetter))
+            if (txtPozivniBroj.Text.Any(char.IsLetter))
             {
                 Errors.SetError(txtPozivniBroj, Properties.Resources.InvalidFormat);
                 return false;

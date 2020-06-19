@@ -163,6 +163,18 @@
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewGrad.Designer.cs">
       <DependentUpon>frmNewGrad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewZdravstvenoStanje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewZdravstvenoStanje.Designer.cs">
+      <DependentUpon>frmNewZdravstvenoStanje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.Designer.cs">
+      <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DisplayDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,6 +281,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNewGrad.resx">
       <DependentUpon>frmNewGrad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNewZdravstvenoStanje.resx">
+      <DependentUpon>frmNewZdravstvenoStanje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.resx">
+      <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DisplayDataForm.resx">
       <DependentUpon>DisplayDataForm.cs</DependentUpon>

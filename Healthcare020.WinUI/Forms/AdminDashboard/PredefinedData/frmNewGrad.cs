@@ -31,6 +31,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         {
             if (_instance == null || _instance.IsDisposed)
                 _instance = new frmNewGrad(grad);
+            else
+                _instance.Grad = grad;
             return _instance;
         }
 
