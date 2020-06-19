@@ -54,12 +54,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent }
             };
 
-            base.DgrvColumnsStyle();
             base.AddColumnsToMainDgrv(new[] { ID, Naziv, Drzava, Brisi });
 
             _apiService = new APIService(Routes.GradoviRoute);
             Text = Properties.Resources.frmGradovi;
-            ResourceParameters = new GradResourceParameters { PageNumber = 1, PageSize = CurrentRowCount, EagerLoaded = true };
+            ResourceParameters = new GradResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
 
             InitializeComponent();
         }
@@ -87,6 +86,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                     {
                         dlgSuccess.ShowDialog();
                         _dataForDgrv.Remove(grad);
+                        CurrentRowCount--;
                     }
                 }
             }

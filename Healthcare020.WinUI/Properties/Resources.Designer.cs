@@ -133,6 +133,24 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Nova uloga.
+        /// </summary>
+        public static string frmNewRoleAdd {
+            get {
+                return ResourceManager.GetString("frmNewRoleAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Izmena uloge.
+        /// </summary>
+        public static string frmNewRoleUpdate {
+            get {
+                return ResourceManager.GetString("frmNewRoleUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Novi korisnički nalog.
         /// </summary>
         public static string frmNewUser {
@@ -165,6 +183,15 @@ namespace Healthcare020.WinUI.Properties {
         public static string frmPredefinedData {
             get {
                 return ResourceManager.GetString("frmPredefinedData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Uloge.
+        /// </summary>
+        public static string frmRoles {
+            get {
+                return ResourceManager.GetString("frmRoles", resourceCulture);
             }
         }
         

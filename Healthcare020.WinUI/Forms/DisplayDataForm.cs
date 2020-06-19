@@ -19,6 +19,7 @@ namespace Healthcare020.WinUI.Forms
 
         protected IBindingList _dataForDgrv;
         protected int CurrentRowCount;
+        protected int PossibleRowsCount;
         protected BaseResourceParameters ResourceParameters;
 
         protected string SearchText;
@@ -27,7 +28,7 @@ namespace Healthcare020.WinUI.Forms
         protected DisplayDataForm()
         {
             InitializeComponent();
-            CurrentRowCount = dgrvMain.GetRowsCount();
+            PossibleRowsCount = dgrvMain.GetRowsCount();
             _dataForDgrv = new BindingSource();
             SearchText = string.Empty;
 
@@ -35,6 +36,7 @@ namespace Healthcare020.WinUI.Forms
             dgrvMain.SetDgrvDesignConfig();
             dgrvMain.RowCount = CurrentRowCount;
             MainDgrv = dgrvMain;
+            dgrvMain.AllowUserToDeleteRows = true;
 
             btnPrevPage.Enabled = false;
 
@@ -57,7 +59,6 @@ namespace Healthcare020.WinUI.Forms
 
         protected void AddColumnsToMainDgrv(DataGridViewColumn[] dgrvColumns)
         {
-            dgrvMain.Columns.RemoveAt(0);
             //POSTOJI B U G PRI DODAVANJU SEKVENCE SA AddRange
             foreach (var column in dgrvColumns)
             {
@@ -96,6 +97,8 @@ namespace Healthcare020.WinUI.Forms
                 .Get<TDto>(ResourceParameters);
 
             _dataForDgrv = new BindingList<TDto>(result.Data);
+            CurrentRowCount = _dataForDgrv.Count;
+
             dgrvMain.DataSource = _dataForDgrv;
 
             btnNextPage.Enabled = ResourceParameters.PageNumber != result.PaginationMetadata.TotalPages;
@@ -128,9 +131,9 @@ namespace Healthcare020.WinUI.Forms
         private async void DisplayDataForm_SizeChanged(object sender, EventArgs e)
         {
             dgrvMain.DataSource = null;
-            CurrentRowCount = dgrvMain.GetRowsCount();
-            ResourceParameters.PageSize = CurrentRowCount;
-            dgrvMain.RowCount = CurrentRowCount;
+            PossibleRowsCount = dgrvMain.GetRowsCount();
+            ResourceParameters.PageSize = PossibleRowsCount;
+            dgrvMain.RowCount = PossibleRowsCount;
             await LoadData();
         }
 
@@ -146,7 +149,7 @@ namespace Healthcare020.WinUI.Forms
 
         protected virtual void txtSearch_Leave(object sender, EventArgs e)
         {
-            SearchText = txtSearch.Text;
+            SearchText = txtSearch.Text.Trim().ToLower();
         }
 
         protected virtual void btnNew_Click(object sender, EventArgs e)
@@ -157,7 +160,7 @@ namespace Healthcare020.WinUI.Forms
         protected virtual void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             //Bind nested/complex types to DataGridView cell, e.g. Grad.Drzava.Naziv -> Drzava
-            if (e.RowIndex > dgrvMain.RowCount)
+            if (e.RowIndex >= CurrentRowCount-1)
                 return;
             DataGridView grid = (DataGridView)sender;
             DataGridViewRow row = grid.Rows[e.RowIndex];
@@ -192,5 +195,7 @@ namespace Healthcare020.WinUI.Forms
         {
 
         }
+
+        protected void SetSourceForDgrv(IBindingList source) => dgrvMain.DataSource = source;
     }
 }
