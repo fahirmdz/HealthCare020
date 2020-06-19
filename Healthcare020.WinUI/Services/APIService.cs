@@ -78,6 +78,9 @@ namespace Healthcare020.WinUI.Services
                 if(response.StatusCode==HttpStatusCode.Forbidden)
                     dlgError.ShowDialog(Properties.Resources.AccessDenied);
 
+                if(response.StatusCode==HttpStatusCode.BadRequest)
+                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync()??string.Empty);
+
                 return APIServiceResult<List<T>>.WithStatusCode(response.StatusCode);
             }
 
@@ -124,6 +127,9 @@ namespace Healthcare020.WinUI.Services
                     if(response.StatusCode==HttpStatusCode.Forbidden)
                         dlgError.ShowDialog(Properties.Resources.AccessDenied);
 
+                    if(response.StatusCode==HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync()??string.Empty);
+
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
                 var headers = response.Headers;
@@ -163,6 +169,9 @@ namespace Healthcare020.WinUI.Services
                     if(response.StatusCode==HttpStatusCode.Forbidden)
                         dlgError.ShowDialog(Properties.Resources.AccessDenied);
 
+                    if(response.StatusCode==HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync()??string.Empty);
+
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
                 var headers = response.Headers;
@@ -200,6 +209,9 @@ namespace Healthcare020.WinUI.Services
                 if(response.StatusCode==HttpStatusCode.Forbidden)
                     dlgError.ShowDialog(Properties.Resources.AccessDenied);
 
+                if(response.StatusCode==HttpStatusCode.BadRequest)
+                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync()??string.Empty);
+
                 return APIServiceResult<T>.WithStatusCode(response.StatusCode);
             }
 
@@ -228,6 +240,9 @@ namespace Healthcare020.WinUI.Services
             {
                 if(response.StatusCode==HttpStatusCode.Forbidden)
                     dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                if(response.StatusCode==HttpStatusCode.BadRequest)
+                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync()??string.Empty);
 
                 return APIServiceResult<T>.WithStatusCode(response.StatusCode);
             }

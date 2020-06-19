@@ -14,10 +14,18 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         {
             InitializeComponent();
             lblError.Text = string.IsNullOrWhiteSpace(message)?"Greška":message;
-            this.Opacity = 50;
             this.FormBorderStyle = FormBorderStyle.None;
             var mainFormSize = MainForm.Instance.Size;
             this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
+            pnlMain.MinimumSize = Size;
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
+            this.BackColor=Color.Transparent;
+            this.TransparencyKey=Color.Transparent;
+            pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
         }
 
         public static void ShowDialog(string message = "")
@@ -27,14 +35,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
                 _instance = new dlgError(message);
             }
             ((Form)_instance).ShowDialog();
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            using (SolidBrush brush = new SolidBrush(Color.FromArgb(70, 0, 0, 0)))
-            {
-                e.Graphics.FillRectangle(brush, e.ClipRectangle);
-            }
         }
 
         private void dlgError_Shown(object sender, EventArgs e)

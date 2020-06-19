@@ -31,8 +31,10 @@
             this.pnlBody = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.icnSuccess = new FontAwesome.Sharp.IconPictureBox();
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnSuccess)).BeginInit();
+            this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBody
@@ -41,7 +43,7 @@
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.pnlBody.Controls.Add(this.label1);
             this.pnlBody.Controls.Add(this.icnSuccess);
-            this.pnlBody.Location = new System.Drawing.Point(327, 165);
+            this.pnlBody.Location = new System.Drawing.Point(312, 178);
             this.pnlBody.MaximumSize = new System.Drawing.Size(371, 209);
             this.pnlBody.MinimumSize = new System.Drawing.Size(371, 209);
             this.pnlBody.Name = "pnlBody";
@@ -74,12 +76,21 @@
             this.icnSuccess.TabIndex = 0;
             this.icnSuccess.TabStop = false;
             // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.pnlBody);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(1012, 562);
+            this.pnlMain.TabIndex = 2;
+            // 
             // dlgSuccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1012, 562);
-            this.Controls.Add(this.pnlBody);
+            this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "dlgSuccess";
             this.ShowIcon = false;
@@ -92,6 +103,7 @@
             this.pnlBody.ResumeLayout(false);
             this.pnlBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnSuccess)).EndInit();
+            this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -101,5 +113,6 @@
         private System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.Label label1;
         private FontAwesome.Sharp.IconPictureBox icnSuccess;
+        private System.Windows.Forms.Panel pnlMain;
     }
 }

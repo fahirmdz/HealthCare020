@@ -6,6 +6,7 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
 using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
@@ -14,6 +15,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
     {
         private static frmNewGrad _instance = null;
         private  APIService _apiService;
+        private GradDtoEL Grad;
 
         public static frmNewGrad Instance
         {
@@ -25,11 +27,22 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-        private frmNewGrad()
+        public static frmNewGrad InstanceWithData(GradDtoEL grad = null)
+        {
+            if (_instance == null || _instance.IsDisposed)
+                _instance = new frmNewGrad(grad);
+            else
+                _instance.Grad = grad;
+            return _instance;
+        }
+
+        private frmNewGrad(GradDtoEL grad=null)
         {
             InitializeComponent();
+            Grad = grad;
+           
             _apiService=new APIService(Routes.DrzaveRoute);
-            Text = Properties.Resources.frmNewGrad;
+            Text = Grad==null?Properties.Resources.frmNewGradAdd:Properties.Resources.frmNewGradUpdate;
         }
 
         private async void frmNewGrad_Load(object sender, System.EventArgs e)
@@ -46,6 +59,12 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             cmbDrzave.DataSource = drzave;
             cmbDrzave.ValueMember = nameof(DrzavaDto.Id);
             cmbDrzave.DisplayMember = nameof(DrzavaDto.Naziv);
+
+            if (Grad != null)
+            {
+                txtNaziv.Text = Grad.Naziv;
+                cmbDrzave.SelectedValue = Grad.Drzava.Id;
+            }
         }
 
         private bool ValidateInputs()
@@ -79,8 +98,18 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 _apiService=new APIService(Routes.GradoviRoute);
                 if(int.TryParse(cmbDrzave.SelectedValue.ToString(),out int drzavaId))
                 {
-                    var result = await _apiService.Post<GradDtoLL>(new GradUpsertDto
-                        {DrzavaId = drzavaId, Naziv = txtNaziv.Text});
+                    APIServiceResult<GradDtoLL> result;
+
+                    if(Grad==null)
+                    {
+                        result = await _apiService.Post<GradDtoLL>(new GradUpsertDto
+                            {DrzavaId = drzavaId, Naziv = txtNaziv.Text});
+                    }
+                    else
+                    {
+                        result = await _apiService.Update<GradDtoLL>(Grad.Id,
+                            new GradUpsertDto {Naziv = txtNaziv.Text, DrzavaId = drzavaId});
+                    }
 
                     if (result.Succeeded)
                     {
@@ -89,6 +118,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                     }
                 }
             }
+        }
+
+        private void btnBack_Click(object sender, System.EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmGradovi.Instance);
         }
     }
 }

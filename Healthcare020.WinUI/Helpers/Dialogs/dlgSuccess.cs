@@ -13,10 +13,18 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private dlgSuccess()
         {
             InitializeComponent();
-            this.Opacity = 50;
             var mainFormSize = MainForm.Instance.Size;
             this.Size=new Size(mainFormSize.Width-14,mainFormSize.Height-14);
+            pnlMain.MinimumSize = Size;
+
             this.FormBorderStyle = FormBorderStyle.None;
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
+            this.BackColor=Color.Transparent;
+            pnlMain.BackColor = Color.FromArgb(80,0,0,0);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
         }
 
         public new static void ShowDialog()
@@ -28,14 +36,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
             ((Form) _instance).ShowDialog();
             _instance.BringToFront();
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            using (SolidBrush brush = new SolidBrush(Color.FromArgb(70, 0, 0, 0)))
-            {
-                e.Graphics.FillRectangle(brush, e.ClipRectangle);
-            }
         }
 
         private async void dlgSuccess_Load(object sender, EventArgs e)

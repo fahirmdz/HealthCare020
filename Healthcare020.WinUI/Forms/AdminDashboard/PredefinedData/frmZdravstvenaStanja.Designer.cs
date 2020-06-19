@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    partial class frmGradovi
+    partial class frmZdravstvenaStanja
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // frmGradovi
+            // frmZdravstvenaStanja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "frmGradovi";
-            this.Load += new System.EventHandler(this.frmGradovi_Load);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmZdravstvenaStanja";
+            this.Text = "frmZdravstvenaStanja";
             this.ResumeLayout(false);
 
         }

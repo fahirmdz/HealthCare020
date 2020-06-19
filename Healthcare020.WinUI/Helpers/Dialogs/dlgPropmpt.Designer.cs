@@ -35,8 +35,10 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.btnYes = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.label1 = new System.Windows.Forms.Label();
             this.icnDanger = new FontAwesome.Sharp.IconPictureBox();
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnDanger)).BeginInit();
+            this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBody
@@ -47,7 +49,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.pnlBody.Controls.Add(this.btnYes);
             this.pnlBody.Controls.Add(this.label1);
             this.pnlBody.Controls.Add(this.icnDanger);
-            this.pnlBody.Location = new System.Drawing.Point(315, 159);
+            this.pnlBody.Location = new System.Drawing.Point(309, 166);
             this.pnlBody.MaximumSize = new System.Drawing.Size(358, 195);
             this.pnlBody.MinimumSize = new System.Drawing.Size(358, 195);
             this.pnlBody.Name = "pnlBody";
@@ -124,13 +126,23 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.icnDanger.TabIndex = 0;
             this.icnDanger.TabStop = false;
             // 
+            // pnlMain
+            // 
+            this.pnlMain.BackColor = System.Drawing.Color.Transparent;
+            this.pnlMain.Controls.Add(this.pnlBody);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(996, 546);
+            this.pnlMain.TabIndex = 1;
+            // 
             // dlgPropmpt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(996, 546);
             this.ControlBox = false;
-            this.Controls.Add(this.pnlBody);
+            this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "dlgPropmpt";
@@ -142,6 +154,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.pnlBody.ResumeLayout(false);
             this.pnlBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnDanger)).EndInit();
+            this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -153,5 +166,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private Button_WOC btnYes;
         private System.Windows.Forms.Label label1;
         private Button_WOC btnCancel;
+        private System.Windows.Forms.Panel pnlMain;
     }
 }

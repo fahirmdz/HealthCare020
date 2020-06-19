@@ -80,7 +80,6 @@
             this.dgrvMain.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgrvMain.Location = new System.Drawing.Point(0, 57);
             this.dgrvMain.Name = "dgrvMain";
-            this.dgrvMain.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -97,7 +96,9 @@
             this.dgrvMain.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dgrvMain.Size = new System.Drawing.Size(777, 430);
             this.dgrvMain.TabIndex = 0;
+            this.dgrvMain.UseWaitCursor = true;
             this.dgrvMain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellContentClick);
+            this.dgrvMain.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellDoubleClick);
             this.dgrvMain.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgrvMain_CellFormatting);
             this.dgrvMain.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellValueChanged);
             // 
@@ -105,7 +106,7 @@
             // 
             this.btnPrevPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnPrevPage.BackColor = System.Drawing.Color.Transparent;
-            this.btnPrevPage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrevPage.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.btnPrevPage.FlatAppearance.BorderSize = 0;
             this.btnPrevPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevPage.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -118,13 +119,14 @@
             this.btnPrevPage.Size = new System.Drawing.Size(75, 37);
             this.btnPrevPage.TabIndex = 1;
             this.btnPrevPage.UseVisualStyleBackColor = false;
+            this.btnPrevPage.UseWaitCursor = true;
             this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click_1);
             // 
             // btnNextPage
             // 
             this.btnNextPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnNextPage.BackColor = System.Drawing.Color.Transparent;
-            this.btnNextPage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNextPage.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.btnNextPage.FlatAppearance.BorderSize = 0;
             this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextPage.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -137,6 +139,7 @@
             this.btnNextPage.Size = new System.Drawing.Size(75, 37);
             this.btnNextPage.TabIndex = 2;
             this.btnNextPage.UseVisualStyleBackColor = false;
+            this.btnNextPage.UseWaitCursor = true;
             this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click_1);
             // 
             // txtSearch
@@ -155,13 +158,14 @@
             this.txtSearch.TabIndex = 1;
             this.toolTip.SetToolTip(this.txtSearch, "Pretraga korisnika po korisničkom imenu");
             this.txtSearch.UseSystemPasswordChar = false;
+            this.txtSearch.UseWaitCursor = true;
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
             // 
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
-            this.btnNew.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNew.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
@@ -178,6 +182,7 @@
             this.btnNew.Text = "Dodaj ";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = false;
+            this.btnNew.UseWaitCursor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // pnlSearch
@@ -188,6 +193,7 @@
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(200, 30);
             this.pnlSearch.TabIndex = 5;
+            this.pnlSearch.UseWaitCursor = true;
             // 
             // icnSearch
             // 
@@ -203,6 +209,7 @@
             this.icnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.icnSearch.TabIndex = 0;
             this.icnSearch.TabStop = false;
+            this.icnSearch.UseWaitCursor = true;
             // 
             // pnlNavButtons
             // 
@@ -214,6 +221,7 @@
             this.pnlNavButtons.Name = "pnlNavButtons";
             this.pnlNavButtons.Size = new System.Drawing.Size(777, 58);
             this.pnlNavButtons.TabIndex = 3;
+            this.pnlNavButtons.UseWaitCursor = true;
             // 
             // pnlTop
             // 
@@ -224,6 +232,7 @@
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(777, 57);
             this.pnlTop.TabIndex = 7;
+            this.pnlTop.UseWaitCursor = true;
             // 
             // DisplayDataForm
             // 

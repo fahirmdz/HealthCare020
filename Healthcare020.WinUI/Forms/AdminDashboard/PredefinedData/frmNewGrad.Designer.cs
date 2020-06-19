@@ -33,12 +33,13 @@
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnBack = new FontAwesome.Sharp.IconButton();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.cmbDrzave = new System.Windows.Forms.ComboBox();
             this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.lblDrzava = new MaterialSkin.Controls.MaterialLabel();
             this.txtNaziv = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblNaziv = new MaterialSkin.Controls.MaterialLabel();
-            this.cmbDrzave = new System.Windows.Forms.ComboBox();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.pnlTop.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
@@ -46,6 +47,7 @@
             // 
             // pnlTop
             // 
+            this.pnlTop.BackColor = System.Drawing.Color.White;
             this.pnlTop.Controls.Add(this.btnBack);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
@@ -72,9 +74,12 @@
             this.btnBack.Text = "Back";
             this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // pnlMain
             // 
+            this.pnlMain.BackColor = System.Drawing.Color.White;
+            this.pnlMain.Controls.Add(this.materialSingleLineTextField1);
             this.pnlMain.Controls.Add(this.cmbDrzave);
             this.pnlMain.Controls.Add(this.btnSave);
             this.pnlMain.Controls.Add(this.lblDrzava);
@@ -85,6 +90,17 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(800, 380);
             this.pnlMain.TabIndex = 25;
+            // 
+            // cmbDrzave
+            // 
+            this.cmbDrzave.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmbDrzave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbDrzave.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.cmbDrzave.FormattingEnabled = true;
+            this.cmbDrzave.Location = new System.Drawing.Point(294, 159);
+            this.cmbDrzave.Name = "cmbDrzave";
+            this.cmbDrzave.Size = new System.Drawing.Size(203, 28);
+            this.cmbDrzave.TabIndex = 23;
             // 
             // btnSave
             // 
@@ -153,20 +169,26 @@
             this.lblNaziv.TabIndex = 19;
             this.lblNaziv.Text = "Naziv";
             // 
-            // cmbDrzave
-            // 
-            this.cmbDrzave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbDrzave.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.cmbDrzave.FormattingEnabled = true;
-            this.cmbDrzave.Location = new System.Drawing.Point(294, 159);
-            this.cmbDrzave.Name = "cmbDrzave";
-            this.cmbDrzave.Size = new System.Drawing.Size(203, 28);
-            this.cmbDrzave.TabIndex = 23;
-            // 
             // Errors
             // 
             this.Errors.ContainerControl = this;
             this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
+            // 
+            // materialSingleLineTextField1
+            // 
+            this.materialSingleLineTextField1.Depth = 0;
+            this.materialSingleLineTextField1.Hint = "";
+            this.materialSingleLineTextField1.Location = new System.Drawing.Point(631, 186);
+            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
+            this.materialSingleLineTextField1.PasswordChar = '\0';
+            this.materialSingleLineTextField1.SelectedText = "";
+            this.materialSingleLineTextField1.SelectionLength = 0;
+            this.materialSingleLineTextField1.SelectionStart = 0;
+            this.materialSingleLineTextField1.Size = new System.Drawing.Size(8, 23);
+            this.materialSingleLineTextField1.TabIndex = 24;
+            this.materialSingleLineTextField1.Text = "materialSingleLineTextField1";
+            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
             // 
             // frmNewGrad
             // 
@@ -198,5 +220,6 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField txtNaziv;
         private MaterialSkin.Controls.MaterialLabel lblNaziv;
         private System.Windows.Forms.ErrorProvider Errors;
+        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
     }
 }

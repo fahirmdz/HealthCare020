@@ -1,0 +1,106 @@
+﻿using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Models;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using HealthCare020.Core.Request;
+using Healthcare020.WinUI.Helpers.Dialogs;
+
+namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+{
+    public partial class frmNewZdravstvenoStanje : Form
+    {
+        private static frmNewZdravstvenoStanje _instance = null;
+        private APIService _apiService;
+        private ZdravstvenoStanjeDto ZdravstvenoStanje;
+
+        public new static frmNewZdravstvenoStanje ShowDialog()
+        {
+            if (_instance == null || _instance.IsDisposed)
+            {
+                _instance = new frmNewZdravstvenoStanje();
+            }
+            ((Form)_instance).ShowDialog();
+            return _instance;
+        }
+
+        public static frmNewZdravstvenoStanje ShowDialogWithData(ZdravstvenoStanjeDto zdravstvenoStanje = null)
+        {
+            if (_instance == null || _instance.IsDisposed)
+                _instance = new frmNewZdravstvenoStanje(zdravstvenoStanje);
+            else
+                _instance.ZdravstvenoStanje = zdravstvenoStanje;
+
+            ((Form)_instance).ShowDialog();
+            return _instance;
+        }
+
+        private frmNewZdravstvenoStanje(ZdravstvenoStanjeDto zdravstvenoStanje = null)
+        {
+            InitializeComponent();
+            ZdravstvenoStanje = zdravstvenoStanje;
+
+            _apiService = new APIService(Routes.ZdravstvenaStanjaRoute);
+            Text = ZdravstvenoStanje == null ? Properties.Resources.frmNewZdravstvenoStanjeAdd : Properties.Resources.frmNewZdravstvenoStanjeUpdate;
+
+            var mainFormSize = MainForm.Instance.Size;
+            this.Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
+            pnlMain.MinimumSize = Size;
+            this.FormBorderStyle = FormBorderStyle.None;
+
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.BackColor = Color.Transparent;
+            this.TransparencyKey = Color.Transparent;
+            pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+        }
+
+        private void frmNewZdravstvenoStanje_Shown(object sender, System.EventArgs e)
+        {
+            pnlDialog.PointToScreen(new Point(Width / 2, Height / 2));
+        }
+
+        private void btnClose_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
+
+        private async void btnSave_Click(object sender, System.EventArgs e)
+        {
+            if (ValidateInput())
+            {
+                var result = await _apiService.Post<ZdravstvenoStanjeDto>(new ZdravstvenoStanjeUpsertDto
+                    {Opis = txtOpis.Text});
+
+                if (result.Succeeded)
+                {
+                    dlgSuccess.ShowDialog();
+                    Close();
+                     frmZdravstvenaStanja.Instance.RefreshData();
+                }
+            }
+        }
+
+        private bool ValidateInput()
+        {
+            if(string.IsNullOrWhiteSpace(txtOpis.Text))
+            {
+                Errors.SetError(txtOpis, Properties.Resources.RequiredField);
+                return false;
+            }
+
+            if(txtOpis.Text.Any(char.IsDigit))
+            {
+                Errors.SetError(txtOpis, Properties.Resources.InvalidFormat);
+                return false;
+            }
+
+            Errors.Clear();
+            return true;
+        }
+    }
+}

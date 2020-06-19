@@ -96,7 +96,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 return;
 
             //Account lock out
-            if (e.ColumnIndex == 3)
+            if (e.ColumnIndex == 4)
             {
                 Form promptDialog = null;
 
@@ -149,7 +149,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 3)
+            if (e.ColumnIndex == 4)
             {
                 var isLockedOut =
                     (MainDgrv.Rows[e.RowIndex]?.DataBoundItem as KorisnickiNalogDtoLL)?.LockedOut;

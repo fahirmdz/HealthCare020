@@ -32,9 +32,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblError = new System.Windows.Forms.Label();
             this.icnError = new FontAwesome.Sharp.IconPictureBox();
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBody.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnError)).BeginInit();
+            this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBody
@@ -43,7 +45,7 @@
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.pnlBody.Controls.Add(this.panel1);
             this.pnlBody.Controls.Add(this.icnError);
-            this.pnlBody.Location = new System.Drawing.Point(320, 165);
+            this.pnlBody.Location = new System.Drawing.Point(299, 165);
             this.pnlBody.MaximumSize = new System.Drawing.Size(362, 199);
             this.pnlBody.MinimumSize = new System.Drawing.Size(362, 199);
             this.pnlBody.Name = "pnlBody";
@@ -88,6 +90,15 @@
             this.icnError.TabIndex = 0;
             this.icnError.TabStop = false;
             // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.pnlBody);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(1000, 550);
+            this.pnlMain.TabIndex = 2;
+            // 
             // dlgError
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -95,7 +106,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1000, 550);
             this.ControlBox = false;
-            this.Controls.Add(this.pnlBody);
+            this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "dlgError";
             this.ShowIcon = false;
@@ -108,6 +119,7 @@
             this.pnlBody.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.icnError)).EndInit();
+            this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -118,5 +130,6 @@
         private System.Windows.Forms.Label lblError;
         private FontAwesome.Sharp.IconPictureBox icnError;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlMain;
     }
 }

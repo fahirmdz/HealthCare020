@@ -88,20 +88,47 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Gradovi.
+        /// </summary>
+        public static string frmGradovi {
+            get {
+                return ResourceManager.GetString("frmGradovi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predefinisani podaci - Nova država.
         /// </summary>
-        public static string frmNewDrzava {
+        public static string frmNewDrzavaAdd {
             get {
-                return ResourceManager.GetString("frmNewDrzava", resourceCulture);
+                return ResourceManager.GetString("frmNewDrzavaAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Izmena države.
+        /// </summary>
+        public static string frmNewDrzavaUpdate {
+            get {
+                return ResourceManager.GetString("frmNewDrzavaUpdate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Predefinisani podaci - Novi grad.
         /// </summary>
-        public static string frmNewGrad {
+        public static string frmNewGradAdd {
             get {
-                return ResourceManager.GetString("frmNewGrad", resourceCulture);
+                return ResourceManager.GetString("frmNewGradAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Izmena grada.
+        /// </summary>
+        public static string frmNewGradUpdate {
+            get {
+                return ResourceManager.GetString("frmNewGradUpdate", resourceCulture);
             }
         }
         
@@ -111,6 +138,24 @@ namespace Healthcare020.WinUI.Properties {
         public static string frmNewUser {
             get {
                 return ResourceManager.GetString("frmNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Novo zdavstveno stanje.
+        /// </summary>
+        public static string frmNewZdravstvenoStanjeAdd {
+            get {
+                return ResourceManager.GetString("frmNewZdravstvenoStanjeAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Izmena zdravstvenog stanja.
+        /// </summary>
+        public static string frmNewZdravstvenoStanjeUpdate {
+            get {
+                return ResourceManager.GetString("frmNewZdravstvenoStanjeUpdate", resourceCulture);
             }
         }
         
@@ -138,6 +183,15 @@ namespace Healthcare020.WinUI.Properties {
         public static string frmUsers {
             get {
                 return ResourceManager.GetString("frmUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Zdravstvena stanja.
+        /// </summary>
+        public static string frmZdravstvenaStanja {
+            get {
+                return ResourceManager.GetString("frmZdravstvenaStanja", resourceCulture);
             }
         }
         
