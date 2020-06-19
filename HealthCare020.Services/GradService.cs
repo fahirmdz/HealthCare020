@@ -72,6 +72,14 @@ namespace HealthCare020.Services
             return new ServiceResult<GradDtoLL>(_mapper.Map<GradDtoLL>(entity));
         }
 
+        public override async Task<ServiceResult> Delete(int id)
+        {
+            if(await _dbContext.LicniPodaci.AnyAsync(x=>x.GradId==id))
+                return ServiceResult.BadRequest("Postoje licni podaci koji su referencirani na ovaj grad");
+
+            return await base.Delete(id);
+        }
+
         public override async Task<PagedList<Grad>> FilterAndPrepare(IQueryable<Grad> result, GradResourceParameters resourceParameters)
         {
             if (resourceParameters != null)

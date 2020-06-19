@@ -126,11 +126,20 @@
   <data name="frmDrzave" xml:space="preserve">
     <value>Predefinisani podaci - Države</value>
   </data>
-  <data name="frmNewDrzava" xml:space="preserve">
+  <data name="frmGradovi" xml:space="preserve">
+    <value>Predefinisani podaci - Gradovi</value>
+  </data>
+  <data name="frmNewDrzavaAdd" xml:space="preserve">
     <value>Predefinisani podaci - Nova država</value>
   </data>
-  <data name="frmNewGrad" xml:space="preserve">
+  <data name="frmNewDrzavaUpdate" xml:space="preserve">
+    <value>Predefinisani podaci - Izmena države</value>
+  </data>
+  <data name="frmNewGradAdd" xml:space="preserve">
     <value>Predefinisani podaci - Novi grad</value>
+  </data>
+  <data name="frmNewGradUpdate" xml:space="preserve">
+    <value>Predefinisani podaci - Izmena grada</value>
   </data>
   <data name="frmNewUser" xml:space="preserve">
     <value>Novi korisnički nalog</value>

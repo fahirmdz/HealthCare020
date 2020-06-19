@@ -33,12 +33,12 @@
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnBack = new FontAwesome.Sharp.IconButton();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
+            this.cmbDrzave = new System.Windows.Forms.ComboBox();
             this.lblDrzava = new MaterialSkin.Controls.MaterialLabel();
             this.txtNaziv = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblNaziv = new MaterialSkin.Controls.MaterialLabel();
-            this.cmbDrzave = new System.Windows.Forms.ComboBox();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.pnlTop.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
@@ -46,6 +46,7 @@
             // 
             // pnlTop
             // 
+            this.pnlTop.BackColor = System.Drawing.Color.White;
             this.pnlTop.Controls.Add(this.btnBack);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
@@ -72,9 +73,11 @@
             this.btnBack.Text = "Back";
             this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // pnlMain
             // 
+            this.pnlMain.BackColor = System.Drawing.Color.White;
             this.pnlMain.Controls.Add(this.cmbDrzave);
             this.pnlMain.Controls.Add(this.btnSave);
             this.pnlMain.Controls.Add(this.lblDrzava);
@@ -86,39 +89,28 @@
             this.pnlMain.Size = new System.Drawing.Size(800, 380);
             this.pnlMain.TabIndex = 25;
             // 
-            // btnSave
+            // cmbDrzave
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(253, 231);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
-            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnSave.Size = new System.Drawing.Size(268, 34);
-            this.btnSave.TabIndex = 22;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextColor = System.Drawing.Color.White;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.cmbDrzave.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmbDrzave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbDrzave.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.cmbDrzave.FormattingEnabled = true;
+            this.cmbDrzave.Location = new System.Drawing.Point(294, 159);
+            this.cmbDrzave.Name = "cmbDrzave";
+            this.cmbDrzave.Size = new System.Drawing.Size(203, 28);
+            this.cmbDrzave.TabIndex = 23;
             // 
             // lblDrzava
             // 
             this.lblDrzava.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDrzava.AutoSize = true;
             this.lblDrzava.Depth = 0;
-            this.lblDrzava.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblDrzava.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblDrzava.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblDrzava.Location = new System.Drawing.Point(280, 120);
             this.lblDrzava.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblDrzava.Name = "lblDrzava";
-            this.lblDrzava.Size = new System.Drawing.Size(54, 19);
+            this.lblDrzava.Size = new System.Drawing.Size(55, 18);
             this.lblDrzava.TabIndex = 18;
             this.lblDrzava.Text = "Države";
             // 
@@ -144,29 +136,41 @@
             this.lblNaziv.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblNaziv.AutoSize = true;
             this.lblNaziv.Depth = 0;
-            this.lblNaziv.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblNaziv.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblNaziv.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblNaziv.Location = new System.Drawing.Point(280, 29);
             this.lblNaziv.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblNaziv.Name = "lblNaziv";
-            this.lblNaziv.Size = new System.Drawing.Size(46, 19);
+            this.lblNaziv.Size = new System.Drawing.Size(45, 18);
             this.lblNaziv.TabIndex = 19;
             this.lblNaziv.Text = "Naziv";
-            // 
-            // cmbDrzave
-            // 
-            this.cmbDrzave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbDrzave.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.cmbDrzave.FormattingEnabled = true;
-            this.cmbDrzave.Location = new System.Drawing.Point(294, 159);
-            this.cmbDrzave.Name = "cmbDrzave";
-            this.cmbDrzave.Size = new System.Drawing.Size(203, 28);
-            this.cmbDrzave.TabIndex = 23;
             // 
             // Errors
             // 
             this.Errors.ContainerControl = this;
             this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
+            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(253, 231);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnSave.Size = new System.Drawing.Size(268, 34);
+            this.btnSave.TabIndex = 22;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextColor = System.Drawing.Color.White;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmNewGrad
             // 

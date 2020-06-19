@@ -13,14 +13,22 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private dlgAccountLock()
         {
             InitializeComponent();
-            this.Opacity = 50;
             this.FormBorderStyle = FormBorderStyle.None;
             var mainFormSize = MainForm.Instance.Size;
             this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
+            pnlMain.MinimumSize = Size;
 
             cmbBrojSati.Items.Add("2");
             cmbBrojSati.Items.Add("6");
             cmbBrojSati.Items.Add("18");
+
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
+            this.BackColor=Color.Transparent;
+            pnlMain.BackColor = Color.FromArgb(80, 0, 0, 0);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
         }
 
         public new static dlgAccountLock ShowDialog()
@@ -34,14 +42,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             _instance.BringToFront();
 
             return _instance;
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            using (SolidBrush brush = new SolidBrush(Color.FromArgb(70, 0, 0, 0)))
-            {
-                e.Graphics.FillRectangle(brush, e.ClipRectangle);
-            }
         }
 
         private void dlgAccountLock_Load(object sender, EventArgs e)

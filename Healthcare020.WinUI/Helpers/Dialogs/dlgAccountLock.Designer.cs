@@ -32,11 +32,13 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         {
             this.dlgPrompt = new System.Windows.Forms.Panel();
             this.lblHours = new System.Windows.Forms.Label();
+            this.btnLockOk = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.btnClose = new FontAwesome.Sharp.IconPictureBox();
             this.cmbBrojSati = new System.Windows.Forms.ComboBox();
-            this.btnLockOk = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
+            this.pnlMain = new System.Windows.Forms.Panel();
             this.dlgPrompt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
+            this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // dlgPrompt
@@ -47,7 +49,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.dlgPrompt.Controls.Add(this.btnLockOk);
             this.dlgPrompt.Controls.Add(this.btnClose);
             this.dlgPrompt.Controls.Add(this.cmbBrojSati);
-            this.dlgPrompt.Location = new System.Drawing.Point(375, 191);
+            this.dlgPrompt.Location = new System.Drawing.Point(347, 174);
             this.dlgPrompt.MaximumSize = new System.Drawing.Size(264, 164);
             this.dlgPrompt.MinimumSize = new System.Drawing.Size(264, 164);
             this.dlgPrompt.Name = "dlgPrompt";
@@ -64,6 +66,28 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.lblHours.Size = new System.Drawing.Size(155, 23);
             this.lblHours.TabIndex = 14;
             this.lblHours.Text = "Odaberite broj sati";
+            // 
+            // btnLockOk
+            // 
+            this.btnLockOk.BackColor = System.Drawing.Color.Transparent;
+            this.btnLockOk.BorderColor = System.Drawing.Color.Transparent;
+            this.btnLockOk.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.btnLockOk.FlatAppearance.BorderSize = 0;
+            this.btnLockOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLockOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLockOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLockOk.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLockOk.Location = new System.Drawing.Point(89, 110);
+            this.btnLockOk.Name = "btnLockOk";
+            this.btnLockOk.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnLockOk.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(210)))), ((int)(((byte)(204)))));
+            this.btnLockOk.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnLockOk.Size = new System.Drawing.Size(93, 37);
+            this.btnLockOk.TabIndex = 13;
+            this.btnLockOk.Text = "OK";
+            this.btnLockOk.TextColor = System.Drawing.Color.White;
+            this.btnLockOk.UseVisualStyleBackColor = false;
+            this.btnLockOk.Click += new System.EventHandler(this.btnLockOk_Click);
             // 
             // btnClose
             // 
@@ -90,27 +114,14 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.cmbBrojSati.Size = new System.Drawing.Size(157, 31);
             this.cmbBrojSati.TabIndex = 0;
             // 
-            // btnLockOk
+            // pnlMain
             // 
-            this.btnLockOk.BackColor = System.Drawing.Color.Transparent;
-            this.btnLockOk.BorderColor = System.Drawing.Color.Transparent;
-            this.btnLockOk.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.btnLockOk.FlatAppearance.BorderSize = 0;
-            this.btnLockOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnLockOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnLockOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLockOk.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLockOk.Location = new System.Drawing.Point(89, 110);
-            this.btnLockOk.Name = "btnLockOk";
-            this.btnLockOk.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnLockOk.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(210)))), ((int)(((byte)(204)))));
-            this.btnLockOk.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnLockOk.Size = new System.Drawing.Size(93, 37);
-            this.btnLockOk.TabIndex = 13;
-            this.btnLockOk.Text = "OK";
-            this.btnLockOk.TextColor = System.Drawing.Color.White;
-            this.btnLockOk.UseVisualStyleBackColor = false;
-            this.btnLockOk.Click += new System.EventHandler(this.btnLockOk_Click);
+            this.pnlMain.Controls.Add(this.dlgPrompt);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(996, 546);
+            this.pnlMain.TabIndex = 2;
             // 
             // dlgAccountLock
             // 
@@ -118,7 +129,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(996, 546);
             this.ControlBox = false;
-            this.Controls.Add(this.dlgPrompt);
+            this.Controls.Add(this.pnlMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "dlgAccountLock";
             this.Text = "dlgAccountLock";
@@ -128,6 +139,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.dlgPrompt.ResumeLayout(false);
             this.dlgPrompt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
+            this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -138,5 +150,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private FontAwesome.Sharp.IconPictureBox btnClose;
         private Button_WOC btnLockOk;
         private System.Windows.Forms.Label lblHours;
+        private System.Windows.Forms.Panel pnlMain;
     }
 }

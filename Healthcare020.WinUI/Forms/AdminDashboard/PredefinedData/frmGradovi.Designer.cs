@@ -36,7 +36,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "frmGradovi";
-            this.Text = "frmGradovi";
             this.Load += new System.EventHandler(this.frmGradovi_Load);
             this.ResumeLayout(false);
 

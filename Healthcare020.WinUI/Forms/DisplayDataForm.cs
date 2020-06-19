@@ -157,6 +157,8 @@ namespace Healthcare020.WinUI.Forms
         protected virtual void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             //Bind nested/complex types to DataGridView cell, e.g. Grad.Drzava.Naziv -> Drzava
+            if (e.RowIndex > dgrvMain.RowCount)
+                return;
             DataGridView grid = (DataGridView)sender;
             DataGridViewRow row = grid.Rows[e.RowIndex];
             DataGridViewColumn col = grid.Columns[e.ColumnIndex];
@@ -182,6 +184,11 @@ namespace Healthcare020.WinUI.Forms
         }
 
         protected virtual void dgrvMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        protected virtual void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

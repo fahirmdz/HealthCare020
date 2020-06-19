@@ -4,6 +4,7 @@ using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
 using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
@@ -12,6 +13,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
     {
         private static frmNewDrzava _instance;
         private readonly APIService _apiService;
+        private DrzavaDto Drzava;
 
         public static frmNewDrzava Instance
         {
@@ -23,17 +25,28 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-        private frmNewDrzava()
+        public static frmNewDrzava InstanceWithData(DrzavaDto drzava)
         {
-            InitializeComponent();
-            this.Text = Properties.Resources.frmNewDrzava;
-            _apiService=new APIService(Routes.DrzaveRoute);
+            if (_instance == null || _instance.IsDisposed)
+                _instance = new frmNewDrzava(drzava);
+            return _instance;
+        }
 
+        private frmNewDrzava(DrzavaDto drzava=null)
+        {
+            Drzava = drzava;
+            InitializeComponent();
+            this.Text = Drzava!=null?Properties.Resources.frmNewDrzavaUpdate:Properties.Resources.frmNewDrzavaAdd;
+            _apiService=new APIService(Routes.DrzaveRoute);
         }
 
         private void frmNewDrzava_Load(object sender, System.EventArgs e)
         {
-
+            if(Drzava!=null)
+            {
+                txtNaziv.Text = Drzava.Naziv;
+                txtPozivniBroj.Text = Drzava.PozivniBroj;
+            }
         }
 
         private void btnBack_Click(object sender, System.EventArgs e)
@@ -45,11 +58,20 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         {
             if (ValidateInput())
             {
-                var result = await _apiService.Post<DrzavaDto>(new DrzavaUpsertRequest
+                APIServiceResult<DrzavaDto> result;
+                if (Drzava == null)
                 {
-                    Naziv = txtNaziv.Text,
-                    PozivniBroj = txtPozivniBroj.Text
-                });
+                    result = await _apiService.Post<DrzavaDto>(new DrzavaUpsertRequest
+                    {
+                        Naziv = txtNaziv.Text,
+                        PozivniBroj = txtPozivniBroj.Text
+                    });
+                }
+                else
+                {
+                    result = await _apiService.Update<DrzavaDto>(Drzava.Id,
+                        new DrzavaUpsertRequest {Naziv = txtNaziv.Text, PozivniBroj = txtPozivniBroj.Text});
+                }
 
                 if (result.Succeeded)
                 {

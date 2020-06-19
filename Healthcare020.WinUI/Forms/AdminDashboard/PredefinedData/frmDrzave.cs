@@ -95,7 +95,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             if (!(MainDgrv.CurrentRow?.DataBoundItem is DrzavaDto drzava))
                 return;
 
-            //Account lock out
             if (e.ColumnIndex == 3)
             {
                 var prompDialog = dlgPropmpt.ShowDialog();
@@ -110,6 +109,17 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                         dlgSuccess.ShowDialog();
                     }
                 }
+            }
+        }
+
+        protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(MainDgrv.CurrentRow?.DataBoundItem is DrzavaDto drzava))
+                return;
+
+            if (MainDgrv.Columns[e.ColumnIndex].Name != "Izbriši")
+            {
+                frmStartMenuAdmin.Instance.OpenChildForm(frmNewDrzava.InstanceWithData(drzava));
             }
         }
     }

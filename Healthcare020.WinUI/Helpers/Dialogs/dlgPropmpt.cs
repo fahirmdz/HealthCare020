@@ -11,10 +11,19 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private dlgPropmpt()
         {
             InitializeComponent();
-            this.Opacity = 50;
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
+            this.Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
+            pnlMain.MinimumSize = Size;
             this.FormBorderStyle = FormBorderStyle.None;
+
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
+            this.BackColor=Color.Transparent;
+            this.TransparencyKey=Color.Transparent;
+            pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
         }
 
         public new static dlgPropmpt ShowDialog()
@@ -26,14 +35,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
             ((Form)_instance).ShowDialog();
             return _instance;
-        }
-
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            using (SolidBrush brush = new SolidBrush(Color.FromArgb(70, 0, 0, 0)))
-            {
-                e.Graphics.FillRectangle(brush, e.ClipRectangle);
-            }
         }
 
         private void dlgPropmpt_Load(object sender, System.EventArgs e)

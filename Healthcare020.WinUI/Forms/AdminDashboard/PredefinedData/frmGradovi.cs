@@ -1,4 +1,5 @@
-﻿using Healthcare020.WinUI.Services;
+﻿using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
@@ -45,7 +46,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             var Brisi = new DataGridViewButtonColumn
             {
                 HeaderText = "Brisanje",
-                Name = "Izbriši",
+                Name = "Brisanje",
                 Text = "Izbriši",
                 ToolTipText = "Izbriši grad",
                 UseColumnTextForButtonValue = true,
@@ -57,7 +58,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             base.AddColumnsToMainDgrv(new[] { ID, Naziv, Drzava, Brisi });
 
             _apiService = new APIService(Routes.GradoviRoute);
-            Text = Properties.Resources.frmDrzave;
+            Text = Properties.Resources.frmGradovi;
             ResourceParameters = new GradResourceParameters { PageNumber = 1, PageSize = CurrentRowCount, EagerLoaded = true };
 
             InitializeComponent();
@@ -70,7 +71,36 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         protected override async void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            base.dgrvMain_CellContentClick(sender, e);
+            if (!(MainDgrv.CurrentRow?.DataBoundItem is GradDtoEL grad))
+                return;
+
+            //Izbrisi
+            if (e.ColumnIndex == 3)
+            {
+                var promptDialog = dlgPropmpt.ShowDialog();
+
+                if (promptDialog?.DialogResult == DialogResult.OK)
+                {
+                    var result = await _apiService.Delete<GradDtoLL>(grad.Id);
+
+                    if (result.Succeeded)
+                    {
+                        dlgSuccess.ShowDialog();
+                        _dataForDgrv.Remove(grad);
+                    }
+                }
+            }
+        }
+
+        protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(MainDgrv.CurrentRow?.DataBoundItem is GradDtoEL grad))
+                return;
+
+            if (MainDgrv.Columns[e.ColumnIndex].Name != "Brisanje")
+            {
+                frmStartMenuAdmin.Instance.OpenChildForm(frmNewGrad.InstanceWithData(grad));
+            }
         }
 
         protected override void btnNew_Click(object sender, EventArgs e)
