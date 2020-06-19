@@ -47,5 +47,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         {
             frmStartMenuAdmin.Instance.OpenChildForm(frmZdravstvenaStanja.Instance);
         }
+
+        private void btnRoles_Click(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmRoles.Instance);
+        }
     }
 }

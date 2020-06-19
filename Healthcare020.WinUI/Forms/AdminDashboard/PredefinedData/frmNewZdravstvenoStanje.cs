@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using HealthCare020.Core.Request;
 using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
@@ -41,6 +42,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             InitializeComponent();
             ZdravstvenoStanje = zdravstvenoStanje;
 
+            if (ZdravstvenoStanje != null)
+            {
+                txtOpis.Text = ZdravstvenoStanje.Opis;
+            }
+
             _apiService = new APIService(Routes.ZdravstvenaStanjaRoute);
             Text = ZdravstvenoStanje == null ? Properties.Resources.frmNewZdravstvenoStanjeAdd : Properties.Resources.frmNewZdravstvenoStanjeUpdate;
 
@@ -57,6 +63,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
+            //IGNORE 
         }
 
         private void frmNewZdravstvenoStanje_Shown(object sender, System.EventArgs e)
@@ -73,8 +80,14 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         {
             if (ValidateInput())
             {
-                var result = await _apiService.Post<ZdravstvenoStanjeDto>(new ZdravstvenoStanjeUpsertDto
-                    {Opis = txtOpis.Text});
+                APIServiceResult<ZdravstvenoStanjeDto> result;
+                var upsertDto = new ZdravstvenoStanjeUpsertDto
+                    {Opis = txtOpis.Text};
+
+                if (ZdravstvenoStanje == null)
+                    result = await _apiService.Post<ZdravstvenoStanjeDto>(upsertDto);
+                else
+                    result = await _apiService.Update<ZdravstvenoStanjeDto>(ZdravstvenoStanje.Id, upsertDto);
 
                 if (result.Succeeded)
                 {
@@ -84,6 +97,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 }
             }
         }
+
 
         private bool ValidateInput()
         {

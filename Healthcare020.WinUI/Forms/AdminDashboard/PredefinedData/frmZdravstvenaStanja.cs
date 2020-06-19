@@ -56,7 +56,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             AddColumnsToMainDgrv(new DataGridViewColumn[] { ID, Opis, Brisanje });
             _apiService = new APIService(Routes.ZdravstvenaStanjaRoute);
             Text = Properties.Resources.frmZdravstvenaStanja;
-            ResourceParameters = new ZdravstvenoStanjeResourceParameters();
+            ResourceParameters = new ZdravstvenoStanjeResourceParameters{PageSize = PossibleRowsCount,PageNumber = 1};
 
             InitializeComponent();
         }
@@ -77,6 +77,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                     if (result.Succeeded)
                     {
                         _dataForDgrv.Remove(zdravstvenoStanje);
+                        CurrentRowCount--;
                         dlgSuccess.ShowDialog();
                     }
                 }
@@ -86,6 +87,26 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         protected override void btnNew_Click(object sender, EventArgs e)
         {
             frmNewZdravstvenoStanje.ShowDialog();
+        }
+
+        protected override async void txtSearch_Leave(object sender, EventArgs e)
+        {
+            base.txtSearch_Leave(sender, e);
+            var resParams = ResourceParameters as ZdravstvenoStanjeResourceParameters;
+
+            if (SearchText.ToLower() != resParams.Opis)
+            {
+                resParams.Opis = SearchText;
+                await LoadData();
+            }
+        }
+
+        protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(MainDgrv?.CurrentRow?.DataBoundItem is ZdravstvenoStanjeDto zdravstvenoStanje)
+            {
+                frmNewZdravstvenoStanje.ShowDialogWithData(zdravstvenoStanje);
+            }
         }
 
         public async void RefreshData()

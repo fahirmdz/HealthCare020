@@ -72,6 +72,7 @@
             this.btnRoles.Text = "Roles";
             this.btnRoles.TextColor = System.Drawing.Color.White;
             this.btnRoles.UseVisualStyleBackColor = false;
+            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
             // btnNaucneOblasti
             // 
