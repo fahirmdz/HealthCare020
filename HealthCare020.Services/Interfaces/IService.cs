@@ -14,6 +14,7 @@ namespace HealthCare020.Services.Interfaces
         IQueryable<TEntity> GetWithEagerLoad(int? id = null);
 
         Task<ServiceResult> GetById(int id, bool EagerLoaded);
+        Task<int> Count();
 
         Task<PagedList<TEntity>> FilterAndPrepare(IQueryable<TEntity> result, TResourceParameters resourceParameters);
 

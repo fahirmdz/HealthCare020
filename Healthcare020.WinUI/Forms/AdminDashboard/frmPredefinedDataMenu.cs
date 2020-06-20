@@ -1,12 +1,17 @@
-﻿using System;
+﻿using Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData;
+using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
+using System;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmPredefinedDataMenu : Form
     {
-        public Control ParentControl { get;set; }
+        public Control ParentControl { get; set; }
+        private APIService _apiService;
 
         private static frmPredefinedDataMenu _instance;
 
@@ -21,13 +26,20 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
         }
 
-        public frmPredefinedDataMenu()
+        private frmPredefinedDataMenu()
         {
             InitializeComponent();
+            _apiService = new APIService(Routes.DrzaveRoute);
+            lblDrzaveCounter.Text = frmStartMenuAdmin.Instance.DrzavaCount.ToString();
+            lblGradoviCounter.Text = frmStartMenuAdmin.Instance.GradoviCount.ToString();
+            lblRolesCounter.Text = frmStartMenuAdmin.Instance.RolesCount.ToString();
+            lblZdravstvenaStanjaCounter.Text = frmStartMenuAdmin.Instance.ZdravstvenaStanjaCount.ToString();
+            lblNaucneOblastiCounter.Text = frmStartMenuAdmin.Instance.NaucneOblastiCount.ToString();
+
             Text = Properties.Resources.frmPredefinedData;
         }
 
-        private void frmPredefinedDataMenu_Load(object sender, EventArgs e)
+        private async void frmPredefinedDataMenu_Load(object sender, EventArgs e)
         {
             frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(Controls);
             frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlMain.Controls);
@@ -35,17 +47,17 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void btnDrzave_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Intance);
-        }
-
-        private void btnGradovi_Click(object sender, EventArgs e)
-        {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmGradovi.Instance);
+            frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Instance);
         }
 
         private void btnZdravstvenaStanja_Click(object sender, EventArgs e)
         {
             frmStartMenuAdmin.Instance.OpenChildForm(frmZdravstvenaStanja.Instance);
+        }
+
+        private void btnGradovi_Click(object sender, EventArgs e)
+        {
+            frmStartMenuAdmin.Instance.OpenChildForm(frmGradovi.Instance);
         }
 
         private void btnRoles_Click(object sender, EventArgs e)

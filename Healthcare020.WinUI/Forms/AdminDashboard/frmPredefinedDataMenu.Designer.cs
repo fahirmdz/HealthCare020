@@ -29,153 +29,263 @@
         private void InitializeComponent()
         {
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.btnRoles = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
-            this.btnNaucneOblasti = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
-            this.btnZdravstvenaStanja = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
-            this.btnDrzave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
-            this.btnGradovi = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
+            this.btnNaucneOblasti = new FontAwesome.Sharp.IconButton();
+            this.btnRoles = new FontAwesome.Sharp.IconButton();
+            this.btnGradovi = new FontAwesome.Sharp.IconButton();
+            this.btnZdravstvenaStanja = new FontAwesome.Sharp.IconButton();
+            this.btnDrzave = new FontAwesome.Sharp.IconButton();
+            this.pnlDrzaveCounter = new System.Windows.Forms.Panel();
+            this.lblDrzaveCounter = new System.Windows.Forms.Label();
+            this.pnlZdravstvenaStanjaConter = new System.Windows.Forms.Panel();
+            this.lblZdravstvenaStanjaCounter = new System.Windows.Forms.Label();
+            this.pnlRolesCounter = new System.Windows.Forms.Panel();
+            this.lblRolesCounter = new System.Windows.Forms.Label();
+            this.pnlGradoviCounter = new System.Windows.Forms.Panel();
+            this.lblGradoviCounter = new System.Windows.Forms.Label();
+            this.pnlNaucneOblastiCounter = new System.Windows.Forms.Panel();
+            this.lblNaucneOblastiCounter = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
+            this.pnlDrzaveCounter.SuspendLayout();
+            this.pnlZdravstvenaStanjaConter.SuspendLayout();
+            this.pnlRolesCounter.SuspendLayout();
+            this.pnlGradoviCounter.SuspendLayout();
+            this.pnlNaucneOblastiCounter.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
             // 
-            this.pnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnlMain.Controls.Add(this.btnRoles);
+            this.pnlMain.Controls.Add(this.pnlNaucneOblastiCounter);
+            this.pnlMain.Controls.Add(this.pnlGradoviCounter);
+            this.pnlMain.Controls.Add(this.pnlRolesCounter);
+            this.pnlMain.Controls.Add(this.pnlZdravstvenaStanjaConter);
+            this.pnlMain.Controls.Add(this.pnlDrzaveCounter);
             this.pnlMain.Controls.Add(this.btnNaucneOblasti);
+            this.pnlMain.Controls.Add(this.btnRoles);
+            this.pnlMain.Controls.Add(this.btnGradovi);
             this.pnlMain.Controls.Add(this.btnZdravstvenaStanja);
             this.pnlMain.Controls.Add(this.btnDrzave);
-            this.pnlMain.Controls.Add(this.btnGradovi);
-            this.pnlMain.Location = new System.Drawing.Point(40, 13);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(668, 461);
+            this.pnlMain.Size = new System.Drawing.Size(1035, 598);
             this.pnlMain.TabIndex = 22;
-            // 
-            // btnRoles
-            // 
-            this.btnRoles.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnRoles.BackColor = System.Drawing.Color.White;
-            this.btnRoles.BorderColor = System.Drawing.Color.Transparent;
-            this.btnRoles.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
-            this.btnRoles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRoles.FlatAppearance.BorderSize = 0;
-            this.btnRoles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnRoles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnRoles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRoles.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoles.Location = new System.Drawing.Point(350, 176);
-            this.btnRoles.Name = "btnRoles";
-            this.btnRoles.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnRoles.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.btnRoles.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnRoles.Size = new System.Drawing.Size(275, 56);
-            this.btnRoles.TabIndex = 20;
-            this.btnRoles.Text = "Roles";
-            this.btnRoles.TextColor = System.Drawing.Color.White;
-            this.btnRoles.UseVisualStyleBackColor = false;
-            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
             // btnNaucneOblasti
             // 
-            this.btnNaucneOblasti.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnNaucneOblasti.BackColor = System.Drawing.Color.White;
-            this.btnNaucneOblasti.BorderColor = System.Drawing.Color.Transparent;
-            this.btnNaucneOblasti.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnNaucneOblasti.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnNaucneOblasti.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnNaucneOblasti.FlatAppearance.BorderSize = 0;
-            this.btnNaucneOblasti.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnNaucneOblasti.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnNaucneOblasti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNaucneOblasti.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNaucneOblasti.Location = new System.Drawing.Point(56, 272);
+            this.btnNaucneOblasti.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnNaucneOblasti.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNaucneOblasti.ForeColor = System.Drawing.Color.White;
+            this.btnNaucneOblasti.IconChar = FontAwesome.Sharp.IconChar.Microscope;
+            this.btnNaucneOblasti.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnNaucneOblasti.IconSize = 70;
+            this.btnNaucneOblasti.Location = new System.Drawing.Point(162, 398);
             this.btnNaucneOblasti.Name = "btnNaucneOblasti";
-            this.btnNaucneOblasti.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnNaucneOblasti.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.btnNaucneOblasti.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnNaucneOblasti.Size = new System.Drawing.Size(275, 56);
-            this.btnNaucneOblasti.TabIndex = 19;
+            this.btnNaucneOblasti.Rotation = 0D;
+            this.btnNaucneOblasti.Size = new System.Drawing.Size(239, 134);
+            this.btnNaucneOblasti.TabIndex = 26;
             this.btnNaucneOblasti.Text = "Naučne oblasti";
-            this.btnNaucneOblasti.TextColor = System.Drawing.Color.White;
+            this.btnNaucneOblasti.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNaucneOblasti.UseVisualStyleBackColor = false;
             this.btnNaucneOblasti.Click += new System.EventHandler(this.btnNaucneOblasti_Click);
             // 
+            // btnRoles
+            // 
+            this.btnRoles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.btnRoles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRoles.FlatAppearance.BorderSize = 0;
+            this.btnRoles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRoles.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnRoles.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRoles.ForeColor = System.Drawing.Color.White;
+            this.btnRoles.IconChar = FontAwesome.Sharp.IconChar.UserTag;
+            this.btnRoles.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnRoles.IconSize = 70;
+            this.btnRoles.Location = new System.Drawing.Point(559, 224);
+            this.btnRoles.Name = "btnRoles";
+            this.btnRoles.Rotation = 0D;
+            this.btnRoles.Size = new System.Drawing.Size(239, 134);
+            this.btnRoles.TabIndex = 25;
+            this.btnRoles.Text = "Roles";
+            this.btnRoles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRoles.UseVisualStyleBackColor = false;
+            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
+            // 
+            // btnGradovi
+            // 
+            this.btnGradovi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.btnGradovi.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGradovi.FlatAppearance.BorderSize = 0;
+            this.btnGradovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGradovi.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnGradovi.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGradovi.ForeColor = System.Drawing.Color.White;
+            this.btnGradovi.IconChar = FontAwesome.Sharp.IconChar.City;
+            this.btnGradovi.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnGradovi.IconSize = 70;
+            this.btnGradovi.Location = new System.Drawing.Point(162, 224);
+            this.btnGradovi.Name = "btnGradovi";
+            this.btnGradovi.Rotation = 0D;
+            this.btnGradovi.Size = new System.Drawing.Size(239, 134);
+            this.btnGradovi.TabIndex = 24;
+            this.btnGradovi.Text = "Gradovi";
+            this.btnGradovi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGradovi.UseVisualStyleBackColor = false;
+            this.btnGradovi.Click += new System.EventHandler(this.btnGradovi_Click);
+            // 
             // btnZdravstvenaStanja
             // 
-            this.btnZdravstvenaStanja.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnZdravstvenaStanja.BackColor = System.Drawing.Color.White;
-            this.btnZdravstvenaStanja.BorderColor = System.Drawing.Color.Transparent;
-            this.btnZdravstvenaStanja.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnZdravstvenaStanja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnZdravstvenaStanja.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnZdravstvenaStanja.FlatAppearance.BorderSize = 0;
-            this.btnZdravstvenaStanja.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnZdravstvenaStanja.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnZdravstvenaStanja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZdravstvenaStanja.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnZdravstvenaStanja.Location = new System.Drawing.Point(350, 85);
+            this.btnZdravstvenaStanja.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnZdravstvenaStanja.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnZdravstvenaStanja.ForeColor = System.Drawing.Color.White;
+            this.btnZdravstvenaStanja.IconChar = FontAwesome.Sharp.IconChar.FileMedicalAlt;
+            this.btnZdravstvenaStanja.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnZdravstvenaStanja.IconSize = 70;
+            this.btnZdravstvenaStanja.Location = new System.Drawing.Point(559, 54);
             this.btnZdravstvenaStanja.Name = "btnZdravstvenaStanja";
-            this.btnZdravstvenaStanja.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnZdravstvenaStanja.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.btnZdravstvenaStanja.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnZdravstvenaStanja.Size = new System.Drawing.Size(275, 56);
-            this.btnZdravstvenaStanja.TabIndex = 21;
+            this.btnZdravstvenaStanja.Rotation = 0D;
+            this.btnZdravstvenaStanja.Size = new System.Drawing.Size(239, 134);
+            this.btnZdravstvenaStanja.TabIndex = 23;
             this.btnZdravstvenaStanja.Text = "Zdravstvena stanja";
-            this.btnZdravstvenaStanja.TextColor = System.Drawing.Color.White;
+            this.btnZdravstvenaStanja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnZdravstvenaStanja.UseVisualStyleBackColor = false;
             this.btnZdravstvenaStanja.Click += new System.EventHandler(this.btnZdravstvenaStanja_Click);
             // 
             // btnDrzave
             // 
-            this.btnDrzave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDrzave.BackColor = System.Drawing.Color.White;
-            this.btnDrzave.BorderColor = System.Drawing.Color.Transparent;
-            this.btnDrzave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnDrzave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnDrzave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDrzave.FlatAppearance.BorderSize = 0;
-            this.btnDrzave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnDrzave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnDrzave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDrzave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDrzave.Location = new System.Drawing.Point(56, 85);
+            this.btnDrzave.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnDrzave.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrzave.ForeColor = System.Drawing.Color.White;
+            this.btnDrzave.IconChar = FontAwesome.Sharp.IconChar.GlobeEurope;
+            this.btnDrzave.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnDrzave.IconSize = 70;
+            this.btnDrzave.Location = new System.Drawing.Point(162, 54);
             this.btnDrzave.Name = "btnDrzave";
-            this.btnDrzave.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnDrzave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.btnDrzave.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnDrzave.Size = new System.Drawing.Size(275, 56);
-            this.btnDrzave.TabIndex = 17;
+            this.btnDrzave.Rotation = 0D;
+            this.btnDrzave.Size = new System.Drawing.Size(239, 134);
+            this.btnDrzave.TabIndex = 22;
             this.btnDrzave.Text = "Države";
-            this.btnDrzave.TextColor = System.Drawing.Color.White;
+            this.btnDrzave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDrzave.UseVisualStyleBackColor = false;
             this.btnDrzave.Click += new System.EventHandler(this.btnDrzave_Click);
             // 
-            // btnGradovi
+            // pnlDrzaveCounter
             // 
-            this.btnGradovi.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnGradovi.BackColor = System.Drawing.Color.White;
-            this.btnGradovi.BorderColor = System.Drawing.Color.Transparent;
-            this.btnGradovi.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
-            this.btnGradovi.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGradovi.FlatAppearance.BorderSize = 0;
-            this.btnGradovi.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnGradovi.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnGradovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGradovi.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGradovi.Location = new System.Drawing.Point(56, 176);
-            this.btnGradovi.Name = "btnGradovi";
-            this.btnGradovi.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnGradovi.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.btnGradovi.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnGradovi.Size = new System.Drawing.Size(275, 56);
-            this.btnGradovi.TabIndex = 18;
-            this.btnGradovi.Text = "Gradovi";
-            this.btnGradovi.TextColor = System.Drawing.Color.White;
-            this.btnGradovi.UseVisualStyleBackColor = false;
-            this.btnGradovi.Click += new System.EventHandler(this.btnGradovi_Click);
+            this.pnlDrzaveCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlDrzaveCounter.Controls.Add(this.lblDrzaveCounter);
+            this.pnlDrzaveCounter.Location = new System.Drawing.Point(396, 54);
+            this.pnlDrzaveCounter.Name = "pnlDrzaveCounter";
+            this.pnlDrzaveCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlDrzaveCounter.TabIndex = 27;
+            // 
+            // lblDrzaveCounter
+            // 
+            this.lblDrzaveCounter.AutoSize = true;
+            this.lblDrzaveCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDrzaveCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDrzaveCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblDrzaveCounter.Name = "lblDrzaveCounter";
+            this.lblDrzaveCounter.Size = new System.Drawing.Size(42, 51);
+            this.lblDrzaveCounter.TabIndex = 0;
+            this.lblDrzaveCounter.Text = "0";
+            // 
+            // pnlZdravstvenaStanjaConter
+            // 
+            this.pnlZdravstvenaStanjaConter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlZdravstvenaStanjaConter.Controls.Add(this.lblZdravstvenaStanjaCounter);
+            this.pnlZdravstvenaStanjaConter.Location = new System.Drawing.Point(794, 54);
+            this.pnlZdravstvenaStanjaConter.Name = "pnlZdravstvenaStanjaConter";
+            this.pnlZdravstvenaStanjaConter.Size = new System.Drawing.Size(110, 134);
+            this.pnlZdravstvenaStanjaConter.TabIndex = 28;
+            // 
+            // lblZdravstvenaStanjaCounter
+            // 
+            this.lblZdravstvenaStanjaCounter.AutoSize = true;
+            this.lblZdravstvenaStanjaCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZdravstvenaStanjaCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblZdravstvenaStanjaCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblZdravstvenaStanjaCounter.Name = "lblZdravstvenaStanjaCounter";
+            this.lblZdravstvenaStanjaCounter.Size = new System.Drawing.Size(42, 51);
+            this.lblZdravstvenaStanjaCounter.TabIndex = 0;
+            this.lblZdravstvenaStanjaCounter.Text = "0";
+            // 
+            // pnlRolesCounter
+            // 
+            this.pnlRolesCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlRolesCounter.Controls.Add(this.lblRolesCounter);
+            this.pnlRolesCounter.Location = new System.Drawing.Point(794, 224);
+            this.pnlRolesCounter.Name = "pnlRolesCounter";
+            this.pnlRolesCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlRolesCounter.TabIndex = 29;
+            // 
+            // lblRolesCounter
+            // 
+            this.lblRolesCounter.AutoSize = true;
+            this.lblRolesCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRolesCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblRolesCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblRolesCounter.Name = "lblRolesCounter";
+            this.lblRolesCounter.Size = new System.Drawing.Size(42, 51);
+            this.lblRolesCounter.TabIndex = 0;
+            this.lblRolesCounter.Text = "0";
+            // 
+            // pnlGradoviCounter
+            // 
+            this.pnlGradoviCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlGradoviCounter.Controls.Add(this.lblGradoviCounter);
+            this.pnlGradoviCounter.Location = new System.Drawing.Point(396, 224);
+            this.pnlGradoviCounter.Name = "pnlGradoviCounter";
+            this.pnlGradoviCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlGradoviCounter.TabIndex = 29;
+            // 
+            // lblGradoviCounter
+            // 
+            this.lblGradoviCounter.AutoSize = true;
+            this.lblGradoviCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGradoviCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblGradoviCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblGradoviCounter.Name = "lblGradoviCounter";
+            this.lblGradoviCounter.Size = new System.Drawing.Size(42, 51);
+            this.lblGradoviCounter.TabIndex = 0;
+            this.lblGradoviCounter.Text = "0";
+            // 
+            // pnlNaucneOblastiCounter
+            // 
+            this.pnlNaucneOblastiCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlNaucneOblastiCounter.Controls.Add(this.lblNaucneOblastiCounter);
+            this.pnlNaucneOblastiCounter.Location = new System.Drawing.Point(396, 398);
+            this.pnlNaucneOblastiCounter.Name = "pnlNaucneOblastiCounter";
+            this.pnlNaucneOblastiCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlNaucneOblastiCounter.TabIndex = 30;
+            // 
+            // lblNaucneOblastiCounter
+            // 
+            this.lblNaucneOblastiCounter.AutoSize = true;
+            this.lblNaucneOblastiCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNaucneOblastiCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblNaucneOblastiCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblNaucneOblastiCounter.Name = "lblNaucneOblastiCounter";
+            this.lblNaucneOblastiCounter.Size = new System.Drawing.Size(42, 51);
+            this.lblNaucneOblastiCounter.TabIndex = 0;
+            this.lblNaucneOblastiCounter.Text = "0";
             // 
             // frmPredefinedDataMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(776, 486);
+            this.ClientSize = new System.Drawing.Size(1035, 598);
             this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -183,17 +293,36 @@
             this.Text = "frmPredefinedDataMenu";
             this.Load += new System.EventHandler(this.frmPredefinedDataMenu_Load);
             this.pnlMain.ResumeLayout(false);
+            this.pnlDrzaveCounter.ResumeLayout(false);
+            this.pnlDrzaveCounter.PerformLayout();
+            this.pnlZdravstvenaStanjaConter.ResumeLayout(false);
+            this.pnlZdravstvenaStanjaConter.PerformLayout();
+            this.pnlRolesCounter.ResumeLayout(false);
+            this.pnlRolesCounter.PerformLayout();
+            this.pnlGradoviCounter.ResumeLayout(false);
+            this.pnlGradoviCounter.PerformLayout();
+            this.pnlNaucneOblastiCounter.ResumeLayout(false);
+            this.pnlNaucneOblastiCounter.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Helpers.CustomElements.Button_WOC btnDrzave;
-        private Helpers.CustomElements.Button_WOC btnGradovi;
-        private Helpers.CustomElements.Button_WOC btnNaucneOblasti;
-        private Helpers.CustomElements.Button_WOC btnRoles;
-        private Helpers.CustomElements.Button_WOC btnZdravstvenaStanja;
         private System.Windows.Forms.Panel pnlMain;
+        private FontAwesome.Sharp.IconButton btnDrzave;
+        private FontAwesome.Sharp.IconButton btnZdravstvenaStanja;
+        private FontAwesome.Sharp.IconButton btnNaucneOblasti;
+        private FontAwesome.Sharp.IconButton btnRoles;
+        private FontAwesome.Sharp.IconButton btnGradovi;
+        private System.Windows.Forms.Panel pnlDrzaveCounter;
+        private System.Windows.Forms.Label lblDrzaveCounter;
+        private System.Windows.Forms.Panel pnlRolesCounter;
+        private System.Windows.Forms.Label lblRolesCounter;
+        private System.Windows.Forms.Panel pnlZdravstvenaStanjaConter;
+        private System.Windows.Forms.Label lblZdravstvenaStanjaCounter;
+        private System.Windows.Forms.Panel pnlNaucneOblastiCounter;
+        private System.Windows.Forms.Label lblNaucneOblastiCounter;
+        private System.Windows.Forms.Panel pnlGradoviCounter;
+        private System.Windows.Forms.Label lblGradoviCounter;
     }
 }

@@ -2,7 +2,10 @@
 using Healthcare020.WinUI.Helpers.Dialogs;
 using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCare020.Core.Constants;
+using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -14,6 +17,16 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
+
+        private APIService _apiService;
+
+
+        //PREDEFINED DATA COUNTS
+        public int DrzavaCount { get; set; }
+        public int GradoviCount { get; set; }
+        public int NaucneOblastiCount { get; set; }
+        public int ZdravstvenaStanjaCount { get; set; }
+        public int RolesCount { get; set; }
 
         public static frmStartMenuAdmin Instance
         {
@@ -34,18 +47,64 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private frmStartMenuAdmin()
         {
             InitializeComponent();
+          
+
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
             panelMenu.Controls.Add(leftBorderBtn);
         }
 
-        private void frmStartMenuAdmin_Load(object sender, EventArgs e)
+        private async void frmStartMenuAdmin_Load(object sender, EventArgs e)
         {
+            await LoadPredefinedDataCounts();
             SetClickEventToCloseUserMenu(Controls);
             SetClickEventToCloseUserMenu(panelMenu.Controls);
             SetClickEventToCloseUserMenu(pnlTop.Controls);
         }
 
+        public async Task LoadPredefinedDataCounts()
+        {
+            _apiService = new APIService(Routes.DrzaveRoute);
+            DrzavaCount = (await _apiService.Count())?.Data ?? 0;
+            _apiService.ChangeRoute(Routes.GradoviRoute);
+            GradoviCount = (await _apiService.Count())?.Data ?? 0;
+            _apiService.ChangeRoute(Routes.ZdravstvenaStanjaRoute);
+            ZdravstvenaStanjaCount = (await _apiService.Count())?.Data ?? 0;
+            _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
+            NaucneOblastiCount = (await _apiService.Count())?.Data ?? 0;
+            _apiService.ChangeRoute(Routes.RolesRoute);
+            RolesCount = (await _apiService.Count())?.Data ?? 0;
+        }
+
+        public async Task LoadPredefinedDataCount(string route)
+        {
+            switch (route)
+            {
+                case Routes.DrzaveRoute:
+                    _apiService = new APIService(Routes.DrzaveRoute);
+                    DrzavaCount = (await _apiService.Count())?.Data ?? 0;
+                    break;
+                case Routes.GradoviRoute:
+                    _apiService.ChangeRoute(Routes.GradoviRoute);
+                    GradoviCount = (await _apiService.Count())?.Data ?? 0;
+                    break;
+                case Routes.ZdravstvenaStanjaRoute:
+                    _apiService.ChangeRoute(Routes.ZdravstvenaStanjaRoute);
+                    ZdravstvenaStanjaCount = (await _apiService.Count())?.Data ?? 0;
+                    break;
+                case Routes.NaucneOblastiRoute:
+                    _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
+                    NaucneOblastiCount = (await _apiService.Count())?.Data ?? 0;
+                    break;
+                case Routes.RolesRoute:
+                    _apiService.ChangeRoute(Routes.RolesRoute);
+                    RolesCount = (await _apiService.Count())?.Data ?? 0;
+                    break;
+                default:
+                    return;
+            }
+
+        }
         /// <summary>
         /// Add event for closing User dropdown menu on every click
         /// </summary>

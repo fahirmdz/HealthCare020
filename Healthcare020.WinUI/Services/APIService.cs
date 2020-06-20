@@ -38,6 +38,11 @@ namespace Healthcare020.WinUI.Services
             }
         }
 
+        public void ChangeRoute(string route)
+        {
+            request = Auth.GetAuthorizedApiRequest(route).AllowAnyHttpStatus();
+        }
+
         private void RevertToBaseRequest(object resourceParameters = null)
         {
             if (resourceParameters != null)
@@ -54,6 +59,25 @@ namespace Healthcare020.WinUI.Services
         public void AddRoute(string route)
         {
             request.Url.AppendPathSegments(route);
+        }
+
+        public async Task<APIServiceResult<int>> Count()
+        {
+            request.Url.AppendPathSegment("count");
+
+            var response = await request.GetAsync();
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                if (response.StatusCode == HttpStatusCode.Forbidden)
+                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                return APIServiceResult<int>.WithStatusCode(response.StatusCode);
+            }
+
+            return APIServiceResult<int>.OK(await response.Content.ReadAsAsync<int>());
         }
 
         /// <summary>
