@@ -74,6 +74,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         private void btnClose_Click(object sender, System.EventArgs e)
         {
             this.Close();
+            Dispose();
         }
 
         private async void btnSave_Click(object sender, System.EventArgs e)
@@ -93,9 +94,12 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 {
                     dlgSuccess.ShowDialog();
                     Close();
-                     frmZdravstvenaStanja.Instance.RefreshData();
+                     await frmZdravstvenaStanja.Instance.RefreshData();
                 }
             }
+
+            Close();
+            Dispose();
         }
 
 

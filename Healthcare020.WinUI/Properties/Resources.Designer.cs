@@ -97,6 +97,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Naucne oblasti.
+        /// </summary>
+        public static string frmNaucneOblasti {
+            get {
+                return ResourceManager.GetString("frmNaucneOblasti", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predefinisani podaci - Nova država.
         /// </summary>
         public static string frmNewDrzavaAdd {
@@ -129,6 +138,24 @@ namespace Healthcare020.WinUI.Properties {
         public static string frmNewGradUpdate {
             get {
                 return ResourceManager.GetString("frmNewGradUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Nova naučna oblast.
+        /// </summary>
+        public static string frmNewNaucnaOblastAdd {
+            get {
+                return ResourceManager.GetString("frmNewNaucnaOblastAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predefinisani podaci - Izmena naučne oblasti.
+        /// </summary>
+        public static string frmNewNaucnaOblastUpdate {
+            get {
+                return ResourceManager.GetString("frmNewNaucnaOblastUpdate", resourceCulture);
             }
         }
         

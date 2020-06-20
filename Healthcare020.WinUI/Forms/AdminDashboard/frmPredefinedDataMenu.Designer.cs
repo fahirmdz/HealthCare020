@@ -96,6 +96,7 @@
             this.btnNaucneOblasti.Text = "Naučne oblasti";
             this.btnNaucneOblasti.TextColor = System.Drawing.Color.White;
             this.btnNaucneOblasti.UseVisualStyleBackColor = false;
+            this.btnNaucneOblasti.Click += new System.EventHandler(this.btnNaucneOblasti_Click);
             // 
             // btnZdravstvenaStanja
             // 
@@ -171,7 +172,7 @@
             // 
             // frmPredefinedDataMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(776, 486);

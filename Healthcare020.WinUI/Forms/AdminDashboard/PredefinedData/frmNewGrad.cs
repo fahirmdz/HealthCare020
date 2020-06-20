@@ -115,6 +115,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                     {
                         dlgSuccess.ShowDialog();
                         frmStartMenuAdmin.Instance.OpenChildForm(frmGradovi.Instance);
+                        Dispose();
                     }
                 }
             }

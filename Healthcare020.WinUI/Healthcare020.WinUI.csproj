@@ -151,6 +151,12 @@
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmGradovi.Designer.cs">
       <DependentUpon>frmGradovi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNaucneOblasti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNaucneOblasti.Designer.cs">
+      <DependentUpon>frmNaucneOblasti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewDrzava.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,12 @@
     </Compile>
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewGrad.Designer.cs">
       <DependentUpon>frmNewGrad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewNaucnaOblast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewNaucnaOblast.Designer.cs">
+      <DependentUpon>frmNewNaucnaOblast.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmNewRole.cs">
       <SubType>Form</SubType>
@@ -263,6 +275,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Validation.cs" />
     <Compile Include="Models\APIServiceResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -288,11 +301,17 @@
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmGradovi.resx">
       <DependentUpon>frmGradovi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNaucneOblasti.resx">
+      <DependentUpon>frmNaucneOblasti.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNewDrzava.resx">
       <DependentUpon>frmNewDrzava.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNewGrad.resx">
       <DependentUpon>frmNewGrad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNewNaucnaOblast.resx">
+      <DependentUpon>frmNewNaucnaOblast.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmNewRole.resx">
       <DependentUpon>frmNewRole.cs</DependentUpon>
