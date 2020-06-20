@@ -53,7 +53,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private void btnBack_Click(object sender, System.EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Intance);
+            frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Instance);
         }
 
         private async void btnSave_Click(object sender, System.EventArgs e)
@@ -77,8 +77,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
                 if (result.Succeeded)
                 {
+                    if (Drzava == null)
+                        await frmStartMenuAdmin.Instance.LoadPredefinedDataCount(Routes.DrzaveRoute);
+
                     dlgSuccess.ShowDialog();
-                    frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Intance);
+                    frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Instance);
                     Dispose();
                 }
             }

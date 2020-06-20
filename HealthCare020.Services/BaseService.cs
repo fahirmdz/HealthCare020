@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
 {
@@ -31,6 +32,8 @@ namespace HealthCare020.Services
             _propertyCheckerService = propertyCheckerService;
             _authService = authService;
         }
+
+        public async Task<int> Count() => await _dbContext.Set<TEntity>().CountAsync();
 
         public virtual async Task<ServiceResult> Get(TResourceParameters resourceParameters)
         {

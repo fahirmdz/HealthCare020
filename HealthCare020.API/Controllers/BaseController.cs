@@ -52,6 +52,9 @@ namespace HealthCare020.API.Controllers
             return Ok(resultWithData.Data);
         }
 
+        [HttpGet("count")]
+        public async Task<IActionResult> Count() => Ok(await _service.Count());
+
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")
         {
             switch (statusCode)

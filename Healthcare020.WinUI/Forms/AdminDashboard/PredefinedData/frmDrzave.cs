@@ -15,7 +15,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         public Control ParentControl { get; set; }
         private static frmDrzave _instance;
 
-        public static frmDrzave Intance
+        public static frmDrzave Instance
         {
             get
             {

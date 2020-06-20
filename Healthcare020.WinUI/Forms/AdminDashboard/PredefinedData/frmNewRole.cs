@@ -105,6 +105,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
                 if (result.Succeeded)
                 {
+                    if (Role == null)
+                        await frmStartMenuAdmin.Instance.LoadPredefinedDataCount(Routes.RolesRoute);
+
                     dlgSuccess.ShowDialog();
                     Close();
                     frmRoles.Instance.RefreshData();
