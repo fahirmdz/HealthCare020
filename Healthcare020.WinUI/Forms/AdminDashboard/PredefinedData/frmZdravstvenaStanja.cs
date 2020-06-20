@@ -109,9 +109,5 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-        public async void RefreshData()
-        {
-            await LoadData();
-        }
     }
 }

@@ -108,6 +108,8 @@ namespace Healthcare020.WinUI.Forms
             dgrvMain.Cursor = this.Cursor;
         }
 
+        public async Task RefreshData() => await LoadData();
+
         private async void btnNextPage_Click_1(object sender, EventArgs e)
         {
             ResourceParameters.PageNumber++;
@@ -130,11 +132,14 @@ namespace Healthcare020.WinUI.Forms
 
         private async void DisplayDataForm_SizeChanged(object sender, EventArgs e)
         {
-            dgrvMain.DataSource = null;
-            PossibleRowsCount = dgrvMain.GetRowsCount();
-            ResourceParameters.PageSize = PossibleRowsCount;
-            dgrvMain.RowCount = PossibleRowsCount;
-            await LoadData();
+            if(ResourceParameters!=null)
+            {
+                dgrvMain.DataSource = null;
+                PossibleRowsCount = dgrvMain.GetRowsCount();
+                ResourceParameters.PageSize = PossibleRowsCount;
+                dgrvMain.RowCount = PossibleRowsCount;
+                await LoadData();
+            }
         }
 
         protected async void DisplayDataForm_Load(object sender, EventArgs e)

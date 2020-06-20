@@ -66,6 +66,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(137)))), ((int)(((byte)(163)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgrvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgrvMain.ColumnHeadersHeight = 29;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -78,7 +79,8 @@
             this.dgrvMain.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgrvMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgrvMain.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgrvMain.Location = new System.Drawing.Point(0, 57);
+            this.dgrvMain.Location = new System.Drawing.Point(0, 70);
+            this.dgrvMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgrvMain.Name = "dgrvMain";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -88,13 +90,14 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(137)))), ((int)(((byte)(163)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgrvMain.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgrvMain.RowHeadersWidth = 51;
             this.dgrvMain.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
             this.dgrvMain.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgrvMain.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dgrvMain.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.dgrvMain.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
             this.dgrvMain.RowTemplate.Height = 30;
             this.dgrvMain.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgrvMain.Size = new System.Drawing.Size(777, 430);
+            this.dgrvMain.Size = new System.Drawing.Size(1036, 529);
             this.dgrvMain.TabIndex = 0;
             this.dgrvMain.UseWaitCursor = true;
             this.dgrvMain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellContentClick);
@@ -113,10 +116,11 @@
             this.btnPrevPage.IconChar = FontAwesome.Sharp.IconChar.ArrowAltCircleLeft;
             this.btnPrevPage.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.btnPrevPage.IconSize = 40;
-            this.btnPrevPage.Location = new System.Drawing.Point(275, 3);
+            this.btnPrevPage.Location = new System.Drawing.Point(367, 4);
+            this.btnPrevPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPrevPage.Name = "btnPrevPage";
             this.btnPrevPage.Rotation = 0D;
-            this.btnPrevPage.Size = new System.Drawing.Size(75, 37);
+            this.btnPrevPage.Size = new System.Drawing.Size(100, 46);
             this.btnPrevPage.TabIndex = 1;
             this.btnPrevPage.UseVisualStyleBackColor = false;
             this.btnPrevPage.UseWaitCursor = true;
@@ -133,10 +137,11 @@
             this.btnNextPage.IconChar = FontAwesome.Sharp.IconChar.ArrowAltCircleRight;
             this.btnNextPage.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.btnNextPage.IconSize = 40;
-            this.btnNextPage.Location = new System.Drawing.Point(396, 3);
+            this.btnNextPage.Location = new System.Drawing.Point(528, 4);
+            this.btnNextPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Rotation = 0D;
-            this.btnNextPage.Size = new System.Drawing.Size(75, 37);
+            this.btnNextPage.Size = new System.Drawing.Size(100, 46);
             this.btnNextPage.TabIndex = 2;
             this.btnNextPage.UseVisualStyleBackColor = false;
             this.btnNextPage.UseWaitCursor = true;
@@ -147,14 +152,15 @@
             this.txtSearch.Depth = 0;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Hint = "";
-            this.txtSearch.Location = new System.Drawing.Point(38, 4);
+            this.txtSearch.Location = new System.Drawing.Point(51, 5);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSearch.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
             this.txtSearch.SelectedText = "";
             this.txtSearch.SelectionLength = 0;
             this.txtSearch.SelectionStart = 0;
-            this.txtSearch.Size = new System.Drawing.Size(159, 23);
+            this.txtSearch.Size = new System.Drawing.Size(212, 28);
             this.txtSearch.TabIndex = 1;
             this.toolTip.SetToolTip(this.txtSearch, "Pretraga korisnika po korisničkom imenu");
             this.txtSearch.UseSystemPasswordChar = false;
@@ -174,10 +180,11 @@
             this.btnNew.IconChar = FontAwesome.Sharp.IconChar.Plus;
             this.btnNew.IconColor = System.Drawing.Color.White;
             this.btnNew.IconSize = 25;
-            this.btnNew.Location = new System.Drawing.Point(642, 13);
+            this.btnNew.Location = new System.Drawing.Point(856, 16);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Rotation = 0D;
-            this.btnNew.Size = new System.Drawing.Size(84, 30);
+            this.btnNew.Size = new System.Drawing.Size(112, 37);
             this.btnNew.TabIndex = 4;
             this.btnNew.Text = "Dodaj ";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -189,9 +196,10 @@
             // 
             this.pnlSearch.Controls.Add(this.txtSearch);
             this.pnlSearch.Controls.Add(this.icnSearch);
-            this.pnlSearch.Location = new System.Drawing.Point(49, 15);
+            this.pnlSearch.Location = new System.Drawing.Point(65, 18);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(200, 30);
+            this.pnlSearch.Size = new System.Drawing.Size(267, 37);
             this.pnlSearch.TabIndex = 5;
             this.pnlSearch.UseWaitCursor = true;
             // 
@@ -202,10 +210,11 @@
             this.icnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.icnSearch.IconChar = FontAwesome.Sharp.IconChar.Search;
             this.icnSearch.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
-            this.icnSearch.IconSize = 30;
+            this.icnSearch.IconSize = 37;
             this.icnSearch.Location = new System.Drawing.Point(0, 0);
+            this.icnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.icnSearch.Name = "icnSearch";
-            this.icnSearch.Size = new System.Drawing.Size(32, 30);
+            this.icnSearch.Size = new System.Drawing.Size(43, 37);
             this.icnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.icnSearch.TabIndex = 0;
             this.icnSearch.TabStop = false;
@@ -217,9 +226,10 @@
             this.pnlNavButtons.Controls.Add(this.btnPrevPage);
             this.pnlNavButtons.Controls.Add(this.btnNextPage);
             this.pnlNavButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlNavButtons.Location = new System.Drawing.Point(0, 429);
+            this.pnlNavButtons.Location = new System.Drawing.Point(0, 528);
+            this.pnlNavButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlNavButtons.Name = "pnlNavButtons";
-            this.pnlNavButtons.Size = new System.Drawing.Size(777, 58);
+            this.pnlNavButtons.Size = new System.Drawing.Size(1036, 71);
             this.pnlNavButtons.TabIndex = 3;
             this.pnlNavButtons.UseWaitCursor = true;
             // 
@@ -229,21 +239,23 @@
             this.pnlTop.Controls.Add(this.pnlSearch);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(777, 57);
+            this.pnlTop.Size = new System.Drawing.Size(1036, 70);
             this.pnlTop.TabIndex = 7;
             this.pnlTop.UseWaitCursor = true;
             // 
             // DisplayDataForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(777, 487);
+            this.ClientSize = new System.Drawing.Size(1036, 599);
             this.Controls.Add(this.pnlNavButtons);
             this.Controls.Add(this.dgrvMain);
             this.Controls.Add(this.pnlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DisplayDataForm";
             this.Text = "frmUsers";
             this.UseWaitCursor = true;

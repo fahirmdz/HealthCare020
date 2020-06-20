@@ -109,6 +109,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                     Close();
                     frmRoles.Instance.RefreshData();
                 }
+
+                Close();
+                Dispose();
             }
         }
 

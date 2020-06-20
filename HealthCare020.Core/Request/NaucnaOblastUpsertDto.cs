@@ -4,7 +4,8 @@ namespace HealthCare020.Core.Request
 {
     public class NaucnaOblastUpsertDto
     {
-        [StringLength(maximumLength: 50, MinimumLength = 4)]
+        [MaxLength(50)]
+        [MinLength(3)]
         public string Naziv { get; set; }
     }
 }
