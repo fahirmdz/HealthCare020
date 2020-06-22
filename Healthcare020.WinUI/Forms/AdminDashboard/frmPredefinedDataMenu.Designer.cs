@@ -29,31 +29,32 @@
         private void InitializeComponent()
         {
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.pnlNaucneOblastiCounter = new System.Windows.Forms.Panel();
+            this.lblNaucneOblastiCounter = new System.Windows.Forms.Label();
+            this.pnlGradoviCounter = new System.Windows.Forms.Panel();
+            this.lblGradoviCounter = new System.Windows.Forms.Label();
+            this.pnlRolesCounter = new System.Windows.Forms.Panel();
+            this.lblRolesCounter = new System.Windows.Forms.Label();
+            this.pnlZdravstvenaStanjaConter = new System.Windows.Forms.Panel();
+            this.lblZdravstvenaStanjaCounter = new System.Windows.Forms.Label();
+            this.pnlDrzaveCounter = new System.Windows.Forms.Panel();
+            this.lblDrzaveCounter = new System.Windows.Forms.Label();
             this.btnNaucneOblasti = new FontAwesome.Sharp.IconButton();
             this.btnRoles = new FontAwesome.Sharp.IconButton();
             this.btnGradovi = new FontAwesome.Sharp.IconButton();
             this.btnZdravstvenaStanja = new FontAwesome.Sharp.IconButton();
             this.btnDrzave = new FontAwesome.Sharp.IconButton();
-            this.pnlDrzaveCounter = new System.Windows.Forms.Panel();
-            this.lblDrzaveCounter = new System.Windows.Forms.Label();
-            this.pnlZdravstvenaStanjaConter = new System.Windows.Forms.Panel();
-            this.lblZdravstvenaStanjaCounter = new System.Windows.Forms.Label();
-            this.pnlRolesCounter = new System.Windows.Forms.Panel();
-            this.lblRolesCounter = new System.Windows.Forms.Label();
-            this.pnlGradoviCounter = new System.Windows.Forms.Panel();
-            this.lblGradoviCounter = new System.Windows.Forms.Label();
-            this.pnlNaucneOblastiCounter = new System.Windows.Forms.Panel();
-            this.lblNaucneOblastiCounter = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
-            this.pnlDrzaveCounter.SuspendLayout();
-            this.pnlZdravstvenaStanjaConter.SuspendLayout();
-            this.pnlRolesCounter.SuspendLayout();
-            this.pnlGradoviCounter.SuspendLayout();
             this.pnlNaucneOblastiCounter.SuspendLayout();
+            this.pnlGradoviCounter.SuspendLayout();
+            this.pnlRolesCounter.SuspendLayout();
+            this.pnlZdravstvenaStanjaConter.SuspendLayout();
+            this.pnlDrzaveCounter.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
             // 
+            this.pnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlMain.Controls.Add(this.pnlNaucneOblastiCounter);
             this.pnlMain.Controls.Add(this.pnlGradoviCounter);
             this.pnlMain.Controls.Add(this.pnlRolesCounter);
@@ -64,11 +65,110 @@
             this.pnlMain.Controls.Add(this.btnGradovi);
             this.pnlMain.Controls.Add(this.btnZdravstvenaStanja);
             this.pnlMain.Controls.Add(this.btnDrzave);
-            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1035, 598);
             this.pnlMain.TabIndex = 22;
+            // 
+            // pnlNaucneOblastiCounter
+            // 
+            this.pnlNaucneOblastiCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlNaucneOblastiCounter.Controls.Add(this.lblNaucneOblastiCounter);
+            this.pnlNaucneOblastiCounter.Location = new System.Drawing.Point(396, 398);
+            this.pnlNaucneOblastiCounter.Name = "pnlNaucneOblastiCounter";
+            this.pnlNaucneOblastiCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlNaucneOblastiCounter.TabIndex = 30;
+            // 
+            // lblNaucneOblastiCounter
+            // 
+            this.lblNaucneOblastiCounter.AutoSize = true;
+            this.lblNaucneOblastiCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNaucneOblastiCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblNaucneOblastiCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblNaucneOblastiCounter.Name = "lblNaucneOblastiCounter";
+            this.lblNaucneOblastiCounter.Size = new System.Drawing.Size(34, 41);
+            this.lblNaucneOblastiCounter.TabIndex = 0;
+            this.lblNaucneOblastiCounter.Text = "0";
+            // 
+            // pnlGradoviCounter
+            // 
+            this.pnlGradoviCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlGradoviCounter.Controls.Add(this.lblGradoviCounter);
+            this.pnlGradoviCounter.Location = new System.Drawing.Point(396, 224);
+            this.pnlGradoviCounter.Name = "pnlGradoviCounter";
+            this.pnlGradoviCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlGradoviCounter.TabIndex = 29;
+            // 
+            // lblGradoviCounter
+            // 
+            this.lblGradoviCounter.AutoSize = true;
+            this.lblGradoviCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGradoviCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblGradoviCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblGradoviCounter.Name = "lblGradoviCounter";
+            this.lblGradoviCounter.Size = new System.Drawing.Size(34, 41);
+            this.lblGradoviCounter.TabIndex = 0;
+            this.lblGradoviCounter.Text = "0";
+            // 
+            // pnlRolesCounter
+            // 
+            this.pnlRolesCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlRolesCounter.Controls.Add(this.lblRolesCounter);
+            this.pnlRolesCounter.Location = new System.Drawing.Point(794, 224);
+            this.pnlRolesCounter.Name = "pnlRolesCounter";
+            this.pnlRolesCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlRolesCounter.TabIndex = 29;
+            // 
+            // lblRolesCounter
+            // 
+            this.lblRolesCounter.AutoSize = true;
+            this.lblRolesCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRolesCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblRolesCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblRolesCounter.Name = "lblRolesCounter";
+            this.lblRolesCounter.Size = new System.Drawing.Size(34, 41);
+            this.lblRolesCounter.TabIndex = 0;
+            this.lblRolesCounter.Text = "0";
+            // 
+            // pnlZdravstvenaStanjaConter
+            // 
+            this.pnlZdravstvenaStanjaConter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlZdravstvenaStanjaConter.Controls.Add(this.lblZdravstvenaStanjaCounter);
+            this.pnlZdravstvenaStanjaConter.Location = new System.Drawing.Point(794, 54);
+            this.pnlZdravstvenaStanjaConter.Name = "pnlZdravstvenaStanjaConter";
+            this.pnlZdravstvenaStanjaConter.Size = new System.Drawing.Size(110, 134);
+            this.pnlZdravstvenaStanjaConter.TabIndex = 28;
+            // 
+            // lblZdravstvenaStanjaCounter
+            // 
+            this.lblZdravstvenaStanjaCounter.AutoSize = true;
+            this.lblZdravstvenaStanjaCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZdravstvenaStanjaCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblZdravstvenaStanjaCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblZdravstvenaStanjaCounter.Name = "lblZdravstvenaStanjaCounter";
+            this.lblZdravstvenaStanjaCounter.Size = new System.Drawing.Size(34, 41);
+            this.lblZdravstvenaStanjaCounter.TabIndex = 0;
+            this.lblZdravstvenaStanjaCounter.Text = "0";
+            // 
+            // pnlDrzaveCounter
+            // 
+            this.pnlDrzaveCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.pnlDrzaveCounter.Controls.Add(this.lblDrzaveCounter);
+            this.pnlDrzaveCounter.Location = new System.Drawing.Point(396, 54);
+            this.pnlDrzaveCounter.Name = "pnlDrzaveCounter";
+            this.pnlDrzaveCounter.Size = new System.Drawing.Size(110, 134);
+            this.pnlDrzaveCounter.TabIndex = 27;
+            // 
+            // lblDrzaveCounter
+            // 
+            this.lblDrzaveCounter.AutoSize = true;
+            this.lblDrzaveCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDrzaveCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDrzaveCounter.Location = new System.Drawing.Point(34, 35);
+            this.lblDrzaveCounter.Name = "lblDrzaveCounter";
+            this.lblDrzaveCounter.Size = new System.Drawing.Size(34, 41);
+            this.lblDrzaveCounter.TabIndex = 0;
+            this.lblDrzaveCounter.Text = "0";
             // 
             // btnNaucneOblasti
             // 
@@ -180,109 +280,9 @@
             this.btnDrzave.UseVisualStyleBackColor = false;
             this.btnDrzave.Click += new System.EventHandler(this.btnDrzave_Click);
             // 
-            // pnlDrzaveCounter
-            // 
-            this.pnlDrzaveCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.pnlDrzaveCounter.Controls.Add(this.lblDrzaveCounter);
-            this.pnlDrzaveCounter.Location = new System.Drawing.Point(396, 54);
-            this.pnlDrzaveCounter.Name = "pnlDrzaveCounter";
-            this.pnlDrzaveCounter.Size = new System.Drawing.Size(110, 134);
-            this.pnlDrzaveCounter.TabIndex = 27;
-            // 
-            // lblDrzaveCounter
-            // 
-            this.lblDrzaveCounter.AutoSize = true;
-            this.lblDrzaveCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDrzaveCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblDrzaveCounter.Location = new System.Drawing.Point(34, 35);
-            this.lblDrzaveCounter.Name = "lblDrzaveCounter";
-            this.lblDrzaveCounter.Size = new System.Drawing.Size(42, 51);
-            this.lblDrzaveCounter.TabIndex = 0;
-            this.lblDrzaveCounter.Text = "0";
-            // 
-            // pnlZdravstvenaStanjaConter
-            // 
-            this.pnlZdravstvenaStanjaConter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.pnlZdravstvenaStanjaConter.Controls.Add(this.lblZdravstvenaStanjaCounter);
-            this.pnlZdravstvenaStanjaConter.Location = new System.Drawing.Point(794, 54);
-            this.pnlZdravstvenaStanjaConter.Name = "pnlZdravstvenaStanjaConter";
-            this.pnlZdravstvenaStanjaConter.Size = new System.Drawing.Size(110, 134);
-            this.pnlZdravstvenaStanjaConter.TabIndex = 28;
-            // 
-            // lblZdravstvenaStanjaCounter
-            // 
-            this.lblZdravstvenaStanjaCounter.AutoSize = true;
-            this.lblZdravstvenaStanjaCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZdravstvenaStanjaCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblZdravstvenaStanjaCounter.Location = new System.Drawing.Point(34, 35);
-            this.lblZdravstvenaStanjaCounter.Name = "lblZdravstvenaStanjaCounter";
-            this.lblZdravstvenaStanjaCounter.Size = new System.Drawing.Size(42, 51);
-            this.lblZdravstvenaStanjaCounter.TabIndex = 0;
-            this.lblZdravstvenaStanjaCounter.Text = "0";
-            // 
-            // pnlRolesCounter
-            // 
-            this.pnlRolesCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.pnlRolesCounter.Controls.Add(this.lblRolesCounter);
-            this.pnlRolesCounter.Location = new System.Drawing.Point(794, 224);
-            this.pnlRolesCounter.Name = "pnlRolesCounter";
-            this.pnlRolesCounter.Size = new System.Drawing.Size(110, 134);
-            this.pnlRolesCounter.TabIndex = 29;
-            // 
-            // lblRolesCounter
-            // 
-            this.lblRolesCounter.AutoSize = true;
-            this.lblRolesCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRolesCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblRolesCounter.Location = new System.Drawing.Point(34, 35);
-            this.lblRolesCounter.Name = "lblRolesCounter";
-            this.lblRolesCounter.Size = new System.Drawing.Size(42, 51);
-            this.lblRolesCounter.TabIndex = 0;
-            this.lblRolesCounter.Text = "0";
-            // 
-            // pnlGradoviCounter
-            // 
-            this.pnlGradoviCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.pnlGradoviCounter.Controls.Add(this.lblGradoviCounter);
-            this.pnlGradoviCounter.Location = new System.Drawing.Point(396, 224);
-            this.pnlGradoviCounter.Name = "pnlGradoviCounter";
-            this.pnlGradoviCounter.Size = new System.Drawing.Size(110, 134);
-            this.pnlGradoviCounter.TabIndex = 29;
-            // 
-            // lblGradoviCounter
-            // 
-            this.lblGradoviCounter.AutoSize = true;
-            this.lblGradoviCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGradoviCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblGradoviCounter.Location = new System.Drawing.Point(34, 35);
-            this.lblGradoviCounter.Name = "lblGradoviCounter";
-            this.lblGradoviCounter.Size = new System.Drawing.Size(42, 51);
-            this.lblGradoviCounter.TabIndex = 0;
-            this.lblGradoviCounter.Text = "0";
-            // 
-            // pnlNaucneOblastiCounter
-            // 
-            this.pnlNaucneOblastiCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.pnlNaucneOblastiCounter.Controls.Add(this.lblNaucneOblastiCounter);
-            this.pnlNaucneOblastiCounter.Location = new System.Drawing.Point(396, 398);
-            this.pnlNaucneOblastiCounter.Name = "pnlNaucneOblastiCounter";
-            this.pnlNaucneOblastiCounter.Size = new System.Drawing.Size(110, 134);
-            this.pnlNaucneOblastiCounter.TabIndex = 30;
-            // 
-            // lblNaucneOblastiCounter
-            // 
-            this.lblNaucneOblastiCounter.AutoSize = true;
-            this.lblNaucneOblastiCounter.Font = new System.Drawing.Font("Segoe UI Semilight", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNaucneOblastiCounter.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblNaucneOblastiCounter.Location = new System.Drawing.Point(34, 35);
-            this.lblNaucneOblastiCounter.Name = "lblNaucneOblastiCounter";
-            this.lblNaucneOblastiCounter.Size = new System.Drawing.Size(42, 51);
-            this.lblNaucneOblastiCounter.TabIndex = 0;
-            this.lblNaucneOblastiCounter.Text = "0";
-            // 
             // frmPredefinedDataMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1035, 598);
@@ -293,16 +293,16 @@
             this.Text = "frmPredefinedDataMenu";
             this.Load += new System.EventHandler(this.frmPredefinedDataMenu_Load);
             this.pnlMain.ResumeLayout(false);
-            this.pnlDrzaveCounter.ResumeLayout(false);
-            this.pnlDrzaveCounter.PerformLayout();
-            this.pnlZdravstvenaStanjaConter.ResumeLayout(false);
-            this.pnlZdravstvenaStanjaConter.PerformLayout();
-            this.pnlRolesCounter.ResumeLayout(false);
-            this.pnlRolesCounter.PerformLayout();
-            this.pnlGradoviCounter.ResumeLayout(false);
-            this.pnlGradoviCounter.PerformLayout();
             this.pnlNaucneOblastiCounter.ResumeLayout(false);
             this.pnlNaucneOblastiCounter.PerformLayout();
+            this.pnlGradoviCounter.ResumeLayout(false);
+            this.pnlGradoviCounter.PerformLayout();
+            this.pnlRolesCounter.ResumeLayout(false);
+            this.pnlRolesCounter.PerformLayout();
+            this.pnlZdravstvenaStanjaConter.ResumeLayout(false);
+            this.pnlZdravstvenaStanjaConter.PerformLayout();
+            this.pnlDrzaveCounter.ResumeLayout(false);
+            this.pnlDrzaveCounter.PerformLayout();
             this.ResumeLayout(false);
 
         }

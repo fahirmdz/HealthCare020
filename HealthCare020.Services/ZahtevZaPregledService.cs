@@ -10,6 +10,8 @@ using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -45,6 +47,37 @@ namespace HealthCare020.Services
             return result;
         }
 
+        public override async Task<List<int>> Count(int MonthsCount)
+        {
+            if (MonthsCount == 0)
+                return new List<int> { await _dbContext.ZahteviZaPregled.CountAsync() };
+
+            int startMonth = DateTime.Now.Month - MonthsCount;
+            var year = DateTime.Now.Year;
+
+            if (startMonth < 1)
+            {
+                startMonth += 12;
+                year = DateTime.Now.Year - 1;
+            }
+
+            var monthsCountsList = new List<int>();
+
+            for (int i = 0; i < MonthsCount; i++)
+            {
+                if (startMonth > 12)
+                {
+                    startMonth = 1;
+                    year++;
+                }
+                monthsCountsList.Add(await _dbContext.ZahteviZaPregled.CountAsync(x => x.DatumVreme.Year == year && x.DatumVreme.Month == startMonth));
+                startMonth++;
+            }
+
+            monthsCountsList.Reverse();
+            return monthsCountsList;
+        }
+
         public override async Task<ServiceResult> Insert(ZahtevZaPregledUpsertDto dtoForCreation)
         {
             var user = await _authService.LoggedInUser();
@@ -63,7 +96,8 @@ namespace HealthCare020.Services
                 DoktorId = dtoForCreation.DoktorId,
                 PacijentId = pacijent.Id,
                 UputnicaId = dtoForCreation.UputnicaId,
-                Napomena = dtoForCreation.Napomena
+                Napomena = dtoForCreation.Napomena,
+                DatumVreme = DateTime.Now
             };
 
             await _dbContext.AddAsync(entity);

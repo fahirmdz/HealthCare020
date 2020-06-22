@@ -52,8 +52,10 @@ namespace HealthCare020.API.Controllers
             return Ok(resultWithData.Data);
         }
 
+
+        //Last MonthsCount months for entities with DateTime property
         [HttpGet("count")]
-        public async Task<IActionResult> Count() => Ok(await _service.Count());
+        public async Task<IActionResult> Count(int MonthsCount=0) => Ok(await _service.Count(MonthsCount));
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")
         {

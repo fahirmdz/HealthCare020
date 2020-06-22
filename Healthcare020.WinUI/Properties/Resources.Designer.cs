@@ -232,11 +232,29 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statistika.
+        /// </summary>
+        public static string frmStatisticsMenu {
+            get {
+                return ResourceManager.GetString("frmStatisticsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Korisnički nalozi.
         /// </summary>
         public static string frmUsers {
             get {
                 return ResourceManager.GetString("frmUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistika - Zahtevi za pregled.
+        /// </summary>
+        public static string frmZahteviZaPregledStatistic {
+            get {
+                return ResourceManager.GetString("frmZahteviZaPregledStatistic", resourceCulture);
             }
         }
         

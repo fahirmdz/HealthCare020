@@ -2,8 +2,6 @@
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
@@ -39,7 +37,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             Text = Properties.Resources.frmPredefinedData;
         }
 
-        private async void frmPredefinedDataMenu_Load(object sender, EventArgs e)
+        private void frmPredefinedDataMenu_Load(object sender, EventArgs e)
         {
             frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(Controls);
             frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlMain.Controls);

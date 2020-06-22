@@ -61,11 +61,12 @@ namespace Healthcare020.WinUI.Services
             request.Url.AppendPathSegments(route);
         }
 
-        public async Task<APIServiceResult<int>> Count()
+        public async Task<APIServiceResult<List<int>>> Count(int MonthsCount=0)
         {
-            request.Url.AppendPathSegment("count");
+            if (!request.Url.Path.Contains("count"))
+                request.Url.AppendPathSegment("count");
 
-            var response = await request.GetAsync();
+            var response = await request.SetQueryParam("MonthsCount",MonthsCount).GetAsync();
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 if (response.StatusCode == HttpStatusCode.Forbidden)
@@ -74,10 +75,10 @@ namespace Healthcare020.WinUI.Services
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                     dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
 
-                return APIServiceResult<int>.WithStatusCode(response.StatusCode);
+                return APIServiceResult<List<int>>.WithStatusCode(response.StatusCode);
             }
 
-            return APIServiceResult<int>.OK(await response.Content.ReadAsAsync<int>());
+            return APIServiceResult<List<int>>.OK(await response.Content.ReadAsAsync<List<int>>());
         }
 
         /// <summary>

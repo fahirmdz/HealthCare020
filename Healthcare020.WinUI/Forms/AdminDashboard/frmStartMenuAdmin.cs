@@ -2,6 +2,7 @@
 using Healthcare020.WinUI.Helpers.Dialogs;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCare020.Core.Constants;
@@ -65,15 +66,15 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         public async Task LoadPredefinedDataCounts()
         {
             _apiService = new APIService(Routes.DrzaveRoute);
-            DrzavaCount = (await _apiService.Count())?.Data ?? 0;
+            DrzavaCount = (await _apiService.Count())?.Data.First() ?? 0;
             _apiService.ChangeRoute(Routes.GradoviRoute);
-            GradoviCount = (await _apiService.Count())?.Data ?? 0;
+            GradoviCount = (await _apiService.Count())?.Data.First()  ?? 0;
             _apiService.ChangeRoute(Routes.ZdravstvenaStanjaRoute);
-            ZdravstvenaStanjaCount = (await _apiService.Count())?.Data ?? 0;
+            ZdravstvenaStanjaCount = (await _apiService.Count())?.Data.First()  ?? 0;
             _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
-            NaucneOblastiCount = (await _apiService.Count())?.Data ?? 0;
+            NaucneOblastiCount = (await _apiService.Count())?.Data.First()  ?? 0;
             _apiService.ChangeRoute(Routes.RolesRoute);
-            RolesCount = (await _apiService.Count())?.Data ?? 0;
+            RolesCount = (await _apiService.Count())?.Data.First()  ?? 0;
         }
 
         public async Task LoadPredefinedDataCount(string route)
@@ -82,23 +83,23 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             {
                 case Routes.DrzaveRoute:
                     _apiService = new APIService(Routes.DrzaveRoute);
-                    DrzavaCount = (await _apiService.Count())?.Data ?? 0;
+                    DrzavaCount = (await _apiService.Count())?.Data.First()  ?? 0;
                     break;
                 case Routes.GradoviRoute:
                     _apiService.ChangeRoute(Routes.GradoviRoute);
-                    GradoviCount = (await _apiService.Count())?.Data ?? 0;
+                    GradoviCount = (await _apiService.Count())?.Data.First()  ?? 0;
                     break;
                 case Routes.ZdravstvenaStanjaRoute:
                     _apiService.ChangeRoute(Routes.ZdravstvenaStanjaRoute);
-                    ZdravstvenaStanjaCount = (await _apiService.Count())?.Data ?? 0;
+                    ZdravstvenaStanjaCount = (await _apiService.Count())?.Data.First()  ?? 0;
                     break;
                 case Routes.NaucneOblastiRoute:
                     _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
-                    NaucneOblastiCount = (await _apiService.Count())?.Data ?? 0;
+                    NaucneOblastiCount = (await _apiService.Count())?.Data.First()  ?? 0;
                     break;
                 case Routes.RolesRoute:
                     _apiService.ChangeRoute(Routes.RolesRoute);
-                    RolesCount = (await _apiService.Count())?.Data ?? 0;
+                    RolesCount = (await _apiService.Count())?.Data.First()  ?? 0;
                     break;
                 default:
                     return;
@@ -194,13 +195,22 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
             else
             {
-                MessageBox.Show(Properties.Resources.NotLoggedIn);
+                dlgError.ShowDialog(Properties.Resources.NotLoggedIn);
             }
         }
 
         private void btnStatistics_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
+            var frmStatisticsMenu = AdminDashboard.frmStatisticsMenu.Instance;
+            if (frmStatisticsMenu != null)
+            {
+                OpenChildForm(frmStatisticsMenu);
+            }
+            else
+            {
+                dlgError.ShowDialog(Properties.Resources.NotLoggedIn);
+            }
         }
 
         private void btnHome_Click(object sender, EventArgs e)

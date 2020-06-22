@@ -44,8 +44,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
-            this.pnlUserMenuDropdown = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuDropdownPanel();
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.pnlUserMenuDropdown = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuDropdownPanel();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -67,7 +67,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(220, 546);
+            this.panelMenu.Size = new System.Drawing.Size(220, 644);
             this.panelMenu.TabIndex = 0;
             // 
             // btnStatistics
@@ -199,7 +199,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(220, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(776, 60);
+            this.pnlTop.Size = new System.Drawing.Size(1004, 60);
             this.pnlTop.TabIndex = 2;
             this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
@@ -212,7 +212,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
             this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
             this.btnUserMenu.IconSize = 44;
-            this.btnUserMenu.Location = new System.Drawing.Point(720, 9);
+            this.btnUserMenu.Location = new System.Drawing.Point(948, 9);
             this.btnUserMenu.Name = "btnUserMenu";
             this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
             this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -249,9 +249,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.pnlCopyright.BackColor = System.Drawing.Color.Transparent;
             this.pnlCopyright.Controls.Add(this.lblCopyright);
             this.pnlCopyright.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCopyright.Location = new System.Drawing.Point(220, 523);
+            this.pnlCopyright.Location = new System.Drawing.Point(220, 621);
             this.pnlCopyright.Name = "pnlCopyright";
-            this.pnlCopyright.Size = new System.Drawing.Size(776, 23);
+            this.pnlCopyright.Size = new System.Drawing.Size(1004, 23);
             this.pnlCopyright.TabIndex = 16;
             // 
             // lblCopyright
@@ -260,22 +260,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblCopyright.Location = new System.Drawing.Point(271, 1);
+            this.lblCopyright.Location = new System.Drawing.Point(385, 1);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(195, 13);
             this.lblCopyright.TabIndex = 14;
             this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
-            // 
-            // pnlUserMenuDropdown
-            // 
-            this.pnlUserMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlUserMenuDropdown.Location = new System.Drawing.Point(576, 0);
-            this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
-            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(200, 100);
-            this.pnlUserMenuDropdown.TabIndex = 0;
-            this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
-            this.pnlUserMenuDropdown.Visible = false;
             // 
             // pnlBody
             // 
@@ -284,9 +273,20 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(220, 60);
             this.pnlBody.Name = "pnlBody";
-            this.pnlBody.Size = new System.Drawing.Size(776, 486);
+            this.pnlBody.Size = new System.Drawing.Size(1004, 584);
             this.pnlBody.TabIndex = 3;
             this.pnlBody.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlBody_Paint);
+            // 
+            // pnlUserMenuDropdown
+            // 
+            this.pnlUserMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.pnlUserMenuDropdown.Location = new System.Drawing.Point(804, 0);
+            this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
+            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(200, 100);
+            this.pnlUserMenuDropdown.TabIndex = 0;
+            this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
+            this.pnlUserMenuDropdown.Visible = false;
             // 
             // frmStartMenuAdmin
             // 
@@ -294,7 +294,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(996, 546);
+            this.ClientSize = new System.Drawing.Size(1224, 644);
             this.ControlBox = false;
             this.Controls.Add(this.pnlCopyright);
             this.Controls.Add(this.pnlBody);
