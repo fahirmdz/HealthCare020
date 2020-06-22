@@ -39,7 +39,6 @@
             this.txtNaziv = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblNaziv = new MaterialSkin.Controls.MaterialLabel();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.pnlTop.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
@@ -79,7 +78,6 @@
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.White;
-            this.pnlMain.Controls.Add(this.materialSingleLineTextField1);
             this.pnlMain.Controls.Add(this.cmbDrzave);
             this.pnlMain.Controls.Add(this.btnSave);
             this.pnlMain.Controls.Add(this.lblDrzava);
@@ -93,6 +91,7 @@
             // 
             // cmbDrzave
             // 
+            this.cmbDrzave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbDrzave.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cmbDrzave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbDrzave.Font = new System.Drawing.Font("Segoe UI", 11.25F);
@@ -174,22 +173,6 @@
             this.Errors.ContainerControl = this;
             this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
             // 
-            // materialSingleLineTextField1
-            // 
-            this.materialSingleLineTextField1.Depth = 0;
-            this.materialSingleLineTextField1.Hint = "";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(631, 186);
-            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
-            this.materialSingleLineTextField1.PasswordChar = '\0';
-            this.materialSingleLineTextField1.SelectedText = "";
-            this.materialSingleLineTextField1.SelectionLength = 0;
-            this.materialSingleLineTextField1.SelectionStart = 0;
-            this.materialSingleLineTextField1.Size = new System.Drawing.Size(8, 23);
-            this.materialSingleLineTextField1.TabIndex = 24;
-            this.materialSingleLineTextField1.Text = "materialSingleLineTextField1";
-            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
-            // 
             // frmNewGrad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,6 +203,5 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField txtNaziv;
         private MaterialSkin.Controls.MaterialLabel lblNaziv;
         private System.Windows.Forms.ErrorProvider Errors;
-        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
     }
 }

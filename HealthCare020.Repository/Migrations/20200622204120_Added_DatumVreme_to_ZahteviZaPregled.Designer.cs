@@ -4,14 +4,16 @@ using HealthCare020.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthCare020.Repository.Migrations
 {
     [DbContext(typeof(HealthCare020DbContext))]
-    partial class HealthCare020DbContextModelSnapshot : ModelSnapshot
+    [Migration("20200622204120_Added_DatumVreme_to_ZahteviZaPregled")]
+    partial class Added_DatumVreme_to_ZahteviZaPregled
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

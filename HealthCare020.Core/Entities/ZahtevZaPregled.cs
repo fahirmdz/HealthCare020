@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthCare020.Core.Entities
@@ -20,6 +21,8 @@ namespace HealthCare020.Core.Entities
         [ForeignKey(nameof(Uputnica))]
         public int? UputnicaId { get; set; }
         public Uputnica Uputnica { get; set; }
+
+        public DateTime DatumVreme { get; set; }
 
         [StringLength(255,ErrorMessage = "Maximum length is 255 characters",MinimumLength = 5)]
         [Required]

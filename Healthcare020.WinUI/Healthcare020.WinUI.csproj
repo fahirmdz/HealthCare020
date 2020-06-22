@@ -54,6 +54,15 @@
     <Reference Include="JTextBox">
       <HintPath>D:\Downloads\JTextBox.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -90,6 +99,8 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
@@ -107,6 +118,7 @@
     <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -119,6 +131,8 @@
     <Reference Include="Thinktecture.IdentityModel, Version=3.6.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Thinktecture.IdentityModel.3.6.1\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\AdminDashboard\frmNewUser.cs">
@@ -132,6 +146,12 @@
     </Compile>
     <Compile Include="Forms\AdminDashboard\frmPredefinedDataMenu.Designer.cs">
       <DependentUpon>frmPredefinedDataMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\frmStatisticsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\frmStatisticsMenu.Designer.cs">
+      <DependentUpon>frmStatisticsMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AdminDashboard\frmUsers.cs">
       <SubType>Form</SubType>
@@ -198,6 +218,12 @@
     </Compile>
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.Designer.cs">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledeStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledeStatistic.Designer.cs">
+      <DependentUpon>frmZahteviZaPregledeStatistic.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DisplayDataForm.cs">
       <SubType>Form</SubType>
@@ -292,6 +318,9 @@
     <EmbeddedResource Include="Forms\AdminDashboard\frmPredefinedDataMenu.resx">
       <DependentUpon>frmPredefinedDataMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\frmStatisticsMenu.resx">
+      <DependentUpon>frmStatisticsMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.resx">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledeStatistic.resx">
+      <DependentUpon>frmZahteviZaPregledeStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DisplayDataForm.resx">
       <DependentUpon>DisplayDataForm.cs</DependentUpon>

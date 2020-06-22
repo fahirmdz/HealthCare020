@@ -38,7 +38,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmZdravstvenaStanja";
-            this.Text = "frmZdravstvenaStanja";
             this.ResumeLayout(false);
 
         }

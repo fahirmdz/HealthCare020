@@ -33,7 +33,7 @@ namespace HealthCare020.Services
             _authService = authService;
         }
 
-        public async Task<int> Count() => await _dbContext.Set<TEntity>().CountAsync();
+        public virtual async Task<List<int>> Count(int MonthsCount) => new List<int>{await _dbContext.Set<TEntity>().CountAsync()};
 
         public virtual async Task<ServiceResult> Get(TResourceParameters resourceParameters)
         {
