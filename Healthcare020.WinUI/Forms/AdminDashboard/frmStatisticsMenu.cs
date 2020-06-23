@@ -59,7 +59,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void btnZakazivanjeStatistic_Click(object sender, System.EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmZahteviZaPregledeStatistic.Instance);
+            frmStartMenuAdmin.Instance.OpenChildForm(frmZahteviZaPregledStatistic.Instance);
         }
 
         private void btnPreglediStatistic_Click(object sender, System.EventArgs e)

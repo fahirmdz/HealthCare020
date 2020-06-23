@@ -272,15 +272,15 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgrvMain;
-        private FontAwesome.Sharp.IconButton btnPrevPage;
-        private FontAwesome.Sharp.IconButton btnNextPage;
-        private System.Windows.Forms.ToolTip toolTip;
-        private FontAwesome.Sharp.IconButton btnNew;
-        private System.Windows.Forms.Panel pnlSearch;
-        private FontAwesome.Sharp.IconPictureBox icnSearch;
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtSearch;
-        private System.Windows.Forms.Panel pnlNavButtons;
-        private System.Windows.Forms.Panel pnlTop;
+        protected System.Windows.Forms.DataGridView dgrvMain;
+        protected FontAwesome.Sharp.IconButton btnPrevPage;
+        protected FontAwesome.Sharp.IconButton btnNextPage;
+        protected System.Windows.Forms.ToolTip toolTip;
+        protected FontAwesome.Sharp.IconButton btnNew;
+        protected System.Windows.Forms.Panel pnlSearch;
+        protected FontAwesome.Sharp.IconPictureBox icnSearch;
+        protected MaterialSkin.Controls.MaterialSingleLineTextField txtSearch;
+        protected System.Windows.Forms.Panel pnlNavButtons;
+        protected System.Windows.Forms.Panel pnlTop;
     }
 }

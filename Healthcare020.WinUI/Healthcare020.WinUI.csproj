@@ -219,17 +219,23 @@
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.Designer.cs">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledeStatistic.cs">
+    <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledStatistic.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledeStatistic.Designer.cs">
-      <DependentUpon>frmZahteviZaPregledeStatistic.cs</DependentUpon>
+    <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledStatistic.Designer.cs">
+      <DependentUpon>frmZahteviZaPregledStatistic.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DisplayDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\DisplayDataForm.Designer.cs">
       <DependentUpon>DisplayDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StatisticChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StatisticChartForm.Designer.cs">
+      <DependentUpon>StatisticChartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
@@ -354,11 +360,14 @@
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.resx">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledeStatistic.resx">
-      <DependentUpon>frmZahteviZaPregledeStatistic.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledStatistic.resx">
+      <DependentUpon>frmZahteviZaPregledStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DisplayDataForm.resx">
       <DependentUpon>DisplayDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StatisticChartForm.resx">
+      <DependentUpon>StatisticChartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\CustomElements\NoDataPanel.resx">
       <DependentUpon>NoDataPanel.cs</DependentUpon>
