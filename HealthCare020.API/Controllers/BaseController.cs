@@ -8,6 +8,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HealthCare020.API.Constants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {
@@ -55,6 +56,7 @@ namespace HealthCare020.API.Controllers
 
         //Last MonthsCount months for entities with DateTime property
         [HttpGet("count")]
+        [Authorize(AuthorizationPolicies.AdminPolicy)]
         public async Task<IActionResult> Count(int MonthsCount=0) => Ok(await _service.Count(MonthsCount));
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")

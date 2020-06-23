@@ -1,6 +1,7 @@
 ﻿using FontAwesome.Sharp;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
+using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
@@ -20,10 +21,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 
         public frmPreglediStatistic()
         {
-            lblChartTitle.Text = "Prikaz broja obavljenih pregleda po mesecima";
-            NoDataMessage = "Nema obavljenih pregleda za odabrane mesece";
+            lblChartTitle.Text = Resources.TitlePreglediStatistic;
+            NoDataMessage = Resources.NoDataPreglediObavljeniStatisticMessage;
             YAxisTitle = "Broj obavljenih pregleda";
-            NoDataPanel.IcnData.IconChar = IconChar.Stethoscope;
+            IcnCharForNoData = IconChar.Stethoscope;
             Text = Properties.Resources.frmPreglediStatistic;
             _apiService = new APIService(Routes.PreglediRoute);
             InitializeComponent();

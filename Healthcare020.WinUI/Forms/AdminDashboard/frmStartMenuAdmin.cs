@@ -1,12 +1,13 @@
 ﻿using FontAwesome.Sharp;
+using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCare020.Core.Constants;
-using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -16,14 +17,15 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         //Fields
         private IconButton currentBtn;
+
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
         private APIService _apiService;
 
-
         //PREDEFINED DATA COUNTS
         public int DrzavaCount { get; set; }
+
         public int GradoviCount { get; set; }
         public int NaucneOblastiCount { get; set; }
         public int ZdravstvenaStanjaCount { get; set; }
@@ -48,7 +50,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private frmStartMenuAdmin()
         {
             InitializeComponent();
-          
 
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
@@ -57,6 +58,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private async void frmStartMenuAdmin_Load(object sender, EventArgs e)
         {
+            if (!Auth.IsAuthenticated())
+            {
+                Close();
+                Dispose();
+            }
             await LoadPredefinedDataCounts();
             SetClickEventToCloseUserMenu(Controls);
             SetClickEventToCloseUserMenu(panelMenu.Controls);
@@ -68,13 +74,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             _apiService = new APIService(Routes.DrzaveRoute);
             DrzavaCount = (await _apiService.Count())?.Data.First() ?? 0;
             _apiService.ChangeRoute(Routes.GradoviRoute);
-            GradoviCount = (await _apiService.Count())?.Data.First()  ?? 0;
+            GradoviCount = (await _apiService.Count())?.Data.First() ?? 0;
             _apiService.ChangeRoute(Routes.ZdravstvenaStanjaRoute);
-            ZdravstvenaStanjaCount = (await _apiService.Count())?.Data.First()  ?? 0;
+            ZdravstvenaStanjaCount = (await _apiService.Count())?.Data.First() ?? 0;
             _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
-            NaucneOblastiCount = (await _apiService.Count())?.Data.First()  ?? 0;
+            NaucneOblastiCount = (await _apiService.Count())?.Data.First() ?? 0;
             _apiService.ChangeRoute(Routes.RolesRoute);
-            RolesCount = (await _apiService.Count())?.Data.First()  ?? 0;
+            RolesCount = (await _apiService.Count())?.Data.First() ?? 0;
         }
 
         public async Task LoadPredefinedDataCount(string route)
@@ -83,29 +89,34 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             {
                 case Routes.DrzaveRoute:
                     _apiService = new APIService(Routes.DrzaveRoute);
-                    DrzavaCount = (await _apiService.Count())?.Data.First()  ?? 0;
+                    DrzavaCount = (await _apiService.Count())?.Data.First() ?? 0;
                     break;
+
                 case Routes.GradoviRoute:
                     _apiService.ChangeRoute(Routes.GradoviRoute);
-                    GradoviCount = (await _apiService.Count())?.Data.First()  ?? 0;
+                    GradoviCount = (await _apiService.Count())?.Data.First() ?? 0;
                     break;
+
                 case Routes.ZdravstvenaStanjaRoute:
                     _apiService.ChangeRoute(Routes.ZdravstvenaStanjaRoute);
-                    ZdravstvenaStanjaCount = (await _apiService.Count())?.Data.First()  ?? 0;
+                    ZdravstvenaStanjaCount = (await _apiService.Count())?.Data.First() ?? 0;
                     break;
+
                 case Routes.NaucneOblastiRoute:
                     _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
-                    NaucneOblastiCount = (await _apiService.Count())?.Data.First()  ?? 0;
+                    NaucneOblastiCount = (await _apiService.Count())?.Data.First() ?? 0;
                     break;
+
                 case Routes.RolesRoute:
                     _apiService.ChangeRoute(Routes.RolesRoute);
-                    RolesCount = (await _apiService.Count())?.Data.First()  ?? 0;
+                    RolesCount = (await _apiService.Count())?.Data.First() ?? 0;
                     break;
+
                 default:
                     return;
             }
-
         }
+
         /// <summary>
         /// Add event for closing User dropdown menu on every click
         /// </summary>
@@ -177,11 +188,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             {
                 MessageBox.Show(Properties.Resources.NotLoggedIn);
             }
-        }
-
-        private void btnSecurity_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color2);
         }
 
         private void btnPredefinedData_Click(object sender, EventArgs e)

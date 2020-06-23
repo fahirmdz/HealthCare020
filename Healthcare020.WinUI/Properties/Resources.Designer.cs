@@ -205,6 +205,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statistika - Posete.
+        /// </summary>
+        public static string frmPoseteStatistic {
+            get {
+                return ResourceManager.GetString("frmPoseteStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predefinisani podaci.
         /// </summary>
         public static string frmPredefinedData {
@@ -296,6 +305,42 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trenutno nema dostupnih poseta.
+        /// </summary>
+        public static string NoDataPosete {
+            get {
+                return ResourceManager.GetString("NoDataPosete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trenutno nema dostupnih poseta.
+        /// </summary>
+        public static string NoDataPoseteStatisticMessage {
+            get {
+                return ResourceManager.GetString("NoDataPoseteStatisticMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trenutno nema dostupnih obavljenih pregleda.
+        /// </summary>
+        public static string NoDataPreglediObavljeniStatisticMessage {
+            get {
+                return ResourceManager.GetString("NoDataPreglediObavljeniStatisticMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trenutno nema dostpunih zahteva za pregled.
+        /// </summary>
+        public static string NoDataZahteviZaPregledStatisticMessage {
+            get {
+                return ResourceManager.GetString("NoDataZahteviZaPregledStatisticMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;Niste prijavljeni na sistem!&quot;.
         /// </summary>
         public static string NotLoggedIn {
@@ -310,6 +355,42 @@ namespace Healthcare020.WinUI.Properties {
         public static string RequiredField {
             get {
                 return ResourceManager.GetString("RequiredField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Broj obavljenih pregleda.
+        /// </summary>
+        public static string StatisticCountYAxisTitle {
+            get {
+                return ResourceManager.GetString("StatisticCountYAxisTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prikaz broja poseta po mesecima.
+        /// </summary>
+        public static string TitlePoseteStatistic {
+            get {
+                return ResourceManager.GetString("TitlePoseteStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prikaz broja obavljenih pregleda po mesecima.
+        /// </summary>
+        public static string TitlePreglediStatistic {
+            get {
+                return ResourceManager.GetString("TitlePreglediStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prikaz broja zahteva za preglede po mesecima.
+        /// </summary>
+        public static string TitleZahteviZaPregledeStatistic {
+            get {
+                return ResourceManager.GetString("TitleZahteviZaPregledeStatistic", resourceCulture);
             }
         }
     }

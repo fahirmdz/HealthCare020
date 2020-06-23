@@ -34,7 +34,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnStatistics = new FontAwesome.Sharp.IconButton();
             this.btnPredefinedData = new FontAwesome.Sharp.IconButton();
-            this.btnSecurity = new FontAwesome.Sharp.IconButton();
             this.btnUsers = new FontAwesome.Sharp.IconButton();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
@@ -61,7 +60,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.panelMenu.Controls.Add(this.btnStatistics);
             this.panelMenu.Controls.Add(this.btnPredefinedData);
-            this.panelMenu.Controls.Add(this.btnSecurity);
             this.panelMenu.Controls.Add(this.btnUsers);
             this.panelMenu.Controls.Add(this.panelLogo);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -82,7 +80,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnStatistics.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.btnStatistics.IconSize = 32;
             this.btnStatistics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStatistics.Location = new System.Drawing.Point(0, 379);
+            this.btnStatistics.Location = new System.Drawing.Point(0, 319);
             this.btnStatistics.Name = "btnStatistics";
             this.btnStatistics.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnStatistics.Rotation = 0D;
@@ -106,7 +104,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnPredefinedData.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.btnPredefinedData.IconSize = 32;
             this.btnPredefinedData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPredefinedData.Location = new System.Drawing.Point(0, 319);
+            this.btnPredefinedData.Location = new System.Drawing.Point(0, 259);
             this.btnPredefinedData.Name = "btnPredefinedData";
             this.btnPredefinedData.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnPredefinedData.Rotation = 0D;
@@ -117,30 +115,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnPredefinedData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPredefinedData.UseVisualStyleBackColor = true;
             this.btnPredefinedData.Click += new System.EventHandler(this.btnPredefinedData_Click);
-            // 
-            // btnSecurity
-            // 
-            this.btnSecurity.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSecurity.FlatAppearance.BorderSize = 0;
-            this.btnSecurity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSecurity.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnSecurity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSecurity.ForeColor = System.Drawing.Color.White;
-            this.btnSecurity.IconChar = FontAwesome.Sharp.IconChar.Lock;
-            this.btnSecurity.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
-            this.btnSecurity.IconSize = 32;
-            this.btnSecurity.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSecurity.Location = new System.Drawing.Point(0, 259);
-            this.btnSecurity.Name = "btnSecurity";
-            this.btnSecurity.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.btnSecurity.Rotation = 0D;
-            this.btnSecurity.Size = new System.Drawing.Size(220, 60);
-            this.btnSecurity.TabIndex = 2;
-            this.btnSecurity.Text = "Security";
-            this.btnSecurity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSecurity.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSecurity.UseVisualStyleBackColor = true;
-            this.btnSecurity.Click += new System.EventHandler(this.btnSecurity_Click);
             // 
             // btnUsers
             // 
@@ -326,7 +300,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private System.Windows.Forms.Panel panelMenu;
         private FontAwesome.Sharp.IconButton btnStatistics;
         private FontAwesome.Sharp.IconButton btnPredefinedData;
-        private FontAwesome.Sharp.IconButton btnSecurity;
         private FontAwesome.Sharp.IconButton btnUsers;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.PictureBox btnHome;
