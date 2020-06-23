@@ -33,6 +33,7 @@ namespace Healthcare020.WinUI.Forms
         protected string NoDataMessage;
 
         protected NoDataPanel NoDataPanel;
+        protected IconChar IcnCharForNoData;
 
         protected StatisticChartForm()
         {
@@ -41,14 +42,6 @@ namespace Healthcare020.WinUI.Forms
             Text = Properties.Resources.frmZahteviZaPregledStatistic;
             MonthsCount = 3;
             Months = new List<string> { "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" };
-
-            NoDataPanel = new NoDataPanel(NoDataMessage);
-            NoDataPanel.Left = (pnlMain.ClientSize.Width - NoDataPanel.Width) / 2;
-            NoDataPanel.Top = pnlMain.ClientSize.Height / 2-60;
-
-            this.Controls.Add(NoDataPanel);
-            NoDataPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
-            NoDataPanel.Hide();
 
             ChartType = ChartType.Pie;
             chartLine.AxisX.Add(new Axis { Title = "Mesec" });
@@ -208,6 +201,14 @@ namespace Healthcare020.WinUI.Forms
 
         protected async void StatisticChartForm_Load(object sender, EventArgs e)
         {
+            NoDataPanel = new NoDataPanel(NoDataMessage);
+            NoDataPanel.IcnData.IconChar = IcnCharForNoData;
+            NoDataPanel.Left = (pnlMain.ClientSize.Width - NoDataPanel.Width) / 2;
+            NoDataPanel.Top = pnlMain.ClientSize.Height / 2 - 60;
+            this.Controls.Add(NoDataPanel);
+            NoDataPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
+            NoDataPanel.Hide();
+
             MonthlyCounts = (await _apiService.Count(3))?.Data ?? new List<int> { 0, 0, 0 };
 
             UpdateChart(MonthlyCounts);

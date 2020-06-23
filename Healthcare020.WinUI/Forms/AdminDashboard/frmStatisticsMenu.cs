@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using System.Net;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AdminDashboard.Statistics;
+using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -37,7 +39,14 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private async Task LoadCounts()
         {
             _apiService.ChangeRoute(Routes.PreglediRoute);
-            PreglediCounter = (await _apiService.Count())?.Data.First()  ?? 0;
+            var result = await _apiService.Count();
+            if (!result.Succeeded && result.StatusCode == HttpStatusCode.Forbidden)
+            {
+                Close();
+                Dispose();
+                return;
+            }
+            PreglediCounter = result.Data.First();
             _apiService.ChangeRoute(Routes.ZahteviZaPregledRoute);
             ZakazivanjaPregledaCounter = (await _apiService.Count())?.Data.First()  ?? 0;
             _apiService.ChangeRoute(Routes.ZahtevZaPosetuRoute);
@@ -69,7 +78,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void btnPoseteStatistic_Click(object sender, System.EventArgs e)
         {
-
+            frmStartMenuAdmin.Instance.OpenChildForm(frmPoseteStatistic.Instance);
         }
     }
 }

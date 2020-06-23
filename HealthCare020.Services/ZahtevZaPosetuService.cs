@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -37,6 +39,36 @@ namespace HealthCare020.Services
                 result = result.Where(x => x.Id == id);
 
             return result;
+        }
+
+        public override async Task<List<int>> Count(int MonthsCount)
+        {
+            if (MonthsCount == 0)
+                return new List<int> { await _dbContext.ZahteviZaPosetu.CountAsync() };
+
+            int startMonth = DateTime.Now.Month - MonthsCount;
+            var year = DateTime.Now.Year;
+
+            if (startMonth < 1)
+            {
+                startMonth += 12;
+                year = DateTime.Now.Year - 1;
+            }
+
+            var monthsCountsList = new List<int>();
+
+            for (int i = 0; i < MonthsCount; i++)
+            {
+                if (startMonth > 12)
+                {
+                    startMonth = 1;
+                    year++;
+                }
+                monthsCountsList.Add(await _dbContext.ZahteviZaPosetu.CountAsync(x => x.DatumVreme.Year == year && x.DatumVreme.Month == startMonth));
+                startMonth++;
+            }
+
+            return monthsCountsList;
         }
 
         public override async Task<ServiceResult> Insert(ZahtevZaPosetuUpsertDto dtoForCreation)

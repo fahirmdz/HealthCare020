@@ -2,6 +2,7 @@
 using HealthCare020.Core.Constants;
 using System;
 using FontAwesome.Sharp;
+using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
@@ -22,9 +23,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
         private frmZahteviZaPregledStatistic()
         {
             _apiService = new APIService(Routes.ZahteviZaPregledRoute);
-            lblChartTitle.Text = "Broj kreiranih zahteva za pregled po mesecima";
+            lblChartTitle.Text = Resources.TitleZahteviZaPregledeStatistic;
             YAxisTitle = "Broj zahteva za pregled";
-            NoDataPanel.IcnData.IconChar = IconChar.CalendarAlt;
+            IcnCharForNoData = IconChar.CalendarAlt;
+            NoDataMessage = Resources.NoDataZahteviZaPregledStatisticMessage;
             Text = Properties.Resources.frmZahteviZaPregledStatistic;
             InitializeComponent();
         }

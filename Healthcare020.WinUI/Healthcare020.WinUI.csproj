@@ -219,6 +219,12 @@
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.Designer.cs">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\Statistics\frmPoseteStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\Statistics\frmPoseteStatistic.Designer.cs">
+      <DependentUpon>frmPoseteStatistic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminDashboard\Statistics\frmPreglediStatistic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.resx">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmPoseteStatistic.resx">
+      <DependentUpon>frmPoseteStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmPreglediStatistic.resx">
       <DependentUpon>frmPreglediStatistic.cs</DependentUpon>
