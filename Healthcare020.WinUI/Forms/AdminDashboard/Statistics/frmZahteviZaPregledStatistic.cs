@@ -1,6 +1,7 @@
 ﻿using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using System;
+using FontAwesome.Sharp;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
@@ -22,6 +23,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
         {
             _apiService = new APIService(Routes.ZahteviZaPregledRoute);
             lblChartTitle.Text = "Broj kreiranih zahteva za pregled po mesecima";
+            YAxisTitle = "Broj zahteva za pregled";
+            NoDataPanel.IcnData.IconChar = IconChar.CalendarAlt;
             Text = Properties.Resources.frmZahteviZaPregledStatistic;
             InitializeComponent();
         }

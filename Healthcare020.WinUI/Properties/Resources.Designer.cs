@@ -214,6 +214,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statistika - Obavljeni pregledi.
+        /// </summary>
+        public static string frmPreglediStatistic {
+            get {
+                return ResourceManager.GetString("frmPreglediStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predefinisani podaci - Uloge.
         /// </summary>
         public static string frmRoles {

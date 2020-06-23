@@ -219,6 +219,12 @@
     <Compile Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.Designer.cs">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\Statistics\frmPreglediStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\Statistics\frmPreglediStatistic.Designer.cs">
+      <DependentUpon>frmPreglediStatistic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledStatistic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +324,12 @@
     <Compile Include="Forms\AdminDashboard\frmStartMenuAdmin.Designer.cs">
       <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\AdminDashboard\frmNewUser.resx">
       <DependentUpon>frmNewUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -359,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\PredefinedData\frmZdravstvenaStanja.resx">
       <DependentUpon>frmZdravstvenaStanja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmPreglediStatistic.resx">
+      <DependentUpon>frmPreglediStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledStatistic.resx">
       <DependentUpon>frmZahteviZaPregledStatistic.cs</DependentUpon>
@@ -408,6 +423,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\AdminDashboard\frmStartMenuAdmin.resx">
       <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
