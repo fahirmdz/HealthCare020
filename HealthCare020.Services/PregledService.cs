@@ -10,6 +10,7 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -45,6 +46,37 @@ namespace HealthCare020.Services
             return result;
         }
 
+        public override async Task<List<int>> Count(int MonthsCount)
+        {
+            if (MonthsCount == 0)
+                return new List<int> { await _dbContext.Pregledi.CountAsync() };
+
+            int startMonth = DateTime.Now.Month - MonthsCount;
+            var year = DateTime.Now.Year;
+
+            if (startMonth < 1)
+            {
+                startMonth += 12;
+                year = DateTime.Now.Year - 1;
+            }
+
+            var monthsCountsList = new List<int>();
+
+            for (int i = 0; i < MonthsCount; i++)
+            {
+                if (startMonth > 12)
+                {
+                    startMonth = 1;
+                    year++;
+                }
+                monthsCountsList.Add(await _dbContext.Pregledi.CountAsync(x => x.IsOdradjen && 
+                                                                               x.DatumPregleda.Year == year && x.DatumPregleda.Month == startMonth));
+                startMonth++;
+            }
+
+            return monthsCountsList;
+        }
+
         public override async Task<ServiceResult> Insert(PregledUpsertDto dtoForCreation)
         {
             var doktor = await _authService.GetCurrentLoggedInDoktor();
@@ -72,8 +104,8 @@ namespace HealthCare020.Services
         public override async Task<ServiceResult> Update(int id, PregledUpsertDto dtoForUpdate)
         {
             var getPregledResult = await GetPregledForManipulation(id);
-            if(!getPregledResult.Succeeded)
-                return ServiceResult.WithStatusCode(getPregledResult.StatusCode,getPregledResult.Message);
+            if (!getPregledResult.Succeeded)
+                return ServiceResult.WithStatusCode(getPregledResult.StatusCode, getPregledResult.Message);
 
             var pregledFromDb = (getPregledResult as ServiceResult<Pregled>).Data;
 
@@ -88,12 +120,12 @@ namespace HealthCare020.Services
         public override async Task<ServiceResult> Delete(int id)
         {
             var getPregledResult = await GetPregledForManipulation(id);
-            if(!getPregledResult.Succeeded)
-                return ServiceResult.WithStatusCode(getPregledResult.StatusCode,getPregledResult.Message);
+            if (!getPregledResult.Succeeded)
+                return ServiceResult.WithStatusCode(getPregledResult.StatusCode, getPregledResult.Message);
 
             var pregledFromDb = (getPregledResult as ServiceResult<Pregled>).Data;
 
-            if(await _dbContext.LekarskaUverenja.AnyAsync(x=>x.PregledId==id))
+            if (await _dbContext.LekarskaUverenja.AnyAsync(x => x.PregledId == id))
                 return ServiceResult.BadRequest($"Ne mozete brisati pregled sve dok ima lekarskih uverenja povezanih sa ovim pregledom.");
 
             await Task.Run(() =>

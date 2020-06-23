@@ -74,7 +74,6 @@ namespace HealthCare020.Services
                 startMonth++;
             }
 
-            monthsCountsList.Reverse();
             return monthsCountsList;
         }
 
