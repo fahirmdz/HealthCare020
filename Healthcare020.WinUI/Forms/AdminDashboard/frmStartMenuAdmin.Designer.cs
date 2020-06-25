@@ -38,21 +38,21 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.btnUserMenu = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuButton();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlUserMenuDropdown = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuDropdownPanel();
+            this.btnUserMenu = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuButton();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
             this.pnlTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
             this.pnlCopyright.SuspendLayout();
             this.pnlBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -70,6 +70,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             // 
             // btnStatistics
             // 
+            this.btnStatistics.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStatistics.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnStatistics.FlatAppearance.BorderSize = 0;
             this.btnStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -80,11 +81,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnStatistics.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.btnStatistics.IconSize = 32;
             this.btnStatistics.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStatistics.Location = new System.Drawing.Point(0, 319);
+            this.btnStatistics.Location = new System.Drawing.Point(0, 359);
             this.btnStatistics.Name = "btnStatistics";
             this.btnStatistics.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnStatistics.Rotation = 0D;
-            this.btnStatistics.Size = new System.Drawing.Size(220, 60);
+            this.btnStatistics.Size = new System.Drawing.Size(220, 80);
             this.btnStatistics.TabIndex = 4;
             this.btnStatistics.Text = "Statistics";
             this.btnStatistics.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -94,6 +95,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             // 
             // btnPredefinedData
             // 
+            this.btnPredefinedData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPredefinedData.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnPredefinedData.FlatAppearance.BorderSize = 0;
             this.btnPredefinedData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -104,11 +106,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnPredefinedData.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
             this.btnPredefinedData.IconSize = 32;
             this.btnPredefinedData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPredefinedData.Location = new System.Drawing.Point(0, 259);
+            this.btnPredefinedData.Location = new System.Drawing.Point(0, 279);
             this.btnPredefinedData.Name = "btnPredefinedData";
             this.btnPredefinedData.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnPredefinedData.Rotation = 0D;
-            this.btnPredefinedData.Size = new System.Drawing.Size(220, 60);
+            this.btnPredefinedData.Size = new System.Drawing.Size(220, 80);
             this.btnPredefinedData.TabIndex = 3;
             this.btnPredefinedData.Text = "Predefined data";
             this.btnPredefinedData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,6 +120,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             // 
             // btnUsers
             // 
+            this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUsers.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnUsers.FlatAppearance.BorderSize = 0;
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -132,7 +135,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.btnUsers.Name = "btnUsers";
             this.btnUsers.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnUsers.Rotation = 0D;
-            this.btnUsers.Size = new System.Drawing.Size(220, 60);
+            this.btnUsers.Size = new System.Drawing.Size(220, 80);
             this.btnUsers.TabIndex = 1;
             this.btnUsers.Text = "Users";
             this.btnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -177,30 +180,14 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.pnlTop.TabIndex = 2;
             this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
-            // btnUserMenu
-            // 
-            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
-            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
-            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
-            this.btnUserMenu.IconSize = 44;
-            this.btnUserMenu.Location = new System.Drawing.Point(948, 9);
-            this.btnUserMenu.Name = "btnUserMenu";
-            this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
-            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnUserMenu.TabIndex = 2;
-            this.btnUserMenu.TabStop = false;
-            // 
             // lblTitleChildForm
             // 
             this.lblTitleChildForm.AutoSize = true;
-            this.lblTitleChildForm.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitleChildForm.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitleChildForm.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblTitleChildForm.Location = new System.Drawing.Point(55, 26);
+            this.lblTitleChildForm.Location = new System.Drawing.Point(65, 21);
             this.lblTitleChildForm.Name = "lblTitleChildForm";
-            this.lblTitleChildForm.Size = new System.Drawing.Size(51, 20);
+            this.lblTitleChildForm.Size = new System.Drawing.Size(55, 21);
             this.lblTitleChildForm.TabIndex = 3;
             this.lblTitleChildForm.Text = "Home";
             // 
@@ -211,10 +198,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.iconCurrentChildForm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(103)))), ((int)(((byte)(105)))));
             this.iconCurrentChildForm.IconChar = FontAwesome.Sharp.IconChar.Home;
             this.iconCurrentChildForm.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(103)))), ((int)(((byte)(105)))));
-            this.iconCurrentChildForm.IconSize = 37;
-            this.iconCurrentChildForm.Location = new System.Drawing.Point(17, 12);
+            this.iconCurrentChildForm.IconSize = 42;
+            this.iconCurrentChildForm.Location = new System.Drawing.Point(17, 9);
             this.iconCurrentChildForm.Name = "iconCurrentChildForm";
-            this.iconCurrentChildForm.Size = new System.Drawing.Size(32, 32);
+            this.iconCurrentChildForm.Size = new System.Drawing.Size(42, 42);
             this.iconCurrentChildForm.TabIndex = 0;
             this.iconCurrentChildForm.TabStop = false;
             // 
@@ -255,12 +242,28 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             // 
             this.pnlUserMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlUserMenuDropdown.Location = new System.Drawing.Point(804, 0);
+            this.pnlUserMenuDropdown.Location = new System.Drawing.Point(757, 0);
             this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
-            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(200, 100);
+            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(247, 139);
             this.pnlUserMenuDropdown.TabIndex = 0;
             this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
             this.pnlUserMenuDropdown.Visible = false;
+            // 
+            // btnUserMenu
+            // 
+            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
+            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(70)))), ((int)(((byte)(125)))));
+            this.btnUserMenu.IconSize = 44;
+            this.btnUserMenu.Location = new System.Drawing.Point(948, 9);
+            this.btnUserMenu.Name = "btnUserMenu";
+            this.btnUserMenu.Size = new System.Drawing.Size(44, 45);
+            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.btnUserMenu.TabIndex = 2;
+            this.btnUserMenu.TabStop = false;
             // 
             // frmStartMenuAdmin
             // 
@@ -286,11 +289,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
             this.pnlCopyright.ResumeLayout(false);
             this.pnlCopyright.PerformLayout();
             this.pnlBody.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.ResumeLayout(false);
 
         }

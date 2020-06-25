@@ -70,7 +70,8 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 btn.IconColor = Color.FromArgb(20, 70, 125);
                 btn.TextImageRelation = TextImageRelation.ImageBeforeText;
                 btn.ForeColor = Color.FromArgb(244, 238, 237);
-                btn.IconSize = 26;
+                btn.IconSize = 36;
+                btn.Cursor = Cursors.Hand;
                 btn.FlatAppearance.BorderSize = 0;
                 btn.Size = new Size(this.Width, this.Height / 3);
                 btn.Font = new Font("Calibri", 11.25f, FontStyle.Bold);
