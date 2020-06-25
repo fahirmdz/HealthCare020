@@ -89,7 +89,7 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(pacijent);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<PacijentDtoLL>.OK(_mapper.Map<PacijentDtoLL>(pacijent));
+            return ServiceResult.OK(_mapper.Map<PacijentDtoLL>(pacijent));
         }
 
         public override async Task<ServiceResult> Update(int id, PacijentUpsertDto dtoForUpdate)
@@ -107,7 +107,7 @@ namespace HealthCare020.Services
             _mapper.Map(dtoForUpdate.KorisnickiNalog, pacijent.KorisnickiNalog);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<PacijentDtoLL>.OK(_mapper.Map<PacijentDtoLL>(pacijent));
+            return ServiceResult.OK(_mapper.Map<PacijentDtoLL>(pacijent));
         }
 
         public override async Task<ServiceResult> Delete(int id)
@@ -166,7 +166,7 @@ namespace HealthCare020.Services
             });
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<PacijentDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<PagedList<Pacijent>> FilterAndPrepare(IQueryable<Pacijent> result, PacijentResourceParameters resourceParameters)

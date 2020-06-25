@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HealthCare020.Core.Enums;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ResponseModels;
 using HealthCare020.Core.ServiceModels;
@@ -79,7 +78,7 @@ namespace HealthCare020.Services
                 HasNext = pagedResult.HasNext,
                 HasPrevious = pagedResult.HasPrevious
             };
-            return ServiceResult<SequenceResult>.OK(serviceResultToReturn);
+            return ServiceResult.OK(serviceResultToReturn);
         }
 
         public virtual IQueryable<TEntity> GetWithEagerLoad(int? id = null)
@@ -107,9 +106,9 @@ namespace HealthCare020.Services
                 return ServiceResult.NotFound();
 
             if (EagerLoaded)
-                return ServiceResult<dynamic>.OK(PrepareDataForClient<TDtoEagerLoaded>(result));
+                return ServiceResult.OK(PrepareDataForClient<TDtoEagerLoaded>(result));
 
-            return ServiceResult<dynamic>.OK(PrepareDataForClient<TDto>(result));
+            return ServiceResult.OK(PrepareDataForClient<TDto>(result));
         }
 
 #pragma warning disable 1998

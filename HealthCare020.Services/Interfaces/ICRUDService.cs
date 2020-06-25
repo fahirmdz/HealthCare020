@@ -10,7 +10,7 @@ namespace HealthCare020.Services.Interfaces
 
         Task<ServiceResult> Update(int id, TDtoForUpdate request);
 
-        Task<ServiceResult<TDtoForUpdate>> GetAsUpdateDto(int id);
+        Task<ServiceResult> GetAsUpdateDto(int id);
 
         Task<ServiceResult> Delete(int id);
     }

@@ -32,12 +32,11 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            var resultWithData = result as ServiceResult<SequenceResult>;
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultWithData.Data.PaginationMetadata));
+            var resultSequence = result.Data as SequenceResult;
 
-            if(ShouldEagerLoad(resourceParameters))
-                return Ok((resultWithData.Data.Data as IEnumerable<TDtoEagerLoaded>).ToList());
-            return Ok((resultWithData.Data.Data as IEnumerable<TDto>).ToList());
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultSequence.PaginationMetadata));
+
+            return Ok(resultSequence.Data);
         }
 
         [HttpGet("{id}")]
@@ -48,9 +47,7 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            var resultWithData = result as ServiceResult<object>;
-
-            return Ok(resultWithData.Data);
+            return Ok(result.Data);
         }
 
 

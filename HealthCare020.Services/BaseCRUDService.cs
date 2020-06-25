@@ -34,7 +34,7 @@ namespace HealthCare020.Services
             await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<TDto>(_mapper.Map<TDto>(entity));
+            return new ServiceResult(_mapper.Map<TDto>(entity));
         }
 
         public virtual async Task<ServiceResult> Update(int id, TDtoForUpdate dtoForUpdate)
@@ -53,17 +53,17 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<TDto>.OK(_mapper.Map<TDto>(entity));
+            return ServiceResult.OK(_mapper.Map<TDto>(entity));
         }
 
-        public async Task<ServiceResult<TDtoForUpdate>> GetAsUpdateDto(int id)
+        public async Task<ServiceResult> GetAsUpdateDto(int id)
         {
             var entity = await _dbContext.Set<TEntity>().FindAsync(id);
 
             if (entity == null)
-                return new ServiceResult<TDtoForUpdate>(HttpStatusCode.NotFound,false);
+                return new ServiceResult(HttpStatusCode.NotFound,false);
 
-            return new ServiceResult<TDtoForUpdate>(_mapper.Map<TDtoForUpdate>(entity));
+            return new ServiceResult(_mapper.Map<TDtoForUpdate>(entity));
         }
 
         public virtual async Task<ServiceResult> Delete(int id)
@@ -80,7 +80,7 @@ namespace HealthCare020.Services
            });
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<TDto>.NoContent();
+            return ServiceResult.NoContent();
         }
     }
 }

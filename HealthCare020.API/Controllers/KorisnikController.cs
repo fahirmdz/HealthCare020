@@ -55,7 +55,7 @@ namespace HealthCare020.API.Controllers
         {
             var result = await _korisnikService.ToggleLock(id, true, request.Until);
 
-            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
+            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
@@ -64,7 +64,7 @@ namespace HealthCare020.API.Controllers
         {
             var result = await _korisnikService.ToggleLock(id, false);
 
-            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
+            return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
@@ -77,8 +77,8 @@ namespace HealthCare020.API.Controllers
             {
                 return WithStatusCode(result.StatusCode, result.Message);
             }
-
-            return Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
+                
+            return Ok(result.Data);
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
@@ -92,7 +92,7 @@ namespace HealthCare020.API.Controllers
                 return WithStatusCode(result.StatusCode, result.Message);
             }
 
-            return Ok((result as ServiceResult<KorisnickiNalogDtoLL>).Data);
+            return Ok(result.Data);
         }
     }
 }

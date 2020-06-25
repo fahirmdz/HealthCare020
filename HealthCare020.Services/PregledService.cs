@@ -98,7 +98,7 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<PregledDtoLL>.OK(_mapper.Map<PregledDtoLL>(entity));
+            return ServiceResult.OK(_mapper.Map<PregledDtoLL>(entity));
         }
 
         public override async Task<ServiceResult> Update(int id, PregledUpsertDto dtoForUpdate)
@@ -107,14 +107,14 @@ namespace HealthCare020.Services
             if (!getPregledResult.Succeeded)
                 return ServiceResult.WithStatusCode(getPregledResult.StatusCode, getPregledResult.Message);
 
-            var pregledFromDb = (getPregledResult as ServiceResult<Pregled>).Data;
+            var pregledFromDb = getPregledResult.Data as Pregled;
 
             if (await ValidateModel(dtoForUpdate) is { } result && !result.Succeeded)
                 return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             _mapper.Map(dtoForUpdate, pregledFromDb);
 
-            return ServiceResult<PregledDtoLL>.OK(_mapper.Map<PregledDtoLL>(pregledFromDb));
+            return ServiceResult.OK(_mapper.Map<PregledDtoLL>(pregledFromDb));
         }
 
         public override async Task<ServiceResult> Delete(int id)
@@ -123,7 +123,8 @@ namespace HealthCare020.Services
             if (!getPregledResult.Succeeded)
                 return ServiceResult.WithStatusCode(getPregledResult.StatusCode, getPregledResult.Message);
 
-            var pregledFromDb = (getPregledResult as ServiceResult<Pregled>).Data;
+            var pregledFromDb = getPregledResult.Data as Pregled;
+
 
             if (await _dbContext.LekarskaUverenja.AnyAsync(x => x.PregledId == id))
                 return ServiceResult.BadRequest($"Ne mozete brisati pregled sve dok ima lekarskih uverenja povezanih sa ovim pregledom.");
@@ -135,7 +136,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<PregledDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<PagedList<Pregled>> FilterAndPrepare(IQueryable<Pregled> result, PregledResourceParameters resourceParameters)
@@ -222,7 +223,7 @@ namespace HealthCare020.Services
             if (pregledFromDb.DoktorId != doktor.Id)
                 return ServiceResult.Forbidden($"Nemate permisije za izmenu pregleda koje je kreirao drugi doktor.");
 
-            return ServiceResult<Pregled>.OK(pregledFromDb);
+            return ServiceResult.OK(pregledFromDb);
         }
 
         public override async Task<bool> AuthorizePacijentForGetById(int id)

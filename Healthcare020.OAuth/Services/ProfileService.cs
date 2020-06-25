@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using HealthCare020.Core.ServiceModels;
 
 namespace Healthcare020.OAuth.Services
 {
@@ -50,7 +49,7 @@ namespace Healthcare020.OAuth.Services
             if (!result.Succeeded)
                 return null;
 
-            return (result as ServiceResult<object>).Data as KorisnickiNalogDtoEL;
+            return result.Data as KorisnickiNalogDtoEL;
         }
     }
 }

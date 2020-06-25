@@ -57,7 +57,7 @@ namespace HealthCare020.Services
             var radnikInsertResult = await _radnikService.Insert(request);
             if (!radnikInsertResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
-            var radnik = (radnikInsertResult as ServiceResult<Radnik>).Data;
+            var radnik = radnikInsertResult.Data as Radnik;
             if(radnik==null)
                 throw new NullReferenceException();
 
@@ -71,7 +71,7 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<RadnikPrijemDtoLL>(_mapper.Map<RadnikPrijemDtoLL>(entity));
+            return new ServiceResult(_mapper.Map<RadnikPrijemDtoLL>(entity));
         }
 
         public override async Task<ServiceResult> Update(int id, RadnikPrijemUpsertDto dtoForUpdate)
@@ -86,7 +86,7 @@ namespace HealthCare020.Services
             _mapper.Map(dtoForUpdate, radnikPrijemFromDb.Radnik);
             var radnikUpdated = await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
 
-            return new ServiceResult<RadnikPrijemDtoLL>(_mapper.Map<RadnikPrijemDtoLL>(radnikPrijemFromDb));
+            return new ServiceResult(_mapper.Map<RadnikPrijemDtoLL>(radnikPrijemFromDb));
         }
 
         public override async Task<ServiceResult> Delete(int id)
@@ -102,7 +102,7 @@ namespace HealthCare020.Services
             });
 
             await _dbContext.SaveChangesAsync();
-            return new ServiceResult<RadnikPrijemDtoLL>();
+            return new ServiceResult();
         }
 
         public override async Task<PagedList<RadnikPrijem>> FilterAndPrepare(IQueryable<RadnikPrijem> result, RadnikPrijemResourceParameters resourceParameters)

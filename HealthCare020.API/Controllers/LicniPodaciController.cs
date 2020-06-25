@@ -32,12 +32,6 @@ namespace HealthCare020.API.Controllers
         }
 
         [Authorize(AuthorizationPolicies.AdminPolicy)]
-        public override async Task<IActionResult> Update(int id, LicniPodaciUpsertDto dtoForUpdate)
-        {
-            return await base.Update(id, dtoForUpdate);
-        }
-
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
         public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<LicniPodaciUpsertDto> patchDocument)
         {
             return await base.PartiallyUpdate(id, patchDocument);

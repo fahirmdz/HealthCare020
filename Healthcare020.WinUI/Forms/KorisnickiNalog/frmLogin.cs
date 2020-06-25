@@ -11,6 +11,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
         private static frmLogin _instance;
 
+        private frmLogin()
+        {
+            InitializeComponent();
+            txtUsername.Select();
+        }
+
         public static frmLogin Instance
         {
             get
@@ -23,10 +29,9 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 return _instance;
             }
         }
-        private frmLogin()
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
-            txtUsername.Select();  
+            Login();
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -35,7 +40,16 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             pnlBody.BringToFront();
         }
 
-        private void Login()
+        private void frmLogin_Resize(object sender, EventArgs e)
+        {
+            pnlTop.Size = new Size(Width, this.Height / 2);
+        }
+
+        private void frmLogin_Shown(object sender, EventArgs e)
+        {
+        }
+
+        private async void Login()
         {
             if (!ValidateInput())
             {
@@ -45,7 +59,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             var username = txtUsername.Text;
             var password = txtPassword.Text;
 
-            if (Auth.AuthenticateWithPassword(username, password))
+            if (await Auth.AuthenticateWithPassword(username, password))
             {
                 var startMenu = frmStartMenuAdmin.Instance;
                 startMenu.ShowAsNextMdiChild(MainForm.Instance.GetMainPanel());
@@ -53,6 +67,15 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             else
             {
                 err.SetError(txtPassword, "Netačan username ili password");
+            }
+        }
+
+        private void txtPassword_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                e.Handled = true;
+                Login();
             }
         }
 
@@ -71,29 +94,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             }
 
             return true;
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            Login();
-        }
-
-        private void txtPassword_KeyPress_1(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == Convert.ToChar(Keys.Enter))
-            {
-                e.Handled = true;
-                Login();
-            }
-        }
-
-        private void frmLogin_Shown(object sender, EventArgs e)
-        {
-        }
-
-        private void frmLogin_Resize(object sender, EventArgs e)
-        {
-            pnlTop.Size=new Size(Width,this.Height/2);
         }
     }
 }

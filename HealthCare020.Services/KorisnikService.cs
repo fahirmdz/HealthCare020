@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace HealthCare020.Services
 
@@ -49,7 +50,23 @@ namespace HealthCare020.Services
             return result;
         }
 
-        public async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request)
+        public override async Task<ServiceResult> GetById(int id, bool EagerLoaded)
+        {
+            if (id == 0)
+            {
+                var user = await _authService.LoggedInUser();
+                if(user==null)
+                    return ServiceResult.Unauthorized();
+
+                var korisnikFromDb = await _dbContext.KorisnickiNalozi.Include(x => x.RolesKorisnickiNalog)
+                    .FirstOrDefaultAsync(x => x.Id == user.Id);
+
+                return ServiceResult.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnikFromDb));
+            }
+            return await base.GetById(id, EagerLoaded);
+        }
+
+        public override async Task<ServiceResult> Insert(KorisnickiNalogUpsertDto request)
         {
             if (await ValidateModel(request) is { } validationResult && !validationResult.Succeeded)
                 return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
@@ -75,7 +92,7 @@ namespace HealthCare020.Services
             if (roleType.HasValue)
                 await AddInRole(korisnickiNalog.Id, roleType.Value);
 
-            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
         public override async Task<ServiceResult> Update(int id, KorisnickiNalogUpsertDto dtoForUpdate)
@@ -113,7 +130,7 @@ namespace HealthCare020.Services
             //Load RoleKorisnickiNalog relations
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
-            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
         public override async Task<ServiceResult> Delete(int id)
@@ -133,7 +150,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<KorisnickiNalogDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<PagedList<KorisnickiNalog>> FilterAndPrepare(IQueryable<KorisnickiNalog> result, KorisnickiNalogResourceParameters resourceParameters)
@@ -197,7 +214,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
         public async Task<ServiceResult> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
@@ -228,7 +245,7 @@ namespace HealthCare020.Services
 
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
-            return new ServiceResult<KorisnickiNalogDtoLL>(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return new ServiceResult(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
         public async Task<ServiceResult> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request)
@@ -254,7 +271,7 @@ namespace HealthCare020.Services
 
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
-            return ServiceResult<KorisnickiNalogDtoLL>.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+            return ServiceResult.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
         }
 
         private List<RoleType> RolesToAdd(RoleType roleParent)

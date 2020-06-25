@@ -37,24 +37,24 @@ namespace HealthCare020.Services
             var licniPodaciResultTemp = await _licniPodaciService.Insert(radnikDto.LicniPodaci);
             if (!licniPodaciResultTemp.Succeeded)
                 return ServiceResult.WithStatusCode(licniPodaciResultTemp.StatusCode, licniPodaciResultTemp.Message);
-            var licniPodaciResult = licniPodaciResultTemp as ServiceResult<LicniPodaciDto>;
+            var licniPodaciResult = licniPodaciResultTemp.Data as LicniPodaciDto;
 
             var korisnickiNalogResultTemp = await _korisnikService.Insert(radnikDto.KorisnickiNalog);
             if (!korisnickiNalogResultTemp.Succeeded)
                 return ServiceResult.WithStatusCode(korisnickiNalogResultTemp.StatusCode, korisnickiNalogResultTemp.Message);
-            var korisnickiNalogResult = korisnickiNalogResultTemp as ServiceResult<KorisnickiNalogDtoLL>;
+            var korisnickiNalogResult = korisnickiNalogResultTemp.Data as KorisnickiNalogDtoLL;
 
             var radnik = new Radnik
             {
-                KorisnickiNalogId = korisnickiNalogResult.Data.Id,
-                LicniPodaciId = licniPodaciResult.Data.Id,
+                KorisnickiNalogId = korisnickiNalogResult.Id,
+                LicniPodaciId = licniPodaciResult.Id,
                 StacionarnoOdeljenjeId = radnikDto.StacionarnoOdeljenjeId
             };
 
             await _dbContext.AddAsync(radnik);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<Radnik>.OK(radnik);
+            return ServiceResult.OK(radnik);
         }
 
         public async Task<ServiceResult> Update(int id, RadnikUpsertDto radnikDto)
@@ -82,7 +82,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<Radnik>.OK(entity);
+            return ServiceResult.OK(entity);
         }
 
         public async Task<ServiceResult> Delete(int id)
@@ -97,7 +97,7 @@ namespace HealthCare020.Services
 
             await Task.Run(() => { _dbContext.Remove(entity); });
 
-            return ServiceResult<Radnik>.NoContent();
+            return ServiceResult.NoContent();
         }
     }
 }

@@ -36,12 +36,12 @@ namespace Healthcare020.WinUI.Forms
             KeyPreview = true;
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
 
-            Auth.AuthenticateWithPassword("test", "testtest");
-            var loginForm = frmStartMenuAdmin.Instance;
+            await Auth.AuthenticateWithPassword("doktor", "testtest");
+            var loginForm = frmUserProfile.Instance;
             currentChild = loginForm;
             loginForm.ShowAsNextMdiChild(panelDesktop);
 

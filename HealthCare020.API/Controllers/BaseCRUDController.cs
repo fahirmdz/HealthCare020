@@ -32,7 +32,7 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok((result as ServiceResult<TDto>).Data);
+            return Ok(result.Data);
         }
 
         [Authorize]
@@ -43,7 +43,7 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            return Ok((result as ServiceResult<TDto>).Data);
+            return Ok(result.Data);
         }
 
         [Authorize]
@@ -65,7 +65,7 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            var dtoForUpdate = result.Data;
+            var dtoForUpdate = result.Data as TDtoForUpdate;
 
             patchDocument.ApplyTo(dtoForUpdate, ModelState);
 
@@ -78,7 +78,7 @@ namespace HealthCare020.API.Controllers
             if (!updateResult.Succeeded)
                 return WithStatusCode(updateResult.StatusCode, updateResult.Message);
 
-            return Ok((updateResult as ServiceResult<TDto>).Data);
+            return Ok(result.Data);
         }
 
         [HttpOptions]

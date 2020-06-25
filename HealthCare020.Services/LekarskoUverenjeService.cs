@@ -47,7 +47,7 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(lekarskoUverenje);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<LekarskoUverenjeDtoLL>.OK(_mapper.Map<LekarskoUverenjeDtoLL>(lekarskoUverenje));
+            return ServiceResult.OK(_mapper.Map<LekarskoUverenjeDtoLL>(lekarskoUverenje));
         }
 
         public override async Task<ServiceResult> Update(int id, LekarskoUverenjeUpsertDto dtoForUpdate)
@@ -63,7 +63,7 @@ namespace HealthCare020.Services
             _mapper.Map(dtoForUpdate, uverenjeFromDb);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<LekarskoUverenjeDtoLL>.OK(_mapper.Map<LekarskoUverenjeDtoLL>(uverenjeFromDb));
+            return ServiceResult.OK(_mapper.Map<LekarskoUverenjeDtoLL>(uverenjeFromDb));
         }
 
         public override async Task<PagedList<LekarskoUverenje>> FilterAndPrepare(IQueryable<LekarskoUverenje> result, LekarskoUverenjeResourceParameters resourceParameters)

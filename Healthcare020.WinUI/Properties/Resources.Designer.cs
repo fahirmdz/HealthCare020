@@ -286,6 +286,24 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ženski.
+        /// </summary>
+        public static string GenderFemale {
+            get {
+                return ResourceManager.GetString("GenderFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Muški.
+        /// </summary>
+        public static string GenderMale {
+            get {
+                return ResourceManager.GetString("GenderMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon Healthcare020_Icon {
@@ -301,6 +319,123 @@ namespace Healthcare020.WinUI.Properties {
         public static string InvalidFormat {
             get {
                 return ResourceManager.GetString("InvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adresa.
+        /// </summary>
+        public static string LabelAddress {
+            get {
+                return ResourceManager.GetString("LabelAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grad.
+        /// </summary>
+        public static string LabelCity {
+            get {
+                return ResourceManager.GetString("LabelCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drzava.
+        /// </summary>
+        public static string LabelCountry {
+            get {
+                return ResourceManager.GetString("LabelCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-mail.
+        /// </summary>
+        public static string LabelEmailAddress {
+            get {
+                return ResourceManager.GetString("LabelEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ime.
+        /// </summary>
+        public static string LabelFirstName {
+            get {
+                return ResourceManager.GetString("LabelFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pol.
+        /// </summary>
+        public static string LabelGender {
+            get {
+                return ResourceManager.GetString("LabelGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JMBG.
+        /// </summary>
+        public static string LabelJmbg {
+            get {
+                return ResourceManager.GetString("LabelJmbg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prezime.
+        /// </summary>
+        public static string LabelLastName {
+            get {
+                return ResourceManager.GetString("LabelLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naziv.
+        /// </summary>
+        public static string LabelName {
+            get {
+                return ResourceManager.GetString("LabelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lični podaci.
+        /// </summary>
+        public static string LabelPersonalData {
+            get {
+                return ResourceManager.GetString("LabelPersonalData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Broj telefona.
+        /// </summary>
+        public static string LabelPhoneNumber {
+            get {
+                return ResourceManager.GetString("LabelPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sigurnost.
+        /// </summary>
+        public static string LabelSecurity {
+            get {
+                return ResourceManager.GetString("LabelSecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korisnički profil.
+        /// </summary>
+        public static string LabelUserProfile {
+            get {
+                return ResourceManager.GetString("LabelUserProfile", resourceCulture);
             }
         }
         

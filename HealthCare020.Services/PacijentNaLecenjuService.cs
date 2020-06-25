@@ -53,14 +53,14 @@ namespace HealthCare020.Services
 
             var pacijentNaLecenju = new PacijentNaLecenju
             {
-                LicniPodaciId = (licniPodaciInsertResult as ServiceResult<LicniPodaciDto>).Data.Id,
+                LicniPodaciId = ((LicniPodaciDto)licniPodaciInsertResult.Data).Id,
                 StacionarnoOdeljenjeId = dtoForCreation.StacionarnoOdeljenjeId
             };
 
             await _dbContext.AddAsync(pacijentNaLecenju);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<PacijentNaLecenjuDtoLL>.OK(_mapper.Map<PacijentNaLecenjuDtoLL>(pacijentNaLecenju));
+            return ServiceResult.OK(_mapper.Map<PacijentNaLecenjuDtoLL>(pacijentNaLecenju));
         }
 
         public override async Task<ServiceResult> Update(int id, PacijentNaLecenjuUpsertDto dtoForUpdate)
@@ -86,7 +86,7 @@ namespace HealthCare020.Services
             if (!licniPodaciUpdateResult.Succeeded)
                 return ServiceResult.WithStatusCode(licniPodaciUpdateResult.StatusCode, licniPodaciUpdateResult.Message);
 
-            return ServiceResult<PacijentNaLecenjuDtoLL>.OK(
+            return ServiceResult.OK(
                 _mapper.Map<PacijentNaLecenjuDtoLL>(pacijentNaLecenjuFromDb));
         }
 
@@ -107,7 +107,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<PacijentNaLecenjuDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<PagedList<PacijentNaLecenju>> FilterAndPrepare(IQueryable<PacijentNaLecenju> result, PacijentNaLecenjuResourceParameters resourceParameters)

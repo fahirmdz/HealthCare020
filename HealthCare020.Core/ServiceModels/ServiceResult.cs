@@ -2,27 +2,6 @@
 
 namespace HealthCare020.Core.ServiceModels
 {
-    public class ServiceResult<T> : ServiceResult
-    {
-        public ServiceResult()
-        {
-        }
-
-        public ServiceResult(HttpStatusCode statusCode, bool succeeded, string message = "") : base(statusCode, succeeded, message)
-        {
-        }
-
-        public static ServiceResult<T> OK(T data, string message = "") => new ServiceResult<T> { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
-
-        public static ServiceResult<T> NoContent(string message = "") => new ServiceResult<T>(HttpStatusCode.NoContent, true, message);
-
-        public ServiceResult(T data):base()
-        {
-            Data = data;
-        }
-
-        public T Data { get; set; }
-    }
 
     public class ServiceResult
     {
@@ -30,6 +9,8 @@ namespace HealthCare020.Core.ServiceModels
         public bool Succeeded { get; set; } = true;
         public string Message { get; set; } = string.Empty;
         public bool HasData { get; set; } = false;
+        public object Data { get; set; }
+
 
         public ServiceResult()
         {
@@ -40,6 +21,15 @@ namespace HealthCare020.Core.ServiceModels
             Succeeded = succeeded;
             StatusCode = statusCode;
             Message = message;
+        }
+
+        public static ServiceResult OK(object data, string message = "") => new ServiceResult { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
+
+        public static ServiceResult NoContent(string message = "") => new ServiceResult(HttpStatusCode.NoContent, true, message);
+
+        public ServiceResult(object data):base()
+        {
+            Data = data;
         }
 
         public static ServiceResult WithStatusCode(HttpStatusCode statusCode, string message = "") => new ServiceResult { StatusCode = statusCode, Succeeded = (int)statusCode - 200 < 100, Message = message };
