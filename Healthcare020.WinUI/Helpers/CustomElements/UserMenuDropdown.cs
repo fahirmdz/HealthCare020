@@ -1,5 +1,4 @@
 ﻿using FontAwesome.Sharp;
-using Healthcare020.WinUI.Forms;
 using Healthcare020.WinUI.Forms.KorisnickiNalog;
 using HealthCare020.Core.Enums;
 using System;
@@ -39,7 +38,6 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             var logoutButton = new IconButton { Name = "btnLogout", Text = "Logout", IconChar = IconChar.SignOutAlt };
             logoutButton.Click += logoutButton_OnClick;
 
-
             buttons.Add(logoutButton);
             buttons.Reverse();
 
@@ -60,6 +58,8 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
             this.Controls.AddRange(buttons.ToArray());
             this.Hide();
+
+            
         }
 
         [DefaultValue(false)]
@@ -72,6 +72,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             }
         }
 
+
         [Description("Icon button which toggles this dropdown list")]
         public UserMenuButton Toggler
         {
@@ -83,14 +84,10 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             }
         }
 
-        protected void HideUserMenuDropdown(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
         protected void logoutButton_OnClick(object sender, EventArgs e)
         {
             Auth.Logout();
+            this.Hide();
         }
 
         protected override void OnResize(EventArgs eventargs)
@@ -104,7 +101,8 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
         protected void profileButton_OnClick(object sender, EventArgs e)
         {
-            frmUserProfile.Instance.ShowAsNextMdiChild(MainForm.Instance.GetMainPanel());
+            frmUserProfile.Instance.OpenAsChildOfControl(Parent);
+            this.Hide();
         }
 
         protected void toggler_OnClick(object sender, EventArgs e)
@@ -117,5 +115,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 this.BringToFront();
             }
         }
+
+        
     }
 }

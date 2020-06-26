@@ -92,7 +92,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 if (result.Succeeded)
                 {
                     if (NaucnaOblast == null)
-                        await frmStartMenuAdmin.Instance.LoadPredefinedDataCount(Routes.NaucneOblastiRoute);
+                        await frmPredefinedDataMenu.Instance.LoadPredefinedDataCount(Routes.NaucneOblastiRoute);
 
                     dlgSuccess.ShowDialog();
                     await frmNaucneOblasti.Instance.RefreshData();

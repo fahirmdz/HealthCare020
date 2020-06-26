@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Forms.AdminDashboard;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.CustomElements;
 using Healthcare020.WinUI.Helpers.DesignConfigs;
@@ -15,16 +14,14 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
     public abstract partial class DisplayDataForm<TDto> : Form
     {
         protected APIService _apiService;
-        protected PanelCheckInternetConnection _internetError;
-
         protected IBindingList _dataForDgrv;
+        protected PanelCheckInternetConnection _internetError;
         protected int CurrentRowCount;
+        protected DataGridView MainDgrv;
         protected int PossibleRowsCount;
         protected BaseResourceParameters ResourceParameters;
 
         protected string SearchText;
-        protected DataGridView MainDgrv;
-
         protected DisplayDataForm()
         {
             InitializeComponent();
@@ -57,6 +54,20 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             }
         }
 
+        public async Task RefreshData() => await LoadData();
+
+        public async void RetryConnection(object sender, EventArgs e)
+        {
+            if (ConnectionCheck.CheckForInternetConnection())
+            {
+                _internetError.Hide();
+                pnlTop.Show();
+                dgrvMain.Show();
+                pnlNavButtons.Show();
+                await LoadData();
+            }
+        }
+
         protected void AddColumnsToMainDgrv(DataGridViewColumn[] dgrvColumns)
         {
             //POSTOJI B U G PRI DODAVANJU SEKVENCE SA AddRange
@@ -64,6 +75,11 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             {
                 dgrvMain.Columns.Insert(dgrvMain.Columns.Count,column);
             }
+        }
+
+        protected virtual void btnNew_Click(object sender, EventArgs e)
+        {
+
         }
 
         protected void DgrvColumnsStyle()
@@ -76,17 +92,47 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
                 column.MinimumWidth = 2;
             }
         }
-
-        public async void RetryConnection(object sender, EventArgs e)
+        protected virtual void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (ConnectionCheck.CheckForInternetConnection())
+
+        }
+
+        protected virtual void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        protected virtual void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            //Bind nested/complex types to DataGridView cell, e.g. Grad.Drzava.Naziv -> Drzava
+            if (e.RowIndex >= CurrentRowCount - 1)
+                return;
+            DataGridView grid = (DataGridView)sender;
+            DataGridViewRow row = grid.Rows[e.RowIndex];
+            DataGridViewColumn col = grid.Columns[e.ColumnIndex];
+            if (row.DataBoundItem != null && col.DataPropertyName.Contains("."))
             {
-                _internetError.Hide();
-                pnlTop.Show();
-                dgrvMain.Show();
-                pnlNavButtons.Show();
-                await LoadData();
+                string[] props = col.DataPropertyName.Split('.');
+                PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
+                if (propInfo == null)
+                    return;
+                object val = propInfo.GetValue(row.DataBoundItem, null);
+                for (int i = 1; i < props.Length; i++)
+                {
+                    propInfo = val.GetType().GetProperty(props[i]);
+                    val = propInfo.GetValue(val, null);
+                }
+                e.Value = val;
             }
+        }
+
+        protected virtual void dgrvMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        protected void DisplayDataForm_Load(object sender, EventArgs e)
+        {
         }
 
         protected virtual async Task LoadData()
@@ -107,8 +153,12 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             this.UseWaitCursor = false;
             Cursor.Current = Cursors.Default;
         }
+        protected void SetSourceForDgrv(IBindingList source) => dgrvMain.DataSource = source;
 
-        public async Task RefreshData() => await LoadData();
+        protected virtual void txtSearch_Leave(object sender, EventArgs e)
+        {
+            SearchText = txtSearch.Text.Trim().ToLower();
+        }
 
         private async void btnNextPage_Click_1(object sender, EventArgs e)
         {
@@ -141,66 +191,5 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
                 await LoadData();
             }
         }
-
-        protected async void DisplayDataForm_Load(object sender, EventArgs e)
-        {
-            if (DesignMode)
-                return;
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(Controls);
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlSearch.Controls);
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlTop.Controls);
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlNavButtons.Controls);
-        }
-
-        protected virtual void txtSearch_Leave(object sender, EventArgs e)
-        {
-            SearchText = txtSearch.Text.Trim().ToLower();
-        }
-
-        protected virtual void btnNew_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected virtual void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            //Bind nested/complex types to DataGridView cell, e.g. Grad.Drzava.Naziv -> Drzava
-            if (e.RowIndex >= CurrentRowCount-1)
-                return;
-            DataGridView grid = (DataGridView)sender;
-            DataGridViewRow row = grid.Rows[e.RowIndex];
-            DataGridViewColumn col = grid.Columns[e.ColumnIndex];
-            if (row.DataBoundItem != null && col.DataPropertyName.Contains("."))
-            {
-                string[] props = col.DataPropertyName.Split('.');
-                PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
-                if (propInfo == null)
-                    return;
-                object val = propInfo.GetValue(row.DataBoundItem, null);
-                for (int i = 1; i < props.Length; i++)
-                {
-                    propInfo = val.GetType().GetProperty(props[i]);
-                    val = propInfo.GetValue(val, null);
-                }
-                e.Value = val;
-            }
-        }
-
-        protected virtual void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        protected virtual void dgrvMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        protected virtual void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        protected void SetSourceForDgrv(IBindingList source) => dgrvMain.DataSource = source;
     }
 }

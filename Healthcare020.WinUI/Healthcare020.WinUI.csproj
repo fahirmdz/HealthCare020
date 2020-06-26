@@ -261,6 +261,7 @@
     <Compile Include="Forms\RadnikDashboard\frmMainDashboard.Designer.cs">
       <DependentUpon>frmMainDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ControlExtensions.cs" />
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -339,6 +340,7 @@
     <Compile Include="Models\APIServiceResult.cs" />
     <Compile Include="Models\ComboBoxItem.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\APIService.cs" />
     <Compile Include="Forms\AdminDashboard\frmStartMenuAdmin.cs">

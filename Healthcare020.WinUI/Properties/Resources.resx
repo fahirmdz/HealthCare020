@@ -274,4 +274,7 @@
   <data name="TitleZahteviZaPregledeStatistic" xml:space="preserve">
     <value>Prikaz broja zahteva za preglede po mesecima</value>
   </data>
+  <data name="WrongUsernameOrPasswordMessage" xml:space="preserve">
+    <value>Netačno korisničko ime ili lozinka</value>
+  </data>
 </root>

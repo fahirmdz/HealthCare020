@@ -57,10 +57,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void frmNewUser_Load(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlTop.Controls);
-            frmStartMenuAdmin.Instance.SetClickEventToCloseUserMenu(pnlMain.Controls);
-
-
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -125,7 +121,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private async void cmbVrstaRadnika_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<RadnikDtoEL> radnici;
 
             //switch (cmbVrstaRadnika.SelectedIndex)+
             //{

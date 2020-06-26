@@ -32,8 +32,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
-            this.err = new System.Windows.Forms.ErrorProvider(this.components);
-            this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblUsername = new System.Windows.Forms.Label();
@@ -44,28 +42,19 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
+            this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnLogin = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlCopyright.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
             this.SuspendLayout();
-            // 
-            // err
-            // 
-            this.err.ContainerControl = this;
-            // 
-            // materialContextMenuStrip1
-            // 
-            this.materialContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialContextMenuStrip1.Depth = 0;
-            this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // pnlBody
             // 
             this.pnlBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlBody.BackColor = System.Drawing.Color.White;
+            this.pnlBody.Controls.Add(this.btnLogin);
             this.pnlBody.Controls.Add(this.picLogo);
             this.pnlBody.Controls.Add(this.lblUsername);
             this.pnlBody.Controls.Add(this.cbxRememberMe);
@@ -101,7 +90,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.cbxRememberMe.AutoSize = true;
             this.cbxRememberMe.Depth = 0;
-            this.cbxRememberMe.Font = new System.Drawing.Font("Roboto", 10F);
+            this.cbxRememberMe.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cbxRememberMe.Location = new System.Drawing.Point(121, 356);
             this.cbxRememberMe.Margin = new System.Windows.Forms.Padding(0);
             this.cbxRememberMe.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -187,6 +176,34 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblCopyright.TabIndex = 14;
             this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
             // 
+            // Errors
+            // 
+            this.Errors.ContainerControl = this;
+            this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLogin.BorderColor = System.Drawing.Color.Transparent;
+            this.btnLogin.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(121, 414);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnLogin.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.btnLogin.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnLogin.Size = new System.Drawing.Size(267, 37);
+            this.btnLogin.TabIndex = 23;
+            this.btnLogin.Text = "Log In";
+            this.btnLogin.TextColor = System.Drawing.Color.White;
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click_1);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,29 +224,28 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.Shown += new System.EventHandler(this.frmLogin_Shown);
             this.Resize += new System.EventHandler(this.frmLogin_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.pnlBody.ResumeLayout(false);
             this.pnlBody.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlCopyright.ResumeLayout(false);
             this.pnlCopyright.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Errors)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.ErrorProvider err;
-        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
         private System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Label lblUsername;
         private MaterialSkin.Controls.MaterialCheckBox cbxRememberMe;
         private System.Windows.Forms.Label lblPassword;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtPassword;
-        private Button_WOC btnLogin;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtUsername;
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Panel pnlCopyright;
         private System.Windows.Forms.Label lblCopyright;
+        private Button_WOC btnLogin;
+        private System.Windows.Forms.ErrorProvider Errors;
     }
 }

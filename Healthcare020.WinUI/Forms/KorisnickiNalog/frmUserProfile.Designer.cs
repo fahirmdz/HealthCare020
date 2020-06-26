@@ -35,8 +35,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblFirstLastName = new System.Windows.Forms.Label();
             this.tabUserProfile = new MaterialSkin.Controls.MaterialTabControl();
             this.tabLicniPodaci = new System.Windows.Forms.TabPage();
+            this.cmbPolovi = new System.Windows.Forms.ComboBox();
+            this.lblGrad = new MaterialSkin.Controls.MaterialLabel();
+            this.cmbGradovi = new System.Windows.Forms.ComboBox();
             this.lblEmailAddress = new MaterialSkin.Controls.MaterialLabel();
             this.txtEmail = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.lblBrojTelefona = new MaterialSkin.Controls.MaterialLabel();
             this.txtBrojTelefona = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lblPol = new MaterialSkin.Controls.MaterialLabel();
@@ -59,10 +63,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.label2 = new System.Windows.Forms.Label();
             this.lblUserProfile = new System.Windows.Forms.Label();
             this.topDivider = new MaterialSkin.Controls.MaterialDivider();
-            this.cmbGradovi = new System.Windows.Forms.ComboBox();
-            this.lblGrad = new MaterialSkin.Controls.MaterialLabel();
-            this.cmbPolovi = new System.Windows.Forms.ComboBox();
-            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.circularPictureBox1 = new Healthcare020.WinUI.Helpers.CustomElements.CircularPictureBox();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabUserProfile.SuspendLayout();
@@ -76,7 +76,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.lblFirstLastName.AutoSize = true;
             this.lblFirstLastName.Font = new System.Drawing.Font("Segoe UI Light", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstLastName.Location = new System.Drawing.Point(60, 328);
+            this.lblFirstLastName.Location = new System.Drawing.Point(62, 308);
             this.lblFirstLastName.Name = "lblFirstLastName";
             this.lblFirstLastName.Padding = new System.Windows.Forms.Padding(2);
             this.lblFirstLastName.Size = new System.Drawing.Size(185, 41);
@@ -123,17 +123,57 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.tabLicniPodaci.TabIndex = 0;
             this.tabLicniPodaci.Text = global::Healthcare020.WinUI.Properties.Resources.LabelPersonalData;
             // 
+            // cmbPolovi
+            // 
+            this.cmbPolovi.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbPolovi.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmbPolovi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPolovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbPolovi.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.cmbPolovi.FormattingEnabled = true;
+            this.cmbPolovi.Location = new System.Drawing.Point(178, 148);
+            this.cmbPolovi.Name = "cmbPolovi";
+            this.cmbPolovi.Size = new System.Drawing.Size(203, 28);
+            this.cmbPolovi.TabIndex = 37;
+            // 
+            // lblGrad
+            // 
+            this.lblGrad.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblGrad.AutoSize = true;
+            this.lblGrad.Depth = 0;
+            this.lblGrad.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblGrad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblGrad.Location = new System.Drawing.Point(474, 289);
+            this.lblGrad.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblGrad.Name = "lblGrad";
+            this.lblGrad.Size = new System.Drawing.Size(40, 19);
+            this.lblGrad.TabIndex = 36;
+            this.lblGrad.Text = "Grad";
+            // 
+            // cmbGradovi
+            // 
+            this.cmbGradovi.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbGradovi.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cmbGradovi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGradovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbGradovi.Font = new System.Drawing.Font("Segoe UI", 11.25F);
+            this.cmbGradovi.FormattingEnabled = true;
+            this.cmbGradovi.Location = new System.Drawing.Point(465, 327);
+            this.cmbGradovi.Name = "cmbGradovi";
+            this.cmbGradovi.Size = new System.Drawing.Size(203, 28);
+            this.cmbGradovi.TabIndex = 35;
+            // 
             // lblEmailAddress
             // 
             this.lblEmailAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblEmailAddress.AutoSize = true;
             this.lblEmailAddress.Depth = 0;
-            this.lblEmailAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblEmailAddress.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblEmailAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblEmailAddress.Location = new System.Drawing.Point(187, 289);
             this.lblEmailAddress.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblEmailAddress.Name = "lblEmailAddress";
-            this.lblEmailAddress.Size = new System.Drawing.Size(50, 18);
+            this.lblEmailAddress.Size = new System.Drawing.Size(51, 19);
             this.lblEmailAddress.TabIndex = 33;
             this.lblEmailAddress.Text = "E-mail";
             // 
@@ -155,17 +195,40 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.txtEmail.TabIndex = 34;
             this.txtEmail.UseSystemPasswordChar = false;
             // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
+            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(298, 393);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(101)))), ((int)(((byte)(112)))));
+            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnSave.Size = new System.Drawing.Size(254, 39);
+            this.btnSave.TabIndex = 32;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextColor = System.Drawing.Color.White;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // lblBrojTelefona
             // 
             this.lblBrojTelefona.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblBrojTelefona.AutoSize = true;
             this.lblBrojTelefona.Depth = 0;
-            this.lblBrojTelefona.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblBrojTelefona.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblBrojTelefona.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblBrojTelefona.Location = new System.Drawing.Point(474, 202);
             this.lblBrojTelefona.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblBrojTelefona.Name = "lblBrojTelefona";
-            this.lblBrojTelefona.Size = new System.Drawing.Size(91, 18);
+            this.lblBrojTelefona.Size = new System.Drawing.Size(95, 19);
             this.lblBrojTelefona.TabIndex = 30;
             this.lblBrojTelefona.Text = "Broj telefona";
             // 
@@ -192,12 +255,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblPol.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPol.AutoSize = true;
             this.lblPol.Depth = 0;
-            this.lblPol.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblPol.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblPol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblPol.Location = new System.Drawing.Point(187, 114);
             this.lblPol.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPol.Name = "lblPol";
-            this.lblPol.Size = new System.Drawing.Size(30, 18);
+            this.lblPol.Size = new System.Drawing.Size(31, 19);
             this.lblPol.TabIndex = 28;
             this.lblPol.Text = "Pol";
             // 
@@ -206,12 +269,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblJmbg.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblJmbg.AutoSize = true;
             this.lblJmbg.Depth = 0;
-            this.lblJmbg.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblJmbg.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblJmbg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblJmbg.Location = new System.Drawing.Point(474, 114);
             this.lblJmbg.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblJmbg.Name = "lblJmbg";
-            this.lblJmbg.Size = new System.Drawing.Size(51, 18);
+            this.lblJmbg.Size = new System.Drawing.Size(49, 19);
             this.lblJmbg.TabIndex = 26;
             this.lblJmbg.Text = "JMBG";
             // 
@@ -237,12 +300,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblAdresa.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdresa.AutoSize = true;
             this.lblAdresa.Depth = 0;
-            this.lblAdresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblAdresa.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblAdresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblAdresa.Location = new System.Drawing.Point(187, 202);
             this.lblAdresa.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblAdresa.Name = "lblAdresa";
-            this.lblAdresa.Size = new System.Drawing.Size(54, 18);
+            this.lblAdresa.Size = new System.Drawing.Size(56, 19);
             this.lblAdresa.TabIndex = 24;
             this.lblAdresa.Text = "Adresa";
             // 
@@ -269,12 +332,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblPrezime.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPrezime.AutoSize = true;
             this.lblPrezime.Depth = 0;
-            this.lblPrezime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblPrezime.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblPrezime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblPrezime.Location = new System.Drawing.Point(474, 25);
             this.lblPrezime.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblPrezime.Name = "lblPrezime";
-            this.lblPrezime.Size = new System.Drawing.Size(63, 18);
+            this.lblPrezime.Size = new System.Drawing.Size(63, 19);
             this.lblPrezime.TabIndex = 22;
             this.lblPrezime.Text = "Prezime";
             // 
@@ -301,12 +364,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblIme.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblIme.AutoSize = true;
             this.lblIme.Depth = 0;
-            this.lblIme.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblIme.Font = new System.Drawing.Font("Roboto", 11F);
             this.lblIme.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblIme.Location = new System.Drawing.Point(187, 25);
             this.lblIme.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblIme.Name = "lblIme";
-            this.lblIme.Size = new System.Drawing.Size(32, 18);
+            this.lblIme.Size = new System.Drawing.Size(34, 19);
             this.lblIme.TabIndex = 18;
             this.lblIme.Text = "Ime";
             // 
@@ -356,7 +419,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.pnlTabs.Controls.Add(this.tabUserProfile);
             this.pnlTabs.Controls.Add(this.tabSelector);
-            this.pnlTabs.Location = new System.Drawing.Point(320, 101);
+            this.pnlTabs.Location = new System.Drawing.Point(322, 81);
             this.pnlTabs.Name = "pnlTabs";
             this.pnlTabs.Size = new System.Drawing.Size(837, 501);
             this.pnlTabs.TabIndex = 5;
@@ -365,7 +428,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.verticalDivider.BackColor = System.Drawing.Color.Gainsboro;
             this.verticalDivider.Depth = 0;
-            this.verticalDivider.Location = new System.Drawing.Point(282, 173);
+            this.verticalDivider.Location = new System.Drawing.Point(284, 153);
             this.verticalDivider.MouseState = MaterialSkin.MouseState.HOVER;
             this.verticalDivider.Name = "verticalDivider";
             this.verticalDivider.Size = new System.Drawing.Size(1, 425);
@@ -376,7 +439,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.lblDateCreated.AutoSize = true;
             this.lblDateCreated.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateCreated.Location = new System.Drawing.Point(72, 498);
+            this.lblDateCreated.Location = new System.Drawing.Point(74, 478);
             this.lblDateCreated.Name = "lblDateCreated";
             this.lblDateCreated.Size = new System.Drawing.Size(104, 21);
             this.lblDateCreated.TabIndex = 11;
@@ -386,7 +449,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.txtDateCreated.AutoSize = true;
             this.txtDateCreated.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDateCreated.Location = new System.Drawing.Point(91, 531);
+            this.txtDateCreated.Location = new System.Drawing.Point(93, 511);
             this.txtDateCreated.Name = "txtDateCreated";
             this.txtDateCreated.Padding = new System.Windows.Forms.Padding(2);
             this.txtDateCreated.Size = new System.Drawing.Size(86, 25);
@@ -397,7 +460,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.horizontalDivider.BackColor = System.Drawing.Color.Gainsboro;
             this.horizontalDivider.Depth = 0;
-            this.horizontalDivider.Location = new System.Drawing.Point(58, 382);
+            this.horizontalDivider.Location = new System.Drawing.Point(60, 362);
             this.horizontalDivider.MouseState = MaterialSkin.MouseState.HOVER;
             this.horizontalDivider.Name = "horizontalDivider";
             this.horizontalDivider.Size = new System.Drawing.Size(200, 1);
@@ -408,7 +471,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.lblRole.AutoSize = true;
             this.lblRole.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRole.Location = new System.Drawing.Point(72, 403);
+            this.lblRole.Location = new System.Drawing.Point(74, 383);
             this.lblRole.Name = "lblRole";
             this.lblRole.Size = new System.Drawing.Size(53, 21);
             this.lblRole.TabIndex = 14;
@@ -418,7 +481,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(91, 436);
+            this.label2.Location = new System.Drawing.Point(93, 416);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(2);
             this.label2.Size = new System.Drawing.Size(61, 25);
@@ -430,7 +493,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblUserProfile.AutoSize = true;
             this.lblUserProfile.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.lblUserProfile.Location = new System.Drawing.Point(50, 9);
+            this.lblUserProfile.Location = new System.Drawing.Point(49, 5);
             this.lblUserProfile.Name = "lblUserProfile";
             this.lblUserProfile.Padding = new System.Windows.Forms.Padding(2);
             this.lblUserProfile.Size = new System.Drawing.Size(243, 49);
@@ -441,80 +504,17 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.topDivider.BackColor = System.Drawing.Color.Gainsboro;
             this.topDivider.Depth = 0;
-            this.topDivider.Location = new System.Drawing.Point(33, 63);
+            this.topDivider.Location = new System.Drawing.Point(32, 59);
             this.topDivider.MouseState = MaterialSkin.MouseState.HOVER;
             this.topDivider.Name = "topDivider";
             this.topDivider.Size = new System.Drawing.Size(1144, 1);
             this.topDivider.TabIndex = 16;
             this.topDivider.Text = "materialDivider1";
             // 
-            // cmbGradovi
-            // 
-            this.cmbGradovi.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbGradovi.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cmbGradovi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGradovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbGradovi.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.cmbGradovi.FormattingEnabled = true;
-            this.cmbGradovi.Location = new System.Drawing.Point(465, 327);
-            this.cmbGradovi.Name = "cmbGradovi";
-            this.cmbGradovi.Size = new System.Drawing.Size(203, 28);
-            this.cmbGradovi.TabIndex = 35;
-            // 
-            // lblGrad
-            // 
-            this.lblGrad.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblGrad.AutoSize = true;
-            this.lblGrad.Depth = 0;
-            this.lblGrad.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblGrad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblGrad.Location = new System.Drawing.Point(474, 289);
-            this.lblGrad.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblGrad.Name = "lblGrad";
-            this.lblGrad.Size = new System.Drawing.Size(41, 18);
-            this.lblGrad.TabIndex = 36;
-            this.lblGrad.Text = "Grad";
-            // 
-            // cmbPolovi
-            // 
-            this.cmbPolovi.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbPolovi.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cmbPolovi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPolovi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbPolovi.Font = new System.Drawing.Font("Segoe UI", 11.25F);
-            this.cmbPolovi.FormattingEnabled = true;
-            this.cmbPolovi.Location = new System.Drawing.Point(178, 148);
-            this.cmbPolovi.Name = "cmbPolovi";
-            this.cmbPolovi.Size = new System.Drawing.Size(203, 28);
-            this.cmbPolovi.TabIndex = 37;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(298, 393);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(101)))), ((int)(((byte)(112)))));
-            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnSave.Size = new System.Drawing.Size(254, 39);
-            this.btnSave.TabIndex = 32;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextColor = System.Drawing.Color.White;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // circularPictureBox1
             // 
             this.circularPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("circularPictureBox1.Image")));
-            this.circularPictureBox1.Location = new System.Drawing.Point(58, 101);
+            this.circularPictureBox1.Location = new System.Drawing.Point(60, 81);
             this.circularPictureBox1.Name = "circularPictureBox1";
             this.circularPictureBox1.Size = new System.Drawing.Size(200, 200);
             this.circularPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

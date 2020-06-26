@@ -93,7 +93,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 if (result.Succeeded)
                 {
                     if (ZdravstvenoStanje == null)
-                        await frmStartMenuAdmin.Instance.LoadPredefinedDataCount(Routes.ZdravstvenaStanjaRoute);
+                        await frmPredefinedDataMenu.Instance.LoadPredefinedDataCount(Routes.ZdravstvenaStanjaRoute);
 
                     dlgSuccess.ShowDialog();
                     Close();

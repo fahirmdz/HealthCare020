@@ -5,6 +5,7 @@ using HealthCare020.Core.Enums;
 using Healthcare020.WinUI.Forms.AdminDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard;
 using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
@@ -30,10 +31,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
                 return _instance;
             }
-        }
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            Login();
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -63,20 +60,20 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
             if (await Auth.AuthenticateWithPassword(username, password))
             {
-                Form startMenu=null;
+                Form formToOpen=null;
 
                 if (Auth.Role == RoleType.Administrator)
-                    startMenu = frmStartMenuAdmin.Instance;
+                    formToOpen = frmStartMenuAdmin.Instance;
                 else if(Auth.Role==RoleType.Doktor || Auth.Role==RoleType.MedicinskiTehnicar)
-                    startMenu=frmMainDashboard.Instance;
-                if (startMenu == null)
+                    formToOpen=frmMainDashboard.Instance;
+                if (formToOpen == null)
                     return;
 
-                startMenu.ShowAsNextMdiChild(MainForm.Instance.GetMainPanel());
+                formToOpen.OpenAsChildOfControl(Parent);
             }
             else
             {
-                err.SetError(txtPassword, "Netačan username ili password");
+                Errors.SetError(txtPassword, Resources.WrongUsernameOrPasswordMessage);
             }
         }
 
@@ -91,19 +88,19 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
         private bool ValidateInput()
         {
-            if (string.IsNullOrWhiteSpace(txtUsername.Text))
-            {
-                err.SetError(txtUsername, "Obavezno polje");
+            if (!txtUsername.ValidTextInput(Errors))
                 return false;
-            }
 
-            if (string.IsNullOrWhiteSpace(txtPassword.Text))
-            {
-                err.SetError(txtPassword, "Obavezno polje");
+            if (!txtPassword.ValidTextInput(Errors))
                 return false;
-            }
 
+            Errors.Clear();
             return true;
+        }
+
+        private void btnLogin_Click_1(object sender, EventArgs e)
+        {
+            Login();
         }
     }
 }

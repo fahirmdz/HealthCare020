@@ -1,34 +1,35 @@
 ﻿using Flurl.Http;
-using Healthcare020.WinUI.Exceptions;
 using Healthcare020.WinUI.Forms;
+using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using System;
 using System.Linq;
 using System.Net;
 using System.Security;
 using System.Threading.Tasks;
-using HealthCare020.Core.Enums;
-using Healthcare020.WinUI.Helpers.Dialogs;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers
 {
-    public class Auth
+    public sealed class Auth
     {
         public static SecureString AccessToken { get; private set; }
 
         /// <summary>
         /// Current logged in user
         /// </summary>
-        public static KorisnickiNalogDtoLL KorisnickiNalog { get; private set; }
+        public static KorisnickiNalogDtoLL KorisnickiNalog
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Role of current logged in user
         /// </summary>
         public static RoleType Role { get; private set; }
-
 
         public static IFlurlRequest GetAuthorizedApiRequest(string relativePath = "")
         {
@@ -43,7 +44,7 @@ namespace Healthcare020.WinUI.Helpers
         /// Authenticate user with username and password and get access token (store it in Auth.AccessToken)
         /// </summary>
         /// <returns>Returns boolean that indicates operation was succeeded or no</returns>
-        public static  async Task<bool> AuthenticateWithPassword(string username, string password)
+        public static async Task<bool> AuthenticateWithPassword(string username, string password)
         {
             try
             {
@@ -62,17 +63,16 @@ namespace Healthcare020.WinUI.Helpers
                 }
                 KorisnickiNalog = result.Data;
 
-                var topRole = KorisnickiNalog.Roles.Min(x=>x);
-                Role = (RoleType) topRole;
+                var topRole = KorisnickiNalog.Roles.Min(x => x);
+                Role = (RoleType)topRole;
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
         }
-
 
         public static void Logout()
         {

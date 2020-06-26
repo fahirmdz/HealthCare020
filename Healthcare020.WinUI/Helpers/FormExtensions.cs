@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AdminDashboard;
@@ -7,24 +9,6 @@ namespace Healthcare020.WinUI.Helpers
 {
     public static class FormExtensions
     {
-        /// <summary>
-        /// Show new MDI child form and close current active child (need to set Mdi parent before call this method)
-        /// </summary>
-        public static void ShowAsNextMdiChild(this Form form, Panel panel)
-        {
-            form.Left = 0;
-            form.Top = 0;
-            form.TopLevel = false;
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.Dock = DockStyle.Fill;
-            panel.Controls.Clear();
-            panel.Controls.Add(form);
-            panel.Tag = form;
-            form.AutoScroll = false;
-            form.BringToFront();
-            form.Show();
-        }
-
         /// <summary>
         /// Open form as child of passed control
         /// </summary>
@@ -38,11 +22,13 @@ namespace Healthcare020.WinUI.Helpers
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
-            parentControl.Controls.Clear();
+            foreach (var control in parentControl.Controls.OfType<Form>())
+            {
+                parentControl.Controls.Remove(control);
+            }
+
             parentControl.Controls.Add(form);
             form.Parent = parentControl;
-            parentControl.Tag = form;
-            form.BringToFront();
             form.Show();
         }
 
