@@ -27,7 +27,6 @@ namespace Healthcare020.WinUI
             //This handler is for catching non-UI thread exception
             AppDomain.CurrentDomain.UnhandledException+=CurrentDomain_UnhandledException;
 
-            Auth.AuthenticateWithPassword("doktoracc", "testtest");
             Application.Run(MainForm.Instance);
         }
 

@@ -91,7 +91,7 @@ namespace Healthcare020.WinUI.Forms
 
         protected virtual async Task LoadData()
         {
-            Application.UseWaitCursor = true;
+            this.UseWaitCursor = true;
 
             var result = await _apiService
                 .Get<TDto>(ResourceParameters);
@@ -104,8 +104,8 @@ namespace Healthcare020.WinUI.Forms
             btnNextPage.Enabled = ResourceParameters.PageNumber != result.PaginationMetadata.TotalPages;
             btnPrevPage.Enabled = ResourceParameters.PageNumber != 1;
 
-            Application.UseWaitCursor = false;
-            dgrvMain.Cursor = this.Cursor;
+            this.UseWaitCursor = false;
+            Cursor.Current = Cursors.Default;
         }
 
         public async Task RefreshData() => await LoadData();

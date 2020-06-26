@@ -58,7 +58,7 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(uputnica);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<UputnicaDtoLL>.OK(_mapper.Map<UputnicaDtoLL>(uputnica));
+            return ServiceResult.OK(_mapper.Map<UputnicaDtoLL>(uputnica));
         }
 
         public override async Task<ServiceResult> Update(int id, UputnicaUpsertDto dtoForUpdate)
@@ -68,7 +68,7 @@ namespace HealthCare020.Services
 
                 return ServiceResult.WithStatusCode(getUputnicaResult.StatusCode, getUputnicaResult.Message);
 
-            var uputnicaFromDb = (getUputnicaResult as ServiceResult<Uputnica>).Data;
+            var uputnicaFromDb = getUputnicaResult.Data as Uputnica;
 
             if (uputnicaFromDb == null)
                 return ServiceResult.NotFound();
@@ -79,7 +79,7 @@ namespace HealthCare020.Services
             _mapper.Map(dtoForUpdate, uputnicaFromDb);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<UputnicaDtoLL>.OK(_mapper.Map<UputnicaDtoLL>(uputnicaFromDb));
+            return ServiceResult.OK(_mapper.Map<UputnicaDtoLL>(uputnicaFromDb));
         }
 
         public override async Task<ServiceResult> Delete(int id)
@@ -91,7 +91,7 @@ namespace HealthCare020.Services
             if (!getUputnicaResult.Succeeded)
                 return ServiceResult.WithStatusCode(getUputnicaResult.StatusCode, getUputnicaResult.Message);
 
-            var uputnicaFromDb = (getUputnicaResult as ServiceResult<Uputnica>).Data;
+            var uputnicaFromDb = getUputnicaResult.Data as Uputnica;
 
             await Task.Run(() =>
             {
@@ -100,7 +100,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<UputnicaDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<bool> AuthorizePacijentForGetById(int id)
@@ -129,7 +129,7 @@ namespace HealthCare020.Services
             if (uputnicaFromDb.UputioDoktorId != doktor.Id)
                 return ServiceResult.Forbidden($"Nemate permisije za izmenu uputnica koje je kreirao drugi doktor.");
 
-            return ServiceResult<Uputnica>.OK(uputnicaFromDb);
+            return ServiceResult.OK(uputnicaFromDb);
         }
 
         private async Task<ServiceResult> ValidateModel(UputnicaUpsertDto dto)

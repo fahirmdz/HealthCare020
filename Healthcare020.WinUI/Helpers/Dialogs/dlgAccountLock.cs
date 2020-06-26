@@ -74,5 +74,11 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.DialogResult = DialogResult.OK;
             NumberOfHours = int.Parse(cmbBrojSati.SelectedItem.ToString());
         }
+
+        private void pnlMain_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Close();
+            Dispose();
+        }
     }
 }

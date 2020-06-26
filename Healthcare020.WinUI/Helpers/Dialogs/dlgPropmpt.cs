@@ -54,6 +54,12 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.DialogResult = DialogResult.OK;
         }
 
+        private void pnlMain_MouseClick(object sender, MouseEventArgs e)
+        {
+            Close();
+            Dispose();
+        }
+
 #pragma warning restore 1998
     }
 }

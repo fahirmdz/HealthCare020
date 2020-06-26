@@ -30,23 +30,23 @@ namespace HealthCare020.Services
         {
             var user = await _authService.LoggedInUser();
 
-            if (await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
+            if (await _authService.CurrentUserIsInRoleAsync(RoleType.RadnikPrijem) ||
+                await _authService.CurrentUserIsInRoleAsync(RoleType.MedicinskiTehnicar) ||
+                await _authService.CurrentUserIsInRoleAsync(RoleType.Doktor))
+            {
+                if (!await _dbContext.Radnici
+                    .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.LicniPodaciId == id))
+                {
+                    return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih uposlenika.");
+                }
+            }
+            else if (await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
             {
                 if (!await _dbContext.Pacijenti
                         .Include(x => x.ZdravstvenaKnjizica)
                         .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.ZdravstvenaKnjizica.LicniPodaciId == id))
                 {
                     return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih pacijenata.");
-                }
-            }
-            else if (await _authService.CurrentUserIsInRoleAsync(RoleType.RadnikPrijem) ||
-                    await _authService.CurrentUserIsInRoleAsync(RoleType.MedicinskiTehnicar) ||
-                    await _authService.CurrentUserIsInRoleAsync(RoleType.Doktor))
-            {
-                if (!await _dbContext.Radnici
-                    .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.LicniPodaciId == id))
-                {
-                    return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih uposlenika.");
                 }
             }
 
@@ -76,12 +76,12 @@ namespace HealthCare020.Services
             await _dbContext.SaveChangesAsync();
 
             entity.Grad = await _dbContext.Gradovi.Include(x => x.Drzava).FirstOrDefaultAsync(x => x.Id == entity.GradId);
-            return new ServiceResult<LicniPodaciDto>(_mapper.Map<LicniPodaciDto>(entity));
+            return new ServiceResult(_mapper.Map<LicniPodaciDto>(entity));
         }
 
         public override async Task<ServiceResult> Update(int id, LicniPodaciUpsertDto request)
         {
-            if (await ValidateModel(request) is { } validationResult && !validationResult.Succeeded)
+            if (await ValidateModel(request,id) is { } validationResult && !validationResult.Succeeded)
                 return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
 
             var entity = await _dbContext.LicniPodaci.FindAsync(id);
@@ -101,7 +101,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<LicniPodaciDto>(_mapper.Map<LicniPodaciDto>(entity));
+            return new ServiceResult(_mapper.Map<LicniPodaciDto>(entity));
         }
 
         public override async Task<ServiceResult> Delete(int id)
@@ -109,18 +109,24 @@ namespace HealthCare020.Services
             return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
 
-        private async Task<ServiceResult> ValidateModel(LicniPodaciUpsertDto dto)
+        /// <summary>
+        /// Prevent data duplication
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="id">Pass ID of entity if validation is from Update method</param>
+        /// <returns></returns>
+        private async Task<ServiceResult> ValidateModel(LicniPodaciUpsertDto dto, int id = 0)
         {
             if (!await _dbContext.Gradovi.AnyAsync(x => x.Id == dto.GradId))
                 return ServiceResult.NotFound($"Grad sa ID-em {dto.GradId} nije pronadjen");
 
-            if (await _dbContext.LicniPodaci.AnyAsync(x => x.JMBG == dto.JMBG))
+            if (await _dbContext.LicniPodaci.AnyAsync(x =>x.Id != id &&  x.JMBG == dto.JMBG))
                 return ServiceResult.BadRequest($"Vec postoji korisnik sa istim JMBG.");
 
-            if (await _dbContext.LicniPodaci.AnyAsync(x => x.BrojTelefona == dto.BrojTelefona.Trim()))
+            if (await _dbContext.LicniPodaci.AnyAsync(x => x.Id != id && x.BrojTelefona == dto.BrojTelefona.Trim()))
                 return ServiceResult.BadRequest($"Vec postoji korisnik koji koristi broj telefona -> {dto.BrojTelefona}");
 
-            if (await _dbContext.LicniPodaci.AnyAsync(x => x.EmailAddress == dto.EmailAddress.Trim()))
+            if (await _dbContext.LicniPodaci.AnyAsync(x =>x.Id != id &&  x.EmailAddress == dto.EmailAddress.Trim()))
                 return ServiceResult.BadRequest($"Vec postoji korisnik koji koristi e-mail adresu -> {dto.EmailAddress}");
 
             return ServiceResult.WithStatusCode(HttpStatusCode.OK);

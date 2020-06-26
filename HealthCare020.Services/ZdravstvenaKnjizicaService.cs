@@ -57,14 +57,14 @@ namespace HealthCare020.Services
 
             var zdravstvenaKnjizica = new ZdravstvenaKnjizica
             {
-                LicniPodaciId = (licniPodaciInsertResult as ServiceResult<LicniPodaciDto>).Data.Id,
+                LicniPodaciId = ((LicniPodaciDto)licniPodaciInsertResult.Data).Id,
                 DoktorId = dtoForCreation.DoktorId
             };
 
             await _dbContext.AddAsync(zdravstvenaKnjizica);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<ZdravstvenaKnjizicaDtoLL>.OK(
+            return ServiceResult.OK(
                 _mapper.Map<ZdravstvenaKnjizicaDtoLL>(zdravstvenaKnjizica));
         }
 
@@ -86,7 +86,7 @@ namespace HealthCare020.Services
             zdravstvenaKnjizicaFromDb.DoktorId = dtoForUpdate.DoktorId;
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<ZdravstvenaKnjizicaDtoLL>.OK(
+            return ServiceResult.OK(
                 _mapper.Map<ZdravstvenaKnjizicaDtoLL>(zdravstvenaKnjizicaFromDb));
         }
 
@@ -108,7 +108,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<ZdravstvenaKnjizicaDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<PagedList<ZdravstvenaKnjizica>> FilterAndPrepare(IQueryable<ZdravstvenaKnjizica> result, ZdravstvenaKnjizicaResourceParameters resourceParameters)

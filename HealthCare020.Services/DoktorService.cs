@@ -62,7 +62,7 @@ namespace HealthCare020.Services
             if (!radnikInsertResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikInsertResult.StatusCode, radnikInsertResult.Message);
 
-            var radnik = (radnikInsertResult as ServiceResult<Radnik>).Data;
+            var radnik = radnikInsertResult.Data as Radnik;
 
             if (radnik == null)
                 throw new NullReferenceException();
@@ -78,7 +78,7 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<DoktorDtoLL>.OK(_mapper.Map<DoktorDtoLL>(entity));
+            return ServiceResult.OK(_mapper.Map<DoktorDtoLL>(entity));
         }
 
         public override async Task<ServiceResult> Update(int id, DoktorUpsertDto dtoForUpdate)
@@ -106,7 +106,7 @@ namespace HealthCare020.Services
             var radnikUpdateResult = await _radnikService.Update(doktorFromDb.RadnikId, dtoForUpdate);
             if (!radnikUpdateResult.Succeeded)
                 return ServiceResult.WithStatusCode(radnikUpdateResult.StatusCode, radnikUpdateResult.Message);
-            return ServiceResult<DoktorDtoLL>.OK(_mapper.Map<DoktorDtoLL>(doktorFromDb));
+            return ServiceResult.OK(_mapper.Map<DoktorDtoLL>(doktorFromDb));
         }
 
         public override async Task<ServiceResult> Delete(int id)
@@ -141,7 +141,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<DoktorDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<PagedList<Doktor>> FilterAndPrepare(IQueryable<Doktor> result, DoktorResourceParameters resourceParameters)
@@ -166,6 +166,9 @@ namespace HealthCare020.Services
                 if (!string.IsNullOrEmpty(resourceParameters.NaucnaOblast) && await result.AnyAsync())
                     result = result.Where(x =>
                         x.NaucnaOblast.Naziv.ToLower().StartsWith(resourceParameters.NaucnaOblast.ToLower()));
+
+                if (await result.AnyAsync() && resourceParameters.KorisnickiNalogId.HasValue)
+                    result = result.Where(x => x.Radnik.KorisnickiNalogId == resourceParameters.KorisnickiNalogId);
 
                 if (resourceParameters.EagerLoaded)
                     PropertyCheck<DoktorDtoEL>(resourceParameters.OrderBy);

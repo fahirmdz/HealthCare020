@@ -86,7 +86,7 @@ namespace HealthCare020.Services
             await _dbContext.AddAsync(zahtevZaPosetu);
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<ZahtevZaPosetuDtoLL>.OK(_mapper.Map<ZahtevZaPosetuDtoLL>(zahtevZaPosetu));
+            return ServiceResult.OK(_mapper.Map<ZahtevZaPosetuDtoLL>(zahtevZaPosetu));
         }
 
         public override async Task<ServiceResult> Update(int id, ZahtevZaPosetuUpsertDto dtoForUpdate)
@@ -108,7 +108,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return ServiceResult<ZahtevZaPosetuDtoLL>.NoContent();
+            return ServiceResult.NoContent();
         }
 
         public override async Task<PagedList<ZahtevZaPosetu>> FilterAndPrepare(IQueryable<ZahtevZaPosetu> result, ZahtevZaPosetuResourceParameters resourceParameters)

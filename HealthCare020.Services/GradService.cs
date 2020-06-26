@@ -47,7 +47,7 @@ namespace HealthCare020.Services
             await _dbContext.Gradovi.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<GradDtoLL>(_mapper.Map<GradDtoLL>(entity));
+            return new ServiceResult(_mapper.Map<GradDtoLL>(entity));
         }
 
         public override async Task<ServiceResult> Update(int id, GradUpsertDto request)
@@ -69,7 +69,7 @@ namespace HealthCare020.Services
 
             await _dbContext.SaveChangesAsync();
 
-            return new ServiceResult<GradDtoLL>(_mapper.Map<GradDtoLL>(entity));
+            return new ServiceResult(_mapper.Map<GradDtoLL>(entity));
         }
 
         public override async Task<ServiceResult> Delete(int id)

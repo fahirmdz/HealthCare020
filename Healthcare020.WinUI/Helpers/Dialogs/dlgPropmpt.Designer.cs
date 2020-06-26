@@ -135,6 +135,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(996, 546);
             this.pnlMain.TabIndex = 1;
+            this.pnlMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlMain_MouseClick);
             // 
             // dlgPropmpt
             // 

@@ -17,6 +17,7 @@ namespace Healthcare020.WinUI.Helpers
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
+            panel.Controls.Clear();
             panel.Controls.Add(form);
             panel.Tag = form;
             form.AutoScroll = false;
