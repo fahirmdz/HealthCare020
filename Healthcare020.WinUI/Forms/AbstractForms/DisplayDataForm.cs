@@ -1,18 +1,18 @@
-﻿using Healthcare020.WinUI.Forms.AdminDashboard;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.CustomElements;
-using Healthcare020.WinUI.Helpers.DesignConfigs;
-using Healthcare020.WinUI.Services;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCare020.Core.ResourceParameters;
+using Healthcare020.WinUI.Forms.AdminDashboard;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.CustomElements;
+using Healthcare020.WinUI.Helpers.DesignConfigs;
+using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Forms
+namespace Healthcare020.WinUI.Forms.AbstractForms
 {
-    public partial class DisplayDataForm<TDto> : Form
+    public abstract partial class DisplayDataForm<TDto> : Form
     {
         protected APIService _apiService;
         protected PanelCheckInternetConnection _internetError;

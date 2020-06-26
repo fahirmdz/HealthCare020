@@ -6,6 +6,7 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using System.Linq;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
@@ -53,7 +54,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private void btnBack_Click(object sender, System.EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Instance);
+            frmDrzave.Instance.OpenAsChildOfControl(Parent);
         }
 
         private async void btnSave_Click(object sender, System.EventArgs e)
@@ -81,7 +82,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                         await frmStartMenuAdmin.Instance.LoadPredefinedDataCount(Routes.DrzaveRoute);
 
                     dlgSuccess.ShowDialog();
-                    frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Instance);
+                    frmDrzave.Instance.OpenAsChildOfControl(Parent);
                     Dispose();
                 }
             }

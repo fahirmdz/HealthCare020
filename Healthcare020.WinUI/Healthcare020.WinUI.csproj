@@ -237,10 +237,10 @@
     <Compile Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledStatistic.Designer.cs">
       <DependentUpon>frmZahteviZaPregledStatistic.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DisplayDataForm.cs">
+    <Compile Include="Forms\AbstractForms\DisplayDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DisplayDataForm.Designer.cs">
+    <Compile Include="Forms\AbstractForms\DisplayDataForm.Designer.cs">
       <DependentUpon>DisplayDataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\KorisnickiNalog\frmUserProfile.cs">
@@ -249,11 +249,17 @@
     <Compile Include="Forms\KorisnickiNalog\frmUserProfile.Designer.cs">
       <DependentUpon>frmUserProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StatisticChartForm.cs">
+    <Compile Include="Forms\AbstractForms\StatisticChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StatisticChartForm.Designer.cs">
+    <Compile Include="Forms\AbstractForms\StatisticChartForm.Designer.cs">
       <DependentUpon>StatisticChartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\frmMainDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\frmMainDashboard.Designer.cs">
+      <DependentUpon>frmMainDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
@@ -398,14 +404,17 @@
     <EmbeddedResource Include="Forms\AdminDashboard\Statistics\frmZahteviZaPregledStatistic.resx">
       <DependentUpon>frmZahteviZaPregledStatistic.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DisplayDataForm.resx">
+    <EmbeddedResource Include="Forms\AbstractForms\DisplayDataForm.resx">
       <DependentUpon>DisplayDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KorisnickiNalog\frmUserProfile.resx">
       <DependentUpon>frmUserProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StatisticChartForm.resx">
+    <EmbeddedResource Include="Forms\AbstractForms\StatisticChartForm.resx">
       <DependentUpon>StatisticChartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\frmMainDashboard.resx">
+      <DependentUpon>frmMainDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\CustomElements\NoDataPanel.resx">
       <DependentUpon>NoDataPanel.cs</DependentUpon>

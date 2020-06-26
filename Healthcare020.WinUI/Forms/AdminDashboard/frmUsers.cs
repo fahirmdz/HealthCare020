@@ -9,6 +9,7 @@ using HealthCare020.Core.ResourceParameters;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AbstractForms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -177,7 +178,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         protected override void btnNew_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmNewUser.Instance);
+            frmNewUser.Instance.OpenAsChildOfControl(Parent);
         }
     }
 }

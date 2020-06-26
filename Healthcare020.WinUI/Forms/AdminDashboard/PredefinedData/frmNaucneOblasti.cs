@@ -4,6 +4,7 @@ using HealthCare020.Core.ResourceParameters;
 using System.Drawing;
 using System.Windows.Forms;
 using HealthCare020.Core.Constants;
+using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 

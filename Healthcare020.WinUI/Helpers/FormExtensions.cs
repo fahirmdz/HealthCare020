@@ -25,6 +25,27 @@ namespace Healthcare020.WinUI.Helpers
             form.Show();
         }
 
+        /// <summary>
+        /// Open form as child of passed control
+        /// </summary>
+        /// <param name="form">Form child</param>
+        /// <param name="parentControl">Parent control</param>
+        public static void OpenAsChildOfControl(this Form form, Control parentControl)
+        {
+            if (form == null || parentControl == null)
+                return;
+
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            parentControl.Controls.Clear();
+            parentControl.Controls.Add(form);
+            form.Parent = parentControl;
+            parentControl.Tag = form;
+            form.BringToFront();
+            form.Show();
+        }
+
 
         public static void ShowDialogWithBlurryBackground(this Form dialog)
         {

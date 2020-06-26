@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
+using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 

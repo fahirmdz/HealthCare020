@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AdminDashboard;
 using Healthcare020.WinUI.Forms.KorisnickiNalog;
+using Healthcare020.WinUI.Forms.RadnikDashboard;
 using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms
@@ -38,23 +39,14 @@ namespace Healthcare020.WinUI.Forms
             currentChild = null;
         }
 
-        public void OpenAsChildForm(Form form)
-        {
-            form.TopLevel = false;
-            form.Dock = DockStyle.Fill;
-            form.FormBorderStyle = FormBorderStyle.None;
-            panelDesktop.Controls.Add(form);
-            form.Show();
-        }
-
         private async void MainForm_Load(object sender, EventArgs e)
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
 
             if(currentChild==null)
             {
-                await Auth.AuthenticateWithPassword("test", "testtest");
-                var loginForm = frmStartMenuAdmin.Instance;
+                await Auth.AuthenticateWithPassword("doktor", "testtest");
+                var loginForm = frmMainDashboard.Instance;
                 loginForm.ShowAsNextMdiChild(panelDesktop);
             }
 
