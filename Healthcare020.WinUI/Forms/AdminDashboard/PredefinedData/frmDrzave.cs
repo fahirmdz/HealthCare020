@@ -7,6 +7,8 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
@@ -83,7 +85,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         protected override void btnNew_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmNewDrzava.Instance);
+            frmNewDrzava.Instance.OpenAsChildOfControl(Parent);
         }
 
         protected override async void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -116,7 +118,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             if (MainDgrv.Columns[e.ColumnIndex].Name != "Izbriši")
             {
-                frmStartMenuAdmin.Instance.OpenChildForm(frmNewDrzava.InstanceWithData(drzava));
+                frmNewDrzava.InstanceWithData(drzava).OpenAsChildOfControl(Parent);
             }
         }
     }

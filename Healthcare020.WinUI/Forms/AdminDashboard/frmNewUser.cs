@@ -7,6 +7,7 @@ using HealthCare020.Core.Constants;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
+using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 using MaterialSkin.Controls;
@@ -50,7 +51,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmUsers.Instance);
+            frmUsers.Instance.OpenAsChildOfControl(Parent);
         }
         
 
@@ -85,7 +86,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 if (result.Succeeded)
                 {
                     dlgSuccess.ShowDialog();
-                    frmStartMenuAdmin.Instance.OpenChildForm(frmUsers.Instance);
+                    frmUsers.Instance.OpenAsChildOfControl(Parent);
                 }
             }
         }

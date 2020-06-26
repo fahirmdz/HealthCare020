@@ -68,17 +68,17 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void btnZakazivanjeStatistic_Click(object sender, System.EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmZahteviZaPregledStatistic.Instance);
+            frmZahteviZaPregledStatistic.Instance.OpenAsChildOfControl(Parent);
         }
 
         private void btnPreglediStatistic_Click(object sender, System.EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmPreglediStatistic.Instance);
+            frmPreglediStatistic.Instance.OpenAsChildOfControl(Parent);
         }
 
         private void btnPoseteStatistic_Click(object sender, System.EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmPoseteStatistic.Instance);
+            frmPoseteStatistic.Instance.OpenAsChildOfControl(Parent);
         }
     }
 }

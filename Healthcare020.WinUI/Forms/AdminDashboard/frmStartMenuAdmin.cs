@@ -182,7 +182,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var frmUsers = AdminDashboard.frmUsers.Instance;
             if (frmUsers != null)
             {
-                OpenChildForm(frmUsers.Instance);
+                frmUsers.OpenAsChildOfControl(pnlBody);
             }
             else
             {
@@ -196,8 +196,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var frmPredefinedData = frmPredefinedDataMenu.Instance;
             if (frmPredefinedData != null)
             {
-                frmPredefinedData.ParentControl = pnlBody;
-                OpenChildForm(frmPredefinedData);
+                frmPredefinedData.OpenAsChildOfControl(pnlBody);
             }
             else
             {
@@ -211,7 +210,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var frmStatisticsMenu = AdminDashboard.frmStatisticsMenu.Instance;
             if (frmStatisticsMenu != null)
             {
-                OpenChildForm(frmStatisticsMenu);
+                frmStatisticsMenu.OpenAsChildOfControl(pnlBody);
             }
             else
             {
@@ -221,8 +220,12 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            if (currentChildForm != null)
-                currentChildForm.Close();
+            foreach (var form in pnlBody.Controls.OfType<Form>())
+            {
+                form.Dispose();
+                form.Close();
+            }
+
             Reset();
         }
 
@@ -233,29 +236,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             iconCurrentChildForm.IconChar = IconChar.Home;
             iconCurrentChildForm.IconColor = RGBColors.color5;
             lblTitleChildForm.Text = "Home";
-        }
-
-        public void OpenChildForm(Form childForm)
-        {
-            if (childForm == currentChildForm)
-                return;
-
-            if (currentChildForm != null)
-            {
-                //open only form
-                currentChildForm.Close();
-            }
-
-            currentChildForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            pnlBody.Controls.Add(childForm);
-            pnlBody.Tag = childForm;
-            childForm.BringToFront();
-            lblTitleChildForm.Text = childForm.Text;
-            childForm.Show();
-            SetClickEventToCloseUserMenu(childForm.Controls);
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -280,6 +260,16 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             currentChildForm.Dispose();
+        }
+
+        private void pnlBody_ControlAdded(object sender, ControlEventArgs e)
+        {
+            currentChildForm = pnlBody.Controls.OfType<Form>().First();
+            if(currentChildForm==null)
+                return;
+
+            lblTitleChildForm.Text = currentChildForm.Text;
+            SetClickEventToCloseUserMenu(currentChildForm.Controls);
         }
     }
 }

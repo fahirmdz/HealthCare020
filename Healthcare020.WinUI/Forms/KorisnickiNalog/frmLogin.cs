@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using HealthCare020.Core.Enums;
 using Healthcare020.WinUI.Forms.AdminDashboard;
+using Healthcare020.WinUI.Forms.RadnikDashboard;
 using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
@@ -61,7 +63,15 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
             if (await Auth.AuthenticateWithPassword(username, password))
             {
-                var startMenu = frmStartMenuAdmin.Instance;
+                Form startMenu=null;
+
+                if (Auth.Role == RoleType.Administrator)
+                    startMenu = frmStartMenuAdmin.Instance;
+                else if(Auth.Role==RoleType.Doktor || Auth.Role==RoleType.MedicinskiTehnicar)
+                    startMenu=frmMainDashboard.Instance;
+                if (startMenu == null)
+                    return;
+
                 startMenu.ShowAsNextMdiChild(MainForm.Instance.GetMainPanel());
             }
             else

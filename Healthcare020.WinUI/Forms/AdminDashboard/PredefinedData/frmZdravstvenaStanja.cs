@@ -6,6 +6,7 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AbstractForms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {

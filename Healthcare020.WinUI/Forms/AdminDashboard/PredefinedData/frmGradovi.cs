@@ -6,6 +6,8 @@ using HealthCare020.Core.ResourceParameters;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
@@ -99,13 +101,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             if (MainDgrv.Columns[e.ColumnIndex].Name != "Brisanje")
             {
-                frmStartMenuAdmin.Instance.OpenChildForm(frmNewGrad.InstanceWithData(grad));
+                frmNewGrad.InstanceWithData(grad).OpenAsChildOfControl(Parent);
             }
         }
 
         protected override void btnNew_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmNewGrad.Instance);
+            frmNewGrad.Instance.OpenAsChildOfControl(Parent);
         }
 
         protected override async void txtSearch_Leave(object sender, EventArgs e)

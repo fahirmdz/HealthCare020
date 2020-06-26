@@ -1,6 +1,6 @@
-﻿namespace Healthcare020.WinUI.Forms
+﻿namespace Healthcare020.WinUI.Forms.AbstractForms
 {
-    partial class StatisticChartForm
+    abstract partial class StatisticChartForm
     {
         /// <summary>
         /// Required designer variable.

@@ -3,6 +3,7 @@ using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using System;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -45,27 +46,27 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void btnDrzave_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmDrzave.Instance);
+            frmDrzave.Instance.OpenAsChildOfControl(Parent);
         }
 
         private void btnZdravstvenaStanja_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmZdravstvenaStanja.Instance);
+            frmZdravstvenaStanja.Instance.OpenAsChildOfControl(Parent);
         }
 
         private void btnGradovi_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmGradovi.Instance);
+            frmGradovi.Instance.OpenAsChildOfControl(Parent);
         }
 
         private void btnRoles_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmRoles.Instance);
+            frmRoles.Instance.OpenAsChildOfControl(Parent);
         }
 
         private void btnNaucneOblasti_Click(object sender, EventArgs e)
         {
-            frmStartMenuAdmin.Instance.OpenChildForm(frmNaucneOblasti.Instance);
+            frmNaucneOblasti.Instance.OpenAsChildOfControl(Parent);
         }
     }
 }

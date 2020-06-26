@@ -39,14 +39,16 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             var logoutButton = new IconButton { Name = "btnLogout", Text = "Logout", IconChar = IconChar.SignOutAlt };
             logoutButton.Click += logoutButton_OnClick;
 
+
             buttons.Add(logoutButton);
+            buttons.Reverse();
 
             foreach (var btn in buttons)
             {
                 btn.BackColor = Color.FromArgb(0, 190, 190);
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.Dock = DockStyle.Top;
-                btn.IconColor = Color.FromArgb(20, 70, 125);
+                btn.IconColor = Color.FromArgb(53, 68, 82);
                 btn.TextImageRelation = TextImageRelation.ImageBeforeText;
                 btn.ForeColor = Color.FromArgb(244, 238, 237);
                 btn.IconSize = 36;
@@ -102,7 +104,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
         protected void profileButton_OnClick(object sender, EventArgs e)
         {
-            MainForm.Instance.OpenAsChildForm(frmUserProfile.Instance);
+            frmUserProfile.Instance.ShowAsNextMdiChild(MainForm.Instance.GetMainPanel());
         }
 
         protected void toggler_OnClick(object sender, EventArgs e)

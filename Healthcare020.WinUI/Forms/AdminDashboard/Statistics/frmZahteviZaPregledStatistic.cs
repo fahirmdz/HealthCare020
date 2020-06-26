@@ -2,6 +2,7 @@
 using HealthCare020.Core.Constants;
 using System;
 using FontAwesome.Sharp;
+using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
