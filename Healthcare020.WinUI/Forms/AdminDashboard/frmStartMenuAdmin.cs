@@ -276,5 +276,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         {
             CloseUserDropdownMenu();
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            currentChildForm.Dispose();
+        }
     }
 }

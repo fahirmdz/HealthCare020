@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AdminDashboard;
@@ -34,16 +35,28 @@ namespace Healthcare020.WinUI.Forms
             ControlBox = false;
             DoubleBuffered = true;
             KeyPreview = true;
+            currentChild = null;
+        }
+
+        public void OpenAsChildForm(Form form)
+        {
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            form.FormBorderStyle = FormBorderStyle.None;
+            panelDesktop.Controls.Add(form);
+            form.Show();
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
 
-            await Auth.AuthenticateWithPassword("doktor", "testtest");
-            var loginForm = frmUserProfile.Instance;
-            currentChild = loginForm;
-            loginForm.ShowAsNextMdiChild(panelDesktop);
+            if(currentChild==null)
+            {
+                await Auth.AuthenticateWithPassword("test", "testtest");
+                var loginForm = frmStartMenuAdmin.Instance;
+                loginForm.ShowAsNextMdiChild(panelDesktop);
+            }
 
             picClose.BringToFront();
             picMaximize.BringToFront();
@@ -142,9 +155,14 @@ namespace Healthcare020.WinUI.Forms
         public void SetLoginAsChildForm()
         {
             var loginForm = frmLogin.Instance;
-            currentChild = loginForm;
+            currentChild.Dispose();
             loginForm.ShowAsNextMdiChild(panelDesktop);
             loginForm.BringToFront();
+        }
+
+        private void panelDesktop_ControlAdded(object sender, ControlEventArgs e)
+        {
+            currentChild = panelDesktop.Controls.OfType<Form>().First();
         }
     }
 }

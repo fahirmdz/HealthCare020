@@ -10,6 +10,7 @@ using System.Net;
 using System.Security;
 using System.Threading.Tasks;
 using HealthCare020.Core.Enums;
+using Healthcare020.WinUI.Helpers.Dialogs;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers
@@ -33,7 +34,7 @@ namespace Healthcare020.WinUI.Helpers
         {
             if (!IsAuthenticated())
             {
-                throw new UnauthorizedException("Niste prijavljeni na sistem!");
+                dlgError.ShowDialog($"Niste prijavljeni na sistem");
             }
             return (Properties.Settings.Default.ApiUrl + relativePath).WithHeader("Authorization", $"Bearer {new NetworkCredential(string.Empty, AccessToken).Password}");
         }

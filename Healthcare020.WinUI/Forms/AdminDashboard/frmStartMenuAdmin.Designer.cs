@@ -244,7 +244,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.pnlUserMenuDropdown.Location = new System.Drawing.Point(757, 0);
             this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
-            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(247, 139);
+            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(247, 58);
             this.pnlUserMenuDropdown.TabIndex = 0;
             this.pnlUserMenuDropdown.Toggler = this.btnUserMenu;
             this.pnlUserMenuDropdown.Visible = false;

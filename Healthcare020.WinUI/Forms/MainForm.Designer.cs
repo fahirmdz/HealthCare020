@@ -122,6 +122,7 @@
             this.panelDesktop.Name = "panelDesktop";
             this.panelDesktop.Size = new System.Drawing.Size(1208, 630);
             this.panelDesktop.TabIndex = 12;
+            this.panelDesktop.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.panelDesktop_ControlAdded);
             this.panelDesktop.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktop_Paint);
             // 
             // MainForm

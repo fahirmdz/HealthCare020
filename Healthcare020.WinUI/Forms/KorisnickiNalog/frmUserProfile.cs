@@ -94,7 +94,10 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
 
                 if (!result.Succeeded || result.Data == null)
+                {
                     dlgError.ShowDialog("Unable to load profile data");
+                    return;
+                }
 
                 var doktor = result.Data.First();
                 licniPodaciId = doktor.Radnik?.LicniPodaciId ?? 0;
@@ -107,7 +110,10 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
 
                 if (!result.Succeeded || result?.Data == null)
+                {
                     dlgError.ShowDialog("Unable to load profile data");
+                    return;
+                }
 
                 var medTehnicar = result.Data.First();
                 licniPodaciId = medTehnicar.LicniPodaciId;
@@ -120,15 +126,29 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
 
                 if (!result.Succeeded || result?.Data == null)
+                {
                     dlgError.ShowDialog("Unable to load profile data");
+                    return;
+                }
 
                 var radnikPrijem = result.Data.First();
                 licniPodaciId = radnikPrijem.LicniPodaciId;
             }
 
+            if (licniPodaciId == 0)
+            {
+                dlgError.ShowDialog("Nismo pronasli licne podatke povezane sa ovim korisnickim nalogom");
+                return;
+            }
+
             _apiService.ChangeRoute(Routes.LicniPodaciRoute);
 
             var licniPodaciResult = await _apiService.GetById<LicniPodaciDto>(licniPodaciId, eagerLoaded: true);
+            if(!licniPodaciResult.Succeeded)
+            {
+                dlgError.ShowDialog("Unable to laod profile data");
+                return;
+            }
 
             LicniPodaci = licniPodaciResult.Data;
 

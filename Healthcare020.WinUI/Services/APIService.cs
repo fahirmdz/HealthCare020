@@ -40,7 +40,8 @@ namespace Healthcare020.WinUI.Services
 
         public void ChangeRoute(string route)
         {
-            request = Auth.GetAuthorizedApiRequest(route).AllowAnyHttpStatus();
+            request.Url = Properties.Settings.Default.ApiUrl;
+            request.AppendPathSegment(route);
         }
 
         private void RevertToBaseRequest(object resourceParameters = null)

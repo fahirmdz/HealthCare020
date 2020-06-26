@@ -1,39 +1,20 @@
-﻿using System;
+﻿using FontAwesome.Sharp;
+using Healthcare020.WinUI.Forms;
+using Healthcare020.WinUI.Forms.KorisnickiNalog;
+using HealthCare020.Core.Enums;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using FontAwesome.Sharp;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {
     public class UserMenuDropdownPanel : Panel
     {
-        private UserMenuButton _toggler;
-
-        [Description("Icon button which toggles this dropdown list")]
-        public UserMenuButton Toggler
-        {
-            get => _toggler;
-            set
-            {
-                _toggler = value;
-                _toggler.Click += toggler_OnClick;
-
-            }
-
-        }
-
         private bool _closeOnAnyActionOutside;
-        [DefaultValue(false)]
-        public bool CloseOnAnyActionOutside
-        {
-            get => _closeOnAnyActionOutside;
-            set
-            {
-                _closeOnAnyActionOutside = value;
-            }
-        }
+        private UserMenuButton _toggler;
 
         public UserMenuDropdownPanel()
         {
@@ -43,24 +24,22 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             this.BackColor = Color.FromArgb(0, 190, 190);
             this.BorderStyle = BorderStyle.None;
 
-            //Profile button
-            var profileButton = new IconButton();
-            profileButton.Name = "btnProfile";
-            profileButton.Text = "Profile";
-            profileButton.IconChar = IconChar.IdCard;
+            var buttons = new List<IconButton>();
 
-            var settingsButton = new IconButton();
-            settingsButton.Name = "btnSettings";
-            settingsButton.Text = "Settings";
-            settingsButton.IconChar = IconChar.Cog;
+            if (Auth.Role != RoleType.Administrator)
+            {
+                //Profile button
+                var profileButton = new IconButton { Name = "btnProfile", Text = "Profile", IconChar = IconChar.IdCard };
+                profileButton.Click += profileButton_OnClick;
 
-            var logoutButton = new IconButton();
-            logoutButton.Name = "btnLogout";
-            logoutButton.Text = "Logout";
-            logoutButton.IconChar = IconChar.SignOutAlt;
-            logoutButton.Click += profileButton_OnClick;
+                buttons.Add(profileButton);
+            }
 
-            var buttons = new IconButton[] { logoutButton, settingsButton, profileButton };
+            //Logout button
+            var logoutButton = new IconButton { Name = "btnLogout", Text = "Logout", IconChar = IconChar.SignOutAlt };
+            logoutButton.Click += logoutButton_OnClick;
+
+            buttons.Add(logoutButton);
 
             foreach (var btn in buttons)
             {
@@ -77,22 +56,53 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 btn.Font = new Font("Calibri", 11.25f, FontStyle.Bold);
             }
 
-            this.Controls.AddRange(buttons);
+            this.Controls.AddRange(buttons.ToArray());
             this.Hide();
         }
-        
+
+        [DefaultValue(false)]
+        public bool CloseOnAnyActionOutside
+        {
+            get => _closeOnAnyActionOutside;
+            set
+            {
+                _closeOnAnyActionOutside = value;
+            }
+        }
+
+        [Description("Icon button which toggles this dropdown list")]
+        public UserMenuButton Toggler
+        {
+            get => _toggler;
+            set
+            {
+                _toggler = value;
+                _toggler.Click += toggler_OnClick;
+            }
+        }
+
+        protected void HideUserMenuDropdown(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        protected void logoutButton_OnClick(object sender, EventArgs e)
+        {
+            Auth.Logout();
+        }
 
         protected override void OnResize(EventArgs eventargs)
         {
+            var buttonCount = Auth.Role == RoleType.Administrator ? 1 : 2;
             foreach (var btn in Controls.OfType<IconButton>())
             {
-                btn.Size=new Size(this.Width,this.Height/3);
+                btn.Size = new Size(this.Width, this.Height / buttonCount);
             }
         }
 
         protected void profileButton_OnClick(object sender, EventArgs e)
         {
-            Auth.Logout();
+            MainForm.Instance.OpenAsChildForm(frmUserProfile.Instance);
         }
 
         protected void toggler_OnClick(object sender, EventArgs e)
@@ -104,11 +114,6 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 this.Show();
                 this.BringToFront();
             }
-        }
-
-        protected void HideUserMenuDropdown(object sender, EventArgs e)
-        {
-            this.Hide();
         }
     }
 }
