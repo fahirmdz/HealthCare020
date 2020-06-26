@@ -34,11 +34,17 @@
             this.picMinimize = new FontAwesome.Sharp.IconPictureBox();
             this.picClose = new FontAwesome.Sharp.IconPictureBox();
             this.panelDesktop = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
+            this.userMenuDropdown = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuDropdownPanel();
+            this.btnUserMenu = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuButton();
             this.panelTop.SuspendLayout();
             this.pnlControlBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
+            this.panelDesktop.SuspendLayout();
+            this.pnlTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
@@ -49,7 +55,7 @@
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1208, 37);
+            this.panelTop.Size = new System.Drawing.Size(1208, 31);
             this.panelTop.TabIndex = 1;
             this.panelTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMainForm_MouseDown);
             // 
@@ -60,21 +66,22 @@
             this.pnlControlBox.Controls.Add(this.picMinimize);
             this.pnlControlBox.Controls.Add(this.picClose);
             this.pnlControlBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlControlBox.Location = new System.Drawing.Point(1058, 0);
+            this.pnlControlBox.Location = new System.Drawing.Point(1079, 0);
             this.pnlControlBox.Name = "pnlControlBox";
-            this.pnlControlBox.Size = new System.Drawing.Size(150, 37);
+            this.pnlControlBox.Size = new System.Drawing.Size(129, 31);
             this.pnlControlBox.TabIndex = 10;
             // 
             // picMaximize
             // 
             this.picMaximize.BackColor = System.Drawing.Color.Transparent;
+            this.picMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picMaximize.ForeColor = System.Drawing.SystemColors.Window;
             this.picMaximize.IconChar = FontAwesome.Sharp.IconChar.WindowMaximize;
             this.picMaximize.IconColor = System.Drawing.SystemColors.Window;
-            this.picMaximize.IconSize = 37;
+            this.picMaximize.IconSize = 31;
             this.picMaximize.Location = new System.Drawing.Point(50, 0);
             this.picMaximize.Name = "picMaximize";
-            this.picMaximize.Size = new System.Drawing.Size(50, 37);
+            this.picMaximize.Size = new System.Drawing.Size(35, 31);
             this.picMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picMaximize.TabIndex = 13;
             this.picMaximize.TabStop = false;
@@ -85,12 +92,13 @@
             // picMinimize
             // 
             this.picMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.picMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
             this.picMinimize.IconColor = System.Drawing.Color.White;
-            this.picMinimize.IconSize = 37;
+            this.picMinimize.IconSize = 31;
             this.picMinimize.Location = new System.Drawing.Point(0, 0);
             this.picMinimize.Name = "picMinimize";
-            this.picMinimize.Size = new System.Drawing.Size(50, 37);
+            this.picMinimize.Size = new System.Drawing.Size(53, 31);
             this.picMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picMinimize.TabIndex = 12;
             this.picMinimize.TabStop = false;
@@ -101,12 +109,14 @@
             // picClose
             // 
             this.picClose.BackColor = System.Drawing.Color.Transparent;
+            this.picClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picClose.Dock = System.Windows.Forms.DockStyle.Right;
             this.picClose.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.picClose.IconColor = System.Drawing.Color.White;
-            this.picClose.IconSize = 37;
-            this.picClose.Location = new System.Drawing.Point(100, 0);
+            this.picClose.IconSize = 31;
+            this.picClose.Location = new System.Drawing.Point(85, 0);
             this.picClose.Name = "picClose";
-            this.picClose.Size = new System.Drawing.Size(50, 37);
+            this.picClose.Size = new System.Drawing.Size(44, 31);
             this.picClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picClose.TabIndex = 11;
             this.picClose.TabStop = false;
@@ -117,13 +127,51 @@
             // panelDesktop
             // 
             this.panelDesktop.BackColor = System.Drawing.Color.White;
+            this.panelDesktop.Controls.Add(this.userMenuDropdown);
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktop.Location = new System.Drawing.Point(0, 37);
+            this.panelDesktop.Location = new System.Drawing.Point(0, 73);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(1208, 630);
+            this.panelDesktop.Size = new System.Drawing.Size(1208, 594);
             this.panelDesktop.TabIndex = 12;
             this.panelDesktop.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.panelDesktop_ControlAdded);
             this.panelDesktop.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktop_Paint);
+            // 
+            // pnlTop
+            // 
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.pnlTop.Controls.Add(this.btnUserMenu);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Location = new System.Drawing.Point(0, 31);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(1208, 42);
+            this.pnlTop.TabIndex = 12;
+            // 
+            // userMenuDropdown
+            // 
+            this.userMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.userMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.userMenuDropdown.Location = new System.Drawing.Point(961, 0);
+            this.userMenuDropdown.Name = "userMenuDropdown";
+            this.userMenuDropdown.Size = new System.Drawing.Size(247, 97);
+            this.userMenuDropdown.TabIndex = 0;
+            this.userMenuDropdown.Toggler = this.btnUserMenu;
+            this.userMenuDropdown.Visible = false;
+            // 
+            // btnUserMenu
+            // 
+            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
+            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUserMenu.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
+            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
+            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
+            this.btnUserMenu.IconSize = 42;
+            this.btnUserMenu.Location = new System.Drawing.Point(1150, 0);
+            this.btnUserMenu.Name = "btnUserMenu";
+            this.btnUserMenu.Size = new System.Drawing.Size(58, 42);
+            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.btnUserMenu.TabIndex = 0;
+            this.btnUserMenu.TabStop = false;
             // 
             // MainForm
             // 
@@ -134,6 +182,7 @@
             this.ClientSize = new System.Drawing.Size(1208, 667);
             this.ControlBox = false;
             this.Controls.Add(this.panelDesktop);
+            this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.panelTop);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -149,6 +198,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
+            this.panelDesktop.ResumeLayout(false);
+            this.pnlTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -160,6 +212,9 @@
         private FontAwesome.Sharp.IconPictureBox picClose;
         private FontAwesome.Sharp.IconPictureBox picMaximize;
         private FontAwesome.Sharp.IconPictureBox picMinimize;
+        private System.Windows.Forms.Panel pnlTop;
+        private Helpers.CustomElements.UserMenuDropdownPanel userMenuDropdown;
+        private Helpers.CustomElements.UserMenuButton btnUserMenu;
     }
 }
 

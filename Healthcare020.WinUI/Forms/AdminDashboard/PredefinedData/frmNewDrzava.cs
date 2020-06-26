@@ -79,7 +79,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 if (result.Succeeded)
                 {
                     if (Drzava == null)
-                        await frmStartMenuAdmin.Instance.LoadPredefinedDataCount(Routes.DrzaveRoute);
+                        await frmPredefinedDataMenu.Instance.LoadPredefinedDataCount(Routes.DrzaveRoute);
 
                     dlgSuccess.ShowDialog();
                     frmDrzave.Instance.OpenAsChildOfControl(Parent);

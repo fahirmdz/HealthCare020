@@ -18,8 +18,8 @@ namespace Healthcare020.WinUI.Services
 {
     public class APIService
     {
-        private IFlurlRequest request;
         private string BaseUrl;
+        private IFlurlRequest request;
 
         /// <summary>
         /// Create new API service with specific route
@@ -38,28 +38,18 @@ namespace Healthcare020.WinUI.Services
             }
         }
 
-        public void ChangeRoute(string route)
-        {
-            request.Url = Properties.Settings.Default.ApiUrl;
-            request.AppendPathSegment(route);
-        }
-
-        private void RevertToBaseRequest(object resourceParameters = null)
-        {
-            if (resourceParameters != null)
-            {
-                request.Url.RemoveQueryParams(resourceParameters.GetType().GetProperties().Select(x => x.Name));
-            }
-
-            request.Url = BaseUrl;
-        }
-
         /// <summary>
         /// Add route to the base request for the API. The route will be removed after the first request.
         /// </summary>
         public void AddRoute(string route)
         {
             request.Url.AppendPathSegments(route);
+        }
+
+        public void ChangeRoute(string route)
+        {
+            request.Url = Properties.Settings.Default.ApiUrl;
+            request.AppendPathSegment(route);
         }
 
         public async Task<APIServiceResult<List<int>>> Count(int MonthsCount = 0)
@@ -82,25 +72,22 @@ namespace Healthcare020.WinUI.Services
             return APIServiceResult<List<int>>.OK(await response.Content.ReadAsAsync<List<int>>());
         }
 
-        public async Task<APIServiceResult<T>> GetById<T>(int id, string pathToAppend = "", bool eagerLoaded = false)
+        /// <summary>
+        /// DELETE request to the API
+        /// </summary>
+        /// <typeparam name="T">Type of return data</typeparam>
+        /// <param name="id">Unique identifier of entity that will be partially updated</param>
+        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
+        public async Task<APIServiceResult<T>> Delete<T>(int id, string pathToAppend = "")
         {
+            request.Url.AppendPathSegment(id);
             if (!string.IsNullOrWhiteSpace(pathToAppend))
             {
                 request.Url.AppendPathSegment(pathToAppend);
             }
 
-            if (eagerLoaded)
-            {
-                request.SetQueryParam("eagerLoaded", "true");
-            }
-
-            HttpResponseMessage response = null;
-
-            request.Url.AppendPathSegment(id.ToString());
-            response = await request.GetAsync();
-
+            var response = await request.DeleteAsync();
             RevertToBaseRequest();
-
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 if (response.StatusCode == HttpStatusCode.Forbidden)
@@ -112,9 +99,9 @@ namespace Healthcare020.WinUI.Services
                 return APIServiceResult<T>.WithStatusCode(response.StatusCode);
             }
 
-            var result = await response.Content.ReadAsAsync<T>();
+            var result = await response.Content?.ReadAsAsync<T>();
 
-            return APIServiceResult<T>.OK(result);
+            return result != null ? APIServiceResult<T>.OK(result) : APIServiceResult<T>.NoContent();
         }
 
         /// <summary>
@@ -164,6 +151,75 @@ namespace Healthcare020.WinUI.Services
             };
         }
 
+        public async Task<APIServiceResult<T>> GetById<T>(int id, string pathToAppend = "", bool eagerLoaded = false)
+        {
+            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            {
+                request.Url.AppendPathSegment(pathToAppend);
+            }
+
+            if (eagerLoaded)
+            {
+                request.SetQueryParam("eagerLoaded", "true");
+            }
+
+            HttpResponseMessage response = null;
+
+            request.Url.AppendPathSegment(id.ToString());
+            response = await request.GetAsync();
+
+            RevertToBaseRequest();
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                if (response.StatusCode == HttpStatusCode.Forbidden)
+                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+            }
+
+            var result = await response.Content.ReadAsAsync<T>();
+
+            return APIServiceResult<T>.OK(result);
+        }
+
+        /// <summary>
+        /// PATCH request to the API
+        /// </summary>
+        /// <typeparam name="T">Type of return data</typeparam>
+        /// <param name="id">Unique identifier of entity that will be partially updated</param>
+        /// <param name="patchDocument">JSON patch document for updating entity</param>
+        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
+        public async Task<APIServiceResult<T>> PartiallyUpdate<T>(int id, object patchDocument, string pathToAppend = "")
+        {
+            request.Url.AppendPathSegment(id);
+            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            {
+                request.Url.AppendPathSegment(pathToAppend);
+            }
+            HttpContent content = new CapturedJsonContent(JsonConvert.SerializeObject(patchDocument));
+
+            var response = await request.PatchJsonAsync(content);
+            RevertToBaseRequest();
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                if (response.StatusCode == HttpStatusCode.Forbidden)
+                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+            }
+
+            var result = await response.Content.ReadAsAsync<T>();
+
+            return APIServiceResult<T>.OK(result);
+        }
+
         /// <summary>
         /// POST request to the API
         /// </summary>
@@ -198,7 +254,7 @@ namespace Healthcare020.WinUI.Services
                 var result = await response.Content.ReadAsAsync<T>();
                 return APIServiceResult<T>.OK(result);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return APIServiceResult<T>.WithStatusCode(response?.StatusCode ?? HttpStatusCode.InternalServerError);
             }
@@ -250,70 +306,14 @@ namespace Healthcare020.WinUI.Services
             }
         }
 
-        /// <summary>
-        /// PATCH request to the API
-        /// </summary>
-        /// <typeparam name="T">Type of return data</typeparam>
-        /// <param name="id">Unique identifier of entity that will be partially updated</param>
-        /// <param name="patchDocument">JSON patch document for updating entity</param>
-        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
-        public async Task<APIServiceResult<T>> PartiallyUpdate<T>(int id, object patchDocument, string pathToAppend = "")
+        private void RevertToBaseRequest(object resourceParameters = null)
         {
-            request.Url.AppendPathSegment(id);
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            if (resourceParameters != null)
             {
-                request.Url.AppendPathSegment(pathToAppend);
-            }
-            HttpContent content = new CapturedJsonContent(JsonConvert.SerializeObject(patchDocument));
-
-            var response = await request.PatchJsonAsync(content);
-            RevertToBaseRequest();
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-
-                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+                request.Url.RemoveQueryParams(resourceParameters.GetType().GetProperties().Select(x => x.Name));
             }
 
-            var result = await response.Content.ReadAsAsync<T>();
-
-            return APIServiceResult<T>.OK(result);
-        }
-
-        /// <summary>
-        /// DELETE request to the API
-        /// </summary>
-        /// <typeparam name="T">Type of return data</typeparam>
-        /// <param name="id">Unique identifier of entity that will be partially updated</param>
-        /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
-        public async Task<APIServiceResult<T>> Delete<T>(int id, string pathToAppend = "")
-        {
-            request.Url.AppendPathSegment(id);
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
-            {
-                request.Url.AppendPathSegment(pathToAppend);
-            }
-
-            var response = await request.DeleteAsync();
-            RevertToBaseRequest();
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-
-                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
-            }
-
-            var result = await response.Content?.ReadAsAsync<T>();
-
-            return result != null ? APIServiceResult<T>.OK(result) : APIServiceResult<T>.NoContent();
+            request.Url = BaseUrl;
         }
     }
 }

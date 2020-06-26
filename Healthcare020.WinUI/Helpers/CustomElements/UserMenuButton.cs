@@ -13,7 +13,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             this.Cursor = Cursors.Hand;
             this.Name = "btnUserMenu";
             this.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            this.IconColor = Color.FromArgb(94, 120, 143);
+            this.IconColor = Color.FromArgb(53, 68, 82);
             this.IconSize = 41;
             this.IconChar = IconChar.UserCircle;
         }

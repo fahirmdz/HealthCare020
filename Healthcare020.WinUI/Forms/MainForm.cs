@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Healthcare020.WinUI.Forms.AdminDashboard;
+using Healthcare020.WinUI.Forms.KorisnickiNalog;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.CustomElements;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard;
-using Healthcare020.WinUI.Forms.KorisnickiNalog;
-using Healthcare020.WinUI.Forms.RadnikDashboard;
-using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms
 {
@@ -43,11 +43,10 @@ namespace Healthcare020.WinUI.Forms
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
 
-            if(currentChild==null)
+            if (currentChild == null)
             {
-                await Auth.AuthenticateWithPassword("doktor", "testtest");
-                var loginForm = frmMainDashboard.Instance;
-                loginForm.ShowAsNextMdiChild(panelDesktop);
+                await Auth.AuthenticateWithPassword("test", "testtest");
+                frmStartMenuAdmin.Instance.OpenAsChildOfControl(panelDesktop);
             }
 
             picClose.BringToFront();
@@ -56,6 +55,10 @@ namespace Healthcare020.WinUI.Forms
             picClose.SizeMode = PictureBoxSizeMode.CenterImage;
             picClose.SizeMode = PictureBoxSizeMode.CenterImage;
             picMaximize.SizeMode = PictureBoxSizeMode.CenterImage;
+
+            //Set event to close user dropdown menu on every click
+            pnlTop.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick, true,
+                x => !(x is UserMenuButton));
         }
 
         //===== Draggable form =====
@@ -148,13 +151,32 @@ namespace Healthcare020.WinUI.Forms
         {
             var loginForm = frmLogin.Instance;
             currentChild.Dispose();
-            loginForm.ShowAsNextMdiChild(panelDesktop);
-            loginForm.BringToFront();
+            loginForm.OpenAsChildOfControl(panelDesktop);
         }
 
         private void panelDesktop_ControlAdded(object sender, ControlEventArgs e)
         {
             currentChild = panelDesktop.Controls.OfType<Form>().First();
+
+            //Set event to close user dropdown menu on every click
+            currentChild.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick, true,
+                x => !(x is UserMenuDropdownPanel) && !(x is UserMenuButton),
+                nestingCounter: currentChild is frmStartMenuAdmin ? 3 : 2);
+
+            if (currentChild is frmLogin || currentChild is frmStartMenuAdmin)
+            {
+                pnlTop.Hide();
+            }
+            else
+            {
+                pnlTop.Show();
+            }
+        }
+
+        protected void userMenuDropdown_MouseClick(object sender, EventArgs e)
+        {
+            if (userMenuDropdown.Visible)
+                userMenuDropdown.Hide();
         }
     }
 }

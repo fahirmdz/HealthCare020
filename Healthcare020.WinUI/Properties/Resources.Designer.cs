@@ -528,5 +528,14 @@ namespace Healthcare020.WinUI.Properties {
                 return ResourceManager.GetString("TitleZahteviZaPregledeStatistic", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Netačno korisničko ime ili lozinka.
+        /// </summary>
+        public static string WrongUsernameOrPasswordMessage {
+            get {
+                return ResourceManager.GetString("WrongUsernameOrPasswordMessage", resourceCulture);
+            }
+        }
     }
 }

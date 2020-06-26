@@ -73,7 +73,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                     if (result.Succeeded)
                     {
                         if (Grad == null)
-                            await frmStartMenuAdmin.Instance.LoadPredefinedDataCount(Routes.GradoviRoute);
+                            await frmPredefinedDataMenu.Instance.LoadPredefinedDataCount(Routes.GradoviRoute);
 
                         dlgSuccess.ShowDialog();
                         frmGradovi.Instance.OpenAsChildOfControl(Parent);

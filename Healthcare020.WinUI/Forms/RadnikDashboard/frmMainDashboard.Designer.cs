@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainDashboard));
             this.picLogo = new System.Windows.Forms.PictureBox();
-            this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.btnZakazaniPregledi = new FontAwesome.Sharp.IconButton();
@@ -42,34 +41,21 @@
             this.lblPregledi = new System.Windows.Forms.Label();
             this.lblOstalo = new System.Windows.Forms.Label();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
-            this.pnlUserMenuDropdown = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuDropdownPanel();
-            this.btnUserMenu = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuButton();
             this.pnlMain = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
-            this.pnlTop.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // picLogo
             // 
+            this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.Location = new System.Drawing.Point(490, 6);
+            this.picLogo.Location = new System.Drawing.Point(524, 31);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(216, 216);
             this.picLogo.TabIndex = 8;
             this.picLogo.TabStop = false;
-            // 
-            // pnlTop
-            // 
-            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlTop.Controls.Add(this.btnUserMenu);
-            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1208, 42);
-            this.pnlTop.TabIndex = 11;
             // 
             // pnlCopyright
             // 
@@ -87,7 +73,7 @@
             this.lblCopyright.AutoSize = true;
             this.lblCopyright.Font = new System.Drawing.Font("Calibri Light", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblCopyright.Location = new System.Drawing.Point(487, 1);
+            this.lblCopyright.Location = new System.Drawing.Point(531, 3);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(199, 13);
             this.lblCopyright.TabIndex = 14;
@@ -95,6 +81,7 @@
             // 
             // btnZakazaniPregledi
             // 
+            this.btnZakazaniPregledi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnZakazaniPregledi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnZakazaniPregledi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnZakazaniPregledi.FlatAppearance.BorderSize = 0;
@@ -105,7 +92,7 @@
             this.btnZakazaniPregledi.IconChar = FontAwesome.Sharp.IconChar.CalendarAlt;
             this.btnZakazaniPregledi.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnZakazaniPregledi.IconSize = 45;
-            this.btnZakazaniPregledi.Location = new System.Drawing.Point(476, 272);
+            this.btnZakazaniPregledi.Location = new System.Drawing.Point(510, 297);
             this.btnZakazaniPregledi.Name = "btnZakazaniPregledi";
             this.btnZakazaniPregledi.Rotation = 0D;
             this.btnZakazaniPregledi.Size = new System.Drawing.Size(230, 74);
@@ -116,6 +103,7 @@
             // 
             // btnPreglediNaCekanju
             // 
+            this.btnPreglediNaCekanju.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnPreglediNaCekanju.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnPreglediNaCekanju.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPreglediNaCekanju.FlatAppearance.BorderSize = 0;
@@ -126,7 +114,7 @@
             this.btnPreglediNaCekanju.IconChar = FontAwesome.Sharp.IconChar.Clock;
             this.btnPreglediNaCekanju.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnPreglediNaCekanju.IconSize = 45;
-            this.btnPreglediNaCekanju.Location = new System.Drawing.Point(750, 272);
+            this.btnPreglediNaCekanju.Location = new System.Drawing.Point(784, 297);
             this.btnPreglediNaCekanju.Name = "btnPreglediNaCekanju";
             this.btnPreglediNaCekanju.Rotation = 0D;
             this.btnPreglediNaCekanju.Size = new System.Drawing.Size(230, 74);
@@ -137,6 +125,7 @@
             // 
             // btnSviPregledi
             // 
+            this.btnSviPregledi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSviPregledi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnSviPregledi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSviPregledi.FlatAppearance.BorderSize = 0;
@@ -147,7 +136,7 @@
             this.btnSviPregledi.IconChar = FontAwesome.Sharp.IconChar.Stethoscope;
             this.btnSviPregledi.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnSviPregledi.IconSize = 45;
-            this.btnSviPregledi.Location = new System.Drawing.Point(173, 272);
+            this.btnSviPregledi.Location = new System.Drawing.Point(207, 297);
             this.btnSviPregledi.Name = "btnSviPregledi";
             this.btnSviPregledi.Rotation = 0D;
             this.btnSviPregledi.Size = new System.Drawing.Size(230, 74);
@@ -158,6 +147,7 @@
             // 
             // btnLekarskaUverenja
             // 
+            this.btnLekarskaUverenja.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnLekarskaUverenja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnLekarskaUverenja.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLekarskaUverenja.FlatAppearance.BorderSize = 0;
@@ -168,7 +158,7 @@
             this.btnLekarskaUverenja.IconChar = FontAwesome.Sharp.IconChar.FileSignature;
             this.btnLekarskaUverenja.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnLekarskaUverenja.IconSize = 45;
-            this.btnLekarskaUverenja.Location = new System.Drawing.Point(183, 435);
+            this.btnLekarskaUverenja.Location = new System.Drawing.Point(217, 460);
             this.btnLekarskaUverenja.Name = "btnLekarskaUverenja";
             this.btnLekarskaUverenja.Rotation = 0D;
             this.btnLekarskaUverenja.Size = new System.Drawing.Size(230, 74);
@@ -179,6 +169,7 @@
             // 
             // btnUputnice
             // 
+            this.btnUputnice.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnUputnice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.btnUputnice.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUputnice.FlatAppearance.BorderSize = 0;
@@ -189,7 +180,7 @@
             this.btnUputnice.IconChar = FontAwesome.Sharp.IconChar.UserMd;
             this.btnUputnice.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnUputnice.IconSize = 45;
-            this.btnUputnice.Location = new System.Drawing.Point(486, 435);
+            this.btnUputnice.Location = new System.Drawing.Point(520, 460);
             this.btnUputnice.Name = "btnUputnice";
             this.btnUputnice.Rotation = 0D;
             this.btnUputnice.Size = new System.Drawing.Size(230, 74);
@@ -200,9 +191,10 @@
             // 
             // materialDivider1
             // 
+            this.materialDivider1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.materialDivider1.BackColor = System.Drawing.Color.Gainsboro;
             this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(154, 254);
+            this.materialDivider1.Location = new System.Drawing.Point(188, 279);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
             this.materialDivider1.Size = new System.Drawing.Size(332, 1);
@@ -211,9 +203,10 @@
             // 
             // lblPregledi
             // 
+            this.lblPregledi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPregledi.AutoSize = true;
             this.lblPregledi.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPregledi.Location = new System.Drawing.Point(168, 216);
+            this.lblPregledi.Location = new System.Drawing.Point(202, 241);
             this.lblPregledi.Name = "lblPregledi";
             this.lblPregledi.Size = new System.Drawing.Size(78, 25);
             this.lblPregledi.TabIndex = 33;
@@ -221,9 +214,10 @@
             // 
             // lblOstalo
             // 
+            this.lblOstalo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblOstalo.AutoSize = true;
             this.lblOstalo.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOstalo.Location = new System.Drawing.Point(179, 379);
+            this.lblOstalo.Location = new System.Drawing.Point(213, 404);
             this.lblOstalo.Name = "lblOstalo";
             this.lblOstalo.Size = new System.Drawing.Size(65, 25);
             this.lblOstalo.TabIndex = 35;
@@ -231,46 +225,19 @@
             // 
             // materialDivider2
             // 
+            this.materialDivider2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.materialDivider2.BackColor = System.Drawing.Color.Gainsboro;
             this.materialDivider2.Depth = 0;
-            this.materialDivider2.Location = new System.Drawing.Point(154, 416);
+            this.materialDivider2.Location = new System.Drawing.Point(188, 441);
             this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider2.Name = "materialDivider2";
             this.materialDivider2.Size = new System.Drawing.Size(332, 1);
             this.materialDivider2.TabIndex = 34;
             this.materialDivider2.Text = "materialDivider2";
             // 
-            // pnlUserMenuDropdown
-            // 
-            this.pnlUserMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlUserMenuDropdown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlUserMenuDropdown.Location = new System.Drawing.Point(1006, 0);
-            this.pnlUserMenuDropdown.Name = "pnlUserMenuDropdown";
-            this.pnlUserMenuDropdown.Size = new System.Drawing.Size(202, 105);
-            this.pnlUserMenuDropdown.TabIndex = 10;
-            this.pnlUserMenuDropdown.Visible = false;
-            // 
-            // btnUserMenu
-            // 
-            this.btnUserMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUserMenu.BackColor = System.Drawing.Color.Transparent;
-            this.btnUserMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUserMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.btnUserMenu.IconChar = FontAwesome.Sharp.IconChar.UserCircle;
-            this.btnUserMenu.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.btnUserMenu.IconSize = 45;
-            this.btnUserMenu.Location = new System.Drawing.Point(1143, 0);
-            this.btnUserMenu.Name = "btnUserMenu";
-            this.btnUserMenu.Size = new System.Drawing.Size(65, 45);
-            this.btnUserMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnUserMenu.TabIndex = 9;
-            this.btnUserMenu.TabStop = false;
-            this.btnUserMenu.Click += new System.EventHandler(this.btnUserMenu_Click);
-            // 
             // pnlMain
             // 
             this.pnlMain.Controls.Add(this.picLogo);
-            this.pnlMain.Controls.Add(this.pnlUserMenuDropdown);
             this.pnlMain.Controls.Add(this.lblOstalo);
             this.pnlMain.Controls.Add(this.btnSviPregledi);
             this.pnlMain.Controls.Add(this.materialDivider2);
@@ -281,9 +248,9 @@
             this.pnlMain.Controls.Add(this.btnPreglediNaCekanju);
             this.pnlMain.Controls.Add(this.materialDivider1);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 42);
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1208, 565);
+            this.pnlMain.Size = new System.Drawing.Size(1208, 607);
             this.pnlMain.TabIndex = 36;
             // 
             // frmMainDashboard
@@ -294,15 +261,13 @@
             this.ClientSize = new System.Drawing.Size(1208, 630);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlCopyright);
-            this.Controls.Add(this.pnlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMainDashboard";
-            this.Text = "x";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "MainDashboard";
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
-            this.pnlTop.ResumeLayout(false);
             this.pnlCopyright.ResumeLayout(false);
             this.pnlCopyright.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             this.ResumeLayout(false);
@@ -312,9 +277,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox picLogo;
-        private Helpers.CustomElements.UserMenuButton btnUserMenu;
-        private Helpers.CustomElements.UserMenuDropdownPanel pnlUserMenuDropdown;
-        private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Panel pnlCopyright;
         private System.Windows.Forms.Label lblCopyright;
         private FontAwesome.Sharp.IconButton btnZakazaniPregledi;

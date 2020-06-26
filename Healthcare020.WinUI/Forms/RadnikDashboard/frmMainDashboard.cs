@@ -20,24 +20,5 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard
         {
             InitializeComponent();
         }
-
-        private void btnUserMenu_Click(object sender, System.EventArgs e)
-        {
-            if (pnlUserMenuDropdown.Visible)
-                pnlUserMenuDropdown.Hide();
-            else
-                pnlUserMenuDropdown.Show();
-        }
-
-        public void ShowInMainPanel(Form form)
-        {
-            if (form == null)
-                return;
-
-            form.Dock = DockStyle.Fill;
-            form.TopLevel = false;
-            pnlMain.Controls.Add(form);
-            form.Show();
-        }
     }
 }
