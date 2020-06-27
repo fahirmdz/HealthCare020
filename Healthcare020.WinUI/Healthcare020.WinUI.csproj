@@ -279,6 +279,12 @@
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.Designer.cs">
       <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.Designer.cs">
+      <DependentUpon>frmZahtevZaPregled.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ControlExtensions.cs" />
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
       <SubType>Component</SubType>
@@ -316,6 +322,12 @@
     </Compile>
     <Compile Include="Helpers\Dialogs\dlgAccountLock.Designer.cs">
       <DependentUpon>dlgAccountLock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Dialogs\dlgForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\Dialogs\dlgForm.Designer.cs">
+      <DependentUpon>dlgForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Dialogs\dlgError.cs">
       <SubType>Form</SubType>
@@ -445,6 +457,9 @@
     <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.resx">
       <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.resx">
+      <DependentUpon>frmZahtevZaPregled.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Helpers\CustomElements\NoDataPanel.resx">
       <DependentUpon>NoDataPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -456,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgAccountLock.resx">
       <DependentUpon>dlgAccountLock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\Dialogs\dlgForm.resx">
+      <DependentUpon>dlgForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgError.resx">
       <DependentUpon>dlgError.cs</DependentUpon>

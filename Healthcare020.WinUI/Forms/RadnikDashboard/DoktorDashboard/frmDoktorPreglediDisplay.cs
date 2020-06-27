@@ -3,9 +3,7 @@ using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
-using HealthCare020.Core.ResourceParameters;
 using System.Windows.Forms;
-using HealthCare020.Core.Entities;
 using PregledResourceParameters = HealthCare020.Core.ResourceParameters.PregledResourceParameters;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard

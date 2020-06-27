@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using Healthcare020.WinUI.Forms.AbstractForms;
+﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
+using System;
 using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
@@ -31,11 +31,10 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
             var DatumVreme = new DataGridViewColumn { DataPropertyName = nameof(ZahtevZaPregledDtoEL.DatumVreme), HeaderText = "Datum i vreme", Name = "Datum i vreme", CellTemplate = new DataGridViewTextBoxCell() };
 
-
             base.AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme });
 
             _apiService = new APIService(Routes.ZahteviZaPregledRoute);
-            ResourceParameters = new ZahtevZaPregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount,EagerLoaded = true};
+            ResourceParameters = new ZahtevZaPregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
 
             InitializeComponent();
         }
@@ -54,6 +53,14 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             {
                 e.Value = pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime();
             }
+        }
+
+        protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(MainDgrv.CurrentRow?.DataBoundItem is ZahtevZaPregledDtoEL zahtevZaPregled))
+                return;
+
+            dlgForm.ShowDialog(frmZahtevZaPregled.InstanceWithData(zahtevZaPregled));
         }
 
         protected override async void txtSearch_Leave(object sender, EventArgs e)
