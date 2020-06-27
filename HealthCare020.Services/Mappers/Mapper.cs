@@ -80,7 +80,9 @@ namespace HealthCare020.Services.Mappers
 
             #region LicniPodaci
 
-            CreateMap<LicniPodaci, LicniPodaciDto>();
+            CreateMap<LicniPodaci, LicniPodaciDto>()
+                .ForMember(dest=>dest.Grad, 
+                    opt=>opt.MapFrom(x=>x.Grad));
             CreateMap<LicniPodaci, LicniPodaciUpsertDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());

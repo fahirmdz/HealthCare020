@@ -214,6 +214,9 @@
   <data name="LabelCountry" xml:space="preserve">
     <value>Drzava</value>
   </data>
+  <data name="LabelDateCreated" xml:space="preserve">
+    <value>Datum kreiranja</value>
+  </data>
   <data name="LabelEmailAddress" xml:space="preserve">
     <value>E-mail</value>
   </data>
@@ -237,6 +240,9 @@
   </data>
   <data name="LabelPhoneNumber" xml:space="preserve">
     <value>Broj telefona</value>
+  </data>
+  <data name="LabelRole" xml:space="preserve">
+    <value>Uloga</value>
   </data>
   <data name="LabelSecurity" xml:space="preserve">
     <value>Sigurnost</value>

@@ -16,5 +16,6 @@
         public string BrojTelefona { get; set; }
 
         public GradDtoLL Grad { get; set; }
+        public byte[] ProfilePicture { get; set; }
     }
 }

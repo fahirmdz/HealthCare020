@@ -350,6 +350,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Datum kreiranja.
+        /// </summary>
+        public static string LabelDateCreated {
+            get {
+                return ResourceManager.GetString("LabelDateCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail.
         /// </summary>
         public static string LabelEmailAddress {
@@ -418,6 +427,15 @@ namespace Healthcare020.WinUI.Properties {
         public static string LabelPhoneNumber {
             get {
                 return ResourceManager.GetString("LabelPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uloga.
+        /// </summary>
+        public static string LabelRole {
+            get {
+                return ResourceManager.GetString("LabelRole", resourceCulture);
             }
         }
         

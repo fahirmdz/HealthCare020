@@ -40,6 +40,8 @@ namespace HealthCare020.Core.Entities
         public int GradId { get; set; }
         public Grad Grad { get; set; }
 
+        public byte[] ProfilePicture { get; set; }
+
         public virtual string ImePrezime() => Ime + " " + Prezime;
     }
 }

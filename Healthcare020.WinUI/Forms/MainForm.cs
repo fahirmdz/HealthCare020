@@ -45,8 +45,8 @@ namespace Healthcare020.WinUI.Forms
 
             if (currentChild == null)
             {
-                await Auth.AuthenticateWithPassword("test", "testtest");
-                frmStartMenuAdmin.Instance.OpenAsChildOfControl(panelDesktop);
+                await Auth.AuthenticateWithPassword("doktor", "testtest");
+                frmUserProfile.Instance.OpenAsChildOfControl(panelDesktop);
             }
 
             picClose.BringToFront();
