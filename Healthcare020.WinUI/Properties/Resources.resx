@@ -205,6 +205,9 @@
   <data name="InvalidFormat" xml:space="preserve">
     <value>Neispravan format</value>
   </data>
+  <data name="InvalidPasswordConfirmation" xml:space="preserve">
+    <value>Lozinke moraju biti iste</value>
+  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Adresa</value>
   </data>
@@ -279,6 +282,12 @@
   </data>
   <data name="TitleZahteviZaPregledeStatistic" xml:space="preserve">
     <value>Prikaz broja zahteva za preglede po mesecima</value>
+  </data>
+  <data name="UnableToLoadPersonalData" xml:space="preserve">
+    <value>Nije moguće učitati lične podatke</value>
+  </data>
+  <data name="UnableToLoadUserProfileMessage" xml:space="preserve">
+    <value>Nije moguće učitati podatke o profilu</value>
   </data>
   <data name="WrongUsernameOrPasswordMessage" xml:space="preserve">
     <value>Netačno korisničko ime ili lozinka</value>

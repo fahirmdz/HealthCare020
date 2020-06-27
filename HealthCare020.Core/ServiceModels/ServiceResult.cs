@@ -23,7 +23,7 @@ namespace HealthCare020.Core.ServiceModels
             Message = message;
         }
 
-        public static ServiceResult OK(object data, string message = "") => new ServiceResult { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
+        public static ServiceResult OK(object data=null, string message = "") => new ServiceResult { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
 
         public static ServiceResult NoContent(string message = "") => new ServiceResult(HttpStatusCode.NoContent, true, message);
 

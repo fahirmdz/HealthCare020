@@ -226,7 +226,7 @@ namespace Healthcare020.WinUI.Services
         /// <typeparam name="T">Type of return data</typeparam>
         /// <param name="dtoForCreation">Data Transfer Object for creating new entity</param>
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
-        public async Task<APIServiceResult<T>> Post<T>(object dtoForCreation, string pathToAppend = "")
+        public async Task<APIServiceResult<T>> Post<T>(object dtoForCreation, bool ReturnData=false, string pathToAppend = "")
         {
             if (!string.IsNullOrWhiteSpace(pathToAppend))
             {
@@ -251,8 +251,12 @@ namespace Healthcare020.WinUI.Services
                 }
                 var headers = response.Headers;
 
-                var result = await response.Content.ReadAsAsync<T>();
-                return APIServiceResult<T>.OK(result);
+                if(ReturnData)
+                {
+                    var result = await response.Content.ReadAsAsync<T>();
+                    return APIServiceResult<T>.OK(result);
+                }
+                return APIServiceResult<T>.OK();
             }
             catch (Exception)
             {

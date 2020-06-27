@@ -323,6 +323,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lozinke moraju biti iste.
+        /// </summary>
+        public static string InvalidPasswordConfirmation {
+            get {
+                return ResourceManager.GetString("InvalidPasswordConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adresa.
         /// </summary>
         public static string LabelAddress {
@@ -544,6 +553,24 @@ namespace Healthcare020.WinUI.Properties {
         public static string TitleZahteviZaPregledeStatistic {
             get {
                 return ResourceManager.GetString("TitleZahteviZaPregledeStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nije moguće učitati lične podatke.
+        /// </summary>
+        public static string UnableToLoadPersonalData {
+            get {
+                return ResourceManager.GetString("UnableToLoadPersonalData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nije moguće učitati podatke o profilu.
+        /// </summary>
+        public static string UnableToLoadUserProfileMessage {
+            get {
+                return ResourceManager.GetString("UnableToLoadUserProfileMessage", resourceCulture);
             }
         }
         

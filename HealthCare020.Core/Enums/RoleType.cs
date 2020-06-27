@@ -29,6 +29,24 @@ namespace HealthCare020.Core.Enums
 
         public static int ToInt(this RoleType val) => (int) val;
 
+        public static string ToTitleString(this RoleType role)
+        {
+            switch (role)
+            {
+                case RoleType.Administrator:
+                    return "Admin";
+                case RoleType.MedicinskiTehnicar:
+                    return "Medicinski tehničar";
+                case RoleType.RadnikPrijem:
+                    return "Radnik na prijemu";
+                case RoleType.Pacijent:
+                    return "Pacijent";
+                case RoleType.Doktor:
+                    return "Doktor";
+                default:
+                    return string.Empty;
+            }
+        }
         
     }
 

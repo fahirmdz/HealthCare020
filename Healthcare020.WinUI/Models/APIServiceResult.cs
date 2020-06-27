@@ -36,6 +36,8 @@ namespace Healthcare020.WinUI.Models
        
         public static APIServiceResult<T> OK(T data, string message = "") => new APIServiceResult<T> { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
 
+        public static APIServiceResult<T> OK() => new APIServiceResult<T> { Succeeded = true, StatusCode = HttpStatusCode.OK,HasData = true};
+
         public static APIServiceResult<T> NoContent(string message = "") => new APIServiceResult<T>(HttpStatusCode.NoContent, true, message);
 
     }

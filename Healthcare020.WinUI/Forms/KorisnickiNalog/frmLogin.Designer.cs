@@ -33,6 +33,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.pnlBody = new System.Windows.Forms.Panel();
+            this.btnLogin = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.cbxRememberMe = new MaterialSkin.Controls.MaterialCheckBox();
@@ -43,7 +44,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnLogin = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlCopyright.SuspendLayout();
@@ -65,6 +65,29 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Size = new System.Drawing.Size(516, 494);
             this.pnlBody.TabIndex = 19;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLogin.BorderColor = System.Drawing.Color.Transparent;
+            this.btnLogin.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(121, 414);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnLogin.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.btnLogin.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnLogin.Size = new System.Drawing.Size(267, 37);
+            this.btnLogin.TabIndex = 23;
+            this.btnLogin.Text = "Log In";
+            this.btnLogin.TextColor = System.Drawing.Color.White;
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click_1);
             // 
             // picLogo
             // 
@@ -90,7 +113,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.cbxRememberMe.AutoSize = true;
             this.cbxRememberMe.Depth = 0;
-            this.cbxRememberMe.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cbxRememberMe.Font = new System.Drawing.Font("Roboto", 10F);
             this.cbxRememberMe.Location = new System.Drawing.Point(121, 356);
             this.cbxRememberMe.Margin = new System.Windows.Forms.Padding(0);
             this.cbxRememberMe.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -181,29 +204,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.Errors.ContainerControl = this;
             this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
             // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnLogin.BorderColor = System.Drawing.Color.Transparent;
-            this.btnLogin.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(121, 414);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnLogin.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
-            this.btnLogin.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnLogin.Size = new System.Drawing.Size(267, 37);
-            this.btnLogin.TabIndex = 23;
-            this.btnLogin.Text = "Log In";
-            this.btnLogin.TextColor = System.Drawing.Color.White;
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click_1);
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,6 +221,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmLogin_FormClosed);
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.Shown += new System.EventHandler(this.frmLogin_Shown);
             this.Resize += new System.EventHandler(this.frmLogin_Resize);
