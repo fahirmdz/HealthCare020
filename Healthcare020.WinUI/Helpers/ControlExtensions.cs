@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
 
@@ -51,6 +52,13 @@ namespace Healthcare020.WinUI.Helpers
             {
                 control.Text = string.Empty;
             }
+        }
+
+        [DllImport("user32.dll")]
+        static extern bool HideCaret(IntPtr hWnd);
+        public static void HideCaret(this Control control)
+        {
+            HideCaret(control.Handle);
         }
     }
 }

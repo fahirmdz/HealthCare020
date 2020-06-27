@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Forms.AbstractForms
 {
-    abstract partial class DisplayDataForm<TDto>
+     partial class DisplayDataForm<TDto>
     {
         /// <summary>
         /// Required designer variable.

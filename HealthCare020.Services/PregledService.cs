@@ -146,36 +146,43 @@ namespace HealthCare020.Services
 
             if (resourceParameters != null)
             {
-                if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentIme))
-                    result = result.Where(x =>
-                        x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
-                            .StartsWith(resourceParameters.PacijentIme.ToLower()));
-
                 if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
                 {
-                    result = result.Where(x =>
+                    var imeForSearch = resourceParameters.PacijentIme.ToLower();
+                    if (!await result.AnyAsync(x =>
                         x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
-                            .StartsWith(resourceParameters.PacijentIme.ToLower()));
+                            .Contains(imeForSearch)))
+                    {
+                        result = result.Where(x =>
+                            x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
+                                .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                    }
+                    else
+                    {
+                        result = result.Where(x =>
+                            x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
+                                .Contains(imeForSearch));
+                    }
                 }
 
-                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime))
+                if (await result.AnyAsync() && (string.IsNullOrWhiteSpace(resourceParameters.PacijentIme) && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime)))
                 {
                     result = result.Where(x =>
                         x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
-                            .StartsWith(resourceParameters.PacijentPrezime.ToLower()));
+                            .Contains(resourceParameters.PacijentPrezime.ToLower()));
                 }
 
                 if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorIme))
                 {
                     result = result.Where(x =>
-                        x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.DoktorIme.ToLower()));
+                        x.Doktor.Radnik.LicniPodaci.Ime.ToLower().Contains(resourceParameters.DoktorIme.ToLower()));
                 }
 
                 if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorPrezime))
                 {
                     result = result.Where(x =>
                         x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
-                            .StartsWith(resourceParameters.DoktorPrezime.ToLower()));
+                            .Contains(resourceParameters.DoktorPrezime.ToLower()));
                 }
 
                 if (await result.AnyAsync() && resourceParameters.PacijentId.HasValue)

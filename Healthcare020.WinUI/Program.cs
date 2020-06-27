@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Exceptions;
@@ -15,6 +16,11 @@ namespace Healthcare020.WinUI
         [STAThread]
         private static void Main()
         {
+            var culture = CultureInfo.GetCultureInfo("bs-Latn-BA");
+
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

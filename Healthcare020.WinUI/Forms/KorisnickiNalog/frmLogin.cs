@@ -1,17 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using HealthCare020.Core.Enums;
-using Healthcare020.WinUI.Forms.AdminDashboard;
-using Healthcare020.WinUI.Forms.RadnikDashboard;
+﻿using Healthcare020.WinUI.Forms.AdminDashboard;
+using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Properties;
+using HealthCare020.Core.Enums;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
     public partial class frmLogin : Form
     {
-
         private static frmLogin _instance;
 
         private frmLogin()
@@ -26,7 +25,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             {
                 if (_instance == null || _instance.IsDisposed)
                 {
-                    _instance=new frmLogin();
+                    _instance = new frmLogin();
                 }
 
                 return _instance;
@@ -60,12 +59,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
             if (await Auth.AuthenticateWithPassword(username, password))
             {
-                Form formToOpen=null;
+                Form formToOpen = null;
 
                 if (Auth.Role == RoleType.Administrator)
                     formToOpen = frmStartMenuAdmin.Instance;
-                else if(Auth.Role==RoleType.Doktor || Auth.Role==RoleType.MedicinskiTehnicar)
-                    formToOpen=frmMainDashboard.Instance;
+                else if (Auth.Role == RoleType.Doktor || Auth.Role == RoleType.MedicinskiTehnicar)
+                    formToOpen = frmDoktorMainDashboard.Instance;
                 if (formToOpen == null)
                     return;
 
@@ -92,7 +91,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             if (!txtUsername.ValidTextInput(Errors))
                 return false;
 
-            if (!txtPassword.ValidTextInput(Errors,Validation.TextInputType.Mixed))
+            if (!txtPassword.ValidTextInput(Errors, Validation.TextInputType.Mixed))
                 return false;
 
             Errors.Clear();

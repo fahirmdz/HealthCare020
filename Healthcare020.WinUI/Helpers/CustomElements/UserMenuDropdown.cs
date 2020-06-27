@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.RadnikDashboard;
+using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {
@@ -114,7 +115,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
         protected void dashboardButton_OnClick(object sender, EventArgs e)
         {
-            frmMainDashboard.Instance.OpenAsChildOfControl(Parent);
+            frmDoktorMainDashboard.Instance.OpenAsChildOfControl(Parent);
             this.Hide();
         }
 

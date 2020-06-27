@@ -255,11 +255,35 @@
     <Compile Include="Forms\AbstractForms\StatisticChartForm.Designer.cs">
       <DependentUpon>StatisticChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RadnikDashboard\frmMainDashboard.cs">
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorMainDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RadnikDashboard\frmMainDashboard.Designer.cs">
-      <DependentUpon>frmMainDashboard.cs</DependentUpon>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorMainDashboard.Designer.cs">
+      <DependentUpon>frmDoktorMainDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPregledi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPregledi.Designer.cs">
+      <DependentUpon>frmDoktorPregledi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorZahteviZaPregledeDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorZahteviZaPregledeDisplay.Designer.cs">
+      <DependentUpon>frmDoktorZahteviZaPregledeDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.Designer.cs">
+      <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.Designer.cs">
+      <DependentUpon>frmZahtevZaPregled.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ControlExtensions.cs" />
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
@@ -298,6 +322,12 @@
     </Compile>
     <Compile Include="Helpers\Dialogs\dlgAccountLock.Designer.cs">
       <DependentUpon>dlgAccountLock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Dialogs\dlgForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helpers\Dialogs\dlgForm.Designer.cs">
+      <DependentUpon>dlgForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Dialogs\dlgError.cs">
       <SubType>Form</SubType>
@@ -415,8 +445,20 @@
     <EmbeddedResource Include="Forms\AbstractForms\StatisticChartForm.resx">
       <DependentUpon>StatisticChartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RadnikDashboard\frmMainDashboard.resx">
-      <DependentUpon>frmMainDashboard.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorMainDashboard.resx">
+      <DependentUpon>frmDoktorMainDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPregledi.resx">
+      <DependentUpon>frmDoktorPregledi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorZahteviZaPregledeDisplay.resx">
+      <DependentUpon>frmDoktorZahteviZaPregledeDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.resx">
+      <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.resx">
+      <DependentUpon>frmZahtevZaPregled.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\CustomElements\NoDataPanel.resx">
       <DependentUpon>NoDataPanel.cs</DependentUpon>
@@ -429,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgAccountLock.resx">
       <DependentUpon>dlgAccountLock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helpers\Dialogs\dlgForm.resx">
+      <DependentUpon>dlgForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\Dialogs\dlgError.resx">
       <DependentUpon>dlgError.cs</DependentUpon>

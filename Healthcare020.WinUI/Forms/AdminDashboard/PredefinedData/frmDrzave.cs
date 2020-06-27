@@ -30,14 +30,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmDrzave() : base()
         {
-            var ID = new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
-            ID.CellTemplate = new DataGridViewTextBoxCell();
+            var ID = new DataGridViewTextBoxColumn { DataPropertyName = nameof(DrzavaDto.Id), HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
 
-            var Naziv = new DataGridViewColumn { DataPropertyName = "Naziv", HeaderText = "Naziv", Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
+            var Naziv = new DataGridViewColumn { DataPropertyName = nameof(DrzavaDto.Naziv), HeaderText = "Naziv", Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
 
             var PozivniBroj = new DataGridViewColumn
             {
-                DataPropertyName = "PozivniBroj",
+                DataPropertyName = nameof(DrzavaDto.PozivniBroj),
                 HeaderText = "Pozivni broj",
                 Name = "PozivniBroj",
                 CellTemplate = new DataGridViewTextBoxCell()
