@@ -70,6 +70,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                     return;
 
                 formToOpen.OpenAsChildOfControl(Parent);
+                this.Close();
             }
             else
             {
@@ -91,7 +92,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             if (!txtUsername.ValidTextInput(Errors))
                 return false;
 
-            if (!txtPassword.ValidTextInput(Errors))
+            if (!txtPassword.ValidTextInput(Errors,Validation.TextInputType.Mixed))
                 return false;
 
             Errors.Clear();
@@ -101,6 +102,11 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         private void btnLogin_Click_1(object sender, EventArgs e)
         {
             Login();
+        }
+
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

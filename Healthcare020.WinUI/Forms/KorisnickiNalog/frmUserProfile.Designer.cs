@@ -55,21 +55,31 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.txtPrezime = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtIme = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabSigurnost = new System.Windows.Forms.TabPage();
+            this.lblPasswordChangeLabel = new System.Windows.Forms.Label();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.lblNewPasswordConfirm = new System.Windows.Forms.Label();
+            this.txtNewPasswordConfirm = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.lblNewPassword = new System.Windows.Forms.Label();
+            this.lblCurrentPassword = new System.Windows.Forms.Label();
+            this.txtNewPassword = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txtCurrentPassword = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabSelector = new MaterialSkin.Controls.MaterialTabSelector();
             this.pnlTabs = new System.Windows.Forms.Panel();
             this.lblDateCreated = new System.Windows.Forms.Label();
             this.txtDateCreated = new System.Windows.Forms.Label();
             this.horizontalDivider = new MaterialSkin.Controls.MaterialDivider();
             this.lblRole = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtRole = new System.Windows.Forms.Label();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.picProfilePicture = new Healthcare020.WinUI.Helpers.CustomElements.CircularPictureBox();
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.ofcLoadPicture = new System.Windows.Forms.OpenFileDialog();
+            this.btnSaveNewPassword = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.tabUserProfile.SuspendLayout();
             this.tabLicniPodaci.SuspendLayout();
+            this.tabSigurnost.SuspendLayout();
             this.pnlTabs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
             this.pnlSidebar.SuspendLayout();
@@ -79,14 +89,15 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             // lblFirstLastName
             // 
-            this.lblFirstLastName.AutoSize = true;
+            this.lblFirstLastName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFirstLastName.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFirstLastName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.lblFirstLastName.Location = new System.Drawing.Point(36, 229);
+            this.lblFirstLastName.Location = new System.Drawing.Point(3, 241);
             this.lblFirstLastName.Name = "lblFirstLastName";
             this.lblFirstLastName.Padding = new System.Windows.Forms.Padding(2);
-            this.lblFirstLastName.Size = new System.Drawing.Size(4, 41);
+            this.lblFirstLastName.Size = new System.Drawing.Size(246, 59);
             this.lblFirstLastName.TabIndex = 1;
+            this.lblFirstLastName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabUserProfile
             // 
@@ -393,13 +404,129 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             // tabSigurnost
             // 
+            this.tabSigurnost.BackColor = System.Drawing.Color.White;
+            this.tabSigurnost.Controls.Add(this.btnSaveNewPassword);
+            this.tabSigurnost.Controls.Add(this.lblPasswordChangeLabel);
+            this.tabSigurnost.Controls.Add(this.materialDivider1);
+            this.tabSigurnost.Controls.Add(this.lblNewPasswordConfirm);
+            this.tabSigurnost.Controls.Add(this.txtNewPasswordConfirm);
+            this.tabSigurnost.Controls.Add(this.lblNewPassword);
+            this.tabSigurnost.Controls.Add(this.lblCurrentPassword);
+            this.tabSigurnost.Controls.Add(this.txtNewPassword);
+            this.tabSigurnost.Controls.Add(this.txtCurrentPassword);
             this.tabSigurnost.Location = new System.Drawing.Point(4, 22);
             this.tabSigurnost.Name = "tabSigurnost";
             this.tabSigurnost.Padding = new System.Windows.Forms.Padding(3);
             this.tabSigurnost.Size = new System.Drawing.Size(883, 516);
             this.tabSigurnost.TabIndex = 1;
             this.tabSigurnost.Text = global::Healthcare020.WinUI.Properties.Resources.LabelSecurity;
-            this.tabSigurnost.UseVisualStyleBackColor = true;
+            // 
+            // lblPasswordChangeLabel
+            // 
+            this.lblPasswordChangeLabel.AutoSize = true;
+            this.lblPasswordChangeLabel.Font = new System.Drawing.Font("Segoe UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPasswordChangeLabel.Location = new System.Drawing.Point(6, 20);
+            this.lblPasswordChangeLabel.Name = "lblPasswordChangeLabel";
+            this.lblPasswordChangeLabel.Size = new System.Drawing.Size(165, 32);
+            this.lblPasswordChangeLabel.TabIndex = 50;
+            this.lblPasswordChangeLabel.Text = "Izmena lozinke";
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.Gainsboro;
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(12, 66);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(377, 1);
+            this.materialDivider1.TabIndex = 15;
+            this.materialDivider1.Text = "materialDivider1";
+            // 
+            // lblNewPasswordConfirm
+            // 
+            this.lblNewPasswordConfirm.AutoSize = true;
+            this.lblNewPasswordConfirm.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNewPasswordConfirm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.lblNewPasswordConfirm.Location = new System.Drawing.Point(83, 288);
+            this.lblNewPasswordConfirm.Name = "lblNewPasswordConfirm";
+            this.lblNewPasswordConfirm.Size = new System.Drawing.Size(191, 25);
+            this.lblNewPasswordConfirm.TabIndex = 49;
+            this.lblNewPasswordConfirm.Text = "Potvrda nove lozinke";
+            // 
+            // txtNewPasswordConfirm
+            // 
+            this.txtNewPasswordConfirm.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtNewPasswordConfirm.Depth = 0;
+            this.txtNewPasswordConfirm.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNewPasswordConfirm.Hint = "";
+            this.txtNewPasswordConfirm.Location = new System.Drawing.Point(85, 340);
+            this.txtNewPasswordConfirm.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtNewPasswordConfirm.Name = "txtNewPasswordConfirm";
+            this.txtNewPasswordConfirm.PasswordChar = '*';
+            this.txtNewPasswordConfirm.SelectedText = "";
+            this.txtNewPasswordConfirm.SelectionLength = 0;
+            this.txtNewPasswordConfirm.SelectionStart = 0;
+            this.txtNewPasswordConfirm.Size = new System.Drawing.Size(250, 23);
+            this.txtNewPasswordConfirm.TabIndex = 48;
+            this.txtNewPasswordConfirm.UseSystemPasswordChar = false;
+            this.txtNewPasswordConfirm.Leave += new System.EventHandler(this.txtNewPasswordConfirm_Leave);
+            // 
+            // lblNewPassword
+            // 
+            this.lblNewPassword.AutoSize = true;
+            this.lblNewPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.lblNewPassword.Location = new System.Drawing.Point(83, 191);
+            this.lblNewPassword.Name = "lblNewPassword";
+            this.lblNewPassword.Size = new System.Drawing.Size(124, 25);
+            this.lblNewPassword.TabIndex = 47;
+            this.lblNewPassword.Text = "Nova lozinka";
+            // 
+            // lblCurrentPassword
+            // 
+            this.lblCurrentPassword.AutoSize = true;
+            this.lblCurrentPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.lblCurrentPassword.Location = new System.Drawing.Point(83, 114);
+            this.lblCurrentPassword.Name = "lblCurrentPassword";
+            this.lblCurrentPassword.Size = new System.Drawing.Size(153, 25);
+            this.lblCurrentPassword.TabIndex = 46;
+            this.lblCurrentPassword.Text = "Trenutna lozinka";
+            // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtNewPassword.Depth = 0;
+            this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNewPassword.Hint = "";
+            this.txtNewPassword.Location = new System.Drawing.Point(85, 240);
+            this.txtNewPassword.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.PasswordChar = '*';
+            this.txtNewPassword.SelectedText = "";
+            this.txtNewPassword.SelectionLength = 0;
+            this.txtNewPassword.SelectionStart = 0;
+            this.txtNewPassword.Size = new System.Drawing.Size(250, 23);
+            this.txtNewPassword.TabIndex = 45;
+            this.txtNewPassword.UseSystemPasswordChar = false;
+            // 
+            // txtCurrentPassword
+            // 
+            this.txtCurrentPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtCurrentPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txtCurrentPassword.Depth = 0;
+            this.txtCurrentPassword.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.txtCurrentPassword.Hint = "";
+            this.txtCurrentPassword.Location = new System.Drawing.Point(88, 149);
+            this.txtCurrentPassword.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtCurrentPassword.Name = "txtCurrentPassword";
+            this.txtCurrentPassword.PasswordChar = '*';
+            this.txtCurrentPassword.SelectedText = "";
+            this.txtCurrentPassword.SelectionLength = 0;
+            this.txtCurrentPassword.SelectionStart = 0;
+            this.txtCurrentPassword.Size = new System.Drawing.Size(250, 23);
+            this.txtCurrentPassword.TabIndex = 44;
+            this.txtCurrentPassword.UseSystemPasswordChar = false;
             // 
             // tabSelector
             // 
@@ -450,7 +577,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.horizontalDivider.BackColor = System.Drawing.Color.Gainsboro;
             this.horizontalDivider.Depth = 0;
-            this.horizontalDivider.Location = new System.Drawing.Point(38, 294);
+            this.horizontalDivider.Location = new System.Drawing.Point(28, 310);
             this.horizontalDivider.MouseState = MaterialSkin.MouseState.HOVER;
             this.horizontalDivider.Name = "horizontalDivider";
             this.horizontalDivider.Size = new System.Drawing.Size(200, 1);
@@ -468,16 +595,16 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblRole.TabIndex = 14;
             this.lblRole.Text = "Uloga";
             // 
-            // label2
+            // txtRole
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(56, 362);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(2);
-            this.label2.Size = new System.Drawing.Size(4, 25);
-            this.label2.TabIndex = 13;
+            this.txtRole.AutoSize = true;
+            this.txtRole.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRole.ForeColor = System.Drawing.Color.White;
+            this.txtRole.Location = new System.Drawing.Point(56, 362);
+            this.txtRole.Name = "txtRole";
+            this.txtRole.Padding = new System.Windows.Forms.Padding(2);
+            this.txtRole.Size = new System.Drawing.Size(4, 25);
+            this.txtRole.TabIndex = 13;
             // 
             // Errors
             // 
@@ -487,9 +614,9 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlSidebar.Controls.Add(this.picProfilePicture);
-            this.pnlSidebar.Controls.Add(this.label2);
             this.pnlSidebar.Controls.Add(this.lblFirstLastName);
+            this.pnlSidebar.Controls.Add(this.picProfilePicture);
+            this.pnlSidebar.Controls.Add(this.txtRole);
             this.pnlSidebar.Controls.Add(this.lblRole);
             this.pnlSidebar.Controls.Add(this.txtDateCreated);
             this.pnlSidebar.Controls.Add(this.lblDateCreated);
@@ -538,6 +665,29 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             this.ofcLoadPicture.FileName = "openFileDialog1";
             // 
+            // btnSaveNewPassword
+            // 
+            this.btnSaveNewPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSaveNewPassword.BorderColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnSaveNewPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSaveNewPassword.FlatAppearance.BorderSize = 0;
+            this.btnSaveNewPassword.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveNewPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveNewPassword.Location = new System.Drawing.Point(88, 412);
+            this.btnSaveNewPassword.Name = "btnSaveNewPassword";
+            this.btnSaveNewPassword.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(101)))), ((int)(((byte)(112)))));
+            this.btnSaveNewPassword.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnSaveNewPassword.Size = new System.Drawing.Size(235, 37);
+            this.btnSaveNewPassword.TabIndex = 51;
+            this.btnSaveNewPassword.Text = "Save";
+            this.btnSaveNewPassword.TextColor = System.Drawing.Color.White;
+            this.btnSaveNewPassword.UseVisualStyleBackColor = true;
+            this.btnSaveNewPassword.Click += new System.EventHandler(this.btnSaveNewPassword_Click);
+            // 
             // frmUserProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,6 +704,8 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.tabUserProfile.ResumeLayout(false);
             this.tabLicniPodaci.ResumeLayout(false);
             this.tabLicniPodaci.PerformLayout();
+            this.tabSigurnost.ResumeLayout(false);
+            this.tabSigurnost.PerformLayout();
             this.pnlTabs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).EndInit();
             this.pnlSidebar.ResumeLayout(false);
@@ -585,7 +737,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         private System.Windows.Forms.Label txtDateCreated;
         private MaterialSkin.Controls.MaterialDivider horizontalDivider;
         private System.Windows.Forms.Label lblRole;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label txtRole;
         private System.Windows.Forms.ComboBox cmbGradovi;
         private System.Windows.Forms.ComboBox cmbPolovi;
         private System.Windows.Forms.ErrorProvider Errors;
@@ -603,5 +755,14 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         private System.Windows.Forms.Label lblCountry;
         private System.Windows.Forms.ComboBox cmbDrzave;
         private System.Windows.Forms.OpenFileDialog ofcLoadPicture;
+        private System.Windows.Forms.Label lblPasswordChangeLabel;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private System.Windows.Forms.Label lblNewPasswordConfirm;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtNewPasswordConfirm;
+        private System.Windows.Forms.Label lblNewPassword;
+        private System.Windows.Forms.Label lblCurrentPassword;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtNewPassword;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtCurrentPassword;
+        private Helpers.CustomElements.Button_WOC btnSaveNewPassword;
     }
 }

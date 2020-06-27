@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Core.Extensions;
 using Microsoft.AspNetCore.Identity;
 
 namespace HealthCare020.Services
@@ -272,6 +273,29 @@ namespace HealthCare020.Services
             await _dbContext.Entry(korisnickiNalog).Collection(x => x.RolesKorisnickiNalog).LoadAsync();
 
             return ServiceResult.OK(_mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog));
+        }
+
+        public async Task<ServiceResult> ChangePassword(string currentPassword, string newPassword)
+        {
+            if(string.IsNullOrWhiteSpace(currentPassword) || string.IsNullOrWhiteSpace(newPassword))
+                return ServiceResult.BadRequest();
+
+            currentPassword = currentPassword.RemoveWhitespaces();
+            newPassword = newPassword.RemoveWhitespaces();
+
+            var currentUser = await _authService.LoggedInUser();
+
+            var userFromDb = await _dbContext.KorisnickiNalozi.FindAsync(currentUser.Id);
+            var hashedCurrentPassword = _securityService.GenerateHash(userFromDb.PasswordSalt, currentPassword);
+            if(userFromDb.PasswordHash!=hashedCurrentPassword)
+                return ServiceResult.BadRequest($"Netačna trenutna lozinka");
+
+            userFromDb.PasswordSalt = _securityService.GenerateSalt();
+            var hash = _securityService.GenerateHash(userFromDb.PasswordSalt, newPassword);
+            userFromDb.PasswordHash = hash;
+            await _dbContext.SaveChangesAsync();
+
+            return ServiceResult.OK();
         }
 
         private List<RoleType> RolesToAdd(RoleType roleParent)

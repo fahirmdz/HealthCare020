@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
 
 namespace Healthcare020.WinUI.Helpers
 {
@@ -40,6 +41,15 @@ namespace Healthcare020.WinUI.Helpers
                         }
                     }
                 }
+            }
+        }
+
+
+        public static void ResetTextboxes(this Control.ControlCollection controls)
+        {
+            foreach (var control in controls.OfType<MaterialSingleLineTextField>())
+            {
+                control.Text = string.Empty;
             }
         }
     }

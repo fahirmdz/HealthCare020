@@ -94,5 +94,18 @@ namespace HealthCare020.API.Controllers
 
             return Ok(result.Data);
         }
+
+        [HttpPost(Routes.ChangePasswordRoute)]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto dto)
+        {
+            var result = await _korisnikService.ChangePassword(dto.CurrentPassword,dto.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return WithStatusCode(result.StatusCode, result.Message);
+            }
+
+            return Ok();
+        }
     }
 }

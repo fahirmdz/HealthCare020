@@ -21,5 +21,6 @@
         public const string PacijentNaLecenjuRoute = "pacijenti-na-lecenju";
         public const string LekarskoUverenjeRoute = "lekarska-uverenja";
         public const string UputnicaRoute = "uputnice";
+        public const string ChangePasswordRoute = "change-password";
     }
 }

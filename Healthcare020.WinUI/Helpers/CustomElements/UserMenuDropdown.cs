@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.RadnikDashboard;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {
@@ -27,6 +28,12 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
             if (Auth.Role != RoleType.Administrator)
             {
+                //Dashboard button
+                var dashboard = new IconButton { Name="btnDashboard", Text="Dashboard", IconChar = IconChar.TachometerAlt};
+                dashboard.Click += dashboardButton_OnClick;
+
+                buttons.Add(dashboard);
+
                 //Profile button
                 var profileButton = new IconButton { Name = "btnProfile", Text = "Profile", IconChar = IconChar.IdCard };
                 profileButton.Click += profileButton_OnClick;
@@ -92,7 +99,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
         protected override void OnResize(EventArgs eventargs)
         {
-            var buttonCount = Auth.Role == RoleType.Administrator ? 1 : 2;
+            var buttonCount = Auth.Role == RoleType.Administrator ? 1 : 3;
             foreach (var btn in Controls.OfType<IconButton>())
             {
                 btn.Size = new Size(this.Width, this.Height / buttonCount);
@@ -102,6 +109,12 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
         protected void profileButton_OnClick(object sender, EventArgs e)
         {
             frmUserProfile.Instance.OpenAsChildOfControl(Parent);
+            this.Hide();
+        }
+
+        protected void dashboardButton_OnClick(object sender, EventArgs e)
+        {
+            frmMainDashboard.Instance.OpenAsChildOfControl(Parent);
             this.Hide();
         }
 

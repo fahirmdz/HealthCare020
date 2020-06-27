@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Healthcare020.WinUI.Properties;
 using MaterialSkin.Controls;
+using System;
 using System.Linq;
 using System.Net.Mail;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Helpers
 {
@@ -11,7 +11,7 @@ namespace Healthcare020.WinUI.Helpers
     {
         public enum TextInputType
         {
-            Digits, Letters
+            Digits, Letters, Mixed
         }
 
         public static bool ValidTextInput(this MaterialSingleLineTextField textField, ErrorProvider errors, TextInputType textInputType = TextInputType.Letters)
@@ -25,7 +25,8 @@ namespace Healthcare020.WinUI.Helpers
                 return false;
             }
 
-            if (textInputType == TextInputType.Letters ? textField.Text.Any(char.IsDigit) : textField.Text.Any(char.IsLetter))
+            if ((textInputType == TextInputType.Digits && textField.Text.Any(char.IsLetter)) 
+                || (textInputType == TextInputType.Letters && textField.Text.Any(char.IsDigit)))
             {
                 errors.SetError(textField, Properties.Resources.InvalidFormat);
                 return false;
@@ -56,9 +57,9 @@ namespace Healthcare020.WinUI.Helpers
 
                 return true;
             }
-            catch(FormatException)
+            catch (FormatException)
             {
-                errors.SetError(textField,Resources.InvalidFormat);
+                errors.SetError(textField, Resources.InvalidFormat);
                 return false;
             }
         }
