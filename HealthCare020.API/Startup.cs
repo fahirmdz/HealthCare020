@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using HealthCare020.API.Constants;
 
 namespace HealthCare020.API
@@ -88,6 +89,11 @@ namespace HealthCare020.API
 
             services.AddResponseCaching();
 
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("bs-Latn-BA");
+                options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US"), new CultureInfo("bs-Latn-BA") };
+            });
 
             services.AddControllers(cfg =>
                 {

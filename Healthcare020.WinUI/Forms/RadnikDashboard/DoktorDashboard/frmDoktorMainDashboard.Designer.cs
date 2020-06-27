@@ -1,6 +1,6 @@
-﻿namespace Healthcare020.WinUI.Forms.RadnikDashboard
+﻿namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
-    partial class frmMainDashboard
+    partial class frmDoktorMainDashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainDashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDoktorMainDashboard));
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.btnZakazaniPregledi = new FontAwesome.Sharp.IconButton();
-            this.btnPreglediNaCekanju = new FontAwesome.Sharp.IconButton();
+            this.btnZahteviZaPregled = new FontAwesome.Sharp.IconButton();
             this.btnSviPregledi = new FontAwesome.Sharp.IconButton();
             this.btnLekarskaUverenja = new FontAwesome.Sharp.IconButton();
             this.btnUputnice = new FontAwesome.Sharp.IconButton();
@@ -51,7 +51,7 @@
             // 
             this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.Location = new System.Drawing.Point(524, 31);
+            this.picLogo.Location = new System.Drawing.Point(510, 12);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(216, 216);
             this.picLogo.TabIndex = 8;
@@ -100,28 +100,30 @@
             this.btnZakazaniPregledi.Text = "Zakazani pregledi";
             this.btnZakazaniPregledi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnZakazaniPregledi.UseVisualStyleBackColor = false;
+            this.btnZakazaniPregledi.Click += new System.EventHandler(this.btnZakazaniPregledi_Click);
             // 
-            // btnPreglediNaCekanju
+            // btnZahteviZaPregled
             // 
-            this.btnPreglediNaCekanju.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnPreglediNaCekanju.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
-            this.btnPreglediNaCekanju.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPreglediNaCekanju.FlatAppearance.BorderSize = 0;
-            this.btnPreglediNaCekanju.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPreglediNaCekanju.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
-            this.btnPreglediNaCekanju.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPreglediNaCekanju.ForeColor = System.Drawing.Color.White;
-            this.btnPreglediNaCekanju.IconChar = FontAwesome.Sharp.IconChar.Clock;
-            this.btnPreglediNaCekanju.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
-            this.btnPreglediNaCekanju.IconSize = 45;
-            this.btnPreglediNaCekanju.Location = new System.Drawing.Point(784, 297);
-            this.btnPreglediNaCekanju.Name = "btnPreglediNaCekanju";
-            this.btnPreglediNaCekanju.Rotation = 0D;
-            this.btnPreglediNaCekanju.Size = new System.Drawing.Size(230, 74);
-            this.btnPreglediNaCekanju.TabIndex = 25;
-            this.btnPreglediNaCekanju.Text = "Pregledi na čekanju";
-            this.btnPreglediNaCekanju.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPreglediNaCekanju.UseVisualStyleBackColor = false;
+            this.btnZahteviZaPregled.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnZahteviZaPregled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.btnZahteviZaPregled.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnZahteviZaPregled.FlatAppearance.BorderSize = 0;
+            this.btnZahteviZaPregled.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZahteviZaPregled.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnZahteviZaPregled.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnZahteviZaPregled.ForeColor = System.Drawing.Color.White;
+            this.btnZahteviZaPregled.IconChar = FontAwesome.Sharp.IconChar.Clock;
+            this.btnZahteviZaPregled.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnZahteviZaPregled.IconSize = 45;
+            this.btnZahteviZaPregled.Location = new System.Drawing.Point(784, 297);
+            this.btnZahteviZaPregled.Name = "btnZahteviZaPregled";
+            this.btnZahteviZaPregled.Rotation = 0D;
+            this.btnZahteviZaPregled.Size = new System.Drawing.Size(230, 74);
+            this.btnZahteviZaPregled.TabIndex = 25;
+            this.btnZahteviZaPregled.Text = "Zahtevi za pregled";
+            this.btnZahteviZaPregled.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnZahteviZaPregled.UseVisualStyleBackColor = false;
+            this.btnZahteviZaPregled.Click += new System.EventHandler(this.btnPreglediNaCekanju_Click);
             // 
             // btnSviPregledi
             // 
@@ -144,6 +146,7 @@
             this.btnSviPregledi.Text = "Svi pregledi";
             this.btnSviPregledi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSviPregledi.UseVisualStyleBackColor = false;
+            this.btnSviPregledi.Click += new System.EventHandler(this.btnSviPregledi_Click);
             // 
             // btnLekarskaUverenja
             // 
@@ -245,7 +248,7 @@
             this.pnlMain.Controls.Add(this.btnLekarskaUverenja);
             this.pnlMain.Controls.Add(this.lblPregledi);
             this.pnlMain.Controls.Add(this.btnUputnice);
-            this.pnlMain.Controls.Add(this.btnPreglediNaCekanju);
+            this.pnlMain.Controls.Add(this.btnZahteviZaPregled);
             this.pnlMain.Controls.Add(this.materialDivider1);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
@@ -253,7 +256,7 @@
             this.pnlMain.Size = new System.Drawing.Size(1208, 607);
             this.pnlMain.TabIndex = 36;
             // 
-            // frmMainDashboard
+            // frmDoktorMainDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -262,7 +265,7 @@
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlCopyright);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmMainDashboard";
+            this.Name = "frmDoktorMainDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MainDashboard";
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
@@ -280,7 +283,7 @@
         private System.Windows.Forms.Panel pnlCopyright;
         private System.Windows.Forms.Label lblCopyright;
         private FontAwesome.Sharp.IconButton btnZakazaniPregledi;
-        private FontAwesome.Sharp.IconButton btnPreglediNaCekanju;
+        private FontAwesome.Sharp.IconButton btnZahteviZaPregled;
         private FontAwesome.Sharp.IconButton btnSviPregledi;
         private FontAwesome.Sharp.IconButton btnLekarskaUverenja;
         private FontAwesome.Sharp.IconButton btnUputnice;

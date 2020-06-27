@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using FontAwesome.Sharp;
+﻿using FontAwesome.Sharp;
 using Healthcare020.WinUI.Helpers.CustomElements;
 using Healthcare020.WinUI.Services;
 using LiveCharts;
 using LiveCharts.Definitions.Series;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using Brushes = System.Windows.Media.Brushes;
 
 namespace Healthcare020.WinUI.Forms.AbstractForms
@@ -21,7 +21,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
         Pie
     };
 
-    public abstract partial class StatisticChartForm : Form
+    public partial class StatisticChartForm : Form
     {
         protected int MonthsCount;
         protected APIService _apiService;

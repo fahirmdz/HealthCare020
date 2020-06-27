@@ -255,11 +255,29 @@
     <Compile Include="Forms\AbstractForms\StatisticChartForm.Designer.cs">
       <DependentUpon>StatisticChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RadnikDashboard\frmMainDashboard.cs">
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorMainDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RadnikDashboard\frmMainDashboard.Designer.cs">
-      <DependentUpon>frmMainDashboard.cs</DependentUpon>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorMainDashboard.Designer.cs">
+      <DependentUpon>frmDoktorMainDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPregledi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPregledi.Designer.cs">
+      <DependentUpon>frmDoktorPregledi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorZahteviZaPregledeDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorZahteviZaPregledeDisplay.Designer.cs">
+      <DependentUpon>frmDoktorZahteviZaPregledeDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.Designer.cs">
+      <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ControlExtensions.cs" />
     <Compile Include="Helpers\CustomElements\Button_WOC.cs">
@@ -415,8 +433,17 @@
     <EmbeddedResource Include="Forms\AbstractForms\StatisticChartForm.resx">
       <DependentUpon>StatisticChartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RadnikDashboard\frmMainDashboard.resx">
-      <DependentUpon>frmMainDashboard.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorMainDashboard.resx">
+      <DependentUpon>frmDoktorMainDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPregledi.resx">
+      <DependentUpon>frmDoktorPregledi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorZahteviZaPregledeDisplay.resx">
+      <DependentUpon>frmDoktorZahteviZaPregledeDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.resx">
+      <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Helpers\CustomElements\NoDataPanel.resx">
       <DependentUpon>NoDataPanel.cs</DependentUpon>

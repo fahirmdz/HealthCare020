@@ -24,7 +24,11 @@ namespace Healthcare020.WinUI.Helpers
             form.Dock = DockStyle.Fill;
             foreach (var control in parentControl.Controls.OfType<Form>())
             {
-                parentControl.Controls.Remove(control);
+                if(form != control)
+                {
+                    control.Close();
+                    parentControl.Controls.Remove(control);
+                }
             }
 
             parentControl.Controls.Add(form);

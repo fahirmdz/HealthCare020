@@ -11,7 +11,7 @@ using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AbstractForms
 {
-    public abstract partial class DisplayDataForm<TDto> : Form
+    public  partial class DisplayDataForm<TDto> : Form
     {
         protected APIService _apiService;
         protected IBindingList _dataForDgrv;
@@ -25,7 +25,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
         protected DisplayDataForm()
         {
             InitializeComponent();
-            PossibleRowsCount = dgrvMain.GetRowsCount();
+            PossibleRowsCount = dgrvMain.GetRowsCount()-1;
             _dataForDgrv = new BindingSource();
             SearchText = string.Empty;
 
@@ -104,9 +104,10 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
         protected virtual void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            //Bind nested/complex types to DataGridView cell, e.g. Grad.Drzava.Naziv -> Drzava
+            //Bind nested/complex types to DataGridView cell, e.g. Grad.Drzava.Naziv -> Drzava bug
             if (e.RowIndex >= CurrentRowCount - 1)
                 return;
+
             DataGridView grid = (DataGridView)sender;
             DataGridViewRow row = grid.Rows[e.RowIndex];
             DataGridViewColumn col = grid.Columns[e.ColumnIndex];
@@ -185,7 +186,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             if(ResourceParameters!=null)
             {
                 dgrvMain.DataSource = null;
-                PossibleRowsCount = dgrvMain.GetRowsCount();
+                PossibleRowsCount = dgrvMain.GetRowsCount()-1;
                 ResourceParameters.PageSize = PossibleRowsCount;
                 dgrvMain.RowCount = PossibleRowsCount;
                 await LoadData();
