@@ -37,5 +37,7 @@ namespace HealthCare020.Core.Request
 
         [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
         public int GradId { get; set; }
+
+        public byte[] ProfilePicture { get; set; }
     }
 }

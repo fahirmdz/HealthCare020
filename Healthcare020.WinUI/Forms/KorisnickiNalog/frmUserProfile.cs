@@ -9,9 +9,13 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using ComboBoxItem = Healthcare020.WinUI.Models.ComboBoxItem;
+using Image = System.Drawing.Image;
 using Validation = Healthcare020.WinUI.Helpers.Validation;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
@@ -40,40 +44,24 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 return _instance;
             }
         }
+
         private async void btnSave_Click(object sender, System.EventArgs e)
         {
-            if (ValidateInputs())
-            {
-                var upsertDto = new LicniPodaciUpsertDto
-                {
-                    Ime = txtIme.Text,
-                    Prezime = txtPrezime.Text,
-                    Adresa = txtAdresa.Text,
-                    JMBG = txtJmbg.Text,
-                    BrojTelefona = txtBrojTelefona.Text,
-                    EmailAddress = txtEmail.Text,
-                    GradId = cmbGradovi.SelectedIndex,
-                    Pol = cmbPolovi.SelectedIndex == 1 ? 'Z' : 'M'
-                };
-
-                _apiService.ChangeRoute(Routes.LicniPodaciRoute);
-                var result = await _apiService.Update<LicniPodaciDto>(LicniPodaci.Id, upsertDto);
-                if (result.Succeeded)
-                    dlgSuccess.ShowDialog();
-            }
+                await UpdateLicniPodaci();
         }
 
         private async void frmUserProfile_Load(object sender, System.EventArgs e)
         {
-            _apiService.ChangeRoute(Routes.GradoviRoute);
-            var gradoviResult = await _apiService.Get<GradDtoLL>();
-            if (gradoviResult.Succeeded)
+            _apiService.ChangeRoute(Routes.DrzaveRoute);
+            var drzaveResult = await _apiService.Get<DrzavaDto>(new DrzavaResourceParameters {PageSize = 100});
+            if (drzaveResult.Succeeded)
             {
-                var gradovi = gradoviResult.Data;
-                cmbGradovi.DataSource = gradovi;
-                cmbGradovi.DisplayMember = nameof(GradDtoLL.Naziv);
-                cmbGradovi.ValueMember = nameof(GradDtoLL.Id);
+                var drzave = drzaveResult.Data;
+                cmbDrzave.DataSource = drzave;
+                cmbDrzave.DisplayMember = "Naziv";
+                cmbDrzave.ValueMember = "Id";
             }
+
 
             cmbPolovi.DataSource = new List<ComboBoxItem>
             {
@@ -91,7 +79,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 _apiService.ChangeRoute(Routes.DoktoriRoute);
 
                 var result = await _apiService.Get<DoktorDtoEL>(new DoktorResourceParameters
-                { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
+                    {KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true});
 
                 if (!result.Succeeded || result.Data == null)
                 {
@@ -107,7 +95,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 _apiService.ChangeRoute(Routes.MedicinskiTehnicariRoute);
 
                 var result = await _apiService.Get<MedicinskiTehnicarDtoEL>(new MedicinskiTehnicarResourceParameters
-                { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
+                    {KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true});
 
                 if (!result.Succeeded || result?.Data == null)
                 {
@@ -123,7 +111,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 _apiService.ChangeRoute(Routes.RadniciPrijemRoute);
 
                 var result = await _apiService.Get<RadnikDtoEL>(new RadnikPrijemResourceParameters()
-                { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
+                    {KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true});
 
                 if (!result.Succeeded || result?.Data == null)
                 {
@@ -144,24 +132,35 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             _apiService.ChangeRoute(Routes.LicniPodaciRoute);
 
             var licniPodaciResult = await _apiService.GetById<LicniPodaciDto>(licniPodaciId, eagerLoaded: true);
-            if(!licniPodaciResult.Succeeded)
+            if (!licniPodaciResult.Succeeded && !licniPodaciResult.HasData)
             {
                 dlgError.ShowDialog("Unable to laod profile data");
                 return;
             }
 
             LicniPodaci = licniPodaciResult.Data;
+            await LoadGradovi(LicniPodaci.Grad.DrzavaId);
 
             txtIme.Text = LicniPodaci.Ime;
             txtPrezime.Text = LicniPodaci.Prezime;
+            lblFirstLastName.Text = $"{LicniPodaci.Ime} {LicniPodaci.Prezime}";
             txtJmbg.Text = LicniPodaci.JMBG;
             txtEmail.Text = LicniPodaci.EmailAddress;
             txtAdresa.Text = LicniPodaci.Adresa;
             txtDateCreated.Text = Auth.KorisnickiNalog.DateCreated;
             txtBrojTelefona.Text = LicniPodaci.BrojTelefona;
-            cmbGradovi.SelectedIndex = LicniPodaci.Grad.Id;
+
+            if (LicniPodaci.ProfilePicture.Length > 0)
+            {
+                var imageFromStream= Image.FromStream(new MemoryStream(LicniPodaci.ProfilePicture));
+                picProfilePicture.Image = imageFromStream;
+            }
+
             cmbPolovi.SelectedIndex = char.ToLower(LicniPodaci.Pol) == 'm' ? 0 : 1;
+            cmbDrzave.SelectedValue = LicniPodaci.Grad?.DrzavaId ?? 0;
+            cmbGradovi.SelectedValue = LicniPodaci.Grad.Id;
         }
+
         private bool ValidateInputs()
         {
             if (!txtIme.ValidTextInput(Errors))
@@ -193,6 +192,71 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
             Errors.Clear();
             return true;
+        }
+
+        private async void cmbDrzave_SelectionChangeCommitted(object sender, System.EventArgs e)
+        {
+            var selected = cmbDrzave.SelectedItem as DrzavaDto;
+            if (selected == null)
+                return;
+
+            await LoadGradovi(selected.Id);
+        }
+
+        private async Task LoadGradovi(int drzavaId)
+        {
+            _apiService.ChangeRoute(Routes.GradoviRoute);
+            var gradoviResult = await _apiService.Get<GradDtoLL>(new GradResourceParameters
+                {PageSize = 100, DrzavaId = drzavaId});
+            if (gradoviResult.Succeeded)
+            {
+                var gradovi = gradoviResult.Data;
+                cmbGradovi.DataSource = gradovi;
+                cmbGradovi.DisplayMember = nameof(GradDtoLL.Naziv);
+                cmbGradovi.ValueMember = nameof(GradDtoLL.Id);
+            }
+        }
+
+        private async void picProfilePicture_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (ofcLoadPicture.ShowDialog() == DialogResult.OK)
+            {
+                var path = ofcLoadPicture.FileName;
+                var picture = Image.FromFile(path);
+                picProfilePicture.Image = picture;
+
+                await UpdateLicniPodaci();
+            }
+        }
+
+        private async Task UpdateLicniPodaci()
+        {
+            if (ValidateInputs())
+            {
+                byte[] ProfilePic;
+                using (var ms = new MemoryStream())
+                {
+                    picProfilePicture.Image.Save(ms,picProfilePicture.Image.RawFormat);
+                    ProfilePic = ms.ToArray();
+                }
+                var upsertDto = new LicniPodaciUpsertDto
+                {
+                    Ime = txtIme.Text,
+                    Prezime = txtPrezime.Text,
+                    Adresa = txtAdresa.Text,
+                    JMBG = txtJmbg.Text,
+                    BrojTelefona = txtBrojTelefona.Text,
+                    EmailAddress = txtEmail.Text,
+                    GradId = int.Parse(cmbGradovi.SelectedValue.ToString()),
+                    Pol = cmbPolovi.SelectedIndex == 1 ? 'Z' : 'M',
+                    ProfilePicture = ProfilePic
+                };
+
+                _apiService.ChangeRoute(Routes.LicniPodaciRoute);
+                var result = await _apiService.Update<LicniPodaciDto>(LicniPodaci.Id, upsertDto);
+                if (result.Succeeded)
+                    dlgSuccess.ShowDialog();
+            }
         }
     }
 }
