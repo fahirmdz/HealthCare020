@@ -25,13 +25,38 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         private frmDoktorZahteviZaPregledeDisplay()
         {
-            var ID = new DataGridViewTextBoxColumn { DataPropertyName = nameof(ZahtevZaPregledDtoEL.Id), HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
+            var ID = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = nameof(ZahtevZaPregledDtoEL.Id),
+                HeaderText = "ID",
+                Name = "ID",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
 
-            var Pacijent = new DataGridViewColumn { HeaderText = "Pacijent", Name = "Pacijent", CellTemplate = new DataGridViewTextBoxCell() };
+            var Pacijent = new DataGridViewColumn
+            {
+                HeaderText = "Pacijent", 
+                Name = "Pacijent", 
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
 
-            var DatumVreme = new DataGridViewColumn { DataPropertyName = nameof(ZahtevZaPregledDtoEL.DatumVreme), HeaderText = "Datum i vreme", Name = "Datum i vreme", CellTemplate = new DataGridViewTextBoxCell() };
+            var DatumVreme = new DataGridViewColumn
+            {
+                DataPropertyName = nameof(ZahtevZaPregledDtoEL.DatumVreme),
+                HeaderText = "Datum i vreme",
+                Name = "Datum i vreme", 
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme });
+            var IsObradjen = new DataGridViewColumn
+            {
+                DataPropertyName = nameof(ZahtevZaPregledDtoEL.IsObradjen), 
+                HeaderText = "Obrađen",
+                Name=nameof(ZahtevZaPregledDtoEL.IsObradjen),
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
+
+            base.AddColumnsToMainDgrv(new[] { ID, Pacijent,IsObradjen, DatumVreme });
 
             _apiService = new APIService(Routes.ZahteviZaPregledRoute);
             ResourceParameters = new ZahtevZaPregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
@@ -52,6 +77,11 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             if (dgrvMain.Columns[e.ColumnIndex].Name == "Pacijent")
             {
                 e.Value = pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime();
+            }
+
+            if (dgrvMain.Columns[e.ColumnIndex].Name == nameof(ZahtevZaPregledDtoEL.IsObradjen))
+            {
+                e.Value = pregled.IsObradjen ? "DA" : "NE";
             }
         }
 

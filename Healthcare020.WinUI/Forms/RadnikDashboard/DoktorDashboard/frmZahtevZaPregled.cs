@@ -1,5 +1,8 @@
 ﻿using HealthCare020.Core.Models;
 using System.Windows.Forms;
+using HealthCare020.Core.Constants;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
@@ -7,6 +10,16 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
     {
         private static frmZahtevZaPregled _instance = null;
         private ZahtevZaPregledDtoEL ZahtevZaPregled;
+
+        private readonly APIService _apiService;
+
+        private frmZahtevZaPregled(ZahtevZaPregledDtoEL zahtevZaPregled)
+        {
+            ZahtevZaPregled = zahtevZaPregled;
+            _apiService=new APIService(Routes.ZahteviZaPregledRoute);
+            InitializeComponent();
+            btnZakazi.Visible = !ZahtevZaPregled.IsObradjen;
+        }
 
         public static frmZahtevZaPregled InstanceWithData(ZahtevZaPregledDtoEL zahtevZaPregled)
         {
@@ -16,13 +29,6 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 _instance = new frmZahtevZaPregled(zahtevZaPregled);
             return _instance;
         }
-
-        private frmZahtevZaPregled(ZahtevZaPregledDtoEL zahtevZaPregled)
-        {
-            ZahtevZaPregled = zahtevZaPregled;
-            InitializeComponent();
-        }
-
         private void frmZahtevZaPregled_Load(object sender, System.EventArgs e)
         {
             txtDatumZahteva.Text = ZahtevZaPregled.DatumVreme.ToString("g");
@@ -30,12 +36,12 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime()??"N/A";
             txtNapomena.Text = ZahtevZaPregled.Napomena;
             txtNapomena.ReadOnly = true;
+            txtIsObradjen.Text = ZahtevZaPregled.IsObradjen ? "DA" : "NE";
         }
 
-        private void btnClose_Click(object sender, System.EventArgs e)
+        private void btnSave_Click(object sender, System.EventArgs e)
         {
-            Parent.Dispose();
-            Dispose();
+            frmPregledZakazivanje.InstanceWithData(ZahtevZaPregled).OpenAsChildOfControl(Parent);
         }
     }
 }

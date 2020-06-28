@@ -40,15 +40,18 @@
             this.txtDatumZahteva = new System.Windows.Forms.Label();
             this.txtDoktor = new System.Windows.Forms.Label();
             this.txtPacijent = new System.Windows.Forms.Label();
-            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
+            this.btnZakazi = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
+            this.txtIsObradjen = new System.Windows.Forms.Label();
+            this.lblIsObradjen = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblDatumVremeZahteva
             // 
+            this.lblDatumVremeZahteva.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDatumVremeZahteva.AutoSize = true;
             this.lblDatumVremeZahteva.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDatumVremeZahteva.Location = new System.Drawing.Point(7, 173);
+            this.lblDatumVremeZahteva.Location = new System.Drawing.Point(45, 170);
             this.lblDatumVremeZahteva.Name = "lblDatumVremeZahteva";
             this.lblDatumVremeZahteva.Size = new System.Drawing.Size(245, 21);
             this.lblDatumVremeZahteva.TabIndex = 51;
@@ -56,9 +59,10 @@
             // 
             // lblDoktor
             // 
+            this.lblDoktor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDoktor.AutoSize = true;
             this.lblDoktor.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDoktor.Location = new System.Drawing.Point(186, 132);
+            this.lblDoktor.Location = new System.Drawing.Point(224, 129);
             this.lblDoktor.Name = "lblDoktor";
             this.lblDoktor.Size = new System.Drawing.Size(66, 21);
             this.lblDoktor.TabIndex = 50;
@@ -66,19 +70,21 @@
             // 
             // lblNapomena
             // 
+            this.lblNapomena.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblNapomena.AutoSize = true;
             this.lblNapomena.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNapomena.Location = new System.Drawing.Point(162, 213);
+            this.lblNapomena.Location = new System.Drawing.Point(126, 264);
             this.lblNapomena.Name = "lblNapomena";
-            this.lblNapomena.Size = new System.Drawing.Size(90, 21);
+            this.lblNapomena.Size = new System.Drawing.Size(94, 21);
             this.lblNapomena.TabIndex = 49;
-            this.lblNapomena.Text = "Napomena";
+            this.lblNapomena.Text = "Napomena:";
             // 
             // lblPacijent
             // 
+            this.lblPacijent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPacijent.AutoSize = true;
             this.lblPacijent.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPacijent.Location = new System.Drawing.Point(181, 88);
+            this.lblPacijent.Location = new System.Drawing.Point(219, 85);
             this.lblPacijent.Name = "lblPacijent";
             this.lblPacijent.Size = new System.Drawing.Size(71, 21);
             this.lblPacijent.TabIndex = 48;
@@ -86,21 +92,26 @@
             // 
             // txtNapomena
             // 
+            this.txtNapomena.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtNapomena.BackColor = System.Drawing.Color.White;
+            this.txtNapomena.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNapomena.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNapomena.Location = new System.Drawing.Point(166, 248);
+            this.txtNapomena.Location = new System.Drawing.Point(226, 265);
+            this.txtNapomena.MaximumSize = new System.Drawing.Size(347, 151);
+            this.txtNapomena.MinimumSize = new System.Drawing.Size(347, 100);
             this.txtNapomena.Multiline = true;
             this.txtNapomena.Name = "txtNapomena";
             this.txtNapomena.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtNapomena.Size = new System.Drawing.Size(377, 90);
+            this.txtNapomena.Size = new System.Drawing.Size(347, 100);
             this.txtNapomena.TabIndex = 52;
             // 
             // lblTitle
             // 
+            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.lblTitle.Location = new System.Drawing.Point(242, 10);
+            this.lblTitle.Location = new System.Drawing.Point(219, 10);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(235, 37);
             this.lblTitle.TabIndex = 53;
@@ -108,9 +119,10 @@
             // 
             // horizontalDivider
             // 
+            this.horizontalDivider.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.horizontalDivider.BackColor = System.Drawing.Color.Gainsboro;
             this.horizontalDivider.Depth = 0;
-            this.horizontalDivider.Location = new System.Drawing.Point(146, 61);
+            this.horizontalDivider.Location = new System.Drawing.Point(123, 61);
             this.horizontalDivider.MouseState = MaterialSkin.MouseState.HOVER;
             this.horizontalDivider.Name = "horizontalDivider";
             this.horizontalDivider.Size = new System.Drawing.Size(424, 1);
@@ -119,9 +131,9 @@
             // 
             // picLogo
             // 
-            this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.picLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.Location = new System.Drawing.Point(643, 10);
+            this.picLogo.Location = new System.Drawing.Point(617, 10);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(111, 112);
             this.picLogo.TabIndex = 55;
@@ -129,63 +141,90 @@
             // 
             // txtDatumZahteva
             // 
+            this.txtDatumZahteva.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDatumZahteva.AutoSize = true;
             this.txtDatumZahteva.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDatumZahteva.Location = new System.Drawing.Point(258, 174);
+            this.txtDatumZahteva.Location = new System.Drawing.Point(296, 171);
             this.txtDatumZahteva.Name = "txtDatumZahteva";
             this.txtDatumZahteva.Size = new System.Drawing.Size(0, 20);
             this.txtDatumZahteva.TabIndex = 57;
             // 
             // txtDoktor
             // 
+            this.txtDoktor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDoktor.AutoSize = true;
             this.txtDoktor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDoktor.Location = new System.Drawing.Point(258, 133);
+            this.txtDoktor.Location = new System.Drawing.Point(296, 130);
             this.txtDoktor.Name = "txtDoktor";
             this.txtDoktor.Size = new System.Drawing.Size(0, 20);
             this.txtDoktor.TabIndex = 58;
             // 
             // txtPacijent
             // 
+            this.txtPacijent.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPacijent.AutoSize = true;
             this.txtPacijent.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPacijent.Location = new System.Drawing.Point(258, 89);
+            this.txtPacijent.Location = new System.Drawing.Point(296, 86);
             this.txtPacijent.Name = "txtPacijent";
             this.txtPacijent.Size = new System.Drawing.Size(0, 20);
             this.txtPacijent.TabIndex = 59;
             // 
-            // btnSave
+            // btnZakazi
             // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(577, 281);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
-            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnSave.Size = new System.Drawing.Size(164, 57);
-            this.btnSave.TabIndex = 56;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextColor = System.Drawing.Color.White;
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnZakazi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnZakazi.BorderColor = System.Drawing.Color.Transparent;
+            this.btnZakazi.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.btnZakazi.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnZakazi.FlatAppearance.BorderSize = 0;
+            this.btnZakazi.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnZakazi.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnZakazi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZakazi.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnZakazi.Location = new System.Drawing.Point(586, 290);
+            this.btnZakazi.Name = "btnZakazi";
+            this.btnZakazi.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnZakazi.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.btnZakazi.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnZakazi.Size = new System.Drawing.Size(142, 75);
+            this.btnZakazi.TabIndex = 56;
+            this.btnZakazi.Text = "Zakaži";
+            this.btnZakazi.TextColor = System.Drawing.Color.White;
+            this.btnZakazi.UseVisualStyleBackColor = true;
+            this.btnZakazi.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtIsObradjen
+            // 
+            this.txtIsObradjen.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtIsObradjen.AutoSize = true;
+            this.txtIsObradjen.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIsObradjen.Location = new System.Drawing.Point(295, 212);
+            this.txtIsObradjen.Name = "txtIsObradjen";
+            this.txtIsObradjen.Size = new System.Drawing.Size(0, 20);
+            this.txtIsObradjen.TabIndex = 61;
+            // 
+            // lblIsObradjen
+            // 
+            this.lblIsObradjen.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblIsObradjen.AutoSize = true;
+            this.lblIsObradjen.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIsObradjen.Location = new System.Drawing.Point(208, 211);
+            this.lblIsObradjen.Name = "lblIsObradjen";
+            this.lblIsObradjen.Size = new System.Drawing.Size(82, 21);
+            this.lblIsObradjen.TabIndex = 60;
+            this.lblIsObradjen.Text = "Obradjen:";
             // 
             // frmZahtevZaPregled
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(787, 377);
+            this.ClientSize = new System.Drawing.Size(740, 377);
+            this.Controls.Add(this.txtIsObradjen);
+            this.Controls.Add(this.lblIsObradjen);
             this.Controls.Add(this.txtPacijent);
             this.Controls.Add(this.txtDoktor);
             this.Controls.Add(this.txtDatumZahteva);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnZakazi);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.horizontalDivider);
             this.Controls.Add(this.lblTitle);
@@ -216,9 +255,11 @@
         private System.Windows.Forms.Label lblTitle;
         private MaterialSkin.Controls.MaterialDivider horizontalDivider;
         private System.Windows.Forms.PictureBox picLogo;
-        private Helpers.CustomElements.Button_WOC btnSave;
+        private Helpers.CustomElements.Button_WOC btnZakazi;
         private System.Windows.Forms.Label txtDatumZahteva;
         private System.Windows.Forms.Label txtDoktor;
         private System.Windows.Forms.Label txtPacijent;
+        private System.Windows.Forms.Label txtIsObradjen;
+        private System.Windows.Forms.Label lblIsObradjen;
     }
 }

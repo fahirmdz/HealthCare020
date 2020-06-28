@@ -81,6 +81,7 @@ namespace HealthCare020.Services.Mappers
             #region LicniPodaci
 
             CreateMap<LicniPodaci, LicniPodaciDto>()
+                .DisableCtorValidation()
                 .ForMember(dest=>dest.Grad, 
                     opt=>opt.MapFrom(x=>x.Grad));
             CreateMap<LicniPodaci, LicniPodaciUpsertDto>()
@@ -186,6 +187,7 @@ namespace HealthCare020.Services.Mappers
                 .ForMember(dest => dest.Username,
                     opt => opt.MapFrom(x => x.KorisnickiNalog.Username));
             CreateMap<Pacijent, PacijentDtoEL>()
+                .DisableCtorValidation()
                 .ForMember(dest => dest.ZdravstvenaKnjizica,
                     opt => opt.MapFrom(x => x.ZdravstvenaKnjizica))
                 .ForMember(dest => dest.Username,
@@ -198,6 +200,7 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<ZahtevZaPregled, ZahtevZaPregledDtoLL>();
             CreateMap<ZahtevZaPregled, ZahtevZaPregledDtoEL>()
+                .DisableCtorValidation()
                 .ForMember(dest => dest.Doktor,
                     opt => opt.MapFrom(x => x.Doktor.Radnik.LicniPodaci.ImePrezime()))
                 .ForMember(dest => dest.Pacijent,
@@ -222,6 +225,7 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<ZdravstvenaKnjizica, ZdravstvenaKnjizicaDtoLL>();
             CreateMap<ZdravstvenaKnjizica, ZdravstvenaKnjizicaDtoEL>()
+                .DisableCtorValidation()
                 .ForMember(dest => dest.Doktor,
                     opt => opt.MapFrom(x => x.Doktor.Radnik.LicniPodaci.ImePrezime()))
                 .ForMember(dest => dest.LicniPodaci,
