@@ -207,6 +207,11 @@ namespace HealthCare020.Services
                 {
                     result = result.Where(x => x.IsOdradjen == resourceParameters.IsOdradjen.Value);
                 }
+
+                if (await result.AnyAsync() && resourceParameters.OnlyZakazani)
+                {
+                    result = result.Where(x => !x.IsOdradjen);
+                }
             }
 
             //CONSTRAINT -> Pacijent moze samo svoje preglede videti

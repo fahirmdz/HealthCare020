@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
-    partial class frmDoktorPregledi
+    partial class frmDoktorDataDisplay
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDoktorPregledi));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDoktorDataDisplay));
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.pnlData = new System.Windows.Forms.Panel();
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
+            this.btnBack = new FontAwesome.Sharp.IconButton();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.horizontalDivider = new MaterialSkin.Controls.MaterialDivider();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlCopyright.SuspendLayout();
             this.SuspendLayout();
@@ -80,23 +83,69 @@
             this.lblCopyright.TabIndex = 14;
             this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
             // 
-            // frmDoktorPregledi
+            // btnBack
+            // 
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnBack.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnBack.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            this.btnBack.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnBack.IconSize = 25;
+            this.btnBack.Location = new System.Drawing.Point(40, 12);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Rotation = 0D;
+            this.btnBack.Size = new System.Drawing.Size(88, 34);
+            this.btnBack.TabIndex = 23;
+            this.btnBack.Text = "Back";
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
+            this.lblTitle.Location = new System.Drawing.Point(128, 65);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(0, 40);
+            this.lblTitle.TabIndex = 54;
+            // 
+            // horizontalDivider
+            // 
+            this.horizontalDivider.BackColor = System.Drawing.Color.Gainsboro;
+            this.horizontalDivider.Depth = 0;
+            this.horizontalDivider.Location = new System.Drawing.Point(92, 117);
+            this.horizontalDivider.MouseState = MaterialSkin.MouseState.HOVER;
+            this.horizontalDivider.Name = "horizontalDivider";
+            this.horizontalDivider.Size = new System.Drawing.Size(504, 1);
+            this.horizontalDivider.TabIndex = 55;
+            this.horizontalDivider.Text = "materialDivider1";
+            // 
+            // frmDoktorDataDisplay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1208, 607);
+            this.Controls.Add(this.horizontalDivider);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.pnlCopyright);
             this.Controls.Add(this.pnlData);
             this.Controls.Add(this.picLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmDoktorPregledi";
+            this.Name = "frmDoktorDataDisplay";
             this.Text = "frmDoktorPregledi";
             this.Load += new System.EventHandler(this.frmDoktorPregledi_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlCopyright.ResumeLayout(false);
             this.pnlCopyright.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,5 +155,8 @@
         private System.Windows.Forms.Panel pnlData;
         private System.Windows.Forms.Panel pnlCopyright;
         private System.Windows.Forms.Label lblCopyright;
+        private FontAwesome.Sharp.IconButton btnBack;
+        private System.Windows.Forms.Label lblTitle;
+        private MaterialSkin.Controls.MaterialDivider horizontalDivider;
     }
 }

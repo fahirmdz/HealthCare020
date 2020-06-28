@@ -147,7 +147,8 @@ namespace Healthcare020.WinUI.Services
             return new APIServiceResult<List<T>>
             {
                 PaginationMetadata = paginationMetadata ?? new PaginationMetadata(),
-                Data = result
+                Data = result,
+                HasData = result!=null
             };
         }
 

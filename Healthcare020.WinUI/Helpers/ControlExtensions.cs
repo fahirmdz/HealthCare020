@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -59,6 +60,13 @@ namespace Healthcare020.WinUI.Helpers
         public static void HideCaret(this Control control)
         {
             HideCaret(control.Handle);
+        }
+
+
+        public static void CenterToClient(this Control control, Control client)
+        {
+            control.Location = new Point(client.ClientSize.Width / 2 - control.Size.Width / 2,
+                client.ClientSize.Height / 2 - control.Size.Height / 2);
         }
     }
 }

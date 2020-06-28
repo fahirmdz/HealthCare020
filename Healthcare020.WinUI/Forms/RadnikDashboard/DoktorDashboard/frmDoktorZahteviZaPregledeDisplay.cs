@@ -62,6 +62,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             ResourceParameters = new ZahtevZaPregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
 
             InitializeComponent();
+
+            btnNew.Visible = false;
         }
 
         protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -87,7 +89,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!(MainDgrv.CurrentRow?.DataBoundItem is ZahtevZaPregledDtoEL zahtevZaPregled))
+            if (!(dgrvMain.CurrentRow?.DataBoundItem is ZahtevZaPregledDtoEL zahtevZaPregled))
                 return;
 
             dlgForm.ShowDialog(frmZahtevZaPregled.InstanceWithData(zahtevZaPregled));

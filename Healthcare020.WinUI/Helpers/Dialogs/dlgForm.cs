@@ -8,18 +8,30 @@ using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Helpers.Dialogs
 {
+    public enum DialogFormSize
+    {
+        Small=5,
+        Medium=8,
+        Large=10
+    };
     public partial class dlgForm : Form
     {
         private static dlgForm _instance = null;
         private Form Child;
+        private Size BodyPanelSize;
 
-        private dlgForm(Form child)
+        private dlgForm(Form child, DialogFormSize bodyPanelSize=DialogFormSize.Medium)
         {
+            var sizeMultiplier = (int) bodyPanelSize;
+
+            BodyPanelSize=new Size(sizeMultiplier*100,(int)((double)sizeMultiplier/2)*100);
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             var mainFormSize = MainForm.Instance.Size;
             this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
+            pnlBody.Size = BodyPanelSize;
+            pnlBody.CenterToClient(this);
             this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
             this.BackColor=Color.Transparent;
             this.TransparencyKey=Color.Empty;
@@ -30,10 +42,10 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             txtLeftTitle.Enter += (s, e) => { txtLeftTitle.Parent.Focus(); };
         }
 
-        public static void ShowDialog(Form child)
+        public static void ShowDialog(Form child,DialogFormSize bodyPanelSize=DialogFormSize.Medium, bool NewInstance=false)
         {
-            if (_instance == null || _instance.IsDisposed || (_instance!=null && _instance.Visible))
-                _instance = new dlgForm(child);
+            if (_instance == null || _instance.IsDisposed || (_instance!=null && _instance.Visible) || NewInstance)
+                _instance = new dlgForm(child,bodyPanelSize);
            
             ((Form)_instance).ShowDialog();
         }
@@ -52,10 +64,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private void pnlMain_MouseClick(object sender, MouseEventArgs e)
         {
-            Child.Close();
-            Child.Dispose();
             Close();
-            Dispose();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -1,8 +1,10 @@
-﻿using System;
-using Healthcare020.WinUI.Forms.AbstractForms;
+﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
+using System;
 using System.Windows.Forms;
 using PregledResourceParameters = HealthCare020.Core.ResourceParameters.PregledResourceParameters;
 
@@ -11,33 +13,59 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
     public partial class frmDoktorPreglediDisplay : DisplayDataForm<PregledDtoEL>
     {
         private static frmDoktorPreglediDisplay _instance = null;
+        private int OpenedPregledId;
+        private bool OnlyZakazani;
 
-        public static frmDoktorPreglediDisplay Instance
+        public static frmDoktorPreglediDisplay InstanceWithData(bool OnlyZakazani = false)
         {
-            get
-            {
-                if (_instance == null || _instance.IsDisposed)
-                    _instance = new frmDoktorPreglediDisplay();
-                return _instance;
-            }
+            if (_instance == null || _instance.IsDisposed)
+                _instance = new frmDoktorPreglediDisplay(OnlyZakazani);
+            return _instance;
         }
 
-        private frmDoktorPreglediDisplay()
+        private frmDoktorPreglediDisplay(bool OnlyZakazani = false)
         {
-            var ID = new DataGridViewTextBoxColumn { DataPropertyName = nameof(PregledDtoEL.Id), HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
+            this.OnlyZakazani = OnlyZakazani;
+            this.Text = OnlyZakazani ? Resources.frmDoktorZakazaniPregledi : Resources.frmDoktorPregledi;
 
-            var Pacijent = new DataGridViewColumn { HeaderText = "Pacijent", Name = "Pacijent", CellTemplate = new DataGridViewTextBoxCell() };
+            var ID = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = nameof(PregledDtoEL.Id),
+                HeaderText = "ID",
+                Name = "ID",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
 
-            var DatumVreme = new DataGridViewColumn { DataPropertyName = nameof(PregledDtoEL.DatumPregleda), HeaderText = "Datum i vreme", Name = "Datum i vreme", CellTemplate = new DataGridViewTextBoxCell() };
+            var Pacijent = new DataGridViewColumn
+            {
+                HeaderText = "Pacijent",
+                Name = "Pacijent",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
 
-            var IsOdradjen = new DataGridViewColumn { DataPropertyName = nameof(PregledDtoEL.IsOdradjen), HeaderText = "Odrađen", Name = "Odrađen", CellTemplate = new DataGridViewTextBoxCell() };
+            var DatumVreme = new DataGridViewColumn
+            {
+                DataPropertyName = nameof(PregledDtoEL.DatumPregleda),
+                HeaderText = "Datum i vreme",
+                Name = nameof(PregledDtoEL.DatumPregleda),
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
+
+            var IsOdradjen = new DataGridViewColumn
+            {
+                DataPropertyName = nameof(PregledDtoEL.IsOdradjen),
+                HeaderText = "Odrađen",
+                Name = "Odrađen",
+                CellTemplate = new DataGridViewTextBoxCell()
+            };
 
             base.AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme, IsOdradjen });
 
             _apiService = new APIService(Routes.PreglediRoute);
-            ResourceParameters = new PregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount,EagerLoaded = true};
+            ResourceParameters = new PregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true, OnlyZakazani = OnlyZakazani };
 
             InitializeComponent();
+            btnNew.Visible = false;
         }
 
         protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -58,6 +86,29 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             if (dgrvMain.Columns[e.ColumnIndex].Name == "Odrađen")
             {
                 e.Value = pregled.IsOdradjen ? "DA" : "NE";
+            }
+
+            if (dgrvMain.Columns[e.ColumnIndex].Name == nameof(PregledDtoEL.DatumPregleda))
+                e.Value = pregled.DatumPregleda.ToString("g");
+        }
+
+        protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(dgrvMain.CurrentRow?.DataBoundItem is PregledDtoEL pregled))
+                return;
+
+            if (!pregled.IsOdradjen)
+            {
+                //Proverava se da li je korisnik kliknuo na novi red i pritom zeli pokrenuti drugi pregled
+                //Ukoliko je korisnik kliknuo na novi pregled, podaci koji su unijeti za prethodno pokrenuti pregled se brisu (dispose se frmNewLekarskoUverenje instanca)
+                var newInstance = false;
+                if (OpenedPregledId != pregled.Id)
+                {
+                    OpenedPregledId = pregled.Id;
+                    newInstance = true;
+                }
+                dlgForm.ShowDialog(frmNewLekarskoUverenje.InstanceWithData(pregled,newInstance), DialogFormSize.Large,newInstance);
+
             }
         }
 
