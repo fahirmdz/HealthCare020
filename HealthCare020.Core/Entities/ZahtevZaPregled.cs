@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,5 +28,8 @@ namespace HealthCare020.Core.Entities
         [StringLength(255,ErrorMessage = "Maximum length is 255 characters",MinimumLength = 5)]
         [Required]
         public string Napomena { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsObradjen { get; set; }
     }
 }

@@ -79,6 +79,33 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Svi pregledi.
+        /// </summary>
+        public static string frmDoktorPregledi {
+            get {
+                return ResourceManager.GetString("frmDoktorPregledi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zahtevi za pregled.
+        /// </summary>
+        public static string frmDoktorZahteviZaPreglede {
+            get {
+                return ResourceManager.GetString("frmDoktorZahteviZaPreglede", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zakazani pregledi.
+        /// </summary>
+        public static string frmDoktorZakazaniPregledi {
+            get {
+                return ResourceManager.GetString("frmDoktorZakazaniPregledi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predefinisani podaci - Države.
         /// </summary>
         public static string frmDrzave {
@@ -310,6 +337,45 @@ namespace Healthcare020.WinUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Healthcare020_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Healthcare020_Logo_210x210 {
+            get {
+                object obj = ResourceManager.GetObject("Healthcare020_Logo_210x210", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Healthcare020_Logo_250x250 {
+            get {
+                object obj = ResourceManager.GetObject("Healthcare020_Logo_250x250", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Healthcare020_Logo_500x500 {
+            get {
+                object obj = ResourceManager.GetObject("Healthcare020_Logo_500x500", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Klinički centar UCS.
+        /// </summary>
+        public static string InstitutionName {
+            get {
+                return ResourceManager.GetString("InstitutionName", resourceCulture);
             }
         }
         

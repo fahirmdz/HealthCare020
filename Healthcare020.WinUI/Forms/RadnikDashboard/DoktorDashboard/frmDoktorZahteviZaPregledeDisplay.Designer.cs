@@ -1,4 +1,6 @@
-﻿namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
+﻿using Healthcare020.WinUI.Properties;
+
+namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     partial class frmDoktorZahteviZaPregledeDisplay
     {
@@ -70,7 +72,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "frmDoktorPreglediDisplay";
-            this.Text = "frmDoktorPreglediDisplay";
+            this.Text = Resources.frmDoktorZahteviZaPreglede;
             this.pnlSearch.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.icnSearch)).EndInit();
             this.pnlNavButtons.ResumeLayout(false);

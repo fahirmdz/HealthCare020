@@ -55,6 +55,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.txtPrezime = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtIme = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tabSigurnost = new System.Windows.Forms.TabPage();
+            this.btnSaveNewPassword = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.lblPasswordChangeLabel = new System.Windows.Forms.Label();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.lblNewPasswordConfirm = new System.Windows.Forms.Label();
@@ -76,7 +77,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.ofcLoadPicture = new System.Windows.Forms.OpenFileDialog();
-            this.btnSaveNewPassword = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.tabUserProfile.SuspendLayout();
             this.tabLicniPodaci.SuspendLayout();
             this.tabSigurnost.SuspendLayout();
@@ -144,10 +144,10 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // lblCountry
             // 
             this.lblCountry.AutoSize = true;
-            this.lblCountry.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountry.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountry.Location = new System.Drawing.Point(65, 273);
             this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(69, 25);
+            this.lblCountry.Size = new System.Drawing.Size(72, 25);
             this.lblCountry.TabIndex = 47;
             this.lblCountry.Text = "Drzava";
             // 
@@ -168,20 +168,20 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // lblCity
             // 
             this.lblCity.AutoSize = true;
-            this.lblCity.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCity.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCity.Location = new System.Drawing.Point(445, 279);
             this.lblCity.Name = "lblCity";
-            this.lblCity.Size = new System.Drawing.Size(52, 25);
+            this.lblCity.Size = new System.Drawing.Size(53, 25);
             this.lblCity.TabIndex = 45;
             this.lblCity.Text = "Grad";
             // 
             // lblPhoneNumber
             // 
             this.lblPhoneNumber.AutoSize = true;
-            this.lblPhoneNumber.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhoneNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhoneNumber.Location = new System.Drawing.Point(445, 191);
             this.lblPhoneNumber.Name = "lblPhoneNumber";
-            this.lblPhoneNumber.Size = new System.Drawing.Size(116, 25);
+            this.lblPhoneNumber.Size = new System.Drawing.Size(122, 25);
             this.lblPhoneNumber.TabIndex = 44;
             this.lblPhoneNumber.Tag = "";
             this.lblPhoneNumber.Text = "Broj telefona";
@@ -189,60 +189,60 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // lblJmbg
             // 
             this.lblJmbg.AutoSize = true;
-            this.lblJmbg.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJmbg.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblJmbg.Location = new System.Drawing.Point(445, 94);
             this.lblJmbg.Name = "lblJmbg";
-            this.lblJmbg.Size = new System.Drawing.Size(58, 25);
+            this.lblJmbg.Size = new System.Drawing.Size(62, 25);
             this.lblJmbg.TabIndex = 43;
             this.lblJmbg.Text = "JMBG";
             // 
             // lblPrezime
             // 
             this.lblPrezime.AutoSize = true;
-            this.lblPrezime.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrezime.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrezime.Location = new System.Drawing.Point(445, 16);
             this.lblPrezime.Name = "lblPrezime";
-            this.lblPrezime.Size = new System.Drawing.Size(77, 25);
+            this.lblPrezime.Size = new System.Drawing.Size(81, 25);
             this.lblPrezime.TabIndex = 42;
             this.lblPrezime.Text = "Prezime";
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.Location = new System.Drawing.Point(62, 378);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(64, 25);
+            this.lblEmail.Size = new System.Drawing.Size(67, 25);
             this.lblEmail.TabIndex = 41;
             this.lblEmail.Text = "E-mail";
             // 
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddress.Location = new System.Drawing.Point(62, 191);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(69, 25);
+            this.lblAddress.Size = new System.Drawing.Size(71, 25);
             this.lblAddress.TabIndex = 40;
             this.lblAddress.Text = "Adresa";
             // 
             // lblGender
             // 
             this.lblGender.AutoSize = true;
-            this.lblGender.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGender.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGender.Location = new System.Drawing.Point(62, 94);
             this.lblGender.Name = "lblGender";
-            this.lblGender.Size = new System.Drawing.Size(36, 25);
+            this.lblGender.Size = new System.Drawing.Size(38, 25);
             this.lblGender.TabIndex = 39;
             this.lblGender.Text = "Pol";
             // 
             // lblIme
             // 
             this.lblIme.AutoSize = true;
-            this.lblIme.Font = new System.Drawing.Font("Segoe UI Semilight", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIme.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIme.Location = new System.Drawing.Point(62, 16);
             this.lblIme.Name = "lblIme";
-            this.lblIme.Size = new System.Drawing.Size(43, 25);
+            this.lblIme.Size = new System.Drawing.Size(45, 25);
             this.lblIme.TabIndex = 38;
             this.lblIme.Text = "Ime";
             // 
@@ -420,6 +420,29 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.tabSigurnost.Size = new System.Drawing.Size(883, 516);
             this.tabSigurnost.TabIndex = 1;
             this.tabSigurnost.Text = global::Healthcare020.WinUI.Properties.Resources.LabelSecurity;
+            // 
+            // btnSaveNewPassword
+            // 
+            this.btnSaveNewPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSaveNewPassword.BorderColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
+            this.btnSaveNewPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSaveNewPassword.FlatAppearance.BorderSize = 0;
+            this.btnSaveNewPassword.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveNewPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveNewPassword.Location = new System.Drawing.Point(88, 412);
+            this.btnSaveNewPassword.Name = "btnSaveNewPassword";
+            this.btnSaveNewPassword.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnSaveNewPassword.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(101)))), ((int)(((byte)(112)))));
+            this.btnSaveNewPassword.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnSaveNewPassword.Size = new System.Drawing.Size(235, 37);
+            this.btnSaveNewPassword.TabIndex = 51;
+            this.btnSaveNewPassword.Text = "Save";
+            this.btnSaveNewPassword.TextColor = System.Drawing.Color.White;
+            this.btnSaveNewPassword.UseVisualStyleBackColor = true;
+            this.btnSaveNewPassword.Click += new System.EventHandler(this.btnSaveNewPassword_Click);
             // 
             // lblPasswordChangeLabel
             // 
@@ -664,29 +687,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // ofcLoadPicture
             // 
             this.ofcLoadPicture.FileName = "openFileDialog1";
-            // 
-            // btnSaveNewPassword
-            // 
-            this.btnSaveNewPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSaveNewPassword.BorderColor = System.Drawing.Color.Transparent;
-            this.btnSaveNewPassword.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(71)))), ((int)(((byte)(79)))));
-            this.btnSaveNewPassword.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSaveNewPassword.FlatAppearance.BorderSize = 0;
-            this.btnSaveNewPassword.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSaveNewPassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSaveNewPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveNewPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveNewPassword.Location = new System.Drawing.Point(88, 412);
-            this.btnSaveNewPassword.Name = "btnSaveNewPassword";
-            this.btnSaveNewPassword.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnSaveNewPassword.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(101)))), ((int)(((byte)(112)))));
-            this.btnSaveNewPassword.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnSaveNewPassword.Size = new System.Drawing.Size(235, 37);
-            this.btnSaveNewPassword.TabIndex = 51;
-            this.btnSaveNewPassword.Text = "Save";
-            this.btnSaveNewPassword.TextColor = System.Drawing.Color.White;
-            this.btnSaveNewPassword.UseVisualStyleBackColor = true;
-            this.btnSaveNewPassword.Click += new System.EventHandler(this.btnSaveNewPassword_Click);
             // 
             // frmUserProfile
             // 

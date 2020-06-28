@@ -35,6 +35,27 @@ namespace Healthcare020.WinUI.Helpers
             return true;
         }
 
+        public static bool ValidTextInput(this TextBox textField, ErrorProvider errors, TextInputType textInputType = TextInputType.Letters)
+        {
+            if (errors == null)
+                return false;
+
+            if (string.IsNullOrWhiteSpace(textField.Text))
+            {
+                errors.SetError(textField, Properties.Resources.RequiredField);
+                return false;
+            }
+
+            if ((textInputType == TextInputType.Digits && textField.Text.Any(char.IsLetter)) 
+                || (textInputType == TextInputType.Letters && textField.Text.Any(char.IsDigit)))
+            {
+                errors.SetError(textField, Properties.Resources.InvalidFormat);
+                return false;
+            }
+
+            return true;
+        }
+
         public static bool ValidComboBoxItemSelected(this ComboBox cmb, ErrorProvider errors)
         {
             if (cmb.SelectedIndex == -1)

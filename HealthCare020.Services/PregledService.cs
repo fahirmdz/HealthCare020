@@ -95,6 +95,9 @@ namespace HealthCare020.Services
                 IsOdradjen = false
             };
 
+            var zahtevFromDb = await _dbContext.ZahteviZaPregled.FindAsync(dtoForCreation.ZahtevZaPregledId);
+            zahtevFromDb.IsObradjen = true;
+
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
@@ -204,11 +207,21 @@ namespace HealthCare020.Services
                 {
                     result = result.Where(x => x.IsOdradjen == resourceParameters.IsOdradjen.Value);
                 }
+
+                if (await result.AnyAsync() && resourceParameters.OnlyZakazani)
+                {
+                    result = result.Where(x => !x.IsOdradjen);
+                }
             }
 
             //CONSTRAINT -> Pacijent moze samo svoje preglede videti
-            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
-                result = result.Where(x => x.PacijentId == pacijent.Id);
+            if (await result.AnyAsync())
+            {
+                if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                    result = result.Where(x => x.PacijentId == pacijent.Id);
+                else
+                    result = result.OrderBy(x => x.IsOdradjen ? 1 : 0).ThenBy(x => x.DatumPregleda);
+            }
 
             return PagedList<Pregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
         }

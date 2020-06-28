@@ -51,7 +51,7 @@
             // 
             this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.Location = new System.Drawing.Point(510, 12);
+            this.picLogo.Location = new System.Drawing.Point(514, 29);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(216, 216);
             this.picLogo.TabIndex = 8;

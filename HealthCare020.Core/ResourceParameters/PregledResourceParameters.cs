@@ -16,6 +16,8 @@ namespace HealthCare020.Core.ResourceParameters
         public string PacijentIme { get; set; }
         public string PacijentPrezime { get; set; }
 
+        public bool OnlyZakazani { get; set; } = false;
+
         public DateTime DatumPregleda { get; set; }
         public bool? IsOdradjen { get; set; } = null;
 

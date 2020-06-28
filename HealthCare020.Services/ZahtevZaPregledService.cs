@@ -201,7 +201,9 @@ namespace HealthCare020.Services
                 result = result.Where(x => x.PacijentId == pacijent.Id);
 
             if (await result.AnyAsync())
-                result = result.OrderBy(x => x.DatumVreme);
+            {
+                result = result.OrderBy(x=>x.IsObradjen?1:0).ThenBy(x => x.DatumVreme);
+            }
 
             return await base.FilterAndPrepare(result, resourceParameters);
         }

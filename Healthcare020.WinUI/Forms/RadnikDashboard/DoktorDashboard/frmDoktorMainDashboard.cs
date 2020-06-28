@@ -24,17 +24,17 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         private void btnSviPregledi_Click(object sender, System.EventArgs e)
         {
-            frmDoktorPregledi.InstanceWithData(frmDoktorPreglediDisplay.Instance).OpenAsChildOfControl(Parent);
+            frmDoktorDataDisplay.InstanceWithData(frmDoktorPreglediDisplay.InstanceWithData()).OpenAsChildOfControl(Parent);
         }
 
         private void btnZakazaniPregledi_Click(object sender, System.EventArgs e)
         {
-
+            frmDoktorDataDisplay.InstanceWithData(frmDoktorPreglediDisplay.InstanceWithData(OnlyZakazani:true)).OpenAsChildOfControl(Parent);
         }
 
         private void btnPreglediNaCekanju_Click(object sender, System.EventArgs e)
         {
-            frmDoktorPregledi.InstanceWithData(frmDoktorZahteviZaPregledeDisplay.Instance).OpenAsChildOfControl(Parent);
+            frmDoktorDataDisplay.InstanceWithData(frmDoktorZahteviZaPregledeDisplay.Instance).OpenAsChildOfControl(Parent);
         }
     }
 }

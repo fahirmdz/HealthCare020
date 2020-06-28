@@ -34,17 +34,17 @@
             this.picMinimize = new FontAwesome.Sharp.IconPictureBox();
             this.picClose = new FontAwesome.Sharp.IconPictureBox();
             this.panelDesktop = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
             this.userMenuDropdown = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuDropdownPanel();
             this.btnUserMenu = new Healthcare020.WinUI.Helpers.CustomElements.UserMenuButton();
-            this.pnlTop = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
             this.pnlControlBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
             this.panelDesktop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.pnlTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
@@ -136,6 +136,16 @@
             this.panelDesktop.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.panelDesktop_ControlAdded);
             this.panelDesktop.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDesktop_Paint);
             // 
+            // pnlTop
+            // 
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.pnlTop.Controls.Add(this.btnUserMenu);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Location = new System.Drawing.Point(0, 31);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(1208, 42);
+            this.pnlTop.TabIndex = 12;
+            // 
             // userMenuDropdown
             // 
             this.userMenuDropdown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -163,16 +173,6 @@
             this.btnUserMenu.TabIndex = 0;
             this.btnUserMenu.TabStop = false;
             // 
-            // pnlTop
-            // 
-            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.pnlTop.Controls.Add(this.btnUserMenu);
-            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTop.Location = new System.Drawing.Point(0, 31);
-            this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1208, 42);
-            this.pnlTop.TabIndex = 12;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,8 +199,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             this.panelDesktop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.pnlTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnUserMenu)).EndInit();
             this.ResumeLayout(false);
 
         }
