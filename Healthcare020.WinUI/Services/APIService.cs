@@ -13,6 +13,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Services
 {
@@ -244,9 +245,10 @@ namespace Healthcare020.WinUI.Services
                 {
                     if (response.StatusCode == HttpStatusCode.Forbidden)
                         dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                    else if (response.StatusCode == HttpStatusCode.BadRequest)
                         dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+                    else if((int)response.StatusCode==422)
+                        dlgError.ShowDialog(Resources.InvalidInputData);
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
@@ -290,12 +292,10 @@ namespace Healthcare020.WinUI.Services
                 {
                     if (response.StatusCode == HttpStatusCode.Forbidden)
                         dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                    else if (response.StatusCode == HttpStatusCode.BadRequest)
                         dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-
-                    if ((int)response.StatusCode == 422)
-                        dlgError.ShowDialog("Neispravni podaci");
+                    else if ((int)response.StatusCode == 422)
+                        dlgError.ShowDialog(Resources.InvalidInputData);
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }

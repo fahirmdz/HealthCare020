@@ -13,9 +13,9 @@ namespace HealthCare020.Core.Request
         public int UpucenKodDoktoraId { get; set; }
 
         [Required]
+        [MaxLength(255)]
         public string Razlog { get; set; }
 
-        [Required]
         [MaxLength(255)]
         public string Napomena { get; set; }
 

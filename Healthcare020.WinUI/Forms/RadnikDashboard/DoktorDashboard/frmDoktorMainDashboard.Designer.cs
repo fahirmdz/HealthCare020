@@ -42,6 +42,7 @@
             this.lblOstalo = new System.Windows.Forms.Label();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.btnUputniceNamenjene = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlCopyright.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -89,7 +90,7 @@
             this.btnZakazaniPregledi.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.btnZakazaniPregledi.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnZakazaniPregledi.ForeColor = System.Drawing.Color.White;
-            this.btnZakazaniPregledi.IconChar = FontAwesome.Sharp.IconChar.CalendarAlt;
+            this.btnZakazaniPregledi.IconChar = FontAwesome.Sharp.IconChar.CalendarDay;
             this.btnZakazaniPregledi.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnZakazaniPregledi.IconSize = 45;
             this.btnZakazaniPregledi.Location = new System.Drawing.Point(510, 297);
@@ -112,9 +113,9 @@
             this.btnZahteviZaPregled.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.btnZahteviZaPregled.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnZahteviZaPregled.ForeColor = System.Drawing.Color.White;
-            this.btnZahteviZaPregled.IconChar = FontAwesome.Sharp.IconChar.Clock;
+            this.btnZahteviZaPregled.IconChar = FontAwesome.Sharp.IconChar.Question;
             this.btnZahteviZaPregled.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
-            this.btnZahteviZaPregled.IconSize = 45;
+            this.btnZahteviZaPregled.IconSize = 43;
             this.btnZahteviZaPregled.Location = new System.Drawing.Point(784, 297);
             this.btnZahteviZaPregled.Name = "btnZahteviZaPregled";
             this.btnZahteviZaPregled.Rotation = 0D;
@@ -169,6 +170,7 @@
             this.btnLekarskaUverenja.Text = "Sva lekarska uverenja";
             this.btnLekarskaUverenja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLekarskaUverenja.UseVisualStyleBackColor = false;
+            this.btnLekarskaUverenja.Click += new System.EventHandler(this.btnLekarskaUverenja_Click);
             // 
             // btnUputnice
             // 
@@ -188,9 +190,10 @@
             this.btnUputnice.Rotation = 0D;
             this.btnUputnice.Size = new System.Drawing.Size(230, 74);
             this.btnUputnice.TabIndex = 28;
-            this.btnUputnice.Text = "Sve uputnice";
+            this.btnUputnice.Text = "Kreirane uputnice";
             this.btnUputnice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUputnice.UseVisualStyleBackColor = false;
+            this.btnUputnice.Click += new System.EventHandler(this.btnUputnice_Click);
             // 
             // materialDivider1
             // 
@@ -240,6 +243,7 @@
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.btnUputniceNamenjene);
             this.pnlMain.Controls.Add(this.picLogo);
             this.pnlMain.Controls.Add(this.lblOstalo);
             this.pnlMain.Controls.Add(this.btnSviPregledi);
@@ -255,6 +259,29 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1208, 607);
             this.pnlMain.TabIndex = 36;
+            // 
+            // btnUputniceNamenjene
+            // 
+            this.btnUputniceNamenjene.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnUputniceNamenjene.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.btnUputniceNamenjene.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUputniceNamenjene.FlatAppearance.BorderSize = 0;
+            this.btnUputniceNamenjene.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUputniceNamenjene.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnUputniceNamenjene.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUputniceNamenjene.ForeColor = System.Drawing.Color.White;
+            this.btnUputniceNamenjene.IconChar = FontAwesome.Sharp.IconChar.UserFriends;
+            this.btnUputniceNamenjene.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnUputniceNamenjene.IconSize = 45;
+            this.btnUputniceNamenjene.Location = new System.Drawing.Point(784, 460);
+            this.btnUputniceNamenjene.Name = "btnUputniceNamenjene";
+            this.btnUputniceNamenjene.Rotation = 0D;
+            this.btnUputniceNamenjene.Size = new System.Drawing.Size(230, 74);
+            this.btnUputniceNamenjene.TabIndex = 36;
+            this.btnUputniceNamenjene.Text = "Namenjene uputnice";
+            this.btnUputniceNamenjene.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUputniceNamenjene.UseVisualStyleBackColor = false;
+            this.btnUputniceNamenjene.Click += new System.EventHandler(this.btnUputniceNamenjene_Click);
             // 
             // frmDoktorMainDashboard
             // 
@@ -292,5 +319,6 @@
         private System.Windows.Forms.Label lblOstalo;
         private MaterialSkin.Controls.MaterialDivider materialDivider2;
         private System.Windows.Forms.Panel pnlMain;
+        private FontAwesome.Sharp.IconButton btnUputniceNamenjene;
     }
 }

@@ -6,6 +6,7 @@ namespace HealthCare020.Core.ResourceParameters
     {
         public int? PacijentId { get; set; }
         public string PacijentImePrezime { get; set; }
+        public bool UpuceneUputnice { get; set; } = false;
 
         public int? UputioDoktorId { get; set; }
         public string UputioDoktorImePrezime { get; set; }

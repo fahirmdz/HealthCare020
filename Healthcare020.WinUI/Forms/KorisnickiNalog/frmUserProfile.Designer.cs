@@ -77,6 +77,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.ofcLoadPicture = new System.Windows.Forms.OpenFileDialog();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabUserProfile.SuspendLayout();
             this.tabLicniPodaci.SuspendLayout();
             this.tabSigurnost.SuspendLayout();
@@ -89,7 +90,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // 
             // lblFirstLastName
             // 
-            this.lblFirstLastName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblFirstLastName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblFirstLastName.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFirstLastName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
             this.lblFirstLastName.Location = new System.Drawing.Point(3, 241);
@@ -653,6 +654,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // picProfilePicture
             // 
             this.picProfilePicture.BackColor = System.Drawing.Color.White;
+            this.picProfilePicture.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picProfilePicture.Image = ((System.Drawing.Image)(resources.GetObject("picProfilePicture.Image")));
             this.picProfilePicture.Location = new System.Drawing.Point(28, 12);
             this.picProfilePicture.Name = "picProfilePicture";
@@ -687,6 +689,11 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             // ofcLoadPicture
             // 
             this.ofcLoadPicture.FileName = "openFileDialog1";
+            // 
+            // toolTip
+            // 
+            this.toolTip.BackColor = System.Drawing.Color.Gainsboro;
+            this.toolTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
             // 
             // frmUserProfile
             // 
@@ -764,5 +771,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         private MaterialSkin.Controls.MaterialSingleLineTextField txtNewPassword;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtCurrentPassword;
         private Helpers.CustomElements.Button_WOC btnSaveNewPassword;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

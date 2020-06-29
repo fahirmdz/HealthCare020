@@ -88,7 +88,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
         private bool ValidateInput()
         {
-            if (!txtUsername.ValidTextInput(Errors))
+            if (!txtUsername.ValidTextInput(Errors,Validation.TextInputType.Mixed))
                 return false;
 
             if (!txtPassword.ValidTextInput(Errors, Validation.TextInputType.Mixed))

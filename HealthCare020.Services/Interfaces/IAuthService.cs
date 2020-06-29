@@ -12,12 +12,14 @@ namespace HealthCare020.Services.Interfaces
         Task<bool> CurrentUserIsInRoleAsync(RoleType role);
 
         bool UserIsPacijent();
+        bool UserIsDoktor();
 
         RoleType? TypeOfCurrentUser();
 
         Task<KorisnickiNalog> LoggedInUser();
 
         Task<Pacijent> GetCurrentLoggedInPacijent();
+
 
         Task<Doktor> GetCurrentLoggedInDoktor();
     }

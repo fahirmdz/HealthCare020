@@ -26,7 +26,6 @@ namespace HealthCare020.Core.Entities
         [Required]
         public string Razlog { get; set; }
 
-        [Required]
         public string Napomena { get; set; }
 
         [Required]

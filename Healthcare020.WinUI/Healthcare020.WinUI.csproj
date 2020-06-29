@@ -46,8 +46,8 @@
     <Reference Include="Flurl.Http, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.Http.2.4.2\lib\net46\Flurl.Http.dll</HintPath>
     </Reference>
-    <Reference Include="FontAwesome.Sharp, Version=5.12.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FontAwesome.Sharp.5.12.1\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    <Reference Include="FontAwesome.Sharp, Version=5.13.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.13.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
     </Reference>
     <Reference Include="IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e7877f4675df049f, processorArchitecture=MSIL">
       <HintPath>..\packages\IdentityModel.4.0.0\lib\net461\IdentityModel.dll</HintPath>
@@ -286,17 +286,35 @@
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.Designer.cs">
       <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmLekarskaUverenja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmLekarskaUverenja.Designer.cs">
+      <DependentUpon>frmLekarskaUverenja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmNewLekarskoUverenje.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmNewLekarskoUverenje.Designer.cs">
       <DependentUpon>frmNewLekarskoUverenje.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmNewUputnica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmNewUputnica.Designer.cs">
+      <DependentUpon>frmNewUputnica.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmPregledZakazivanje.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmPregledZakazivanje.Designer.cs">
       <DependentUpon>frmPregledZakazivanje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmUputnice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmUputnice.Designer.cs">
+      <DependentUpon>frmUputnice.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.cs">
       <SubType>Form</SubType>
@@ -477,11 +495,20 @@
     <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorPreglediDisplay.resx">
       <DependentUpon>frmDoktorPreglediDisplay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmLekarskaUverenja.resx">
+      <DependentUpon>frmLekarskaUverenja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmNewLekarskoUverenje.resx">
       <DependentUpon>frmNewLekarskoUverenje.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmNewUputnica.resx">
+      <DependentUpon>frmNewUputnica.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmPregledZakazivanje.resx">
       <DependentUpon>frmPregledZakazivanje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmUputnice.resx">
+      <DependentUpon>frmUputnice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.resx">
       <DependentUpon>frmZahtevZaPregled.cs</DependentUpon>

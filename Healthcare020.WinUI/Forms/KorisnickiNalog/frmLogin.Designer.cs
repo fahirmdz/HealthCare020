@@ -1,4 +1,5 @@
 ﻿using Healthcare020.WinUI.Helpers.CustomElements;
+using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
@@ -197,7 +198,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(195, 13);
             this.lblCopyright.TabIndex = 14;
-            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
+            this.lblCopyright.Text=Resources.CopyrightText;
             // 
             // Errors
             // 

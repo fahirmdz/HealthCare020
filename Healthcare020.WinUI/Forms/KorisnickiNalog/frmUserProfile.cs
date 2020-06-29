@@ -30,7 +30,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         {
             InitializeComponent();
             tabSelector.BackColor = Color.Black;
-
+            toolTip.SetToolTip(picProfilePicture,Resources.TooltipProfilePictureChange);
             _apiService = new APIService(Routes.LicniPodaciRoute);
         }
 
