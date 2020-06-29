@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 
 namespace Healthcare020.WinUI.Forms
 {
@@ -46,7 +47,7 @@ namespace Healthcare020.WinUI.Forms
             if (currentChild == null)
             {
                 await Auth.AuthenticateWithPassword("doktor", "testtest");
-                frmUserProfile.Instance.OpenAsChildOfControl(panelDesktop);
+                frmDoktorMainDashboard.Instance.OpenAsChildOfControl(panelDesktop);
             }
 
             picClose.BringToFront();

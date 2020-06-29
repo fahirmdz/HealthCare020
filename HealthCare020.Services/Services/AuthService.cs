@@ -34,6 +34,9 @@ namespace HealthCare020.Services.Services
 
         public bool UserIsPacijent() => GetClaim("roles").ToLower().Trim() == RoleType.Pacijent.ToDescriptionString().ToLower();
 
+        public bool UserIsDoktor() =>
+            string.Equals(GetClaim("roles").Split(",")?[0]??string.Empty, RoleType.Doktor.ToDescriptionString(), StringComparison.CurrentCultureIgnoreCase);
+
         public RoleType? TypeOfCurrentUser()
         {
             if (IsAuthenticated().Result)

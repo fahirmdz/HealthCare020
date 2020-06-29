@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPregledZakazivanje));
             this.lblDatumPregleda = new System.Windows.Forms.Label();
             this.lblDoktor = new System.Windows.Forms.Label();
@@ -43,7 +44,9 @@
             this.datePregled = new System.Windows.Forms.DateTimePicker();
             this.timePregled = new System.Windows.Forms.DateTimePicker();
             this.lblVremePregleda = new System.Windows.Forms.Label();
+            this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
             this.SuspendLayout();
             // 
             // lblDatumPregleda
@@ -214,6 +217,11 @@
             this.lblVremePregleda.TabIndex = 63;
             this.lblVremePregleda.Text = "Vreme pregleda:";
             // 
+            // Errors
+            // 
+            this.Errors.ContainerControl = this;
+            this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
+            // 
             // frmPregledZakazivanje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,6 +249,7 @@
             this.Text = "frmZahtevZaPregled";
             this.Load += new System.EventHandler(this.frmZahtevZaPregled_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +271,6 @@
         private System.Windows.Forms.DateTimePicker datePregled;
         private System.Windows.Forms.DateTimePicker timePregled;
         private System.Windows.Forms.Label lblVremePregleda;
+        private System.Windows.Forms.ErrorProvider Errors;
     }
 }

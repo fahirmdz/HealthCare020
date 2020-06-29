@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Services.Helpers;
 
 namespace HealthCare020.Services
 {
@@ -101,6 +102,41 @@ namespace HealthCare020.Services
             await _dbContext.SaveChangesAsync();
 
             return ServiceResult.NoContent();
+        }
+
+        public override async Task<PagedList<Uputnica>> FilterAndPrepare(IQueryable<Uputnica> result, UputnicaResourceParameters resourceParameters)
+        {
+            if (!await result.AnyAsync())
+                return null;
+
+            if (resourceParameters != null)
+            {
+                if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentImePrezime))
+                {
+                    result = result.Where(x =>
+                        resourceParameters.PacijentImePrezime.ToLower()
+                            .Contains(x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower())
+                        || resourceParameters.PacijentImePrezime.ToLower()
+                            .Contains(x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()));
+                }
+            }
+
+            //CONSTRAINT -> Pacijent moze samo svoje preglede videti
+            if (await result.AnyAsync())
+            {
+                if( _authService.UserIsDoktor() && await _authService.GetCurrentLoggedInDoktor() is { } doktor)
+                {
+                    if (resourceParameters?.UpuceneUputnice ?? false)
+                        result = result.Where(x => x.UpucenKodDoktoraId == doktor.Id);
+                    else
+                        result = result.Where(x => x.UputioDoktorId == doktor.Id);
+                }
+
+                result = result.OrderByDescending(x => x.DatumVreme);
+            }
+
+
+            return await base.FilterAndPrepare(result, resourceParameters);
         }
 
         public override async Task<bool> AuthorizePacijentForGetById(int id)

@@ -70,6 +70,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to © 2020. Fahir Mumdžić. All rights reserved..
+        /// </summary>
+        public static string CopyrightText {
+            get {
+                return ResourceManager.GetString("CopyrightText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lozinke se ne podudaraju.
         /// </summary>
         public static string DifferentPasswords {
@@ -120,6 +129,24 @@ namespace Healthcare020.WinUI.Properties {
         public static string frmGradovi {
             get {
                 return ResourceManager.GetString("frmGradovi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kreirane uputnice.
+        /// </summary>
+        public static string frmKreiraneUputnice {
+            get {
+                return ResourceManager.GetString("frmKreiraneUputnice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lekarska uverenja.
+        /// </summary>
+        public static string frmLekarskaUverenje {
+            get {
+                return ResourceManager.GetString("frmLekarskaUverenje", resourceCulture);
             }
         }
         
@@ -286,6 +313,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upućene uputnice.
+        /// </summary>
+        public static string frmUpuceneUputnice {
+            get {
+                return ResourceManager.GetString("frmUpuceneUputnice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Korisnički nalozi.
         /// </summary>
         public static string frmUsers {
@@ -380,6 +416,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Datum mora bidi u budućnosti.
+        /// </summary>
+        public static string InvalidDateMustBeInFuture {
+            get {
+                return ResourceManager.GetString("InvalidDateMustBeInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Neispravan format.
         /// </summary>
         public static string InvalidFormat {
@@ -389,11 +434,29 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unijeti podaci nisu validni.
+        /// </summary>
+        public static string InvalidInputData {
+            get {
+                return ResourceManager.GetString("InvalidInputData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lozinke moraju biti iste.
         /// </summary>
         public static string InvalidPasswordConfirmation {
             get {
                 return ResourceManager.GetString("InvalidPasswordConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vreme mora biti u budućnosti.
+        /// </summary>
+        public static string InvalidTimeMustBeInFuture {
+            get {
+                return ResourceManager.GetString("InvalidTimeMustBeInFuture", resourceCulture);
             }
         }
         
@@ -533,6 +596,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string NoDataLekarskaUverenjaMessage {
+            get {
+                return ResourceManager.GetString("NoDataLekarskaUverenjaMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trenutno nema dostupnih poseta.
         /// </summary>
         public static string NoDataPosete {
@@ -619,6 +691,15 @@ namespace Healthcare020.WinUI.Properties {
         public static string TitleZahteviZaPregledeStatistic {
             get {
                 return ResourceManager.GetString("TitleZahteviZaPregledeStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kliknite za promenu profilne slike.
+        /// </summary>
+        public static string TooltipProfilePictureChange {
+            get {
+                return ResourceManager.GetString("TooltipProfilePictureChange", resourceCulture);
             }
         }
         

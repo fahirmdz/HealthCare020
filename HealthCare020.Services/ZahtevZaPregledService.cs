@@ -196,12 +196,15 @@ namespace HealthCare020.Services
                 }
             }
 
-            //CONSTRAINT -> Pacijent moze samo svoje zahteve za pregled videti
-            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
-                result = result.Where(x => x.PacijentId == pacijent.Id);
-
-            if (await result.AnyAsync())
+            if(await result.AnyAsync())
             {
+                //CONSTRAINT -> Pacijent moze videti samo zahteve za pregled koje je on kreirao
+                if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                    result = result.Where(x => x.PacijentId == pacijent.Id);
+                //CONSTRAINT -> Doktor moze videti samo zahteve za pregled kod njega
+                else if (_authService.UserIsDoktor() && await _authService.GetCurrentLoggedInDoktor() is {} doktor)
+                    result = result.Where(x => x.DoktorId == doktor.Id);
+
                 result = result.OrderBy(x=>x.IsObradjen?1:0).ThenBy(x => x.DatumVreme);
             }
 

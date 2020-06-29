@@ -32,6 +32,13 @@ namespace HealthCare020.Services
             var result = _dbContext.LekarskaUverenja
                 .Include(x => x.Pregled)
                 .ThenInclude(x => x.Doktor)
+                .ThenInclude(x=>x.Radnik)
+                .ThenInclude(x=>x.LicniPodaci)
+                .Include(x => x.Pregled)
+                .ThenInclude(x => x.Pacijent)
+                .ThenInclude(x => x.ZdravstvenaKnjizica)
+                .ThenInclude(x => x.LicniPodaci)
+                .Include(x => x.ZdravstvenoStanje)
                 .AsQueryable();
 
             return id.HasValue ? result = result.Where(x => x.Id == id) : result;
@@ -43,6 +50,8 @@ namespace HealthCare020.Services
                 return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
             var lekarskoUverenje = _mapper.Map<LekarskoUverenje>(dtoForCreation);
+            var pregledFromDb = await _dbContext.Pregledi.FindAsync(dtoForCreation.PregledId);
+            pregledFromDb.IsOdradjen = true;
 
             await _dbContext.AddAsync(lekarskoUverenje);
             await _dbContext.SaveChangesAsync();
@@ -82,11 +91,45 @@ namespace HealthCare020.Services
 
                 if (await result.AnyAsync() && resourceParameters.ZdravstvenoStanjeId.HasValue)
                     result = result.Where(x => x.ZdravstvenoStanjeId == resourceParameters.ZdravstvenoStanjeId);
+
+                if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
+                {
+                    var imeForSearch = resourceParameters.PacijentIme.ToLower();
+                    if (!await result.AnyAsync(x =>
+                        x.Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
+                            .Contains(imeForSearch)))
+                    {
+                        result = result.Where(x =>
+                            x.Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
+                                .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                    }
+                    else
+                    {
+                        result = result.Where(x =>
+                            x.Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
+                                .Contains(imeForSearch));
+                    }
+                }
+
+                if (await result.AnyAsync() && (string.IsNullOrWhiteSpace(resourceParameters.PacijentIme) && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime)))
+                {
+                    result = result.Where(x =>
+                        x.Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
+                            .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                }
             }
 
-            //CONSTRAINT -> Pacijent moze samo svoje preglede videti
-            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
-                result = result.Where(x => x.Pregled.PacijentId == pacijent.Id);
+            if(await result.AnyAsync())
+            {
+                //CONSTRAINT -> Pacijent moze videti samo lekarska uverenja koja su njemu izdata
+                if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                    result = result.Where(x => x.Pregled.PacijentId == pacijent.Id);
+                //CONSTRAINT -> Doktor moze videti samo lekarska uverenja koja je kreirao
+                else if (_authService.UserIsDoktor() && await _authService.GetCurrentLoggedInDoktor() is {} doktor)
+                    result = result.Where(x => x.Pregled.DoktorId == doktor.Id);
+
+                result = result.OrderByDescending(x => x.Pregled.DatumPregleda);
+            }
 
             return await base.FilterAndPrepare(result, resourceParameters);
         }

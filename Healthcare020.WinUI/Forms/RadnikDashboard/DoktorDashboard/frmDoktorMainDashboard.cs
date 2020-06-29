@@ -36,5 +36,20 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         {
             frmDoktorDataDisplay.InstanceWithData(frmDoktorZahteviZaPregledeDisplay.Instance).OpenAsChildOfControl(Parent);
         }
+
+        private void btnLekarskaUverenja_Click(object sender, System.EventArgs e)
+        {
+            frmDoktorDataDisplay.InstanceWithData(frmLekarskaUverenja.Instance).OpenAsChildOfControl(Parent);
+        }
+
+        private void btnUputnice_Click(object sender, System.EventArgs e)
+        {
+            frmDoktorDataDisplay.InstanceWithData(frmUputnice.InstanceWithData()).OpenAsChildOfControl(Parent);
+        }
+
+        private void btnUputniceNamenjene_Click(object sender, System.EventArgs e)
+        {
+            frmDoktorDataDisplay.InstanceWithData(frmUputnice.InstanceWithData(NamenjenjeTrenutnoLogovanomKorisniku:true)).OpenAsChildOfControl(Parent);
+        }
     }
 }

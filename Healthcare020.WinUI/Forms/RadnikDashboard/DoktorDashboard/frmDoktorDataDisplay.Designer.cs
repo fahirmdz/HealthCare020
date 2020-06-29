@@ -1,4 +1,6 @@
-﻿namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
+﻿using Healthcare020.WinUI.Properties;
+
+namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     partial class frmDoktorDataDisplay
     {
@@ -42,7 +44,7 @@
             // 
             // picLogo
             // 
-            this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.picLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
             this.picLogo.Location = new System.Drawing.Point(1024, 12);
             this.picLogo.Name = "picLogo";
@@ -79,9 +81,9 @@
             this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblCopyright.Location = new System.Drawing.Point(504, 1);
             this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(195, 13);
+            this.lblCopyright.Size = new System.Drawing.Size(199, 13);
             this.lblCopyright.TabIndex = 14;
-            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All right reserved.";
+            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All rights reserved.";
             // 
             // btnBack
             // 
@@ -116,6 +118,8 @@
             // 
             // horizontalDivider
             // 
+            this.horizontalDivider.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.horizontalDivider.BackColor = System.Drawing.Color.Gainsboro;
             this.horizontalDivider.Depth = 0;
             this.horizontalDivider.Location = new System.Drawing.Point(92, 117);

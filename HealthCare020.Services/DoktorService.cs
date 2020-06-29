@@ -162,6 +162,9 @@ namespace HealthCare020.Services
                 if (!string.IsNullOrEmpty(resourceParameters.Username) && await result.AnyAsync())
                     result = result.Where(x =>
                         x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
+                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.EqualUsername))
+                    result = result.Where(x =>
+                        x.Radnik.KorisnickiNalog.Username.ToLower() == resourceParameters.EqualUsername);
 
                 if (!string.IsNullOrEmpty(resourceParameters.NaucnaOblast) && await result.AnyAsync())
                     result = result.Where(x =>

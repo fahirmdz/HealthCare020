@@ -45,6 +45,7 @@
             this.cmbZdravstvenoStanje = new System.Windows.Forms.ComboBox();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnUputnica = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
             this.SuspendLayout();
@@ -162,7 +163,7 @@
             this.btnPdf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnPdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPdf.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPdf.Location = new System.Drawing.Point(837, 340);
+            this.btnPdf.Location = new System.Drawing.Point(837, 273);
             this.btnPdf.Name = "btnPdf";
             this.btnPdf.OnHoverBorderColor = System.Drawing.Color.Transparent;
             this.btnPdf.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
@@ -231,12 +232,36 @@
             this.toolTip.BackColor = System.Drawing.Color.Gainsboro;
             this.toolTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
             // 
+            // btnUputnica
+            // 
+            this.btnUputnica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUputnica.BorderColor = System.Drawing.Color.Transparent;
+            this.btnUputnica.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.btnUputnica.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUputnica.FlatAppearance.BorderSize = 0;
+            this.btnUputnica.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnUputnica.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnUputnica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUputnica.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUputnica.Location = new System.Drawing.Point(837, 329);
+            this.btnUputnica.Name = "btnUputnica";
+            this.btnUputnica.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.btnUputnica.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
+            this.btnUputnica.OnHoverTextColor = System.Drawing.Color.White;
+            this.btnUputnica.Size = new System.Drawing.Size(151, 61);
+            this.btnUputnica.TabIndex = 76;
+            this.btnUputnica.Text = "Kreiraj uputnicu";
+            this.btnUputnica.TextColor = System.Drawing.Color.White;
+            this.btnUputnica.UseVisualStyleBackColor = true;
+            this.btnUputnica.Click += new System.EventHandler(this.btnUputnica_Click);
+            // 
             // frmNewLekarskoUverenje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1000, 500);
+            this.Controls.Add(this.btnUputnica);
             this.Controls.Add(this.cmbZdravstvenoStanje);
             this.Controls.Add(this.lblZdravstvenoStanje);
             this.Controls.Add(this.btnPdf);
@@ -278,5 +303,6 @@
         private System.Windows.Forms.ComboBox cmbZdravstvenoStanje;
         private System.Windows.Forms.ErrorProvider Errors;
         private System.Windows.Forms.ToolTip toolTip;
+        private Helpers.CustomElements.Button_WOC btnUputnica;
     }
 }

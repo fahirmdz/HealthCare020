@@ -120,6 +120,9 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>Nemate potrebne permisije</value>
   </data>
+  <data name="CopyrightText" xml:space="preserve">
+    <value>© 2020. Fahir Mumdžić. All rights reserved.</value>
+  </data>
   <data name="DifferentPasswords" xml:space="preserve">
     <value>Lozinke se ne podudaraju</value>
   </data>
@@ -137,6 +140,12 @@
   </data>
   <data name="frmGradovi" xml:space="preserve">
     <value>Predefinisani podaci - Gradovi</value>
+  </data>
+  <data name="frmKreiraneUputnice" xml:space="preserve">
+    <value>Kreirane uputnice</value>
+  </data>
+  <data name="frmLekarskaUverenje" xml:space="preserve">
+    <value>Lekarska uverenja</value>
   </data>
   <data name="frmNaucneOblasti" xml:space="preserve">
     <value>Predefinisani podaci - Naucne oblasti</value>
@@ -192,6 +201,9 @@
   <data name="frmStatisticsMenu" xml:space="preserve">
     <value>Statistika</value>
   </data>
+  <data name="frmUpuceneUputnice" xml:space="preserve">
+    <value>Upućene uputnice</value>
+  </data>
   <data name="frmUsers" xml:space="preserve">
     <value>Korisnički nalozi</value>
   </data>
@@ -223,11 +235,20 @@
   <data name="InstitutionName" xml:space="preserve">
     <value>Klinički centar UCS</value>
   </data>
+  <data name="InvalidDateMustBeInFuture" xml:space="preserve">
+    <value>Datum mora bidi u budućnosti</value>
+  </data>
   <data name="InvalidFormat" xml:space="preserve">
     <value>Neispravan format</value>
   </data>
+  <data name="InvalidInputData" xml:space="preserve">
+    <value>Unijeti podaci nisu validni</value>
+  </data>
   <data name="InvalidPasswordConfirmation" xml:space="preserve">
     <value>Lozinke moraju biti iste</value>
+  </data>
+  <data name="InvalidTimeMustBeInFuture" xml:space="preserve">
+    <value>Vreme mora biti u budućnosti</value>
   </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Adresa</value>
@@ -274,6 +295,9 @@
   <data name="LabelUserProfile" xml:space="preserve">
     <value>Korisnički profil</value>
   </data>
+  <data name="NoDataLekarskaUverenjaMessage" xml:space="preserve">
+    <value />
+  </data>
   <data name="NoDataPosete" xml:space="preserve">
     <value>Trenutno nema dostupnih poseta</value>
   </data>
@@ -303,6 +327,9 @@
   </data>
   <data name="TitleZahteviZaPregledeStatistic" xml:space="preserve">
     <value>Prikaz broja zahteva za preglede po mesecima</value>
+  </data>
+  <data name="TooltipProfilePictureChange" xml:space="preserve">
+    <value>Kliknite za promenu profilne slike</value>
   </data>
   <data name="UnableToLoadPersonalData" xml:space="preserve">
     <value>Nije moguće učitati lične podatke</value>

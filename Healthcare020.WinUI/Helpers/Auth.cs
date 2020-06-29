@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Security;
 using System.Threading.Tasks;
+using HealthCare020.Core.ResourceParameters;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers
@@ -23,8 +24,9 @@ namespace Healthcare020.WinUI.Helpers
         /// </summary>
         public static KorisnickiNalogDtoLL KorisnickiNalog
         {
-            get; set;
+            get; private set;
         }
+        public static DoktorDtoLL CurrentLoggedInDoktor { get; private set; }
 
         /// <summary>
         /// Role of current logged in user
@@ -65,6 +67,17 @@ namespace Healthcare020.WinUI.Helpers
 
                 var topRole = KorisnickiNalog.Roles.Min(x => x);
                 Role = (RoleType)topRole;
+
+                if (Role == RoleType.Doktor)
+                {
+                    apiSerivce.ChangeRoute(Routes.DoktoriRoute);
+                    var doktorResult = await apiSerivce.Get<DoktorDtoLL>(new DoktorResourceParameters
+                        {EqualUsername = KorisnickiNalog.Username});
+                    if (doktorResult.Succeeded && doktorResult.HasData)
+                    {
+                        CurrentLoggedInDoktor = doktorResult.Data.First();
+                    }
+                }
 
                 return true;
             }

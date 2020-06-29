@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using HealthCare020.Core.Constants;
 using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
@@ -41,6 +42,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         private void btnSave_Click(object sender, System.EventArgs e)
         {
+            dlgForm.SetShouldDisposeOnChildClose(false);
             frmPregledZakazivanje.InstanceWithData(ZahtevZaPregled).OpenAsChildOfControl(Parent);
         }
     }

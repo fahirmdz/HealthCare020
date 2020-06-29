@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSide = new System.Windows.Forms.Panel();
             this.txtLeftTitle = new System.Windows.Forms.RichTextBox();
             this.btnClose = new FontAwesome.Sharp.IconButton();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlBody.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlSide.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +42,7 @@
             // 
             this.pnlBody.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.pnlBody.Controls.Add(this.panel1);
+            this.pnlBody.Controls.Add(this.pnlSide);
             this.pnlBody.Location = new System.Drawing.Point(200, 152);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Size = new System.Drawing.Size(803, 377);
@@ -50,15 +50,15 @@
             this.pnlBody.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.pnlBody_ControlAdded);
             this.pnlBody.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.pnlBody_ControlRemoved);
             // 
-            // panel1
+            // pnlSide
             // 
-            this.panel1.Controls.Add(this.txtLeftTitle);
-            this.panel1.Controls.Add(this.btnClose);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(59, 377);
-            this.panel1.TabIndex = 2;
+            this.pnlSide.Controls.Add(this.txtLeftTitle);
+            this.pnlSide.Controls.Add(this.btnClose);
+            this.pnlSide.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSide.Location = new System.Drawing.Point(0, 0);
+            this.pnlSide.Name = "pnlSide";
+            this.pnlSide.Size = new System.Drawing.Size(59, 377);
+            this.pnlSide.TabIndex = 2;
             // 
             // txtLeftTitle
             // 
@@ -122,7 +122,7 @@
             this.Load += new System.EventHandler(this.dlgForm_Load);
             this.Shown += new System.EventHandler(this.dlgForm_Shown);
             this.pnlBody.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.pnlSide.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -132,7 +132,7 @@
 
         private System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSide;
         private FontAwesome.Sharp.IconButton btnClose;
         private System.Windows.Forms.RichTextBox txtLeftTitle;
     }

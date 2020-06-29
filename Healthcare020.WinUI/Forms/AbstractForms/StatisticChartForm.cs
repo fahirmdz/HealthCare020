@@ -201,8 +201,13 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
         protected async void StatisticChartForm_Load(object sender, EventArgs e)
         {
-            NoDataPanel = new NoDataPanel(NoDataMessage);
-            NoDataPanel.IcnData.IconChar = IcnCharForNoData;
+            NoDataPanel = new NoDataPanel(NoDataMessage)
+            {
+                IcnData =
+                {
+                    IconChar = IcnCharForNoData
+                }
+            };
             NoDataPanel.Left = (pnlMain.ClientSize.Width - NoDataPanel.Width) / 2;
             NoDataPanel.Top = pnlMain.ClientSize.Height / 2 - 60;
             this.Controls.Add(NoDataPanel);

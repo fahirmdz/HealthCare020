@@ -5,7 +5,8 @@
         public int? PregledId { get; set; }
 
         public int? ZdravstvenoStanjeId { get; set; }
-
+        public string PacijentIme { get; set; }
+        public string PacijentPrezime { get; set; }
         public string OpisStanja { get; set; }
         public bool EagerLoaded { get; set; } = false;
     }
