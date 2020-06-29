@@ -97,19 +97,18 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             if (!(dgrvMain.CurrentRow?.DataBoundItem is PregledDtoEL pregled))
                 return;
 
-            if (!pregled.IsOdradjen)
+            //Proverava se da li je korisnik kliknuo na novi red i pritom zeli pokrenuti drugi pregled
+            //Ukoliko je korisnik kliknuo na novi pregled, podaci koji su unijeti za prethodno pokrenuti pregled se brisu (dispose se frmNewLekarskoUverenje instanca)
+            var newInstance = false;
+            if (OpenedPregledId != pregled.Id)
             {
-                //Proverava se da li je korisnik kliknuo na novi red i pritom zeli pokrenuti drugi pregled
-                //Ukoliko je korisnik kliknuo na novi pregled, podaci koji su unijeti za prethodno pokrenuti pregled se brisu (dispose se frmNewLekarskoUverenje instanca)
-                var newInstance = false;
-                if (OpenedPregledId != pregled.Id)
-                {
-                    OpenedPregledId = pregled.Id;
-                    newInstance = true;
-                }
-                dlgForm.ShowDialog(frmNewLekarskoUverenje.InstanceWithData(pregled,newInstance), DialogFormSize.Large,newInstance);
-
+                OpenedPregledId = pregled.Id;
+                newInstance = true;
             }
+            if (!pregled.IsOdradjen)
+                dlgForm.ShowDialog(frmNewLekarskoUverenje.InstanceWithData(pregled,newInstance), DialogFormSize.Large,newInstance);
+            else
+                dlgForm.ShowDialog(frmPregledOverview.InstanceWithData(pregled,newInstance),NewInstance:newInstance);
         }
 
         private void frmDoktorPreglediDisplay_FormClosed(object sender, FormClosedEventArgs e)

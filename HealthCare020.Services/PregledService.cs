@@ -69,7 +69,7 @@ namespace HealthCare020.Services
                     startMonth = 1;
                     year++;
                 }
-                monthsCountsList.Add(await _dbContext.Pregledi.CountAsync(x => x.IsOdradjen && 
+                monthsCountsList.Add(await _dbContext.Pregledi.CountAsync(x => x.IsOdradjen &&
                                                                                x.DatumPregleda.Year == year && x.DatumPregleda.Month == startMonth));
                 startMonth++;
             }
@@ -127,7 +127,6 @@ namespace HealthCare020.Services
                 return ServiceResult.WithStatusCode(getPregledResult.StatusCode, getPregledResult.Message);
 
             var pregledFromDb = getPregledResult.Data as Pregled;
-
 
             if (await _dbContext.LekarskaUverenja.AnyAsync(x => x.PregledId == id))
                 return ServiceResult.BadRequest($"Ne mozete brisati pregled sve dok ima lekarskih uverenja povezanih sa ovim pregledom.");
@@ -219,8 +218,10 @@ namespace HealthCare020.Services
             {
                 if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
                     result = result.Where(x => x.PacijentId == pacijent.Id);
-                else
-                    result = result.OrderBy(x => x.IsOdradjen ? 1 : 0).ThenBy(x => x.DatumPregleda);
+                else if (_authService.UserIsDoktor() && await _authService.GetCurrentLoggedInDoktor() is { } doktor)
+                    result = result.Where(x => x.DoktorId == doktor.Id);
+
+                result = result.OrderBy(x => x.IsOdradjen ? 1 : 0).ThenBy(x => x.DatumPregleda);
             }
 
             return PagedList<Pregled>.Create(result, resourceParameters.PageNumber, resourceParameters.PageSize);
