@@ -7,8 +7,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AdminDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
+using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {
@@ -115,7 +117,19 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
         protected void dashboardButton_OnClick(object sender, EventArgs e)
         {
-            frmDoktorMainDashboard.Instance.OpenAsChildOfControl(Parent);
+            switch (Auth.Role)
+            {
+                case RoleType.Administrator:
+                    frmStartMenuAdmin.Instance.OpenAsChildOfControl(Parent);
+                    break;
+                case RoleType.Doktor:
+                    frmDoktorMainDashboard.Instance.OpenAsChildOfControl(Parent);
+                    break;
+                case RoleType.RadnikPrijem:
+                    frmRadnikPrijemMainDashboard.Instance.OpenAsChildOfControl(Parent);
+                    break;
+            }
+
             this.Hide();
         }
 

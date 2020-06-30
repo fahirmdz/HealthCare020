@@ -84,6 +84,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             ResourceParameters = new KorisnickiNalogResourceParameters { PageNumber = 1, PageSize = CurrentRowCount };
 
             InitializeComponent();
+            btnBack.Visible = false;
         }
 
         private void frmUsers_Load(object sender, EventArgs e)

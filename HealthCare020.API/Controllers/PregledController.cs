@@ -13,11 +13,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/" + Routes.PreglediRoute)]
-    [Authorize(AuthorizationPolicies.PacijentPolicy)]
     public class PregledController : BaseCRUDController<Pregled, PregledDtoLL, PregledDtoEL, PregledResourceParameters, PregledUpsertDto, PregledUpsertDto>
     {
         public PregledController(ICRUDService<Pregled, PregledDtoLL, PregledDtoEL, PregledResourceParameters, PregledUpsertDto, PregledUpsertDto> crudService) : base(crudService)
         {
+        }
+
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
+        public override async Task<IActionResult> Get(PregledResourceParameters resourceParameters)
+        {
+            return await base.Get(resourceParameters);
+        }
+
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
+        public override async Task<IActionResult> GetById(int id, bool? EagerLoaded)
+        {
+            return await base.GetById(id, EagerLoaded);
         }
 
         [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]

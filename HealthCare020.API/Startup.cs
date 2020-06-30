@@ -94,6 +94,7 @@ namespace HealthCare020.API
                 options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("bs-Latn-BA");
                 options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US"), new CultureInfo("bs-Latn-BA") };
             });
+            services.AddAuthConfiguration();
 
             services.AddControllers(cfg =>
                 {
@@ -101,12 +102,14 @@ namespace HealthCare020.API
                     cfg.ReturnHttpNotAcceptable = true;
                     cfg.CacheProfiles.Add(CacheProfilesConstants.CacheProfile240Seconds,new CacheProfile{Duration = 240});
 
-                }).AddNewtonsoftJson(setupAction =>
+                })
+                .AddNewtonsoftJson(setupAction =>
                 {
                     //Input and output JSON formatters
 
                     setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                }).AddXmlDataContractSerializerFormatters()
+                })
+                .AddXmlDataContractSerializerFormatters()
                 .ConfigureApiBehaviorOptions(config =>
                 {
                     config.InvalidModelStateResponseFactory = context =>
@@ -129,7 +132,6 @@ namespace HealthCare020.API
                     };
                 });
 
-            services.AddAuthConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -141,9 +143,7 @@ namespace HealthCare020.API
                 //app.UseDeveloperExceptionPage();
                 //app.UseDatabaseErrorPage();
             }
-            else
-            {
-            }
+          
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

@@ -192,6 +192,15 @@
   <data name="frmPreglediStatistic" xml:space="preserve">
     <value>Statistika - Obavljeni pregledi</value>
   </data>
+  <data name="frmRadnikPrijemPoseteNeobradjeniZahtevi" xml:space="preserve">
+    <value>Neobrađeni zahtevi sa posete</value>
+  </data>
+  <data name="frmRadnikPrijemPoseteObradjeniZahteviOnly" xml:space="preserve">
+    <value>Obrađeni zahtevi za posete</value>
+  </data>
+  <data name="frmRadnikPrijemPoseteSviZahtevi" xml:space="preserve">
+    <value>Svi zahtevi za posete</value>
+  </data>
   <data name="frmRoles" xml:space="preserve">
     <value>Predefinisani podaci - Uloge</value>
   </data>

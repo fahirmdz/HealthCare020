@@ -34,6 +34,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmRoles()
         {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
+
             var ID = new DataGridViewColumn
             {
                 HeaderText = "ID",

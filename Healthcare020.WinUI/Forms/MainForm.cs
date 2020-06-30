@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
+using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 
 namespace Healthcare020.WinUI.Forms
 {
@@ -46,8 +47,8 @@ namespace Healthcare020.WinUI.Forms
 
             if (currentChild == null)
             {
-                await Auth.AuthenticateWithPassword("doktor", "testtest");
-                frmDoktorMainDashboard.Instance.OpenAsChildOfControl(panelDesktop);
+                await Auth.AuthenticateWithPassword("radnikprijem1", "testtest");
+                frmRadnikPrijemMainDashboard.Instance.OpenAsChildOfControl(panelDesktop);
             }
 
             picClose.BringToFront();

@@ -26,6 +26,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmNaucneOblasti()
         {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
+
             this.Text = Properties.Resources.frmNaucneOblasti;
 
             var ID = new DataGridViewTextBoxColumn

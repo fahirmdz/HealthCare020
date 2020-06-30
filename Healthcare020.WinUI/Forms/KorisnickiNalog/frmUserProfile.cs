@@ -137,7 +137,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             {
                 _apiService.ChangeRoute(Routes.RadniciPrijemRoute);
 
-                var result = await _apiService.Get<RadnikDtoEL>(new RadnikPrijemResourceParameters()
+                var result = await _apiService.Get<RadnikPrijemDtoEL>(new RadnikPrijemResourceParameters()
                 { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
 
                 if (!result.Succeeded || result?.Data == null)

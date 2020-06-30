@@ -22,5 +22,6 @@
         public const string LekarskoUverenjeRoute = "lekarska-uverenja";
         public const string UputnicaRoute = "uputnice";
         public const string ChangePasswordRoute = "change-password";
+        public const string ZahteviZaPosetuAutoSchedulingRoute = "zahtevi-za-posetu"+"/auto-scheduling";
     }
 }

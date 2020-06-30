@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HealthCare020.Core.Entities
 {
@@ -13,5 +14,8 @@ namespace HealthCare020.Core.Entities
         [ForeignKey(nameof(StacionarnoOdeljenje))]
         public int StacionarnoOdeljenjeId { get; set; }
         public StacionarnoOdeljenje StacionarnoOdeljenje { get; set; }
+
+        [Required]
+        public int BrojSobe { get; set; }
     }
 }

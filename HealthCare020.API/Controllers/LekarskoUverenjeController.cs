@@ -20,6 +20,18 @@ namespace HealthCare020.API.Controllers
         }
 
         [Authorize(AuthorizationPolicies.PacijentPolicy)]
+        public override async Task<IActionResult> Get(LekarskoUverenjeResourceParameters resourceParameters)
+        {
+            return await base.Get(resourceParameters);
+        }
+
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
+        public override async Task<IActionResult> GetById(int id, bool? EagerLoaded)
+        {
+            return await base.GetById(id, EagerLoaded);
+        }
+
+        [Authorize(AuthorizationPolicies.PacijentPolicy)]
         public override async Task<IActionResult> Insert(LekarskoUverenjeUpsertDto dtoForCreation)
         {
             return await base.Insert(dtoForCreation);

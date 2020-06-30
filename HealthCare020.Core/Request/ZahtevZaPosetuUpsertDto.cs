@@ -10,10 +10,6 @@ namespace HealthCare020.Core.Request
         [Required]
         public int PacijentNaLecenjuId { get; set; }
 
-        [Required]
-        [FutureDateTime(ErrorMessage = "Datum i vrijeme posete moraju biti u buducnosti")]
-        public DateTime DatumVreme { get; set; }
-
         private string _brojTelefona;
         [Phone]
         [Required]

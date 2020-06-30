@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/"+Routes.RadniciPrijemRoute)]
-    [Authorize(AuthorizationPolicies.PacijentPolicy)]
     public class RadnikPrijemController : BaseCRUDController<RadnikPrijem, RadnikPrijemDtoLL,RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto>
     {
         public RadnikPrijemController(ICRUDService<RadnikPrijem, RadnikPrijemDtoLL, RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto> crudService) : base(crudService)

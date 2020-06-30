@@ -52,26 +52,32 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 case Routes.DrzaveRoute:
                     _apiService = new APIService(Routes.DrzaveRoute);
                     DrzavaCount = (await _apiService.Count())?.Data.First() ?? 0;
+                    lblDrzaveCounter.Text = DrzavaCount.ToString();
                     break;
 
                 case Routes.GradoviRoute:
                     _apiService.ChangeRoute(Routes.GradoviRoute);
                     GradoviCount = (await _apiService.Count())?.Data.First() ?? 0;
+                    lblGradoviCounter.Text = GradoviCount.ToString();
                     break;
 
                 case Routes.ZdravstvenaStanjaRoute:
                     _apiService.ChangeRoute(Routes.ZdravstvenaStanjaRoute);
                     ZdravstvenaStanjaCount = (await _apiService.Count())?.Data.First() ?? 0;
+                    lblZdravstvenaStanjaCounter.Text = ZdravstvenaStanjaCount.ToString();
                     break;
 
                 case Routes.NaucneOblastiRoute:
                     _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
                     NaucneOblastiCount = (await _apiService.Count())?.Data.First() ?? 0;
+                    lblNaucneOblastiCounter.Text = NaucneOblastiCount.ToString();
+                
                     break;
 
                 case Routes.RolesRoute:
                     _apiService.ChangeRoute(Routes.RolesRoute);
                     RolesCount = (await _apiService.Count())?.Data.First() ?? 0;
+                    lblRolesCounter.Text = RolesCount.ToString();
                     break;
 
                 default:
@@ -121,6 +127,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private async void frmPredefinedDataMenu_Load(object sender, EventArgs e)
         {
             await LoadPredefinedDataCounts();
+            lblDrzaveCounter.Text = DrzavaCount.ToString();
+            lblGradoviCounter.Text = GradoviCount.ToString();
+            lblNaucneOblastiCounter.Text = NaucneOblastiCount.ToString();
+            lblRolesCounter.Text = RolesCount.ToString();
+            lblZdravstvenaStanjaCounter.Text = ZdravstvenaStanjaCount.ToString();
         }
     }
 }

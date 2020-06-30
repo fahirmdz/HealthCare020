@@ -27,6 +27,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmGradovi() : base()
         {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
+
             var ID = new DataGridViewColumn
             {
                 HeaderText = "ID",

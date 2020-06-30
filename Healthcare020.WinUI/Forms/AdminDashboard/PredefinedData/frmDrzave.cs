@@ -30,6 +30,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmDrzave() : base()
         {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
             var ID = new DataGridViewTextBoxColumn { DataPropertyName = nameof(DrzavaDto.Id), HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
 
             var Naziv = new DataGridViewColumn { DataPropertyName = nameof(DrzavaDto.Naziv), HeaderText = "Naziv", Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };

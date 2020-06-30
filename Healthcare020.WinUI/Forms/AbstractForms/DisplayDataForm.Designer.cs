@@ -43,6 +43,7 @@
             this.icnSearch = new FontAwesome.Sharp.IconPictureBox();
             this.pnlNavButtons = new System.Windows.Forms.Panel();
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.btnBack = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgrvMain)).BeginInit();
             this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icnSearch)).BeginInit();
@@ -96,12 +97,14 @@
             this.dgrvMain.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
             this.dgrvMain.RowTemplate.Height = 30;
             this.dgrvMain.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgrvMain.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgrvMain.Size = new System.Drawing.Size(777, 430);
             this.dgrvMain.TabIndex = 0;
             this.dgrvMain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellContentClick);
             this.dgrvMain.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellDoubleClick);
             this.dgrvMain.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgrvMain_CellFormatting);
             this.dgrvMain.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellValueChanged);
+            this.dgrvMain.SizeChanged += new System.EventHandler(this.dgrvMain_SizeChanged);
             // 
             // btnPrevPage
             // 
@@ -146,7 +149,7 @@
             this.txtSearch.Depth = 0;
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Hint = "";
-            this.txtSearch.Location = new System.Drawing.Point(38, 4);
+            this.txtSearch.Location = new System.Drawing.Point(38, 5);
             this.txtSearch.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
@@ -185,7 +188,7 @@
             // 
             this.pnlSearch.Controls.Add(this.txtSearch);
             this.pnlSearch.Controls.Add(this.icnSearch);
-            this.pnlSearch.Location = new System.Drawing.Point(49, 15);
+            this.pnlSearch.Location = new System.Drawing.Point(106, 19);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(200, 30);
             this.pnlSearch.TabIndex = 5;
@@ -218,6 +221,7 @@
             // 
             // pnlTop
             // 
+            this.pnlTop.Controls.Add(this.btnBack);
             this.pnlTop.Controls.Add(this.btnNew);
             this.pnlTop.Controls.Add(this.pnlSearch);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -225,6 +229,27 @@
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(777, 57);
             this.pnlTop.TabIndex = 7;
+            // 
+            // btnBack
+            // 
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnBack.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnBack.IconChar = FontAwesome.Sharp.IconChar.ArrowLeft;
+            this.btnBack.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnBack.IconSize = 25;
+            this.btnBack.Location = new System.Drawing.Point(3, 15);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Rotation = 0D;
+            this.btnBack.Size = new System.Drawing.Size(88, 34);
+            this.btnBack.TabIndex = 6;
+            this.btnBack.Text = "Back";
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // DisplayDataForm
             // 
@@ -238,8 +263,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DisplayDataForm";
             this.Text = "frmUsers";
-            this.Load += new System.EventHandler(this.DisplayDataForm_Load);
-            this.SizeChanged += new System.EventHandler(this.DisplayDataForm_SizeChanged);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DisplayDataForm_FormClosed);
+            this.Load += new System.EventHandler(this.DisplayDataForm_Load_1);
+            this.Shown += new System.EventHandler(this.DisplayDataForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgrvMain)).EndInit();
             this.pnlSearch.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.icnSearch)).EndInit();
@@ -261,5 +287,6 @@
         protected MaterialSkin.Controls.MaterialSingleLineTextField txtSearch;
         protected System.Windows.Forms.Panel pnlNavButtons;
         protected System.Windows.Forms.Panel pnlTop;
+        protected FontAwesome.Sharp.IconButton btnBack;
     }
 }

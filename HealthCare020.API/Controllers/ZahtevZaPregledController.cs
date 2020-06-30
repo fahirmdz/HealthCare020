@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/"+Routes.ZahteviZaPregledRoute)]
-    [Authorize(AuthorizationPolicies.PacijentPolicy)]
+    [Authorize(Policy = AuthorizationPolicies.PacijentPolicy)]
     public class ZahtevZaPregledController : BaseCRUDController<ZahtevZaPregled, ZahtevZaPregledDtoLL, ZahtevZaPregledDtoEL, ZahtevZaPregledResourceParameters, ZahtevZaPregledUpsertDto, ZahtevZaPregledUpsertDto>
     {
         public ZahtevZaPregledController(ICRUDService<ZahtevZaPregled, ZahtevZaPregledDtoLL,

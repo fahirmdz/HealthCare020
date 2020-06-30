@@ -13,6 +13,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCare020.Core.Models;
 using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Services
@@ -133,9 +134,14 @@ namespace Healthcare020.WinUI.Services
                 return APIServiceResult<List<T>>.WithStatusCode(response.StatusCode);
             }
 
+
             var headers = response.Headers;
 
             var result = await response.Content.ReadAsAsync<List<T>>();
+
+            if(response.StatusCode==HttpStatusCode.OK && result==null)
+                return APIServiceResult<List<T>>.OK();
+
             var xpaginationHeader = headers.FirstOrDefault(x => x.Key == "X-Pagination").Value?.FirstOrDefault();
 
             PaginationMetadata paginationMetadata = null;

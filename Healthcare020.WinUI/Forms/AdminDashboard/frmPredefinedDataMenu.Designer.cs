@@ -74,7 +74,7 @@
             // 
             this.pnlNaucneOblastiCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.pnlNaucneOblastiCounter.Controls.Add(this.lblNaucneOblastiCounter);
-            this.pnlNaucneOblastiCounter.Location = new System.Drawing.Point(396, 398);
+            this.pnlNaucneOblastiCounter.Location = new System.Drawing.Point(388, 403);
             this.pnlNaucneOblastiCounter.Name = "pnlNaucneOblastiCounter";
             this.pnlNaucneOblastiCounter.Size = new System.Drawing.Size(110, 134);
             this.pnlNaucneOblastiCounter.TabIndex = 30;
@@ -94,7 +94,7 @@
             // 
             this.pnlGradoviCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.pnlGradoviCounter.Controls.Add(this.lblGradoviCounter);
-            this.pnlGradoviCounter.Location = new System.Drawing.Point(396, 224);
+            this.pnlGradoviCounter.Location = new System.Drawing.Point(388, 229);
             this.pnlGradoviCounter.Name = "pnlGradoviCounter";
             this.pnlGradoviCounter.Size = new System.Drawing.Size(110, 134);
             this.pnlGradoviCounter.TabIndex = 29;
@@ -114,7 +114,7 @@
             // 
             this.pnlRolesCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.pnlRolesCounter.Controls.Add(this.lblRolesCounter);
-            this.pnlRolesCounter.Location = new System.Drawing.Point(794, 224);
+            this.pnlRolesCounter.Location = new System.Drawing.Point(786, 229);
             this.pnlRolesCounter.Name = "pnlRolesCounter";
             this.pnlRolesCounter.Size = new System.Drawing.Size(110, 134);
             this.pnlRolesCounter.TabIndex = 29;
@@ -134,7 +134,7 @@
             // 
             this.pnlZdravstvenaStanjaConter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.pnlZdravstvenaStanjaConter.Controls.Add(this.lblZdravstvenaStanjaCounter);
-            this.pnlZdravstvenaStanjaConter.Location = new System.Drawing.Point(794, 54);
+            this.pnlZdravstvenaStanjaConter.Location = new System.Drawing.Point(786, 59);
             this.pnlZdravstvenaStanjaConter.Name = "pnlZdravstvenaStanjaConter";
             this.pnlZdravstvenaStanjaConter.Size = new System.Drawing.Size(110, 134);
             this.pnlZdravstvenaStanjaConter.TabIndex = 28;
@@ -154,7 +154,7 @@
             // 
             this.pnlDrzaveCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
             this.pnlDrzaveCounter.Controls.Add(this.lblDrzaveCounter);
-            this.pnlDrzaveCounter.Location = new System.Drawing.Point(396, 54);
+            this.pnlDrzaveCounter.Location = new System.Drawing.Point(388, 59);
             this.pnlDrzaveCounter.Name = "pnlDrzaveCounter";
             this.pnlDrzaveCounter.Size = new System.Drawing.Size(110, 134);
             this.pnlDrzaveCounter.TabIndex = 27;
@@ -182,7 +182,7 @@
             this.btnNaucneOblasti.IconChar = FontAwesome.Sharp.IconChar.Microscope;
             this.btnNaucneOblasti.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnNaucneOblasti.IconSize = 70;
-            this.btnNaucneOblasti.Location = new System.Drawing.Point(162, 398);
+            this.btnNaucneOblasti.Location = new System.Drawing.Point(154, 403);
             this.btnNaucneOblasti.Name = "btnNaucneOblasti";
             this.btnNaucneOblasti.Rotation = 0D;
             this.btnNaucneOblasti.Size = new System.Drawing.Size(239, 134);
@@ -204,7 +204,7 @@
             this.btnRoles.IconChar = FontAwesome.Sharp.IconChar.UserTag;
             this.btnRoles.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnRoles.IconSize = 70;
-            this.btnRoles.Location = new System.Drawing.Point(559, 224);
+            this.btnRoles.Location = new System.Drawing.Point(551, 229);
             this.btnRoles.Name = "btnRoles";
             this.btnRoles.Rotation = 0D;
             this.btnRoles.Size = new System.Drawing.Size(239, 134);
@@ -226,7 +226,7 @@
             this.btnGradovi.IconChar = FontAwesome.Sharp.IconChar.City;
             this.btnGradovi.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnGradovi.IconSize = 70;
-            this.btnGradovi.Location = new System.Drawing.Point(162, 224);
+            this.btnGradovi.Location = new System.Drawing.Point(154, 229);
             this.btnGradovi.Name = "btnGradovi";
             this.btnGradovi.Rotation = 0D;
             this.btnGradovi.Size = new System.Drawing.Size(239, 134);
@@ -248,7 +248,7 @@
             this.btnZdravstvenaStanja.IconChar = FontAwesome.Sharp.IconChar.FileMedicalAlt;
             this.btnZdravstvenaStanja.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnZdravstvenaStanja.IconSize = 70;
-            this.btnZdravstvenaStanja.Location = new System.Drawing.Point(559, 54);
+            this.btnZdravstvenaStanja.Location = new System.Drawing.Point(551, 59);
             this.btnZdravstvenaStanja.Name = "btnZdravstvenaStanja";
             this.btnZdravstvenaStanja.Rotation = 0D;
             this.btnZdravstvenaStanja.Size = new System.Drawing.Size(239, 134);
@@ -270,7 +270,7 @@
             this.btnDrzave.IconChar = FontAwesome.Sharp.IconChar.GlobeEurope;
             this.btnDrzave.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnDrzave.IconSize = 70;
-            this.btnDrzave.Location = new System.Drawing.Point(162, 54);
+            this.btnDrzave.Location = new System.Drawing.Point(154, 59);
             this.btnDrzave.Name = "btnDrzave";
             this.btnDrzave.Rotation = 0D;
             this.btnDrzave.Size = new System.Drawing.Size(239, 134);
