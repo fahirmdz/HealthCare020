@@ -13,8 +13,7 @@ namespace Healthcare020.WinUI.Helpers.DesignConfigs
             dgrv.BorderStyle = BorderStyle.None;
             dgrv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgrv.AutoGenerateColumns = false;
-            dgrv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(249,249,249);
-
+            dgrv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(249, 249, 249);
 
             dgrv.AllowUserToAddRows = false;
             dgrv.AllowUserToDeleteRows = false;
@@ -43,11 +42,9 @@ namespace Healthcare020.WinUI.Helpers.DesignConfigs
             dgrv.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             dgrv.Dock = System.Windows.Forms.DockStyle.Fill;
             dgrv.GridColor = System.Drawing.SystemColors.ButtonFace;
-            dgrv.Location = new System.Drawing.Point(0, 57);
             dgrv.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
             dgrv.RowTemplate.Height = 30;
             dgrv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            dgrv.Size = new System.Drawing.Size(777, 430);
             dgrv.TabIndex = 0;
         }
 
@@ -55,7 +52,6 @@ namespace Healthcare020.WinUI.Helpers.DesignConfigs
         /// Returns data grid view rows count, based on height of passed control
         /// </summary>
         /// <returns></returns>
-        public static int GetRowsCount(this DataGridView dgrv) =>
-            dgrv.Height /dgrv.RowTemplate.Height -2;
+        public static int GetRowsCount(this DataGridView dgrv) => dgrv.Height / dgrv.RowTemplate.Height -3;
     }
 }

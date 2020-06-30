@@ -25,6 +25,11 @@ namespace HealthCare020.API.Controllers
             return await base.Get(resourceParameters);
         }
 
+        public override async Task<IActionResult> GetById(int id, bool? EagerLoaded)
+        {
+            return await base.GetById(id, EagerLoaded);
+        }
+
         [Authorize(AuthorizationPolicies.AdminPolicy)]
         public override async Task<IActionResult> Insert(LicniPodaciUpsertDto dtoForCreation)
         {

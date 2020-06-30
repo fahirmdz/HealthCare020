@@ -4,14 +4,16 @@ using HealthCare020.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthCare020.Repository.Migrations
 {
     [DbContext(typeof(HealthCare020DbContext))]
-    partial class HealthCare020DbContextModelSnapshot : ModelSnapshot
+    [Migration("20200630142338_Added_IsObradjen_to_ZahtevZaPosetu")]
+    partial class Added_IsObradjen_to_ZahtevZaPosetu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,9 +263,6 @@ namespace HealthCare020.Repository.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BrojSobe")
-                        .HasColumnType("int");
-
                     b.Property<int>("LicniPodaciId")
                         .HasColumnType("int");
 
@@ -457,7 +456,7 @@ namespace HealthCare020.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DatumVremeKreiranja")
+                    b.Property<DateTime>("DatumVreme")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsObradjen")
@@ -465,9 +464,6 @@ namespace HealthCare020.Repository.Migrations
 
                     b.Property<int>("PacijentNaLecenjuId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ZakazanoDatumVreme")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

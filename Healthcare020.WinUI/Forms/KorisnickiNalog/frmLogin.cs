@@ -6,6 +6,8 @@ using HealthCare020.Core.Enums;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
+using Healthcare020.WinUI.Helpers.Dialogs;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
@@ -61,12 +63,28 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             {
                 Form formToOpen = null;
 
-                if (Auth.Role == RoleType.Administrator)
-                    formToOpen = frmStartMenuAdmin.Instance;
-                else if (Auth.Role == RoleType.Doktor || Auth.Role == RoleType.MedicinskiTehnicar)
-                    formToOpen = frmDoktorMainDashboard.Instance;
+                switch (Auth.Role)
+                {
+                    case RoleType.Administrator:
+                        formToOpen = frmStartMenuAdmin.Instance;
+                        break;
+                    case RoleType.Doktor:
+                        formToOpen = frmDoktorMainDashboard.Instance;
+                        break;
+                    case RoleType.RadnikPrijem:
+                        formToOpen = frmRadnikPrijemMainDashboard.Instance;
+                        break;
+                    case RoleType.MedicinskiTehnicar:
+                        break;
+                    case RoleType.Pacijent:
+                        break;
+                    default:
+                        formToOpen=null;
+                        break;
+                }
+
                 if (formToOpen == null)
-                    return;
+                    dlgError.ShowDialog("Molimo pokušajte kasnije");
 
                 formToOpen.OpenAsChildOfControl(Parent);
                 this.Close();

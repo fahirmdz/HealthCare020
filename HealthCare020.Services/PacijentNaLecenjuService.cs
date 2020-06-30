@@ -54,7 +54,8 @@ namespace HealthCare020.Services
             var pacijentNaLecenju = new PacijentNaLecenju
             {
                 LicniPodaciId = ((LicniPodaciDto)licniPodaciInsertResult.Data).Id,
-                StacionarnoOdeljenjeId = dtoForCreation.StacionarnoOdeljenjeId
+                StacionarnoOdeljenjeId = dtoForCreation.StacionarnoOdeljenjeId,
+                BrojSobe = dtoForCreation.BrojSobe
             };
 
             await _dbContext.AddAsync(pacijentNaLecenju);

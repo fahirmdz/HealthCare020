@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
@@ -11,6 +9,8 @@ using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -25,12 +25,15 @@ namespace HealthCare020.Services
             IHttpContextAccessor httpContextAccessor,
             IAuthService authService)
             : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
-        {
-        }
+        { }
 
         public override IQueryable<ZahtevZaPosetu> GetWithEagerLoad(int? id = null)
         {
             var result = _dbContext.ZahteviZaPosetu
+                .Include(x => x.PacijentNaLecenju)
+                .ThenInclude(x => x.LicniPodaci)
+                .ThenInclude(x => x.Grad)
+                .ThenInclude(x => x.Drzava)
                 .Include(x => x.PacijentNaLecenju)
                 .ThenInclude(x => x.StacionarnoOdeljenje)
                 .AsQueryable();
@@ -64,7 +67,9 @@ namespace HealthCare020.Services
                     startMonth = 1;
                     year++;
                 }
-                monthsCountsList.Add(await _dbContext.ZahteviZaPosetu.CountAsync(x => x.DatumVreme.Year == year && x.DatumVreme.Month == startMonth));
+                monthsCountsList.Add(await _dbContext.ZahteviZaPosetu.CountAsync(x => x.IsObradjen &&
+                                                                                      (x.ZakazanoDatumVreme.Value.Year == year
+                                                                                       && x.ZakazanoDatumVreme.Value.Month == startMonth)));
                 startMonth++;
             }
 
@@ -79,8 +84,8 @@ namespace HealthCare020.Services
             var zahtevZaPosetu = new ZahtevZaPosetu
             {
                 PacijentNaLecenjuId = dtoForCreation.PacijentNaLecenjuId,
-                DatumVreme = dtoForCreation.DatumVreme,
-                BrojTelefonaPosetioca = dtoForCreation.BrojTelefonaPosetioca.Trim()
+                BrojTelefonaPosetioca = dtoForCreation.BrojTelefonaPosetioca.Trim(),
+                DatumVremeKreiranja = DateTime.Now
             };
 
             await _dbContext.AddAsync(zahtevZaPosetu);
@@ -118,25 +123,107 @@ namespace HealthCare020.Services
 
             if (resourceParameters != null)
             {
-                if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentIme))
-                    result = result.Where(x =>
+                if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
+                {
+                    var imeForSearch = resourceParameters.PacijentIme.ToLower();
+                    if (!await result.AnyAsync(x =>
                         x.PacijentNaLecenju.LicniPodaci.Ime.ToLower()
-                            .StartsWith(resourceParameters.PacijentIme.Trim().ToLower()));
+                            .Contains(imeForSearch)))
+                    {
+                        result = result.Where(x =>
+                            x.PacijentNaLecenju.LicniPodaci.Prezime.ToLower()
+                                .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                    }
+                    else
+                    {
+                        result = result.Where(x =>
+                            x.PacijentNaLecenju.LicniPodaci.Ime.ToLower()
+                                .Contains(imeForSearch));
+                    }
+                }
 
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.PacijentPrezime))
+                if (await result.AnyAsync() && (string.IsNullOrWhiteSpace(resourceParameters.PacijentIme) && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime)))
+                {
                     result = result.Where(x =>
                         x.PacijentNaLecenju.LicniPodaci.Prezime.ToLower()
-                            .StartsWith(resourceParameters.PacijentPrezime.Trim().ToLower()));
+                            .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                }
 
                 if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.BrojTelefonaPosetioca))
                     result = result.Where(x =>
                         x.BrojTelefonaPosetioca.StartsWith(resourceParameters.BrojTelefonaPosetioca.Trim()));
 
                 if (await result.AnyAsync() && resourceParameters.Datum.HasValue)
-                    result = result.Where(x => x.DatumVreme.Date == resourceParameters.Datum.Value.Date);
+                    result = result.Where(x => x.IsObradjen && x.ZakazanoDatumVreme.Value.Date == resourceParameters.Datum.Value.Date);
+
+                if (await result.AnyAsync() && resourceParameters.NeobradjeneOnly)
+                    result = result.Where(x => !x.IsObradjen);
+
+                if (await result.AnyAsync() && resourceParameters.ObradjeneOnly)
+                    result = result.Where(x => x.IsObradjen);
             }
 
             return await base.FilterAndPrepare(result, resourceParameters);
+        }
+
+        public async Task<ServiceResult> AutoScheduling()
+        {
+            var zahteviZaPoseteDanas = _dbContext.ZahteviZaPosetu
+                .Include(x=>x.PacijentNaLecenju)
+                .Where(x => !x.IsObradjen)
+                .ToList();
+
+            if (!zahteviZaPoseteDanas.Any())
+                return ServiceResult.BadRequest("Trenutno nema zahteva za posete");
+
+            var brojKrevetaUSobi = 3;
+            var maxBrojPosetiocaPoPacijentu = 2;
+            var maxPacijenataUSobi = brojKrevetaUSobi * maxBrojPosetiocaPoPacijentu;
+
+            var currentDate = DateTime.Now.Date;
+            var prviTerminPosetePocetak=new DateTime(currentDate.Year,currentDate.Month,currentDate.Day,14,30,0);
+            var prviTerminPoseteKraj = prviTerminPosetePocetak.AddMinutes(30);
+
+            var drugiTerminPosetePocetak=new DateTime(currentDate.Year,currentDate.Month,currentDate.Day,18,0,0);
+            var drugiTerminPoseteKraj = drugiTerminPosetePocetak.AddMinutes(30);
+
+            var pacijentiZaPosete = zahteviZaPoseteDanas
+                .GroupBy(x => x.PacijentNaLecenjuId)
+                .Select(x => x.Key)
+                .ToList();
+
+             zahteviZaPoseteDanas.ForEach(x => x.IsObradjen = true);
+
+            foreach (var pacijentId in pacijentiZaPosete)
+            {
+                var zahteviZaPacijenta = zahteviZaPoseteDanas.Where(x => x.PacijentNaLecenjuId == pacijentId).ToList();
+
+                if (zahteviZaPacijenta.Count() > maxBrojPosetiocaPoPacijentu * 2) //2 su termina dnevno
+                {
+                    zahteviZaPacijenta = zahteviZaPacijenta
+                        .OrderBy(x => x.DatumVremeKreiranja)
+                        .Take(maxBrojPosetiocaPoPacijentu * 2)
+                        .ToList();
+                }
+
+                //SMS notifications
+                //.....
+
+
+                var flagCounter = 0;
+                var vrijeme = prviTerminPosetePocetak;
+                foreach (var zahtev in zahteviZaPacijenta)
+                {
+                    if (flagCounter == 2)
+                        vrijeme = drugiTerminPosetePocetak;
+                    zahtev.ZakazanoDatumVreme = vrijeme;
+                    flagCounter++;
+                }
+
+                await _dbContext.SaveChangesAsync();
+            }
+
+            return ServiceResult.OK();
         }
     }
 }

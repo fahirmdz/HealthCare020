@@ -34,6 +34,8 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             {
                 _instance = new dlgError(message);
             }
+
+            ((Form) _instance).Visible = false;
             ((Form)_instance).ShowDialog();
         }
 

@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using HealthCare020.Services;
 using HealthCare020.Services.Constants;
 
 namespace HealthCare020.API.Controllers
 {
     [Route("api/" + Routes.ZahtevZaPosetuRoute)]
-    [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)] //At least RadnikPrijem
     public class ZahtevZaPosetuController : BaseCRUDController<ZahtevZaPosetu, ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuUpsertDto>
     {
         public ZahtevZaPosetuController(ICRUDService<ZahtevZaPosetu, ZahtevZaPosetuDtoLL,
@@ -27,7 +27,7 @@ namespace HealthCare020.API.Controllers
             return await base.Insert(dtoForCreation);
         }
 
-        [NonAction]
+        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
         public override async Task<IActionResult> Update(int id, ZahtevZaPosetuUpsertDto dtoForUpdate)
         {
             return await base.Update(id, dtoForUpdate);
@@ -37,6 +37,18 @@ namespace HealthCare020.API.Controllers
         public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<ZahtevZaPosetuUpsertDto> patchDocument)
         {
             return await base.PartiallyUpdate(id, patchDocument);
+        }
+
+        [HttpGet("auto-scheduling")]
+        public async Task<IActionResult> AutoScheduling()
+        {
+            if (_crudService is ZahtevZaPosetuService service)
+            {
+                var result = await service.AutoScheduling();
+                return WithStatusCode(result.StatusCode, result.Message);
+            }
+
+            return StatusCode(500);
         }
     }
 }

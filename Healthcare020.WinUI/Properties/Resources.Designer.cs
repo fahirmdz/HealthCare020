@@ -286,6 +286,33 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neobrađeni zahtevi sa posete.
+        /// </summary>
+        public static string frmRadnikPrijemPoseteNeobradjeniZahtevi {
+            get {
+                return ResourceManager.GetString("frmRadnikPrijemPoseteNeobradjeniZahtevi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obrađeni zahtevi za posete.
+        /// </summary>
+        public static string frmRadnikPrijemPoseteObradjeniZahteviOnly {
+            get {
+                return ResourceManager.GetString("frmRadnikPrijemPoseteObradjeniZahteviOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Svi zahtevi za posete.
+        /// </summary>
+        public static string frmRadnikPrijemPoseteSviZahtevi {
+            get {
+                return ResourceManager.GetString("frmRadnikPrijemPoseteSviZahtevi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predefinisani podaci - Uloge.
         /// </summary>
         public static string frmRoles {

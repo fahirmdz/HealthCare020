@@ -140,7 +140,13 @@ namespace HealthCare020.Services.Mappers
 
             CreateMap<RadnikPrijem, RadnikPrijemDtoEL>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
-                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje));
+                    opt => opt.MapFrom(x => x.Radnik.StacionarnoOdeljenje))
+                .ForMember(dest => dest.LicniPodaciId,
+                    opt => opt.MapFrom(x => x.Radnik.LicniPodaciId))
+                .ForMember(dest => dest.Ime,
+                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci.Ime))
+                .ForMember(dest => dest.Prezime,
+                    opt => opt.MapFrom(x => x.Radnik.LicniPodaci.Prezime));
 
             CreateMap<RadnikPrijemUpsertDto, Radnik>().ReverseMap();
 

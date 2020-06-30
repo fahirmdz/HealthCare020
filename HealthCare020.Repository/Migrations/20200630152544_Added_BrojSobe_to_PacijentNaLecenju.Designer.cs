@@ -4,14 +4,16 @@ using HealthCare020.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthCare020.Repository.Migrations
 {
     [DbContext(typeof(HealthCare020DbContext))]
-    partial class HealthCare020DbContextModelSnapshot : ModelSnapshot
+    [Migration("20200630152544_Added_BrojSobe_to_PacijentNaLecenju")]
+    partial class Added_BrojSobe_to_PacijentNaLecenju
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -457,16 +459,16 @@ namespace HealthCare020.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DatumVremeKreiranja")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("IsObradjen")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("OdobrenoDatumVreme")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PacijentNaLecenjuId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("ZakazanoDatumVreme")
+                    b.Property<DateTime>("TrazenoDatumVreme")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

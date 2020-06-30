@@ -42,9 +42,9 @@
             this.lblLekarskaUverenja = new System.Windows.Forms.Label();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.btnUputniceNamenjene = new FontAwesome.Sharp.IconButton();
             this.lblUputnice = new System.Windows.Forms.Label();
             this.materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
+            this.btnUputniceNamenjene = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlCopyright.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -54,7 +54,7 @@
             // 
             this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.Location = new System.Drawing.Point(514, 32);
+            this.picLogo.Location = new System.Drawing.Point(514, 22);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(216, 216);
             this.picLogo.TabIndex = 8;
@@ -95,7 +95,7 @@
             this.btnZakazaniPregledi.IconChar = FontAwesome.Sharp.IconChar.CalendarDay;
             this.btnZakazaniPregledi.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnZakazaniPregledi.IconSize = 45;
-            this.btnZakazaniPregledi.Location = new System.Drawing.Point(534, 331);
+            this.btnZakazaniPregledi.Location = new System.Drawing.Point(503, 314);
             this.btnZakazaniPregledi.Name = "btnZakazaniPregledi";
             this.btnZakazaniPregledi.Rotation = 0D;
             this.btnZakazaniPregledi.Size = new System.Drawing.Size(230, 74);
@@ -118,7 +118,7 @@
             this.btnZahteviZaPregled.IconChar = FontAwesome.Sharp.IconChar.Question;
             this.btnZahteviZaPregled.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnZahteviZaPregled.IconSize = 43;
-            this.btnZahteviZaPregled.Location = new System.Drawing.Point(810, 331);
+            this.btnZahteviZaPregled.Location = new System.Drawing.Point(779, 314);
             this.btnZahteviZaPregled.Name = "btnZahteviZaPregled";
             this.btnZahteviZaPregled.Rotation = 0D;
             this.btnZahteviZaPregled.Size = new System.Drawing.Size(230, 74);
@@ -141,7 +141,7 @@
             this.btnSviPregledi.IconChar = FontAwesome.Sharp.IconChar.Stethoscope;
             this.btnSviPregledi.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnSviPregledi.IconSize = 45;
-            this.btnSviPregledi.Location = new System.Drawing.Point(239, 331);
+            this.btnSviPregledi.Location = new System.Drawing.Point(208, 314);
             this.btnSviPregledi.Name = "btnSviPregledi";
             this.btnSviPregledi.Rotation = 0D;
             this.btnSviPregledi.Size = new System.Drawing.Size(230, 74);
@@ -164,7 +164,7 @@
             this.btnLekarskaUverenja.IconChar = FontAwesome.Sharp.IconChar.FileSignature;
             this.btnLekarskaUverenja.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnLekarskaUverenja.IconSize = 45;
-            this.btnLekarskaUverenja.Location = new System.Drawing.Point(810, 494);
+            this.btnLekarskaUverenja.Location = new System.Drawing.Point(779, 477);
             this.btnLekarskaUverenja.Name = "btnLekarskaUverenja";
             this.btnLekarskaUverenja.Rotation = 0D;
             this.btnLekarskaUverenja.Size = new System.Drawing.Size(230, 74);
@@ -187,7 +187,7 @@
             this.btnUputnice.IconChar = FontAwesome.Sharp.IconChar.UserMd;
             this.btnUputnice.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnUputnice.IconSize = 45;
-            this.btnUputnice.Location = new System.Drawing.Point(239, 494);
+            this.btnUputnice.Location = new System.Drawing.Point(208, 477);
             this.btnUputnice.Name = "btnUputnice";
             this.btnUputnice.Rotation = 0D;
             this.btnUputnice.Size = new System.Drawing.Size(230, 74);
@@ -202,7 +202,7 @@
             this.materialDivider1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.materialDivider1.BackColor = System.Drawing.Color.Gainsboro;
             this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(201, 295);
+            this.materialDivider1.Location = new System.Drawing.Point(170, 278);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
             this.materialDivider1.Size = new System.Drawing.Size(857, 1);
@@ -215,7 +215,7 @@
             this.lblPregledi.AutoSize = true;
             this.lblPregledi.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPregledi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.lblPregledi.Location = new System.Drawing.Point(215, 262);
+            this.lblPregledi.Location = new System.Drawing.Point(184, 245);
             this.lblPregledi.Name = "lblPregledi";
             this.lblPregledi.Size = new System.Drawing.Size(91, 30);
             this.lblPregledi.TabIndex = 33;
@@ -227,7 +227,7 @@
             this.lblLekarskaUverenja.AutoSize = true;
             this.lblLekarskaUverenja.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLekarskaUverenja.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.lblLekarskaUverenja.Location = new System.Drawing.Point(792, 423);
+            this.lblLekarskaUverenja.Location = new System.Drawing.Point(761, 406);
             this.lblLekarskaUverenja.Name = "lblLekarskaUverenja";
             this.lblLekarskaUverenja.Size = new System.Drawing.Size(182, 30);
             this.lblLekarskaUverenja.TabIndex = 35;
@@ -238,7 +238,7 @@
             this.materialDivider2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.materialDivider2.BackColor = System.Drawing.Color.Gainsboro;
             this.materialDivider2.Depth = 0;
-            this.materialDivider2.Location = new System.Drawing.Point(797, 457);
+            this.materialDivider2.Location = new System.Drawing.Point(766, 440);
             this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider2.Name = "materialDivider2";
             this.materialDivider2.Size = new System.Drawing.Size(280, 1);
@@ -266,6 +266,30 @@
             this.pnlMain.Size = new System.Drawing.Size(1208, 607);
             this.pnlMain.TabIndex = 36;
             // 
+            // lblUputnice
+            // 
+            this.lblUputnice.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblUputnice.AutoSize = true;
+            this.lblUputnice.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUputnice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
+            this.lblUputnice.Location = new System.Drawing.Point(184, 406);
+            this.lblUputnice.Name = "lblUputnice";
+            this.lblUputnice.Size = new System.Drawing.Size(99, 30);
+            this.lblUputnice.TabIndex = 38;
+            this.lblUputnice.Text = "Uputnice";
+            // 
+            // materialDivider3
+            // 
+            this.materialDivider3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.materialDivider3.BackColor = System.Drawing.Color.Gainsboro;
+            this.materialDivider3.Depth = 0;
+            this.materialDivider3.Location = new System.Drawing.Point(172, 439);
+            this.materialDivider3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider3.Name = "materialDivider3";
+            this.materialDivider3.Size = new System.Drawing.Size(561, 1);
+            this.materialDivider3.TabIndex = 37;
+            this.materialDivider3.Text = "materialDivider3";
+            // 
             // btnUputniceNamenjene
             // 
             this.btnUputniceNamenjene.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -279,7 +303,7 @@
             this.btnUputniceNamenjene.IconChar = FontAwesome.Sharp.IconChar.UserFriends;
             this.btnUputniceNamenjene.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
             this.btnUputniceNamenjene.IconSize = 45;
-            this.btnUputniceNamenjene.Location = new System.Drawing.Point(534, 494);
+            this.btnUputniceNamenjene.Location = new System.Drawing.Point(503, 477);
             this.btnUputniceNamenjene.Name = "btnUputniceNamenjene";
             this.btnUputniceNamenjene.Rotation = 0D;
             this.btnUputniceNamenjene.Size = new System.Drawing.Size(230, 74);
@@ -288,30 +312,6 @@
             this.btnUputniceNamenjene.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUputniceNamenjene.UseVisualStyleBackColor = false;
             this.btnUputniceNamenjene.Click += new System.EventHandler(this.btnUputniceNamenjene_Click);
-            // 
-            // lblUputnice
-            // 
-            this.lblUputnice.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblUputnice.AutoSize = true;
-            this.lblUputnice.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUputnice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
-            this.lblUputnice.Location = new System.Drawing.Point(215, 423);
-            this.lblUputnice.Name = "lblUputnice";
-            this.lblUputnice.Size = new System.Drawing.Size(99, 30);
-            this.lblUputnice.TabIndex = 38;
-            this.lblUputnice.Text = "Uputnice";
-            // 
-            // materialDivider3
-            // 
-            this.materialDivider3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.materialDivider3.BackColor = System.Drawing.Color.Gainsboro;
-            this.materialDivider3.Depth = 0;
-            this.materialDivider3.Location = new System.Drawing.Point(203, 456);
-            this.materialDivider3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialDivider3.Name = "materialDivider3";
-            this.materialDivider3.Size = new System.Drawing.Size(561, 1);
-            this.materialDivider3.TabIndex = 37;
-            this.materialDivider3.Text = "materialDivider3";
             // 
             // frmDoktorMainDashboard
             // 

@@ -27,6 +27,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         
         private frmZdravstvenaStanja(ZdravstvenoStanjeDto zdravstvenoStanje=null)
         {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
+
             var ID = new DataGridViewTextBoxColumn
             {
                 Name = "ID",

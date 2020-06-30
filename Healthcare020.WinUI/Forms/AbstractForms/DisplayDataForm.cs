@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.CustomElements;
+using Healthcare020.WinUI.Helpers.DesignConfigs;
+using Healthcare020.WinUI.Services;
+using HealthCare020.Core.ResourceParameters;
+using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.CustomElements;
-using Healthcare020.WinUI.Helpers.DesignConfigs;
-using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AbstractForms
 {
-    public  partial class DisplayDataForm<TDto> : Form
+    public partial class DisplayDataForm<TDto> : Form
     {
         protected APIService _apiService;
         protected IBindingList _dataForDgrv;
@@ -20,18 +20,18 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
         protected DataGridView MainDgrv;
         protected int PossibleRowsCount;
         protected BaseResourceParameters ResourceParameters;
+        protected Form FormForBackButton;
 
         protected string SearchText;
+
         protected DisplayDataForm()
         {
             InitializeComponent();
-            PossibleRowsCount = dgrvMain.GetRowsCount()-1;
             _dataForDgrv = new BindingSource();
             SearchText = string.Empty;
 
             //Main data grid view settings
             dgrvMain.SetDgrvDesignConfig();
-            dgrvMain.RowCount = CurrentRowCount;
             MainDgrv = dgrvMain;
             dgrvMain.AllowUserToDeleteRows = true;
 
@@ -73,13 +73,12 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             //POSTOJI B U G PRI DODAVANJU SEKVENCE SA AddRange
             foreach (var column in dgrvColumns)
             {
-                dgrvMain.Columns.Insert(dgrvMain.Columns.Count,column);
+                dgrvMain.Columns.Insert(dgrvMain.Columns.Count, column);
             }
         }
 
         protected virtual void btnNew_Click(object sender, EventArgs e)
         {
-
         }
 
         protected void DgrvColumnsStyle()
@@ -92,14 +91,13 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
                 column.MinimumWidth = 2;
             }
         }
+
         protected virtual void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         protected virtual void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         protected virtual void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -129,11 +127,11 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
         protected virtual void dgrvMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         protected void DisplayDataForm_Load(object sender, EventArgs e)
         {
+            this.SizeChanged += formDisplayed_SizeChanged;
         }
 
         protected virtual async Task LoadData()
@@ -142,6 +140,9 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
             var result = await _apiService
                 .Get<TDto>(ResourceParameters);
+
+            if (!result.Succeeded || !result.HasData)
+                return;
 
             _dataForDgrv = new BindingList<TDto>(result.Data);
             CurrentRowCount = _dataForDgrv.Count;
@@ -154,6 +155,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             this.UseWaitCursor = false;
             Cursor.Current = Cursors.Default;
         }
+
         protected void SetSourceForDgrv(IBindingList source) => dgrvMain.DataSource = source;
 
         protected virtual void txtSearch_Leave(object sender, EventArgs e)
@@ -181,16 +183,49 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             btnNextPage.Enabled = true;
         }
 
-        private async void DisplayDataForm_SizeChanged(object sender, EventArgs e)
+        private async void formDisplayed_SizeChanged(object sender, EventArgs e)
         {
-            if(ResourceParameters!=null)
+            if (ResourceParameters != null)
             {
+                CalculateRowsCount();
                 dgrvMain.DataSource = null;
-                PossibleRowsCount = dgrvMain.GetRowsCount()-1;
-                ResourceParameters.PageSize = PossibleRowsCount;
-                dgrvMain.RowCount = PossibleRowsCount;
                 await LoadData();
             }
+        }
+
+        private void DisplayDataForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.SizeChanged -= formDisplayed_SizeChanged;
+        }
+
+        private void DisplayDataForm_Shown(object sender, EventArgs e)
+        {
+            this.SizeChanged += formDisplayed_SizeChanged;
+        }
+
+        private async void DisplayDataForm_Load_1(object sender, EventArgs e)
+        {
+            await LoadData();
+        }
+
+        protected virtual void btnBack_Click(object sender, EventArgs e)
+        {
+            FormForBackButton?.OpenAsChildOfControl(Parent);
+        }
+
+        private void CalculateRowsCount()
+        {
+            PossibleRowsCount = dgrvMain.GetRowsCount();
+            PossibleRowsCount = PossibleRowsCount <= 0 ? 1 : PossibleRowsCount;
+            dgrvMain.RowCount = PossibleRowsCount;
+            ResourceParameters.PageSize = PossibleRowsCount;
+        }
+
+        private async void dgrvMain_SizeChanged(object sender, EventArgs e)
+        {
+            dgrvMain.DataSource = null;
+            CalculateRowsCount();
+            await LoadData();
         }
     }
 }

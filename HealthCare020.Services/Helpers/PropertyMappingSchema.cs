@@ -135,7 +135,7 @@ namespace HealthCare020.Services.Helpers
                     {
                         {nameof(ZahtevZaPosetuDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.Id)})},
                         {nameof(ZahtevZaPosetuDtoLL.PacijentNaLecenjuId),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.PacijentNaLecenjuId)})},
-                        {nameof(ZahtevZaPosetuDtoLL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.DatumVreme)})},
+
                         {nameof(ZahtevZaPosetuDtoLL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.BrojTelefonaPosetioca)})}
                     })
                 },
@@ -144,7 +144,6 @@ namespace HealthCare020.Services.Helpers
                         {nameof(ZahtevZaPosetuDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.Id)})},
                         {nameof(ZahtevZaPosetuDtoEL.PacijentNaLecenju),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.PacijentNaLecenju)})},
                         {nameof(ZahtevZaPosetuDtoEL.BrojTelefonaPosetioca),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.BrojTelefonaPosetioca)})},
-                        {nameof(ZahtevZaPosetuDtoEL.DatumVreme),new PropertyMappingValue(new List<string>(){nameof(ZahtevZaPosetu.DatumVreme)})}
                     })
                 },
                 {new PropertyMapping<PacijentNaLecenjuDtoLL,PacijentNaLecenju>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)

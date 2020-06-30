@@ -1,19 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using HealthCare020.API.Constants;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
-using HealthCare020.API.Constants;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {
     [ApiController]
-    [ResponseCache(VaryByHeader = "User-Agent",CacheProfileName = CacheProfilesConstants.CacheProfile240Seconds)]
+    [ResponseCache(VaryByHeader = "User-Agent", CacheProfileName = CacheProfilesConstants.CacheProfile240Seconds)]
     public class BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters> : ControllerBase where TResourceParameters : BaseResourceParameters
     {
         private readonly IService<TEntity, TResourceParameters> _service;
@@ -50,11 +48,10 @@ namespace HealthCare020.API.Controllers
             return Ok(result.Data);
         }
 
-
         //Last MonthsCount months for entities with DateTime property
         [HttpGet("count")]
         [Authorize(AuthorizationPolicies.AdminPolicy)]
-        public async Task<IActionResult> Count(int MonthsCount=0) => Ok(await _service.Count(MonthsCount));
+        public async Task<IActionResult> Count(int MonthsCount = 0) => Ok(await _service.Count(MonthsCount));
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")
         {
@@ -64,11 +61,10 @@ namespace HealthCare020.API.Controllers
                     return NotFound(message);
 
                 case HttpStatusCode.Forbidden:
-                    return StatusCode(403,message);
+                    return StatusCode(403, message);
 
                 case HttpStatusCode.Unauthorized:
                     return Unauthorized();
-
 
                 default:
                     return BadRequest(message);
