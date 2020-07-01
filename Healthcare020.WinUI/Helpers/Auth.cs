@@ -11,6 +11,8 @@ using System.Net;
 using System.Security;
 using System.Threading.Tasks;
 using HealthCare020.Core.ResourceParameters;
+using Healthcare020.WinUI.Properties;
+using Microsoft.Win32;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers
@@ -90,6 +92,15 @@ namespace Healthcare020.WinUI.Helpers
         public static void Logout()
         {
             AccessToken = null;
+            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey,true))
+            {
+                if (reg != null)
+                {
+                    reg.SetValue(Resources.RegistryKeyValueUsername,string.Empty);
+                    reg.SetValue(Resources.RegistryKeyValuePassword,string.Empty);
+                    reg.Close();
+                }
+            }
             MainForm.Instance.SetLoginAsChildForm();
         }
 

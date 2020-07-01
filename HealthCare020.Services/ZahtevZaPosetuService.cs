@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
-    public class ZahtevZaPosetuService : BaseCRUDService<ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters, ZahtevZaPosetu, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuUpsertDto>
+    public class ZahtevZaPosetuService : BaseCRUDService<ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters, ZahtevZaPosetu, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuPatchDto>
     {
         public ZahtevZaPosetuService(IMapper mapper, HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
@@ -94,9 +94,18 @@ namespace HealthCare020.Services
             return ServiceResult.OK(_mapper.Map<ZahtevZaPosetuDtoLL>(zahtevZaPosetu));
         }
 
-        public override async Task<ServiceResult> Update(int id, ZahtevZaPosetuUpsertDto dtoForUpdate)
+        public override async Task<ServiceResult> Update(int id, ZahtevZaPosetuPatchDto dtoForUpdate)
         {
-            return ServiceResult.WithStatusCode(HttpStatusCode.OK);
+            if (!await _dbContext.PacijentiNaLecenju.AnyAsync(x => x.Id == dtoForUpdate.PacijentNaLecenjuId))
+                return ServiceResult.NotFound($"Pacijent na lecenju sa ID-em {dtoForUpdate.PacijentNaLecenjuId} nije pronadjen.");
+
+            var zahtevFromDb = await _dbContext.ZahteviZaPosetu.FindAsync(id);
+            _mapper.Map(dtoForUpdate, zahtevFromDb);
+            zahtevFromDb.IsObradjen = dtoForUpdate.ZakazanoDatumVreme.HasValue;
+
+            await _dbContext.SaveChangesAsync();
+
+            return ServiceResult.OK(_mapper.Map<ZahtevZaPosetuDtoLL>(zahtevFromDb));
         }
 
         public override async Task<ServiceResult> Delete(int id)

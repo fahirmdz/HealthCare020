@@ -322,6 +322,12 @@
   <data name="NotLoggedIn" xml:space="preserve">
     <value>"Niste prijavljeni na sistem!"</value>
   </data>
+  <data name="RegistryKeyValuePassword" xml:space="preserve">
+    <value>CurrentPassword</value>
+  </data>
+  <data name="RegistryKeyValueUsername" xml:space="preserve">
+    <value>CurrentUsername</value>
+  </data>
   <data name="RequiredField" xml:space="preserve">
     <value>Obavezno polje</value>
   </data>

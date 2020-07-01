@@ -14,5 +14,8 @@
     <Setting Name="IdpClientSecret" Type="System.String" Scope="User">
       <Value Profile="(Default)">devsecret</Value>
     </Setting>
+    <Setting Name="RegistryKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Software\\Healthcare020</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -286,6 +286,10 @@ namespace HealthCare020.Services.Mappers
             CreateMap<PacijentNaLecenjuUpsertDto, PacijentNaLecenju>();
 
             #endregion PacijentNaLecenju
+
+            CreateMap<ZahtevZaPosetuPatchDto, ZahtevZaPosetu>()
+                .ForMember(dest => dest.Id, x => x.Ignore());
+            CreateMap<ZahtevZaPosetu,ZahtevZaPosetuPatchDto>();
         }
     }
 }

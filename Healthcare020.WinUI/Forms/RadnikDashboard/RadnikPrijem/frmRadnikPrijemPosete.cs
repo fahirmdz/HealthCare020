@@ -6,8 +6,9 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Helpers.DesignConfigs;
+using Healthcare020.WinUI.Helpers.Dialogs;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 {
@@ -109,8 +110,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
         {
             if (!(dgrvMain.CurrentRow?.DataBoundItem is ZahtevZaPosetuDtoEL zahtevZaPosetu))
                 return;
-
-            //dlgForm.ShowDialog(frmNewUputnica.InstanceWithData(zahtevZaPosetu,newInstance:true),DialogFormSize.Large,NewInstance:true);
+            dlgForm.ShowDialog(frmPosetaOverview.InstanceWithData(zahtevZaPosetu, newInstance: true),
+                NewInstance: true);
         }
 
         private void frmRadnikPrijemPosete_FormClosed(object sender, FormClosedEventArgs e)
