@@ -122,6 +122,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -328,6 +329,12 @@
     <Compile Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.Designer.cs">
       <DependentUpon>frmZahtevZaPregled.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RadnikDashboard\RadnikPrijem\frmPosetaOverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RadnikDashboard\RadnikPrijem\frmPosetaOverview.Designer.cs">
+      <DependentUpon>frmPosetaOverview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RadnikDashboard\RadnikPrijem\frmRadnikPrijemDataDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -440,6 +447,7 @@
     <Compile Include="Forms\AdminDashboard\frmStartMenuAdmin.Designer.cs">
       <DependentUpon>frmStartMenuAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\DataProtectionExtensions.cs" />
     <Compile Include="Services\PDFService.cs" />
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>
@@ -539,6 +547,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmZahtevZaPregled.resx">
       <DependentUpon>frmZahtevZaPregled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RadnikDashboard\RadnikPrijem\frmPosetaOverview.resx">
+      <DependentUpon>frmPosetaOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RadnikDashboard\RadnikPrijem\frmRadnikPrijemDataDisplay.resx">
       <DependentUpon>frmRadnikPrijemDataDisplay.cs</DependentUpon>

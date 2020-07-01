@@ -208,9 +208,7 @@ namespace Healthcare020.WinUI.Services
             {
                 request.Url.AppendPathSegment(pathToAppend);
             }
-            HttpContent content = new CapturedJsonContent(JsonConvert.SerializeObject(patchDocument));
-
-            var response = await request.PatchJsonAsync(content);
+            var response = await request.PatchJsonAsync(patchDocument);
             RevertToBaseRequest();
             if (response.StatusCode != HttpStatusCode.OK)
             {

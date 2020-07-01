@@ -677,6 +677,24 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CurrentPassword.
+        /// </summary>
+        public static string RegistryKeyValuePassword {
+            get {
+                return ResourceManager.GetString("RegistryKeyValuePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CurrentUsername.
+        /// </summary>
+        public static string RegistryKeyValueUsername {
+            get {
+                return ResourceManager.GetString("RegistryKeyValueUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obavezno polje.
         /// </summary>
         public static string RequiredField {

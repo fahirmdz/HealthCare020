@@ -16,7 +16,7 @@ namespace Healthcare020.WinUI.Helpers
         /// <param name="parentControl">Parent control</param>
         public static void OpenAsChildOfControl(this Form form, Control parentControl)
         {
-            if (form == null || parentControl == null)
+            if (form == null || parentControl == null || form.IsDisposed)
                 return;
 
             form.TopLevel = false;

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Exceptions;
 using Healthcare020.WinUI.Forms;
 using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
+using Microsoft.Win32;
 
 namespace Healthcare020.WinUI
 {
@@ -32,6 +36,16 @@ namespace Healthcare020.WinUI
 
             //This handler is for catching non-UI thread exception
             AppDomain.CurrentDomain.UnhandledException+=CurrentDomain_UnhandledException;
+
+            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey))
+            {
+                if (reg != null)
+                {
+                    Auth.AuthenticateWithPassword(reg.GetValue(Resources.RegistryKeyValueUsername).ToString().Unprotect(),
+                        reg.GetValue(Resources.RegistryKeyValuePassword).ToString().Unprotect()).Wait();
+                   reg.Close();
+                }
+            }
 
             Application.Run(MainForm.Instance);
         }

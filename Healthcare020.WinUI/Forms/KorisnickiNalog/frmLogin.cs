@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Services;
+using Microsoft.Win32;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
@@ -55,9 +57,16 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             {
                 return;
             }
-
             var username = txtUsername.Text;
             var password = txtPassword.Text;
+
+            if(cbxRememberMe.Checked)
+            {
+                var key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Healthcare020");
+                key.SetValue("CurrentUsername", username.Protect());
+                key.SetValue("CurrentPassword", password.Protect());
+                key.Close();
+            }
 
             if (await Auth.AuthenticateWithPassword(username, password))
             {

@@ -38,6 +38,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
         }
 
+        
+
         //PREDEFINED DATA COUNTS
         public int DrzavaCount { get; set; }
         public int GradoviCount { get; set; }

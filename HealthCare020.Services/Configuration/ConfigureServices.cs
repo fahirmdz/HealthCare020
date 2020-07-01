@@ -68,7 +68,7 @@ namespace HealthCare020.Services.Configuration
 
             services
                 .AddScoped<ICRUDService<ZahtevZaPosetu, ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL,
-                        ZahtevZaPosetuResourceParameters, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuUpsertDto>,
+                        ZahtevZaPosetuResourceParameters, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuPatchDto>,
                     ZahtevZaPosetuService>();
 
             services.AddScoped<ICRUDService<PacijentNaLecenju, PacijentNaLecenjuDtoLL, PacijentNaLecenjuDtoEL,

@@ -46,7 +46,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            currentChildForm.Dispose();
+            currentChildForm?.Dispose();
         }
 
         private void ActivateButton(object senderBtn, Color color)

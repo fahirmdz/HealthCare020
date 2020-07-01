@@ -14,10 +14,10 @@ using HealthCare020.Services.Constants;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/" + Routes.ZahtevZaPosetuRoute)]
-    public class ZahtevZaPosetuController : BaseCRUDController<ZahtevZaPosetu, ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuUpsertDto>
+    public class ZahtevZaPosetuController : BaseCRUDController<ZahtevZaPosetu, ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters,ZahtevZaPosetuUpsertDto, ZahtevZaPosetuPatchDto>
     {
         public ZahtevZaPosetuController(ICRUDService<ZahtevZaPosetu, ZahtevZaPosetuDtoLL,
-            ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuUpsertDto> crudService)
+            ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuPatchDto> crudService)
             : base(crudService)
         { }
 
@@ -27,14 +27,14 @@ namespace HealthCare020.API.Controllers
             return await base.Insert(dtoForCreation);
         }
 
-        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
-        public override async Task<IActionResult> Update(int id, ZahtevZaPosetuUpsertDto dtoForUpdate)
+        [NonAction]
+        public override async Task<IActionResult> Update(int id, ZahtevZaPosetuPatchDto dtoForUpdate)
         {
             return await base.Update(id, dtoForUpdate);
         }
 
-        [NonAction]
-        public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<ZahtevZaPosetuUpsertDto> patchDocument)
+        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
+        public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<ZahtevZaPosetuPatchDto> patchDocument)
         {
             return await base.PartiallyUpdate(id, patchDocument);
         }
