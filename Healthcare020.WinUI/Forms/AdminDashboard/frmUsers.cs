@@ -11,7 +11,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AbstractForms;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard
 {
     public partial class frmUsers : DisplayDataForm<KorisnickiNalogDtoLL>
     {

@@ -39,7 +39,7 @@ namespace Healthcare020.OAuth.Services
             var korisnikId = context.Subject.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
 
             var korisnik = await GetKorisnickiNalog(int.Parse(korisnikId ?? "0"));
-            context.IsActive = korisnik != null;
+            context.IsActive = korisnik != null && !korisnik.LockedOut;
         }
 
         private async Task<KorisnickiNalogDtoEL> GetKorisnickiNalog(int id)

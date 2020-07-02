@@ -1,18 +1,17 @@
 ﻿using Flurl.Http;
 using Healthcare020.WinUI.Forms;
-using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
+using HealthCare020.Core.ResourceParameters;
+using Microsoft.Win32;
 using System;
 using System.Linq;
 using System.Net;
 using System.Security;
 using System.Threading.Tasks;
-using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Properties;
-using Microsoft.Win32;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers
@@ -28,6 +27,7 @@ namespace Healthcare020.WinUI.Helpers
         {
             get; private set;
         }
+
         public static DoktorDtoLL CurrentLoggedInDoktor { get; private set; }
 
         /// <summary>
@@ -37,10 +37,6 @@ namespace Healthcare020.WinUI.Helpers
 
         public static IFlurlRequest GetAuthorizedApiRequest(string relativePath = "")
         {
-            if (!IsAuthenticated())
-            {
-                dlgError.ShowDialog($"Niste prijavljeni na sistem");
-            }
             return (Properties.Settings.Default.ApiUrl + relativePath).WithHeader("Authorization", $"Bearer {new NetworkCredential(string.Empty, AccessToken).Password}");
         }
 
@@ -67,14 +63,14 @@ namespace Healthcare020.WinUI.Helpers
                 }
                 KorisnickiNalog = result.Data;
 
-                var topRole = KorisnickiNalog.Roles.Min(x => x);
-                Role = (RoleType)topRole;
+                var topRole = KorisnickiNalog.Roles?.Min(x => x);
+                Role = topRole.HasValue ? (RoleType)topRole : RoleType.Pacijent;
 
                 if (Role == RoleType.Doktor)
                 {
                     apiSerivce.ChangeRoute(Routes.DoktoriRoute);
                     var doktorResult = await apiSerivce.Get<DoktorDtoLL>(new DoktorResourceParameters
-                        {EqualUsername = KorisnickiNalog.Username});
+                    { EqualUsername = KorisnickiNalog.Username });
                     if (doktorResult.Succeeded && doktorResult.HasData)
                     {
                         CurrentLoggedInDoktor = doktorResult.Data.First();
@@ -92,12 +88,12 @@ namespace Healthcare020.WinUI.Helpers
         public static void Logout()
         {
             AccessToken = null;
-            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey,true))
+            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey, true))
             {
                 if (reg != null)
                 {
-                    reg.SetValue(Resources.RegistryKeyValueUsername,string.Empty);
-                    reg.SetValue(Resources.RegistryKeyValuePassword,string.Empty);
+                    reg.SetValue(Resources.RegistryKeyValueUsername, string.Empty);
+                    reg.SetValue(Resources.RegistryKeyValuePassword, string.Empty);
                     reg.Close();
                 }
             }

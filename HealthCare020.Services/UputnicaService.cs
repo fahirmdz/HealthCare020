@@ -114,10 +114,10 @@ namespace HealthCare020.Services
                 if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentImePrezime))
                 {
                     result = result.Where(x =>
-                        resourceParameters.PacijentImePrezime.ToLower()
-                            .Contains(x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower())
-                        || resourceParameters.PacijentImePrezime.ToLower()
-                            .Contains(x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()));
+                        x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
+                            .Contains(resourceParameters.PacijentImePrezime.ToLower())
+                        || x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
+                            .Contains(resourceParameters.PacijentImePrezime.ToLower()));
                 }
             }
 

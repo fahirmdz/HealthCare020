@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
+﻿namespace Healthcare020.WinUI.Forms.AdministratorDashboard.Statistics
 {
     partial class frmPreglediStatistic
     {

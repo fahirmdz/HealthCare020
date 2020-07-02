@@ -1,4 +1,4 @@
-﻿using Healthcare020.WinUI.Forms.AdminDashboard;
+﻿using Healthcare020.WinUI.Forms.AdministratorDashboard;
 using Healthcare020.WinUI.Forms.KorisnickiNalog;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.CustomElements;
@@ -41,6 +41,11 @@ namespace Healthcare020.WinUI.Forms
             currentChild = null;
         }
 
+        public void ReloadUserDropdownMenu()
+        {
+           userMenuDropdown.ArrangeButtons();
+        }
+
         private async void MainForm_Load(object sender, EventArgs e)
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
@@ -49,7 +54,7 @@ namespace Healthcare020.WinUI.Forms
             {
                 //await Auth.AuthenticateWithPassword("radnikprijem1", "testtest");
                 if(Auth.IsAuthenticated())
-                    frmStartMenuAdmin.Instance.OpenAsChildOfControl(panelDesktop);
+                    frmStartMenuAdministrator.Instance.OpenAsChildOfControl(panelDesktop);
                 else
                     frmLogin.Instance.OpenAsChildOfControl(panelDesktop);
 
@@ -103,6 +108,7 @@ namespace Healthcare020.WinUI.Forms
             picMaximize.BackColor = Color.FromArgb(0, 170, 180);
         }
 
+
         private void picMaximize_MouseLeave(object sender, EventArgs e)
         {
             picMaximize.BackColor = Color.FromArgb(0, 190, 190);
@@ -120,7 +126,7 @@ namespace Healthcare020.WinUI.Forms
 
         private void picClose_Click_1(object sender, EventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         private void picMaximize_Click(object sender, EventArgs e)
@@ -167,9 +173,9 @@ namespace Healthcare020.WinUI.Forms
             //Set event to close user dropdown menu on every click
             currentChild.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick, true,
                 x => !(x is UserMenuDropdownPanel) && !(x is UserMenuButton),
-                nestingCounter: currentChild is frmStartMenuAdmin ? 3 : 2);
+                nestingCounter: currentChild is frmStartMenuAdministrator ? 3 : 2);
 
-            if (currentChild is frmLogin || currentChild is frmStartMenuAdmin)
+            if (currentChild is frmLogin || currentChild is frmStartMenuAdministrator) 
             {
                 pnlTop.Hide();
             }

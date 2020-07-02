@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmGradovi : DisplayDataForm<GradDtoEL>
     {
@@ -27,7 +27,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmGradovi() : base()
         {
-            FormForBackButton = frmPredefinedDataMenu.Instance;
 
             var ID = new DataGridViewColumn
             {
@@ -70,6 +69,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         private void frmGradovi_Load(object sender, System.EventArgs e)
         {
             DisplayDataForm_Load(sender, e);
+            FormForBackButton = frmPredefinedDataMenu.Instance;
         }
 
         protected override async void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -67,7 +67,7 @@ namespace HealthCare020.Services
                     startMonth = 1;
                     year++;
                 }
-                monthsCountsList.Add(await _dbContext.ZahteviZaPosetu.CountAsync(x => x.IsObradjen &&
+                monthsCountsList.Add(await _dbContext.ZahteviZaPosetu.CountAsync(x => x.ZakazanoDatumVreme.HasValue &&
                                                                                       (x.ZakazanoDatumVreme.Value.Year == year
                                                                                        && x.ZakazanoDatumVreme.Value.Month == startMonth)));
                 startMonth++;

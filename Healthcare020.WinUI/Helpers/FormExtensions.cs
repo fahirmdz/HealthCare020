@@ -1,9 +1,8 @@
-﻿using System.Drawing;
+﻿using Healthcare020.WinUI.Forms.AdministratorDashboard;
+using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard;
 
 namespace Healthcare020.WinUI.Helpers
 {
@@ -24,7 +23,7 @@ namespace Healthcare020.WinUI.Helpers
             form.Dock = DockStyle.Fill;
             foreach (var control in parentControl.Controls.OfType<Form>())
             {
-                if(form != control)
+                if (form != control)
                 {
                     control.Close();
                     parentControl.Controls.Remove(control);
@@ -36,7 +35,6 @@ namespace Healthcare020.WinUI.Helpers
             form.Show();
         }
 
-
         public static void ShowDialogWithBlurryBackground(this Form dialog)
         {
             var panel = new Panel();
@@ -44,16 +42,16 @@ namespace Healthcare020.WinUI.Helpers
             panel.Controls.Add(dialog);
             panel.Tag = dialog;
             panel.Dock = DockStyle.Fill;
-            panel.BackColor=Color.FromArgb(25,Color.Black);
+            panel.BackColor = Color.FromArgb(25, Color.Black);
             panel.BringToFront();
-            frmStartMenuAdmin.Instance.Controls.Add(panel);
+            frmStartMenuAdministrator.Instance.Controls.Add(panel);
 
             panel.Show();
         }
 
-        public static async Task CloseAfterDelay(this Form form, int millisecondsDelay )
+        public static async Task CloseAfterDelay(this Form form, int millisecondsDelay)
         {
-            await Task.Delay( millisecondsDelay );
+            await Task.Delay(millisecondsDelay);
             form.Close();
         }
     }

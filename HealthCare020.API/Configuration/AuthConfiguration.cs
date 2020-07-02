@@ -22,9 +22,9 @@ namespace HealthCare020.API.Configuration
 
             services.AddAuthorization(opt =>
             {
-                opt.AddPolicy(AuthorizationPolicies.AdminPolicy, policy =>
+                opt.AddPolicy(AuthorizationPolicies.AdministratorPolicy, policy =>
                 {
-                    policy.RequireAssertion(context => authorizationHandler(context, AuthorizationPolicies.AdminPolicy).Invoke(context));
+                    policy.RequireAssertion(context => authorizationHandler(context, AuthorizationPolicies.AdministratorPolicy).Invoke(context));
                 });
                 opt.AddPolicy(AuthorizationPolicies.DoktorPolicy, policy =>
                 {
@@ -52,7 +52,7 @@ namespace HealthCare020.API.Configuration
 
                 var roleOnTop = roles.Split(",")[0];
 
-                //If Admin logged in
+                //If Administrator logged in
                 if (string.Equals(roleOnTop, RoleType.Administrator.ToDescriptionString(),
                     StringComparison.CurrentCultureIgnoreCase))
                     return handlerContext => true;

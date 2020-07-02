@@ -14,7 +14,7 @@ using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmRoles : DisplayDataForm<TwoFieldsDto>
     {
@@ -34,7 +34,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmRoles()
         {
-            FormForBackButton = frmPredefinedDataMenu.Instance;
 
             var ID = new DataGridViewColumn
             {
@@ -115,5 +114,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         }
 
         public async void RefreshData() => await LoadData();
+
+        private void frmRoles_Load(object sender, EventArgs e)
+        {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
+        }
     }
 }

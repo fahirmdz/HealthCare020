@@ -5,6 +5,7 @@ using Healthcare020.WinUI.Services;
 using HealthCare020.Core.ResourceParameters;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -149,7 +150,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
             dgrvMain.DataSource = _dataForDgrv;
 
-            btnNextPage.Enabled = ResourceParameters.PageNumber != result.PaginationMetadata.TotalPages;
+            btnNextPage.Enabled = result.HasData && result.Data.Any() &&  ResourceParameters.PageNumber != result.PaginationMetadata.TotalPages;
             btnPrevPage.Enabled = ResourceParameters.PageNumber != 1;
 
             this.UseWaitCursor = false;

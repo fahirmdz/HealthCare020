@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Helpers;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmNewDrzava : Form
     {

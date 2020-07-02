@@ -4,7 +4,7 @@ using HealthCare020.Core.Constants;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Properties;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.Statistics
 {
     public partial class frmPoseteStatistic : StatisticChartForm
     {
@@ -22,11 +22,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 
         public frmPoseteStatistic()
         {
-            lblChartTitle.Text = Properties.Resources.TitlePoseteStatistic;
-            NoDataMessage = Properties.Resources.NoDataPoseteStatisticMessage;
-            YAxisTitle = Properties.Resources.StatisticCountYAxisTitle;
+            lblChartTitle.Text = Resources.TitlePoseteStatistic;
+            NoDataMessage = Resources.NoDataPoseteStatisticMessage;
+            YAxisTitle = Resources.StatisticCountYAxisTitle;
             IcnCharForNoData = IconChar.Eye;
-            Text = Properties.Resources.frmPoseteStatistic;
+            Text = Resources.frmPoseteStatistic;
             _apiService = new APIService(Routes.ZahtevZaPosetuRoute);
             InitializeComponent();
         }

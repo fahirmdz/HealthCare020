@@ -7,11 +7,11 @@ using System.Linq;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Helpers.CustomElements;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard
 {
-    public partial class frmStartMenuAdmin : Form
+    public partial class frmStartMenuAdministrator : Form
     {
-        private static frmStartMenuAdmin _instance;
+        private static frmStartMenuAdministrator _instance;
 
         //Fields
         private IconButton currentBtn;
@@ -19,7 +19,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private Form currentChildForm;
         private Panel leftBorderBtn;
 
-        private frmStartMenuAdmin()
+        private frmStartMenuAdministrator()
         {
             InitializeComponent();
 
@@ -28,16 +28,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             panelMenu.Controls.Add(leftBorderBtn);
         }
 
-        public static frmStartMenuAdmin Instance
+        public static frmStartMenuAdministrator Instance
         {
             get
             {
-                //if (!Auth.IsAuthenticated())
-                //    return null;
-
                 if (_instance == null || _instance.IsDisposed)
                 {
-                    _instance = new frmStartMenuAdmin();
+                    _instance = new frmStartMenuAdministrator();
                 }
 
                 return _instance;
@@ -82,7 +79,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 form.Dispose();
                 form.Close();
             }
-
+            btnStatistics.PerformClick();
             Reset();
         }
 
@@ -103,7 +100,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private void btnStatistics_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
-            var frmStatisticsMenu = AdminDashboard.frmStatisticsMenu.Instance;
+            var frmStatisticsMenu = AdministratorDashboard.frmStatisticsMenu.Instance;
             if (frmStatisticsMenu != null)
             {
                 frmStatisticsMenu.OpenAsChildOfControl(pnlBody);
@@ -117,7 +114,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private void btnUsers_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
-            var frmUsers = AdminDashboard.frmUsers.Instance;
+            var frmUsers = AdministratorDashboard.frmUsers.Instance;
             if (frmUsers != null)
             {
                 frmUsers.OpenAsChildOfControl(pnlBody);
@@ -147,7 +144,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
         }
 
-        private void frmStartMenuAdmin_Load(object sender, EventArgs e)
+        private void frmStartMenuAdministrator_Load(object sender, EventArgs e)
         {
             if (!Auth.IsAuthenticated())
             {
@@ -157,11 +154,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
             //Set event to close user drop down menu on click
             this.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick,true,x=>!(x is UserMenuButton) && !(x is UserMenuDropdownPanel));
+            btnStatistics.PerformClick();
         }
 
-        private void panel2_MouseDown(object sender, MouseEventArgs e)
-        {
-        }
+       
 
         private void pnlBody_ControlAdded(object sender, ControlEventArgs e)
         {
@@ -175,20 +171,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             currentChildForm.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick,true);
         }
 
-        private void pnlBody_Paint(object sender, PaintEventArgs e)
+      private void Reset()
         {
-        }
-
-        private void Reset()
-        {
-            DisableButton();
             leftBorderBtn.Visible = false;
             iconCurrentChildForm.IconChar = IconChar.Home;
             iconCurrentChildForm.IconColor = RGBColors.color5;
             lblTitleChildForm.Text = "Home";
-        }
-
-        //Structs
+        }  
         private struct RGBColors
         {
             public static Color color1 = Color.FromArgb(172, 126, 241);
@@ -196,6 +185,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             public static Color color3 = Color.FromArgb(253, 138, 114);
             public static Color color4 = Color.FromArgb(95, 77, 221);
             public static Color color5 = Color.FromArgb(0, 31, 61);
+        }
+
+        private void iconCurrentChildForm_Click(object sender, EventArgs e)
+        {
+            btnStatistics.PerformClick();
         }
     }
 }

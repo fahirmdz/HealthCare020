@@ -117,8 +117,8 @@ namespace HealthCare020.Services
                 return ServiceResult.Unauthorized();
 
             Pacijent pacijent = null;
-            bool isAdmin = await _authService.CurrentUserIsInRoleAsync(RoleType.Administrator);
-            if (isAdmin)
+            bool isAdministrator = await _authService.CurrentUserIsInRoleAsync(RoleType.Administrator);
+            if (isAdministrator)
             {
                 pacijent = await _dbContext.Pacijenti
                     .Include(x => x.KorisnickiNalog)
@@ -132,7 +132,7 @@ namespace HealthCare020.Services
             }
 
             if (pacijent == null)
-                return ServiceResult.NotFound(isAdmin ? $"Pacijent sa ID-em {id} nije pronadjen." : "Ovaj korisnicki nalog ne koristi ni jedan pacijent.");
+                return ServiceResult.NotFound(isAdministrator ? $"Pacijent sa ID-em {id} nije pronadjen." : "Ovaj korisnicki nalog ne koristi ni jedan pacijent.");
 
             await Task.Run(() =>
             {

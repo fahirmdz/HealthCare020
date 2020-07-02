@@ -70,6 +70,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Korisnički nalog je zaključan, pokušajte ponovo kasnije.
+        /// </summary>
+        public static string AccountLockedOut {
+            get {
+                return ResourceManager.GetString("AccountLockedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to © 2020. Fahir Mumdžić. All rights reserved..
         /// </summary>
         public static string CopyrightText {
@@ -324,9 +333,9 @@ namespace Healthcare020.WinUI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Administratorski meni.
         /// </summary>
-        public static string frmStartMenuAdmin {
+        public static string frmStartMenuAdministrator {
             get {
-                return ResourceManager.GetString("frmStartMenuAdmin", resourceCulture);
+                return ResourceManager.GetString("frmStartMenuAdministrator", resourceCulture);
             }
         }
         
@@ -709,6 +718,15 @@ namespace Healthcare020.WinUI.Properties {
         public static string StatisticCountYAxisTitle {
             get {
                 return ResourceManager.GetString("StatisticCountYAxisTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ova operacije se trenutno ne može izvršiti.
+        /// </summary>
+        public static string TemporarilyUnvailable {
+            get {
+                return ResourceManager.GetString("TemporarilyUnvailable", resourceCulture);
             }
         }
         

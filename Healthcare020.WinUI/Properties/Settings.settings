@@ -17,5 +17,8 @@
     <Setting Name="RegistryKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Software\\Healthcare020</Value>
     </Setting>
+    <Setting Name="Healthcare020_Logger" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Healthcare020_LoggerRule</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

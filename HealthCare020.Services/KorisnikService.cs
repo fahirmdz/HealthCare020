@@ -298,6 +298,18 @@ namespace HealthCare020.Services
             return ServiceResult.OK();
         }
 
+        public async Task<ServiceResult> AccountLocked(string username, string password)
+        {
+            var user = await Authenticate(username, password);
+            if(user==null)
+                return ServiceResult.BadRequest($"Korisnicki nalog nije pronadjen");
+
+            if(user.LockedOut)
+                return ServiceResult.WithStatusCode(HttpStatusCode.Locked);
+
+            return ServiceResult.OK();
+        }
+
         private List<RoleType> RolesToAdd(RoleType roleParent)
         {
             switch (roleParent)

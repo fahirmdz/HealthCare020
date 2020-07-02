@@ -8,7 +8,7 @@ using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmNaucneOblasti : DisplayDataForm<TwoFieldsDto>
     {
@@ -26,7 +26,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmNaucneOblasti()
         {
-            FormForBackButton = frmPredefinedDataMenu.Instance;
 
             this.Text = Properties.Resources.frmNaucneOblasti;
 
@@ -114,6 +113,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         protected override void btnNew_Click(object sender, EventArgs e)
         {
             frmNewNaucnaOblast.ShowDialog();
+        }
+
+        private void frmNaucneOblasti_Load(object sender, EventArgs e)
+        {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
         }
     }
 }

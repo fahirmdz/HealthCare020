@@ -4,7 +4,7 @@ using HealthCare020.Core.Constants;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Properties;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.Statistics
 {
     public partial class frmPreglediStatistic : StatisticChartForm
     {
