@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AbstractForms;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmZdravstvenaStanja : DisplayDataForm<ZdravstvenoStanjeDto>
     {
@@ -27,7 +27,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         
         private frmZdravstvenaStanja(ZdravstvenoStanjeDto zdravstvenoStanje=null)
         {
-            FormForBackButton = frmPredefinedDataMenu.Instance;
 
             var ID = new DataGridViewTextBoxColumn
             {
@@ -112,5 +111,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
+        private void frmZdravstvenaStanja_Load(object sender, EventArgs e)
+        {
+            FormForBackButton = frmPredefinedDataMenu.Instance;
+        }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using FontAwesome.Sharp;
+using Healthcare020.WinUI.Forms.AdministratorDashboard;
 using Healthcare020.WinUI.Forms.KorisnickiNalog;
+using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
+using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 using HealthCare020.Core.Enums;
 using System;
 using System.Collections.Generic;
@@ -7,10 +10,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard;
-using Healthcare020.WinUI.Forms.RadnikDashboard;
-using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
-using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {
@@ -27,12 +26,25 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             this.BackColor = Color.FromArgb(0, 190, 190);
             this.BorderStyle = BorderStyle.None;
 
+            ArrangeButtons();
+
+            this.Hide();
+        }
+
+        public void ArrangeButtons()
+        {
+            var buttonsFromControls = this.Controls.OfType<IconButton>();
+            foreach (var btn in buttonsFromControls)
+            {
+                Controls.Remove(btn);
+            }
+
             var buttons = new List<IconButton>();
 
             if (Auth.Role != RoleType.Administrator)
             {
                 //Dashboard button
-                var dashboard = new IconButton { Name="btnDashboard", Text="Dashboard", IconChar = IconChar.TachometerAlt};
+                var dashboard = new IconButton { Name = "btnDashboard", Text = "Dashboard", IconChar = IconChar.TachometerAlt };
                 dashboard.Click += dashboardButton_OnClick;
 
                 buttons.Add(dashboard);
@@ -67,9 +79,6 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             }
 
             this.Controls.AddRange(buttons.ToArray());
-            this.Hide();
-
-            
         }
 
         [DefaultValue(false)]
@@ -81,7 +90,6 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 _closeOnAnyActionOutside = value;
             }
         }
-
 
         [Description("Icon button which toggles this dropdown list")]
         public UserMenuButton Toggler
@@ -120,11 +128,13 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             switch (Auth.Role)
             {
                 case RoleType.Administrator:
-                    frmStartMenuAdmin.Instance.OpenAsChildOfControl(Parent);
+                    frmStartMenuAdministrator.Instance.OpenAsChildOfControl(Parent);
                     break;
+
                 case RoleType.Doktor:
                     frmDoktorMainDashboard.Instance.OpenAsChildOfControl(Parent);
                     break;
+
                 case RoleType.RadnikPrijem:
                     frmRadnikPrijemMainDashboard.Instance.OpenAsChildOfControl(Parent);
                     break;
@@ -143,7 +153,5 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 this.BringToFront();
             }
         }
-
-        
     }
 }

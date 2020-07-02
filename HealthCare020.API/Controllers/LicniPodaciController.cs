@@ -19,7 +19,7 @@ namespace HealthCare020.API.Controllers
         {
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Get(LicniPodaciResourceParameters resourceParameters)
         {
             return await base.Get(resourceParameters);
@@ -30,13 +30,13 @@ namespace HealthCare020.API.Controllers
             return await base.GetById(id, EagerLoaded);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Insert(LicniPodaciUpsertDto dtoForCreation)
         {
             return await base.Insert(dtoForCreation);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<LicniPodaciUpsertDto> patchDocument)
         {
             return await base.PartiallyUpdate(id, patchDocument);

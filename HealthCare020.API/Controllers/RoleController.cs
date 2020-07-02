@@ -19,25 +19,25 @@ namespace HealthCare020.API.Controllers
         {
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Insert(RoleUpsertDto dtoForCreation)
         {
             return await base.Insert(dtoForCreation);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Update(int id, RoleUpsertDto dtoForUpdate)
         {
             return await base.Update(id, dtoForUpdate);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<RoleUpsertDto> patchDocument)
         {
             return await base.PartiallyUpdate(id, patchDocument);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Delete(int id)
         {
             return await base.Delete(id);

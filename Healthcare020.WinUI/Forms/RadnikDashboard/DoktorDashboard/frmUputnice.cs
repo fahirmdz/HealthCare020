@@ -66,6 +66,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
             InitializeComponent();
             btnNew.Visible = false;
+            btnBack.Visible = false;
         }
 
         protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

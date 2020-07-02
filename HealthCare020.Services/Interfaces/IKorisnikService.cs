@@ -18,5 +18,6 @@ namespace HealthCare020.Services.Interfaces
 
         Task<ServiceResult> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request);
         Task<ServiceResult> ChangePassword(string currentPassword, string newPassword);
+        Task<ServiceResult> AccountLocked(string username, string password);
     }
 }

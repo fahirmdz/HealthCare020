@@ -9,7 +9,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmNewNaucnaOblast : Form
     {

@@ -13,16 +13,6 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
     {
         private static frmDoktorZahteviZaPregledeDisplay _instance = null;
 
-        public static frmDoktorZahteviZaPregledeDisplay Instance
-        {
-            get
-            {
-                if (_instance == null || _instance.IsDisposed)
-                    _instance = new frmDoktorZahteviZaPregledeDisplay();
-                return _instance;
-            }
-        }
-
         private frmDoktorZahteviZaPregledeDisplay()
         {
             var ID = new DataGridViewTextBoxColumn
@@ -35,8 +25,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
             var Pacijent = new DataGridViewColumn
             {
-                HeaderText = "Pacijent", 
-                Name = "Pacijent", 
+                HeaderText = "Pacijent",
+                Name = "Pacijent",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
@@ -44,19 +34,19 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             {
                 DataPropertyName = nameof(ZahtevZaPregledDtoEL.DatumVreme),
                 HeaderText = "Datum i vreme",
-                Name = "Datum i vreme", 
+                Name = "Datum i vreme",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
             var IsObradjen = new DataGridViewColumn
             {
-                DataPropertyName = nameof(ZahtevZaPregledDtoEL.IsObradjen), 
+                DataPropertyName = nameof(ZahtevZaPregledDtoEL.IsObradjen),
                 HeaderText = "Obrađen",
-                Name=nameof(ZahtevZaPregledDtoEL.IsObradjen),
+                Name = nameof(ZahtevZaPregledDtoEL.IsObradjen),
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Pacijent,IsObradjen, DatumVreme });
+            base.AddColumnsToMainDgrv(new[] { ID, Pacijent, IsObradjen, DatumVreme });
 
             _apiService = new APIService(Routes.ZahteviZaPregledRoute);
             ResourceParameters = new ZahtevZaPregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
@@ -64,6 +54,25 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             InitializeComponent();
 
             btnNew.Visible = false;
+            btnBack.Visible = false;
+        }
+
+        public static frmDoktorZahteviZaPregledeDisplay Instance
+        {
+            get
+            {
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new frmDoktorZahteviZaPregledeDisplay();
+                return _instance;
+            }
+        }
+
+        protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(dgrvMain.CurrentRow?.DataBoundItem is ZahtevZaPregledDtoEL zahtevZaPregled))
+                return;
+
+            dlgForm.ShowDialog(frmZahtevZaPregled.InstanceWithData(zahtevZaPregled));
         }
 
         protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -85,14 +94,6 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             {
                 e.Value = pregled.IsObradjen ? "DA" : "NE";
             }
-        }
-
-        protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!(dgrvMain.CurrentRow?.DataBoundItem is ZahtevZaPregledDtoEL zahtevZaPregled))
-                return;
-
-            dlgForm.ShowDialog(frmZahtevZaPregled.InstanceWithData(zahtevZaPregled));
         }
 
         protected override async void txtSearch_Leave(object sender, EventArgs e)

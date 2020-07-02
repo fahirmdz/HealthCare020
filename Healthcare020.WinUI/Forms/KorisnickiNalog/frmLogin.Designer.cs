@@ -45,6 +45,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlCopyright.SuspendLayout();
@@ -196,14 +197,19 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.lblCopyright.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.lblCopyright.Location = new System.Drawing.Point(398, 1);
             this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(195, 13);
+            this.lblCopyright.Size = new System.Drawing.Size(199, 13);
             this.lblCopyright.TabIndex = 14;
-            this.lblCopyright.Text=Resources.CopyrightText;
+            this.lblCopyright.Text = "© 2020. Fahir Mumdžić. All rights reserved.";
             // 
             // Errors
             // 
             this.Errors.ContainerControl = this;
             this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
+            // 
+            // toolTip
+            // 
+            this.toolTip.BackColor = System.Drawing.Color.Gainsboro;
+            this.toolTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
             // 
             // frmLogin
             // 
@@ -249,5 +255,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         private System.Windows.Forms.Label lblCopyright;
         private Button_WOC btnLogin;
         private System.Windows.Forms.ErrorProvider Errors;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

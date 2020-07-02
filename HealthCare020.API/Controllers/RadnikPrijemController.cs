@@ -19,7 +19,7 @@ namespace HealthCare020.API.Controllers
         {
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Insert(RadnikPrijemUpsertDto dtoForCreation)
         {
             return await base.Insert(dtoForCreation);

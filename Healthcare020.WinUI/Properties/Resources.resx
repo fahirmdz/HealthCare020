@@ -120,6 +120,9 @@
   <data name="AccessDenied" xml:space="preserve">
     <value>Nemate potrebne permisije</value>
   </data>
+  <data name="AccountLockedOut" xml:space="preserve">
+    <value>Korisnički nalog je zaključan, pokušajte ponovo kasnije</value>
+  </data>
   <data name="CopyrightText" xml:space="preserve">
     <value>© 2020. Fahir Mumdžić. All rights reserved.</value>
   </data>
@@ -204,7 +207,7 @@
   <data name="frmRoles" xml:space="preserve">
     <value>Predefinisani podaci - Uloge</value>
   </data>
-  <data name="frmStartMenuAdmin" xml:space="preserve">
+  <data name="frmStartMenuAdministrator" xml:space="preserve">
     <value>Administratorski meni</value>
   </data>
   <data name="frmStatisticsMenu" xml:space="preserve">
@@ -333,6 +336,9 @@
   </data>
   <data name="StatisticCountYAxisTitle" xml:space="preserve">
     <value>Broj obavljenih pregleda</value>
+  </data>
+  <data name="TemporarilyUnvailable" xml:space="preserve">
+    <value>Ova operacije se trenutno ne može izvršiti</value>
   </data>
   <data name="TitlePoseteStatistic" xml:space="preserve">
     <value>Prikaz broja poseta po mesecima</value>

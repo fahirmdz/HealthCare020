@@ -1,11 +1,14 @@
-﻿using Healthcare020.WinUI.Forms.AdminDashboard;
+﻿using Healthcare020.WinUI.Forms.AdministratorDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Properties;
 using HealthCare020.Core.Enums;
 using System;
 using System.Drawing;
+using System.Net;
 using System.Windows.Forms;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Request;
 using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
@@ -16,11 +19,14 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
     public partial class frmLogin : Form
     {
         private static frmLogin _instance;
+        private readonly APIService _apiService;
 
         private frmLogin()
         {
             InitializeComponent();
             txtUsername.Select();
+            toolTip.SetToolTip(cbxRememberMe,"Zapamti podatke i automatski me prijavi pri sledećem pokretanju aplikacije");
+            _apiService=new APIService(Routes.AccountLockedRoute);
         }
 
         public static frmLogin Instance
@@ -60,12 +66,26 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             var username = txtUsername.Text;
             var password = txtPassword.Text;
 
-            if(cbxRememberMe.Checked)
+            var accountLockedResult =
+                await _apiService.Post<bool>(new LoginDto { Username = username, Password = password });
+            if (!accountLockedResult.Succeeded)
+            {
+                if ((int)accountLockedResult.StatusCode == 423)
+                {
+                    Errors.SetError(txtUsername, Resources.AccountLockedOut);
+                    return;
+                }
+            }
+
+            if (cbxRememberMe.Checked)
             {
                 var key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Healthcare020");
-                key.SetValue("CurrentUsername", username.Protect());
-                key.SetValue("CurrentPassword", password.Protect());
-                key.Close();
+                if(key!=null)
+                {
+                    key.SetValue("CurrentUsername", username.Protect());
+                    key.SetValue("CurrentPassword", password.Protect());
+                    key.Close();
+                }
             }
 
             if (await Auth.AuthenticateWithPassword(username, password))
@@ -75,7 +95,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 switch (Auth.Role)
                 {
                     case RoleType.Administrator:
-                        formToOpen = frmStartMenuAdmin.Instance;
+                        formToOpen = frmStartMenuAdministrator.Instance;
                         break;
                     case RoleType.Doktor:
                         formToOpen = frmDoktorMainDashboard.Instance;
@@ -94,6 +114,8 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
                 if (formToOpen == null)
                     dlgError.ShowDialog("Molimo pokušajte kasnije");
+
+                MainForm.Instance.ReloadUserDropdownMenu();
 
                 formToOpen.OpenAsChildOfControl(Parent);
                 this.Close();

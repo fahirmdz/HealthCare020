@@ -79,5 +79,14 @@ namespace Healthcare020.WinUI.Properties {
                 return ((string)(this["RegistryKey"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Healthcare020_LoggerRule")]
+        public string Healthcare020_Logger {
+            get {
+                return ((string)(this["Healthcare020_Logger"]));
+            }
+        }
     }
 }

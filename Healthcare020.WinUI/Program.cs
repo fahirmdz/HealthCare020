@@ -1,55 +1,19 @@
-﻿using System;
-using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Healthcare020.WinUI.Exceptions;
+﻿using Healthcare020.WinUI.Exceptions;
 using Healthcare020.WinUI.Forms;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using Microsoft.Win32;
+using System;
+using System.Globalization;
+using System.Threading;
+using System.Windows.Forms;
+using NLog;
 
 namespace Healthcare020.WinUI
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main()
-        {
-            var culture = CultureInfo.GetCultureInfo("bs-Latn-BA");
-
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            CultureInfo.DefaultThreadCurrentUICulture = culture;
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            //Add handler for UI thread exception
-            Application.ThreadException+=UIThreadException;
-
-            //Force all WinForms errors to go through handler
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-
-            //This handler is for catching non-UI thread exception
-            AppDomain.CurrentDomain.UnhandledException+=CurrentDomain_UnhandledException;
-
-            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey))
-            {
-                if (reg != null)
-                {
-                    Auth.AuthenticateWithPassword(reg.GetValue(Resources.RegistryKeyValueUsername).ToString().Unprotect(),
-                        reg.GetValue(Resources.RegistryKeyValuePassword).ToString().Unprotect()).Wait();
-                   reg.Close();
-                }
-            }
-
-            Application.Run(MainForm.Instance);
-        }
-
         private static void CurrentDomain_UnhandledException(Object sender, UnhandledExceptionEventArgs e)
         {
             try
@@ -79,6 +43,43 @@ namespace Healthcare020.WinUI
             }
 
             // It should terminate our main thread so Application.Exit() is unnecessary here
+        }
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        private static void Main()
+        {
+            var culture = CultureInfo.GetCultureInfo("bs-Latn-BA");
+
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            //Add handler for UI thread exception
+            Application.ThreadException += UIThreadException;
+
+            //Force all WinForms errors to go through handler
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+            //This handler is for catching non-UI thread exception
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey))
+            {
+                if (reg != null)
+                {
+                    Auth.AuthenticateWithPassword(reg.GetValue(Resources.RegistryKeyValueUsername)?.ToString().Unprotect() ?? string.Empty,
+                        reg.GetValue(Resources.RegistryKeyValuePassword)?.ToString().Unprotect() ?? string.Empty).Wait();
+                    reg.Close();
+                }
+            }
+           
+
+            Application.Run(MainForm.Instance);
         }
 
         private static void UIThreadException(object sender, ThreadExceptionEventArgs t)

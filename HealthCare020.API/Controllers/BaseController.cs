@@ -50,7 +50,7 @@ namespace HealthCare020.API.Controllers
 
         //Last MonthsCount months for entities with DateTime property
         [HttpGet("count")]
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public async Task<IActionResult> Count(int MonthsCount = 0) => Ok(await _service.Count(MonthsCount));
 
         protected IActionResult WithStatusCode(HttpStatusCode statusCode, string message = "")
@@ -66,8 +66,10 @@ namespace HealthCare020.API.Controllers
                 case HttpStatusCode.Unauthorized:
                     return Unauthorized();
 
-                default:
+               case HttpStatusCode.BadRequest:
                     return BadRequest(message);
+               default:
+                   return StatusCode((int) statusCode);
             }
         }
 

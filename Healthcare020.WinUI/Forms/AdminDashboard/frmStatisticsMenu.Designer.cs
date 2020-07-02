@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI.Forms.AdminDashboard
+﻿namespace Healthcare020.WinUI.Forms.AdministratorDashboard
 {
     partial class frmStatisticsMenu
     {

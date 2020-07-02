@@ -8,7 +8,7 @@ using HealthCare020.Core.Request;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Models;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmNewZdravstvenoStanje : Form
     {

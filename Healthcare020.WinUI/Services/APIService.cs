@@ -1,11 +1,12 @@
 ﻿using Flurl.Http;
-using Flurl.Http.Content;
 using Healthcare020.WinUI.Exceptions;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Properties;
 using HealthCare020.Core.ResponseModels;
 using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCare020.Core.Models;
-using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Services
 {
@@ -22,6 +21,7 @@ namespace Healthcare020.WinUI.Services
     {
         private string BaseUrl;
         private IFlurlRequest request;
+        private static Logger logger = LogManager.GetLogger(Settings.Default.Healthcare020_Logger);
 
         /// <summary>
         /// Create new API service with specific route
@@ -56,22 +56,31 @@ namespace Healthcare020.WinUI.Services
 
         public async Task<APIServiceResult<List<int>>> Count(int MonthsCount = 0)
         {
-            if (!request.Url.Path.Contains("count"))
-                request.Url.AppendPathSegment("count");
-
-            var response = await request.SetQueryParam("MonthsCount", MonthsCount).GetAsync();
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
             {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
+                if (!request.Url.Path.Contains("count"))
+                    request.Url.AppendPathSegment("count");
 
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+                var response = await request.SetQueryParam("MonthsCount", MonthsCount).GetAsync();
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
 
-                return APIServiceResult<List<int>>.WithStatusCode(response.StatusCode);
+                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                    return APIServiceResult<List<int>>.WithStatusCode(response.StatusCode);
+                }
+
+                return APIServiceResult<List<int>>.OK(await response.Content.ReadAsAsync<List<int>>());
             }
-
-            return APIServiceResult<List<int>>.OK(await response.Content.ReadAsAsync<List<int>>());
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<List<int>>.Exception();
+            }
         }
 
         /// <summary>
@@ -82,28 +91,37 @@ namespace Healthcare020.WinUI.Services
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
         public async Task<APIServiceResult<T>> Delete<T>(int id, string pathToAppend = "")
         {
-            request.Url.AppendPathSegment(id);
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            try
             {
-                request.Url.AppendPathSegment(pathToAppend);
-            }
+                request.Url.AppendPathSegment(id);
+                if (!string.IsNullOrWhiteSpace(pathToAppend))
+                {
+                    request.Url.AppendPathSegment(pathToAppend);
+                }
 
-            var response = await request.DeleteAsync();
-            RevertToBaseRequest();
-            if (response.StatusCode != HttpStatusCode.OK)
+                var response = await request.DeleteAsync();
+                RevertToBaseRequest();
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                    return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+                }
+
+                var result = await response.Content?.ReadAsAsync<T>();
+
+                return result != null ? APIServiceResult<T>.OK(result) : APIServiceResult<T>.NoContent();
+            }
+            catch (Exception ex)
             {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-
-                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<T>.Exception();
             }
-
-            var result = await response.Content?.ReadAsAsync<T>();
-
-            return result != null ? APIServiceResult<T>.OK(result) : APIServiceResult<T>.NoContent();
         }
 
         /// <summary>
@@ -115,83 +133,100 @@ namespace Healthcare020.WinUI.Services
         /// <returns></returns>
         public async Task<APIServiceResult<List<T>>> Get<T>(object resourceParameters = null, string pathToAppend = "")
         {
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            try
             {
-                request.Url.AppendPathSegment(pathToAppend);
+                if (!string.IsNullOrWhiteSpace(pathToAppend))
+                {
+                    request.Url.AppendPathSegment(pathToAppend);
+                }
+
+                var response = await request.SetQueryParams(resourceParameters).GetAsync();
+                RevertToBaseRequest(resourceParameters);
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                    return APIServiceResult<List<T>>.WithStatusCode(response.StatusCode);
+                }
+
+                var headers = response.Headers;
+
+                var result = await response.Content.ReadAsAsync<List<T>>();
+
+                if (response.StatusCode == HttpStatusCode.OK && result == null)
+                    return APIServiceResult<List<T>>.OK();
+
+                var xpaginationHeader = headers.FirstOrDefault(x => x.Key == "X-Pagination").Value?.FirstOrDefault();
+
+                PaginationMetadata paginationMetadata = null;
+
+                if (!string.IsNullOrWhiteSpace(xpaginationHeader))
+                    paginationMetadata = JsonConvert.DeserializeObject<PaginationMetadata>(xpaginationHeader);
+                {
+                }
+
+                return new APIServiceResult<List<T>>
+                {
+                    PaginationMetadata = paginationMetadata ?? new PaginationMetadata(),
+                    Data = result,
+                    HasData = result != null
+                };
             }
-
-            var response = await request.SetQueryParams(resourceParameters).GetAsync();
-            RevertToBaseRequest(resourceParameters);
-
-            if (response.StatusCode != HttpStatusCode.OK)
+            catch (Exception ex)
             {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-
-                return APIServiceResult<List<T>>.WithStatusCode(response.StatusCode);
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<List<T>>.Exception();
             }
-
-
-            var headers = response.Headers;
-
-            var result = await response.Content.ReadAsAsync<List<T>>();
-
-            if(response.StatusCode==HttpStatusCode.OK && result==null)
-                return APIServiceResult<List<T>>.OK();
-
-            var xpaginationHeader = headers.FirstOrDefault(x => x.Key == "X-Pagination").Value?.FirstOrDefault();
-
-            PaginationMetadata paginationMetadata = null;
-
-            if (!string.IsNullOrWhiteSpace(xpaginationHeader))
-                paginationMetadata = JsonConvert.DeserializeObject<PaginationMetadata>(xpaginationHeader);
-            {
-            }
-
-            return new APIServiceResult<List<T>>
-            {
-                PaginationMetadata = paginationMetadata ?? new PaginationMetadata(),
-                Data = result,
-                HasData = result!=null
-            };
         }
 
         public async Task<APIServiceResult<T>> GetById<T>(int id, string pathToAppend = "", bool eagerLoaded = false)
         {
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            try
             {
-                request.Url.AppendPathSegment(pathToAppend);
-            }
+                if (!string.IsNullOrWhiteSpace(pathToAppend))
+                {
+                    request.Url.AppendPathSegment(pathToAppend);
+                }
 
-            if (eagerLoaded)
+                if (eagerLoaded)
+                {
+                    request.SetQueryParam("eagerLoaded", "true");
+                }
+
+                HttpResponseMessage response = null;
+
+                request.Url.AppendPathSegment(id.ToString());
+                response = await request.GetAsync();
+
+                RevertToBaseRequest();
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                    return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+                }
+
+                var result = await response.Content.ReadAsAsync<T>();
+
+                return APIServiceResult<T>.OK(result);
+            }
+            catch (Exception ex)
             {
-                request.SetQueryParam("eagerLoaded", "true");
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<T>.Exception();
             }
-
-            HttpResponseMessage response = null;
-
-            request.Url.AppendPathSegment(id.ToString());
-            response = await request.GetAsync();
-
-            RevertToBaseRequest();
-
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-
-                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
-            }
-
-            var result = await response.Content.ReadAsAsync<T>();
-
-            return APIServiceResult<T>.OK(result);
         }
 
         /// <summary>
@@ -203,27 +238,36 @@ namespace Healthcare020.WinUI.Services
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
         public async Task<APIServiceResult<T>> PartiallyUpdate<T>(int id, object patchDocument, string pathToAppend = "")
         {
-            request.Url.AppendPathSegment(id);
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
+            try
             {
-                request.Url.AppendPathSegment(pathToAppend);
+                request.Url.AppendPathSegment(id);
+                if (!string.IsNullOrWhiteSpace(pathToAppend))
+                {
+                    request.Url.AppendPathSegment(pathToAppend);
+                }
+                var response = await request.PatchJsonAsync(patchDocument);
+                RevertToBaseRequest();
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                    return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+                }
+
+                var result = await response.Content.ReadAsAsync<T>();
+
+                return APIServiceResult<T>.OK(result);
             }
-            var response = await request.PatchJsonAsync(patchDocument);
-            RevertToBaseRequest();
-            if (response.StatusCode != HttpStatusCode.OK)
+            catch (Exception ex)
             {
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                    dlgError.ShowDialog(Properties.Resources.AccessDenied);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                    dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-
-                return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<T>.Exception();
             }
-
-            var result = await response.Content.ReadAsAsync<T>();
-
-            return APIServiceResult<T>.OK(result);
         }
 
         /// <summary>
@@ -232,16 +276,17 @@ namespace Healthcare020.WinUI.Services
         /// <typeparam name="T">Type of return data</typeparam>
         /// <param name="dtoForCreation">Data Transfer Object for creating new entity</param>
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
-        public async Task<APIServiceResult<T>> Post<T>(object dtoForCreation, bool ReturnData=false, string pathToAppend = "")
+        public async Task<APIServiceResult<T>> Post<T>(object dtoForCreation, bool ReturnData = false, string pathToAppend = "")
         {
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
-            {
-                request.Url.AppendPathSegment(pathToAppend);
-            }
-
-            HttpResponseMessage response = null;
             try
             {
+                if (!string.IsNullOrWhiteSpace(pathToAppend))
+                {
+                    request.Url.AppendPathSegment(pathToAppend);
+                }
+
+                HttpResponseMessage response = null;
+
                 response = await request.PostJsonAsync(dtoForCreation);
                 RevertToBaseRequest();
 
@@ -251,23 +296,25 @@ namespace Healthcare020.WinUI.Services
                         dlgError.ShowDialog(Properties.Resources.AccessDenied);
                     else if (response.StatusCode == HttpStatusCode.BadRequest)
                         dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
-                    else if((int)response.StatusCode==422)
+                    else if ((int)response.StatusCode == 422)
                         dlgError.ShowDialog(Resources.InvalidInputData);
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
                 var headers = response.Headers;
 
-                if(ReturnData)
+                if (ReturnData)
                 {
                     var result = await response.Content.ReadAsAsync<T>();
                     return APIServiceResult<T>.OK(result);
                 }
                 return APIServiceResult<T>.OK();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return APIServiceResult<T>.WithStatusCode(response?.StatusCode ?? HttpStatusCode.InternalServerError);
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<T>.Exception();
             }
         }
 
@@ -280,15 +327,15 @@ namespace Healthcare020.WinUI.Services
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
         public async Task<APIServiceResult<T>> Update<T>(int id, object dtoForUpdate, string pathToAppend = "")
         {
-            request.Url.AppendPathSegment(id);
-            if (!string.IsNullOrWhiteSpace(pathToAppend))
-            {
-                request.Url.AppendPathSegment(pathToAppend);
-            }
-            HttpResponseMessage response = null;
-
             try
             {
+                request.Url.AppendPathSegment(id);
+                if (!string.IsNullOrWhiteSpace(pathToAppend))
+                {
+                    request.Url.AppendPathSegment(pathToAppend);
+                }
+                HttpResponseMessage response = null;
+
                 response = await request.PutJsonAsync(dtoForUpdate);
                 RevertToBaseRequest();
 
@@ -310,8 +357,9 @@ namespace Healthcare020.WinUI.Services
             }
             catch (Exception ex)
             {
-                dlgError.ShowDialog();
-                return APIServiceResult<T>.WithStatusCode(response?.StatusCode ?? HttpStatusCode.InternalServerError);
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<T>.Exception();
             }
         }
 

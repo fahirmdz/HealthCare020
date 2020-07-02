@@ -4,7 +4,7 @@ namespace HealthCare020.Core.Enums
 {
     public enum RoleType
     {
-        [Description("Admin")]
+        [Description("Administrator")]
         Administrator=1, //Numbering based on unique identifier from db
         [Description("Doktor")]
         Doktor,
@@ -34,7 +34,7 @@ namespace HealthCare020.Core.Enums
             switch (role)
             {
                 case RoleType.Administrator:
-                    return "Admin";
+                    return "Administrator";
                 case RoleType.MedicinskiTehnicar:
                     return "Medicinski tehničar";
                 case RoleType.RadnikPrijem:

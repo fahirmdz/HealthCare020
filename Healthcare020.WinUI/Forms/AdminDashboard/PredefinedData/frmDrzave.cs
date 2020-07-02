@@ -10,11 +10,10 @@ using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmDrzave : DisplayDataForm<DrzavaDto>
     {
-        public Control ParentControl { get; set; }
         private static frmDrzave _instance;
 
         public static frmDrzave Instance
@@ -30,7 +29,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmDrzave() : base()
         {
-            FormForBackButton = frmPredefinedDataMenu.Instance;
             var ID = new DataGridViewTextBoxColumn { DataPropertyName = nameof(DrzavaDto.Id), HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
 
             var Naziv = new DataGridViewColumn { DataPropertyName = nameof(DrzavaDto.Naziv), HeaderText = "Naziv", Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
@@ -63,9 +61,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             InitializeComponent();
         }
 
-        private async void frmDrzave_Load(object sender, EventArgs e)
+        private  void frmDrzave_Load(object sender, EventArgs e)
         {
             DisplayDataForm_Load(sender, e);
+            FormForBackButton = frmPredefinedDataMenu.Instance;
         }
 
         protected override async void txtSearch_Leave(object sender, EventArgs e)

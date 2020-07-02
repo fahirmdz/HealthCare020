@@ -25,31 +25,31 @@ namespace HealthCare020.API.Controllers
             _korisnikService = _crudService as IKorisnikService;
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Insert(KorisnickiNalogUpsertDto dtoForCreation)
         {
             return await base.Insert(dtoForCreation);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Update(int id, KorisnickiNalogUpsertDto dtoForUpdate)
         {
             return await base.Update(id, dtoForUpdate);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Delete(int id)
         {
             return await base.Delete(id);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<KorisnickiNalogUpsertDto> patchDocument)
         {
             return await base.PartiallyUpdate(id, patchDocument);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         [HttpPut("{id}/lock")]
         public async Task<IActionResult> Lock(int id, KorisnickiNalogLockUpsertRequest request)
         {
@@ -58,7 +58,7 @@ namespace HealthCare020.API.Controllers
             return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         [HttpDelete("{id}/lock")]
         public async Task<IActionResult> Lock(int id)
         {
@@ -67,7 +67,7 @@ namespace HealthCare020.API.Controllers
             return !result.Succeeded ? WithStatusCode(result.StatusCode, result.Message) : Ok(result.Data);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         [HttpPut("{id}/roles")]
         public async Task<IActionResult> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request)
         {
@@ -81,7 +81,7 @@ namespace HealthCare020.API.Controllers
             return Ok(result.Data);
         }
 
-        [Authorize(AuthorizationPolicies.AdminPolicy)]
+        [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         [HttpDelete("{id}/roles")]
         public async Task<IActionResult> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request)
         {
@@ -106,6 +106,15 @@ namespace HealthCare020.API.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpPost("zakljucan")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AccountLocked(LoginDto loginData)
+        {
+            var result = await _korisnikService.AccountLocked(loginData.Username, loginData.Password);
+
+            return WithStatusCode(result.StatusCode, result.Message);
         }
     }
 }

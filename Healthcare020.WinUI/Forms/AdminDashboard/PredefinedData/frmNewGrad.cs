@@ -9,7 +9,7 @@ using HealthCare020.Core.ResourceParameters;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
 {
     public partial class frmNewGrad : Form
     {

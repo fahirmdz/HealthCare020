@@ -4,10 +4,10 @@ using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard.Statistics;
+using Healthcare020.WinUI.Forms.AdministratorDashboard.Statistics;
 using Healthcare020.WinUI.Helpers;
 
-namespace Healthcare020.WinUI.Forms.AdminDashboard
+namespace Healthcare020.WinUI.Forms.AdministratorDashboard
 {
     public partial class frmStatisticsMenu : Form
     {
