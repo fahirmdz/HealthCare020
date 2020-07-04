@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
+             xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
+             xmlns:triggers="clr-namespace:Healthcare020.Mobile.Triggers;assembly=Healthcare020.Mobile"
+             mc:Ignorable="d"
+             x:Class="Healthcare020.Mobile.Views.WelcomePage">
+
+    <ContentPage.BindingContext>
+        <viewModels:WelcomeViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <!--<Image>
+                    <Image.Source>
+                        <FontImageSource
+            FontFamily="{StaticResource FontAwesomeRegular}"
+            Glyph="{x:Static local:IconFont.Stethoscope}"
+            Size="60"
+            Color="#00bebe" />
+                    </Image.Source>
+                </Image>-->
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="WhiteSmoke">
+
+            <Frame  HorizontalOptions="Fill" VerticalOptions="Start" BackgroundColor="WhiteSmoke" BorderColor="Transparent">
+                <Image HorizontalOptions="Center" VerticalOptions="Fill" x:Name="LogoImage"></Image>
+            </Frame>
+            <CarouselView x:Name="CarouselImages"  HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                          IsScrollAnimated="true" IsSwipeEnabled="True" ItemsSource="{Binding ImageUrls}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Aspect="AspectFill" Source="{Binding item}" 
+                                    HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <StackLayout Margin="0,30" HorizontalOptions="Fill">
+                <Button CornerRadius="20" x:Name="LoginButton"
+                        BackgroundColor="#00bebe" 
+                        HorizontalOptions="Center" 
+                        Text="Log In" 
+                        TextColor="#31373d"
+                   HeightRequest="40"
+                        WidthRequest="300"
+                        Font="12" 
+                        FontFamily="Arial"
+                    Command="{Binding LoginPageCommand}">
+                </Button>
+
+                <Button CornerRadius="20" x:Name="RegisterButton" 
+                        HorizontalOptions="Center" 
+                        Text="Register" 
+                        TextColor="#31373d"
+                        HeightRequest="40"
+                        WidthRequest="300" 
+                        Font="12"
+                        Command="{Binding RegisterPageCommand}">
+                </Button>
+
+                <Button CornerRadius="20" x:Name="PosetaButton" 
+                        BackgroundColor="#496075" 
+                        HorizontalOptions="Center"  
+                        Text="Poseta"
+                        TextColor="WhiteSmoke"
+                        HeightRequest="40" 
+                        WidthRequest="300"
+                        Font="12"
+                        Command="{Binding PosetaPageCommand}">
+                </Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

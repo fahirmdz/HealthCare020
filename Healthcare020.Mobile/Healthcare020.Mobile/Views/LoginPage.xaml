@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
+             mc:Ignorable="d"
+             x:Class="Healthcare020.Mobile.Views.LoginPage">
+
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand"   BackgroundColor="WhiteSmoke">
+            <StackLayout Padding="0" Margin="0">
+                <Grid HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Frame BackgroundColor="#00bebe" Grid.Row="0">
+                    </Frame>
+                    <Frame BackgroundColor="WhiteSmoke" Grid.Row="1">
+                    </Frame>
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Margin="45,50,45,70" VerticalOptions="Center">
+                <Frame BackgroundColor="White"
+                           HasShadow="False"
+                           VerticalOptions="FillAndExpand"
+                           Margin="0"
+                           Padding="0"
+                           HorizontalOptions="FillAndExpand">
+
+                    <StackLayout Padding="50,20" Spacing="20" VerticalOptions="FillAndExpand" HorizontalOptions="Center">
+                        <Frame HasShadow="False" Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+                            <Image HorizontalOptions="Center" Aspect="AspectFit">
+                                <Image.Source>
+                                    <OnPlatform x:TypeArguments="ImageSource">
+                                        <On Platform="Android">Assets/healthcare020_200x200.png</On>
+                                        <On Platform="UWP">Assets/healthcare020_200x200.png</On>
+                                    </OnPlatform>
+                                    
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                        <Entry Placeholder="Korisničko ime" FontSize="18" HeightRequest="50" />
+                        <Entry Placeholder="Lozinka" HeightRequest="50" FontSize="18" />
+
+                        <!--REMEMBER ME-->
+                        <Grid VerticalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Switch Grid.Row="0" Grid.Column="0"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Start"
+                                    x:Name="RememberMe"
+                                    Toggled="RememberMe_OnToggled"/>
+                            <Label VerticalTextAlignment="Center" Grid.Column="1" Text="Zapamti me" TextColor="#666769" FontSize="17"></Label>
+                        </Grid>
+
+                        <!--LOGIN BUTTON-->
+                        <Frame HasShadow="False" Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+                            <Button Text="Log in" BackgroundColor="#00bebe"
+                                        TextColor="WhiteSmoke"
+                                        HeightRequest="40"
+                                        CornerRadius="20"
+                                        FontSize="12"
+                                        Command="{Binding LoginCommand}" />
+                        </Frame>
+
+                        <Label Text="Forgotten password?" TextColor="#496075" HorizontalOptions="Center" FontSize="13" />
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <BoxView BackgroundColor="#555" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="0.2" />
+                            <Label Text="OR" TextColor="#555" HorizontalOptions="Center"  VerticalOptions="Center" FontSize="Medium" />
+                            <BoxView BackgroundColor="#555" HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="0.2" />
+                        </StackLayout>
+                        <Frame HasShadow="False" Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+                            <Button CornerRadius="20" x:Name="RegisterButton"
+                                    HorizontalOptions="Center"
+                                    Text="Register"
+                                    TextColor="#31373d"
+                                    HeightRequest="40"
+                                    WidthRequest="300"
+                                    Font="12">
+                            </Button>
+                        </Frame>
+                    </StackLayout>
+                    <!--<Button CornerRadius="25" x:Name="PosetaButton"
+                                        BackgroundColor="#496075"
+                                        HorizontalOptions="Center"
+                                        Text="Poseta"
+                                        TextColor="WhiteSmoke"
+                                        HeightRequest="50"
+                                        WidthRequest="300"
+                                        Font="14"
+                                        Command="{Binding PosetaPageCommand}">
+                                </Button>-->
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
