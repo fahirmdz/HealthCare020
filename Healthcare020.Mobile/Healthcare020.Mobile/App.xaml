@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:themes = "clr-namespace:Healthcare020.Mobile.Themes;assembly=Healthcare020.Mobile"
+             x:Class="Healthcare020.Mobile.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:LightTheme />
+            </ResourceDictionary.MergedDictionaries >
+            <!--Global Styles-->
+            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+
+
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeBrands">
+                <On Platform="Android" 
+                    Value="FontAwesome5Brands.otf#Regular" />
+                <On Platform="iOS" 
+                    Value="FontAwesome5Brands-Regular" />
+                <On Platform="UWP" 
+                    Value="/Assets/fa-solid-900.ttf" />
+            </OnPlatform> 
+    
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeSolid"> 
+                <On Platform="Android" 
+                    Value="FontAwesome5Solid.otf#Regular" /> 
+                <On Platform="iOS" 
+                    Value="FontAwesome5Free-Solid" /> 
+                <On Platform="UWP" 
+                    Value="/Assets/fa-solid-900.ttf" /> 
+            </OnPlatform> 
+    
+            <OnPlatform x:TypeArguments="x:String" 
+                        x:Key="FontAwesomeRegular">
+                <On Platform="Android" 
+                    Value="FontAwesome5Regular.otf#Regular" /> 
+                <On Platform="iOS" 
+                    Value="FontAwesome5Free-Regular" /> 
+                <On Platform="UWP" 
+                    Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" /> 
+            </OnPlatform>
+
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>
