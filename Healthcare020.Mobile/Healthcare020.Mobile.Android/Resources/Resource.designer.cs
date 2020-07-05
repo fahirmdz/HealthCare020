@@ -2689,6 +2689,156 @@ namespace Healthcare020.Mobile.Droid
 			global::Syncfusion.XForms.Android.ComboBox.Resource.Styleable.ViewStubCompat_android_id = global::Healthcare020.Mobile.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::Syncfusion.XForms.Android.ComboBox.Resource.Styleable.ViewStubCompat_android_inflatedId = global::Healthcare020.Mobile.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::Syncfusion.XForms.Android.ComboBox.Resource.Styleable.ViewStubCompat_android_layout = global::Healthcare020.Mobile.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::Healthcare020.Mobile.Droid.Resource.Animation.slide_in_right;
+			global::Xamarin.Auth.Resource.Animation.slide_out_left = global::Healthcare020.Mobile.Droid.Resource.Animation.slide_out_left;
+			global::Xamarin.Auth.Resource.Attribute.alpha = global::Healthcare020.Mobile.Droid.Resource.Attribute.alpha;
+			global::Xamarin.Auth.Resource.Attribute.font = global::Healthcare020.Mobile.Droid.Resource.Attribute.font;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderAuthority = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontProviderAuthority;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderCerts = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontProviderCerts;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderFetchStrategy = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontProviderFetchStrategy;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderFetchTimeout = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontProviderFetchTimeout;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderPackage = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontProviderPackage;
+			global::Xamarin.Auth.Resource.Attribute.fontProviderQuery = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontProviderQuery;
+			global::Xamarin.Auth.Resource.Attribute.fontStyle = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontStyle;
+			global::Xamarin.Auth.Resource.Attribute.fontVariationSettings = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontVariationSettings;
+			global::Xamarin.Auth.Resource.Attribute.fontWeight = global::Healthcare020.Mobile.Droid.Resource.Attribute.fontWeight;
+			global::Xamarin.Auth.Resource.Attribute.ttcIndex = global::Healthcare020.Mobile.Droid.Resource.Attribute.ttcIndex;
+			global::Xamarin.Auth.Resource.Color.browser_actions_bg_grey = global::Healthcare020.Mobile.Droid.Resource.Color.browser_actions_bg_grey;
+			global::Xamarin.Auth.Resource.Color.browser_actions_divider_color = global::Healthcare020.Mobile.Droid.Resource.Color.browser_actions_divider_color;
+			global::Xamarin.Auth.Resource.Color.browser_actions_text_color = global::Healthcare020.Mobile.Droid.Resource.Color.browser_actions_text_color;
+			global::Xamarin.Auth.Resource.Color.browser_actions_title_color = global::Healthcare020.Mobile.Droid.Resource.Color.browser_actions_title_color;
+			global::Xamarin.Auth.Resource.Color.notification_action_color_filter = global::Healthcare020.Mobile.Droid.Resource.Color.notification_action_color_filter;
+			global::Xamarin.Auth.Resource.Color.notification_icon_bg_color = global::Healthcare020.Mobile.Droid.Resource.Color.notification_icon_bg_color;
+			global::Xamarin.Auth.Resource.Color.ripple_material_light = global::Healthcare020.Mobile.Droid.Resource.Color.ripple_material_light;
+			global::Xamarin.Auth.Resource.Color.secondary_text_default_material_light = global::Healthcare020.Mobile.Droid.Resource.Color.secondary_text_default_material_light;
+			global::Xamarin.Auth.Resource.Dimension.browser_actions_context_menu_max_width = global::Healthcare020.Mobile.Droid.Resource.Dimension.browser_actions_context_menu_max_width;
+			global::Xamarin.Auth.Resource.Dimension.browser_actions_context_menu_min_padding = global::Healthcare020.Mobile.Droid.Resource.Dimension.browser_actions_context_menu_min_padding;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_inset_horizontal_material = global::Healthcare020.Mobile.Droid.Resource.Dimension.compat_button_inset_horizontal_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_inset_vertical_material = global::Healthcare020.Mobile.Droid.Resource.Dimension.compat_button_inset_vertical_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_padding_horizontal_material = global::Healthcare020.Mobile.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_button_padding_vertical_material = global::Healthcare020.Mobile.Droid.Resource.Dimension.compat_button_padding_vertical_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_control_corner_material = global::Healthcare020.Mobile.Droid.Resource.Dimension.compat_control_corner_material;
+			global::Xamarin.Auth.Resource.Dimension.compat_notification_large_icon_max_height = global::Healthcare020.Mobile.Droid.Resource.Dimension.compat_notification_large_icon_max_height;
+			global::Xamarin.Auth.Resource.Dimension.compat_notification_large_icon_max_width = global::Healthcare020.Mobile.Droid.Resource.Dimension.compat_notification_large_icon_max_width;
+			global::Xamarin.Auth.Resource.Dimension.notification_action_icon_size = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_action_icon_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_action_text_size = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_action_text_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_big_circle_margin = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_big_circle_margin;
+			global::Xamarin.Auth.Resource.Dimension.notification_content_margin_start = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_content_margin_start;
+			global::Xamarin.Auth.Resource.Dimension.notification_large_icon_height = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_large_icon_height;
+			global::Xamarin.Auth.Resource.Dimension.notification_large_icon_width = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_large_icon_width;
+			global::Xamarin.Auth.Resource.Dimension.notification_main_column_padding_top = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_main_column_padding_top;
+			global::Xamarin.Auth.Resource.Dimension.notification_media_narrow_margin = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_media_narrow_margin;
+			global::Xamarin.Auth.Resource.Dimension.notification_right_icon_size = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_right_icon_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_right_side_padding_top = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_right_side_padding_top;
+			global::Xamarin.Auth.Resource.Dimension.notification_small_icon_background_padding = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_small_icon_background_padding;
+			global::Xamarin.Auth.Resource.Dimension.notification_small_icon_size_as_large = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_small_icon_size_as_large;
+			global::Xamarin.Auth.Resource.Dimension.notification_subtext_size = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_subtext_size;
+			global::Xamarin.Auth.Resource.Dimension.notification_top_pad = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_top_pad;
+			global::Xamarin.Auth.Resource.Dimension.notification_top_pad_large_text = global::Healthcare020.Mobile.Droid.Resource.Dimension.notification_top_pad_large_text;
+			global::Xamarin.Auth.Resource.Drawable.ic_arrow_back = global::Healthcare020.Mobile.Droid.Resource.Drawable.ic_arrow_back;
+			global::Xamarin.Auth.Resource.Drawable.notification_action_background = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_action_background;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_bg_low;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low_normal = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_bg_low_normal;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_low_pressed = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_bg_low_pressed;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_normal = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_bg_normal;
+			global::Xamarin.Auth.Resource.Drawable.notification_bg_normal_pressed = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_bg_normal_pressed;
+			global::Xamarin.Auth.Resource.Drawable.notification_icon_background = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_icon_background;
+			global::Xamarin.Auth.Resource.Drawable.notification_template_icon_bg = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_template_icon_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_template_icon_low_bg = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_template_icon_low_bg;
+			global::Xamarin.Auth.Resource.Drawable.notification_tile_bg = global::Healthcare020.Mobile.Droid.Resource.Drawable.notification_tile_bg;
+			global::Xamarin.Auth.Resource.Drawable.notify_panel_notification_icon_bg = global::Healthcare020.Mobile.Droid.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Xamarin.Auth.Resource.Id.action_container = global::Healthcare020.Mobile.Droid.Resource.Id.action_container;
+			global::Xamarin.Auth.Resource.Id.action_divider = global::Healthcare020.Mobile.Droid.Resource.Id.action_divider;
+			global::Xamarin.Auth.Resource.Id.action_image = global::Healthcare020.Mobile.Droid.Resource.Id.action_image;
+			global::Xamarin.Auth.Resource.Id.action_text = global::Healthcare020.Mobile.Droid.Resource.Id.action_text;
+			global::Xamarin.Auth.Resource.Id.actions = global::Healthcare020.Mobile.Droid.Resource.Id.actions;
+			global::Xamarin.Auth.Resource.Id.async = global::Healthcare020.Mobile.Droid.Resource.Id.async;
+			global::Xamarin.Auth.Resource.Id.blocking = global::Healthcare020.Mobile.Droid.Resource.Id.blocking;
+			global::Xamarin.Auth.Resource.Id.browser_actions_header_text = global::Healthcare020.Mobile.Droid.Resource.Id.browser_actions_header_text;
+			global::Xamarin.Auth.Resource.Id.browser_actions_menu_item_icon = global::Healthcare020.Mobile.Droid.Resource.Id.browser_actions_menu_item_icon;
+			global::Xamarin.Auth.Resource.Id.browser_actions_menu_item_text = global::Healthcare020.Mobile.Droid.Resource.Id.browser_actions_menu_item_text;
+			global::Xamarin.Auth.Resource.Id.browser_actions_menu_items = global::Healthcare020.Mobile.Droid.Resource.Id.browser_actions_menu_items;
+			global::Xamarin.Auth.Resource.Id.browser_actions_menu_view = global::Healthcare020.Mobile.Droid.Resource.Id.browser_actions_menu_view;
+			global::Xamarin.Auth.Resource.Id.chronometer = global::Healthcare020.Mobile.Droid.Resource.Id.chronometer;
+			global::Xamarin.Auth.Resource.Id.forever = global::Healthcare020.Mobile.Droid.Resource.Id.forever;
+			global::Xamarin.Auth.Resource.Id.icon = global::Healthcare020.Mobile.Droid.Resource.Id.icon;
+			global::Xamarin.Auth.Resource.Id.icon_group = global::Healthcare020.Mobile.Droid.Resource.Id.icon_group;
+			global::Xamarin.Auth.Resource.Id.info = global::Healthcare020.Mobile.Droid.Resource.Id.info;
+			global::Xamarin.Auth.Resource.Id.italic = global::Healthcare020.Mobile.Droid.Resource.Id.italic;
+			global::Xamarin.Auth.Resource.Id.line1 = global::Healthcare020.Mobile.Droid.Resource.Id.line1;
+			global::Xamarin.Auth.Resource.Id.line3 = global::Healthcare020.Mobile.Droid.Resource.Id.line3;
+			global::Xamarin.Auth.Resource.Id.normal = global::Healthcare020.Mobile.Droid.Resource.Id.normal;
+			global::Xamarin.Auth.Resource.Id.notification_background = global::Healthcare020.Mobile.Droid.Resource.Id.notification_background;
+			global::Xamarin.Auth.Resource.Id.notification_main_column = global::Healthcare020.Mobile.Droid.Resource.Id.notification_main_column;
+			global::Xamarin.Auth.Resource.Id.notification_main_column_container = global::Healthcare020.Mobile.Droid.Resource.Id.notification_main_column_container;
+			global::Xamarin.Auth.Resource.Id.right_icon = global::Healthcare020.Mobile.Droid.Resource.Id.right_icon;
+			global::Xamarin.Auth.Resource.Id.right_side = global::Healthcare020.Mobile.Droid.Resource.Id.right_side;
+			global::Xamarin.Auth.Resource.Id.tag_transition_group = global::Healthcare020.Mobile.Droid.Resource.Id.tag_transition_group;
+			global::Xamarin.Auth.Resource.Id.tag_unhandled_key_event_manager = global::Healthcare020.Mobile.Droid.Resource.Id.tag_unhandled_key_event_manager;
+			global::Xamarin.Auth.Resource.Id.tag_unhandled_key_listeners = global::Healthcare020.Mobile.Droid.Resource.Id.tag_unhandled_key_listeners;
+			global::Xamarin.Auth.Resource.Id.text = global::Healthcare020.Mobile.Droid.Resource.Id.text;
+			global::Xamarin.Auth.Resource.Id.text2 = global::Healthcare020.Mobile.Droid.Resource.Id.text2;
+			global::Xamarin.Auth.Resource.Id.time = global::Healthcare020.Mobile.Droid.Resource.Id.time;
+			global::Xamarin.Auth.Resource.Id.title = global::Healthcare020.Mobile.Droid.Resource.Id.title;
+			global::Xamarin.Auth.Resource.Id.webview = global::Healthcare020.Mobile.Droid.Resource.Id.webview;
+			global::Xamarin.Auth.Resource.Integer.status_bar_notification_info_maxnum = global::Healthcare020.Mobile.Droid.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Xamarin.Auth.Resource.Layout.activity_webview = global::Healthcare020.Mobile.Droid.Resource.Layout.activity_webview;
+			global::Xamarin.Auth.Resource.Layout.browser_actions_context_menu_page = global::Healthcare020.Mobile.Droid.Resource.Layout.browser_actions_context_menu_page;
+			global::Xamarin.Auth.Resource.Layout.browser_actions_context_menu_row = global::Healthcare020.Mobile.Droid.Resource.Layout.browser_actions_context_menu_row;
+			global::Xamarin.Auth.Resource.Layout.notification_action = global::Healthcare020.Mobile.Droid.Resource.Layout.notification_action;
+			global::Xamarin.Auth.Resource.Layout.notification_action_tombstone = global::Healthcare020.Mobile.Droid.Resource.Layout.notification_action_tombstone;
+			global::Xamarin.Auth.Resource.Layout.notification_template_custom_big = global::Healthcare020.Mobile.Droid.Resource.Layout.notification_template_custom_big;
+			global::Xamarin.Auth.Resource.Layout.notification_template_icon_group = global::Healthcare020.Mobile.Droid.Resource.Layout.notification_template_icon_group;
+			global::Xamarin.Auth.Resource.Layout.notification_template_part_chronometer = global::Healthcare020.Mobile.Droid.Resource.Layout.notification_template_part_chronometer;
+			global::Xamarin.Auth.Resource.Layout.notification_template_part_time = global::Healthcare020.Mobile.Droid.Resource.Layout.notification_template_part_time;
+			global::Xamarin.Auth.Resource.String.status_bar_notification_info_overflow = global::Healthcare020.Mobile.Droid.Resource.String.status_bar_notification_info_overflow;
+			global::Xamarin.Auth.Resource.String.title_activity_webview = global::Healthcare020.Mobile.Droid.Resource.String.title_activity_webview;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification = global::Healthcare020.Mobile.Droid.Resource.Style.TextAppearance_Compat_Notification;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Info = global::Healthcare020.Mobile.Droid.Resource.Style.TextAppearance_Compat_Notification_Info;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Line2 = global::Healthcare020.Mobile.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Time = global::Healthcare020.Mobile.Droid.Resource.Style.TextAppearance_Compat_Notification_Time;
+			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification_Title = global::Healthcare020.Mobile.Droid.Resource.Style.TextAppearance_Compat_Notification_Title;
+			global::Xamarin.Auth.Resource.Style.Widget_Compat_NotificationActionContainer = global::Healthcare020.Mobile.Droid.Resource.Style.Widget_Compat_NotificationActionContainer;
+			global::Xamarin.Auth.Resource.Style.Widget_Compat_NotificationActionText = global::Healthcare020.Mobile.Droid.Resource.Style.Widget_Compat_NotificationActionText;
+			global::Xamarin.Auth.Resource.Styleable.ColorStateListItem = global::Healthcare020.Mobile.Droid.Resource.Styleable.ColorStateListItem;
+			global::Xamarin.Auth.Resource.Styleable.ColorStateListItem_alpha = global::Healthcare020.Mobile.Droid.Resource.Styleable.ColorStateListItem_alpha;
+			global::Xamarin.Auth.Resource.Styleable.ColorStateListItem_android_alpha = global::Healthcare020.Mobile.Droid.Resource.Styleable.ColorStateListItem_android_alpha;
+			global::Xamarin.Auth.Resource.Styleable.ColorStateListItem_android_color = global::Healthcare020.Mobile.Droid.Resource.Styleable.ColorStateListItem_android_color;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamily;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderAuthority = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamily_fontProviderAuthority;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderCerts = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamily_fontProviderCerts;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderFetchTimeout = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamily_fontProviderFetchTimeout;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderPackage = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamily_fontProviderPackage;
+			global::Xamarin.Auth.Resource.Styleable.FontFamily_fontProviderQuery = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamily_fontProviderQuery;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_android_font = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_android_font;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_android_fontStyle = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_android_fontVariationSettings = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_android_fontVariationSettings;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_android_fontWeight = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_android_ttcIndex = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_android_ttcIndex;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_font = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_font;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_fontStyle = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_fontVariationSettings = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_fontVariationSettings;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_fontWeight = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_fontWeight;
+			global::Xamarin.Auth.Resource.Styleable.FontFamilyFont_ttcIndex = global::Healthcare020.Mobile.Droid.Resource.Styleable.FontFamilyFont_ttcIndex;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_centerColor = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_centerColor;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_centerX = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_centerX;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_centerY = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_centerY;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_endColor = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_endColor;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_endX = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_endX;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_endY = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_endY;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_gradientRadius = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_gradientRadius;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_startColor = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_startColor;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_startX = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_startX;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_startY = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_startY;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_tileMode = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_tileMode;
+			global::Xamarin.Auth.Resource.Styleable.GradientColor_android_type = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColor_android_type;
+			global::Xamarin.Auth.Resource.Styleable.GradientColorItem = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColorItem;
+			global::Xamarin.Auth.Resource.Styleable.GradientColorItem_android_color = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColorItem_android_color;
+			global::Xamarin.Auth.Resource.Styleable.GradientColorItem_android_offset = global::Healthcare020.Mobile.Droid.Resource.Styleable.GradientColorItem_android_offset;
 			global::Xamarin.Essentials.Resource.Attribute.alpha = global::Healthcare020.Mobile.Droid.Resource.Attribute.alpha;
 			global::Xamarin.Essentials.Resource.Attribute.coordinatorLayoutStyle = global::Healthcare020.Mobile.Droid.Resource.Attribute.coordinatorLayoutStyle;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::Healthcare020.Mobile.Droid.Resource.Attribute.font;
@@ -8113,6 +8263,12 @@ namespace Healthcare020.Mobile.Droid
 			// aapt resource value: 0x7F010024
 			public const int ExitToRight = 2130772004;
 			
+			// aapt resource value: 0x7F010025
+			public const int slide_in_right = 2130772005;
+			
+			// aapt resource value: 0x7F010026
+			public const int slide_out_left = 2130772006;
+			
 			static Animation()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -11192,88 +11348,91 @@ namespace Healthcare020.Mobile.Droid
 			public const int healthcare020_200x200 = 2131165323;
 			
 			// aapt resource value: 0x7F07008C
-			public const int ic_mtrl_chip_checked_black = 2131165324;
+			public const int ic_arrow_back = 2131165324;
 			
 			// aapt resource value: 0x7F07008D
-			public const int ic_mtrl_chip_checked_circle = 2131165325;
+			public const int ic_mtrl_chip_checked_black = 2131165325;
 			
 			// aapt resource value: 0x7F07008E
-			public const int ic_mtrl_chip_close_circle = 2131165326;
-			
-			// aapt resource value: 0x7F070090
-			public const int inputlayout_togglecollapseicon = 2131165328;
-			
-			// aapt resource value: 0x7F070091
-			public const int inputlayout_togglevisibleicon = 2131165329;
+			public const int ic_mtrl_chip_checked_circle = 2131165326;
 			
 			// aapt resource value: 0x7F07008F
-			public const int input_layout_drop_down_icon = 2131165327;
+			public const int ic_mtrl_chip_close_circle = 2131165327;
 			
-			// aapt resource value: 0x7F070093
-			public const int LoginBackground = 2131165331;
+			// aapt resource value: 0x7F070091
+			public const int inputlayout_togglecollapseicon = 2131165329;
 			
 			// aapt resource value: 0x7F070092
-			public const int login_background = 2131165330;
+			public const int inputlayout_togglevisibleicon = 2131165330;
+			
+			// aapt resource value: 0x7F070090
+			public const int input_layout_drop_down_icon = 2131165328;
 			
 			// aapt resource value: 0x7F070094
-			public const int mtrl_snackbar_background = 2131165332;
+			public const int LoginBackground = 2131165332;
+			
+			// aapt resource value: 0x7F070093
+			public const int login_background = 2131165331;
 			
 			// aapt resource value: 0x7F070095
-			public const int mtrl_tabs_default_indicator = 2131165333;
+			public const int mtrl_snackbar_background = 2131165333;
 			
 			// aapt resource value: 0x7F070096
-			public const int navigation_empty_icon = 2131165334;
+			public const int mtrl_tabs_default_indicator = 2131165334;
 			
 			// aapt resource value: 0x7F070097
-			public const int notification_action_background = 2131165335;
+			public const int navigation_empty_icon = 2131165335;
 			
 			// aapt resource value: 0x7F070098
-			public const int notification_bg = 2131165336;
+			public const int notification_action_background = 2131165336;
 			
 			// aapt resource value: 0x7F070099
-			public const int notification_bg_low = 2131165337;
+			public const int notification_bg = 2131165337;
 			
 			// aapt resource value: 0x7F07009A
-			public const int notification_bg_low_normal = 2131165338;
+			public const int notification_bg_low = 2131165338;
 			
 			// aapt resource value: 0x7F07009B
-			public const int notification_bg_low_pressed = 2131165339;
+			public const int notification_bg_low_normal = 2131165339;
 			
 			// aapt resource value: 0x7F07009C
-			public const int notification_bg_normal = 2131165340;
+			public const int notification_bg_low_pressed = 2131165340;
 			
 			// aapt resource value: 0x7F07009D
-			public const int notification_bg_normal_pressed = 2131165341;
+			public const int notification_bg_normal = 2131165341;
 			
 			// aapt resource value: 0x7F07009E
-			public const int notification_icon_background = 2131165342;
+			public const int notification_bg_normal_pressed = 2131165342;
 			
 			// aapt resource value: 0x7F07009F
-			public const int notification_template_icon_bg = 2131165343;
+			public const int notification_icon_background = 2131165343;
 			
 			// aapt resource value: 0x7F0700A0
-			public const int notification_template_icon_low_bg = 2131165344;
+			public const int notification_template_icon_bg = 2131165344;
 			
 			// aapt resource value: 0x7F0700A1
-			public const int notification_tile_bg = 2131165345;
+			public const int notification_template_icon_low_bg = 2131165345;
 			
 			// aapt resource value: 0x7F0700A2
-			public const int notify_panel_notification_icon_bg = 2131165346;
+			public const int notification_tile_bg = 2131165346;
 			
 			// aapt resource value: 0x7F0700A3
-			public const int tooltip_frame_dark = 2131165347;
+			public const int notify_panel_notification_icon_bg = 2131165347;
 			
 			// aapt resource value: 0x7F0700A4
-			public const int tooltip_frame_light = 2131165348;
+			public const int tooltip_frame_dark = 2131165348;
 			
 			// aapt resource value: 0x7F0700A5
-			public const int welcome_poseta = 2131165349;
+			public const int tooltip_frame_light = 2131165349;
 			
 			// aapt resource value: 0x7F0700A6
-			public const int welcome_stetoscope = 2131165350;
+			public const int welcome_poseta = 2131165350;
 			
 			// aapt resource value: 0x7F0700A7
-			public const int xamarin_logo = 2131165351;
+			public const int welcome_stetoscope = 2131165351;
+			
+			// aapt resource value: 0x7F0700A8
+			public const int xamarin_logo = 2131165352;
 			
 			static Drawable()
 			{
@@ -11922,10 +12081,13 @@ namespace Healthcare020.Mobile.Droid
 			public const int visible = 2131230930;
 			
 			// aapt resource value: 0x7F0800D3
-			public const int withText = 2131230931;
+			public const int webview = 2131230931;
 			
 			// aapt resource value: 0x7F0800D4
-			public const int wrap_content = 2131230932;
+			public const int withText = 2131230932;
+			
+			// aapt resource value: 0x7F0800D5
+			public const int wrap_content = 2131230933;
 			
 			static Id()
 			{
@@ -12123,142 +12285,145 @@ namespace Healthcare020.Mobile.Droid
 			public const int abc_tooltip = 2131427355;
 			
 			// aapt resource value: 0x7F0B001C
-			public const int BottomTabLayout = 2131427356;
+			public const int activity_webview = 2131427356;
 			
 			// aapt resource value: 0x7F0B001D
-			public const int browser_actions_context_menu_page = 2131427357;
+			public const int BottomTabLayout = 2131427357;
 			
 			// aapt resource value: 0x7F0B001E
-			public const int browser_actions_context_menu_row = 2131427358;
+			public const int browser_actions_context_menu_page = 2131427358;
 			
 			// aapt resource value: 0x7F0B001F
-			public const int CustomizedImageView = 2131427359;
+			public const int browser_actions_context_menu_row = 2131427359;
 			
 			// aapt resource value: 0x7F0B0020
-			public const int CustomizedView = 2131427360;
+			public const int CustomizedImageView = 2131427360;
 			
 			// aapt resource value: 0x7F0B0021
-			public const int design_bottom_navigation_item = 2131427361;
+			public const int CustomizedView = 2131427361;
 			
 			// aapt resource value: 0x7F0B0022
-			public const int design_bottom_sheet_dialog = 2131427362;
+			public const int design_bottom_navigation_item = 2131427362;
 			
 			// aapt resource value: 0x7F0B0023
-			public const int design_layout_snackbar = 2131427363;
+			public const int design_bottom_sheet_dialog = 2131427363;
 			
 			// aapt resource value: 0x7F0B0024
-			public const int design_layout_snackbar_include = 2131427364;
+			public const int design_layout_snackbar = 2131427364;
 			
 			// aapt resource value: 0x7F0B0025
-			public const int design_layout_tab_icon = 2131427365;
+			public const int design_layout_snackbar_include = 2131427365;
 			
 			// aapt resource value: 0x7F0B0026
-			public const int design_layout_tab_text = 2131427366;
+			public const int design_layout_tab_icon = 2131427366;
 			
 			// aapt resource value: 0x7F0B0027
-			public const int design_menu_item_action_area = 2131427367;
+			public const int design_layout_tab_text = 2131427367;
 			
 			// aapt resource value: 0x7F0B0028
-			public const int design_navigation_item = 2131427368;
+			public const int design_menu_item_action_area = 2131427368;
 			
 			// aapt resource value: 0x7F0B0029
-			public const int design_navigation_item_header = 2131427369;
+			public const int design_navigation_item = 2131427369;
 			
 			// aapt resource value: 0x7F0B002A
-			public const int design_navigation_item_separator = 2131427370;
+			public const int design_navigation_item_header = 2131427370;
 			
 			// aapt resource value: 0x7F0B002B
-			public const int design_navigation_item_subheader = 2131427371;
+			public const int design_navigation_item_separator = 2131427371;
 			
 			// aapt resource value: 0x7F0B002C
-			public const int design_navigation_menu = 2131427372;
+			public const int design_navigation_item_subheader = 2131427372;
 			
 			// aapt resource value: 0x7F0B002D
-			public const int design_navigation_menu_item = 2131427373;
+			public const int design_navigation_menu = 2131427373;
 			
 			// aapt resource value: 0x7F0B002E
-			public const int design_text_input_password_icon = 2131427374;
+			public const int design_navigation_menu_item = 2131427374;
 			
 			// aapt resource value: 0x7F0B002F
-			public const int FlyoutContent = 2131427375;
+			public const int design_text_input_password_icon = 2131427375;
 			
 			// aapt resource value: 0x7F0B0030
-			public const int mtrl_layout_snackbar = 2131427376;
+			public const int FlyoutContent = 2131427376;
 			
 			// aapt resource value: 0x7F0B0031
-			public const int mtrl_layout_snackbar_include = 2131427377;
+			public const int mtrl_layout_snackbar = 2131427377;
 			
 			// aapt resource value: 0x7F0B0032
-			public const int notification_action = 2131427378;
+			public const int mtrl_layout_snackbar_include = 2131427378;
 			
 			// aapt resource value: 0x7F0B0033
-			public const int notification_action_tombstone = 2131427379;
+			public const int notification_action = 2131427379;
 			
 			// aapt resource value: 0x7F0B0034
-			public const int notification_media_action = 2131427380;
+			public const int notification_action_tombstone = 2131427380;
 			
 			// aapt resource value: 0x7F0B0035
-			public const int notification_media_cancel_action = 2131427381;
+			public const int notification_media_action = 2131427381;
 			
 			// aapt resource value: 0x7F0B0036
-			public const int notification_template_big_media = 2131427382;
+			public const int notification_media_cancel_action = 2131427382;
 			
 			// aapt resource value: 0x7F0B0037
-			public const int notification_template_big_media_custom = 2131427383;
+			public const int notification_template_big_media = 2131427383;
 			
 			// aapt resource value: 0x7F0B0038
-			public const int notification_template_big_media_narrow = 2131427384;
+			public const int notification_template_big_media_custom = 2131427384;
 			
 			// aapt resource value: 0x7F0B0039
-			public const int notification_template_big_media_narrow_custom = 2131427385;
+			public const int notification_template_big_media_narrow = 2131427385;
 			
 			// aapt resource value: 0x7F0B003A
-			public const int notification_template_custom_big = 2131427386;
+			public const int notification_template_big_media_narrow_custom = 2131427386;
 			
 			// aapt resource value: 0x7F0B003B
-			public const int notification_template_icon_group = 2131427387;
+			public const int notification_template_custom_big = 2131427387;
 			
 			// aapt resource value: 0x7F0B003C
-			public const int notification_template_lines_media = 2131427388;
+			public const int notification_template_icon_group = 2131427388;
 			
 			// aapt resource value: 0x7F0B003D
-			public const int notification_template_media = 2131427389;
+			public const int notification_template_lines_media = 2131427389;
 			
 			// aapt resource value: 0x7F0B003E
-			public const int notification_template_media_custom = 2131427390;
+			public const int notification_template_media = 2131427390;
 			
 			// aapt resource value: 0x7F0B003F
-			public const int notification_template_part_chronometer = 2131427391;
+			public const int notification_template_media_custom = 2131427391;
 			
 			// aapt resource value: 0x7F0B0040
-			public const int notification_template_part_time = 2131427392;
+			public const int notification_template_part_chronometer = 2131427392;
 			
 			// aapt resource value: 0x7F0B0041
-			public const int RootLayout = 2131427393;
+			public const int notification_template_part_time = 2131427393;
 			
 			// aapt resource value: 0x7F0B0042
-			public const int select_dialog_item_material = 2131427394;
+			public const int RootLayout = 2131427394;
 			
 			// aapt resource value: 0x7F0B0043
-			public const int select_dialog_multichoice_material = 2131427395;
+			public const int select_dialog_item_material = 2131427395;
 			
 			// aapt resource value: 0x7F0B0044
-			public const int select_dialog_singlechoice_material = 2131427396;
+			public const int select_dialog_multichoice_material = 2131427396;
 			
 			// aapt resource value: 0x7F0B0045
-			public const int sfcomboBox_layout = 2131427397;
+			public const int select_dialog_singlechoice_material = 2131427397;
 			
 			// aapt resource value: 0x7F0B0046
-			public const int ShellContent = 2131427398;
+			public const int sfcomboBox_layout = 2131427398;
 			
 			// aapt resource value: 0x7F0B0047
-			public const int support_simple_spinner_dropdown_item = 2131427399;
+			public const int ShellContent = 2131427399;
 			
 			// aapt resource value: 0x7F0B0048
-			public const int Tabbar = 2131427400;
+			public const int support_simple_spinner_dropdown_item = 2131427400;
 			
 			// aapt resource value: 0x7F0B0049
-			public const int Toolbar = 2131427401;
+			public const int Tabbar = 2131427401;
+			
+			// aapt resource value: 0x7F0B004A
+			public const int Toolbar = 2131427402;
 			
 			static Layout()
 			{
@@ -12456,6 +12621,9 @@ namespace Healthcare020.Mobile.Droid
 			
 			// aapt resource value: 0x7F0D0035
 			public const int status_bar_notification_info_overflow = 2131558453;
+			
+			// aapt resource value: 0x7F0D0036
+			public const int title_activity_webview = 2131558454;
 			
 			static String()
 			{

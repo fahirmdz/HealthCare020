@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare020.Mobile.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare020.Mobile.iOS", "Healthcare020.Mobile\Healthcare020.Mobile.iOS\Healthcare020.Mobile.iOS.csproj", "{E94B910F-196E-4C4E-A067-0782C3F0195B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare020.Mobile", "Healthcare020.Mobile\Healthcare020.Mobile\Healthcare020.Mobile.csproj", "{9F7C0390-A1A9-44F3-A488-0731D3FC14EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare020.Mobile", "Healthcare020.Mobile\Healthcare020.Mobile\Healthcare020.Mobile.csproj", "{9F7C0390-A1A9-44F3-A488-0731D3FC14EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -213,7 +213,7 @@ Global
 		{302498AE-7B4F-4C38-9988-6214D3C84503}.Release|x64.Build.0 = Release|Any CPU
 		{302498AE-7B4F-4C38-9988-6214D3C84503}.Release|x86.ActiveCfg = Release|Any CPU
 		{302498AE-7B4F-4C38-9988-6214D3C84503}.Release|x86.Build.0 = Release|Any CPU
-		{F0AC9248-2763-45BC-8ABA-17A8D4C3099A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F0AC9248-2763-45BC-8ABA-17A8D4C3099A}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{F0AC9248-2763-45BC-8ABA-17A8D4C3099A}.Debug|ARM.ActiveCfg = Debug|ARM
 		{F0AC9248-2763-45BC-8ABA-17A8D4C3099A}.Debug|ARM.Build.0 = Debug|ARM
 		{F0AC9248-2763-45BC-8ABA-17A8D4C3099A}.Debug|ARM.Deploy.0 = Debug|ARM

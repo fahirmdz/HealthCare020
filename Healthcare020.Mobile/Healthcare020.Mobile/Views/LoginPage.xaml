@@ -4,12 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
+             xmlns:app="clr-namespace:Healthcare020.Mobile.Helpers;assembly=Healthcare020.Mobile"
              mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.LoginPage">
+             x:Class="Healthcare020.Mobile.Views.LoginPage"
+             BindingContext="{x:Static app:ViewModelLocator.LoginViewModel}">
 
-    <ContentPage.BindingContext>
-        <viewModels:LoginViewModel />
-    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <Grid VerticalOptions="FillAndExpand"   BackgroundColor="WhiteSmoke">
@@ -47,8 +46,10 @@
                                 </Image.Source>
                             </Image>
                         </Frame>
-                        <Entry Placeholder="Korisničko ime" FontSize="18" HeightRequest="50" />
-                        <Entry Placeholder="Lozinka" HeightRequest="50" FontSize="18" />
+                        <Entry Placeholder="Korisničko ime" Text="{Binding Username}"  FontSize="18" HeightRequest="50" x:Name="Username"/>
+                        <Label x:Name="UsernameErrorLabel" TextColor="Red"></Label>
+                        <Entry Placeholder="Lozinka" HeightRequest="50" Text="{Binding Password}"  FontSize="18" x:Name="Password" MaxLength="15"/>
+                        <Label x:Name="PasswordErrorLabel" TextColor="Red"></Label>
 
                         <!--REMEMBER ME-->
                         <Grid VerticalOptions="Center">
@@ -74,7 +75,7 @@
                                         HeightRequest="40"
                                         CornerRadius="20"
                                         FontSize="12"
-                                        Command="{Binding LoginCommand}" />
+                                         Clicked="Button_OnClicked"/>
                         </Frame>
 
                         <Label Text="Forgotten password?" TextColor="#496075" HorizontalOptions="Center" FontSize="13" />
