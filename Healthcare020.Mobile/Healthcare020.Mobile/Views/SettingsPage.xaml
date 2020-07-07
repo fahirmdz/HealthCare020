@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Healthcare020.Mobile.Views.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeightRequest="100">
+                <Image x:Name="ProfilePic"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center" 
+                   Aspect="AspectFit"
+                   HeightRequest="100"
+                   WidthRequest="100">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer  NumberOfTapsRequired="1"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

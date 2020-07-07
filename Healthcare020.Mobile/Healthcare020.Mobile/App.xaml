@@ -19,33 +19,10 @@
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
 
-
-            <OnPlatform x:TypeArguments="x:String" 
-                        x:Key="FontAwesomeBrands">
-                <On Platform="Android" 
-                    Value="FontAwesome5Brands.otf##Font Awesome 5 Free" />
-                <On Platform="iOS" 
-                    Value="FontAwesome5Brands-Regular" />
-                <On Platform="UWP" 
-                    Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" />
-            </OnPlatform> 
-    
-            <OnPlatform x:TypeArguments="x:String" 
-                        x:Key="FontAwesomeSolid"> 
-                <On Platform="Android" 
-                    Value="FontAwesome5Solid.otf##Font Awesome 5 Free" /> 
-                <On Platform="iOS" 
-                    Value="FontAwesome5Free-Solid" /> 
-                <On Platform="UWP" 
-                    Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" /> 
-            </OnPlatform> 
-    
             <OnPlatform x:TypeArguments="x:String" 
                         x:Key="FontAwesomeRegular">
                 <On Platform="Android" 
-                    Value="fa-solid-900.ttf#Font Awesome 5 Free Regular" /> 
-                <On Platform="iOS" 
-                    Value="FontAwesome5Free-Regular" /> 
+                    Value="fa-solid-900.ttf#Font Awesome 5 Free" /> 
                 <On Platform="UWP" 
                     Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" /> 
             </OnPlatform>

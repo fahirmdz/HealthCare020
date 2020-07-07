@@ -6,9 +6,52 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
+            xmlns:pages="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
             mc:Ignorable="d">
-  <!--Pages can be added as references or inline-->
-  <ContentPage Title="Pregledi" x:Name="PreglediTab"/>
-  <ContentPage Title="Uverenja" x:Name="UverenjaTab"/>
-  <ContentPage Title="Zahtevi" x:Name="ZahteviTab"/>
+
+    <!--Pages can be added as references or inline-->
+    <pages:WelcomePage Title="Pregledi" x:Name="PreglediTab">
+        <ContentPage.IconImageSource>
+            <FontImageSource
+              FontFamily="{StaticResource FontAwesomeRegular}"
+              Glyph="{x:Static local:IconFont.Stethoscope}"
+              Size="55"
+              Color="Aqua"
+              ></FontImageSource>
+        </ContentPage.IconImageSource>
+    </pages:WelcomePage>
+
+    <pages:AboutPage Title="Uverenja" x:Name="UverenjaTab">
+        <ContentPage.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontAwesomeRegular}"
+                Glyph="{x:Static local:IconFont.FileSignature}"
+                Size="55"
+                Color="Aqua"
+            ></FontImageSource>
+        </ContentPage.IconImageSource>
+    </pages:AboutPage>
+
+    <pages:LoginPage Title="Zahtevi" x:Name="ZahteviTab">
+        <ContentPage.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontAwesomeRegular}"
+                Glyph="{x:Static local:IconFont.Question}"
+                Size="55"
+                Color="Aqua"
+            ></FontImageSource>
+        </ContentPage.IconImageSource>
+    </pages:LoginPage>
+
+    <pages:SettingsPage Title="Zahtevi" x:Name="SettingsTab">
+        <ContentPage.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontAwesomeRegular}"
+                Glyph="{x:Static local:IconFont.Cog}"
+                Size="55"
+                Color="Aqua"
+            ></FontImageSource>
+        </ContentPage.IconImageSource>
+    </pages:SettingsPage>
 </TabbedPage>

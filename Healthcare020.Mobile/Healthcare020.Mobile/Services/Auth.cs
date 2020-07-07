@@ -1,4 +1,4 @@
-﻿using Flurl.Http;
+﻿using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Resources;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Enums;
@@ -7,7 +7,6 @@ using HealthCare020.Core.Models;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Security;
 using System.Text;
@@ -64,6 +63,7 @@ namespace Healthcare020.Mobile.Services
                 {
                     await SecureStorage.SetAsync("Username", username);
                     await SecureStorage.SetAsync("Password", password);
+                    await SecureStorage.SetAsync(PreferencesKeys.HasSavedLoginCredentials, true.ToString());
                 }
                 //System.Net.ServicePointManager.ServerCertificateValidationCallback +=
                 //    (sender, cert, chain, sslPolicyErrors) =>
