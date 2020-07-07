@@ -6,18 +6,25 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using IdentityModel.Client;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace HealthCare020.API.Configuration
 {
     public static class AuthConfiguration
     {
-        public static IServiceCollection AddAuthConfiguration(this IServiceCollection services)
+        public static IServiceCollection AddAuthConfiguration(this IServiceCollection services, IWebHostEnvironment env)
         {
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                .AddIdentityServerAuthentication(options =>
                {
-                   options.Authority = "https://localhost:5005/";
+                   options.Authority = env.IsDevelopment()?"https://localhost:5007/":"https://healthcare020-oauth.com:5005/";
                    options.RequireHttpsMetadata = false;
+                   options.IntrospectionDiscoveryPolicy = new DiscoveryPolicy
+                   {
+                       ValidateIssuerName = false
+                   };
                });
 
             services.AddAuthorization(opt =>

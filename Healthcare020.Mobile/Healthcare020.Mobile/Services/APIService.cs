@@ -1,5 +1,7 @@
 ﻿using Flurl.Http;
+using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
+using HealthCare020.Core.Extensions;
 using HealthCare020.Core.ResponseModels;
 using Newtonsoft.Json;
 using System;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Healthcare020.Mobile.Interfaces;
+using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.Services
 {
@@ -16,6 +18,7 @@ namespace Healthcare020.Mobile.Services
     {
         private string BaseUrl;
         private IFlurlRequest request;
+        private IFlurlClient _flurlClient;
 
         /// <summary>
         /// Create new API service with specific route
@@ -25,11 +28,29 @@ namespace Healthcare020.Mobile.Services
         {
             try
             {
-                request = Auth.GetAuthorizedApiRequest(route).AllowAnyHttpStatus();
+#if  DEBUG
+                var httpClientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain,
+                        errors) => true
+                };
+#endif
+
+                var httpClient = new HttpClient(httpClientHandler)
+                {
+                    BaseAddress = new Uri(Device.RuntimePlatform == Device.Android
+                        ? AppResources.ApiUrlAndroid
+                        : AppResources.ApiUrl)
+                };
+
+                _flurlClient = new FlurlClient(httpClient);
+                request = _flurlClient.Request(route);
+                request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
                 BaseUrl = request.Url;
             }
             catch (Exception ex)
             {
+                // ignored
             }
         }
 

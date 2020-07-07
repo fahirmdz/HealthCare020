@@ -61,11 +61,20 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://localhost:5001/api/.
+        ///   Looks up a localized string similar to https://healthcare020-api.com:5001/api/.
         /// </summary>
         internal static string ApiUrl {
             get {
                 return ResourceManager.GetString("ApiUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://10.0.2.2:5001/api/.
+        /// </summary>
+        internal static string ApiUrlAndroid {
+            get {
+                return ResourceManager.GetString("ApiUrlAndroid", resourceCulture);
             }
         }
         
@@ -88,11 +97,20 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://localhost:5005/connect/token.
+        ///   Looks up a localized string similar to https://healthcare020-oauth.com:5005/connect/token.
         /// </summary>
         internal static string IdpTokenEndpoint {
             get {
                 return ResourceManager.GetString("IdpTokenEndpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://10.0.2.2:5005/connect/token.
+        /// </summary>
+        internal static string IdpTokenEndpointAndroid {
+            get {
+                return ResourceManager.GetString("IdpTokenEndpointAndroid", resourceCulture);
             }
         }
         

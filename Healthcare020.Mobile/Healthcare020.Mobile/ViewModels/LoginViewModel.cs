@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
@@ -36,9 +37,14 @@ namespace Healthcare020.Mobile.ViewModels
 
         private async void Login()
         {
-            var loggedIn=await Auth.AuthenticateWithPassword(Username, Password);
+            var activityIndicator = new ActivityIndicator{IsRunning = true};
+            activityIndicator.Color = Color.FromRgb(0, 130, 130);
+
+            var loggedIn=  await Auth.AuthenticateWithPassword(Username, Password,RememberMe);
             await Application.Current.MainPage.DisplayAlert("Log In",
                 loggedIn ? "Uspesno logovani" : AppResources.InvalidLoginCredentials, "Ok");
+
+            activityIndicator.IsRunning = false;
         }
     }
 }

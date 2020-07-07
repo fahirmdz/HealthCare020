@@ -1,24 +1,23 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Healthcare020.Mobile.Services;
+﻿using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
+using Xamarin.Forms;
 
 namespace Healthcare020.Mobile
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new WelcomePage();
+
+            MainPage = new SplashScreenPage();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
+            //var loggedIn = await Auth.AuthenticateWithSavedCredentials();
         }
 
         protected override void OnSleep()

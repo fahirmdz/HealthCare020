@@ -28,7 +28,15 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
-    }//,
+    },
+    "HealthCare020.API_Prod": {
+      "commandName": "Project",
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "applicationUrl": "https://healthcare020-api.com"
+    }
     //"Docker": {
     //  "commandName": "Docker",
     //  "launchBrowser": true,

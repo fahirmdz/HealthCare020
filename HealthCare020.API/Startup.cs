@@ -18,6 +18,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using HealthCare020.API.Constants;
+using HealthCare020.API.Extensions;
+using Healthcare020.LoggerService.Configuration;
+using Healthcare020.LoggerService.Interfaces;
 
 namespace HealthCare020.API
 {
@@ -39,6 +42,7 @@ namespace HealthCare020.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureLoggerService();
             services.AddDbContext<HealthCare020DbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                     .EnableSensitiveDataLogging(true));
@@ -94,7 +98,8 @@ namespace HealthCare020.API
                 options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("bs-Latn-BA");
                 options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US"), new CultureInfo("bs-Latn-BA") };
             });
-            services.AddAuthConfiguration();
+            
+            services.AddAuthConfiguration(Environment);
 
             services.AddControllers(cfg =>
                 {
@@ -134,7 +139,7 @@ namespace HealthCare020.API
 
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
@@ -144,6 +149,8 @@ namespace HealthCare020.API
                 //app.UseDatabaseErrorPage();
             }
           
+            app.ConfigureExceptionHandler(logger);
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

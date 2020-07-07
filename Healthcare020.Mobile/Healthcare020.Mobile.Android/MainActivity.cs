@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Net;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -17,6 +17,7 @@ namespace Healthcare020.Mobile.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);

@@ -16,7 +16,7 @@ using Thinktecture.IdentityModel.Clients;
 
 namespace Healthcare020.WinUI.Helpers
 {
-    public sealed class Auth
+    public static class Auth
     {
         public static SecureString AccessToken { get; private set; }
 
@@ -35,9 +35,9 @@ namespace Healthcare020.WinUI.Helpers
         /// </summary>
         public static RoleType Role { get; private set; }
 
-        public static IFlurlRequest GetAuthorizedApiRequest(string relativePath = "")
+        public static IFlurlRequest GetAuthorizedApiRequest(this IFlurlRequest request, string relativePath = "")
         {
-            return (Properties.Settings.Default.ApiUrl + relativePath).WithHeader("Authorization", $"Bearer {new NetworkCredential(string.Empty, AccessToken).Password}");
+            return request.WithHeader("Authorization", $"Bearer {new NetworkCredential(string.Empty, AccessToken).Password}");
         }
 
         /// <summary>

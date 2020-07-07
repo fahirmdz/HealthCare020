@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
              xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
-             xmlns:triggers="clr-namespace:Healthcare020.Mobile.Triggers;assembly=Healthcare020.Mobile"
              mc:Ignorable="d"
              x:Class="Healthcare020.Mobile.Views.WelcomePage">
 
