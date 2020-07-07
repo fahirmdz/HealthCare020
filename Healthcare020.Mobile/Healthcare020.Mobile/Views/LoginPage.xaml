@@ -52,7 +52,7 @@
                         <Label x:Name="PasswordErrorLabel" TextColor="Red"></Label>
 
                         <!--REMEMBER ME-->
-                        <Grid VerticalOptions="Center">
+                        <Grid VerticalOptions="Center" HorizontalOptions="Start">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40" />
                             </Grid.RowDefinitions>
@@ -60,12 +60,12 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Switch Grid.Row="0" Grid.Column="0"
+                            <Label VerticalTextAlignment="Center" Margin="8,0"  Grid.Column="0" Text="Zapamti me" TextColor="#666769" FontSize="17"></Label>
+                            <Switch Grid.Row="0" Grid.Column="1"
                                     VerticalOptions="Center"
-                                    HorizontalOptions="Start"
+                                    HorizontalOptions="End"
                                     x:Name="RememberMe"
                                     Toggled="RememberMe_OnToggled"/>
-                            <Label VerticalTextAlignment="Center" Grid.Column="1" Text="Zapamti me" TextColor="#666769" FontSize="17"></Label>
                         </Grid>
 
                         <!--LOGIN BUTTON-->

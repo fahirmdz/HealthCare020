@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApiUrl" xml:space="preserve">
-    <value>https://localhost:5001/api/</value>
+    <value>https://healthcare020-api.com:5001/api/</value>
+  </data>
+  <data name="ApiUrlAndroid" xml:space="preserve">
+    <value>https://10.0.2.2:5001/api/</value>
   </data>
   <data name="IdpClientId" xml:space="preserve">
     <value>Healthcare020_WebAPI</value>
@@ -127,7 +130,10 @@
     <value>devsecret</value>
   </data>
   <data name="IdpTokenEndpoint" xml:space="preserve">
-    <value>https://localhost:5005/connect/token</value>
+    <value>https://healthcare020-oauth.com:5005/connect/token</value>
+  </data>
+  <data name="IdpTokenEndpointAndroid" xml:space="preserve">
+    <value>https://10.0.2.2:5005/connect/token</value>
   </data>
   <data name="InvalidLoginCredentials" xml:space="preserve">
     <value>Neispravno korisničko ime ili lozinka</value>

@@ -1,4 +1,8 @@
+using System;
+using Healthcare020.LoggerService.Configuration;
+using Healthcare020.LoggerService.Interfaces;
 using Healthcare020.OAuth.Configuration;
+using Healthcare020.OAuth.Extensions;
 using Healthcare020.OAuth.Services;
 using Healthcare020.OAuth.Validators;
 using HealthCare020.Repository;
@@ -31,6 +35,7 @@ namespace Healthcare020.OAuth
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureLoggerService();
             services.AddDbContext<HealthCare020DbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(true));
 
@@ -40,7 +45,7 @@ namespace Healthcare020.OAuth
             };
             services.AddSingleton<ICorsPolicyService>(cors);
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(opt=>opt.IssuerUri="https://healthcare020-oauth.com/")
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
                 .AddDeveloperSigningCredential()
@@ -50,12 +55,14 @@ namespace Healthcare020.OAuth
             services.AddHealthCare020Services();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.ConfigureExceptionHandler(logger);
 
             app.UseIdentityServer();
         }

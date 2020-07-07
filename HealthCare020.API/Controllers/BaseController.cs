@@ -38,6 +38,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public virtual async Task<IActionResult> GetById(int id, [FromQuery] bool? EagerLoaded = false)
         {
             var result = await _service.GetById(id, EagerLoaded ?? false);

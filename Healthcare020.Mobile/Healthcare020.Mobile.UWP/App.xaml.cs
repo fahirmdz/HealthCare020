@@ -45,7 +45,7 @@ namespace Healthcare020.Mobile.UWP
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-
+            Xamarin.Forms.Forms.SetFlags("Shell_UWP_Experimental");
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

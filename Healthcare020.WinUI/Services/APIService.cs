@@ -31,7 +31,24 @@ namespace Healthcare020.WinUI.Services
         {
             try
             {
-                request = Auth.GetAuthorizedApiRequest(route).AllowAnyHttpStatus();
+#if DEBUG
+                var httpClientHandler = new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = (message, cert, chain,
+                        errors) => true
+                };
+#endif
+
+                var httpClient = new HttpClient(httpClientHandler)
+                {
+                    BaseAddress = new Uri(Settings.Default.ApiUrl)
+                };
+
+                var _flurlClient = new FlurlClient(httpClient);
+                request = _flurlClient.Request(route);
+                BaseUrl = request.Url;
+
+                request = request.GetAuthorizedApiRequest().AllowAnyHttpStatus();
                 BaseUrl = request.Url;
             }
             catch (UnauthorizedException ex)

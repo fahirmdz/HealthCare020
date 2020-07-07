@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Flurl.Http;
+using Healthcare020.Mobile.Resources;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
+using HealthCare020.Core.Extensions;
+using HealthCare020.Core.Models;
+using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using Flurl.Http;
-using HealthCare020.Core.Constants;
-using HealthCare020.Core.Enums;
-using HealthCare020.Core.Models;
-using Healthcare020.Mobile.Resources;
-using Newtonsoft.Json;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.Services
 {
@@ -49,31 +52,49 @@ namespace Healthcare020.Mobile.Services
         /// </summary>
         public static RoleType Role { get; private set; }
 
-        public static IFlurlRequest GetAuthorizedApiRequest(string relativePath = "")
-        {
-            return (AppResources.ApiUrl+ relativePath).WithHeader("Authorization", $"Bearer {new NetworkCredential(string.Empty, AccessToken).Password}");
-        }
-
         /// <summary>
         /// Authenticate user with username and password and get access token (store it in Auth.AccessToken)
         /// </summary>
         /// <returns>Returns boolean that indicates operation was succeeded or no</returns>
-        public static async Task<bool> AuthenticateWithPassword(string username, string password)
+        public static async Task<bool> AuthenticateWithPassword(string username, string password, bool RememberMe = false)
         {
             try
             {
-                using (HttpClient client = new HttpClient())
+                if (RememberMe)
                 {
+                    await SecureStorage.SetAsync("Username", username);
+                    await SecureStorage.SetAsync("Password", password);
+                }
+                //System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                //    (sender, cert, chain, sslPolicyErrors) =>
+                //    {
+                //        if (cert != null) System.Diagnostics.Debug.WriteLine(cert);
+                //        return true;
+                //    };
 
+#if DEBUG
+                HttpClientHandler clientHandler;
+
+                if (Device.RuntimePlatform == Device.Android)
+                    clientHandler = new HttpClientHandler
+                    {
+                        ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+                    };
+                else
+                    clientHandler = new HttpClientHandler();
+#endif
+
+                using (var client = new HttpClient(clientHandler))
+                {
                     var accept = "application/json";
                     client.DefaultRequestHeaders.Add("Accept", accept);
-                    var postBody = @"client_id=" + AppResources.IdpClientId 
-                                                    + "&client_secret=" + AppResources.IdpClientSecret 
-                                                    + "&grant_type=password&username=" 
-                                                    + username + "&password=" + password 
-                                                    + "&scope= openid offline_access";
+                    var postBody = @"client_id=" + AppResources.IdpClientId
+                                                 + "&client_secret=" + AppResources.IdpClientSecret
+                                                 + "&grant_type=password&username="
+                                                 + username + "&password=" + password
+                                                 + "&scope=openid offline_access";
 
-                    var response = client.PostAsync(AppResources.IdpTokenEndpoint,
+                    var response = client.PostAsync(Device.RuntimePlatform == Device.Android ? AppResources.IdpTokenEndpointAndroid : AppResources.IdpTokenEndpoint,
                         new StringContent(postBody, Encoding.UTF8, "application/x-www-form-urlencoded")).Result;
 
                     if (response.IsSuccessStatusCode)
@@ -81,12 +102,15 @@ namespace Healthcare020.Mobile.Services
                         var responseJson = await response.Content.ReadAsStringAsync();
                         var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseJson);
                         if (tokenResponse != null && !string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
-                            AccessToken = new NetworkCredential(string.Empty, tokenResponse.AccessToken).SecurePassword;
+                            AccessToken = tokenResponse.AccessToken.ConvertToSecureString();
                         else
                             return false;
                     }
                     else
+                    {
+                        var error = await response.Content.ReadAsStringAsync();
                         return false;
+                    }
                 }
 
                 var apiSerivce = new APIService(Routes.KorisniciRoute);
@@ -105,6 +129,28 @@ namespace Healthcare020.Mobile.Services
                 return true;
             }
             catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Get saved login credentials from previous login
+        /// </summary>
+        /// <returns>Boolean value indicates successful or unsuccessful login</returns>
+        public static async Task<bool> AuthenticateWithSavedCredentials()
+        {
+            try
+            {
+                var username = await SecureStorage.GetAsync("Username");
+                var password = await SecureStorage.GetAsync("Password");
+
+                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                    return false;
+
+                return await AuthenticateWithPassword(username, password);
+            }
+            catch
             {
                 return false;
             }
