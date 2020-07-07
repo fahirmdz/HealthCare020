@@ -11,7 +11,7 @@ namespace Healthcare020.Mobile
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-
+            
             MainPage = new SplashScreenPage();
         }
 

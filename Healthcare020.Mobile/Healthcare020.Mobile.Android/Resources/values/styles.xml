@@ -29,4 +29,8 @@
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#00bebe</item>
   </style>
+
+  <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+    <item name="android:textSize">15dp</item>
+  </style>
 </resources>

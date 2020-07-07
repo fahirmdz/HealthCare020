@@ -1,31 +1,40 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using Healthcare020.Mobile.Models;
+using Healthcare020.Mobile.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using Xamarin.Forms;
-
-using Healthcare020.Mobile.Models;
-using Healthcare020.Mobile.Services;
 
 namespace Healthcare020.Mobile.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public string LoadingMessage { get; set; }= string.Empty;
 
-        bool isBusy = false;
+        private bool isBusy = false;
+
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get => isBusy;
+            set
+            {
+                if (value)
+                    UserDialogs.Instance.ShowLoading(LoadingMessage);
+                else
+                    UserDialogs.Instance.HideLoading();
+                SetProperty(ref isBusy, value);
+            }
         }
 
-        string title = string.Empty;
+        private string title = string.Empty;
+
         public string Title
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            get => title;
+            set => SetProperty(ref title, value);
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
@@ -42,7 +51,9 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         #region INotifyPropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
@@ -51,6 +62,7 @@ namespace Healthcare020.Mobile.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
+
+        #endregion INotifyPropertyChanged
     }
 }

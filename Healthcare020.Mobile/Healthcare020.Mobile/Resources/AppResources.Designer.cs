@@ -122,5 +122,24 @@ namespace Healthcare020.Mobile.Resources {
                 return ResourceManager.GetString("InvalidLoginCredentials", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logiranje...
+        /// </summary>
+        internal static string LoggingInLoadingMessage {
+            get {
+                return ResourceManager.GetString("LoggingInLoadingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] user {
+            get {
+                object obj = ResourceManager.GetObject("user", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

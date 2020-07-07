@@ -193,6 +193,9 @@ namespace HealthCare020.Services
 
                 if (await result.AnyAsync() && resourceParameters.ZdravstvenaKnjizicaId.HasValue)
                     result = result.Where(x => x.ZdravstvenaKnjizicaId == resourceParameters.ZdravstvenaKnjizicaId);
+
+                if (await result.AnyAsync() && resourceParameters.KorisnickiNalogId.HasValue)
+                    result = result.Where(x => x.KorisnickiNalogId == resourceParameters.KorisnickiNalogId);
             }
 
             return await base.FilterAndPrepare(result, resourceParameters);
