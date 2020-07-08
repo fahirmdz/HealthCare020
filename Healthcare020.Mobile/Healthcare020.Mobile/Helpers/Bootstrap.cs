@@ -1,6 +1,10 @@
-﻿using Healthcare020.Mobile.Interfaces;
+﻿using System;
+using AutoMapper;
+using HealthCare020.Core.Mappers;
+using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Services;
 using TinyIoC;
+using Mapper = AutoMapper.Mapper;
 
 namespace Healthcare020.Mobile.Helpers
 {
@@ -10,6 +14,9 @@ namespace Healthcare020.Mobile.Helpers
         {
             var container = new TinyIoCContainer();
             container.Register<IAPIService, APIService>();
+            var cfg = new MapperConfiguration(MapperConfig.MapperConfiguration());
+
+            container.Register<IMapper, Mapper>(new Mapper(cfg));
 
             return container;
         }

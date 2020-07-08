@@ -141,8 +141,20 @@
   <data name="LoggingInLoadingMessage" xml:space="preserve">
     <value>Logiranje..</value>
   </data>
+  <data name="PreglediTabTitle" xml:space="preserve">
+    <value>Pregledi</value>
+  </data>
+  <data name="SettingsTabTitle" xml:space="preserve">
+    <value>Podešavanja</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>user.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UverenjaTabTitle" xml:space="preserve">
+    <value>Lekarska uverenja</value>
+  </data>
+  <data name="ZahteviTabTitle" xml:space="preserve">
+    <value>Zahtevi za pregled</value>
   </data>
 </root>

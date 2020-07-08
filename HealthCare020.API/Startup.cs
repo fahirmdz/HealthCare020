@@ -1,4 +1,9 @@
+using Healthcare020.LoggerService.Configuration;
+using Healthcare020.LoggerService.Interfaces;
+using Healthcare020.LoggerService.Services;
 using HealthCare020.API.Configuration;
+using HealthCare020.API.Constants;
+using HealthCare020.API.Extensions;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
 using HealthCare020.Services.Filters;
@@ -17,10 +22,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using HealthCare020.API.Constants;
-using HealthCare020.API.Extensions;
-using Healthcare020.LoggerService.Configuration;
-using Healthcare020.LoggerService.Interfaces;
+using System.Linq;
 
 namespace HealthCare020.API
 {
@@ -31,8 +33,8 @@ namespace HealthCare020.API
             Environment = env;
 
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json",optional:true,reloadOnChange:true)
-                .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json",optional:true,reloadOnChange:true);
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
             Configuration = builder.Build();
         }
@@ -62,11 +64,16 @@ namespace HealthCare020.API
                     {
                         Password = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri("https://localhost:5005/connect/authorize"),
-                            TokenUrl = new Uri("https://localhost:5005/connect/token")
+                            AuthorizationUrl = new Uri(Environment.IsDevelopment() ? "https://localhost:5007/connect/authorize"
+                                : "https://healthcare020-oauth.com:5005/connect/authorize"),
+
+                            TokenUrl = new Uri(Environment.IsDevelopment() ? "https://localhost:5007/connect/token"
+                                : "https://healthcare020-oauth.com:5005/connect/token")
                         }
                     },
-                    OpenIdConnectUrl = new Uri("https://localhost:5005/.well-known/openid-configuration"),
+                    OpenIdConnectUrl = new Uri(Environment.IsDevelopment() ? "https://localhost:5007/.well-known/openid-configuration"
+                        : "https://healthcare020-oauth.com:5005/.well-known/openid-configuration"),
+
                     Scheme = JwtBearerDefaults.AuthenticationScheme,
                     BearerFormat = "JWT",
                     Name = "Authorization",
@@ -89,8 +96,6 @@ namespace HealthCare020.API
             services.AddHttpContextAccessor();
             services.AddHealthCare020Services();
 
-
-
             services.AddResponseCaching();
 
             services.Configure<RequestLocalizationOptions>(options =>
@@ -98,15 +103,16 @@ namespace HealthCare020.API
                 options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("bs-Latn-BA");
                 options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US"), new CultureInfo("bs-Latn-BA") };
             });
-            
+
             services.AddAuthConfiguration(Environment);
+
+            var logger = new LoggerManager();
 
             services.AddControllers(cfg =>
                 {
                     cfg.Filters.Add(typeof(ErrorFilter));
                     cfg.ReturnHttpNotAcceptable = true;
-                    cfg.CacheProfiles.Add(CacheProfilesConstants.CacheProfile240Seconds,new CacheProfile{Duration = 240});
-
+                    cfg.CacheProfiles.Add(CacheProfilesConstants.CacheProfile240Seconds, new CacheProfile { Duration = 240 });
                 })
                 .AddNewtonsoftJson(setupAction =>
                 {
@@ -119,14 +125,28 @@ namespace HealthCare020.API
                 {
                     config.InvalidModelStateResponseFactory = context =>
                     {
+                        var detailsString = "Validation errors";
+#if DEBUG
+
+                        foreach (var modelState in context.ModelState.Values)
+                        {
+                            foreach (var error in modelState.Errors)
+                            {
+                                detailsString += $"Error message: {error.ErrorMessage}\n";
+                            }
+                        }
+#endif
+
                         var problemDetails = new ValidationProblemDetails(context.ModelState)
                         {
                             Type = "Model state validation error",
                             Status = StatusCodes.Status422UnprocessableEntity,
                             Title = "One or more validation errors occurred",
-                            Detail = "See the errors field for details.",
+                            Detail = detailsString,
                             Instance = context.HttpContext.Request.Path
                         };
+
+                        logger.LogInfo($"Model state errors details: {problemDetails.Detail}\n");
 
                         problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
 
@@ -136,7 +156,6 @@ namespace HealthCare020.API
                         };
                     };
                 });
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
@@ -148,7 +167,7 @@ namespace HealthCare020.API
                 //app.UseDeveloperExceptionPage();
                 //app.UseDatabaseErrorPage();
             }
-          
+
             app.ConfigureExceptionHandler(logger);
 
             app.UseSwagger();
@@ -160,7 +179,6 @@ namespace HealthCare020.API
             });
             app.UseHttpsRedirection();
             app.UseResponseCaching();
-
 
             app.UseRouting();
 

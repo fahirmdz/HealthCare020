@@ -133,12 +133,48 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pregledi.
+        /// </summary>
+        internal static string PreglediTabTitle {
+            get {
+                return ResourceManager.GetString("PreglediTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podešavanja.
+        /// </summary>
+        internal static string SettingsTabTitle {
+            get {
+                return ResourceManager.GetString("SettingsTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] user {
             get {
                 object obj = ResourceManager.GetObject("user", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lekarska uverenja.
+        /// </summary>
+        internal static string UverenjaTabTitle {
+            get {
+                return ResourceManager.GetString("UverenjaTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zahtevi za pregled.
+        /// </summary>
+        internal static string ZahteviTabTitle {
+            get {
+                return ResourceManager.GetString("ZahteviTabTitle", resourceCulture);
             }
         }
     }

@@ -44,7 +44,7 @@ namespace Healthcare020.Mobile.Services
                 };
 
                 _flurlClient = new FlurlClient(httpClient);
-                request = _flurlClient.Request(route);
+                request = _flurlClient.Request(route).AllowAnyHttpStatus();
                 request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
                 BaseUrl = request.Url;
             }
@@ -64,7 +64,9 @@ namespace Healthcare020.Mobile.Services
 
         public void ChangeRoute(string route)
         {
-            request.Url = AppResources.ApiUrl;
+            request.Url = Device.RuntimePlatform == Device.Android
+                ? AppResources.ApiUrlAndroid
+                : AppResources.ApiUrl;
             request.AppendPathSegment(route);
         }
 
@@ -372,11 +374,11 @@ namespace Healthcare020.Mobile.Services
                     }
                     else if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        //dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+                        //dlgError.ShowDialog( ?? string.Empty);
                     }
                     else if ((int)response.StatusCode == 422)
                     {
-                        //dlgError.ShowDialog(Resources.InvalidInputData);
+                        var errorDetails = await response.Content?.ReadAsStringAsync();
                     }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);

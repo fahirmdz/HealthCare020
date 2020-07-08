@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using Healthcare020.Mobile.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -46,6 +47,7 @@ namespace Healthcare020.Mobile.Services
             get; private set;
         }
 
+        public static PacijentDtoEL Pacijent { get; set; }
         /// <summary>
         /// Role of current logged in user
         /// </summary>
@@ -156,9 +158,15 @@ namespace Healthcare020.Mobile.Services
             }
         }
 
-        public static void Logout()
+        public static async Task Logout()
         {
             AccessToken = null;
+            SecureStorage.Remove("Username");
+            SecureStorage.Remove("Password");
+
+            await SecureStorage.SetAsync(PreferencesKeys.HasSavedLoginCredentials, false.ToString());
+
+            Application.Current.MainPage=new LoginPage();
         }
 
         public static bool IsAuthenticated() => AccessToken != null;

@@ -20,20 +20,7 @@ namespace Healthcare020.Mobile.Views
 
         private void Button_OnClicked(object sender, EventArgs e)
         {
-            var username = Username.Text;
-            var password = Password.Text;
-
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                UsernameErrorLabel.Text = "Obavezno polje";
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                UsernameErrorLabel.Text = "Obavezno polje";
-                return;
-            }
+            
 
             LoginVM.LoginCommand.Execute(sender);
         }
