@@ -15,7 +15,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             InitializeComponent();
             txtDoktor.Text = Pregled.Doktor;
             txtDatumVreme.Text = Pregled.DatumPregleda.ToString("g");
-            txtPacijent.Text = Pregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime() ?? "N/A";
+            txtPacijent.Text = Pregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
         }
 
         public static frmPregledOverview InstanceWithData(PregledDtoEL pregled, bool newInstance = false)

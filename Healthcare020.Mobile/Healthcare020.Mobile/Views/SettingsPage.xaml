@@ -5,62 +5,82 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
              xmlns:custom="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
              mc:Ignorable="d"
              x:Class="Healthcare020.Mobile.Views.SettingsPage">
 
     <ContentPage.Content>
-        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="130"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Frame Margin="40,10"  Grid.Row="0"
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+              Margin="0,0,0,10" BackgroundColor="{StaticResource LighterSmokeWhite}">
+
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Start"  Margin="40,50,40,0">
+                    <!-- top controls -->
+                    <Frame  Grid.Row="0"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="Start"
-                   HeightRequest="250"
-                   BackgroundColor="{StaticResource LightSmokeWhite}">
-                <custom:CircleImage x:Name="ProfilePic"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   Aspect="AspectFit"
-                   HeightRequest="200"
-                   WidthRequest="200"
-                   Source="{Binding ProfilePicImageSource}">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ProfilePicturePick}" NumberOfTapsRequired="1"></TapGestureRecognizer>
-                    </Image.GestureRecognizers>
-                </custom:CircleImage>
-            </Frame>
-            <Frame Grid.Row="1" Margin="40,10"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
-                   BackgroundColor="{StaticResource LightSmokeWhite}"
-                   BorderColor="{StaticResource LightSmokeWhite}">
-                <StackLayout BackgroundColor="{StaticResource LightSmokeWhite}">
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
-                    <Label Text="Test label" FontSize="{StaticResource FontSize-Medium}"></Label>
+                   HeightRequest="350"
+                   BackgroundColor="{StaticResource LightGray}">
+                        <StackLayout Spacing="5">
+                            <custom:CircleImage x:Name="ProfilePic"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        Aspect="AspectFit"
+                                        HeightRequest="210"
+                                        WidthRequest="210"
+                                        Source="{Binding ProfilePicImageSource}">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ProfilePicturePick}" NumberOfTapsRequired="1"></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </custom:CircleImage>
+                            <Label FontFamily="{StaticResource Montserrat-Light}"
+                           FontSize="{StaticResource FontSize-Smaller}"
+                           FontAttributes="Italic"
+                           TextColor="{StaticResource CustomDarkBlue}"
+                           HorizontalOptions="Center"
+                           Text="Tap to change profile picture"></Label>
+                            <Label FontFamily="{StaticResource Montserrat-Medium}"
+                           FontSize="{StaticResource FontSize-Large}"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource CustomDarkBlue}"
+                           Margin="0,30,0,10"
+                           Text="{Binding Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime}"></Label>
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
-            </Frame>
 
-            <Frame Grid.Row="2" Margin="40,10"
+                <StackLayout VerticalOptions="FillAndExpand" Margin="40,0,40,0" Spacing="0">
+                    <Frame HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           BackgroundColor="{StaticResource LightGray}">
+                        <StackLayout VerticalOptions="CenterAndExpand"
+                                     HorizontalOptions="FillAndExpand">
+                            <Button x:Name="EditProfileBtn"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    Text="Edit profile"
+                                    Command="{Binding EditProfileNavigationCommand}">
+                            </Button>
+                            <Button x:Name="ChangePasswordBtn"
+                                    Text="Change password"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    Clicked="ChangePasswordBtn_OnClicked"></Button>
+                            
+                        </StackLayout>
+                    </Frame>
+                    <Label TextColor="DarkRed" Text="Delete account" FontSize="Medium"
+                           Margin="0,20,0,10"
+                           HorizontalOptions="Center"></Label>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="End" Margin="40,5">
+                    <!-- bottom controls -->
+                    <Frame
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="End"
                    HeightRequest="55"
-                   BackgroundColor="{StaticResource LightSmokeWhite}">
-                <Button x:Name="LogoutBtn"
+                   BackgroundColor="{StaticResource LighterSmokeWhite}"
+                   BorderColor="Transparent">
+                        <Button x:Name="LogoutBtn"
                         Text="Logout"
                         FontSize="{StaticResource FontSize-Medium}"
                          ContentLayout="Left,0"
@@ -72,11 +92,13 @@
                          HorizontalOptions="FillAndExpand"
                          HeightRequest="50"
                         Command="{Binding LogoutCommand}">
-                    <Button.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" NumberOfTapsRequired="1"></TapGestureRecognizer>
-                    </Button.GestureRecognizers>
-                </Button>
-            </Frame>
+                            <Button.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding }" NumberOfTapsRequired="1"></TapGestureRecognizer>
+                            </Button.GestureRecognizers>
+                        </Button>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

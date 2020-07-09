@@ -1,4 +1,5 @@
-﻿using Healthcare020.Mobile.Services;
+﻿using Healthcare020.Mobile.Constants;
+using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
 using Xamarin.Forms;
 
@@ -11,8 +12,8 @@ namespace Healthcare020.Mobile
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            
-            MainPage = new SplashScreenPage();
+
+            MainPage = new PacijentDasbhboardTabbedPage();
         }
 
         protected override void OnStart()

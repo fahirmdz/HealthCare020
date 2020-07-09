@@ -142,6 +142,16 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] prof {
+            get {
+                object obj = ResourceManager.GetObject("prof", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Podešavanja.
         /// </summary>
         internal static string SettingsTabTitle {

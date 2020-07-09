@@ -38,7 +38,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             datePregled.MinDate = DateTime.Now;
             timePregled.MinDate = DateTime.Now;
             txtDoktor.Text = ZahtevZaPregled.Doktor;
-            txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime() ?? "N/A";
+            txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
         }
 
         private async void btnSave_Click(object sender, System.EventArgs e)

@@ -20,7 +20,7 @@ namespace HealthCare020.Core.Models
         public GradDtoLL Grad { get; set; }
         public byte[] ProfilePicture { get; set; }
 
-        public string ImePrezime() => $"{Ime} {Prezime}";
+        public string ImePrezime => $"{Ime} {Prezime}";
 
         public LicniPodaciDto()
         {
