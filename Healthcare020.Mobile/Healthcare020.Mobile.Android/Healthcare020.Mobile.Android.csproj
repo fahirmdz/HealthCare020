@@ -76,8 +76,14 @@
     <PackageReference Include="Xam.Plugin.Iconize.FontAwesome">
       <Version>3.5.0.129</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>5.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
+      <Version>3.0.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -93,6 +99,8 @@
     <AndroidAsset Include="Assets\Montserrat-Regular.ttf" />
     <AndroidAsset Include="Assets\Montserrat-SemiBold.ttf" />
     <AndroidAsset Include="Assets\fa-solid-900.ttf" />
+    <Content Include="Assets\Montserrat-Thin.ttf" />
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -117,6 +125,10 @@
     <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\HealthCare020.Core\HealthCare020.Core.csproj">
+      <Project>{eb0d4334-b95a-480b-9e35-f45c2600da59}</Project>
+      <Name>HealthCare020.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Healthcare020.Mobile\Healthcare020.Mobile.csproj">
       <Project>{967489A2-FFB1-4672-983E-67B2B6701697}</Project>
       <Name>Healthcare020.Mobile</Name>
@@ -164,6 +176,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\menu_background_pacijentdashboard.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

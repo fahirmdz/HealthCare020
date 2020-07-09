@@ -7,6 +7,7 @@ using HealthCare020.Services.Interfaces;
 using HealthCare020.Services.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using HealthCare020.Core.Configuration;
 
 namespace HealthCare020.Services.Configuration
 {
@@ -14,11 +15,12 @@ namespace HealthCare020.Services.Configuration
     {
         public static void AddHealthCare020Services(this IServiceCollection services)
         {
+            services.ConfigureHealthcare020Core();
+
             services.AddHttpContextAccessor();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISecurityService, SecurityService>();
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ICRUDService<ZdravstvenoStanje, ZdravstvenoStanjeDto, ZdravstvenoStanjeDto, ZdravstvenoStanjeResourceParameters, ZdravstvenoStanjeUpsertDto, ZdravstvenoStanjeUpsertDto>, ZdravstvenoStanjeService>();
             services.AddScoped<ICRUDService<Role, TwoFieldsDto, TwoFieldsDto, TwoFieldsResourceParameters, RoleUpsertDto, RoleUpsertDto>, RoleService>();

@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Globalization;
+using System.Linq;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using System.Globalization;
-using System.Linq;
 
-namespace HealthCare020.Services.Mappers
+namespace HealthCare020.Core.Mappers
 {
     public class Mapper : Profile
     {
@@ -87,7 +87,7 @@ namespace HealthCare020.Services.Mappers
             CreateMap<LicniPodaci, LicniPodaciUpsertDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
-
+            CreateMap<LicniPodaciDto, LicniPodaciUpsertDto>();
             #endregion LicniPodaci
 
             #region StacionarnoOdeljenje

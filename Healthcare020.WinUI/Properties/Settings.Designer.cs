@@ -49,7 +49,7 @@ namespace Healthcare020.WinUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Healthcare020_WebAPI")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Healthcare020_Desktop")]
         public string IdpClientId {
             get {
                 return ((string)(this["IdpClientId"]));
@@ -61,7 +61,7 @@ namespace Healthcare020.WinUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("devsecret")]
+        [global::System.Configuration.DefaultSettingValueAttribute("devsecret_desktop")]
         public string IdpClientSecret {
             get {
                 return ((string)(this["IdpClientSecret"]));

@@ -11,23 +11,39 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <themes:LightTheme />
-            </ResourceDictionary.MergedDictionaries >
+            </ResourceDictionary.MergedDictionaries>
             <!--Global Styles-->
+
+            <Color x:Key="CustomBlue">#536b80</Color>
             <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Color x:Key="HealthcareCyan">#3ddbdb</Color>
+            <Color x:Key="LightSmokeWhite">#fcfcfc</Color>
+
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
 
-            <OnPlatform x:TypeArguments="x:String" 
-                        x:Key="FontAwesomeRegular">
-                <On Platform="Android" 
-                    Value="fa-solid-900.ttf#Font Awesome 5 Free" /> 
-                <On Platform="UWP" 
-                    Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" /> 
+            <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
+                <On Platform="UWP">15</On>
+                <On Platform="Android">22</On>
             </OnPlatform>
 
+            <OnPlatform x:TypeArguments="x:String"
+                        x:Key="FontAwesomeRegular">
+                <On Platform="Android"
+                    Value="fa-solid-900.ttf#Font Awesome 5 Free" />
+                <On Platform="UWP"
+                    Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String"
+                        x:Key="Montserrat-Thin">
+                <On Platform="Android"
+                    Value="Montserrat-Thin.ttf" />
+                <On Platform="UWP"
+                    Value="/Assets/Montserrat-Thin.ttf" />
+            </OnPlatform>
         </ResourceDictionary>
     </Application.Resources>
-    
 </Application>

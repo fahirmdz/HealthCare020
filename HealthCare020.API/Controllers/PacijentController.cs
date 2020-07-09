@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace HealthCare020.API.Controllers
 {
     [Route("api/" + Routes.PacijentiRoute)]
-    [Authorize(AuthorizationPolicies.PacijentPolicy)]
     public class PacijentController : BaseCRUDController<Pacijent, PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters, PacijentUpsertDto, PacijentUpsertDto>
     {
         public PacijentController(ICRUDService<Pacijent, PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters, PacijentUpsertDto, PacijentUpsertDto> crudService) :
@@ -21,7 +20,6 @@ namespace HealthCare020.API.Controllers
         {
         }
 
-        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
         public override async Task<IActionResult> Get(PacijentResourceParameters resourceParameters)
         {
             return await base.Get(resourceParameters);

@@ -15,9 +15,8 @@ namespace Healthcare020.Mobile
             MainPage = new SplashScreenPage();
         }
 
-        protected override async void OnStart()
+        protected override void OnStart()
         {
-            //var loggedIn = await Auth.AuthenticateWithSavedCredentials();
         }
 
         protected override void OnSleep()

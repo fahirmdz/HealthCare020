@@ -191,7 +191,9 @@ namespace HealthCare020.Services
 
         public async Task<KorisnickiNalogDtoLL> Authenticate(string username, string password)
         {
-            var korisnickiNalog = await _dbContext.KorisnickiNalozi.FirstOrDefaultAsync(x => x.Username == username);
+            var korisnickiNalog = await _dbContext.KorisnickiNalozi
+                .Include(x=>x.RolesKorisnickiNalog)
+                .FirstOrDefaultAsync(x => x.Username == username);
 
             if (korisnickiNalog != null)
             {

@@ -11,7 +11,7 @@
             mc:Ignorable="d">
 
     <!--Pages can be added as references or inline-->
-    <pages:WelcomePage Title="Pregledi" x:Name="PreglediTab">
+    <pages:WelcomePage Title="{x:Static local:AppResources.PreglediTabTitle}" x:Name="PreglediTab">
         <ContentPage.IconImageSource>
             <FontImageSource
               FontFamily="{StaticResource FontAwesomeRegular}"
@@ -22,7 +22,7 @@
         </ContentPage.IconImageSource>
     </pages:WelcomePage>
 
-    <pages:AboutPage Title="Uverenja" x:Name="UverenjaTab">
+    <pages:AboutPage Title="{x:Static local:AppResources.UverenjaTabTitle}" x:Name="UverenjaTab">
         <ContentPage.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontAwesomeRegular}"
@@ -33,7 +33,7 @@
         </ContentPage.IconImageSource>
     </pages:AboutPage>
 
-    <pages:LoginPage Title="Zahtevi" x:Name="ZahteviTab">
+    <pages:LoginPage Title="{x:Static local:AppResources.ZahteviTabTitle}" x:Name="ZahteviTab">
         <ContentPage.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontAwesomeRegular}"
@@ -44,7 +44,7 @@
         </ContentPage.IconImageSource>
     </pages:LoginPage>
 
-    <pages:SettingsPage Title="Zahtevi" x:Name="SettingsTab">
+    <pages:SettingsPage Title="{x:Static local:AppResources.SettingsTabTitle}" x:Name="SettingsTab">
         <ContentPage.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontAwesomeRegular}"

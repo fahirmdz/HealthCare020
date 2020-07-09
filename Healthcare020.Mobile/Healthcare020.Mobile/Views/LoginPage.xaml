@@ -48,7 +48,7 @@
                         </Frame>
                         <Entry Placeholder="Korisničko ime" Text="{Binding Username}"  FontSize="18" HeightRequest="50" x:Name="Username"/>
                         <Label x:Name="UsernameErrorLabel" TextColor="Red"></Label>
-                        <Entry Placeholder="Lozinka" HeightRequest="50" Text="{Binding Password}"  FontSize="18" x:Name="Password" MaxLength="15"/>
+                        <Entry Placeholder="Lozinka" HeightRequest="50" Text="{Binding Password}" IsPassword="True"  FontSize="18" x:Name="Password" MaxLength="15"/>
                         <Label x:Name="PasswordErrorLabel" TextColor="Red"></Label>
 
                         <!--REMEMBER ME-->
@@ -75,7 +75,7 @@
                                         HeightRequest="40"
                                         CornerRadius="20"
                                         FontSize="12"
-                                         Clicked="Button_OnClicked"/>
+                                        Command="{Binding LoginCommand}"/>
                         </Frame>
 
                         <Label Text="Forgotten password?" TextColor="#496075" HorizontalOptions="Center" FontSize="13" />

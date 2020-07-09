@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace Healthcare020.Mobile.Droid
 {
@@ -20,6 +21,7 @@ namespace Healthcare020.Mobile.Droid
 
             ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
             base.OnCreate(savedInstanceState);
+            ImageCircleRenderer.Init();
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

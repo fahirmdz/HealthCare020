@@ -29,6 +29,9 @@ namespace HealthCare020.Core.Enums
 
         public static int ToInt(this RoleType val) => (int) val;
 
+        /// <summary>
+        /// Convert RoleType enumeration to title string
+        /// </summary>
         public static string ToTitleString(this RoleType role)
         {
             switch (role)
@@ -47,7 +50,13 @@ namespace HealthCare020.Core.Enums
                     return string.Empty;
             }
         }
-        
+
+        /// <summary>
+        /// Compare integer value of RoleType enumeration with passed integer value
+        /// </summary>
+        /// <returns>Returns true if RoleType integer is equal to passed integer value</returns>
+        public static bool EqualInt(this RoleType role, int value) => (int)role == value;
+
     }
 
     public class RoleTypeManager
