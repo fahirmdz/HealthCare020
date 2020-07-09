@@ -124,10 +124,10 @@
     <value>https://10.0.2.2:5001/api/</value>
   </data>
   <data name="IdpClientId" xml:space="preserve">
-    <value>Healthcare020_WebAPI</value>
+    <value>Healthcare020_Mobile</value>
   </data>
   <data name="IdpClientSecret" xml:space="preserve">
-    <value>devsecret</value>
+    <value>devsecret_mobile</value>
   </data>
   <data name="IdpTokenEndpoint" xml:space="preserve">
     <value>https://healthcare020-oauth.com:5005/connect/token</value>

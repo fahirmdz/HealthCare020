@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Services.Interfaces;
 using IdentityServer4.Models;
@@ -13,6 +14,7 @@ namespace Healthcare020.OAuth.Services
     public class ProfileService : IProfileService
     {
         private readonly IKorisnikService _korisnikService;
+        private KorisnickiNalogDtoEL KorisnickiNalog;
 
         public ProfileService(IKorisnikService korisnikService)
         {
@@ -22,14 +24,11 @@ namespace Healthcare020.OAuth.Services
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             var korisnikId = context.Subject.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-
-            var korisnik = await GetKorisnickiNalog(int.Parse(korisnikId ?? "0"));
-            if (korisnik == null)
-                return;
+            KorisnickiNalog = await GetKorisnickiNalog(int.Parse(korisnikId ?? "0"));
 
             var claimsToAdd = new List<Claim>
             {
-                new Claim("roles", string.Join(", ", korisnik.Roles.Select(x => x.Naziv)))
+                new Claim("roles", string.Join(", ", KorisnickiNalog.Roles.Select(x => x.Naziv)))
             };
 
             context.IssuedClaims.AddRange(claimsToAdd);
@@ -38,14 +37,14 @@ namespace Healthcare020.OAuth.Services
         public async Task IsActiveAsync(IsActiveContext context)
         {
             var korisnikId = context.Subject.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-
-            var korisnik = await GetKorisnickiNalog(int.Parse(korisnikId ?? "0"));
-            context.IsActive = korisnik != null && !korisnik.LockedOut;
+            KorisnickiNalog = await GetKorisnickiNalog(int.Parse(korisnikId ?? "0"));
+            context.IsActive = !KorisnickiNalog.LockedOut;
         }
 
         private async Task<KorisnickiNalogDtoEL> GetKorisnickiNalog(int id)
         {
-            var result = await _korisnikService.GetById(id,true);
+
+            var result = await _korisnikService.GetById(id, true);
 
             if (!result.Succeeded)
                 return null;

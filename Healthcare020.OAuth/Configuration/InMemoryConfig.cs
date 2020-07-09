@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
+using HealthCare020.Core.Constants;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
@@ -21,8 +22,30 @@ namespace Healthcare020.OAuth.Configuration
             {
                 new Client
                 {
-                    ClientId = "Healthcare020_WebAPI",
-                    ClientSecrets = new [] { new Secret("devsecret".Sha512()) },
+                    ClientId = OAuthConstants.WebAPIClientId,
+                    ClientSecrets = new [] { new Secret("devsecret_api".Sha512()) },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId },
+                    RefreshTokenUsage = TokenUsage.ReUse,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    AbsoluteRefreshTokenLifetime = 2592000,
+                    AllowOfflineAccess = true
+                },
+                new Client
+                {
+                    ClientId = OAuthConstants.MobileClientId,
+                    ClientSecrets = new [] { new Secret("devsecret_mobile".Sha512()) },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId },
+                    RefreshTokenUsage = TokenUsage.ReUse,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    AbsoluteRefreshTokenLifetime = 2592000,
+                    AllowOfflineAccess = true
+                },
+                new Client
+                {
+                    ClientId = OAuthConstants.DesktopClientId,
+                    ClientSecrets = new [] { new Secret("devsecret_desktop".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId },
                     RefreshTokenUsage = TokenUsage.ReUse,

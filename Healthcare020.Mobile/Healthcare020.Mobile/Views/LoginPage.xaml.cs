@@ -17,12 +17,5 @@ namespace Healthcare020.Mobile.Views
 
 
         private void RememberMe_OnToggled(object sender, ToggledEventArgs e)=> LoginVM.RememberMe = RememberMe.IsToggled;
-
-        private void Button_OnClicked(object sender, EventArgs e)
-        {
-            
-
-            LoginVM.LoginCommand.Execute(sender);
-        }
     }
 }

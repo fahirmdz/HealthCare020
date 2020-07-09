@@ -39,6 +39,7 @@ namespace Healthcare020.Mobile.ViewModels
 
         private async void Login()
         {
+            IsBusy = true;
             if (string.IsNullOrWhiteSpace(Username))
             {
                 return;
@@ -53,6 +54,8 @@ namespace Healthcare020.Mobile.ViewModels
             {
                 Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
             }
+
+            IsBusy = false;
         }
     }
 }

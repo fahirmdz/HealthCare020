@@ -79,7 +79,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Healthcare020_WebAPI.
+        ///   Looks up a localized string similar to Healthcare020_Mobile.
         /// </summary>
         internal static string IdpClientId {
             get {
@@ -88,7 +88,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to devsecret.
+        ///   Looks up a localized string similar to devsecret_mobile.
         /// </summary>
         internal static string IdpClientSecret {
             get {

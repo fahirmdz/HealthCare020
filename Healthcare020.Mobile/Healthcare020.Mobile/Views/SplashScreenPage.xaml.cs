@@ -20,6 +20,8 @@ namespace Healthcare020.Mobile.Views
             BindingContext = BaseVM = new BaseViewModel {
                 LoadingMessage = AppResources.LoggingInLoadingMessage
             };
+
+            BaseVM.IsBusy = true;
         }
 
         protected override async void OnAppearing()
@@ -28,15 +30,15 @@ namespace Healthcare020.Mobile.Views
 
             if (await SecureStorage.GetAsync(PreferencesKeys.HasSavedLoginCredentials) is string val && val == true.ToString())
             {
-                BaseVM.IsBusy = true;
                 var loggedInWithSavedCredentials = await Auth.AuthenticateWithSavedCredentials();
                 if (loggedInWithSavedCredentials)
                     Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
 
-                BaseVM.IsBusy = false;
             }
             else
                 Application.Current.MainPage = new LoginPage();
+
+            BaseVM.IsBusy = false;
         }
 
         protected override void OnDisappearing()
