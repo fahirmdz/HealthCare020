@@ -1,57 +1,55 @@
-﻿using System.ComponentModel;
-using Android.Content;
-using Android.Graphics;
+﻿using Android.Content;
 using Android.Support.Design.Widget;
-using Android.Support.V4.Content;
-using Android.Support.V4.View;
-using Healthcare020.Mobile.Controls;
+using Android.Views;
 using Healthcare020.Mobile.Droid.Renderers;
+using Healthcare020.Mobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
 
-[assembly: ExportRenderer(typeof(CustomTabbedPage), typeof(CustomTabbedPageRenderer))]
+[assembly: ExportRenderer(typeof(PacijentDasbhboardTabbedPage), typeof(MyTabPageRender))]
+
 namespace Healthcare020.Mobile.Droid.Renderers
 {
-    public class CustomTabbedPageRenderer : TabbedPageRenderer
+    public class MyTabPageRender : TabbedPageRenderer, BottomNavigationView.IOnNavigationItemReselectedListener
     {
-        private bool _isConfigured = false;
-        private ViewPager _pager;
-        private TabLayout _layout;
- 
-        public CustomTabbedPageRenderer(Context context) : base(context) { }
- 
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public MyTabPageRender(Context context) : base(context)
         {
-            base.OnElementPropertyChanged(sender, e);
- 
-            _pager = (ViewPager)ViewGroup.GetChildAt(0);
-            _layout = (TabLayout)ViewGroup.GetChildAt(1);
- 
-            var control = (CustomTabbedPage)sender;
-            Android.Graphics.Color selectedColor;
-            Android.Graphics.Color unselectedColor;
-            if (control != null)
+        }
+
+        public static void Initialize()
+        {
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<TabbedPage> e)
+        {
+            base.OnElementChanged(e);
+
+            if (e.OldElement == null && e.NewElement != null)
             {
-                selectedColor = control.SelectedIconColor.ToAndroid();
-                unselectedColor = control.UnselectedIconColor.ToAndroid();
-            }
-            else
-            {
-                selectedColor = new Android.Graphics.Color(ContextCompat.GetColor(Context, Resource.Color.tabBarSelected));
-                unselectedColor = new Android.Graphics.Color(ContextCompat.GetColor(Context, Resource.Color.tabBarUnselected));
-            }
- 
-            for (int i = 0; i < _layout.TabCount; i++)
-            {
-                var tab = _layout.GetTabAt(i);
-                var icon = tab.Icon;
-                if (icon != null)
+                for (int i = 0; i <= this.ViewGroup.ChildCount - 1; i++)
                 {
-                    var color = tab.IsSelected ? selectedColor : unselectedColor;
-                    icon = Android.Support.V4.Graphics.Drawable.DrawableCompat.Wrap(icon);
-                    icon.SetColorFilter(color, PorterDuff.Mode.SrcIn);
+                    var childView = this.ViewGroup.GetChildAt(i);
+                    if (childView is ViewGroup viewGroup)
+                    {
+                        for (int j = 0; j <= viewGroup.ChildCount - 1; j++)
+                        {
+                            var childRelativeLayoutView = viewGroup.GetChildAt(j);
+                            if (childRelativeLayoutView is BottomNavigationView bottomNavigationView)
+                            {
+                                bottomNavigationView.SetOnNavigationItemReselectedListener(this);
+                            }
+                        }
+                    }
                 }
+            }
+        }
+
+        async void BottomNavigationView.IOnNavigationItemReselectedListener.OnNavigationItemReselected(IMenuItem item)
+        {
+            if (Element.CurrentPage is NavigationPage navPage)
+            {
+                await navPage.PopToRootAsync(true);
             }
         }
     }

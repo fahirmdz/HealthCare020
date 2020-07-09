@@ -8,50 +8,67 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
             xmlns:pages="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
-            mc:Ignorable="d">
+    xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
+    mc:Ignorable="d">
 
     <!--Pages can be added as references or inline-->
-    <pages:WelcomePage Title="{x:Static local:AppResources.PreglediTabTitle}" x:Name="PreglediTab">
-        <ContentPage.IconImageSource>
-            <FontImageSource
-              FontFamily="{StaticResource FontAwesomeRegular}"
-              Glyph="{x:Static local:IconFont.Stethoscope}"
-              Size="55"
-              Color="Aqua"
-              ></FontImageSource>
-        </ContentPage.IconImageSource>
-    </pages:WelcomePage>
-
-    <pages:AboutPage Title="{x:Static local:AppResources.UverenjaTabTitle}" x:Name="UverenjaTab">
-        <ContentPage.IconImageSource>
+    <NavigationPage Title="{x:Static resources:AppResources.PreglediTabTitle}" x:Name="PreglediTab">
+        <x:Arguments>
+            <pages:PreglediMainPage>
+            </pages:PreglediMainPage>
+        </x:Arguments>
+        <NavigationPage.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontAwesomeRegular}"
-                Glyph="{x:Static local:IconFont.FileSignature}"
+                Glyph="{x:Static resources:IconFont.Stethoscope}"
                 Size="55"
                 Color="Aqua"
             ></FontImageSource>
-        </ContentPage.IconImageSource>
-    </pages:AboutPage>
+        </NavigationPage.IconImageSource>
+    </NavigationPage>
 
-    <pages:LoginPage Title="{x:Static local:AppResources.ZahteviTabTitle}" x:Name="ZahteviTab">
-        <ContentPage.IconImageSource>
+    <NavigationPage Title="{x:Static resources:AppResources.UverenjaTabTitle}" x:Name="UverenjaTab">
+        <x:Arguments>
+            <pages:LekarskaUverenjaMainPage>
+            </pages:LekarskaUverenjaMainPage>
+        </x:Arguments>
+        <NavigationPage.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontAwesomeRegular}"
-                Glyph="{x:Static local:IconFont.Question}"
+                Glyph="{x:Static resources:IconFont.FileSignature}"
                 Size="55"
                 Color="Aqua"
             ></FontImageSource>
-        </ContentPage.IconImageSource>
-    </pages:LoginPage>
+        </NavigationPage.IconImageSource>
+    </NavigationPage>
 
-    <pages:SettingsPage Title="{x:Static local:AppResources.SettingsTabTitle}" x:Name="SettingsTab">
-        <ContentPage.IconImageSource>
+    <NavigationPage Title="{x:Static resources:AppResources.ZahteviTabTitle}" x:Name="ZahteviTab">
+        <x:Arguments>
+            <pages:ZahteviZaPregledMainPage>
+            </pages:ZahteviZaPregledMainPage>
+        </x:Arguments>
+        <NavigationPage.IconImageSource>
+            <FontImageSource
+                FontFamily="{StaticResource FontAwesomeRegular}"
+                Glyph="{x:Static resources:IconFont.Question}"
+                Size="55"
+                Color="Aqua"
+            ></FontImageSource>
+        </NavigationPage.IconImageSource>
+    </NavigationPage>
+
+    <NavigationPage Title="{x:Static resources:AppResources.SettingsTabTitle}" x:Name="SettingsTab">
+        <x:Arguments>
+            <pages:SettingsPage>
+            </pages:SettingsPage>
+        </x:Arguments>
+        <NavigationPage.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontAwesomeRegular}"
                 Glyph="{x:Static local:IconFont.Cog}"
                 Size="55"
                 Color="Aqua"
             ></FontImageSource>
-        </ContentPage.IconImageSource>
-    </pages:SettingsPage>
+        </NavigationPage.IconImageSource>
+    </NavigationPage>
 </TabbedPage>

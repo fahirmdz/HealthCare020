@@ -49,7 +49,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             InitializeComponent();
 
             _apiService = new APIService(Routes.ZdravstvenaStanjaRoute);
-            txtPacijent.Text = LekarskoUverenje.Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime();
+            txtPacijent.Text = LekarskoUverenje.Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime;
             txtDoktor.Text = LekarskoUverenje.Pregled.Doktor;
             txtOpisStanja.Text = LekarskoUverenje.OpisStanja;
             toolTip.SetToolTip(btnPdf, "Generisanje PDF dokumenta na osnovu podataka iz forme");
@@ -66,7 +66,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
             _apiService = new APIService(Routes.ZdravstvenaStanjaRoute);
             InitializeComponent();
-            txtPacijent.Text = Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime();
+            txtPacijent.Text = Pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime;
             txtDoktor.Text = Pregled.Doktor;
             txtOpisStanja.ResetText();
             toolTip.SetToolTip(btnPdf, "Generisanje PDF dokumenta na osnovu podataka iz forme");

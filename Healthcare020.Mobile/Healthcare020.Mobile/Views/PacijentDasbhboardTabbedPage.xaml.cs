@@ -24,11 +24,20 @@ namespace Healthcare020.Mobile.Views
             //this.Children.Add(new SettingsPage());
             this.SelectedTabColor = (Color)Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
             this.UnselectedTabColor = (Color)Application.Current.Resources[ResourceKeys.CustomBlueColor];
+            this.PropertyChanging += OnTabChanged;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+        }
+
+        private async void OnTabChanged (object sender, PropertyChangingEventArgs e)
+        {
+            if (e.PropertyName == "CurrentPage" && this.CurrentPage is NavigationPage navPage)
+            {
+                await navPage.PopToRootAsync(true);
+            }
         }
     }
 }

@@ -81,7 +81,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
             if (dgrvMain.Columns[e.ColumnIndex].Name == "Pacijent")
             {
-                e.Value = uputnica.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime();
+                e.Value = uputnica.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime;
             }
         }
 

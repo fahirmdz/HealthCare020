@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PacijentDashboardPage : ContentPage
+    public partial class PreglediMainPage : ContentPage
     {
-        public PacijentDashboardPage()
+        public PreglediMainPage()
         {
             InitializeComponent();
         }

@@ -18,7 +18,7 @@ namespace Healthcare020.WinUI.Services
             if (pregled == null || string.IsNullOrWhiteSpace(opisStanja) || string.IsNullOrWhiteSpace(zdravstvenoStanje))
                 return;
 
-            var pacijent = pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime();
+            var pacijent = pregled.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime;
 
             var document = new PdfDocument();
             var fileName = $"LekarskoUverenje_{pacijent ?? string.Empty}_{DateTime.Now.Date:d}.pdf".RemoveWhitespaces();

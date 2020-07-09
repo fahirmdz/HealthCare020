@@ -34,7 +34,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         {
             txtDatumZahteva.Text = ZahtevZaPregled.DatumVreme.ToString("g");
             txtDoktor.Text = ZahtevZaPregled.Doktor;
-            txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime()??"N/A";
+            txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime??"N/A";
             txtNapomena.Text = ZahtevZaPregled.Napomena;
             txtNapomena.ReadOnly = true;
             txtIsObradjen.Text = ZahtevZaPregled.IsObradjen ? "DA" : "NE";

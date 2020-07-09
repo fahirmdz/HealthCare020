@@ -36,7 +36,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 
         private void frmPosetaOverview_Load(object sender, System.EventArgs e)
         {
-            txtPacijent.Text = ZahtevZaPosetu.PacijentNaLecenju.LicniPodaci.ImePrezime();
+            txtPacijent.Text = ZahtevZaPosetu.PacijentNaLecenju.LicniPodaci.ImePrezime;
             txtDatumZahteva.Text = ZahtevZaPosetu.DatumVremeKreiranja.ToString("g");
             txtBrojTelefonaPosetioca.Text = ZahtevZaPosetu.BrojTelefonaPosetioca;
             txtIsObradjen.Text = ZahtevZaPosetu.IsObradjen ? "DA" : "NE";

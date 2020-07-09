@@ -51,7 +51,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             InitializeComponent();
             _apiService = new APIService(Routes.UputnicaRoute);
 
-            txtPacijent.Text = Uputnica.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime();
+            txtPacijent.Text = Uputnica.Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime;
             txtRazlog.Text = Uputnica.Razlog;
             txtNapomena.Text = uputnica.Napomena;
 
@@ -69,7 +69,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
             _apiService = new APIService(Routes.UputnicaRoute);
             InitializeComponent();
-            txtPacijent.Text = Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime() ?? "N/A";
+            txtPacijent.Text = Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

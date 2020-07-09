@@ -58,6 +58,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.1.0.446</Version>
     </PackageReference>
+    <PackageReference Include="LiveXAML">
+      <Version>2.1.73</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>18.1.0.59</Version>
     </PackageReference>
@@ -99,8 +102,9 @@
     <AndroidAsset Include="Assets\Montserrat-Regular.ttf" />
     <AndroidAsset Include="Assets\Montserrat-SemiBold.ttf" />
     <AndroidAsset Include="Assets\fa-solid-900.ttf" />
-    <Content Include="Assets\Montserrat-Thin.ttf" />
+    <AndroidAsset Include="Assets\Montserrat-Thin.ttf" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+    <AndroidAsset Include="Assets\Montserrat-Light.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

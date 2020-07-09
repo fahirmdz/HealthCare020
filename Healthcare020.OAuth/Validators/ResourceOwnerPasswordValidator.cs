@@ -50,9 +50,10 @@ namespace Healthcare020.OAuth.Validators
             var leadRole = korisnickiNalog.Roles.Min();
 
             //1. condition -> If mobile client request access token and user doesn't have Pacijent role
-            //2. condition -> If desktop client request access token and user doesn't have one of these roles => Administrator or Doktor
+            //2. condition -> If desktop client request access token and user doesn't have one of these roles => Administrator, Doktor or RadnikPrijem
             if ((context.Request.ClientId == OAuthConstants.MobileClientId && !RoleType.Pacijent.EqualInt(leadRole))
-                || (context.Request.ClientId == OAuthConstants.DesktopClientId && !RoleType.Administrator.EqualInt(leadRole) && !RoleType.Doktor.EqualInt(leadRole)))
+                || (context.Request.ClientId == OAuthConstants.DesktopClientId && !RoleType.Administrator.EqualInt(leadRole) 
+                                                                               && !RoleType.Doktor.EqualInt(leadRole) && !RoleType.RadnikPrijem.EqualInt(leadRole)))
             {
                 context.Result=new GrantValidationResult(TokenRequestErrors.InvalidTarget,"Invalid credentials");
                 return;
