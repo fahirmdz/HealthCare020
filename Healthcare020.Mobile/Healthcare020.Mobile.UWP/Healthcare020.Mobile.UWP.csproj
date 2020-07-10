@@ -105,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\healthcare020_200x200.png" />
+    <AndroidResource Include="Assets\healthcare020_350x350.png" />
+    <AndroidResource Include="Assets\healthcare020_350x350_revert.png" />
+    <AndroidResource Include="Assets\healthcare020_200x200_revert.png" />
     <Content Include="Assets\Healthcare020_Logo_108x108.png" />
     <Content Include="Assets\Healthcare020_Logo_250x250.png" />
     <Content Include="Assets\Healthcare020_120x120.png" />
@@ -178,8 +181,8 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
       <Version>3.0.0.5</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>

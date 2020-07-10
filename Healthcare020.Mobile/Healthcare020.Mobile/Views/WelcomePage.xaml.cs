@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Healthcare020.Mobile.ViewModels;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -36,10 +35,6 @@ namespace Healthcare020.Mobile.Views
                 CarouselImages.Position = (CarouselImages.Position + 1) % WelcomeVM.ImageUrls.Count;
                 return true;
             });
-
-            LogoImage.Source = Device.RuntimePlatform == Device.Android
-                ? ImageSource.FromFile("healthcare020_200x200.png")
-                : ImageSource.FromFile("Assets/healthcare020_200x200.png");
         }
     }
 }

@@ -17,9 +17,6 @@ namespace Healthcare020.Mobile.Droid.Renderers
         {
         }
 
-        public static void Initialize()
-        {
-        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<TabbedPage> e)
         {

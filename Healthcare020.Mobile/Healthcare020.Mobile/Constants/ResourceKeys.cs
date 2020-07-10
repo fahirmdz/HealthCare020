@@ -9,6 +9,9 @@ namespace Healthcare020.Mobile.Constants
         public static string LightSmokeWhiteColor { get; } = "LightSmokeWhite";
         public static string CustomDarkBlueColor { get; } = "CustomDarkBlue";
         public static string CustomDarkCyanColor { get; } = "CustomDarkCyan";
-        public static string CustomNavyBlueDarkColor { get; } = "CustomNavyBlueDark";
+        public static string TitlePathMedium { get; } = "TitlePath-Medium";
+        public static string TitlePathLarge { get; } = "TitlePath-Large";
+        public static string TitleLabelMedium { get; } = "TitleLabel-Medium";
+        public static string TitleLabelLarge { get; } = "TitleLabel-Large";
     }
 }

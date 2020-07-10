@@ -11,64 +11,68 @@
     xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
 
+    <TabbedPage.Resources>
+        <FontImageSource x:Key="StethoscopeIcon"
+            FontFamily="{StaticResource FontAwesomeRegular}"
+            Glyph="{x:Static resources:IconFont.Stethoscope}"
+            Size="30"
+            Color="{StaticResource CustomBlue}"
+        ></FontImageSource>
+
+        <FontImageSource x:Key="FileSignatureIcon"
+            FontFamily="{StaticResource FontAwesomeRegular}"
+            Glyph="{x:Static resources:IconFont.FileSignature}"
+            Size="30"
+            Color="{StaticResource CustomBlue}"
+
+        ></FontImageSource>
+
+        <FontImageSource x:Key="QuestionIcon"
+            FontFamily="{StaticResource FontAwesomeRegular}"
+            Glyph="{x:Static resources:IconFont.Question}"
+            Size="30"
+            Color="{StaticResource CustomBlue}"
+
+        ></FontImageSource>
+
+        <FontImageSource x:Key="CogIcon"
+            FontFamily="{StaticResource FontAwesomeRegular}"
+            Glyph="{x:Static local:IconFont.Cog}"
+            Size="30"
+            Color="{StaticResource CustomBlue}"
+        ></FontImageSource>
+    </TabbedPage.Resources>
     <!--Pages can be added as references or inline-->
-    <NavigationPage Title="{x:Static resources:AppResources.PreglediTabTitle}" x:Name="PreglediTab">
+    <NavigationPage Title="{x:Static resources:AppResources.PreglediTabTitle}" x:Name="PreglediTab" IconImageSource="{StaticResource StethoscopeIcon}">
         <x:Arguments>
             <pages:PreglediMainPage>
             </pages:PreglediMainPage>
         </x:Arguments>
-        <NavigationPage.IconImageSource>
-            <FontImageSource
-                FontFamily="{StaticResource FontAwesomeRegular}"
-                Glyph="{x:Static resources:IconFont.Stethoscope}"
-                Size="55"
-                Color="Aqua"
-            ></FontImageSource>
-        </NavigationPage.IconImageSource>
     </NavigationPage>
 
-    <NavigationPage Title="{x:Static resources:AppResources.UverenjaTabTitle}" x:Name="UverenjaTab">
+    <NavigationPage Title="{x:Static resources:AppResources.UverenjaTabTitle}"
+                    x:Name="UverenjaTab"
+                    IconImageSource="{StaticResource FileSignatureIcon}">
         <x:Arguments>
             <pages:LekarskaUverenjaMainPage>
             </pages:LekarskaUverenjaMainPage>
         </x:Arguments>
-        <NavigationPage.IconImageSource>
-            <FontImageSource
-                FontFamily="{StaticResource FontAwesomeRegular}"
-                Glyph="{x:Static resources:IconFont.FileSignature}"
-                Size="55"
-                Color="Aqua"
-            ></FontImageSource>
-        </NavigationPage.IconImageSource>
     </NavigationPage>
 
-    <NavigationPage Title="{x:Static resources:AppResources.ZahteviTabTitle}" x:Name="ZahteviTab">
+    <!--****Title attribute sets title of bottom tab item--> 
+    <NavigationPage Title="{x:Static resources:AppResources.ZahteviTabTitle}" x:Name="ZahteviTab" IconImageSource="{StaticResource QuestionIcon}">
         <x:Arguments>
             <pages:ZahteviZaPregledMainPage>
             </pages:ZahteviZaPregledMainPage>
         </x:Arguments>
-        <NavigationPage.IconImageSource>
-            <FontImageSource
-                FontFamily="{StaticResource FontAwesomeRegular}"
-                Glyph="{x:Static resources:IconFont.Question}"
-                Size="55"
-                Color="Aqua"
-            ></FontImageSource>
-        </NavigationPage.IconImageSource>
     </NavigationPage>
 
-    <NavigationPage Title="{x:Static resources:AppResources.SettingsTabTitle}" x:Name="SettingsTab">
+    <NavigationPage  Title="{x:Static resources:AppResources.SettingsTabTitle}"
+                     x:Name="SettingsTab" 
+                     IconImageSource="{StaticResource CogIcon}">
         <x:Arguments>
             <pages:SettingsPage>
             </pages:SettingsPage>
         </x:Arguments>
-        <NavigationPage.IconImageSource>
-            <FontImageSource
-                FontFamily="{StaticResource FontAwesomeRegular}"
-                Glyph="{x:Static local:IconFont.Cog}"
-                Size="55"
-                Color="Aqua"
-            ></FontImageSource>
-        </NavigationPage.IconImageSource>
     </NavigationPage>
 </TabbedPage>

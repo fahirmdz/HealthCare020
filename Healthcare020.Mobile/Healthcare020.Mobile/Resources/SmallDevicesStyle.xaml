@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                    x:Class="Healthcare020.Mobile.Resources.SmallDevicesStyle">
+
+    <Style TargetType="Path" x:Key="LogoPath">
+        <Setter Property="Aspect" Value="UniformToFill" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="Data">M574 158.191V0H0C193.374 136.819 284.177 184.151 574 158.191Z</Setter>
+        <Setter Property="Fill" Value="#65DBDB" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+    </Style>
+    <Style TargetType="Path" x:Key="TitlePath">
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Aspect" Value="None" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="Data">M-1 7.53438e-05C-1 7.53438e-05 159.165 4.31494e-05 186.129 7.53438e-05C213.093 0.000107538 217.407 32.0001 186.129 32.0001C154.851 32.0001 -1 32.0001 -1 32.0001V7.53438e-05Z</Setter>
+        <Setter Property="Fill" Value="#65DBDB" />
+    </Style>
+    <Style TargetType="Label" x:Key="TitleLabel">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Text" Value="Registracija" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="CharacterSpacing">1</Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
+        <Setter Property="Margin">-200,5,0,0</Setter>
+    </Style>
+    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo">
+        <On Platform="Android" Value="healthcare020_200x200.png"></On>
+        <On Platform="UWP" Value="Assets/healthcare020_200x200.png"></On>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo_Revert">
+        <On Platform="Android" Value="healthcare020_200x200_revert.png"></On>
+        <On Platform="UWP" Value="Assets/healthcare020_200x200_revert.png"></On>
+    </OnPlatform>
+
+    <Style TargetType="Button" x:Key="CustomButtonStyle">
+        <Setter Property="ContentLayout">Left,0</Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource CustomBlue}"></Setter>
+        <Setter Property="TextColor">WhiteSmoke</Setter>
+        <Setter Property="CornerRadius">15</Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}"></Setter>
+        <Setter Property="VerticalOptions">FillAndExpand</Setter>
+        <Setter Property="HorizontalOptions">FillAndExpand</Setter>
+        <Setter Property="HeightRequest">60</Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+        <Setter Property="Margin">15,10,15,10</Setter>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+        <Setter Property="TextColor" Value="{StaticResource CustomDarkBlue}"></Setter>
+    </Style>
+
+</ResourceDictionary>

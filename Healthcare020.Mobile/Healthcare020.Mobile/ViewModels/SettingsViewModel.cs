@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Acr.UserDialogs;
 using AutoMapper;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
@@ -8,8 +8,6 @@ using Plugin.Media.Abstractions;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
-using Healthcare020.Mobile.Views;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
@@ -65,6 +63,7 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         private PacijentDtoEL _pacijent;
+
         public PacijentDtoEL Pacijent
         {
             get => _pacijent;
@@ -81,7 +80,6 @@ namespace Healthcare020.Mobile.ViewModels
              if (UploadedPic != null)
                  await UpdateLicniPodaci();
          });
-
 
         public ICommand LogoutCommand => new Command(async () => { await Auth.Logout(); });
 

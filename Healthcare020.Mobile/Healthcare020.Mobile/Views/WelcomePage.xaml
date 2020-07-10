@@ -13,39 +13,45 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <!--<Image>
-                    <Image.Source>
-                        <FontImageSource
-            FontFamily="{StaticResource FontAwesomeRegular}"
-            Glyph="{x:Static local:IconFont.Stethoscope}"
-            Size="60"
-            Color="#00bebe" />
-                    </Image.Source>
-                </Image>-->
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="WhiteSmoke">
-
-            <Frame  HorizontalOptions="Fill" VerticalOptions="Start" BackgroundColor="WhiteSmoke" BorderColor="Transparent">
-                <Image HorizontalOptions="Center" VerticalOptions="Fill" x:Name="LogoImage"></Image>
+            <Frame  HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    BackgroundColor="WhiteSmoke"
+                    BorderColor="Transparent"
+                    HeightRequest="270"
+                    Margin="0,30,0,0">
+                <Image HorizontalOptions="Center"
+                       Aspect="AspectFill"
+                       VerticalOptions="CenterAndExpand"
+                       Source="{StaticResource Logo}">
+                </Image>
             </Frame>
-            <CarouselView x:Name="CarouselImages"  HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                          IsScrollAnimated="true" IsSwipeEnabled="True" ItemsSource="{Binding ImageUrls}">
+            <CarouselView x:Name="CarouselImages"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="Center"
+                          IsScrollAnimated="true"
+                          IsSwipeEnabled="True"
+                          ItemsSource="{Binding ImageUrls}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Image Aspect="AspectFill" Source="{Binding item}" 
+                            <Image Aspect="AspectFill" Source="{Binding item}"
                                     HorizontalOptions="Center" VerticalOptions="Center"></Image>
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            <StackLayout Margin="0,30" HorizontalOptions="Fill">
-                <Button CornerRadius="20" x:Name="LoginButton"
+            <StackLayout Margin="0,30"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="End">
+                <Button CornerRadius="20" 
+                        x:Name="LoginButton"
                         BackgroundColor="#00bebe" 
                         HorizontalOptions="Center" 
                         Text="Log In" 
                         TextColor="#31373d"
-                   HeightRequest="40"
+                        HeightRequest="40"
                         WidthRequest="300"
                         Font="12" 
                         FontFamily="Arial"

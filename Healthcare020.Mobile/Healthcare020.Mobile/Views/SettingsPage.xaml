@@ -58,7 +58,8 @@
                             <Button x:Name="EditProfileBtn"
                                     Style="{StaticResource CustomButtonStyle}"
                                     Text="Edit profile"
-                                    Command="{Binding EditProfileNavigationCommand}">
+                                    Command="{Binding EditProfileNavigationCommand}"
+                                    Clicked="EditProfileBtn_OnClicked">
                             </Button>
                             <Button x:Name="ChangePasswordBtn"
                                     Text="Change password"

@@ -1,4 +1,7 @@
-﻿using Healthcare020.Mobile.Constants;
+﻿using System;
+using Healthcare020.Mobile.Constants;
+using Healthcare020.Mobile.Helpers;
+using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -18,26 +21,14 @@ namespace Healthcare020.Mobile.Views
         {
             InitializeComponent();
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
-            //this.Children.Add(new WelcomePage());
-            //this.Children.Add(new AboutPage());
-            //this.Children.Add(new LoginPage());
-            //this.Children.Add(new SettingsPage());
+          
             this.SelectedTabColor = (Color)Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
             this.UnselectedTabColor = (Color)Application.Current.Resources[ResourceKeys.CustomBlueColor];
-            this.PropertyChanging += OnTabChanged;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-        }
-
-        private async void OnTabChanged (object sender, PropertyChangingEventArgs e)
-        {
-            if (e.PropertyName == "CurrentPage" && this.CurrentPage is NavigationPage navPage)
-            {
-                await navPage.PopToRootAsync(true);
-            }
         }
     }
 }
