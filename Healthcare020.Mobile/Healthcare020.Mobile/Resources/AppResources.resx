@@ -123,6 +123,12 @@
   <data name="ApiUrlAndroid" xml:space="preserve">
     <value>https://10.0.2.2:5001/api/</value>
   </data>
+  <data name="ChangePasswordPageTitle" xml:space="preserve">
+    <value>Izmena lozinke</value>
+  </data>
+  <data name="EditProfilePageTitle" xml:space="preserve">
+    <value>Izmena profila</value>
+  </data>
   <data name="IdpClientId" xml:space="preserve">
     <value>Healthcare020_Mobile</value>
   </data>
@@ -138,6 +144,9 @@
   <data name="InvalidLoginCredentials" xml:space="preserve">
     <value>Neispravno korisničko ime ili lozinka</value>
   </data>
+  <data name="LekarskaUverenjaPageTitle" xml:space="preserve">
+    <value>Lekarska uverenja</value>
+  </data>
   <data name="LoggingInLoadingMessage" xml:space="preserve">
     <value>Logiranje..</value>
   </data>
@@ -147,6 +156,9 @@
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="prof" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>prof.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>Podešavanja</value>
   </data>
   <data name="SettingsTabTitle" xml:space="preserve">
     <value>Podešavanja</value>

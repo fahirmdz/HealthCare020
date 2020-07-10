@@ -9,20 +9,6 @@ namespace Healthcare020.Mobile.ViewModels
     {
         public WelcomeViewModel()
         {
-            LoginPageCommand=new Command(() =>
-            {
-                Application.Current.MainPage = new LoginPage();
-            });
-
-            RegisterPageCommand=new Command(() =>
-            {
-                Application.Current.MainPage = new LoginPage();
-            });
-
-            PosetaPageCommand=new Command(() =>
-            {
-                Application.Current.MainPage = new LoginPage();
-            });
         }
 
         private ObservableCollection<SinglePropertyItemsViewModel<ImageSource>> _imageUrls;
@@ -32,8 +18,19 @@ namespace Healthcare020.Mobile.ViewModels
             set => SetProperty(ref _imageUrls, value);
         }
 
-        public ICommand LoginPageCommand { get; set; }
-        public ICommand RegisterPageCommand { get; set; }
-        public ICommand PosetaPageCommand { get; set; }
+        public ICommand LoginPageCommand=>new Command(() =>
+        {
+            Application.Current.MainPage = new LoginPage();
+        });
+
+        public ICommand RegisterPageCommand=>new Command(() =>
+        {
+            Application.Current.MainPage = new RegisterPage();
+        });
+
+        public ICommand PosetaPageCommand=>new Command(() =>
+        {
+            Application.Current.MainPage = new LoginPage();
+        });
     }
 }

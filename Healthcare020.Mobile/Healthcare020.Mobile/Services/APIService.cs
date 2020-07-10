@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+#pragma warning disable 168
 
 namespace Healthcare020.Mobile.Services
 {
@@ -48,7 +49,9 @@ namespace Healthcare020.Mobile.Services
                 request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
                 BaseUrl = request.Url;
             }
+#pragma warning disable 168
             catch (Exception ex)
+#pragma warning restore 168
             {
                 // ignored
             }
@@ -242,7 +245,9 @@ namespace Healthcare020.Mobile.Services
 
                 return APIServiceResult<T>.OK(result);
             }
+#pragma warning disable 168
             catch (Exception ex)
+#pragma warning restore 168
             {
                 return APIServiceResult<T>.Exception();
             }

@@ -36,6 +36,10 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         public ICommand LoginCommand => new Command(Login);
+        public ICommand RegisterNavigationCommand => new Command(() =>
+        {
+            Application.Current.MainPage=new RegisterPage();
+        });
 
         private async void Login()
         {

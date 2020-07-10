@@ -79,6 +79,24 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Izmena lozinke.
+        /// </summary>
+        internal static string ChangePasswordPageTitle {
+            get {
+                return ResourceManager.GetString("ChangePasswordPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izmena profila.
+        /// </summary>
+        internal static string EditProfilePageTitle {
+            get {
+                return ResourceManager.GetString("EditProfilePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Healthcare020_Mobile.
         /// </summary>
         internal static string IdpClientId {
@@ -124,6 +142,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lekarska uverenja.
+        /// </summary>
+        internal static string LekarskaUverenjaPageTitle {
+            get {
+                return ResourceManager.GetString("LekarskaUverenjaPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logiranje...
         /// </summary>
         internal static string LoggingInLoadingMessage {
@@ -148,6 +175,15 @@ namespace Healthcare020.Mobile.Resources {
             get {
                 object obj = ResourceManager.GetObject("prof", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podešavanja.
+        /// </summary>
+        internal static string SettingsPageTitle {
+            get {
+                return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
             }
         }
         

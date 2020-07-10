@@ -1,7 +1,8 @@
-﻿using System;
-using Healthcare020.Mobile.Helpers;
+﻿using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,33 +12,40 @@ namespace Healthcare020.Mobile.Views
     public partial class SettingsPage : ContentPage
     {
         public SettingsViewModel SettingsVM { get; set; }
-        private readonly OnPlatform<string> FontAwesomeRegular;
+        private NavigationPage NavigationPageParent;
 
         public SettingsPage()
         {
-            //_apiService = new APIService(Routes.PacijentiRoute);
+            Title = AppResources.SettingsPageTitle;
             InitializeComponent();
             BindingContext = SettingsVM = ViewModelLocator.SettingsViewModel;
-            FontAwesomeRegular = Application.Current.Resources["FontAwesomeRegular"] as OnPlatform<string>;
 
-            LogoutBtn.ImageSource = GetIconSource(IconFont.SignOutAlt);
+            LogoutBtn.ImageSource = IconFont.SignOutAlt.GetIcon();
 
-            EditProfileBtn.ImageSource = GetIconSource(IconFont.Edit);
+            EditProfileBtn.ImageSource = IconFont.Edit.GetIcon(); ;
 
-            ChangePasswordBtn.ImageSource = GetIconSource(IconFont.Key);
+            ChangePasswordBtn.ImageSource = IconFont.Key.GetIcon(); ;
         }
 
-        private FontImageSource GetIconSource(string glyph) => new FontImageSource
+        protected override void OnAppearing()
         {
-            FontFamily = FontAwesomeRegular,
-            Glyph = glyph,
-            Color=Color.WhiteSmoke,
-            Size=30
-        };
+            base.OnAppearing();
+            NavigationPageParent = (NavigationPage)Parent;
+        }
 
         private async void ChangePasswordBtn_OnClicked(object sender, EventArgs e)
         {
-            await ((NavigationPage)this.Parent).PushAsync(new EditProfilePage());
+            await PushToNavigationParent(new ChangePasswordPage());
+        }
+
+        private async void EditProfileBtn_OnClicked(object sender, EventArgs e)
+        {
+            await PushToNavigationParent(new EditProfilePage());
+        }
+
+        private async Task PushToNavigationParent(Page page)
+        {
+            await NavigationPageParent.PushAsync(page, true);
         }
     }
 }

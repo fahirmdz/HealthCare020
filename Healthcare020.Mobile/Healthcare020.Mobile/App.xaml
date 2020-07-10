@@ -8,7 +8,7 @@
              x:Class="Healthcare020.Mobile.App">
 
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary x:Name="MainResourceDictionary">
             <ResourceDictionary.MergedDictionaries>
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries>
@@ -18,19 +18,12 @@
             <Color x:Key="CustomDarkBlue">#174c73</Color>
             <Color x:Key="CustomDarkCyan">#0bbfbf</Color>
             <Color x:Key="CustomNavyBlueDark">#0b2236</Color>
-            
+
             <Color x:Key="NavigationPrimary">#2196F3</Color>
             <Color x:Key="HealthcareCyan">#3ddbdb</Color>
             <Color x:Key="LightSmokeWhite">#fafafa</Color>
             <Color x:Key="LighterSmokeWhite">#fefefe</Color>
             <Color x:Key="LightGray">#f7f7f7</Color>
-
-            
-
-            <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource CustomDarkCyan}" />
-                <Setter Property="BarTextColor" Value="{StaticResource CustomDarkBlue}" />
-            </Style>
 
             <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
                 <On Platform="UWP">27</On>
@@ -40,6 +33,11 @@
             <OnPlatform x:Key="FontSize-Smaller" x:TypeArguments="x:Double">
                 <On Platform="UWP">17</On>
                 <On Platform="Android">12</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="FontSize-Small" x:TypeArguments="x:Double">
+                <On Platform="UWP">22</On>
+                <On Platform="Android">18</On>
             </OnPlatform>
 
             <OnPlatform x:Key="FontSize-Large" x:TypeArguments="x:Double">
@@ -55,6 +53,40 @@
                     Value="/Assets/fa-solid-900.ttf#Font Awesome 5 Free" />
             </OnPlatform>
 
+            <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo">
+                <On Platform="Android" Value="healthcare020_350x350.png"></On>
+                <On Platform="UWP" Value="Assets/healthcare020_350x350.png"></On>
+            </OnPlatform>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource CustomDarkCyan}" />
+                <Setter Property="BarTextColor" Value="{StaticResource CustomDarkBlue}" />
+            </Style>
+
+
+            <!--TESTING PURPOSE--><!--
+            <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo_Revert">
+                <On Platform="Android" Value="healthcare020_350x350_revert.png"></On>
+                <On Platform="UWP" Value="Assets/healthcare020_350x350_revert.png"></On>
+            </OnPlatform>
+
+            <Style TargetType="Path" x:Key="TitlePath">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Aspect" Value="None" />
+                <Setter Property="FlowDirection" Value="LeftToRight" />
+                <Setter Property="Data">M-1 9.23353e-05C-1 9.23353e-05 175.259 2.191e-05 204.932 9.23353e-05C234.605 0.000162761 239.353 70.0001 204.932 70.0001C170.511 70.0001 -1 70.0001 -1 70.0001V9.23353e-05Z</Setter>
+                <Setter Property="Fill" Value="#65DBDB" />
+            </Style>
+            <Style TargetType="Label" x:Key="TitleLabel">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="Text" Value="Registracija" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="CharacterSpacing">1</Setter>
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+                <Setter Property="Margin">-200,20,0,0</Setter>
+            </Style>
+
             <Style TargetType="Button" x:Key="CustomButtonStyle">
                 <Setter Property="ContentLayout">Left,0</Setter>
                 <Setter Property="BackgroundColor" Value="{StaticResource CustomBlue}"></Setter>
@@ -67,6 +99,11 @@
                 <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
                 <Setter Property="Margin">15,10,15,10</Setter>
             </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource CustomDarkBlue}"></Setter>
+            </Style>-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>
