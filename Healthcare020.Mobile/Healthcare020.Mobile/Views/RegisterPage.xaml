@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:io="clr-namespace:System.IO;assembly=netstandard"
-             xmlns:src="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
              mc:Ignorable="d"
              x:Class="Healthcare020.Mobile.Views.RegisterPage">
     <ContentPage.Content>

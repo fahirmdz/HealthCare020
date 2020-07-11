@@ -42,7 +42,7 @@
                                         <On Platform="Android">Assets/healthcare020_200x200.png</On>
                                         <On Platform="UWP">Assets/healthcare020_200x200.png</On>
                                     </OnPlatform>
-                                    
+
                                 </Image.Source>
                             </Image>
                         </Frame>

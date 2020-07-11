@@ -3,6 +3,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Healthcare020.Mobile.Resources.LargeDevicesStyle">
 
+    <!--#region RegisterPage style-->
+
     <!--Path with Logo-->
     <Style TargetType="Path" x:Key="LogoPath">
         <Setter Property="Aspect" Value="UniformToFill" />
@@ -47,7 +49,6 @@
     </Style>
     <!--/Path with Label-->
 
-    <!--Register form styles-->
     <Style TargetType="StackLayout" x:Key="RegisterFormStackBody">
         <Setter Property="VerticalOptions" Value="StartAndExpand" />
         <Setter Property="BackgroundColor" Value="{StaticResource LighterSmokeWhite}" />
@@ -59,8 +60,9 @@
         <Setter Property="TextColor" Value="Black"></Setter>
         <Setter Property="Margin" Value="20"></Setter>
     </Style>
-    <!--/Register form styles-->
+    <!--#endregion-->
 
+    <!--#region General styles-->
     <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo">
         <On Platform="Android" Value="healthcare020_350x350.png"></On>
         <On Platform="UWP" Value="Assets/healthcare020_350x350.png"></On>
@@ -73,4 +75,24 @@
         <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
         <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
     </Style>
+    <!--#endregion-->
+
+    <!--#region WelcomePage styles-->
+    <Style TargetType="Path" x:Key="WelcomePageLogoPath">
+        <Setter Property="Data">M519 0C519 47.6698 512.288 94.8729 499.247 138.914C486.206 182.955 467.091 222.972 442.994 256.68C418.897 290.387 390.29 317.126 358.806 335.368C327.322 353.611 293.578 363 259.5 363C225.422 363 191.678 353.611 160.194 335.368C128.71 317.126 100.103 290.387 76.0058 256.68C51.909 222.972 32.7943 182.955 19.7533 138.914C6.71216 94.8729 -2.97919e-06 47.6698 0 -3.17345e-05L259.5 0H519Z</Setter>
+        <Setter Property="Aspect" Value="UniformToFill"></Setter>
+    </Style>
+    <Style TargetType="CarouselView" x:Key="WelcomePageCarouselStyle">
+        <Setter Property="Margin">0,50,0,0</Setter>
+    </Style>
+    <Style TargetType="Button" x:Key="BigButtonRadiusStyle">
+        <Setter Property="CornerRadius">20</Setter>
+        <Setter Property="HorizontalOptions">Center</Setter>
+        <Setter Property="WidthRequest">400</Setter>
+        <Setter Property="HeightRequest">60</Setter>
+        <Setter Property="Margin">0,10,0,0</Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
+    </Style>
+    <!--#endregion-->
+
 </ResourceDictionary>
