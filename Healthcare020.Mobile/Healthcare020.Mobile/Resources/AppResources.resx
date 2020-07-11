@@ -126,6 +126,9 @@
   <data name="ChangePasswordPageTitle" xml:space="preserve">
     <value>Izmena lozinke</value>
   </data>
+  <data name="DigitsOnlyError" xml:space="preserve">
+    <value>Polje može sadržati samo cifre</value>
+  </data>
   <data name="EditProfilePageTitle" xml:space="preserve">
     <value>Izmena profila</value>
   </data>
@@ -141,14 +144,23 @@
   <data name="IdpTokenEndpointAndroid" xml:space="preserve">
     <value>https://10.0.2.2:5005/connect/token</value>
   </data>
+  <data name="ImePrezimeLengthError" xml:space="preserve">
+    <value>Polje mora sadržati izmedju 2 i 20 slova</value>
+  </data>
   <data name="InvalidLoginCredentials" xml:space="preserve">
     <value>Neispravno korisničko ime ili lozinka</value>
   </data>
   <data name="LekarskaUverenjaPageTitle" xml:space="preserve">
     <value>Lekarska uverenja</value>
   </data>
+  <data name="LettersOnlyError" xml:space="preserve">
+    <value>Polje može sadržati samo slova</value>
+  </data>
   <data name="LoggingInLoadingMessage" xml:space="preserve">
     <value>Logiranje..</value>
+  </data>
+  <data name="PasswordLengthError" xml:space="preserve">
+    <value>Lozinka mora sadržati izmedju 8 i 15 karaktera</value>
   </data>
   <data name="PreglediTabTitle" xml:space="preserve">
     <value>Pregledi</value>
@@ -156,6 +168,9 @@
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="prof" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>prof.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="RequiredFieldError" xml:space="preserve">
+    <value>Obavezno polje</value>
   </data>
   <data name="SettingsPageTitle" xml:space="preserve">
     <value>Podešavanja</value>
@@ -165,6 +180,9 @@
   </data>
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>user.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UsernameLengthError" xml:space="preserve">
+    <value>Korisničko ime mora sadržati izmedju 4 i 12 karaktera</value>
   </data>
   <data name="UverenjaTabTitle" xml:space="preserve">
     <value>Lekarska uverenja</value>

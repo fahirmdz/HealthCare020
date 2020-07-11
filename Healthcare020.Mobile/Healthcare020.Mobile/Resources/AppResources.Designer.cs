@@ -22,7 +22,7 @@ namespace Healthcare020.Mobile.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppResources {
+    public class AppResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Healthcare020.Mobile.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Healthcare020.Mobile.Resources.AppResources", typeof(AppResources).Assembly);
@@ -51,7 +51,7 @@ namespace Healthcare020.Mobile.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://healthcare020-api.com:5001/api/.
         /// </summary>
-        internal static string ApiUrl {
+        public static string ApiUrl {
             get {
                 return ResourceManager.GetString("ApiUrl", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://10.0.2.2:5001/api/.
         /// </summary>
-        internal static string ApiUrlAndroid {
+        public static string ApiUrlAndroid {
             get {
                 return ResourceManager.GetString("ApiUrlAndroid", resourceCulture);
             }
@@ -81,16 +81,25 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Izmena lozinke.
         /// </summary>
-        internal static string ChangePasswordPageTitle {
+        public static string ChangePasswordPageTitle {
             get {
                 return ResourceManager.GetString("ChangePasswordPageTitle", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polje može sadržati samo cifre.
+        /// </summary>
+        public static string DigitsOnlyError {
+            get {
+                return ResourceManager.GetString("DigitsOnlyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Izmena profila.
         /// </summary>
-        internal static string EditProfilePageTitle {
+        public static string EditProfilePageTitle {
             get {
                 return ResourceManager.GetString("EditProfilePageTitle", resourceCulture);
             }
@@ -99,7 +108,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Healthcare020_Mobile.
         /// </summary>
-        internal static string IdpClientId {
+        public static string IdpClientId {
             get {
                 return ResourceManager.GetString("IdpClientId", resourceCulture);
             }
@@ -108,7 +117,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to devsecret_mobile.
         /// </summary>
-        internal static string IdpClientSecret {
+        public static string IdpClientSecret {
             get {
                 return ResourceManager.GetString("IdpClientSecret", resourceCulture);
             }
@@ -117,7 +126,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://healthcare020-oauth.com:5005/connect/token.
         /// </summary>
-        internal static string IdpTokenEndpoint {
+        public static string IdpTokenEndpoint {
             get {
                 return ResourceManager.GetString("IdpTokenEndpoint", resourceCulture);
             }
@@ -126,16 +135,25 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://10.0.2.2:5005/connect/token.
         /// </summary>
-        internal static string IdpTokenEndpointAndroid {
+        public static string IdpTokenEndpointAndroid {
             get {
                 return ResourceManager.GetString("IdpTokenEndpointAndroid", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polje mora sadržati izmedju 2 i 20 slova.
+        /// </summary>
+        public static string ImePrezimeLengthError {
+            get {
+                return ResourceManager.GetString("ImePrezimeLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Neispravno korisničko ime ili lozinka.
         /// </summary>
-        internal static string InvalidLoginCredentials {
+        public static string InvalidLoginCredentials {
             get {
                 return ResourceManager.GetString("InvalidLoginCredentials", resourceCulture);
             }
@@ -144,25 +162,43 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Lekarska uverenja.
         /// </summary>
-        internal static string LekarskaUverenjaPageTitle {
+        public static string LekarskaUverenjaPageTitle {
             get {
                 return ResourceManager.GetString("LekarskaUverenjaPageTitle", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Polje može sadržati samo slova.
+        /// </summary>
+        public static string LettersOnlyError {
+            get {
+                return ResourceManager.GetString("LettersOnlyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logiranje...
         /// </summary>
-        internal static string LoggingInLoadingMessage {
+        public static string LoggingInLoadingMessage {
             get {
                 return ResourceManager.GetString("LoggingInLoadingMessage", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lozinka mora sadržati izmedju 8 i 15 karaktera.
+        /// </summary>
+        public static string PasswordLengthError {
+            get {
+                return ResourceManager.GetString("PasswordLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pregledi.
         /// </summary>
-        internal static string PreglediTabTitle {
+        public static string PreglediTabTitle {
             get {
                 return ResourceManager.GetString("PreglediTabTitle", resourceCulture);
             }
@@ -171,7 +207,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] prof {
+        public static byte[] prof {
             get {
                 object obj = ResourceManager.GetObject("prof", resourceCulture);
                 return ((byte[])(obj));
@@ -179,9 +215,18 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obavezno polje.
+        /// </summary>
+        public static string RequiredFieldError {
+            get {
+                return ResourceManager.GetString("RequiredFieldError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Podešavanja.
         /// </summary>
-        internal static string SettingsPageTitle {
+        public static string SettingsPageTitle {
             get {
                 return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
             }
@@ -190,7 +235,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Podešavanja.
         /// </summary>
-        internal static string SettingsTabTitle {
+        public static string SettingsTabTitle {
             get {
                 return ResourceManager.GetString("SettingsTabTitle", resourceCulture);
             }
@@ -199,7 +244,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] user {
+        public static byte[] user {
             get {
                 object obj = ResourceManager.GetObject("user", resourceCulture);
                 return ((byte[])(obj));
@@ -207,9 +252,18 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Korisničko ime mora sadržati izmedju 4 i 12 karaktera.
+        /// </summary>
+        public static string UsernameLengthError {
+            get {
+                return ResourceManager.GetString("UsernameLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lekarska uverenja.
         /// </summary>
-        internal static string UverenjaTabTitle {
+        public static string UverenjaTabTitle {
             get {
                 return ResourceManager.GetString("UverenjaTabTitle", resourceCulture);
             }
@@ -218,7 +272,7 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Zahtevi za pregled.
         /// </summary>
-        internal static string ZahteviTabTitle {
+        public static string ZahteviTabTitle {
             get {
                 return ResourceManager.GetString("ZahteviTabTitle", resourceCulture);
             }

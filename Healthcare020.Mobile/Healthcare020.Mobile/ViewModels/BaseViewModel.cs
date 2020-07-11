@@ -64,5 +64,6 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         #endregion INotifyPropertyChanged
+
     }
 }

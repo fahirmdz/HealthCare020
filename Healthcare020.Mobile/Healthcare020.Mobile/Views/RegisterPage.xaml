@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BaseValidationContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
              mc:Ignorable="d"
              x:Class="Healthcare020.Mobile.Views.RegisterPage">
     <ContentPage.Content>
@@ -27,21 +28,35 @@
                         </Grid>
                     </Grid>
                 </StackLayout>
-                <StackLayout Grid.Row="1" Style="{StaticResource RegisterFormStackBody}">
+                <StackLayout Grid.Row="1" Style="{StaticResource RegisterFormStackBody}" x:Name="FormBody">
                     <StackLayout.Resources>
                         <Style TargetType="Entry" BasedOn="{StaticResource CustomEntry}"></Style>
+                        <Style TargetType="Label" BasedOn="{StaticResource CustomValidationLabel}"></Style>
                     </StackLayout.Resources>
-                    <Entry Placeholder="Broj zdravstvene knjižice *"></Entry>
-                    <Entry Placeholder="Ime *"></Entry>
-                    <Entry Placeholder="Prezime *"></Entry>
-                    <Entry Placeholder="Username *"></Entry>
-                    <Entry Placeholder="Password *"></Entry>
-                    <Entry Placeholder="Confirm password *"></Entry>
+
+                    <Entry Text="{Binding BrojKnjizice}" ClassId="BrojKnjizice" Placeholder="Broj zdravstvene knjižice *"></Entry>
+                    <Label x:Name="BrojKnjiziceValidation"></Label>
+
+                    <Entry Text="{Binding Ime}" ClassId="Ime" Placeholder="Ime *"></Entry>
+                    <Label x:Name="ImeValidation"></Label>
+
+                    <Entry Text="{Binding Prezime}" ClassId="Prezime"  Placeholder="Prezime *"></Entry>
+                    <Label x:Name="PrezimeValidation"></Label>
+
+                    <Entry Text="{Binding Username}" ClassId="Username"  Placeholder="Username *"></Entry>
+                    <Label x:Name="UsernameValidation"></Label>
+
+                    <Entry Text="{Binding Password}" ClassId="Password"  Placeholder="Password *"></Entry>
+                    <Label x:Name="PasswordValidation"></Label>
+
+                    <Entry Text="{Binding ConfirmPassword}" ClassId="ConfirmPassword"  Placeholder="Confirm password *"></Entry>
+                    <Label x:Name="ConfirmPasswordValidation"></Label>
 
                     <Button Style="{StaticResource BigButtonStyle}"
-                            Text="Register"></Button>
+                            Text="Register"
+                            Clicked="Button_OnClicked"></Button>
                 </StackLayout>
             </Grid>
         </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</views:BaseValidationContentPage>

@@ -58,7 +58,15 @@
     <Style x:Key="CustomEntry" TargetType="Entry">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
         <Setter Property="TextColor" Value="Black"></Setter>
-        <Setter Property="Margin" Value="20"></Setter>
+        <Setter Property="Margin" Value="20,15,20,0"></Setter>
+    </Style>
+
+    <Style x:Key="CustomValidationLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+        <Setter Property="TextColor" Value="Red"></Setter>
+        <Setter Property="CharacterSpacing" Value="1"></Setter>
+        <Setter Property="Margin" Value="27,3,20,0"></Setter>
+        <Setter Property="IsVisible">false</Setter>
     </Style>
     <!--#endregion-->
 
