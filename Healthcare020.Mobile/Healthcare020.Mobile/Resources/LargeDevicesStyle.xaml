@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Healthcare020.Mobile.Resources.LargeDevicesStyle">
+
+    <!--Path with Logo-->
+    <Style TargetType="Path" x:Key="LogoPath">
+        <Setter Property="Aspect" Value="UniformToFill" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="Data">M574 270.798V0H0C193.374 234.211 284.177 315.236 574 270.798Z</Setter>
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="Fill" Value="#65DBDB" />
+    </Style>
+    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo_Revert">
+        <On Platform="Android" Value="healthcare020_350x350_revert.png"></On>
+        <On Platform="UWP" Value="Assets/healthcare020_350x350_revert"></On>
+    </OnPlatform>
+    <Style TargetType="Image" x:Key="LogoImage">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="HeightRequest">300</Setter>
+        <Setter Property="Source" Value="{StaticResource Logo_Revert}" />
+    </Style>
+    <!--/Path with Logo-->
+
+    <!--Path with Label-->
+    <Style TargetType="Path" x:Key="TitlePath">
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Aspect" Value="None" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="Data">M-1 9.23353e-05C-1 9.23353e-05 175.259 2.191e-05 204.932 9.23353e-05C234.605 0.000162761 239.353 70.0001 204.932 70.0001C170.511 70.0001 -1 70.0001 -1 70.0001V9.23353e-05Z</Setter>
+        <Setter Property="Fill" Value="#65DBDB" />
+    </Style>
+    <Style TargetType="Label" x:Key="TitleLabel">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Text" Value="Registracija" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="CharacterSpacing">1</Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="Margin">-200,20,0,0</Setter>
+    </Style>
+    <Style TargetType="StackLayout" x:Key="TitleLabelStackStyle">
+        <Setter Property="Margin">0,340,0,0</Setter>
+        <Setter Property="Orientation">Horizontal</Setter>
+        <Setter Property="HorizontalOptions">Start</Setter>
+    </Style>
+    <!--/Path with Label-->
+
+    <!--Register form styles-->
+    <Style TargetType="StackLayout" x:Key="RegisterFormStackBody">
+        <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        <Setter Property="BackgroundColor" Value="{StaticResource LighterSmokeWhite}" />
+        <Setter Property="Margin" Value="110,20,110,0" />
+    </Style>
+
+    <Style x:Key="CustomEntry" TargetType="Entry">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
+        <Setter Property="TextColor" Value="Black"></Setter>
+        <Setter Property="Margin" Value="20"></Setter>
+    </Style>
+    <!--/Register form styles-->
+
+    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo">
+        <On Platform="Android" Value="healthcare020_350x350.png"></On>
+        <On Platform="UWP" Value="Assets/healthcare020_350x350.png"></On>
+    </OnPlatform>
+
+    <Style TargetType="Button" x:Key="BigButtonStyle">
+        <Setter Property="CornerRadius" Value="15"></Setter>
+        <Setter Property="Margin" Value="0,25"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource HealthcareCyan}"></Setter>
+        <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
+    </Style>
+</ResourceDictionary>

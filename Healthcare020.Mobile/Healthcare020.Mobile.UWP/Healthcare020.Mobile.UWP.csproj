@@ -104,6 +104,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Assets\healthcare020_150x150_revert.png" />
     <Content Include="Assets\healthcare020_200x200.png" />
     <AndroidResource Include="Assets\healthcare020_350x350.png" />
     <AndroidResource Include="Assets\healthcare020_350x350_revert.png" />

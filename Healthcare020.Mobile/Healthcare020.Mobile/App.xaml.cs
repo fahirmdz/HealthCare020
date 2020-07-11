@@ -1,24 +1,35 @@
 ﻿using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
+using HealthCare020.Core.Extensions;
+using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Healthcare020.Mobile
 {
+    public enum DeviceScreenSize { Small, Medium, Large }
+
     public partial class App : Application
     {
-        const int smallWightResolution = 1100;
-        const int smallHeightResolution = 2000;
-        public static int ScreenHeight {get; set;}
-        public static int ScreenWidth {get; set;}
+        private const int smallWidthResoulution = 1100;
+        private const int smallHeightResolution = 2000;
+
+        private const int mediumWidthResoultion = 1450;
+        private const int mediumHeightResolution = 3100;
+
+        public static int ScreenHeight { get; set; }
+        public static int ScreenWidth { get; set; }
+        public static DeviceScreenSize DeviceScreenSize;
+
         public App()
         {
             InitializeComponent();
             LoadStyles();
 
             DependencyService.Register<MockDataStore>();
-            Device.SetFlags(new []{"Shapes_Experimental","MediaElement_Experimental"});
+            Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental" });
 
             MainPage = new WelcomePage();
         }
@@ -36,19 +47,41 @@ namespace Healthcare020.Mobile
         }
 
         //Determine which styles to apply, based on current device screen size
-        void LoadStyles()
+        private void LoadStyles()
         {
-            if (IsASmallDevice())
+            ResourceDictionary DictionaryToAdd;
+            DeviceScreenSize = DetermineScreenSize();
+
+            if (DeviceScreenSize == DeviceScreenSize.Medium)
+                return;
+
+            switch (DeviceScreenSize)
             {
-                MainResourceDictionary.MergedDictionaries.Add(SmallDevicesStyle.SharedInstance);
+                case DeviceScreenSize.Small:
+                    DictionaryToAdd = SmallDevicesStyle.SharedInstance;
+                    break;
+
+                case DeviceScreenSize.Large:
+                    DictionaryToAdd = LargeDevicesStyle.SharedInstance;
+                    break;
+
+                default:
+                    return;
             }
-            else
+
+            var diffElements = MainResourceDictionary.Where(x => !DictionaryToAdd.ContainsKey(x.Key));
+            var ElementsFromMainResourceDictionaryToAdd = new ResourceDictionary();
+            foreach (var x in diffElements)
             {
-                MainResourceDictionary.MergedDictionaries.Add(GeneralDevicesStyle.SharedInstance);
+                ElementsFromMainResourceDictionaryToAdd.Add(x.Key, x.Value);
             }
+
+            MainResourceDictionary.Clear();
+            MainResourceDictionary.Add(DictionaryToAdd);
+            MainResourceDictionary.MergedDictionaries.Add(ElementsFromMainResourceDictionaryToAdd);
         }
 
-        public static bool IsASmallDevice()
+        public static DeviceScreenSize DetermineScreenSize()
         {
             // Get Metrics
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
@@ -58,7 +91,12 @@ namespace Healthcare020.Mobile
 
             // Height (in pixels)
             var height = mainDisplayInfo.Height;
-            return (width <= smallWightResolution && height <= smallHeightResolution);
+            if (width <= smallWidthResoulution && height <= smallHeightResolution)
+                return DeviceScreenSize.Small;
+            if (width >= smallWidthResoulution && width <= mediumWidthResoultion && height >= smallHeightResolution &&
+                height <= mediumHeightResolution)
+                return DeviceScreenSize.Medium;
+            return DeviceScreenSize.Large;
         }
     }
 }

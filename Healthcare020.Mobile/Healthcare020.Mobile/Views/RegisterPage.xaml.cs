@@ -12,7 +12,7 @@ namespace Healthcare020.Mobile.Views
         public RegisterPage()
         {
             InitializeComponent();
-            
+
         }
     }
 }

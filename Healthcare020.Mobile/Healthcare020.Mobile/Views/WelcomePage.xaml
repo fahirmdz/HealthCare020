@@ -45,35 +45,35 @@
             <StackLayout Margin="0,30"
                          HorizontalOptions="Fill"
                          VerticalOptions="End">
-                <Button CornerRadius="20" 
+                <Button CornerRadius="20"
                         x:Name="LoginButton"
-                        BackgroundColor="#00bebe" 
-                        HorizontalOptions="Center" 
-                        Text="Log In" 
+                        BackgroundColor="#00bebe"
+                        HorizontalOptions="Center"
+                        Text="Log In"
                         TextColor="#31373d"
                         HeightRequest="40"
                         WidthRequest="300"
-                        Font="12" 
+                        Font="12"
                         FontFamily="Arial"
                     Command="{Binding LoginPageCommand}">
                 </Button>
 
-                <Button CornerRadius="20" x:Name="RegisterButton" 
-                        HorizontalOptions="Center" 
-                        Text="Register" 
+                <Button CornerRadius="20" x:Name="RegisterButton"
+                        HorizontalOptions="Center"
+                        Text="Register"
                         TextColor="#31373d"
                         HeightRequest="40"
-                        WidthRequest="300" 
+                        WidthRequest="300"
                         Font="12"
                         Command="{Binding RegisterPageCommand}">
                 </Button>
 
-                <Button CornerRadius="20" x:Name="PosetaButton" 
-                        BackgroundColor="#496075" 
-                        HorizontalOptions="Center"  
+                <Button CornerRadius="20" x:Name="PosetaButton"
+                        BackgroundColor="#496075"
+                        HorizontalOptions="Center"
                         Text="Poseta"
                         TextColor="WhiteSmoke"
-                        HeightRequest="40" 
+                        HeightRequest="40"
                         WidthRequest="300"
                         Font="12"
                         Command="{Binding PosetaPageCommand}">
