@@ -1,5 +1,7 @@
 ﻿using System;
+using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Healthcare020.Mobile.Views
@@ -12,7 +14,7 @@ namespace Healthcare020.Mobile.Views
         public RegisterPage()
         {
             InitializeComponent();
-            BindingContext = RegisterVM = new RegisterViewModel();
+            BindingContext = RegisterVM = ViewModelLocator.RegisterViewModel;
 
             //Validation requirements
             BaseValidationVM = RegisterVM;
@@ -20,9 +22,15 @@ namespace Healthcare020.Mobile.Views
             SetErrorsClearOnTextChanged();
         }
 
-        private void Button_OnClicked(object sender, EventArgs e)
+        private void RegisterButton_OnClicked(object sender, EventArgs e)
         {
             ValidateModel();
+
+        }
+
+        private void CancelButton_OnClicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage=new WelcomePage();
         }
     }
 }

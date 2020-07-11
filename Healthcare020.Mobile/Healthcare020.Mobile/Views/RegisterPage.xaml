@@ -54,7 +54,15 @@
 
                     <Button Style="{StaticResource BigButtonStyle}"
                             Text="Register"
-                            Clicked="Button_OnClicked"></Button>
+                            x:Name="RegisterButton"
+                            Clicked="RegisterButton_OnClicked">
+                    </Button>
+                    <Button Style="{StaticResource BigButtonSecondaryStyle}"
+                            BackgroundColor="Silver"
+                            Text="Cancel"
+                            x:Name="CancelButton"
+                            Clicked="CancelButton_OnClicked">
+                    </Button>
                 </StackLayout>
             </Grid>
         </ScrollView>

@@ -1,30 +1,48 @@
-﻿using Healthcare020.Mobile.Services;
+﻿using Healthcare020.Mobile.Resources;
+using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
+using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseValidationViewModel
     {
         public LoginViewModel()
         {
         }
 
+        #region Properties
+
         private string _username;
 
+        [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
         public string Username
         {
             get => _username;
-            set => SetProperty(ref _username, value);
+            set
+            {
+                if (ValidateProperty(nameof(Username), value))
+                {
+                    SetProperty(ref _username, value);
+                }
+            }
         }
 
         private string _password;
 
+        [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
         public string Password
         {
             get => _password;
-            set => SetProperty(ref _password, value);
+            set
+            {
+                if (ValidateProperty(nameof(Password), value))
+                {
+                    SetProperty(ref _password, value);
+                }
+            }
         }
 
         private bool _rememberMe;
@@ -35,14 +53,15 @@ namespace Healthcare020.Mobile.ViewModels
             set => SetProperty(ref _rememberMe, value);
         }
 
-        public ICommand LoginCommand => new Command(Login);
-        public ICommand RegisterNavigationCommand => new Command(() =>
-        {
-            Application.Current.MainPage=new RegisterPage();
-        });
+        #endregion Properties
 
-        private async void Login()
+        #region Commands
+
+        public ICommand LoginCommand => new Command(async () =>
         {
+            if (!IsValidModel)
+                return;
+
             IsBusy = true;
             if (string.IsNullOrWhiteSpace(Username))
             {
@@ -60,6 +79,13 @@ namespace Healthcare020.Mobile.ViewModels
             }
 
             IsBusy = false;
-        }
+        });
+
+        public ICommand RegisterNavigationCommand => new Command(() =>
+        {
+            Application.Current.MainPage = new RegisterPage();
+        });
+
+        #endregion Commands
     }
 }

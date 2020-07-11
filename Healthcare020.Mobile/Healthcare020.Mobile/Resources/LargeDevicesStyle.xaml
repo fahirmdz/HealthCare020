@@ -58,7 +58,7 @@
     <Style x:Key="CustomEntry" TargetType="Entry">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
         <Setter Property="TextColor" Value="Black"></Setter>
-        <Setter Property="Margin" Value="20,15,20,0"></Setter>
+        <Setter Property="Margin" Value="20,20,20,0"></Setter>
     </Style>
 
     <Style x:Key="CustomValidationLabel" TargetType="Label">
@@ -83,6 +83,66 @@
         <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
         <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
     </Style>
+
+    <Style TargetType="Button" x:Key="BigButtonSecondaryStyle">
+        <Setter Property="CornerRadius" Value="15"></Setter>
+        <Setter Property="BackgroundColor" Value="Silver"></Setter>
+        <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
+    </Style>
+
+    <!--Font sizes-->
+    <OnPlatform x:Key="FontSize-Smaller" x:TypeArguments="x:Double">
+        <On Platform="UWP">20</On>
+        <On Platform="Android">16</On>
+    </OnPlatform>
+    <OnPlatform x:Key="FontSize-Small" x:TypeArguments="x:Double">
+        <On Platform="UWP">21</On>
+        <On Platform="Android">18</On>
+    </OnPlatform>
+    <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
+        <On Platform="UWP">27</On>
+        <On Platform="Android">24</On>
+    </OnPlatform>
+    <OnPlatform x:Key="FontSize-Large" x:TypeArguments="x:Double">
+        <On Platform="UWP">29</On>
+        <On Platform="Android">26</On>
+    </OnPlatform>
+    <!--/Font sizes-->
+
+
+    <!--#region Margin-Responsive-->
+    <OnPlatform x:Key="5mr" x:TypeArguments="x:Double">
+        <On Platform="UWP">10</On>
+        <On Platform="Android">10</On>
+    </OnPlatform>
+
+    <OnPlatform x:Key="10mr" x:TypeArguments="x:Double">
+        <On Platform="UWP">15</On>
+        <On Platform="Android">15</On>
+    </OnPlatform>
+
+    <OnPlatform x:Key="15mr" x:TypeArguments="x:Double">
+        <On Platform="UWP">22</On>
+        <On Platform="Android">22</On>
+    </OnPlatform>
+
+    <OnPlatform x:Key="20mr" x:TypeArguments="x:Double">
+        <On Platform="UWP">27</On>
+        <On Platform="Android">27</On>
+    </OnPlatform>
+
+    <OnPlatform x:Key="30mr" x:TypeArguments="x:Double">
+        <On Platform="UWP">40</On>
+        <On Platform="Android">40</On>
+    </OnPlatform>
+
+    <OnPlatform x:Key="50mr" x:TypeArguments="x:Double">
+        <On Platform="UWP">60</On>
+        <On Platform="Android">60</On>
+    </OnPlatform>
+    <!--#endregion-->
+
     <!--#endregion-->
 
     <!--#region WelcomePage styles-->
@@ -103,4 +163,16 @@
     </Style>
     <!--#endregion-->
 
+
+    <!--#region LoginPage styles-->
+    <Style TargetType="Entry" x:Key="LoginPageEntryStyle">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}"></Setter>
+        <Setter Property="Margin" Value="0,25"></Setter>
+    </Style>
+    <Style TargetType="StackLayout" x:Key="LoginFormBodyStyle">
+        <Setter Property="Padding">50,20</Setter>
+        <Setter Property="VerticalOptions">FillAndExpand</Setter>
+        <Setter Property="HorizontalOptions">Center</Setter>
+    </Style>
+    <!--#endregion-->
 </ResourceDictionary>

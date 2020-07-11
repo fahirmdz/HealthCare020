@@ -187,6 +187,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lozinke se ne podudaraju.
+        /// </summary>
+        public static string PasswordDoNotMatchError {
+            get {
+                return ResourceManager.GetString("PasswordDoNotMatchError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lozinka mora sadržati izmedju 8 i 15 karaktera.
         /// </summary>
         public static string PasswordLengthError {
