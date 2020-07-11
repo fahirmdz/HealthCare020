@@ -53,8 +53,12 @@ namespace Healthcare020.Mobile.Views
         protected virtual bool ValidateModel()
         {
             if (BaseValidationVM == null)
-                return true;
-
+                return false;
+            foreach (var entry in FormBody.Children.OfType<Entry>())
+            {
+                entry.Text += " ";
+                entry.Text = entry.Text.Trim();
+            }
             if (BaseValidationVM.Errors.Any())
             {
                 foreach (var error in BaseValidationVM.Errors)

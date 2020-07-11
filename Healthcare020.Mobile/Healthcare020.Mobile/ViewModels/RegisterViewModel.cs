@@ -108,7 +108,7 @@ namespace Healthcare020.Mobile.ViewModels
         private string _confirmPassword;
 
         [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
-        [Compare(nameof(Password))]
+        [Compare(nameof(Password),ErrorMessageResourceType = typeof(AppResources),ErrorMessageResourceName = nameof(AppResources.PasswordDoNotMatchError))]
         public string ConfirmPassword
         {
             get => _confirmPassword;

@@ -159,6 +159,9 @@
   <data name="LoggingInLoadingMessage" xml:space="preserve">
     <value>Logiranje..</value>
   </data>
+  <data name="PasswordDoNotMatchError" xml:space="preserve">
+    <value>Lozinke se ne podudaraju</value>
+  </data>
   <data name="PasswordLengthError" xml:space="preserve">
     <value>Lozinka mora sadržati izmedju 8 i 15 karaktera</value>
   </data>

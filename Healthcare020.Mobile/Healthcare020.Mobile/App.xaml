@@ -24,6 +24,7 @@
             <Color x:Key="LighterSmokeWhite">#fefefe</Color>
             <Color x:Key="LightGray">#f7f7f7</Color>
 
+            <!--Font sizes-->
             <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
                 <On Platform="UWP">27</On>
                 <On Platform="Android">22</On>
@@ -43,6 +44,40 @@
                 <On Platform="UWP">16</On>
                 <On Platform="Android">30</On>
             </OnPlatform>
+
+            <!--#region Margin-Responsive-->
+            <OnPlatform x:Key="5mr" x:TypeArguments="x:Double">
+                <On Platform="UWP">5</On>
+                <On Platform="Android">5</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="10mr" x:TypeArguments="x:Double">
+                <On Platform="UWP">10</On>
+                <On Platform="Android">10</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="15mr" x:TypeArguments="x:Double">
+                <On Platform="UWP">15</On>
+                <On Platform="Android">15</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="20mr" x:TypeArguments="x:Double">
+                <On Platform="UWP">20</On>
+                <On Platform="Android">20</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="30mr" x:TypeArguments="x:Double">
+                <On Platform="UWP">30</On>
+                <On Platform="Android">30</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="50mr" x:TypeArguments="x:Double">
+                <On Platform="UWP">50</On>
+                <On Platform="Android">50</On>
+            </OnPlatform>
+            <!--#endregion-->
+
+            <!--/Font sizes-->
 
             <OnPlatform x:TypeArguments="x:String"
                         x:Key="FontAwesomeRegular">
@@ -83,6 +118,13 @@
                 <Setter Property="CornerRadius" Value="15"></Setter>
                 <Setter Property="Margin" Value="0,15"></Setter>
                 <Setter Property="BackgroundColor" Value="{StaticResource HealthcareCyan}"></Setter>
+                <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+            </Style>
+
+            <Style TargetType="Button" x:Key="BigButtonSecondaryStyle">
+                <Setter Property="CornerRadius" Value="15"></Setter>
+                <Setter Property="BackgroundColor" Value="Silver"></Setter>
                 <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
                 <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
             </Style>
@@ -146,8 +188,8 @@
             <Style x:Key="CustomValidationLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}"></Setter>
                 <Setter Property="TextColor" Value="Red"></Setter>
-                <Setter Property="Margin" Value="9,3,5,0"></Setter>
-                <Setter Property="CharacterSpacing" Value="2"></Setter>
+                <Setter Property="Margin" Value="7,0,5,0"></Setter>
+                <Setter Property="CharacterSpacing" Value="1"></Setter>
                 <Setter Property="IsVisible">false</Setter>
             </Style>
 
@@ -169,6 +211,17 @@
                 <Setter Property="HeightRequest">40</Setter>
                 <Setter Property="Margin">0,5,0,0</Setter>
                 <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+            </Style>
+            <!--#endregion-->
+
+            <!--#region LoginPage styles-->
+            <Style TargetType="Entry" x:Key="LoginPageEntryStyle">
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+            </Style>
+            <Style TargetType="StackLayout" x:Key="LoginFormBodyStyle">
+                <Setter Property="Padding">50,20</Setter>
+                <Setter Property="VerticalOptions">FillAndExpand</Setter>
+                <Setter Property="HorizontalOptions">Center</Setter>
             </Style>
             <!--#endregion-->
         </ResourceDictionary>

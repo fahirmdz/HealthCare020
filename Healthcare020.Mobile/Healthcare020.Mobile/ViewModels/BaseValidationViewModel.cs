@@ -11,6 +11,8 @@ namespace Healthcare020.Mobile.ViewModels
         /// </summary>
         public IDictionary<string, string> Errors;
 
+        public bool IsValidModel { get; private set; }
+
         public BaseValidationViewModel()
         {
             Errors=new Dictionary<string, string>();
@@ -43,7 +45,7 @@ namespace Healthcare020.Mobile.ViewModels
                 }
             }
 
-            return isValid;
+            return IsValidModel=isValid;
         }
 
         /// <summary>
