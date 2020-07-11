@@ -189,6 +189,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\healthcare020_200x200_revert.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\healthcare020_150x150_revert.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

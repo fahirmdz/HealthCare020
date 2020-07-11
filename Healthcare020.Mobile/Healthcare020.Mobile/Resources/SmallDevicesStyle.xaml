@@ -1,20 +1,35 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Healthcare020.Mobile.Resources.SmallDevicesStyle">
 
+
+    <!--Path with Logo-->
     <Style TargetType="Path" x:Key="LogoPath">
         <Setter Property="Aspect" Value="UniformToFill" />
         <Setter Property="FlowDirection" Value="LeftToRight" />
-        <Setter Property="Data">M574 158.191V0H0C193.374 136.819 284.177 184.151 574 158.191Z</Setter>
+        <Setter Property="Data">M574.013 54.2383C576.234 -0.834323 574.013 0.00072339 574.013 0.00072339H0C109.478 111.046 571.793 109.311 574.013 54.2383Z</Setter>
         <Setter Property="Fill" Value="#65DBDB" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
     </Style>
+    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo_Revert">
+        <On Platform="Android" Value="healthcare020_150x150_revert.png"></On>
+        <On Platform="UWP" Value="Assets/healthcare020_150x150_revert"></On>
+    </OnPlatform>
+    <Style TargetType="Image" x:Key="LogoImage">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="HeightRequest">150</Setter>
+        <Setter Property="Source" Value="{StaticResource Logo_Revert}" />
+    </Style>
+    <!--/Path with Logo-->
+
+    <!--Path with Label-->
     <Style TargetType="Path" x:Key="TitlePath">
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="Aspect" Value="None" />
         <Setter Property="FlowDirection" Value="LeftToRight" />
-        <Setter Property="Data">M-1 7.53438e-05C-1 7.53438e-05 159.165 4.31494e-05 186.129 7.53438e-05C213.093 0.000107538 217.407 32.0001 186.129 32.0001C154.851 32.0001 -1 32.0001 -1 32.0001V7.53438e-05Z</Setter>
+        <Setter Property="Data">M-1 1.65443e-05C-1 1.65443e-05 110.12 -2.06804e-05 128.827 1.65443e-05C147.534 5.37691e-05 150.527 37 128.827 37C107.126 37 -1 37 -1 37V1.65443e-05Z</Setter>
         <Setter Property="Fill" Value="#65DBDB" />
     </Style>
     <Style TargetType="Label" x:Key="TitleLabel">
@@ -23,18 +38,36 @@
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="CharacterSpacing">1</Setter>
         <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
-        <Setter Property="Margin">-200,5,0,0</Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />
+        <Setter Property="Margin">-130,7,0,0</Setter>
     </Style>
+    <Style TargetType="StackLayout" x:Key="TitleLabelStackStyle">
+        <Setter Property="Margin">0,130,0,0</Setter>
+        <Setter Property="Orientation">Horizontal</Setter>
+        <Setter Property="HorizontalOptions">Start</Setter>
+    </Style>
+    <!--/Path with Label-->
+
+    <!--Register form styles-->
+    <Style TargetType="StackLayout" x:Key="RegisterFormStackBody">
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="BackgroundColor" Value="{StaticResource LighterSmokeWhite}" />
+        <Setter Property="Margin" Value="70,-20,70,0" />
+    </Style>
+
+    <Style x:Key="CustomEntry" TargetType="Entry">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}"></Setter>
+        <Setter Property="TextColor" Value="Black"></Setter>
+        <Setter Property="Margin" Value="5"></Setter>
+    </Style>
+    <!--/Register form styles-->
+
     <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo">
         <On Platform="Android" Value="healthcare020_200x200.png"></On>
         <On Platform="UWP" Value="Assets/healthcare020_200x200.png"></On>
     </OnPlatform>
 
-    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo_Revert">
-        <On Platform="Android" Value="healthcare020_200x200_revert.png"></On>
-        <On Platform="UWP" Value="Assets/healthcare020_200x200_revert.png"></On>
-    </OnPlatform>
 
     <Style TargetType="Button" x:Key="CustomButtonStyle">
         <Setter Property="ContentLayout">Left,0</Setter>
@@ -53,5 +86,6 @@
         <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
         <Setter Property="TextColor" Value="{StaticResource CustomDarkBlue}"></Setter>
     </Style>
+
 
 </ResourceDictionary>
