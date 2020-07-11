@@ -9,76 +9,70 @@
              x:Class="Healthcare020.Mobile.Views.WelcomePage">
 
     <ContentPage.BindingContext>
-        <viewModels:WelcomeViewModel/>
+        <viewModels:WelcomeViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="WhiteSmoke">
-            <Frame  HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    BackgroundColor="WhiteSmoke"
-                    BorderColor="Transparent"
-                    HeightRequest="270"
-                    Margin="0,30,0,0">
-                <Image HorizontalOptions="Center"
-                       Aspect="AspectFill"
-                       VerticalOptions="CenterAndExpand"
-                       Source="{StaticResource Logo}">
-                </Image>
-            </Frame>
-            <CarouselView x:Name="CarouselImages"
+        <Grid  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="WhiteSmoke">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <AbsoluteLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Path Style="{StaticResource WelcomePageLogoPath}"
+                          Fill="{StaticResource HealthcareCyan}"/>
+                    <Image HorizontalOptions="Center"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       Source="{StaticResource Logo_Revert}">
+                    </Image>
+                </Grid>
+            </AbsoluteLayout>
+            <CarouselView Grid.Row="1"
+                          x:Name="CarouselImages"
                           HorizontalOptions="FillAndExpand"
-                          VerticalOptions="Center"
                           IsScrollAnimated="true"
                           IsSwipeEnabled="True"
-                          ItemsSource="{Binding ImageUrls}">
+                          VerticalOptions="End"
+                          ItemsSource="{Binding ImageUrls}"
+                          Style="{StaticResource WelcomePageCarouselStyle}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Image Aspect="AspectFill" Source="{Binding item}"
-                                    HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Aspect="AspectFit" Source="{Binding item}"></Image>
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            <StackLayout Margin="0,30"
+            <StackLayout Grid.Row="2" Margin="0,30"
                          HorizontalOptions="Fill"
                          VerticalOptions="End">
-                <Button CornerRadius="20"
-                        x:Name="LoginButton"
+                <StackLayout.Resources>
+                    <Style BasedOn="{StaticResource BigButtonRadiusStyle}" TargetType="Button"></Style>
+                </StackLayout.Resources>
+                <Button x:Name="LoginButton"
                         BackgroundColor="#00bebe"
-                        HorizontalOptions="Center"
                         Text="Log In"
                         TextColor="#31373d"
-                        HeightRequest="40"
-                        WidthRequest="300"
-                        Font="12"
-                        FontFamily="Arial"
-                    Command="{Binding LoginPageCommand}">
+                        Command="{Binding LoginPageCommand}">
                 </Button>
 
-                <Button CornerRadius="20" x:Name="RegisterButton"
-                        HorizontalOptions="Center"
+                <Button x:Name="RegisterButton"
                         Text="Register"
                         TextColor="#31373d"
-                        HeightRequest="40"
-                        WidthRequest="300"
-                        Font="12"
                         Command="{Binding RegisterPageCommand}">
                 </Button>
 
-                <Button CornerRadius="20" x:Name="PosetaButton"
-                        BackgroundColor="#496075"
-                        HorizontalOptions="Center"
+                <Button x:Name="PosetaButton"
                         Text="Poseta"
+                        BackgroundColor="{StaticResource CustomBlue}"
                         TextColor="WhiteSmoke"
-                        HeightRequest="40"
-                        WidthRequest="300"
-                        Font="12"
                         Command="{Binding PosetaPageCommand}">
                 </Button>
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
