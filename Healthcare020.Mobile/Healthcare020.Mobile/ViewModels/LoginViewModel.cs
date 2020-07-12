@@ -59,10 +59,11 @@ namespace Healthcare020.Mobile.ViewModels
 
         public ICommand LoginCommand => new Command(async () =>
         {
+            IsBusy = true;
+
             if (!IsValidModel)
                 return;
 
-            IsBusy = true;
             if (string.IsNullOrWhiteSpace(Username))
             {
                 return;

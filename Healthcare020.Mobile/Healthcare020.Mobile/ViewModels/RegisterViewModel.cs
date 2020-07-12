@@ -1,6 +1,14 @@
-﻿using Healthcare020.Mobile.Resources;
+﻿using Healthcare020.Mobile.Interfaces;
+using Healthcare020.Mobile.Resources;
+using Healthcare020.Mobile.Services;
+using Healthcare020.Mobile.Views;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
 using HealthCare020.Core.ValidationAttributes;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -8,17 +16,62 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class RegisterViewModel : BaseValidationViewModel
     {
-        public RegisterViewModel()
+        private readonly IAPIService _apiService;
+        private readonly IHud HudNotify;
+
+        public RegisterViewModel(IAPIService apiService)
         {
+            _apiService = apiService;
+            HudNotify = DependencyService.Get<IHud>();
         }
 
-        public ICommand RegisterCommand => new Command(() =>
-         {
-         });
+        #region Commands
+
+        public ICommand RegisterCommand => new Command(async () =>
+        {
+            IsBusy = true;
+            if (!IsValidModel)
+                return;
+
+            _apiService.ChangeRoute(Routes.PacijentiRoute);
+            var upsertDto = new PacijentUpsertDto
+            {
+                Ime = Ime,
+                Prezime = Prezime,
+                BrojZdravstveneKnjizice = int.Parse(BrojKnjizice),
+                JMBG = JMBG,
+                KorisnickiNalog = new KorisnickiNalogUpsertDto
+                {
+                    Username = Username,
+                    Password = Password,
+                    ConfirmPassword = ConfirmPassword
+                }
+            };
+
+            var result = await _apiService.Post<PacijentDtoLL>(upsertDto);
+            IsBusy = false;
+
+
+
+            if (result.Succeeded)
+            {
+                NotificationService.Instance.Success(AppResources.SuccessfullyCreatedAccount);
+                await Task.Delay(100);
+                Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
+            }
+            else
+            {
+                NotificationService.Instance.Error(result.StatusCode == HttpStatusCode.BadRequest
+                    ? result.Message
+                    : string.Empty);
+            }
+        });
 
         public ICommand CancelRegistrationCommand => new Command(() =>
-         {
-         });
+        {
+        });
+
+        #endregion Commands
 
         #region Properties
 
@@ -31,12 +84,27 @@ namespace Healthcare020.Mobile.ViewModels
             get => _brojKnjizice;
             set
             {
-                if (ValidateProperty(nameof(BrojKnjizice),value))
+                if (ValidateProperty(nameof(BrojKnjizice), value))
                 {
                     SetProperty(ref _brojKnjizice, value);
                 }
             }
+        }
 
+        private string _jmbg;
+
+        [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
+        [DigitsOnly(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.LettersOnlyError))]
+        public string JMBG
+        {
+            get => _jmbg;
+            set
+            {
+                if (ValidateProperty(nameof(JMBG), value))
+                {
+                    SetProperty(ref _jmbg, value);
+                }
+            }
         }
 
         private string _ime;
@@ -49,7 +117,7 @@ namespace Healthcare020.Mobile.ViewModels
             get => _ime;
             set
             {
-                if (ValidateProperty(nameof(Ime),value))
+                if (ValidateProperty(nameof(Ime), value))
                 {
                     SetProperty(ref _ime, value);
                 }
@@ -66,7 +134,7 @@ namespace Healthcare020.Mobile.ViewModels
             get => _prezime;
             set
             {
-                if (ValidateProperty(nameof(Prezime),value))
+                if (ValidateProperty(nameof(Prezime), value))
                 {
                     SetProperty(ref _prezime, value);
                 }
@@ -82,7 +150,7 @@ namespace Healthcare020.Mobile.ViewModels
             get => _username;
             set
             {
-                if (ValidateProperty(nameof(Username),value))
+                if (ValidateProperty(nameof(Username), value))
                 {
                     SetProperty(ref _username, value);
                 }
@@ -98,7 +166,7 @@ namespace Healthcare020.Mobile.ViewModels
             get => _password;
             set
             {
-                if (ValidateProperty(nameof(Password),value))
+                if (ValidateProperty(nameof(Password), value))
                 {
                     SetProperty(ref _password, value);
                 }
@@ -108,13 +176,13 @@ namespace Healthcare020.Mobile.ViewModels
         private string _confirmPassword;
 
         [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
-        [Compare(nameof(Password),ErrorMessageResourceType = typeof(AppResources),ErrorMessageResourceName = nameof(AppResources.PasswordDoNotMatchError))]
+        [Compare(nameof(Password), ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.PasswordDoNotMatchError))]
         public string ConfirmPassword
         {
             get => _confirmPassword;
             set
             {
-                if (ValidateProperty(nameof(ConfirmPassword),value))
+                if (ValidateProperty(nameof(ConfirmPassword), value))
                 {
                     SetProperty(ref _confirmPassword, value);
                 }

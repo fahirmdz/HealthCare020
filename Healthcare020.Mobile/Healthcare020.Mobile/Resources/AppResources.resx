@@ -181,6 +181,9 @@
   <data name="SettingsTabTitle" xml:space="preserve">
     <value>Podešavanja</value>
   </data>
+  <data name="SuccessfullyCreatedAccount" xml:space="preserve">
+    <value>Uspešno kreiran korisnički nalog</value>
+  </data>
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>user.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

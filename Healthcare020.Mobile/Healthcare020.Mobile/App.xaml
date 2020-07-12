@@ -13,7 +13,7 @@
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries>
             <!--#region Global Styles-->
-            <Color x:Key="CustomBlue">#536b80</Color>
+            <Color x:Key="CustomBlue">#3b4b84</Color>
             <Color x:Key="CustomDarkBlue">#174c73</Color>
             <Color x:Key="CustomDarkCyan">#0bbfbf</Color>
             <Color x:Key="CustomNavyBlueDark">#0b2236</Color>

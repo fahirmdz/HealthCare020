@@ -46,7 +46,8 @@ namespace Healthcare020.Mobile.Services
 
                 _flurlClient = new FlurlClient(httpClient);
                 request = _flurlClient.Request(route).AllowAnyHttpStatus();
-                request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
+                if (Auth.IsAuthenticated())
+                    request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
                 BaseUrl = request.Url;
             }
 #pragma warning disable 168
@@ -325,6 +326,8 @@ namespace Healthcare020.Mobile.Services
                     }
                     else if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
+                        var errorDetails = await response.Content?.ReadAsStringAsync();
+                        return APIServiceResult<T>.BadRequest(errorDetails);
                     }
                     else if ((int)response.StatusCode == 422)
                     {

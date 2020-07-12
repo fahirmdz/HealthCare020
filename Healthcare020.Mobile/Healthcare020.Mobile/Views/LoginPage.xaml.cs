@@ -22,6 +22,11 @@ namespace Healthcare020.Mobile.Views
             SetErrorsClearOnTextChanged();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         private void RememberMe_OnToggled(object sender, ToggledEventArgs e) => LoginVM.RememberMe = RememberMe.IsToggled;
 
         private void Button_OnClicked(object sender, EventArgs e)

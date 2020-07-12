@@ -20,6 +20,10 @@ namespace Healthcare020.Mobile.ViewModels
 
         protected virtual bool ValidateProperty(string propertyName, object value)
         {
+            //Remove all errors if property is valid
+            if (Errors.Any(x => x.Key == propertyName))
+                Errors.Remove(propertyName);
+
             var results = new List<ValidationResult>();
             var isValid = Validator.TryValidateProperty(
                 value,
@@ -29,13 +33,7 @@ namespace Healthcare020.Mobile.ViewModels
                 },
                 results);
 
-            if (isValid)
-            {
-                //Remove all errors if property is valid
-                if (Errors.Any(x => x.Key == propertyName))
-                    Errors.Remove(propertyName);
-            }
-            else
+            if(!isValid)
             {
                 //Add errors to dictionary if prop is not valid
                 foreach (var error in results)

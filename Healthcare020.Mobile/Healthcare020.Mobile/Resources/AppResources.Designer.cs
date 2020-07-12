@@ -251,6 +251,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uspešno kreiran korisnički nalog.
+        /// </summary>
+        public static string SuccessfullyCreatedAccount {
+            get {
+                return ResourceManager.GetString("SuccessfullyCreatedAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] user {
