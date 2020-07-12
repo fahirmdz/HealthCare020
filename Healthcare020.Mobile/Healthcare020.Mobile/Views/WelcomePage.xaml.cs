@@ -19,6 +19,11 @@ namespace Healthcare020.Mobile.Views
             LoadDataForCarouselView();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         private void LoadDataForCarouselView()
         {
             WelcomeVM.ImageUrls= new ObservableCollection<SinglePropertyItemsViewModel<ImageSource>>

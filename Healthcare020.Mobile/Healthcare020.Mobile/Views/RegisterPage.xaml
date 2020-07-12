@@ -37,6 +37,9 @@
                     <Entry Text="{Binding BrojKnjizice}" ClassId="BrojKnjizice" Placeholder="Broj zdravstvene knjižice *"></Entry>
                     <Label x:Name="BrojKnjiziceValidation"></Label>
 
+                    <Entry Text="{Binding JMBG}" ClassId="JMBG" Placeholder="JMBG *"></Entry>
+                    <Label x:Name="JMBGValidation"></Label>
+
                     <Entry Text="{Binding Ime}" ClassId="Ime" Placeholder="Ime *"></Entry>
                     <Label x:Name="ImeValidation"></Label>
 
@@ -46,10 +49,10 @@
                     <Entry Text="{Binding Username}" ClassId="Username"  Placeholder="Username *"></Entry>
                     <Label x:Name="UsernameValidation"></Label>
 
-                    <Entry Text="{Binding Password}" ClassId="Password"  Placeholder="Password *"></Entry>
+                    <Entry Text="{Binding Password}" ClassId="Password" IsPassword="True" Placeholder="Password *"></Entry>
                     <Label x:Name="PasswordValidation"></Label>
 
-                    <Entry Text="{Binding ConfirmPassword}" ClassId="ConfirmPassword"  Placeholder="Confirm password *"></Entry>
+                    <Entry Text="{Binding ConfirmPassword}" ClassId="ConfirmPassword" IsPassword="True"  Placeholder="Confirm password *"></Entry>
                     <Label x:Name="ConfirmPasswordValidation"></Label>
 
                     <Button Style="{StaticResource BigButtonStyle}"

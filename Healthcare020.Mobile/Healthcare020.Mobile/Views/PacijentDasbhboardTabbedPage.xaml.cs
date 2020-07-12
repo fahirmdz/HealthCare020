@@ -15,13 +15,13 @@ namespace Healthcare020.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PacijentDasbhboardTabbedPage : TabbedPage
     {
-        public BaseViewModel BaseVM { get; set; }
+        public BaseViewModel BaseVM;
 
         public PacijentDasbhboardTabbedPage()
         {
             InitializeComponent();
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
-          
+
             this.SelectedTabColor = (Color)Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
             this.UnselectedTabColor = (Color)Application.Current.Resources[ResourceKeys.CustomBlueColor];
         }
