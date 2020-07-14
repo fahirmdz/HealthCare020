@@ -1,7 +1,5 @@
-﻿using System;
+﻿using HealthCare020.Core.Extensions;
 using System.ComponentModel.DataAnnotations;
-using HealthCare020.Core.Extensions;
-using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
@@ -13,6 +11,6 @@ namespace HealthCare020.Core.Request
         private string _brojTelefona;
         [Phone]
         [Required]
-        public string BrojTelefonaPosetioca { get=>_brojTelefona; set=>_brojTelefona=value.RemoveWhitespaces(); }
+        public string BrojTelefonaPosetioca { get => _brojTelefona; set => _brojTelefona = value.RemoveWhitespaces(); }
     }
 }

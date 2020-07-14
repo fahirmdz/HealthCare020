@@ -6,10 +6,20 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class BaseValidationViewModel : BaseViewModel
     {
+        private IDictionary<string, string> _errors;
         /// <summary>
         /// Dictionary with errors based on model validation
         /// </summary>
-        public IDictionary<string, string> Errors;
+        public IDictionary<string, string> Errors
+        {
+            get=>_errors;
+            set
+            {
+                _errors = value;
+                if (!_errors.Any())
+                    IsValidModel = true;
+            }
+        }
 
         public bool IsValidModel { get; private set; }
 

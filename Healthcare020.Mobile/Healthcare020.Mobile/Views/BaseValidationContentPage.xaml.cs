@@ -54,6 +54,15 @@ namespace Healthcare020.Mobile.Views
         {
             if (BaseValidationVM == null)
                 return false;
+
+            var invisibleEntries = FormBody.Children.OfType<Entry>()?.Where(x => !x.IsVisible);
+
+            //Remove errors for invisible entries (IsValidModel will be set based on errors value)
+            BaseValidationVM.Errors =
+                BaseValidationVM.Errors.Where(x => invisibleEntries.All(e => e.ClassId != x.Key))
+                    .ToDictionary(x=>x.Key,x=>x.Value);
+
+
             foreach (var entry in FormBody.Children.OfType<Entry>())
             {
                 entry.Text += " ";

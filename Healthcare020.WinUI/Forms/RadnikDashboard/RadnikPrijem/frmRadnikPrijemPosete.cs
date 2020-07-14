@@ -100,7 +100,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
                 return;
 
             if (dgrvMain.Columns[e.ColumnIndex].Name == "Pacijent")
-                e.Value = zahtevZaPosetu.PacijentNaLecenju.LicniPodaci.ImePrezime;
+                e.Value = zahtevZaPosetu.PacijentNaLecenju.ImePrezime;
 
             if (dgrvMain.Columns[e.ColumnIndex].Name == nameof(ZahtevZaPosetuDtoEL.ZakazanoDatumVreme))
                 e.Value = zahtevZaPosetu.ZakazanoDatumVreme.HasValue?zahtevZaPosetu.ZakazanoDatumVreme.Value.ToString("g"):"ODBIJEN";

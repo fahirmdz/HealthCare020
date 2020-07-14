@@ -31,7 +31,7 @@ namespace Healthcare020.Mobile.ViewModels
 
         public ICommand PosetaPageCommand => new Command(() =>
           {
-              Application.Current.MainPage = new LoginPage();
+              Application.Current.MainPage = new PosetaPage();
           });
     }
 }

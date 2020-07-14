@@ -2,10 +2,12 @@
 <views:BaseValidationContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:custom="clr-namespace:Healthcare020.Mobile.Controls;assembly=Healthcare020.Mobile"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
+
              mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.RegisterPage">
+             x:Class="Healthcare020.Mobile.Views.PosetaPage">
     <ContentPage.Content>
         <ScrollView>
             <Grid BackgroundColor="{StaticResource LighterSmokeWhite}">
@@ -20,7 +22,7 @@
                         </Grid.ColumnDefinitions>
                         <StackLayout Style="{StaticResource TitleLabelStackStyle}">
                             <Path x:Name="TitlePath" Style="{StaticResource TitlePath}"></Path>
-                            <Label x:Name="TitleLabel" Text="Registracija"  Style="{StaticResource TitleLabel}"></Label>
+                            <Label x:Name="TitleLabel" Text="Poseta" Style="{StaticResource TitleLabel}"></Label>
                         </StackLayout>
                         <Grid VerticalOptions="FillAndExpand">
                             <Path Style="{StaticResource LogoPath}"></Path>
@@ -34,37 +36,44 @@
                         <Style TargetType="Label" BasedOn="{StaticResource CustomValidationLabel}"></Style>
                     </StackLayout.Resources>
 
-                    <Entry Text="{Binding BrojKnjizice}" ClassId="BrojKnjizice" Placeholder="Broj zdravstvene knjižice *"></Entry>
-                    <Label x:Name="BrojKnjiziceValidation"></Label>
+                    <Entry Text="{Binding PacijentSearch}"
+                           ClassId="ImePrezimePacijenta"
+                           Placeholder="Ime i prezime pacijenta *"></Entry>
+                    <Label x:Name="ImePrezimePacijentaValidation"></Label>
 
-                    <Entry Text="{Binding JMBG}" ClassId="JMBG" Placeholder="JMBG *"></Entry>
-                    <Label x:Name="JMBGValidation"></Label>
+                    <Entry Text="{Binding BrojTelefonaPosetioca}" IsVisible="False"
+                           ClassId="BrojTelefonaPosetioca"
+                           x:Name="BrojTelefonaPosetioca"
+                           Placeholder="BrojTelefonaPosetioca *"></Entry>
+                    <Label x:Name="BrojTelefonaPosetiocaValidation"></Label>
 
-                    <Entry Text="{Binding Ime}" ClassId="Ime" Placeholder="Ime *"></Entry>
-                    <Label x:Name="ImeValidation"></Label>
-
-                    <Entry Text="{Binding Prezime}" ClassId="Prezime"  Placeholder="Prezime *"></Entry>
-                    <Label x:Name="PrezimeValidation"></Label>
-
-                    <Entry Text="{Binding Username}" ClassId="Username"  Placeholder="Username *"></Entry>
-                    <Label x:Name="UsernameValidation"></Label>
-
-                    <Entry Text="{Binding Password}" ClassId="Password" IsPassword="True" Placeholder="Password *"></Entry>
-                    <Label x:Name="PasswordValidation"></Label>
-
-                    <Entry Text="{Binding ConfirmPassword}" ClassId="ConfirmPassword" IsPassword="True"  Placeholder="Confirm password *"></Entry>
-                    <Label x:Name="ConfirmPasswordValidation"></Label>
+                    <custom:CustomPicker x:Name="PacijentPicker"
+                            HorizontalOptions="CenterAndExpand"
+                            FontSize="{StaticResource FontSize-Medium}"
+                            IsVisible="False"
+                            ClassId="{Binding PickerIsReady}"
+                            Title="--Odaberite pacijenta--"
+                            SelectedIndexChanged="PacijentPicker_OnSelectedIndexChanged"
+                            ItemsSource="{Binding Pacijenti}"
+                            ItemDisplayBinding="{Binding ImePrezime}"></custom:CustomPicker>
+                    <Label x:Name="PacijentPickedValidation"></Label>
+                    <Entry Text="{Binding PickerReadyToOpen}" IsVisible="False" ClassId="No"></Entry>
 
                     <Button Style="{StaticResource BigButtonStyle}"
-                            Text="Register"
-                            x:Name="RegisterButton"
-                            Clicked="RegisterButton_OnClicked">
+                            Text="Potvrdi"
+                            IsVisible="False"
+                            x:Name="ConfirmButton"
+                             Clicked="ConfirmButton_OnClicked">
+                    </Button>
+                    <Button Style="{StaticResource BigButtonStyle}"
+                            Text="Traži"
+                            x:Name="SearchButton"
+                            Clicked="SearchButton_OnClicked">
                     </Button>
                     <Button Style="{StaticResource BigButtonSecondaryStyle}"
                             BackgroundColor="Silver"
                             Text="Cancel"
-                            x:Name="CancelButton"
-                            Clicked="CancelButton_OnClicked">
+                            x:Name="CancelButton">
                     </Button>
                 </StackLayout>
             </Grid>

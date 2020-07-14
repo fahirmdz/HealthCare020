@@ -1,4 +1,5 @@
-﻿using Acr.UserDialogs;
+﻿using System.Threading.Tasks;
+using Acr.UserDialogs;
 using Healthcare020.Mobile.Interfaces;
 using Xamarin.Forms;
 
@@ -38,6 +39,16 @@ namespace Healthcare020.Mobile.Services
                 UserDialogs.Instance.Toast(string.IsNullOrWhiteSpace(message) ? "Uspešno!" : message);
             else
                 HudNotify.Toast(message);
+        }
+
+        public async Task<PromptResult> Prompt(string message="")
+        {
+            return await UserDialogs.Instance.PromptAsync(new PromptConfig
+            {
+                OkText = "Potvrdi",
+                Title = "Sigurni ste?",
+                Text = message
+            });
         }
 
 

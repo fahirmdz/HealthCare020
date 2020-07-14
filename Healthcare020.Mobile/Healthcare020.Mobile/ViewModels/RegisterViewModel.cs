@@ -17,12 +17,10 @@ namespace Healthcare020.Mobile.ViewModels
     public class RegisterViewModel : BaseValidationViewModel
     {
         private readonly IAPIService _apiService;
-        private readonly IHud HudNotify;
 
         public RegisterViewModel(IAPIService apiService)
         {
             _apiService = apiService;
-            HudNotify = DependencyService.Get<IHud>();
         }
 
         #region Commands
@@ -51,8 +49,6 @@ namespace Healthcare020.Mobile.ViewModels
             var result = await _apiService.Post<PacijentDtoLL>(upsertDto);
             IsBusy = false;
 
-
-
             if (result.Succeeded)
             {
                 NotificationService.Instance.Success(AppResources.SuccessfullyCreatedAccount);
@@ -78,7 +74,7 @@ namespace Healthcare020.Mobile.ViewModels
         private string _brojKnjizice;
 
         [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
-        [DigitsOnly(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.LettersOnlyError))]
+        [DigitsOnly(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.DigitsOnlyError))]
         public string BrojKnjizice
         {
             get => _brojKnjizice;
@@ -94,7 +90,7 @@ namespace Healthcare020.Mobile.ViewModels
         private string _jmbg;
 
         [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
-        [DigitsOnly(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.LettersOnlyError))]
+        [DigitsOnly(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.DigitsOnlyError))]
         public string JMBG
         {
             get => _jmbg;

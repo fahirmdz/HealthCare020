@@ -84,7 +84,7 @@ namespace HealthCare020.Core.Mappers
 
             mapperConfigExp.CreateMap<LicniPodaci, LicniPodaciDto>()
                 .DisableCtorValidation()
-                .ForMember(dest=>dest.Grad, 
+                .ForMember(dest=>dest.Grad,
                     opt=>opt.MapFrom(x=>x.Grad));
             mapperConfigExp.CreateMap<LicniPodaci, LicniPodaciUpsertDto>()
                 .ReverseMap()
@@ -284,8 +284,8 @@ namespace HealthCare020.Core.Mappers
             mapperConfigExp.CreateMap<PacijentNaLecenju, PacijentNaLecenjuDtoEL>()
                 .ForMember(dest => dest.StacionarnoOdeljenje,
                     opt => opt.MapFrom(x => x.StacionarnoOdeljenje))
-                .ForMember(dest => dest.LicniPodaci,
-                    opt => opt.MapFrom(x => x.LicniPodaci));
+                .ForMember(dest => dest.ImePrezime,
+                    opt => opt.MapFrom(x => x.LicniPodaci.ImePrezime()));
             mapperConfigExp.CreateMap<PacijentNaLecenjuUpsertDto, PacijentNaLecenju>();
 
             #endregion PacijentNaLecenju

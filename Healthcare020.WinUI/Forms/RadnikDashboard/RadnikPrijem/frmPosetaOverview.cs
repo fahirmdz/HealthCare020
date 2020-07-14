@@ -36,11 +36,11 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 
         private void frmPosetaOverview_Load(object sender, System.EventArgs e)
         {
-            txtPacijent.Text = ZahtevZaPosetu.PacijentNaLecenju.LicniPodaci.ImePrezime;
+            txtPacijent.Text = ZahtevZaPosetu.PacijentNaLecenju.ImePrezime;
             txtDatumZahteva.Text = ZahtevZaPosetu.DatumVremeKreiranja.ToString("g");
             txtBrojTelefonaPosetioca.Text = ZahtevZaPosetu.BrojTelefonaPosetioca;
             txtIsObradjen.Text = ZahtevZaPosetu.IsObradjen ? "DA" : "NE";
-         
+
             if (ZahtevZaPosetu.IsObradjen)
             {
                 dateZakazaniDatum.Value = ZahtevZaPosetu.ZakazanoDatumVreme.Value;
@@ -51,7 +51,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
                 dateZakazaniDatum.MinDate=DateTime.Now;
                 timeZakazanoVreme.MinDate=DateTime.Now;
             }
-            
+
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
