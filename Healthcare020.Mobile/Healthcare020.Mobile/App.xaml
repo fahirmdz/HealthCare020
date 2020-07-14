@@ -161,7 +161,6 @@
             </Style>
             <Style TargetType="Label" x:Key="TitleLabel">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="Text" Value="Registracija" />
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="CharacterSpacing">1</Setter>
                 <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />

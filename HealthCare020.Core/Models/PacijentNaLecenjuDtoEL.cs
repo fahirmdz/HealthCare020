@@ -2,7 +2,7 @@
 {
     public class PacijentNaLecenjuDtoEL:PacijentNaLecenjuDto
     {
-        public LicniPodaciDto LicniPodaci { get; set; }
+        public string ImePrezime { get; set; }
         public TwoFieldsDto StacionarnoOdeljenje { get; set; }
     }
 }

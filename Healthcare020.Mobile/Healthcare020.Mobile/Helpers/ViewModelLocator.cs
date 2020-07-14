@@ -13,13 +13,13 @@ namespace Healthcare020.Mobile.Helpers
             Locator.Register<LoginViewModel>();
             Locator.Register<PacijentDashboardViewModel>();
             Locator.Register<SettingsViewModel>();
-            Locator.Register<RegisterViewModel>();
         }
 
         public static WelcomeViewModel WelcomeViewModel => Locator.GetInstance<WelcomeViewModel>();
         public static LoginViewModel LoginViewModel => Locator.GetInstance<LoginViewModel>();
         public static PacijentDashboardViewModel PacijentDashboardViewModel => Locator.GetInstance<PacijentDashboardViewModel>();
         public static SettingsViewModel SettingsViewModel => Locator.GetInstance<SettingsViewModel>();
-        public static RegisterViewModel RegisterViewModel => Locator.GetInstance<RegisterViewModel>();
+        public static RegisterViewModel RegisterViewModel => Bootstrap.GetContainer().Resolve<RegisterViewModel>();
+        public static PosetaViewModel PosetaViewModel => Bootstrap.GetContainer().Resolve<PosetaViewModel>();
     }
 }

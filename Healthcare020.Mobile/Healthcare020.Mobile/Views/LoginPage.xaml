@@ -50,7 +50,7 @@
                                 <Entry Placeholder="Korisničko ime"
                                        ClassId="Username"
                                        Text="{Binding Username}"
-                                       MaxLength="20" />
+                                       MaxLength="20"/>
                                 <Label x:Name="UsernameValidation"></Label>
                                 <Entry Placeholder="Lozinka"
                                        Text="{Binding Password}"

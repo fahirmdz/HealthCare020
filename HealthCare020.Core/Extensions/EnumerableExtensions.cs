@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace HealthCare020.Core.Extensions
@@ -25,6 +26,14 @@ namespace HealthCare020.Core.Extensions
         public static IEnumerable<TSource> GetDuplicates<TSource>(this IEnumerable<TSource> source)
         {
             return source.GetDuplicates(x => x, null);
+        }
+
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> enumerable) {
+            var col = new ObservableCollection<T>();
+            foreach ( var cur in enumerable ) {
+                col.Add(cur);
+            }
+            return col;
         }
     }
 }

@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace HealthCare020.API.Controllers
 {
     [ApiController]
-    [ResponseCache(VaryByHeader = "User-Agent", CacheProfileName = CacheProfilesConstants.CacheProfile240Seconds)]
     public class BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters> : ControllerBase where TResourceParameters : BaseResourceParameters
     {
         private readonly IService<TEntity, TResourceParameters> _service;

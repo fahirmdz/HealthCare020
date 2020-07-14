@@ -36,7 +36,6 @@ namespace HealthCare020.Services
             var result = _dbContext.PacijentiNaLecenju
                 .Include(x => x.StacionarnoOdeljenje)
                 .Include(x => x.LicniPodaci)
-                .ThenInclude(x => x.Grad)
                 .AsQueryable();
 
             return id.HasValue ? result = result.Where(x => x.Id == id) : result;
@@ -118,13 +117,31 @@ namespace HealthCare020.Services
 
             if(resourceParameters!=null)
             {
-                if (!string.IsNullOrWhiteSpace(resourceParameters.Ime))
-                    result = result.Where(x =>
-                        x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.Trim().ToLower()));
+                if (!string.IsNullOrEmpty(resourceParameters.Ime))
+                {
+                    var imeForSearch = resourceParameters.Ime.ToLower();
+                    if (!await result.AnyAsync(x =>
+                        x.LicniPodaci.Ime.ToLower()
+                            .Contains(imeForSearch)))
+                    {
+                        result = result.Where(x =>
+                            x.LicniPodaci.Prezime.ToLower()
+                                .Contains(resourceParameters.Prezime.ToLower()));
+                    }
+                    else
+                    {
+                        result = result.Where(x =>
+                            x.LicniPodaci.Ime.ToLower()
+                                .Contains(imeForSearch));
+                    }
+                }
 
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
+                if (await result.AnyAsync() && (string.IsNullOrWhiteSpace(resourceParameters.Ime) && !string.IsNullOrEmpty(resourceParameters.Prezime)))
+                {
                     result = result.Where(x =>
-                        x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.Trim().ToLower()));
+                        x.LicniPodaci.Prezime.ToLower()
+                            .Contains(resourceParameters.Prezime.ToLower()));
+                }
 
                 if (await result.AnyAsync() && resourceParameters.StacionarnoOdeljenjeId.HasValue)
                     result = result.Where(x => x.StacionarnoOdeljenjeId == resourceParameters.StacionarnoOdeljenjeId);
