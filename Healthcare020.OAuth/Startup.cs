@@ -52,7 +52,7 @@ namespace Healthcare020.OAuth
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 
-            services.AddHealthCare020Services();
+            services.AddHealthCare020Services(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)

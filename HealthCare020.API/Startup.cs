@@ -94,7 +94,7 @@ namespace HealthCare020.API
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
-            services.AddHealthCare020Services();
+            services.AddHealthCare020Services(Configuration);
 
             services.AddResponseCaching();
 
