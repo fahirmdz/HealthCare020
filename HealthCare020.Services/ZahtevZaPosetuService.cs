@@ -11,21 +11,26 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
     public class ZahtevZaPosetuService : BaseCRUDService<ZahtevZaPosetuDtoLL, ZahtevZaPosetuDtoEL, ZahtevZaPosetuResourceParameters, ZahtevZaPosetu, ZahtevZaPosetuUpsertDto, ZahtevZaPosetuPatchDto>
     {
+        private readonly ISMSGateway _smsGateway;
+
         public ZahtevZaPosetuService(IMapper mapper, HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService)
+            IAuthService authService,
+            ISMSGateway smsGateway)
             : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
-        { }
+        {
+            _smsGateway = smsGateway;
+        }
 
         public override IQueryable<ZahtevZaPosetu> GetWithEagerLoad(int? id = null)
         {
@@ -178,7 +183,7 @@ namespace HealthCare020.Services
         public async Task<ServiceResult> AutoScheduling()
         {
             var zahteviZaPoseteDanas = _dbContext.ZahteviZaPosetu
-                .Include(x=>x.PacijentNaLecenju)
+                .Include(x => x.PacijentNaLecenju)
                 .Where(x => !x.IsObradjen)
                 .ToList();
 
@@ -190,10 +195,10 @@ namespace HealthCare020.Services
             var maxPacijenataUSobi = brojKrevetaUSobi * maxBrojPosetiocaPoPacijentu;
 
             var currentDate = DateTime.Now.Date;
-            var prviTerminPosetePocetak=new DateTime(currentDate.Year,currentDate.Month,currentDate.Day,14,30,0);
+            var prviTerminPosetePocetak = new DateTime(currentDate.Year, currentDate.Month, currentDate.Day, 14, 30, 0);
             var prviTerminPoseteKraj = prviTerminPosetePocetak.AddMinutes(30);
 
-            var drugiTerminPosetePocetak=new DateTime(currentDate.Year,currentDate.Month,currentDate.Day,18,0,0);
+            var drugiTerminPosetePocetak = new DateTime(currentDate.Year, currentDate.Month, currentDate.Day, 18, 0, 0);
             var drugiTerminPoseteKraj = drugiTerminPosetePocetak.AddMinutes(30);
 
             var pacijentiZaPosete = zahteviZaPoseteDanas
@@ -201,7 +206,7 @@ namespace HealthCare020.Services
                 .Select(x => x.Key)
                 .ToList();
 
-             zahteviZaPoseteDanas.ForEach(x => x.IsObradjen = true);
+            zahteviZaPoseteDanas.ForEach(x => x.IsObradjen = true);
 
             foreach (var pacijentId in pacijentiZaPosete)
             {
@@ -215,10 +220,6 @@ namespace HealthCare020.Services
                         .ToList();
                 }
 
-                //SMS notifications
-                //.....
-
-
                 var flagCounter = 0;
                 var vrijeme = prviTerminPosetePocetak;
                 foreach (var zahtev in zahteviZaPacijenta)
@@ -226,6 +227,11 @@ namespace HealthCare020.Services
                     if (flagCounter == 2)
                         vrijeme = drugiTerminPosetePocetak;
                     zahtev.ZakazanoDatumVreme = vrijeme;
+
+                    //SMS notifications
+                    _smsGateway.Send(zahtev.BrojTelefonaPosetioca, $"Zahtev za posetu koji ste poslali je odobren. Odobreno vreme je: " +
+                                                                   $"{zahtev.ZakazanoDatumVreme.Value.ToString("G", CultureInfo.CreateSpecificCulture("de-De"))}");
+
                     flagCounter++;
                 }
 
