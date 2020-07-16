@@ -161,6 +161,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.1.0.446</Version>
     </PackageReference>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>3.0.4</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>18.1.0.59</Version>
     </PackageReference>
@@ -209,6 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Montserrat-Thin.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\welcome_animationview.json" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
