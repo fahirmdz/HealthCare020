@@ -1,80 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:BaseValidationContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:custom="clr-namespace:Healthcare020.Mobile.Controls;assembly=Healthcare020.Mobile"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
-
-             mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.PosetaPage">
+<views:BaseValidationContentPage
+    x:Class="Healthcare020.Mobile.Views.PosetaPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Healthcare020.Mobile.Controls;assembly=Healthcare020.Mobile"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shapes="clr-namespace:Xamarin.Forms.Shapes;assembly=Xamarin.Forms.Core"
+    xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
+    mc:Ignorable="d">
     <ContentPage.Content>
         <ScrollView>
             <Grid BackgroundColor="{StaticResource LighterSmokeWhite}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0" Margin="0" Orientation="Horizontal">
+                <StackLayout
+                    Grid.Row="0"
+                    Margin="0"
+                    Orientation="Horizontal">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackLayout Style="{StaticResource TitleLabelStackStyle}">
-                            <Path x:Name="TitlePath" Style="{StaticResource TitlePath}"></Path>
-                            <Label x:Name="TitleLabel" Text="Poseta" Style="{StaticResource TitleLabel}"></Label>
+                            <shapes:Path x:Name="TitlePath" Style="{StaticResource TitlePath}" />
+                            <Label
+                                x:Name="TitleLabel"
+                                Style="{StaticResource TitleLabel}"
+                                Text="Poseta" />
                         </StackLayout>
                         <Grid VerticalOptions="FillAndExpand">
-                            <Path Style="{StaticResource LogoPath}"></Path>
-                            <Image Style="{StaticResource LogoImage}"></Image>
+                            <Path Style="{StaticResource LogoPath}" />
+                            <Image Style="{StaticResource LogoImage}" />
                         </Grid>
                     </Grid>
                 </StackLayout>
-                <StackLayout Grid.Row="1" Style="{StaticResource RegisterFormStackBody}" x:Name="FormBody">
+                <StackLayout
+                    x:Name="FormBody"
+                    Grid.Row="1"
+                    Style="{StaticResource RegisterFormStackBody}">
                     <StackLayout.Resources>
-                        <Style TargetType="Entry" BasedOn="{StaticResource CustomEntry}"></Style>
-                        <Style TargetType="Label" BasedOn="{StaticResource CustomValidationLabel}"></Style>
+                        <Style BasedOn="{StaticResource CustomEntry}" TargetType="Entry" />
+                        <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
                     </StackLayout.Resources>
 
-                    <Entry Text="{Binding PacijentSearch}"
-                           ClassId="ImePrezimePacijenta"
-                           Placeholder="Ime i prezime pacijenta *"></Entry>
-                    <Label x:Name="ImePrezimePacijentaValidation"></Label>
+                    <Entry
+                        ClassId="ImePrezimePacijenta"
+                        Placeholder="Ime i prezime pacijenta *"
+                        Text="{Binding PacijentSearch}" />
+                    <Label x:Name="ImePrezimePacijentaValidation" />
 
-                    <Entry Text="{Binding BrojTelefonaPosetioca}" IsVisible="False"
-                           ClassId="BrojTelefonaPosetioca"
-                           x:Name="BrojTelefonaPosetioca"
-                           Placeholder="BrojTelefonaPosetioca *"></Entry>
-                    <Label x:Name="BrojTelefonaPosetiocaValidation"></Label>
+                    <Entry
+                        x:Name="BrojTelefonaPosetioca"
+                        ClassId="BrojTelefonaPosetioca"
+                        IsVisible="False"
+                        Placeholder="BrojTelefonaPosetioca *"
+                        Text="{Binding BrojTelefonaPosetioca}" />
+                    <Label x:Name="BrojTelefonaPosetiocaValidation" />
 
-                    <custom:CustomPicker x:Name="PacijentPicker"
-                            HorizontalOptions="CenterAndExpand"
-                            FontSize="{StaticResource FontSize-Medium}"
-                            IsVisible="False"
-                            ClassId="{Binding PickerIsReady}"
-                            Title="--Odaberite pacijenta--"
-                            SelectedIndexChanged="PacijentPicker_OnSelectedIndexChanged"
-                            ItemsSource="{Binding Pacijenti}"
-                            ItemDisplayBinding="{Binding ImePrezime}"></custom:CustomPicker>
-                    <Label x:Name="PacijentPickedValidation"></Label>
-                    <Entry Text="{Binding PickerReadyToOpen}" IsVisible="False" ClassId="No"></Entry>
+                    <custom:CustomPicker
+                        x:Name="PacijentPicker"
+                        Title="--Odaberite pacijenta--"
+                        ClassId="{Binding PickerIsReady}"
+                        FontSize="{StaticResource FontSize-Medium}"
+                        HorizontalOptions="CenterAndExpand"
+                        IsVisible="False"
+                        ItemDisplayBinding="{Binding ImePrezime}"
+                        ItemsSource="{Binding Pacijenti}"
+                        SelectedIndexChanged="PacijentPicker_OnSelectedIndexChanged" />
+                    <Label x:Name="PacijentPickedValidation" />
+                    <Entry
+                        ClassId="No"
+                        IsVisible="False"
+                        Text="{Binding PickerReadyToOpen}" />
 
-                    <Button Style="{StaticResource BigButtonStyle}"
-                            Text="Potvrdi"
-                            IsVisible="False"
-                            x:Name="ConfirmButton"
-                             Clicked="ConfirmButton_OnClicked">
-                    </Button>
-                    <Button Style="{StaticResource BigButtonStyle}"
-                            Text="Traži"
-                            x:Name="SearchButton"
-                            Clicked="SearchButton_OnClicked">
-                    </Button>
-                    <Button Style="{StaticResource BigButtonSecondaryStyle}"
-                            BackgroundColor="Silver"
-                            Text="Cancel"
-                            x:Name="CancelButton">
-                    </Button>
+                    <Button
+                        x:Name="ConfirmButton"
+                        Clicked="ConfirmButton_OnClicked"
+                        IsVisible="False"
+                        Style="{StaticResource BigButtonStyle}"
+                        Text="Potvrdi" />
+                    <Button
+                        x:Name="SearchButton"
+                        Clicked="SearchButton_OnClicked"
+                        Style="{StaticResource BigButtonStyle}"
+                        Text="Traži" />
+                    <Button
+                        x:Name="CancelButton"
+                        BackgroundColor="Silver"
+                        Style="{StaticResource BigButtonSecondaryStyle}"
+                        Text="Cancel" />
                 </StackLayout>
             </Grid>
         </ScrollView>

@@ -20,13 +20,12 @@ namespace Healthcare020.Mobile.Views
             BindingContext = BaseVM = new BaseViewModel {
                 LoadingMessage = AppResources.LoggingInLoadingMessage
             };
-
-            BaseVM.IsBusy = true;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            await Task.Delay(5000);
 
             if (await SecureStorage.GetAsync(PreferencesKeys.HasSavedLoginCredentials) is string val && val == true.ToString())
             {
@@ -37,13 +36,6 @@ namespace Healthcare020.Mobile.Views
             }
             else
                 Application.Current.MainPage = new LoginPage();
-
-            BaseVM.IsBusy = false;
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
         }
     }
 }

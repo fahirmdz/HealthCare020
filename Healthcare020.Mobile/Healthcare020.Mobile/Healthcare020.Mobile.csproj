@@ -12,7 +12,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BottomBar\**" />
+    <Compile Remove="Converters\**" />
+    <EmbeddedResource Remove="BottomBar\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <None Remove="BottomBar\**" />
+    <None Remove="Converters\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.446" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="3.0.4" />
     <PackageReference Include="Flurl" Version="2.8.2" />
     <PackageReference Include="Flurl.Http" Version="2.4.2" />
     <PackageReference Include="IdentityModel" Version="4.3.0" />
@@ -91,9 +101,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Converters\" />
     <Folder Include="Navigation\" />
-    <Folder Include="BottomBar\" />
     <Folder Include="Triggers\" />
   </ItemGroup>
 

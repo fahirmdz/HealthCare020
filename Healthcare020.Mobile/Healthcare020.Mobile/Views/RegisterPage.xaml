@@ -1,71 +1,105 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:BaseValidationContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
-             mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.RegisterPage">
+<views:BaseValidationContentPage
+    x:Class="Healthcare020.Mobile.Views.RegisterPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shapes="clr-namespace:Xamarin.Forms.Shapes;assembly=Xamarin.Forms.Core"
+    xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
+    mc:Ignorable="d">
     <ContentPage.Content>
         <ScrollView>
             <Grid BackgroundColor="{StaticResource LighterSmokeWhite}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0" Margin="0" Orientation="Horizontal">
+                <StackLayout
+                    Grid.Row="0"
+                    Margin="0"
+                    Orientation="Horizontal">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackLayout Style="{StaticResource TitleLabelStackStyle}">
-                            <Path x:Name="TitlePath" Style="{StaticResource TitlePath}"></Path>
-                            <Label x:Name="TitleLabel" Text="Registracija"  Style="{StaticResource TitleLabel}"></Label>
+                            <shapes:Path x:Name="TitlePath" Style="{StaticResource TitlePath}" />
+                            <Label
+                                x:Name="TitleLabel"
+                                Style="{StaticResource TitleLabel}"
+                                Text="Registracija" />
                         </StackLayout>
                         <Grid VerticalOptions="FillAndExpand">
-                            <Path Style="{StaticResource LogoPath}"></Path>
-                            <Image Style="{StaticResource LogoImage}"></Image>
+                            <Path Style="{StaticResource LogoPath}" />
+                            <Image Style="{StaticResource LogoImage}" />
                         </Grid>
                     </Grid>
                 </StackLayout>
-                <StackLayout Grid.Row="1" Style="{StaticResource RegisterFormStackBody}" x:Name="FormBody">
+                <StackLayout
+                    x:Name="FormBody"
+                    Grid.Row="1"
+                    Style="{StaticResource RegisterFormStackBody}">
                     <StackLayout.Resources>
-                        <Style TargetType="Entry" BasedOn="{StaticResource CustomEntry}"></Style>
-                        <Style TargetType="Label" BasedOn="{StaticResource CustomValidationLabel}"></Style>
+                        <Style BasedOn="{StaticResource CustomEntry}" TargetType="Entry" />
+                        <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
                     </StackLayout.Resources>
 
-                    <Entry Text="{Binding BrojKnjizice}" ClassId="BrojKnjizice" Placeholder="Broj zdravstvene knjižice *"></Entry>
-                    <Label x:Name="BrojKnjiziceValidation"></Label>
+                    <Entry
+                        ClassId="BrojKnjizice"
+                        Placeholder="Broj zdravstvene knjižice *"
+                        Text="{Binding BrojKnjizice}" />
+                    <Label x:Name="BrojKnjiziceValidation" />
 
-                    <Entry Text="{Binding JMBG}" ClassId="JMBG" Placeholder="JMBG *"></Entry>
-                    <Label x:Name="JMBGValidation"></Label>
+                    <Entry
+                        ClassId="JMBG"
+                        Placeholder="JMBG *"
+                        Text="{Binding JMBG}" />
+                    <Label x:Name="JMBGValidation" />
 
-                    <Entry Text="{Binding Ime}" ClassId="Ime" Placeholder="Ime *"></Entry>
-                    <Label x:Name="ImeValidation"></Label>
+                    <Entry
+                        ClassId="Ime"
+                        Placeholder="Ime *"
+                        Text="{Binding Ime}" />
+                    <Label x:Name="ImeValidation" />
 
-                    <Entry Text="{Binding Prezime}" ClassId="Prezime"  Placeholder="Prezime *"></Entry>
-                    <Label x:Name="PrezimeValidation"></Label>
+                    <Entry
+                        ClassId="Prezime"
+                        Placeholder="Prezime *"
+                        Text="{Binding Prezime}" />
+                    <Label x:Name="PrezimeValidation" />
 
-                    <Entry Text="{Binding Username}" ClassId="Username"  Placeholder="Username *"></Entry>
-                    <Label x:Name="UsernameValidation"></Label>
+                    <Entry
+                        ClassId="Username"
+                        Placeholder="Username *"
+                        Text="{Binding Username}" />
+                    <Label x:Name="UsernameValidation" />
 
-                    <Entry Text="{Binding Password}" ClassId="Password" IsPassword="True" Placeholder="Password *"></Entry>
-                    <Label x:Name="PasswordValidation"></Label>
+                    <Entry
+                        ClassId="Password"
+                        IsPassword="True"
+                        Placeholder="Password *"
+                        Text="{Binding Password}" />
+                    <Label x:Name="PasswordValidation" />
 
-                    <Entry Text="{Binding ConfirmPassword}" ClassId="ConfirmPassword" IsPassword="True"  Placeholder="Confirm password *"></Entry>
-                    <Label x:Name="ConfirmPasswordValidation"></Label>
+                    <Entry
+                        ClassId="ConfirmPassword"
+                        IsPassword="True"
+                        Placeholder="Confirm password *"
+                        Text="{Binding ConfirmPassword}" />
+                    <Label x:Name="ConfirmPasswordValidation" />
 
-                    <Button Style="{StaticResource BigButtonStyle}"
-                            Text="Register"
-                            x:Name="RegisterButton"
-                            Clicked="RegisterButton_OnClicked">
-                    </Button>
-                    <Button Style="{StaticResource BigButtonSecondaryStyle}"
-                            BackgroundColor="Silver"
-                            Text="Cancel"
-                            x:Name="CancelButton"
-                            Clicked="CancelButton_OnClicked">
-                    </Button>
+                    <Button
+                        x:Name="RegisterButton"
+                        Clicked="RegisterButton_OnClicked"
+                        Style="{StaticResource BigButtonStyle}"
+                        Text="Register" />
+                    <Button
+                        x:Name="CancelButton"
+                        BackgroundColor="Silver"
+                        Clicked="CancelButton_OnClicked"
+                        Style="{StaticResource BigButtonSecondaryStyle}"
+                        Text="Cancel" />
                 </StackLayout>
             </Grid>
         </ScrollView>
