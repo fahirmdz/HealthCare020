@@ -90,6 +90,7 @@
                     <Button
                         x:Name="CancelButton"
                         BackgroundColor="Silver"
+                        Command="{Binding CancelNavigationCommand}"
                         Style="{StaticResource BigButtonSecondaryStyle}"
                         Text="Cancel" />
                 </StackLayout>

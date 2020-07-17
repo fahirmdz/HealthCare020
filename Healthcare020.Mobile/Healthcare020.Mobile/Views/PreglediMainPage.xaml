@@ -1,15 +1,172 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.PreglediMainPage">
+<ContentPage
+    x:Class="Healthcare020.Mobile.Views.PreglediMainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
+    mc:Ignorable="d">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="PRREGLEDI"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid
+            Padding="0,30,0,0"
+            BackgroundColor="White"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Frame
+                Grid.Row="0"
+                Padding="0,0,-1,0"
+                HasShadow="False">
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Column="0" HasShadow="False">
+                        <Image
+                            HorizontalOptions="Start"
+                            Source="{StaticResource Logo}"
+                            VerticalOptions="Start" />
+                    </Frame>
+                    <Path
+                        Grid.Column="1"
+                        Margin="0"
+                        Aspect="Fill"
+                        Data="M501,354.2c-138.9,31-247.7,18.8-315.4,4.6c-95.9-20.1-121.7-35.4-156.2-74.1C-3.3,248-6.8,169.7,11.6,123.5  C59.3,3.6,243.3-23.8,501,20.3"
+                        Fill="{StaticResource LightNavyBlue}">
+                        <Path.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="SviPregledi" Tapped="SviPregledi_OnTapped" />
+                        </Path.GestureRecognizers>
+                    </Path>
+
+                    <StackLayout
+                        Grid.Column="1"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <Image
+                            Aspect="AspectFit"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand">
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{x:Static resources:IconFont.Stethoscope}"
+                                    Size="{StaticResource IconSize-Medium}"
+                                    Color="Aqua" />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                            Margin="0,10,0,0"
+                            FontSize="{StaticResource FontSize-Medium}"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Svi pregledi"
+                            TextColor="WhiteSmoke" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SviPregledi_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <Frame
+                Grid.Row="1"
+                Padding="-2,0,0,0"
+                HasShadow="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Path
+                        Grid.Column="0"
+                        Margin="0"
+                        Aspect="Fill"
+                        Data=" M0.1,20.6c138.7-31.4,247.6-20,315.4-6.5c96,19.2,121.9,34.1,156.7,72c32.9,35.9,36.9,112.9,18.8,158.5             c-47,118.4-230.8,146.5-488.8,104.7"
+                        Fill="{StaticResource LightNavyBlue}">
+                        <Path.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="ZakazaniPregledi" Tapped="ZakazaniPregledi_OnTapped" />
+                        </Path.GestureRecognizers>
+                    </Path>
+
+                    <StackLayout
+                        Grid.Column="0"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ZakazaniPregledi_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{x:Static resources:IconFont.CalendarAlt}"
+                                    Size="{StaticResource IconSize-Medium}"
+                                    Color="Aqua" />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                            Margin="0,10,0,0"
+                            FontSize="{StaticResource FontSize-Medium}"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Zakazani pregledi"
+                            TextColor="WhiteSmoke" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+
+            <Frame
+                Grid.Row="2"
+                Padding="0,0,-1,0"
+                BorderColor="White"
+                HasShadow="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Path
+                        Grid.Column="1"
+                        Margin="0"
+                        Aspect="Fill"
+                        Data="M501,354.2c-138.9,31-247.7,18.8-315.4,4.6c-95.9-20.1-121.7-35.4-156.2-74.1C-3.3,248-6.8,169.7,11.6,123.5  C59.3,3.6,243.3-23.8,501,20.3"
+                        Fill="{StaticResource LightNavyBlue}">
+                        <Path.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="NoviPregled" Tapped="NoviPregled_OnTapped" />
+                        </Path.GestureRecognizers>
+                    </Path>
+
+                    <StackLayout
+                        Grid.Column="1"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="NoviPregled_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{x:Static resources:IconFont.Plus}"
+                                    Size="{StaticResource IconSize-Medium}"
+                                    Color="Aqua" />
+                            </Image.Source>
+                        </Image>
+                        <Label
+                            Margin="0,10,0,0"
+                            FontSize="{StaticResource FontSize-Medium}"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Zakaži pregled"
+                            TextColor="WhiteSmoke" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

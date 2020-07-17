@@ -31,7 +31,7 @@ namespace Healthcare020.Mobile
             DependencyService.Register<MockDataStore>();
             Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental" });
 
-            MainPage = new SplashScreenPage();
+            MainPage = new PacijentDasbhboardTabbedPage();
         }
 
         protected override void OnStart()
