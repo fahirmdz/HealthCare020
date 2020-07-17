@@ -1,8 +1,10 @@
-﻿using Healthcare020.Mobile.Resources;
+﻿using System.Globalization;
+using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
 using HealthCare020.Core.Extensions;
 using System.Linq;
+using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -29,13 +31,16 @@ namespace Healthcare020.Mobile
             LoadStyles();
 
             DependencyService.Register<MockDataStore>();
-            Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental" });
+            Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
 
             MainPage = new PacijentDasbhboardTabbedPage();
+
+
         }
 
         protected override void OnStart()
         {
+            Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture= new CultureInfo("bs-Latn-BA");
         }
 
         protected override void OnSleep()

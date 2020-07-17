@@ -1,15 +1,146 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.ZahteviZaPregledMainPage">
+<ContentPage
+    x:Class="Healthcare020.Mobile.Views.ZahteviZaPregledMainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Effects="clr-namespace:Healthcare020.Mobile.Effects;assembly=Healthcare020.Mobile"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
+    mc:Ignorable="d">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="ZAHETVI ZA PREGLED"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <CollectionView
+            Grid.Row="2"
+            Margin="25"
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding ZahteviZaPregled}"
+            SelectionMode="None"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.Header>
+                <Label
+                    FontSize="{StaticResource FontSize-Medium}"
+                    Text="Zahtevi"
+                    TextColor="Black" />
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="20" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <pancakeView:PancakeView
+                        BackgroundColor="{StaticResource LighterNavyBlue}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="StartAndExpand">
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <BoxView
+                                BackgroundColor="{StaticResource LighterNavyBlue}"
+                                HorizontalOptions="Start"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="3" />
+                            <Expander Grid.Column="1">
+                                <Expander.Header>
+                                    <Grid BackgroundColor="{StaticResource LightNavyBlue}" HorizontalOptions="FillAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="3.5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout
+                                            BackgroundColor="{StaticResource LightNavyBlue}"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                            <StackLayout.Effects>
+                                                <Effects:FocusEffect />
+                                            </StackLayout.Effects>
+                                            <Label
+                                                FontSize="{StaticResource FontSize-Medium}"
+                                                HorizontalOptions="Center"
+                                                Text="{Binding DatumVreme, StringFormat='{0:dd}'}"
+                                                TextColor="Aqua" />
+                                            <Label
+                                                Margin="0,-10,0,0"
+                                                FontSize="{StaticResource FontSize-Small}"
+                                                HorizontalOptions="Center"
+                                                Text="{Binding DatumVreme, StringFormat='{0:MMMM}'}"
+                                                TextColor="Aqua" />
+                                        </StackLayout>
+                                        <BoxView
+                                            Grid.Column="1"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="FillAndExpand"
+                                            WidthRequest="1" />
+                                        <StackLayout
+                                            Grid.Column="2"
+                                            Margin="20"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="Center">
+                                            <StackLayout>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontFamily="{StaticResource Montserrat-Bold}"
+                                                    FontSize="{StaticResource FontSize-Small}"
+                                                    Text="Doktor: "
+                                                    TextColor="White" />
+                                                <Label
+                                                    FontFamily="{StaticResource Montserrat-Light}"
+                                                    FontSize="{StaticResource FontSize-Small}"
+                                                    Text="{Binding Doktor}"
+                                                    TextColor="White" />
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </Expander.Header>
+                                <Grid BackgroundColor="{StaticResource LighterNavyBlue}" HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="3.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <BoxView
+                                        Grid.Column="1"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="FillAndExpand"
+                                        WidthRequest="1" />
+                                    <StackLayout
+                                        Grid.Column="2"
+                                        Margin="0,5"
+                                        BackgroundColor="{StaticResource LighterNavyBlue}"
+                                        Spacing="10">
+                                        <Label
+                                            Margin="20,0"
+                                            FontFamily="{StaticResource Montserrat-Bold}"
+                                            FontSize="{StaticResource FontSize-Small}"
+                                            Text="Napomena:"
+                                            TextColor="White" />
+                                        <Label
+                                            Margin="20,5,5,20"
+                                            FontSize="{StaticResource FontSize-Small}"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding Napomena}"
+                                            TextColor="White">
+                                            <!--<Label.FormattedText>
+                                                    <FormattedString>
+                                                        <FormattedString.Spans>
+                                                            <Span Text="Test" />
+                                                            <Span Text=" - " />
+                                                            <Span FontAttributes="Bold" Text="Test" />
+                                                        </FormattedString.Spans>
+                                                    </FormattedString>
+                                                </Label.FormattedText>-->
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </Expander>
+                        </Grid>
+                    </pancakeView:PancakeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ContentPage.Content>
 </ContentPage>

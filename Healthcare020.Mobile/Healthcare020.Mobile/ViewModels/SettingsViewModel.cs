@@ -76,9 +76,17 @@ namespace Healthcare020.Mobile.ViewModels
              {
                  return;
              }
-             UploadedPic = await CrossMedia.Current.PickPhotoAsync();
-             if (UploadedPic != null)
-                 await UpdateLicniPodaci();
+
+             try
+             {
+                 UploadedPic = await CrossMedia.Current.PickPhotoAsync();
+                 if (UploadedPic != null)
+                     await UpdateLicniPodaci();
+             }
+             catch
+             {
+                 //ignore
+             }
          });
 
         public ICommand LogoutCommand => new Command(async () => { await Auth.Logout(); });

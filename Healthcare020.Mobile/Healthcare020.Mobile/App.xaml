@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:themes="clr-namespace:Healthcare020.Mobile.Themes;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
-
     <Application.Resources>
         <ResourceDictionary x:Name="MainResourceDictionary">
             <ResourceDictionary.MergedDictionaries>
@@ -18,7 +17,10 @@
             <Color x:Key="CustomDarkBlue">#174c73</Color>
             <Color x:Key="CustomDarkCyan">#0bbfbf</Color>
             <Color x:Key="LightNavyBlue">#5e788f</Color>
-            <Color x:Key="CustomNavyBlueDark">#0b2236</Color>
+            <Color x:Key="LighterNavyBlue">#7d9bb5</Color>
+            <Color x:Key="CustomNavyBlue">#0b2236</Color>
+            <Color x:Key="CustomNavyBlueDark">#354452</Color>
+
             <Color x:Key="CustomLightGreen">#c2f1db</Color>
 
 
@@ -30,23 +32,23 @@
 
             <!--  Font sizes  -->
             <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
-                <On Platform="UWP">27</On>
-                <On Platform="Android">22</On>
+                <On Platform="UWP">25</On>
+                <On Platform="Android">17</On>
             </OnPlatform>
 
             <OnPlatform x:Key="FontSize-Smaller" x:TypeArguments="x:Double">
                 <On Platform="UWP">18</On>
-                <On Platform="Android">14</On>
+                <On Platform="Android">12</On>
             </OnPlatform>
 
             <OnPlatform x:Key="FontSize-Small" x:TypeArguments="x:Double">
                 <On Platform="UWP">19</On>
-                <On Platform="Android">15</On>
+                <On Platform="Android">14</On>
             </OnPlatform>
 
             <OnPlatform x:Key="FontSize-Large" x:TypeArguments="x:Double">
-                <On Platform="UWP">16</On>
-                <On Platform="Android">30</On>
+                <On Platform="UWP">24</On>
+                <On Platform="Android">21</On>
             </OnPlatform>
 
             <!--#region Margin-Responsive-->

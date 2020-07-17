@@ -20,12 +20,14 @@ namespace Healthcare020.Mobile.Views
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
 
             this.SelectedTabColor = (Color)Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
-            this.UnselectedTabColor = (Color)Application.Current.Resources[ResourceKeys.CustomBlueColor];
+            this.UnselectedTabColor = (Color)Application.Current.Resources[ResourceKeys.CustomNavyBlueDarkColor];
+            var st = new StackLayout();
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
         }
     }
 }
