@@ -22,8 +22,8 @@
                     RowSpacing="0"
                     VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="3*" />
-                        <RowDefinition Height="4*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
                     </Grid.RowDefinitions>
                     <Frame
                         Grid.Row="0"
@@ -37,7 +37,7 @@
             <StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="2*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
@@ -51,37 +51,41 @@
                             Margin="0,40,0,0"
                             BackgroundColor="{StaticResource LightSmokeWhite}"
                             CornerRadius="50"
-                            HeightRequest="350"
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="End">
-                            <StackLayout Spacing="5">
+                            VerticalOptions="EndAndExpand">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
                                 <custom:CircleImage
                                     x:Name="ProfilePic"
+                                    Grid.Row="0"
                                     Aspect="AspectFit"
-                                    HeightRequest="210"
                                     HorizontalOptions="Center"
                                     Source="{Binding ProfilePicImageSource}"
-                                    VerticalOptions="Center"
-                                    WidthRequest="210">
+                                    VerticalOptions="Center">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding ProfilePicturePick}" NumberOfTapsRequired="1" />
                                     </Image.GestureRecognizers>
                                 </custom:CircleImage>
                                 <Label
+                                    Grid.Row="1"
                                     FontAttributes="Italic"
                                     FontFamily="{StaticResource Montserrat-Light}"
                                     FontSize="{StaticResource FontSize-Smaller}"
                                     HorizontalOptions="Center"
                                     Text="Tap to change profile picture"
-                                    TextColor="{StaticResource CustomDarkBlue}" />
+                                    TextColor="{StaticResource LightNavyBlue}" />
                                 <Label
+                                    Grid.Row="1"
                                     Margin="0,30,0,10"
                                     FontFamily="{StaticResource Montserrat-Medium}"
                                     FontSize="{StaticResource FontSize-Large}"
                                     HorizontalOptions="Center"
                                     Text="{Binding Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime}"
-                                    TextColor="{StaticResource CustomDarkBlue}" />
-                            </StackLayout>
+                                    TextColor="{StaticResource CustomNavyBlueDark}" />
+                            </Grid>
                         </Frame>
                     </StackLayout>
 
@@ -136,14 +140,11 @@
                                 HorizontalOptions="FillAndExpand"
                                 Text="Logout"
                                 TextColor="WhiteSmoke"
-                                VerticalOptions="FillAndExpand">
-                                <Button.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
-                                </Button.GestureRecognizers>
-                            </Button>
+                                VerticalOptions="FillAndExpand" />
                         </Frame>
                         <Label
-                            FontSize="Medium"
+                            Margin="0,0,0,10"
+                            FontSize="{StaticResource FontSize-Smaller}"
                             HorizontalOptions="Center"
                             Text="Delete account"
                             TextColor="DarkRed" />

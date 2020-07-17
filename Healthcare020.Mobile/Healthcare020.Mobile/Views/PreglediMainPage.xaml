@@ -120,7 +120,6 @@
                 </Grid>
             </Frame>
 
-
             <Frame
                 Grid.Row="2"
                 Padding="0,0,-1,0"
