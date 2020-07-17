@@ -187,6 +187,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Novi zahtev za pregled.
+        /// </summary>
+        public static string NoviZahtevZaPregledPageTitle {
+            get {
+                return ResourceManager.GetString("NoviZahtevZaPregledPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lozinke se ne podudaraju.
         /// </summary>
         public static string PasswordDoNotMatchError {
@@ -260,6 +269,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Svi pregledi.
+        /// </summary>
+        public static string SviPreglediPageTitle {
+            get {
+                return ResourceManager.GetString("SviPreglediPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] user {
@@ -293,6 +311,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string ZahteviTabTitle {
             get {
                 return ResourceManager.GetString("ZahteviTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zakazani pregledi.
+        /// </summary>
+        public static string ZakazaniPreglediPageTitle {
+            get {
+                return ResourceManager.GetString("ZakazaniPreglediPageTitle", resourceCulture);
             }
         }
     }

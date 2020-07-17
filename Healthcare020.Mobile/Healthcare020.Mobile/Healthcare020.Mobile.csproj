@@ -14,10 +14,16 @@
   <ItemGroup>
     <Compile Remove="BottomBar\**" />
     <Compile Remove="Converters\**" />
+    <Compile Remove="Navigation\**" />
+    <Compile Remove="Triggers\**" />
     <EmbeddedResource Remove="BottomBar\**" />
     <EmbeddedResource Remove="Converters\**" />
+    <EmbeddedResource Remove="Navigation\**" />
+    <EmbeddedResource Remove="Triggers\**" />
     <None Remove="BottomBar\**" />
     <None Remove="Converters\**" />
+    <None Remove="Navigation\**" />
+    <None Remove="Triggers\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,6 +80,9 @@
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\NoviZahtevZaPregledPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\PacijentDasbhboardTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -98,11 +107,9 @@
     <EmbeddedResource Update="Views\ZahteviZaPregledMainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Navigation\" />
-    <Folder Include="Triggers\" />
+    <EmbeddedResource Update="Views\ZakazaniPreglediPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

@@ -35,7 +35,7 @@ namespace Healthcare020.Mobile.Views
 
             }
             else
-                Application.Current.MainPage = new LoginPage();
+                Application.Current.MainPage = new WelcomePage();
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using Healthcare020.Mobile.Constants;
-using Healthcare020.Mobile.Helpers;
-using Healthcare020.Mobile.Resources;
+﻿using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
