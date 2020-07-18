@@ -13,15 +13,12 @@
 
   <ItemGroup>
     <Compile Remove="BottomBar\**" />
-    <Compile Remove="Converters\**" />
     <Compile Remove="Navigation\**" />
     <Compile Remove="Triggers\**" />
     <EmbeddedResource Remove="BottomBar\**" />
-    <EmbeddedResource Remove="Converters\**" />
     <EmbeddedResource Remove="Navigation\**" />
     <EmbeddedResource Remove="Triggers\**" />
     <None Remove="BottomBar\**" />
-    <None Remove="Converters\**" />
     <None Remove="Navigation\**" />
     <None Remove="Triggers\**" />
   </ItemGroup>

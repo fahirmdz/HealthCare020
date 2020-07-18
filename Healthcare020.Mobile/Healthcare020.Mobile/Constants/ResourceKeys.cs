@@ -5,6 +5,8 @@ namespace Healthcare020.Mobile.Constants
     public class ResourceKeys
     {
         public static string CustomBlueColor { get; } = "CustomBlue";
+        public static string FontSizeMedium { get; } = "FontSize-Medium";
+        public static string FontSizeSmall { get; } = "FontSize-Small";
         public static string HealthcareCyanColor { get; } = "HealthcareCyan";
         public static string CustomNavyBlueDarkColor { get; } = "CustomNavyBlueDark";
         public static string LightSmokeWhiteColor { get; } = "LightSmokeWhite";
@@ -14,6 +16,9 @@ namespace Healthcare020.Mobile.Constants
         public static string TitlePathLarge { get; } = "TitlePath-Large";
         public static string TitleLabelMedium { get; } = "TitleLabel-Medium";
         public static string TitleLabelLarge { get; } = "TitleLabel-Large";
-
+        public static string FontAwesomeRegularFamily { get; } = "FontAwesomeRegular";
+        public static string IconSizeLarge { get; } = "IconSize-Large";
+        public static string LightNavyBlueColor { get; } = "LightNavyBlue";
+        public static string RowCountZahteviZaPregled { get; } = "RowCountZahteviZaPregled";
     }
 }

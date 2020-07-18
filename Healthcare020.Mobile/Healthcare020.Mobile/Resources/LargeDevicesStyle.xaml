@@ -4,6 +4,19 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+
+    <!--#region ConstantValues-->
+    <x:Int32 x:Key="RowCountZahteviZaPregled">5</x:Int32>
+    <!--#endregion-->
+
+    <!--#region Thicknesses-->
+    <Thickness x:Key="NextPrevNavigationThickness">0,0,0,40</Thickness>
+    <!--#endregion-->
+
+    <!--#region GridLengths-->
+    <GridLength x:Key="ZahteviZaPregled1Row">6*</GridLength>
+    <!--#endregion-->
+
     <!--#region RegisterPage style-->
 
     <!--  Path with Logo  -->
@@ -96,6 +109,14 @@
     <OnPlatform x:Key="IconSize-Medium" x:TypeArguments="x:Double">
         <On Platform="Android">65</On>
     </OnPlatform>
+    <OnPlatform x:Key="IconSize-Large" x:TypeArguments="x:Double">
+        <On Platform="Android">70</On>
+        <On Platform="UWP">80</On>
+    </OnPlatform>
+    <OnPlatform x:Key="IconSize-Smaller" x:TypeArguments="x:Double">
+        <On Platform="Android">25</On>
+        <On Platform="UWP">30</On>
+    </OnPlatform>
     <!--#endregion-->
 
     <!--  Font sizes  -->
@@ -104,7 +125,7 @@
         <On Platform="Android">16</On>
     </OnPlatform>
     <OnPlatform x:Key="FontSize-Small" x:TypeArguments="x:Double">
-        <On Platform="UWP">21</On>
+        <On Platform="UWP">22</On>
         <On Platform="Android">18</On>
     </OnPlatform>
     <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
@@ -116,7 +137,6 @@
         <On Platform="Android">26</On>
     </OnPlatform>
     <!--  /Font sizes  -->
-
 
     <!--#region Margin-Responsive-->
     <OnPlatform x:Key="5mr" x:TypeArguments="x:Double">
@@ -169,7 +189,6 @@
         <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
     </Style>
     <!--#endregion-->
-
 
     <!--#region LoginPage styles-->
     <Style x:Key="LoginPageEntryStyle" TargetType="Entry">
