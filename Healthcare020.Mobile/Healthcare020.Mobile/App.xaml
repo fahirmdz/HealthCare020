@@ -3,6 +3,7 @@
     x:Class="Healthcare020.Mobile.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Healthcare020.Mobile.Converters;assembly=Healthcare020.Mobile"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:themes="clr-namespace:Healthcare020.Mobile.Themes;assembly=Healthcare020.Mobile"
@@ -12,6 +13,27 @@
             <ResourceDictionary.MergedDictionaries>
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries>
+
+
+            <!--#region ConstantValues-->
+            <x:Int32 x:Key="RowCountZahteviZaPregled">3</x:Int32>
+            <!--#endregion-->
+
+            <!--#region Thicknesses-->
+            <Thickness x:Key="NextPrevNavigationThickness">0,0,0,5</Thickness>
+            <!--#endregion-->
+
+
+            <!--#region GridLengths-->
+            <GridLength x:Key="ZahteviZaPregled1Row">8*</GridLength>
+            <!--#endregion-->
+
+            <!--#region Converters-->
+            <converters:BooleanYesOrNoConverter x:Key="BooleanYesOrNoConverter" />
+            <converters:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+            <converters:OppositeBooleanConverter x:Key="OppositeBooleanConverter" />
+            <!--#endregion-->
+
             <!--#region Global Styles-->
             <Color x:Key="CustomBlue">#3b4b84</Color>
             <Color x:Key="CustomDarkBlue">#174c73</Color>
@@ -22,7 +44,6 @@
             <Color x:Key="CustomNavyBlueDark">#354452</Color>
 
             <Color x:Key="CustomLightGreen">#c2f1db</Color>
-
 
             <Color x:Key="NavigationPrimary">#2196F3</Color>
             <Color x:Key="HealthcareCyan">#3ddbdb</Color>
@@ -50,6 +71,7 @@
                 <On Platform="UWP">24</On>
                 <On Platform="Android">21</On>
             </OnPlatform>
+            <!--  /Font sizes  -->
 
             <!--#region Margin-Responsive-->
             <OnPlatform x:Key="5mr" x:TypeArguments="x:Double">
@@ -86,10 +108,17 @@
             <!--#region IconSizes-->
             <OnPlatform x:Key="IconSize-Medium" x:TypeArguments="x:Double">
                 <On Platform="Android">35</On>
+                <On Platform="UWP">40</On>
+            </OnPlatform>
+            <OnPlatform x:Key="IconSize-Large" x:TypeArguments="x:Double">
+                <On Platform="Android">65</On>
+                <On Platform="UWP">75</On>
+            </OnPlatform>
+            <OnPlatform x:Key="IconSize-Smaller" x:TypeArguments="x:Double">
+                <On Platform="Android">13</On>
+                <On Platform="UWP">15</On>
             </OnPlatform>
             <!--#endregion-->
-
-            <!--  /Font sizes  -->
 
             <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
                 <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free" />

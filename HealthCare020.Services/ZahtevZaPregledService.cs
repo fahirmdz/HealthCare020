@@ -205,7 +205,7 @@ namespace HealthCare020.Services
                 else if (_authService.UserIsDoktor() && await _authService.GetCurrentLoggedInDoktor() is {} doktor)
                     result = result.Where(x => x.DoktorId == doktor.Id);
 
-                result = result.OrderBy(x=>x.IsObradjen?1:0).ThenBy(x => x.DatumVreme);
+                result = result.OrderByDescending(x => x.DatumVreme);
             }
 
             return await base.FilterAndPrepare(result, resourceParameters);
