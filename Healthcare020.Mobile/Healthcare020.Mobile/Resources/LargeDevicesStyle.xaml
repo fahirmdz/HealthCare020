@@ -5,6 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
 
+    <!--#region Images-->
+    <OnPlatform x:Key="Logo_Revert_Medium" x:TypeArguments="ImageSource">
+        <On Platform="Android" Value="healthcare020_200x200_revert.png" />
+        <On Platform="UWP" Value="Assets/healthcare020_200x200_revert.png" />
+    </OnPlatform>
+    <OnPlatform x:Key="Logo_Revert" x:TypeArguments="ImageSource">
+        <On Platform="Android" Value="healthcare020_350x350_revert.png" />
+        <On Platform="UWP" Value="Assets/healthcare020_350x350_revert" />
+    </OnPlatform>
+    <!--#endregion-->
+
     <!--#region ConstantValues-->
     <x:Int32 x:Key="RowCountZahteviZaPregled">5</x:Int32>
     <!--#endregion-->
@@ -27,10 +38,6 @@
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
         <Setter Property="Fill" Value="#65DBDB" />
     </Style>
-    <OnPlatform x:Key="Logo_Revert" x:TypeArguments="ImageSource">
-        <On Platform="Android" Value="healthcare020_350x350_revert.png" />
-        <On Platform="UWP" Value="Assets/healthcare020_350x350_revert" />
-    </OnPlatform>
     <Style x:Key="LogoImage" TargetType="Image">
         <Setter Property="HorizontalOptions" Value="End" />
         <Setter Property="VerticalOptions" Value="Start" />
@@ -105,6 +112,21 @@
         <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
     </Style>
 
+    <Style x:Key="CustomEntryStyle" TargetType="Entry">
+        <Setter Property="Margin">10</Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
+    </Style>
+
+    <Style x:Key="CustomEditorStyle" TargetType="Editor">
+        <Setter Property="Margin">10</Setter>
+        <Setter Property="AutoSize" Value="TextChanges" />
+        <Setter Property="Keyboard">Plain</Setter>
+        <Setter Property="MaxLength">180</Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
+    </Style>
+
     <!--#region IconSizes-->
     <OnPlatform x:Key="IconSize-Medium" x:TypeArguments="x:Double">
         <On Platform="Android">65</On>
@@ -130,7 +152,7 @@
     </OnPlatform>
     <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
         <On Platform="UWP">27</On>
-        <On Platform="Android">24</On>
+        <On Platform="Android">26</On>
     </OnPlatform>
     <OnPlatform x:Key="FontSize-Large" x:TypeArguments="x:Double">
         <On Platform="UWP">29</On>
@@ -199,6 +221,12 @@
         <Setter Property="Padding">50,20</Setter>
         <Setter Property="VerticalOptions">FillAndExpand</Setter>
         <Setter Property="HorizontalOptions">Center</Setter>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region NoviZahtevZaPregledPage styles-->
+    <Style x:Key="MainStackNoviZahtevZaPregledStyle" TargetType="StackLayout">
+        <Setter Property="Margin" Value="20,0,20,0" />
     </Style>
     <!--#endregion-->
 </ResourceDictionary>
