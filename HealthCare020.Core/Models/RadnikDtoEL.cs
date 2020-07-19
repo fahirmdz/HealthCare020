@@ -6,5 +6,6 @@
         public string Prezime { get; set; }
         public TwoFieldsDto StacionarnoOdeljenje { get; set; }
         public int LicniPodaciId { get; set; }
+        public virtual string ImePrezime => $"{Ime} {Prezime}";
     }
 }

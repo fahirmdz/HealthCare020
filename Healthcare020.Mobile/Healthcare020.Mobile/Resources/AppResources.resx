@@ -159,6 +159,9 @@
   <data name="LoggingInLoadingMessage" xml:space="preserve">
     <value>Logiranje..</value>
   </data>
+  <data name="MaxLength180Error" xml:space="preserve">
+    <value>Maksimalan broj karaketera je 180</value>
+  </data>
   <data name="NoviZahtevZaPregledPageTitle" xml:space="preserve">
     <value>Novi zahtev za pregled</value>
   </data>
@@ -187,8 +190,14 @@
   <data name="SuccessfullyCreatedAccount" xml:space="preserve">
     <value>Uspešno kreiran korisnički nalog</value>
   </data>
+  <data name="SuccessfullyCreatedZahtevZaPregledMessage" xml:space="preserve">
+    <value>Uspešno kreiran zahtev za pregled</value>
+  </data>
   <data name="SviPreglediPageTitle" xml:space="preserve">
     <value>Svi pregledi</value>
+  </data>
+  <data name="UnableToLoadDataError" xml:space="preserve">
+    <value>Greška pri učitavanju podataka</value>
   </data>
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>user.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

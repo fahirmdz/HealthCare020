@@ -1,5 +1,6 @@
 ﻿using Healthcare020.Mobile.Resources;
 using System;
+using Healthcare020.Mobile.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,16 +25,19 @@ namespace Healthcare020.Mobile.Views
 
         private async void ZakazaniPregledi_OnTapped(object sender, EventArgs e)
         {
+            await ZakazaniPreglediButton.ScaleEffect(1.1);
             await NavigationPageParent.PushAsync(new ZakazaniPreglediPage(), true);
         }
 
         private async void SviPregledi_OnTapped(object sender, EventArgs e)
         {
+            await SviPreglediButton.ScaleEffect(1.1);
             await NavigationPageParent.PushAsync(new ZakazaniPreglediPage(), true);
         }
 
         private async void NoviPregled_OnTapped(object sender, EventArgs e)
         {
+            await ZakazivanjePregledaButton.ScaleEffect(1.1);
             await NavigationPageParent.PushAsync(new NoviZahtevZaPregledPage(), true);
         }
     }

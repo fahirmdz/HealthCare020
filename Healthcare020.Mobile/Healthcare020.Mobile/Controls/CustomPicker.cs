@@ -3,7 +3,7 @@
 namespace Healthcare020.Mobile.Controls
 {
     /// <summary>
-    /// Custom picker with bindable flag value in ClassId that indicates that indicates picker is ready or not for opening
+    /// Custom picker with bindable flag value in ClassId that indicates picker is ready or not for opening
     /// </summary>
     public class CustomPicker : Picker
     {

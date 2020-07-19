@@ -9,7 +9,7 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <Grid
-            Padding="0,30,0,0"
+            Padding="0,50,0,0"
             BackgroundColor="White"
             RowSpacing="0">
             <Grid.RowDefinitions>
@@ -46,6 +46,7 @@
                     </Path>
 
                     <StackLayout
+                        x:Name="SviPreglediButton"
                         Grid.Column="1"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand">
@@ -95,6 +96,7 @@
                     </Path>
 
                     <StackLayout
+                        x:Name="ZakazaniPreglediButton"
                         Grid.Column="0"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand">
@@ -142,6 +144,7 @@
                     </Path>
 
                     <StackLayout
+                        x:Name="ZakazivanjePregledaButton"
                         Grid.Column="1"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand">

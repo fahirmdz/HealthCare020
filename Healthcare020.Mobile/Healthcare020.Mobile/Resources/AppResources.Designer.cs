@@ -187,6 +187,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maksimalan broj karaketera je 180.
+        /// </summary>
+        public static string MaxLength180Error {
+            get {
+                return ResourceManager.GetString("MaxLength180Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Novi zahtev za pregled.
         /// </summary>
         public static string NoviZahtevZaPregledPageTitle {
@@ -269,11 +278,29 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uspešno kreiran zahtev za pregled.
+        /// </summary>
+        public static string SuccessfullyCreatedZahtevZaPregledMessage {
+            get {
+                return ResourceManager.GetString("SuccessfullyCreatedZahtevZaPregledMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Svi pregledi.
         /// </summary>
         public static string SviPreglediPageTitle {
             get {
                 return ResourceManager.GetString("SviPreglediPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greška pri učitavanju podataka.
+        /// </summary>
+        public static string UnableToLoadDataError {
+            get {
+                return ResourceManager.GetString("UnableToLoadDataError", resourceCulture);
             }
         }
         

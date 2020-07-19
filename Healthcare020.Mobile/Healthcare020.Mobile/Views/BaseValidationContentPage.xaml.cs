@@ -28,19 +28,44 @@ namespace Healthcare020.Mobile.Views
         /// </summary>
         protected virtual void HideErrorLabel(object sender, TextChangedEventArgs e)
         {
-            var entry = (Entry)sender;
-            if (FormBody == null)
+            if (sender is Entry entry)
             {
-                FormBody = this.FindByName<StackLayout>("FormBody");
-                if (FormBody == null || entry == null)
-                    return;
-            }
+                if (FormBody == null)
+                {
+                    FormBody = this.FindByName<StackLayout>("FormBody");
+                    if (FormBody == null)
+                        return;
+                }
 
-            var labelToHide = FormBody.FindByName<Label>($"{entry.ClassId}Validation");
-            if (labelToHide != null)
+                var labelToHide = FormBody.FindByName<Label>($"{entry.ClassId}Validation");
+                if (labelToHide != null)
+                {
+                    labelToHide.Text = string.Empty;
+                    labelToHide.IsVisible = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Hide validation message for input caller (it is recommended to set the FormBody element on Page initialization)
+        /// </summary>
+        protected virtual void HideErrorLabel(object sender, FocusEventArgs e)
+        {
+            if (sender is Picker picker)
             {
-                labelToHide.Text = string.Empty;
-                labelToHide.IsVisible = false;
+                if (FormBody == null)
+                {
+                    FormBody = this.FindByName<StackLayout>("FormBody");
+                    if (FormBody == null)
+                        return;
+                }
+
+                var labelToHide = FormBody.FindByName<Label>($"{picker.ClassId}Validation");
+                if (labelToHide != null)
+                {
+                    labelToHide.Text = string.Empty;
+                    labelToHide.IsVisible = false;
+                }
             }
         }
 
@@ -60,14 +85,23 @@ namespace Healthcare020.Mobile.Views
             //Remove errors for invisible entries (IsValidModel will be set based on errors value)
             BaseValidationVM.Errors =
                 BaseValidationVM.Errors.Where(x => invisibleEntries.All(e => e.ClassId != x.Key))
-                    .ToDictionary(x=>x.Key,x=>x.Value);
-
+                    .ToDictionary(x => x.Key, x => x.Value);
 
             foreach (var entry in FormBody.Children.OfType<Entry>())
             {
                 entry.Text += " ";
                 entry.Text = entry.Text.Trim();
             }
+
+            foreach (var picker in FormBody.Children.OfType<Picker>())
+            {
+                if (picker.SelectedIndex == -1)
+                {
+                    picker.SelectedIndex = 0;
+                    picker.SelectedIndex = -1;
+                }
+            }
+
             if (BaseValidationVM.Errors.Any())
             {
                 foreach (var error in BaseValidationVM.Errors)
@@ -92,6 +126,16 @@ namespace Healthcare020.Mobile.Views
             foreach (var entry in FormBody.Children.OfType<Entry>())
             {
                 entry.TextChanged += HideErrorLabel;
+            }
+        }
+
+        protected void SetErrorsClearOnPickerFocused()
+        {
+            if (FormBody == null)
+                return;
+            foreach (var picker in FormBody.Children.OfType<Picker>())
+            {
+                picker.Focused += HideErrorLabel;
             }
         }
 
