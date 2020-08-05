@@ -191,9 +191,7 @@ namespace Healthcare020.Mobile.Services
 
                 if (!string.IsNullOrWhiteSpace(xpaginationHeader))
                     paginationMetadata = JsonConvert.DeserializeObject<PaginationMetadata>(xpaginationHeader);
-                {
-                }
-
+                
                 return new APIServiceResult<List<T>>
                 {
                     PaginationMetadata = paginationMetadata ?? new PaginationMetadata(),

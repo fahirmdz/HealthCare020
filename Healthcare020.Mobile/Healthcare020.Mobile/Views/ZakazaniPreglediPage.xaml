@@ -10,9 +10,6 @@
     xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
 
-    <ContentPage.BindingContext>
-        <viewModels:ZakazaniPreglediViewModel />
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid Padding="0" BackgroundColor="{StaticResource LightSmokeWhite}">
             <Grid.RowDefinitions>
@@ -34,7 +31,7 @@
                 Grid.Row="1"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                <customViews:CustomCollectionView MainCollection="{Binding ZakazaniPregledi}" />
+                <customViews:CustomCollectionView BaseCollectionViewModel="{Binding ZakazaniPreglediVM}" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
