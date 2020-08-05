@@ -117,7 +117,7 @@ namespace Healthcare020.Mobile.Views
                 return;
 
             if (DateStack.Scale - 1 <= 0.1)
-                await DateStack.ScaleTo(1.2, 200);
+                await DateStack.ScaleTo(1.1, 200);
             else
                 await DateStack.ScaleTo(1, 200);
         }

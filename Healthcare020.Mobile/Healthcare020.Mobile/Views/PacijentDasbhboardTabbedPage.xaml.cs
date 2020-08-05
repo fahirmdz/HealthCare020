@@ -1,4 +1,5 @@
-﻿using Healthcare020.Mobile.Constants;
+﻿using System.ComponentModel;
+using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -27,7 +28,11 @@ namespace Healthcare020.Mobile.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+        }
 
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
         }
     }
 }

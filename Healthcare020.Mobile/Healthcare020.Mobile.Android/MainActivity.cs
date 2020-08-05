@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
@@ -17,6 +18,7 @@ namespace Healthcare020.Mobile.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -38,5 +40,12 @@ namespace Healthcare020.Mobile.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs args)
+        {
+            var ex = (Exception) args.ExceptionObject;
+            System.Diagnostics.Debug.WriteLine($"GRESKA: {ex.Message}");
+        }
+
     }
 }

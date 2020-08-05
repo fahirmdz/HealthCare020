@@ -1,5 +1,8 @@
-﻿using HealthCare020.Core.Models;
+﻿using Healthcare020.Mobile.Models;
 using Healthcare020.Mobile.Resources;
+using HealthCare020.Core.Models;
+using System;
+using System.Collections.ObjectModel;
 
 namespace Healthcare020.Mobile
 {
@@ -12,9 +15,9 @@ namespace Healthcare020.Mobile
             Username = "pacijent",
             ZdravstvenaKnjizica = new ZdravstvenaKnjizicaDtoEL
             {
-                DoktorId=2,
+                DoktorId = 2,
                 Doktor = "Doktor Doktorovic",
-                Id=2,
+                Id = 2,
                 LicniPodaci = new LicniPodaciDto
                 {
                     Adresa = "Gradacacka 40",
@@ -34,6 +37,11 @@ namespace Healthcare020.Mobile
                     ProfilePicture = AppResources.prof
                 }
             }
+        };
+
+        public static ObservableCollection<CollectionViewItem> GetCollectioItemsZakazaniPregledi() => new ObservableCollection<CollectionViewItem>
+        {
+            new CollectionViewItem{DateTime = DateTime.Now.AddDays(-2),PrimaryTextTitle = "Doktor:",PrimaryTextContent = "Fahir Mumdzic"}
         };
     }
 }

@@ -135,4 +135,8 @@
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CustomViews\" />
+  </ItemGroup>
 </Project>
