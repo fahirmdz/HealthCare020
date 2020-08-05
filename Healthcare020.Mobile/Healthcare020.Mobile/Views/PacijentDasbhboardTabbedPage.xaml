@@ -9,7 +9,7 @@
             xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
             xmlns:pages="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
     xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
-    mc:Ignorable="d">
+    mc:Ignorable="d" >
 
     <TabbedPage.Resources>
         <FontImageSource x:Key="StethoscopeIcon"

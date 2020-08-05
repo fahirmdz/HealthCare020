@@ -16,6 +16,7 @@ namespace Healthcare020.Mobile.Views
         {
             Title = AppResources.ZakazaniPreglediPageTitle;
             InitializeComponent();
+            
         }
     }
 }
