@@ -6,6 +6,7 @@
     xmlns:converters="clr-namespace:Healthcare020.Mobile.Converters;assembly=Healthcare020.Mobile"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:themes="clr-namespace:Healthcare020.Mobile.Themes;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
     <Application.Resources>
@@ -13,6 +14,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries>
+
 
             <!--#region Images-->
             <OnPlatform x:Key="Logo_Revert_Medium" x:TypeArguments="ImageSource">
@@ -296,6 +298,92 @@
             <Style x:Key="MainStackNoviZahtevZaPregledStyle" TargetType="StackLayout">
                 <Setter Property="Margin" Value="20,120,20,0" />
             </Style>
+            <!--#endregion-->
+
+            <!--#region DataTemplates-->
+
+            <DataTemplate x:Key="CustomDataTemplate">
+                <pancakeView:PancakeView
+                    Margin="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand">
+                    <Grid
+                        BackgroundColor="{StaticResource LighterNavyBlue}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="StartAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <BoxView
+                            BackgroundColor="{StaticResource LighterNavyBlue}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="3" />
+                        <Grid
+                            Grid.Column="1"
+                            BackgroundColor="{StaticResource LightNavyBlue}"
+                            HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="3.5*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.GestureRecognizers />
+                            <StackLayout
+                                BackgroundColor="{StaticResource LightNavyBlue}"
+                                ClassId="LabelsToScaleStack"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                <Label
+                                    ClassId="MonthDateLabel"
+                                    FontSize="{StaticResource FontSize-Medium}"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding DateTime, StringFormat='{0:dd}'}"
+                                    TextColor="Aqua" />
+                                <Label
+                                    Margin="0,-5,0,0"
+                                    ClassId="MonthNameLabel"
+                                    FontSize="{StaticResource FontSize-Small}"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding DateTime, StringFormat='{0:MMMM}'}"
+                                    TextColor="Aqua" />
+                                <Label
+                                    Margin="0,-10,0,0"
+                                    ClassId="MonthNameLabel"
+                                    FontSize="{StaticResource FontSize-Smaller}"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding DateTime, StringFormat='{0:yyyy}'}"
+                                    TextColor="Aqua" />
+                            </StackLayout>
+                            <BoxView
+                                Grid.Column="1"
+                                HorizontalOptions="Start"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="1" />
+                            <StackLayout
+                                Grid.Column="2"
+                                Margin="20"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontFamily="{StaticResource Montserrat-Bold}"
+                                        FontSize="{StaticResource FontSize-Small}"
+                                        Text="{Binding PrimaryTextTitle}"
+                                        TextColor="White" />
+                                    <Label
+                                        FontFamily="{StaticResource Montserrat-Light}"
+                                        FontSize="{StaticResource FontSize-Small}"
+                                        Text="{Binding PrimaryTextContent}"
+                                        TextColor="White" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                </pancakeView:PancakeView>
+            </DataTemplate>
             <!--#endregion-->
         </ResourceDictionary>
     </Application.Resources>
