@@ -41,7 +41,11 @@ namespace Healthcare020.Mobile
 
         public static ObservableCollection<CollectionViewItem> GetCollectioItemsZakazaniPregledi() => new ObservableCollection<CollectionViewItem>
         {
-            new CollectionViewItem{DateTime = DateTime.Now.AddDays(-2),PrimaryTextTitle = "Doktor:",PrimaryTextContent = "Fahir Mumdzic"}
+            new CollectionViewItem{DateTime = DateTime.Now.AddDays(-2),PrimaryTextTitle = "Doktor:",PrimaryTextContent = "Fahir Mumdzic"},
+            new CollectionViewItem{DateTime = DateTime.Now.AddDays(-1),PrimaryTextTitle = "Doktor:",PrimaryTextContent = "Fahir Mumdzic"},
+            new CollectionViewItem{DateTime = DateTime.Now.AddDays(-22),PrimaryTextTitle = "Doktor:",PrimaryTextContent = "Fahir Mumdzic"},
+            new CollectionViewItem{DateTime = DateTime.Now.AddDays(-12),PrimaryTextTitle = "Doktor:",PrimaryTextContent = "Fahir Mumdzic"},
+            new CollectionViewItem{DateTime = DateTime.Now.AddDays(-11),PrimaryTextTitle = "Doktor:",PrimaryTextContent = "Fahir Mumdzic"},
         };
     }
 }

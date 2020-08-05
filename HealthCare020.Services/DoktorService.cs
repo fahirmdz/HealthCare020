@@ -27,7 +27,7 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IRadnikService radnikService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService, 
+            IAuthService authService,
             IKorisnikService korisnikService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _radnikService = radnikService;
@@ -151,13 +151,18 @@ namespace HealthCare020.Services
 
             if (resourceParameters != null)
             {
-                if (!string.IsNullOrEmpty(resourceParameters.Ime))
-                    result = result.Where(x =>
-                        x.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime.ToLower()));
-
-                if (!string.IsNullOrEmpty(resourceParameters.Prezime) && await result.AnyAsync())
-                    result = result.Where(x =>
-                        x.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
+                if (!string.IsNullOrWhiteSpace(resourceParameters.Ime))
+                {
+                    var imeToSearch = resourceParameters.Ime.ToLower();
+                    if (await result.AnyAsync(x => x.Radnik.LicniPodaci.Ime.ToLower().StartsWith(imeToSearch)))
+                    {
+                        result = result.Where(x => x.Radnik.LicniPodaci.Ime.ToLower().StartsWith(imeToSearch));
+                    }
+                    else if (!string.IsNullOrWhiteSpace(resourceParameters.Prezime))
+                    {
+                        result = result.Where(x => x.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime.ToLower()));
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(resourceParameters.Username) && await result.AnyAsync())
                     result = result.Where(x =>
