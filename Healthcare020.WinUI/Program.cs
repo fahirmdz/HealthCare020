@@ -1,24 +1,47 @@
 ﻿using Healthcare020.WinUI.Exceptions;
 using Healthcare020.WinUI.Forms;
-using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Forms.KorisnickiNalog;
 using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
 using NLog;
 
 namespace Healthcare020.WinUI
 {
     internal static class Program
     {
-        private static void CurrentDomain_UnhandledException(Object sender, UnhandledExceptionEventArgs e)
+        private static string GetLogFilePathString()
+        {
+            var dateString = DateTime.Now.Date.ToString("u");
+            var x=dateString.IndexOf(" ");
+            dateString = dateString.Substring(0, x);
+
+            return $"{Resources.LogFilePath.Replace("#", dateString)}";
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             try
             {
                 Exception ex = (Exception)e.ExceptionObject;
+                LogManager.GetCurrentClassLogger().Error(ex);
+                var logFilePath = GetLogFilePathString();
+                if (MessageBox.Show(Resources.ExceptionThrownLogFileWritten.Replace("#",logFilePath).Replace("\\n",Environment.NewLine),
+                    "Greška!", MessageBoxButtons.YesNo) == DialogResult.OK)
+                {
+                    Process.Start($@"{logFilePath}");
+                }
+                else
+                {
+
+                }
 
                 if (ex is UnauthorizedException)
                 {
@@ -52,7 +75,7 @@ namespace Healthcare020.WinUI
         private static void Main()
         {
             var culture = CultureInfo.GetCultureInfo("bs-Latn-BA");
-
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
@@ -72,12 +95,12 @@ namespace Healthcare020.WinUI
             {
                 if (reg != null)
                 {
-                    Auth.AuthenticateWithPassword(reg.GetValue(Resources.RegistryKeyValueUsername)?.ToString().Unprotect() ?? string.Empty,
-                        reg.GetValue(Resources.RegistryKeyValuePassword)?.ToString().Unprotect() ?? string.Empty).Wait();
+                    frmLogin.Instance.Login(
+                        reg.GetValue(Resources.RegistryKeyValueUsername)?.ToString().Unprotect() ?? string.Empty,
+                        reg.GetValue(Resources.RegistryKeyValuePassword)?.ToString().Unprotect() ?? string.Empty, ExternalLoginCall: true);
                     reg.Close();
                 }
             }
-           
 
             Application.Run(MainForm.Instance);
         }
@@ -86,7 +109,18 @@ namespace Healthcare020.WinUI
         {
             try
             {
-                MessageBox.Show("Unhandled exception catched.\n Application is going to close now.");
+                LogManager.GetCurrentClassLogger().Error(t.Exception);
+                var logFilePath = GetLogFilePathString();
+
+                if (MessageBox.Show(Resources.ExceptionThrownLogFileWritten.Replace("#",logFilePath).Replace("\\n",Environment.NewLine),
+                    "Greška!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Process.Start(logFilePath);
+                }
+                else
+                {
+
+                }
             }
             catch
             {

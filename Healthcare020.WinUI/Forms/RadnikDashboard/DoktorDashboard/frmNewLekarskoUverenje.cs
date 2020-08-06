@@ -136,7 +136,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         private void btnUputnica_Click(object sender, EventArgs e)
         {
             dlgForm.SetShouldDisposeOnChildClose(false);
-            dlgForm.ShowDialog(frmNewUputnica.InstanceWithData(Pregled.Pacijent),DialogFormSize.Large);
+            dlgForm.ShowDialog(frmNewUputnica.InstanceWithData(Pregled?.Pacijent??LekarskoUverenje.Pregled.Pacijent),DialogFormSize.Large, NewInstance:true);
         }
     }
 }
