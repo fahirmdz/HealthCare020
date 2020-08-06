@@ -121,6 +121,7 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.dlgForm_Load);
             this.Shown += new System.EventHandler(this.dlgForm_Shown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dlgForm_KeyPress);
             this.pnlBody.ResumeLayout(false);
             this.pnlSide.ResumeLayout(false);
             this.pnlMain.ResumeLayout(false);

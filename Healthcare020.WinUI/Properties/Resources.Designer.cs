@@ -97,6 +97,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Proverite log fajl na lokaciji -&gt; # za više detalja. \n Otvorite log fajl?.
+        /// </summary>
+        public static string ExceptionThrownLogFileWritten {
+            get {
+                return ResourceManager.GetString("ExceptionThrownLogFileWritten", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Svi pregledi.
         /// </summary>
         public static string frmDoktorPregledi {
@@ -628,6 +637,15 @@ namespace Healthcare020.WinUI.Properties {
         public static string LabelUserProfile {
             get {
                 return ResourceManager.GetString("LabelUserProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:/Temp/logs/Helathcare020_Desktop_Logs/#_logfile.txt.
+        /// </summary>
+        public static string LogFilePath {
+            get {
+                return ResourceManager.GetString("LogFilePath", resourceCulture);
             }
         }
         

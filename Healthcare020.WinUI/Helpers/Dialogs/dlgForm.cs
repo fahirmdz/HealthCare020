@@ -16,12 +16,18 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
     public partial class dlgForm : Form
     {
         public static bool ShouldDisposeOnChildClose;
+
+        public bool ShouldDisposeOnOutsideClick;
+        public bool DisabledCloseOnOutsideClick;
         private static dlgForm _instance = null;
         private Size BodyPanelSize;
         private Form Child;
 
-        private dlgForm(Form child, DialogFormSize bodyPanelSize = DialogFormSize.Medium)
+        private dlgForm(Form child, DialogFormSize bodyPanelSize = DialogFormSize.Medium, bool ShouldDisposeOnOutsideClick = true, bool DisabledCloseOnOutsideClick=false)
         {
+            this.ShouldDisposeOnOutsideClick = ShouldDisposeOnOutsideClick;
+            this.DisabledCloseOnOutsideClick = DisabledCloseOnOutsideClick;
+
             ShouldDisposeOnChildClose = true;
             var sizeMultiplier = (int)bodyPanelSize;
 
@@ -42,14 +48,23 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             Child.OpenAsChildOfControl(pnlBody);
             //Left focus from left side title (because it is RichTextBox)
             txtLeftTitle.Enter += (s, e) => { txtLeftTitle.Parent.Focus(); };
+            this.KeyPreview = true;
         }
 
         public static void ShowDialog(Form child, DialogFormSize bodyPanelSize = DialogFormSize.Medium, bool NewInstance = false)
         {
-            if (_instance == null || _instance.IsDisposed || (_instance != null && _instance.Visible) || NewInstance)
-                _instance = new dlgForm(child, bodyPanelSize);
+            try
+            {
+                if (_instance == null || _instance.IsDisposed || (_instance != null && _instance.Visible) ||
+                    NewInstance)
+                    _instance = new dlgForm(child, bodyPanelSize);
 
-            ((Form)_instance).ShowDialog();
+                ((Form) _instance).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                //ignore;
+            }
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -59,9 +74,6 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private void btnClose_Click(object sender, EventArgs e)
         {
             Child.Close();
-            Child.Dispose();
-            Close();
-            Dispose();
         }
 
         private void child_Closed(object sender, EventArgs e)
@@ -98,7 +110,15 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private void pnlMain_MouseClick(object sender, MouseEventArgs e)
         {
+            if (this.DisabledCloseOnOutsideClick)
+                return;
+
             Close();
+            if (ShouldDisposeOnOutsideClick)
+            {
+                //Trigger event child_Closed (above)
+                Child.Close();
+            }
         }
 
         private void txtLeftTitle_SelectionChanged(object sender, EventArgs e)
@@ -111,5 +131,14 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         /// </summary>
         /// <param name="should">Flag value true or false</param>
         public static void SetShouldDisposeOnChildClose(bool should) => ShouldDisposeOnChildClose = should;
+
+        private void dlgForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 27)
+            {
+                this.Close();
+                Child.Close();
+            }
+        }
     }
 }

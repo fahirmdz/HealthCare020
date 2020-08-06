@@ -129,6 +129,10 @@
   <data name="DifferentPasswords" xml:space="preserve">
     <value>Lozinke se ne podudaraju</value>
   </data>
+  <data name="ExceptionThrownLogFileWritten" xml:space="preserve">
+    <value>Proverite log fajl na lokaciji -&gt; # za više detalja. \n Otvorite log fajl?</value>
+    <comment># will be replaced with path of log file</comment>
+  </data>
   <data name="frmDoktorPregledi" xml:space="preserve">
     <value>Svi pregledi</value>
   </data>
@@ -306,6 +310,10 @@
   </data>
   <data name="LabelUserProfile" xml:space="preserve">
     <value>Korisnički profil</value>
+  </data>
+  <data name="LogFilePath" xml:space="preserve">
+    <value>C:/Temp/logs/Helathcare020_Desktop_Logs/#_logfile.txt</value>
+    <comment># will be replaced with DateTime format 2020-08-10</comment>
   </data>
   <data name="NoDataLekarskaUverenjaMessage" xml:space="preserve">
     <value />
