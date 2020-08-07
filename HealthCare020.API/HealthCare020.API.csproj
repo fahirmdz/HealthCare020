@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HealthCare020.Core\HealthCare020.Core.csproj" />
-    <ProjectReference Include="..\Healthcare020.LoggerService\Healthcare020.LoggerService.csproj" />
     <ProjectReference Include="..\HealthCare020.Services\HealthCare020.Services.csproj" />
   </ItemGroup>
 

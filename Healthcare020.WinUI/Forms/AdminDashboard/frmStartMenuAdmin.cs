@@ -1,11 +1,11 @@
 ﻿using FontAwesome.Sharp;
 using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.CustomElements;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Helpers.CustomElements;
 
 namespace Healthcare020.WinUI.Forms.AdministratorDashboard
 {
@@ -153,11 +153,9 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
             }
 
             //Set event to close user drop down menu on click
-            this.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick,true,x=>!(x is UserMenuButton) && !(x is UserMenuDropdownPanel));
+            this.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick, true, x => !(x is UserMenuButton) && !(x is UserMenuDropdownPanel));
             btnStatistics.PerformClick();
         }
-
-       
 
         private void pnlBody_ControlAdded(object sender, ControlEventArgs e)
         {
@@ -168,16 +166,17 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
             lblTitleChildForm.Text = currentChildForm.Text;
 
             //Set event to close user drop down menu on click
-            currentChildForm.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick,true);
+            currentChildForm.SetMouseClickEventToChildControls(userMenuDropdown_MouseClick, true);
         }
 
-      private void Reset()
+        private void Reset()
         {
             leftBorderBtn.Visible = false;
             iconCurrentChildForm.IconChar = IconChar.Home;
             iconCurrentChildForm.IconColor = RGBColors.color5;
             lblTitleChildForm.Text = "Home";
-        }  
+        }
+
         private struct RGBColors
         {
             public static Color color1 = Color.FromArgb(172, 126, 241);

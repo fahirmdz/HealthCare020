@@ -1,4 +1,5 @@
-﻿using Acr.UserDialogs;
+﻿using System;
+using Acr.UserDialogs;
 using AutoMapper;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
@@ -6,8 +7,12 @@ using HealthCare020.Core.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.ResourceParameters;
+using Healthcare020.Mobile.Helpers;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
@@ -23,7 +28,7 @@ namespace Healthcare020.Mobile.ViewModels
             _mapper = mapper;
             var FontAwesomeRegular = Application.Current.Resources["FontAwesomeRegular"] as OnPlatform<string>;
 
-            //_apiSerivce=new APIService(Routes.PacijentiRoute);
+            _apiSerivce = new APIService(Routes.PacijentiRoute);
             _profilePicImageSource = new FontImageSource
             {
                 FontFamily = FontAwesomeRegular,
@@ -38,20 +43,27 @@ namespace Healthcare020.Mobile.ViewModels
 
         public async void InitializeAsync()
         {
-            //var pacijentResult = await _apiSerivce.Get<PacijentDtoEL>(new PacijentResourceParameters
-            //{
-            //    EagerLoaded = true,
-            //    KorisnickiNalogId = Auth.KorisnickiNalog.Id
-            //});
+            var pacijentResult = await _apiSerivce.Get<PacijentDtoEL>(new PacijentResourceParameters
+            {
+                EagerLoaded = true,
+                KorisnickiNalogId = Auth.KorisnickiNalog.Id
+            });
+            //Pacijent = DevelopmentTestEntities.GetTestPacijent();
 
-            //if (pacijentResult.Succeeded && (pacijentResult.Data?.Any() ?? false))
-            //{
-            //    Pacijent = pacijentResult.Data.First();
-            //    ProfilePicImageSource=ImageSource.FromStream(() => new MemoryStream(Pacijent.ZdravstvenaKnjizica?.LicniPodaci?.ProfilePicture ?? Array.Empty<byte>()));
-            //}
-            Pacijent = DevelopmentTestEntities.GetTestPacijent();
-            ProfilePicImageSource = ImageSource.FromStream(() =>
-                  new MemoryStream(Pacijent.ZdravstvenaKnjizica.LicniPodaci.ProfilePicture));
+            if (pacijentResult.Succeeded && (pacijentResult.Data?.Any() ?? false))
+            {
+                Pacijent = pacijentResult.Data.First();
+                var imgSourceForProfilePic = ImageSource.FromStream(() =>
+                    new MemoryStream(Pacijent.ZdravstvenaKnjizica?.LicniPodaci?.ProfilePicture ?? Array.Empty<byte>()));
+
+                if (imgSourceForProfilePic.IsEmpty)
+                    imgSourceForProfilePic = IconFont.UserCircle.GetIcon();
+                ProfilePicImageSource = imgSourceForProfilePic;
+            }
+            else
+            {
+                return;
+            }
         }
 
         private ImageSource _profilePicImageSource;

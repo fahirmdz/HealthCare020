@@ -70,11 +70,20 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://10.0.2.2:5001/api/.
+        ///   Looks up a localized string similar to https://192.168.100.18:7500/api/.
         /// </summary>
         public static string ApiUrlAndroid {
             get {
                 return ResourceManager.GetString("ApiUrlAndroid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a2cc66d67831414ebff902da6e1ce412.
+        /// </summary>
+        public static string AzureFaceAPI_Key {
+            get {
+                return ResourceManager.GetString("AzureFaceAPI_Key", resourceCulture);
             }
         }
         
@@ -106,6 +115,24 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Healthcare020_Pacijenti.
+        /// </summary>
+        public static string FaceAPI_PersonGroup {
+            get {
+                return ResourceManager.GetString("FaceAPI_PersonGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to healthcare020_pacijenti_person_group_00423122.
+        /// </summary>
+        public static string FaceAPI_PersonGroupId {
+            get {
+                return ResourceManager.GetString("FaceAPI_PersonGroupId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Healthcare020_Mobile.
         /// </summary>
         public static string IdpClientId {
@@ -133,7 +160,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://10.0.2.2:5005/connect/token.
+        ///   Looks up a localized string similar to https://192.168.100.18:7600/connect/token.
         /// </summary>
         public static string IdpTokenEndpointAndroid {
             get {
@@ -251,6 +278,24 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;RSAKeyValue&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;  &lt;Modulus&gt;1nEbK/j2UssTOXcRdiroS2n1PoOlnfeY9S8dvSxFaD3oMpWkVjq32qt66by772WVHzpVX6aRASecCb91n1sk7LG9Jdqo6SMu47S61970nOYWOXdlyvuvXzR4l/bVSZrBRD72vjB2Yme+aggLZUzKgU1TsJ5SThOpCV/fSj6aD26C5w7chQdTUJNmqaGF4XnpvpU1ebE7mmKpU8aWdONEGsuAUHx50rh5bfNSHGcrR0pji1PQjBSoOskSGnVFTodDsYH3FeheDN9DjzjIrUBuZc8Asn4M8MCE6TKV1lN0voADTGYDBSSSwpIOQ4Hs0lsXFZzYyTcv1ugdTPMk8ZrcKdG8EmGXxlgyofq37hFMeiJgPOwDfyO6Pmq9po9RY3h6Yrob+AtGoxa4Jg0J4ecfRPrnurOlzzS9n2u4PIZLNWz/WLxJNVIUI+1o3UQvVecw8hf3EuMXUjFSNL6 [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string RSAPublicKeyXml {
+            get {
+                return ResourceManager.GetString("RSAPublicKeyXml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 68a26225-ab2c-4034-94ba-227e043e7a8a.
+        /// </summary>
+        public static string ServiceIdentificationSecret {
+            get {
+                return ResourceManager.GetString("ServiceIdentificationSecret", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Podešavanja.
         /// </summary>
         public static string SettingsPageTitle {
@@ -305,6 +350,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neuspešna autentifikacija!.
+        /// </summary>
+        public static string UnsuccessfullyAuthentication {
+            get {
+                return ResourceManager.GetString("UnsuccessfullyAuthentication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] user {
@@ -320,6 +374,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string UsernameLengthError {
             get {
                 return ResourceManager.GetString("UsernameLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uspešno prosleđen zahtev za posetu.
+        /// </summary>
+        public static string UspesnoProsledjenZahtevZaPosetuMessage {
+            get {
+                return ResourceManager.GetString("UspesnoProsledjenZahtevZaPosetuMessage", resourceCulture);
             }
         }
         

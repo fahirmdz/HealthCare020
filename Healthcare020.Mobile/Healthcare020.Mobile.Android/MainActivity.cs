@@ -25,7 +25,6 @@ namespace Healthcare020.Mobile.Droid
             ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
             base.OnCreate(savedInstanceState);
             ImageCircleRenderer.Init();
-
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             UserDialogs.Init(this);
@@ -37,7 +36,8 @@ namespace Healthcare020.Mobile.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 

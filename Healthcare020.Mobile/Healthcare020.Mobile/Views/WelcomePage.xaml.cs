@@ -41,5 +41,10 @@ namespace Healthcare020.Mobile.Views
                 return true;
             });
         }
+
+        private void TEST_OnClicked(object sender, EventArgs e)
+        {
+           Application.Current.MainPage=new TestPage();
+        }
     }
 }

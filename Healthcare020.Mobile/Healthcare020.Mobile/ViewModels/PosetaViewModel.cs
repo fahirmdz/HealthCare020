@@ -83,7 +83,7 @@ namespace Healthcare020.Mobile.ViewModels
 
             if (result.Succeeded)
             {
-                 NotificationService.Instance.Success("Uspesno prosledjen zahtev za posetu");
+                 NotificationService.Instance.Success(AppResources.UspesnoProsledjenZahtevZaPosetuMessage);
                  await Task.Delay(300);
                  Application.Current.MainPage=new WelcomePage();
             }

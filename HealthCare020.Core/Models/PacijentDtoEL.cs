@@ -4,10 +4,11 @@
     public class PacijentDtoEL : PacijentDto
     {
         public ZdravstvenaKnjizicaDtoEL ZdravstvenaKnjizica { get; set; }
+        public string FaceId { get; set; }
 
         public PacijentDtoEL()
         {
-            
+
         }
 
         public PacijentDtoEL(PacijentDtoEL pacijent)

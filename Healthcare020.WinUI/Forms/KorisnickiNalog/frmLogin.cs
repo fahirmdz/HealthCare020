@@ -58,7 +58,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
         public async void Login(string _username = "", string _password = "", bool ExternalLoginCall = false)
         {
-            throw new ArgumentNullException();
             if (!ExternalLoginCall && !ValidateInput())
             {
                 return;

@@ -98,7 +98,7 @@ namespace Healthcare020.Mobile.Services
 
                     var response = client.PostAsync(Device.RuntimePlatform == Device.Android ? AppResources.IdpTokenEndpointAndroid : AppResources.IdpTokenEndpoint,
                         new StringContent(postBody, Encoding.UTF8, "application/x-www-form-urlencoded")).Result;
-
+                    var str = await response.Content.ReadAsStringAsync();
                     if (response.IsSuccessStatusCode)
                     {
                         var responseJson = await response.Content.ReadAsStringAsync();

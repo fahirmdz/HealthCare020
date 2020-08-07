@@ -26,6 +26,7 @@ namespace HealthCare020.API.Extensions
                         await context.Response.WriteAsync(new ErrorDetails
                         {
                             StatusCode = context.Response.StatusCode,
+                            StackTrace = contextFeature.Error.StackTrace,
                             Message = "Internal Server Error"
                         }.ToString());
                     }

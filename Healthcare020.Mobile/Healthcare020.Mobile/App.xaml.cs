@@ -33,7 +33,7 @@ namespace Healthcare020.Mobile
             DependencyService.Register<MockDataStore>();
             Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
 
-            MainPage = new PacijentDasbhboardTabbedPage();
+            MainPage = new WelcomePage();
 
 
         }

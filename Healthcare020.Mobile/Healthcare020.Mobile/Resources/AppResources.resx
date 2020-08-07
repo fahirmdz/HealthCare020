@@ -121,7 +121,11 @@
     <value>https://healthcare020-api.com:5001/api/</value>
   </data>
   <data name="ApiUrlAndroid" xml:space="preserve">
-    <value>https://10.0.2.2:5001/api/</value>
+    <value>https://192.168.100.18:7500/api/</value>
+    <comment> 10.0.2.2:5001</comment>
+  </data>
+  <data name="AzureFaceAPI_Key" xml:space="preserve">
+    <value>a2cc66d67831414ebff902da6e1ce412</value>
   </data>
   <data name="ChangePasswordPageTitle" xml:space="preserve">
     <value>Izmena lozinke</value>
@@ -132,6 +136,12 @@
   <data name="EditProfilePageTitle" xml:space="preserve">
     <value>Izmena profila</value>
   </data>
+  <data name="FaceAPI_PersonGroup" xml:space="preserve">
+    <value>Healthcare020_Pacijenti</value>
+  </data>
+  <data name="FaceAPI_PersonGroupId" xml:space="preserve">
+    <value>healthcare020_pacijenti_person_group_00423122</value>
+  </data>
   <data name="IdpClientId" xml:space="preserve">
     <value>Healthcare020_Mobile</value>
   </data>
@@ -140,9 +150,11 @@
   </data>
   <data name="IdpTokenEndpoint" xml:space="preserve">
     <value>https://healthcare020-oauth.com:5005/connect/token</value>
+    <comment>192.168.100.18:7600</comment>
   </data>
   <data name="IdpTokenEndpointAndroid" xml:space="preserve">
-    <value>https://10.0.2.2:5005/connect/token</value>
+    <value>https://192.168.100.18:7600/connect/token</value>
+    <comment> 10.0.2.2:5007  10.0.2.2:5005</comment>
   </data>
   <data name="ImePrezimeLengthError" xml:space="preserve">
     <value>Polje mora sadržati izmedju 2 i 20 slova</value>
@@ -181,6 +193,12 @@
   <data name="RequiredFieldError" xml:space="preserve">
     <value>Obavezno polje</value>
   </data>
+  <data name="RSAPublicKeyXml" xml:space="preserve">
+    <value>&lt;RSAKeyValue&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;  &lt;Modulus&gt;1nEbK/j2UssTOXcRdiroS2n1PoOlnfeY9S8dvSxFaD3oMpWkVjq32qt66by772WVHzpVX6aRASecCb91n1sk7LG9Jdqo6SMu47S61970nOYWOXdlyvuvXzR4l/bVSZrBRD72vjB2Yme+aggLZUzKgU1TsJ5SThOpCV/fSj6aD26C5w7chQdTUJNmqaGF4XnpvpU1ebE7mmKpU8aWdONEGsuAUHx50rh5bfNSHGcrR0pji1PQjBSoOskSGnVFTodDsYH3FeheDN9DjzjIrUBuZc8Asn4M8MCE6TKV1lN0voADTGYDBSSSwpIOQ4Hs0lsXFZzYyTcv1ugdTPMk8ZrcKdG8EmGXxlgyofq37hFMeiJgPOwDfyO6Pmq9po9RY3h6Yrob+AtGoxa4Jg0J4ecfRPrnurOlzzS9n2u4PIZLNWz/WLxJNVIUI+1o3UQvVecw8hf3EuMXUjFSNL6ahkpV0yT1K+YJdmy/7Ahc0RY5PzNwEk/ql25lzRRVdDqCXJ9UZlgKSlBiu69PWNRIc7ZTR/Ah9aopOnhMPoEmfWGBc+M9r6kDHeVuJ10rqk/muUWRynh/h0oPZzEo7Ov96MDT02vfVb0YHcy3lq26RE18Hr2nN8sE6RAG1keNWVDuSSamwGBzK5Hx0dJ4mGU3c5n8uXUNETR214CPN+Z+dcOjpxU=&lt;/Modulus&gt;&lt;/RSAKeyValue&gt;</value>
+  </data>
+  <data name="ServiceIdentificationSecret" xml:space="preserve">
+    <value>68a26225-ab2c-4034-94ba-227e043e7a8a</value>
+  </data>
   <data name="SettingsPageTitle" xml:space="preserve">
     <value>Podešavanja</value>
   </data>
@@ -199,11 +217,17 @@
   <data name="UnableToLoadDataError" xml:space="preserve">
     <value>Greška pri učitavanju podataka</value>
   </data>
+  <data name="UnsuccessfullyAuthentication" xml:space="preserve">
+    <value>Neuspešna autentifikacija!</value>
+  </data>
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>user.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="UsernameLengthError" xml:space="preserve">
     <value>Korisničko ime mora sadržati izmedju 4 i 12 karaktera</value>
+  </data>
+  <data name="UspesnoProsledjenZahtevZaPosetuMessage" xml:space="preserve">
+    <value>Uspešno prosleđen zahtev za posetu</value>
   </data>
   <data name="UverenjaTabTitle" xml:space="preserve">
     <value>Lekarska uverenja</value>

@@ -93,6 +93,7 @@ namespace HealthCare020.Repository
         public DbSet<Pregled> Pregledi { get; set; }
         public DbSet<LekarskoUverenje> LekarskaUverenja { get; set; }
         public DbSet<ZdravstvenaKnjizica> ZdravstvenaKnjizica { get; set; }
+        public DbSet<FaceRecognition> FaceRecognitions { get; set; }
 
     }
 }
