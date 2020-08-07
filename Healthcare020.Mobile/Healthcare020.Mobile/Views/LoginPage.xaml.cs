@@ -39,5 +39,11 @@ namespace Healthcare020.Mobile.Views
         {
             Application.Current.MainPage = new RegisterPage();
         }
+
+        private void FaceIDLogin_OnClicked(object sender, EventArgs e)
+        {
+            LoginVM.FaceIDLoginCommand.Execute(sender);
+
+        }
     }
 }

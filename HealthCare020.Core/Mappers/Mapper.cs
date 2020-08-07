@@ -1,9 +1,9 @@
-﻿using System.Globalization;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
+using System.Globalization;
+using System.Linq;
 
 namespace HealthCare020.Core.Mappers
 {
@@ -82,12 +82,13 @@ namespace HealthCare020.Core.Mappers
 
             CreateMap<LicniPodaci, LicniPodaciDto>()
                 .DisableCtorValidation()
-                .ForMember(dest=>dest.Grad,
-                    opt=>opt.MapFrom(x=>x.Grad));
+                .ForMember(dest => dest.Grad,
+                    opt => opt.MapFrom(x => x.Grad));
             CreateMap<LicniPodaci, LicniPodaciUpsertDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<LicniPodaciDto, LicniPodaciUpsertDto>();
+
             #endregion LicniPodaci
 
             #region StacionarnoOdeljenje
@@ -197,7 +198,9 @@ namespace HealthCare020.Core.Mappers
                 .ForMember(dest => dest.ZdravstvenaKnjizica,
                     opt => opt.MapFrom(x => x.ZdravstvenaKnjizica))
                 .ForMember(dest => dest.Username,
-                    opt => opt.MapFrom(x => x.KorisnickiNalog.Username));
+                    opt => opt.MapFrom(x => x.KorisnickiNalog.Username))
+                .ForMember(dest => dest.FaceId,
+                    opt => opt.MapFrom(x => x.KorisnickiNalog.FaceId));
             CreateMap<PacijentUpsertDto, Pacijent>();
 
             #endregion Pacijent
@@ -289,7 +292,14 @@ namespace HealthCare020.Core.Mappers
 
             CreateMap<ZahtevZaPosetuPatchDto, ZahtevZaPosetu>()
                 .ForMember(dest => dest.Id, x => x.Ignore());
-            CreateMap<ZahtevZaPosetu,ZahtevZaPosetuPatchDto>();
+            CreateMap<ZahtevZaPosetu, ZahtevZaPosetuPatchDto>();
+
+            #region FaceRecognition
+
+            CreateMap<FaceRecognition, FaceRecognitionDto>();
+            CreateMap<FaceRecognitionRecordUpsertDto, FaceRecognition>();
+
+            #endregion FaceRecognition
         }
     }
 }

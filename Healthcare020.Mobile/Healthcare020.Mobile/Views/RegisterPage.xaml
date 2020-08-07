@@ -3,6 +3,7 @@
     x:Class="Healthcare020.Mobile.Views.RegisterPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:shapes="clr-namespace:Xamarin.Forms.Shapes;assembly=Xamarin.Forms.Core"
@@ -35,7 +36,9 @@
                             <Image Style="{StaticResource LogoImage}" />
                         </Grid>
                     </Grid>
+
                 </StackLayout>
+
                 <StackLayout
                     x:Name="FormBody"
                     Grid.Row="1"
@@ -44,7 +47,18 @@
                         <Style BasedOn="{StaticResource CustomEntry}" TargetType="Entry" />
                         <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
                     </StackLayout.Resources>
-
+                    <abstractions:CircleImage
+                        x:Name="ProfilePic"
+                        Aspect="AspectFit"
+                        HeightRequest="100"
+                        HorizontalOptions="Center"
+                        Source="{Binding ProfilePicture}"
+                        VerticalOptions="Center"
+                        WidthRequest="100">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UploadProfilePictureCommand}" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </abstractions:CircleImage>
                     <Entry
                         ClassId="BrojKnjizice"
                         Placeholder="Broj zdravstvene knjižice *"

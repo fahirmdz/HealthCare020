@@ -12,6 +12,7 @@ namespace HealthCare020.Core.Entities
         [StringLength(maximumLength: 20, MinimumLength = 4)]
         public string Username { get; set; }
 
+        public string FaceId { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
         public DateTime LastOnline { get; set; }

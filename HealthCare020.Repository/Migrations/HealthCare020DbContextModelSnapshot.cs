@@ -60,6 +60,26 @@ namespace HealthCare020.Repository.Migrations
                     b.ToTable("Drzave");
                 });
 
+            modelBuilder.Entity("HealthCare020.Core.Entities.FaceRecognition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("KorisnickiNalogId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KorisnickiNalogId");
+
+                    b.ToTable("FaceRecognitions");
+                });
+
             modelBuilder.Entity("HealthCare020.Core.Entities.Grad", b =>
                 {
                     b.Property<int>("Id")
@@ -90,6 +110,9 @@ namespace HealthCare020.Repository.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FaceId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("LastOnline")
                         .HasColumnType("datetime2");
@@ -563,6 +586,15 @@ namespace HealthCare020.Repository.Migrations
                     b.HasOne("HealthCare020.Core.Entities.Radnik", "Radnik")
                         .WithMany()
                         .HasForeignKey("RadnikId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.FaceRecognition", b =>
+                {
+                    b.HasOne("HealthCare020.Core.Entities.KorisnickiNalog", "KorisnickiNalog")
+                        .WithMany()
+                        .HasForeignKey("KorisnickiNalogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -21,6 +21,9 @@ namespace HealthCare020.Core.Request
         public string JMBG { get=>_jmbg; set=>_jmbg=value.RemoveWhitespaces(); }
 
         [Required]
+        public byte[] ProfilePicture { get; set; }
+
+        [Required]
         public KorisnickiNalogUpsertDto KorisnickiNalog { get; set; }
     }
 }

@@ -27,7 +27,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Healthcare020.LoggerService\Healthcare020.LoggerService.csproj" />
     <ProjectReference Include="..\HealthCare020.Repository\HealthCare020.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ServiceModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Security\SecurityResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SecurityResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Security\SecurityResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SecurityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

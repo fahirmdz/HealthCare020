@@ -35,9 +35,9 @@ namespace Healthcare020.Mobile.ViewModels
 
         public async Task Init()
         {
-            await Auth.AuthenticateWithPassword("pacijent", "testtest");
-            _apiService = new APIService();
-            await LoadData();
+            //await Auth.AuthenticateWithPassword("pacijent", "testtest");
+            //_apiService = new APIService();
+            //await LoadData();
         }
 
         #region Properties

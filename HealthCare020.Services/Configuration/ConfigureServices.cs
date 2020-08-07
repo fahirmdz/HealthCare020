@@ -5,6 +5,9 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
 using HealthCare020.Services.Services;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +17,15 @@ namespace HealthCare020.Services.Configuration
     {
         public static void AddHealthCare020Services(this IServiceCollection services, IConfiguration Configuration)
         {
+            services.AddDataProtection()
+                .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration
+                {
+                    EncryptionAlgorithm = EncryptionAlgorithm.AES_256_GCM,
+                    ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+                });
+
+            services.AddScoped<ICipherService, CipherService>();
+
             services.Configure<ServicesConfiguration>(Configuration.GetSection("ServicesConfiguration"));
             services.ConfigureHealthcare020Core();
             services.AddSingleton<ISMSGateway, SMSGateway>();
@@ -86,6 +98,10 @@ namespace HealthCare020.Services.Configuration
             services
                 .AddScoped<ICRUDService<Uputnica, UputnicaDtoLL, UputnicaDtoEL, UputnicaResourceParameters,
                     UputnicaUpsertDto, UputnicaUpsertDto>, UputnicaService>();
+
+            services
+                .AddScoped<ICRUDService<FaceRecognition, FaceRecognitionDto, FaceRecognitionDto, BaseResourceParameters,
+                    FaceRecognitionRecordUpsertDto, FaceRecognitionRecordUpsertDto>, FaceRegonitionRecordService>();
 
             services.AddScoped<IRadnikService, RadnikService>();
 

@@ -15,22 +15,26 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Core.Extensions;
 
 namespace HealthCare020.Services
 {
     public class PacijentService : BaseCRUDService<PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters, Pacijent, PacijentUpsertDto, PacijentUpsertDto>
     {
         private readonly ISecurityService _securityService;
+        private readonly ICipherService _cipherService;
 
         public PacijentService(IMapper mapper,
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService, ISecurityService securityService) :
+            IAuthService authService,
+            ISecurityService securityService, ICipherService cipherService) :
             base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _securityService = securityService;
+            _cipherService = cipherService;
         }
 
         public override IQueryable<Pacijent> GetWithEagerLoad(int? id = null)
@@ -67,6 +71,7 @@ namespace HealthCare020.Services
 
             korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
             korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, dtoForCreation.KorisnickiNalog.Password);
+            korisnickiNalog.FaceId = await GetUniqueInteger();
 
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;
@@ -88,6 +93,17 @@ namespace HealthCare020.Services
 
             await _dbContext.AddAsync(pacijent);
             await _dbContext.SaveChangesAsync();
+
+            var zdravstvenaKnjizicaFromDb = await _dbContext.ZdravstvenaKnjizica
+                .Include(x => x.LicniPodaci).FirstOrDefaultAsync(x => x.Id == pacijent.ZdravstvenaKnjizicaId);
+
+            if (zdravstvenaKnjizicaFromDb != null)
+            {
+                zdravstvenaKnjizicaFromDb.LicniPodaci.ProfilePicture = dtoForCreation.ProfilePicture;
+                 _dbContext.Update(zdravstvenaKnjizicaFromDb.LicniPodaci);
+                 await _dbContext.SaveChangesAsync();
+            }
+
 
             return ServiceResult.OK(_mapper.Map<PacijentDtoLL>(pacijent));
         }
@@ -173,6 +189,7 @@ namespace HealthCare020.Services
         {
             if (!await result.AnyAsync())
                 return null;
+
             result = result.Include(x => x.KorisnickiNalog)
                 .ThenInclude(x => x.RolesKorisnickiNalog);
 
@@ -227,6 +244,19 @@ namespace HealthCare020.Services
                 return (false, HttpStatusCode.BadRequest, $"Validacija unijetih podataka neuspjesna.");
 
             return (true, HttpStatusCode.OK, String.Empty);
+        }
+
+        private async Task<string> GetUniqueInteger()
+        {
+            var rand = new Random();
+            int number;
+
+            do
+            {
+                number = rand.Next(1, int.MaxValue);
+            } while (await _dbContext.KorisnickiNalozi.AnyAsync(x => x.FaceId == number.ToString()));
+
+            return number.ToString();
         }
     }
 }

@@ -145,6 +145,18 @@
                                     Text="Register"
                                     TextColor="#31373d" />
                             </Frame>
+                            <Frame
+                                Margin="0"
+                                Padding="0"
+                                HasShadow="False"
+                                HorizontalOptions="FillAndExpand">
+                                <Button
+                                    x:Name="FaceIDLogin"
+                                    Style="{StaticResource BigButtonRadiusStyle}"
+                                    Text="Login with Face ID"
+                                    TextColor="#31373d" Clicked="FaceIDLogin_OnClicked">
+                                </Button>
+                            </Frame>
                         </StackLayout>
                     </Frame>
                 </StackLayout>

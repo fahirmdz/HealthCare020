@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
 using System.Net;
+using NLog;
 
 namespace HealthCare020.Services.Filters
 {
@@ -11,6 +12,9 @@ namespace HealthCare020.Services.Filters
     {
         public override void OnException(ExceptionContext context)
         {
+            var logger = LogManager.GetCurrentClassLogger();
+            logger.Error(context.Exception);
+
             if (context.Exception is NotFoundException)
             {
                 context.ModelState.AddModelError("ERROR", context.Exception.Message);

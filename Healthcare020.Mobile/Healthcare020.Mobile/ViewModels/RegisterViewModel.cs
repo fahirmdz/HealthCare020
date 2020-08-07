@@ -1,4 +1,5 @@
-﻿using Healthcare020.Mobile.Interfaces;
+﻿using System.Collections.Generic;
+using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
@@ -6,10 +7,14 @@ using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ValidationAttributes;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Healthcare020.Mobile.Helpers;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
@@ -17,16 +22,49 @@ namespace Healthcare020.Mobile.ViewModels
     public class RegisterViewModel : BaseValidationViewModel
     {
         private readonly IAPIService _apiService;
+        private readonly IFaceRecognitionService _faceRecognitionService;
 
         public RegisterViewModel(IAPIService apiService)
         {
+            _faceRecognitionService=new FaceRecognitionService();
             _apiService = apiService;
+            UploadProfilePictureCommand = new Command(async () => await UploadProfilePicture());
+            RegisterCommand = new Command(async () => await Register());
+            CancelRegistrationCommand = new Command(() => { Application.Current.MainPage = new WelcomePage(); });
+            ProfilePicture = IconFont.User.GetIcon();
         }
 
-        #region Commands
+        #region Methods
 
-        public ICommand RegisterCommand => new Command(async () =>
+        private async Task UploadProfilePicture()
         {
+            MediaFile UploadedPic;
+
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                return;
+            }
+
+            try
+            {
+                UploadedPic = await CrossMedia.Current.PickPhotoAsync();
+                if (UploadedPic != null)
+                {
+                    ProfilePicture = ImageSource.FromStream(() => UploadedPic.GetStream());
+                    ProfilePictureAsBytes = UploadedPic.GetStream().AsByteArray();
+                }
+            }
+            catch
+            {
+                //ignore
+            }
+        }
+
+        private async Task Register()
+        {
+            if (ProfilePicture == null)
+                return;
+
             IsBusy = true;
             if (!IsValidModel)
                 return;
@@ -43,7 +81,8 @@ namespace Healthcare020.Mobile.ViewModels
                     Username = Username,
                     Password = Password,
                     ConfirmPassword = ConfirmPassword
-                }
+                },
+                ProfilePicture = ProfilePictureAsBytes
             };
 
             var result = await _apiService.Post<PacijentDtoLL>(upsertDto);
@@ -51,6 +90,7 @@ namespace Healthcare020.Mobile.ViewModels
 
             if (result.Succeeded)
             {
+                await _faceRecognitionService.AddPersonToGruop(Username, ProfilePictureAsBytes);
                 NotificationService.Instance.Success(AppResources.SuccessfullyCreatedAccount);
                 await Task.Delay(100);
                 Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
@@ -61,15 +101,32 @@ namespace Healthcare020.Mobile.ViewModels
                     ? result.Message
                     : string.Empty);
             }
-        });
+        }
 
-        public ICommand CancelRegistrationCommand => new Command(() =>
-        {
-        });
+        #endregion Methods
+
+        #region Commands
+
+        public ICommand UploadProfilePictureCommand { get; set; }
+
+        public ICommand RegisterCommand { get; set; }
+
+        public ICommand CancelRegistrationCommand { get; set; }
 
         #endregion Commands
 
         #region Properties
+
+        private byte[] ProfilePictureAsBytes;
+
+        private ImageSource _profilePicture;
+
+        public ImageSource ProfilePicture
+        {
+            get => _profilePicture;
+            set=>SetProperty(ref _profilePicture, value);
+
+        }
 
         private string _brojKnjizice;
 

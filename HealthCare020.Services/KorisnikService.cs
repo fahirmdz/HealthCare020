@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Enums;
+using HealthCare020.Core.Extensions;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
@@ -16,8 +17,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Core.Extensions;
-using Microsoft.AspNetCore.Identity;
 
 namespace HealthCare020.Services
 
@@ -26,6 +25,7 @@ namespace HealthCare020.Services
         IKorisnikService
     {
         private readonly ISecurityService _securityService;
+        private readonly ICipherService _cipherService;
 
         public KorisnikService(IMapper mapper,
             HealthCare020DbContext dbContext,
@@ -33,9 +33,11 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
             ISecurityService securityService,
-            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
+            IAuthService authService,
+            ICipherService cipherService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _securityService = securityService;
+            _cipherService = cipherService;
         }
 
         public override IQueryable<KorisnickiNalog> GetWithEagerLoad(int? id = null)
@@ -56,7 +58,7 @@ namespace HealthCare020.Services
             if (id == 0)
             {
                 var user = await _authService.LoggedInUser();
-                if(user==null)
+                if (user == null)
                     return ServiceResult.Unauthorized();
 
                 var korisnikFromDb = await _dbContext.KorisnickiNalozi.Include(x => x.RolesKorisnickiNalog)
@@ -81,6 +83,7 @@ namespace HealthCare020.Services
 
             korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
             korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, request.Password);
+            korisnickiNalog.FaceId = _cipherService.Encrypt(Guid.NewGuid().ToString() + Guid.NewGuid().ToString());
 
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;
@@ -192,7 +195,7 @@ namespace HealthCare020.Services
         public async Task<KorisnickiNalogDtoLL> Authenticate(string username, string password)
         {
             var korisnickiNalog = await _dbContext.KorisnickiNalozi
-                .Include(x=>x.RolesKorisnickiNalog)
+                .Include(x => x.RolesKorisnickiNalog)
                 .FirstOrDefaultAsync(x => x.Username == username);
 
             if (korisnickiNalog != null)
@@ -201,6 +204,20 @@ namespace HealthCare020.Services
 
                 if (newHash == korisnickiNalog.PasswordHash)
                     return _mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog);
+                else
+                {
+                    var lastFaceRecognitionRecord = await _dbContext.FaceRecognitions.OrderByDescending(x => x.DateTime)
+                        .FirstOrDefaultAsync(x => x.KorisnickiNalogId == korisnickiNalog.Id);
+                    //If the user has successfully scanned the face in the past 10 seconds
+                    if (lastFaceRecognitionRecord != null && lastFaceRecognitionRecord.DateTime.SecondsDifference(DateTime.Now) <= 10)
+
+                    {
+                        var faceId = password;
+                        //If FaceId encrypted passed as password
+                        if (korisnickiNalog.FaceId == faceId)
+                            return _mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog);
+                    }
+                }
             }
             return null;
         }
@@ -279,7 +296,7 @@ namespace HealthCare020.Services
 
         public async Task<ServiceResult> ChangePassword(string currentPassword, string newPassword)
         {
-            if(string.IsNullOrWhiteSpace(currentPassword) || string.IsNullOrWhiteSpace(newPassword))
+            if (string.IsNullOrWhiteSpace(currentPassword) || string.IsNullOrWhiteSpace(newPassword))
                 return ServiceResult.BadRequest();
 
             currentPassword = currentPassword.RemoveWhitespaces();
@@ -289,7 +306,7 @@ namespace HealthCare020.Services
 
             var userFromDb = await _dbContext.KorisnickiNalozi.FindAsync(currentUser.Id);
             var hashedCurrentPassword = _securityService.GenerateHash(userFromDb.PasswordSalt, currentPassword);
-            if(userFromDb.PasswordHash!=hashedCurrentPassword)
+            if (userFromDb.PasswordHash != hashedCurrentPassword)
                 return ServiceResult.BadRequest($"Netačna trenutna lozinka");
 
             userFromDb.PasswordSalt = _securityService.GenerateSalt();
@@ -303,10 +320,10 @@ namespace HealthCare020.Services
         public async Task<ServiceResult> AccountLocked(string username, string password)
         {
             var user = await Authenticate(username, password);
-            if(user==null)
+            if (user == null)
                 return ServiceResult.BadRequest($"Korisnicki nalog nije pronadjen");
 
-            if(user.LockedOut)
+            if (user.LockedOut)
                 return ServiceResult.WithStatusCode(HttpStatusCode.Locked);
 
             return ServiceResult.OK();

@@ -167,6 +167,9 @@ namespace HealthCare020.API
                 //app.UseDeveloperExceptionPage();
                 //app.UseDatabaseErrorPage();
             }
+            else
+            {
+            }
 
             app.ConfigureExceptionHandler(logger);
 

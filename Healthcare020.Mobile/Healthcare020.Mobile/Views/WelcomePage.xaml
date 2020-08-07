@@ -72,6 +72,12 @@
                         TextColor="WhiteSmoke"
                         Command="{Binding PosetaPageCommand}">
                 </Button>
+                <Button x:Name="TEST"
+                        Text="TEST"
+                        BackgroundColor="{StaticResource CustomBlue}"
+                        TextColor="WhiteSmoke"
+                       Clicked="TEST_OnClicked">
+                </Button>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
