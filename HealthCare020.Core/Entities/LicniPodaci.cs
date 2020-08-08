@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Entities
 {
@@ -8,23 +9,23 @@ namespace HealthCare020.Core.Entities
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(maximumLength: 15, MinimumLength = 2)]
         public string Ime { get; set; }
 
-        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
-        [StringLength(maximumLength: 15, MinimumLength = 2)]//
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(maximumLength:2,MinimumLength = 15)]
         public string Prezime { get; set; }
 
-        [Required(AllowEmptyStrings = false,ErrorMessage = "Obavezno polje")]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(maximumLength:12,MinimumLength = 9)]
         public string JMBG { get; set; }
 
-        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(maximumLength: 30, MinimumLength = 3)]
         public string Adresa { get; set; }
 
-        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false)]
         [DefaultValue("M")]
         public char Pol { get; set; }
 
@@ -32,7 +33,7 @@ namespace HealthCare020.Core.Entities
         [Required(AllowEmptyStrings = false)]
         public string EmailAddress { get; set; }
 
-        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false)]
         [DataType(DataType.PhoneNumber)]
         public string BrojTelefona { get; set; }
 

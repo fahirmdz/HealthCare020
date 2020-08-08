@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using HealthCare020.Core.Extensions;
-using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {

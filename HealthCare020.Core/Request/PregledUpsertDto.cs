@@ -1,14 +1,14 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using HealthCare020.Core.ValidationAttributes;
+using System;
 
 namespace HealthCare020.Core.Request
 {
     public class PregledUpsertDto
     {
-        [Required]
+        [RequiredWithMessage()]
         public int ZahtevZaPregledId { get; set; }
 
-        [Required]
+        [RequiredWithMessage]
         public int PacijentId { get; set; }
 
         public DateTime DatumPregleda { get; set; }

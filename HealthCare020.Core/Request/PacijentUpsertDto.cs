@@ -1,29 +1,32 @@
-﻿using System.ComponentModel.DataAnnotations;
-using HealthCare020.Core.Extensions;
+﻿using HealthCare020.Core.Extensions;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
     public class PacijentUpsertDto
     {
-        [Required]
+        [RequiredWithMessage]
         public int BrojZdravstveneKnjizice { get; set; }
 
         private string _ime;
-        [StringLength(maximumLength: 15, MinimumLength = 2)]
-        public string Ime { get=>_ime; set=>_ime=value.RemoveWhitespaces(); }
+
+        [StringLengthWithMessage(2, 15)]
+        public string Ime { get => _ime; set => _ime = value.RemoveWhitespaces(); }
 
         private string _prezime;
-        [StringLength(maximumLength: 15, MinimumLength = 2)]
-        public string Prezime { get=>_prezime; set=>_prezime=value.RemoveWhitespaces(); }
+
+        [StringLengthWithMessage(2, 15)]
+        public string Prezime { get => _prezime; set => _prezime = value.RemoveWhitespaces(); }
 
         private string _jmbg;
-        [StringLength(maximumLength: 12, MinimumLength = 9)]
-        public string JMBG { get=>_jmbg; set=>_jmbg=value.RemoveWhitespaces(); }
 
-        [Required]
+        [StringLengthWithMessage(9, 12)]
+        public string JMBG { get => _jmbg; set => _jmbg = value.RemoveWhitespaces(); }
+
+        [RequiredWithMessage]
         public byte[] ProfilePicture { get; set; }
 
-        [Required]
+        [RequiredWithMessage]
         public KorisnickiNalogUpsertDto KorisnickiNalog { get; set; }
     }
 }

@@ -35,5 +35,52 @@ namespace HealthCare020.Core.Extensions
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
         }
+
+        public static string ReplaceFirstOccurrence(this string Source, string Find, string Replace)
+        {
+            if (string.IsNullOrWhiteSpace(Source))
+                return string.Empty;
+
+            int Place = Source.IndexOf(Find, StringComparison.Ordinal);
+            if (Place == -1)
+                return Source;
+            string result = Source.Remove(Place, Find.Length).Insert(Place, Replace);
+            return result;
+        }
+
+        public static string ReplaceLastOccurrence(this string Source, string Find, string Replace)
+        {
+            if (string.IsNullOrWhiteSpace(Source))
+                return string.Empty;
+
+            int Place = Source.LastIndexOf(Find, StringComparison.Ordinal);
+            if (Place == -1)
+                return Source;
+
+            string result = Source.Remove(Place, Find.Length).Insert(Place, Replace);
+            return result;
+        }
+
+        public static string ToTitleCase(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                return str;
+            return str.Replace(str[0], char.ToUpper(str[0]));
+        }
+
+        public static string FirstLetterLower(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                return str;
+            return str.Replace(str[0], char.ToLower(str[0]));
+        }
+
+        public static string FirstLetterUpper(this string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                return str;
+
+            return str.Replace(str[0], char.ToUpper(str[0]));
+        }
     }
 }

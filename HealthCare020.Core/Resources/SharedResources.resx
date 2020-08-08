@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Test" xml:space="preserve">
-    <value>Test</value>
+  <data name="FutureDateTimeConstraintMessage" xml:space="preserve">
+    <value>Datum mora biti u budućnosti</value>
+  </data>
+  <data name="InvalidGenderFormatMessage" xml:space="preserve">
+    <value>Neispravan format pola. Trebao bi biti 'M' ili 'Z'</value>
+  </data>
+  <data name="RequiredPickMessage" xml:space="preserve">
+    <value>Morate odabrati #</value>
+    <comment># will be replaced with property name</comment>
+  </data>
+  <data name="RequiredValidationError" xml:space="preserve">
+    <value>Obavezno polje</value>
+  </data>
+  <data name="ResourceNotFoundValidationMessage" xml:space="preserve">
+    <value># # nije pronađen/a</value>
+    <comment># will be replaced with resource name</comment>
+  </data>
+  <data name="StringLengthValidationErrorMask" xml:space="preserve">
+    <value>Polje može sadržati između # i # karaktera</value>
+    <comment># will be replaced with minimum and maximum string length</comment>
   </data>
 </root>

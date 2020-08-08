@@ -8,7 +8,7 @@ namespace HealthCare020.Core.Entities
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage="Obavezno polje",AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(maximumLength: 20, MinimumLength = 4)]
         public string Username { get; set; }
 

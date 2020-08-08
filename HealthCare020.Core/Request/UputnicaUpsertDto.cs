@@ -1,25 +1,24 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
     public class UputnicaUpsertDto
     {
-        [Required]
+        [RequiredWithMessage()]
         public int PacijentId { get; set; }
 
-        [Required]
+        [RequiredWithMessage]
         public int UpucenKodDoktoraId { get; set; }
 
-        [Required]
-        [MaxLength(255)]
+        [RequiredWithMessage]
+        [StringLengthWithMessage(1,255)]
         public string Razlog { get; set; }
 
-        [MaxLength(255)]
+        [StringLengthWithMessage(1,255)]
         public string Napomena { get; set; }
 
-        [Required]
+        [RequiredWithMessage]
         [FutureDateTime]
         public DateTime DatumVreme { get; set; }
     }

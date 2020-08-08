@@ -10,7 +10,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using HealthCare020.Core.ServiceModels;
 using Xamarin.Forms;
+
 #pragma warning disable 168
 
 namespace Healthcare020.Mobile.Services
@@ -191,7 +193,7 @@ namespace Healthcare020.Mobile.Services
 
                 if (!string.IsNullOrWhiteSpace(xpaginationHeader))
                     paginationMetadata = JsonConvert.DeserializeObject<PaginationMetadata>(xpaginationHeader);
-                
+
                 return new APIServiceResult<List<T>>
                 {
                     PaginationMetadata = paginationMetadata ?? new PaginationMetadata(),
@@ -319,6 +321,7 @@ namespace Healthcare020.Mobile.Services
 
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
+
                     if (response.StatusCode == HttpStatusCode.Forbidden)
                     {
                     }
@@ -326,9 +329,19 @@ namespace Healthcare020.Mobile.Services
                     {
                         var errorDetails = await response.Content?.ReadAsStringAsync();
                         return APIServiceResult<T>.BadRequest(errorDetails);
+
                     }
                     else if ((int)response.StatusCode == 422)
                     {
+                        var errorDetails = await response.Content?.ReadAsStringAsync();
+
+                        var validationProblemDetails =
+                            JsonConvert.DeserializeObject<ValidationProblemDetails>(errorDetails);
+
+                        if (validationProblemDetails == null)
+                            return APIServiceResult<T>.BadRequest();
+
+                        return APIServiceResult<T>.BadRequest(validationProblemDetails.Detail);
                     }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);

@@ -125,17 +125,15 @@ namespace HealthCare020.API
                 {
                     config.InvalidModelStateResponseFactory = context =>
                     {
-                        var detailsString = "Validation errors";
-#if DEBUG
+                        var detailsString =string.Empty;
 
                         foreach (var modelState in context.ModelState.Values)
                         {
                             foreach (var error in modelState.Errors)
                             {
-                                detailsString += $"Error message: {error.ErrorMessage}\n";
+                                detailsString += $"{error.ErrorMessage}\r\n";
                             }
                         }
-#endif
 
                         var problemDetails = new ValidationProblemDetails(context.ModelState)
                         {

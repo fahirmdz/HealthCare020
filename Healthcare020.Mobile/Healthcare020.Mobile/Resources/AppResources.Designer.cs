@@ -359,16 +359,6 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] user {
-            get {
-                object obj = ResourceManager.GetObject("user", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Korisničko ime mora sadržati izmedju 4 i 12 karaktera.
         /// </summary>
         public static string UsernameLengthError {

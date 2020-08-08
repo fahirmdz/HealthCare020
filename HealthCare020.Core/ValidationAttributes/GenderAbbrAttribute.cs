@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using HealthCare020.Core.Resources;
 
 namespace HealthCare020.Core.ValidationAttributes
 {
@@ -7,7 +8,7 @@ namespace HealthCare020.Core.ValidationAttributes
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if(!(value is char gender) || (char.ToUpper(gender)!='M' && char.ToUpper(gender)!='Z'))
-                return new ValidationResult($"Neispravan format pola. Trebao bi biti 'M' ili 'Z'.");
+                return new ValidationResult(SharedResources.InvalidGenderFormatMessage);
 
             return ValidationResult.Success;
         }
