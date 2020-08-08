@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
     public class ZdravstvenaKnjizicaUpsertDto
     {
-        [Required]
+        [RequiredWithMessage]
         public LicniPodaciUpsertDto LicniPodaci { get; set; }
 
-        [Required]
+        [RequiredWithMessage]
         public int DoktorId { get; set; }
     }
 }

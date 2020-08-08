@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
     public class ZahtevZaPregledUpsertDto
     {
-        [Required]
+        [RequiredWithMessage]
         public int DoktorId { get; set; }
 
         public int? UputnicaId { get; set; }
 
-        [StringLength(255, ErrorMessage = "Maximum length is 255 characters", MinimumLength = 5)]
-        [Required]
+        [StringLengthWithMessage(5, 255)]
+        [RequiredWithMessage]
         public string Napomena { get; set; }
     }
 }

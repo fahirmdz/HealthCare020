@@ -1,22 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using HealthCare020.Core.Extensions;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
     public class KorisnickiNalogUpsertDto
     {
         private string _username;
-        [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
-        [StringLength(maximumLength: 20, MinimumLength = 4, ErrorMessage = "Username mora sadrzati izmedju 4 i 20 karaktera")]
+        [RequiredWithMessage]
+        [StringLengthWithMessage(4,20)]
         public string Username { get=>_username; set=>_username=value.RemoveWhitespaces(); }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
-        [StringLength(maximumLength: int.MaxValue, MinimumLength = 6, ErrorMessage = "Lozinka mora sadrzati minimalno 6 karaktera")]
+        [RequiredWithMessage]
+        [StringLengthWithMessage(6,int.MaxValue)]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Obavezno polje", AllowEmptyStrings = false)]
+        [RequiredWithMessage]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
 

@@ -11,10 +11,8 @@ namespace HealthCare020.Core.ValidationAttributes
             {
                 if (date.Date.Day != DateTime.Now.Day)
                     return new ValidationResult(ErrorMessage, new[] { nameof(DateTime) });
-
-                return ValidationResult.Success;
             }
-            return new ValidationResult($"Neispravan format datuma -> {value}");
+            return ValidationResult.Success;
         }
     }
 }

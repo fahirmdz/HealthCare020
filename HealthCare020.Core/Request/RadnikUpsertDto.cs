@@ -4,6 +4,6 @@
     {
         public LicniPodaciUpsertDto LicniPodaci { get; set; }
         public KorisnickiNalogUpsertDto KorisnickiNalog { get; set; }
-        public int StacionarnoOdeljenjeId { get; set; } 
+        public int StacionarnoOdeljenjeId { get; set; }
     }
 }

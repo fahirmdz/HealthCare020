@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
     public class LoginDto
     {
-        [Required]
+        [RequiredWithMessage]
         public string Username { get; set; }
-        [Required]
+        [RequiredWithMessage]
         public string Password { get; set; }
     }
 }

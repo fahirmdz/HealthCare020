@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCare020.Core.Resources;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthCare020.Core.ValidationAttributes
@@ -11,13 +12,11 @@ namespace HealthCare020.Core.ValidationAttributes
             {
                 if (date.Date < DateTime.Now.Date)
                 {
-                    return new ValidationResult(ErrorMessage);
+                    return new ValidationResult(string.IsNullOrWhiteSpace(ErrorMessage) ? SharedResources.FutureDateTimeConstraintMessage : ErrorMessage);
                 }
-
-                return ValidationResult.Success;
             }
 
-            return new ValidationResult($"Neispravan format datuma -> {value}");
+            return ValidationResult.Success;
         }
     }
 }

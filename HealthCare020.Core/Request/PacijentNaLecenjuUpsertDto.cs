@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {
     public class PacijentNaLecenjuUpsertDto
     {
-        [Required(ErrorMessage = "Licni podaci su obavezni za kreiranje novogo pacijenta na lecenju.")]
+        [RequiredWithMessage()]
         public LicniPodaciUpsertDto LicniPodaci { get; set; }
 
-        [Required]
+        [RequiredWithMessage]
         public int StacionarnoOdeljenjeId { get; set; }
 
-        [Required]
+        [RequiredWithMessage]
         public int BrojSobe { get; set; }
     }
 }

@@ -61,11 +61,56 @@ namespace HealthCare020.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Test.
+        ///   Looks up a localized string similar to Datum mora biti u budućnosti.
         /// </summary>
-        public static string Test {
+        public static string FutureDateTimeConstraintMessage {
             get {
-                return ResourceManager.GetString("Test", resourceCulture);
+                return ResourceManager.GetString("FutureDateTimeConstraintMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neispravan format pola. Trebao bi biti &apos;M&apos; ili &apos;Z&apos;.
+        /// </summary>
+        public static string InvalidGenderFormatMessage {
+            get {
+                return ResourceManager.GetString("InvalidGenderFormatMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Morate odabrati #.
+        /// </summary>
+        public static string RequiredPickMessage {
+            get {
+                return ResourceManager.GetString("RequiredPickMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obavezno polje.
+        /// </summary>
+        public static string RequiredValidationError {
+            get {
+                return ResourceManager.GetString("RequiredValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to # # nije pronađen/a.
+        /// </summary>
+        public static string ResourceNotFoundValidationMessage {
+            get {
+                return ResourceManager.GetString("ResourceNotFoundValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Polje može sadržati između # i # karaktera.
+        /// </summary>
+        public static string StringLengthValidationErrorMask {
+            get {
+                return ResourceManager.GetString("StringLengthValidationErrorMask", resourceCulture);
             }
         }
     }
