@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using HealthCare020.Core.Extensions;
 using HealthCare020.Core.Resources;
 
 namespace HealthCare020.Core.ValidationAttributes
@@ -39,6 +40,15 @@ namespace HealthCare020.Core.ValidationAttributes
                         errorMessage = SharedResources.RequiredPickMessage.Replace("#",
                             validationContext.MemberName.Substring(0,
                                 validationContext.MemberName.IndexOf("Id", StringComparison.Ordinal)));
+                }
+                else
+                {
+                    var displayName = validationContext.MemberName.LocalizeStringFromResource();
+                    if (string.IsNullOrWhiteSpace(displayName))
+                        displayName = validationContext.DisplayName;
+
+                    errorMessage =
+                        SharedResources.RequiredReplacementValidationError.Replace("#",displayName);
                 }
 
 
