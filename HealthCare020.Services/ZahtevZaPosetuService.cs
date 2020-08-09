@@ -137,44 +137,63 @@ namespace HealthCare020.Services
 
             if (resourceParameters != null)
             {
-                if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
+                if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentIme))
                 {
-                    var imeForSearch = resourceParameters.PacijentIme.ToLower();
-                    if (!await result.AnyAsync(x =>
-                        x.PacijentNaLecenju.LicniPodaci.Ime.ToLower()
-                            .Contains(imeForSearch)))
+                    var nazivToSearch = resourceParameters.PacijentIme.ToLower();
+                    if (await result.AnyAsync(x =>
+                        x.PacijentNaLecenju.LicniPodaci.Ime.ToLower().StartsWith(nazivToSearch)))
                     {
                         result = result.Where(x =>
-                            x.PacijentNaLecenju.LicniPodaci.Prezime.ToLower()
-                                .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                            x.PacijentNaLecenju.LicniPodaci.Ime.ToLower().StartsWith(nazivToSearch));
                     }
-                    else
+                    else if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentPrezime))
                     {
                         result = result.Where(x =>
                             x.PacijentNaLecenju.LicniPodaci.Ime.ToLower()
-                                .Contains(imeForSearch));
+                                .StartsWith(resourceParameters.PacijentPrezime.ToLower()));
                     }
                 }
 
-                if (await result.AnyAsync() && (string.IsNullOrWhiteSpace(resourceParameters.PacijentIme) && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime)))
+                if (await result.AnyAsync())
                 {
-                    result = result.Where(x =>
-                        x.PacijentNaLecenju.LicniPodaci.Prezime.ToLower()
-                            .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                    if (!string.IsNullOrWhiteSpace(resourceParameters.BrojTelefonaPosetioca))
+                        result = result.Where(x =>
+                            x.BrojTelefonaPosetioca.StartsWith(resourceParameters.BrojTelefonaPosetioca.Trim()));
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
                 }
 
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.BrojTelefonaPosetioca))
-                    result = result.Where(x =>
-                        x.BrojTelefonaPosetioca.StartsWith(resourceParameters.BrojTelefonaPosetioca.Trim()));
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.Datum.HasValue)
+                        result = result.Where(x => x.IsObradjen && x.ZakazanoDatumVreme.Value.Date == resourceParameters.Datum.Value.Date);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
 
-                if (await result.AnyAsync() && resourceParameters.Datum.HasValue)
-                    result = result.Where(x => x.IsObradjen && x.ZakazanoDatumVreme.Value.Date == resourceParameters.Datum.Value.Date);
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.NeobradjeneOnly)
+                        result = result.Where(x => !x.IsObradjen);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
 
-                if (await result.AnyAsync() && resourceParameters.NeobradjeneOnly)
-                    result = result.Where(x => !x.IsObradjen);
-
-                if (await result.AnyAsync() && resourceParameters.ObradjeneOnly)
-                    result = result.Where(x => x.IsObradjen);
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.ObradjeneOnly)
+                        result = result.Where(x => x.IsObradjen);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
             }
 
             return await base.FilterAndPrepare(result, resourceParameters);

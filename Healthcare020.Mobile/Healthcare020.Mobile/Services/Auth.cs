@@ -106,11 +106,15 @@ namespace Healthcare020.Mobile.Services
                         if (tokenResponse != null && !string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
                             AccessToken = tokenResponse.AccessToken.ConvertToSecureString();
                         else
+                        {
+                            NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                             return false;
+                        }
                     }
                     else
                     {
                         var error = await response.Content.ReadAsStringAsync();
+                        NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                         return false;
                     }
                 }
@@ -132,6 +136,7 @@ namespace Healthcare020.Mobile.Services
             }
             catch (Exception ex)
             {
+                NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return false;
             }
         }

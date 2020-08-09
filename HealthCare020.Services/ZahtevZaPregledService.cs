@@ -134,79 +134,86 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
+            //CONSTRAINT -> Pacijent moze videti samo zahteve za pregled koje je on kreirao
+            if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
+                result = result.Where(x => x.PacijentId == pacijent.Id);
+            //CONSTRAINT -> Doktor moze videti samo zahteve za pregled kod njega
+            else if (_authService.UserIsDoktor() && await _authService.GetCurrentLoggedInDoktor() is { } doktor)
+                result = result.Where(x => x.DoktorId == doktor.Id);
+
             if (resourceParameters != null)
             {
-                if (!string.IsNullOrEmpty(resourceParameters.PacijentIme))
+                if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentIme))
                 {
-                    var imeForSearch = resourceParameters.PacijentIme.ToLower();
-                    if (!await result.AnyAsync(x =>
-                        x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
-                            .Contains(imeForSearch)))
+                    var nazivToSearch = resourceParameters.PacijentIme.ToLower();
+                    if (await result.AnyAsync(x => x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.StartsWith(nazivToSearch)))
                     {
-                        result = result.Where(x =>
-                            x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
-                                .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                        result = result.Where(x => x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower().StartsWith(nazivToSearch));
                     }
-                    else
+                    else if (!string.IsNullOrWhiteSpace(resourceParameters.PacijentPrezime))
                     {
-                        result = result.Where(x =>
-                            x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Ime.ToLower()
-                                .Contains(imeForSearch));
+                        result = result.Where(x => x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.PacijentPrezime.ToLower()));
                     }
                 }
 
-                if (await result.AnyAsync() && (string.IsNullOrWhiteSpace(resourceParameters.PacijentIme) && !string.IsNullOrEmpty(resourceParameters.PacijentPrezime)))
+                if (await result.AnyAsync())
                 {
-                    result = result.Where(x =>
-                        x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
-                            .Contains(resourceParameters.PacijentPrezime.ToLower()));
+                    if (!string.IsNullOrWhiteSpace(resourceParameters.DoktorIme))
+                    {
+                        var nazivToSearch = resourceParameters.DoktorIme.ToLower();
+                        if (await result.AnyAsync(x => x.Doktor.Radnik.LicniPodaci.Ime.StartsWith(nazivToSearch)))
+                        {
+                            result = result.Where(x => x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(nazivToSearch));
+                        }
+                        else if (!string.IsNullOrWhiteSpace(resourceParameters.DoktorPrezime))
+                        {
+                            result = result.Where(x => x.Doktor.Radnik.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.DoktorPrezime.ToLower()));
+                        }
+                    }
                 }
 
-                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorIme))
+                if (await result.AnyAsync())
                 {
-                    result = result.Where(x =>
-                        x.Doktor.Radnik.LicniPodaci.Ime.ToLower().Contains(resourceParameters.DoktorIme.ToLower()));
+                    if (resourceParameters.PacijentId.HasValue)
+                        result = result.Where(x => x.PacijentId == resourceParameters.PacijentId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
                 }
 
-                if (await result.AnyAsync() && !string.IsNullOrEmpty(resourceParameters.DoktorPrezime))
+                if (await result.AnyAsync())
                 {
-                    result = result.Where(x =>
-                        x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
-                            .Contains(resourceParameters.DoktorPrezime.ToLower()));
+                    if (resourceParameters.DoktorId.HasValue)
+                        result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
                 }
 
-                if (await result.AnyAsync() && resourceParameters.PacijentId.HasValue)
+                if (await result.AnyAsync())
                 {
-                    result = result.Where(x => x.PacijentId == resourceParameters.PacijentId);
+                    if (resourceParameters.UputnicaId.HasValue)
+                        result = result.Where(x => x.UputnicaId == resourceParameters.UputnicaId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
                 }
 
-                if (await result.AnyAsync() && resourceParameters.DoktorId.HasValue)
+                if (await result.AnyAsync())
                 {
-                    result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+                    if (!string.IsNullOrWhiteSpace(resourceParameters.Napomena))
+                        result = result.Where(x => x.Napomena.ToLower().Contains(resourceParameters.Napomena.ToLower()));
                 }
-
-                if (await result.AnyAsync() && resourceParameters.UputnicaId.HasValue)
+                else
                 {
-                    result = result.Where(x => x.UputnicaId == resourceParameters.UputnicaId);
-                }
-
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Napomena))
-                {
-                    result = result.Where(x => x.Napomena.ToLower().Contains(resourceParameters.Napomena.ToLower()));
+                    return await base.FilterAndPrepare(result, resourceParameters);
                 }
             }
 
-            if(await result.AnyAsync())
-            {
-                //CONSTRAINT -> Pacijent moze videti samo zahteve za pregled koje je on kreirao
-                if (_authService.UserIsPacijent() && await _authService.GetCurrentLoggedInPacijent() is { } pacijent)
-                    result = result.Where(x => x.PacijentId == pacijent.Id);
-                //CONSTRAINT -> Doktor moze videti samo zahteve za pregled kod njega
-                else if (_authService.UserIsDoktor() && await _authService.GetCurrentLoggedInDoktor() is {} doktor)
-                    result = result.Where(x => x.DoktorId == doktor.Id);
-
-                result = result.OrderByDescending(x => x.DatumVreme);
-            }
+            result = result.OrderByDescending(x => x.DatumVreme);
 
             return await base.FilterAndPrepare(result, resourceParameters);
         }
