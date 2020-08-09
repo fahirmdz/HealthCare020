@@ -18,7 +18,7 @@ namespace Healthcare020.Mobile.Helpers
 
             container.Register<RegisterViewModel>(new RegisterViewModel(new APIService()));
             container.Register<PosetaViewModel>(new PosetaViewModel(new APIService()));
-            container.Register<ZakazaniPreglediViewModel>(new ZakazaniPreglediViewModel());
+            container.Register<PreglediViewModel>(new PreglediViewModel());
 
 
             var cfg = new MapperConfiguration(MapperConfig.MapperConfiguration());

@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
@@ -11,6 +10,7 @@ using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -68,9 +68,9 @@ namespace HealthCare020.Services
                 throw new NullReferenceException();
 
             var rolesAddResult = await _korisnikService.AddInRoles(radnik.KorisnickiNalogId,
-                new KorisnickiNalogRolesUpsertDto {RoleId = RoleType.Doktor.ToInt()});
-            if(!rolesAddResult.Succeeded)
-                return ServiceResult.WithStatusCode(rolesAddResult.StatusCode,rolesAddResult.Message);
+                new KorisnickiNalogRolesUpsertDto { RoleId = RoleType.Doktor.ToInt() });
+            if (!rolesAddResult.Succeeded)
+                return ServiceResult.WithStatusCode(rolesAddResult.StatusCode, rolesAddResult.Message);
 
             var entity = _mapper.Map<Doktor>(request);
             entity.RadnikId = radnik.Id;
@@ -164,19 +164,49 @@ namespace HealthCare020.Services
                     }
                 }
 
-                if (!string.IsNullOrEmpty(resourceParameters.Username) && await result.AnyAsync())
-                    result = result.Where(x =>
-                        x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.EqualUsername))
-                    result = result.Where(x =>
-                        x.Radnik.KorisnickiNalog.Username.ToLower() == resourceParameters.EqualUsername);
+                if (await result.AnyAsync())
+                {
+                    if (!string.IsNullOrEmpty(resourceParameters.Username))
+                        result = result.Where(x =>
+                            x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
 
-                if (!string.IsNullOrEmpty(resourceParameters.NaucnaOblast) && await result.AnyAsync())
-                    result = result.Where(x =>
-                        x.NaucnaOblast.Naziv.ToLower().StartsWith(resourceParameters.NaucnaOblast.ToLower()));
+                if (await result.AnyAsync())
+                {
+                    if (!string.IsNullOrWhiteSpace(resourceParameters.EqualUsername))
+                        result = result.Where(x =>
+                            x.Radnik.KorisnickiNalog.Username.ToLower() == resourceParameters.EqualUsername);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
 
-                if (await result.AnyAsync() && resourceParameters.KorisnickiNalogId.HasValue)
-                    result = result.Where(x => x.Radnik.KorisnickiNalogId == resourceParameters.KorisnickiNalogId);
+                if (await result.AnyAsync())
+                {
+                    if (!string.IsNullOrEmpty(resourceParameters.NaucnaOblast))
+                        result = result.Where(x =>
+                            x.NaucnaOblast.Naziv.ToLower().StartsWith(resourceParameters.NaucnaOblast.ToLower()));
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
+
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.KorisnickiNalogId.HasValue)
+                        result = result.Where(x => x.Radnik.KorisnickiNalogId == resourceParameters.KorisnickiNalogId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
+
 
                 if (resourceParameters.EagerLoaded)
                     PropertyCheck<DoktorDtoEL>(resourceParameters.OrderBy);

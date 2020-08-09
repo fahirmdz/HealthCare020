@@ -62,7 +62,7 @@ namespace Healthcare020.Mobile.UWP
                 {
                     typeof(ImageCircleRenderer).GetTypeInfo().Assembly
                 };
-
+                
                 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)

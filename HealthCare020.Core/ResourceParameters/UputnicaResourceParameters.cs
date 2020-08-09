@@ -18,7 +18,7 @@ namespace HealthCare020.Core.ResourceParameters
 
         public string Napomena { get; set; }
 
-        public DateTime DatumVreme { get; set; }
+        public DateTime? Datum { get; set; }
 
         public bool EagerLoaded { get; set; } = false;
     }

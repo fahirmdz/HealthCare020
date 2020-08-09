@@ -1,78 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage
-    xmlns:s="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
     x:Class="Healthcare020.Mobile.Views.PacijentDasbhboardTabbedPage"
-            xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
-            xmlns:pages="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
     xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
-    mc:Ignorable="d" >
+    mc:Ignorable="d">
 
     <TabbedPage.Resources>
-        <FontImageSource x:Key="StethoscopeIcon"
+        <FontImageSource
+            x:Key="StethoscopeIcon"
             FontFamily="{StaticResource FontAwesomeRegular}"
             Glyph="{x:Static resources:IconFont.Stethoscope}"
             Size="30"
-            Color="{StaticResource CustomBlue}"
-        ></FontImageSource>
+            Color="{StaticResource CustomBlue}" />
 
-        <FontImageSource x:Key="FileSignatureIcon"
+        <FontImageSource
+            x:Key="FileSignatureIcon"
             FontFamily="{StaticResource FontAwesomeRegular}"
             Glyph="{x:Static resources:IconFont.FileSignature}"
             Size="30"
-            Color="{StaticResource CustomBlue}"
+            Color="{StaticResource CustomBlue}" />
 
-        ></FontImageSource>
-
-        <FontImageSource x:Key="QuestionIcon"
+        <FontImageSource
+            x:Key="QuestionIcon"
             FontFamily="{StaticResource FontAwesomeRegular}"
             Glyph="{x:Static resources:IconFont.Question}"
             Size="30"
-            Color="{StaticResource CustomBlue}"
+            Color="{StaticResource CustomBlue}" />
 
-        ></FontImageSource>
-
-        <FontImageSource x:Key="CogIcon"
+        <FontImageSource
+            x:Key="CogIcon"
             FontFamily="{StaticResource FontAwesomeRegular}"
             Glyph="{x:Static local:IconFont.Cog}"
             Size="30"
-            Color="{StaticResource CustomBlue}"
-        ></FontImageSource>
+            Color="{StaticResource CustomBlue}" />
     </TabbedPage.Resources>
-    <!--Pages can be added as references or inline-->
-    <NavigationPage Title="{x:Static resources:AppResources.PreglediTabTitle}" x:Name="PreglediTab" IconImageSource="{StaticResource StethoscopeIcon}">
+    <!--  Pages can be added as references or inline  -->
+    <NavigationPage
+        x:Name="PreglediTab"
+        Title="{x:Static resources:AppResources.PreglediTabTitle}"
+        IconImageSource="{StaticResource StethoscopeIcon}">
         <x:Arguments>
-            <pages:PreglediMainPage>
-            </pages:PreglediMainPage>
+            <pages:PreglediMainPage />
         </x:Arguments>
     </NavigationPage>
 
-    <NavigationPage Title="{x:Static resources:AppResources.UverenjaTabTitle}"
-                    x:Name="UverenjaTab"
-                    IconImageSource="{StaticResource FileSignatureIcon}">
+    <NavigationPage
+        x:Name="UverenjaTab"
+        Title="{x:Static resources:AppResources.UverenjaTabTitle}"
+        IconImageSource="{StaticResource FileSignatureIcon}">
         <x:Arguments>
-            <pages:LekarskaUverenjaMainPage>
-            </pages:LekarskaUverenjaMainPage>
+            <pages:LekarskaUverenjaMainPage />
         </x:Arguments>
     </NavigationPage>
 
-    <!--****Title attribute sets title of bottom tab item--> 
-    <NavigationPage Title="{x:Static resources:AppResources.ZahteviTabTitle}" x:Name="ZahteviTab" IconImageSource="{StaticResource QuestionIcon}">
+    <!--  ****Title attribute sets title of bottom tab item  -->
+    <NavigationPage
+        x:Name="ZahteviTab"
+        Title="{x:Static resources:AppResources.ZahteviTabTitle}"
+        IconImageSource="{StaticResource QuestionIcon}">
         <x:Arguments>
-            <pages:ZahteviZaPregledMainPage>
-            </pages:ZahteviZaPregledMainPage>
+            <pages:ZahteviZaPregledMainPage />
         </x:Arguments>
     </NavigationPage>
 
-    <NavigationPage  Title="{x:Static resources:AppResources.SettingsTabTitle}"
-                     x:Name="SettingsTab" 
-                     IconImageSource="{StaticResource CogIcon}">
+    <NavigationPage
+        x:Name="SettingsTab"
+        Title="{x:Static resources:AppResources.SettingsTabTitle}"
+        IconImageSource="{StaticResource CogIcon}">
         <x:Arguments>
-            <pages:SettingsPage>
-            </pages:SettingsPage>
+            <pages:SettingsPage />
         </x:Arguments>
     </NavigationPage>
 </TabbedPage>

@@ -32,6 +32,12 @@ namespace Healthcare020.Mobile.ViewModels
 
         public async Task Init()
         {
+            if (!Auth.IsAuthenticated())
+            {
+                NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
+                return;
+            }
+
             _apiService.ChangeRoute(Routes.DoktoriRoute);
             var result = await _apiService.Get<DoktorDtoEL>(new DoktorResourceParameters { EagerLoaded = true });
 

@@ -117,15 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Grad</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>E-mail adresa</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Ime</value>
+  </data>
   <data name="FutureDateTimeConstraintMessage" xml:space="preserve">
     <value>Datum mora biti u budućnosti</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Pol</value>
   </data>
   <data name="InvalidGenderFormatMessage" xml:space="preserve">
     <value>Neispravan format pola. Trebao bi biti 'M' ili 'Z'</value>
   </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Broj telefona</value>
+  </data>
+  <data name="ProfilePicture" xml:space="preserve">
+    <value>Profilna slika</value>
+  </data>
   <data name="RequiredPickMessage" xml:space="preserve">
     <value>Morate odabrati #</value>
     <comment># will be replaced with property name</comment>
+  </data>
+  <data name="RequiredReplacementValidationError" xml:space="preserve">
+    <value># je obavezno polje</value>
   </data>
   <data name="RequiredValidationError" xml:space="preserve">
     <value>Obavezno polje</value>

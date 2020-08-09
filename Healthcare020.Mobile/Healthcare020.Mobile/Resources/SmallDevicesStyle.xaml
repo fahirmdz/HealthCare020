@@ -1,39 +1,49 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    x:Class="Healthcare020.Mobile.Resources.SmallDevicesStyle">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="Healthcare020.Mobile.Resources.SmallDevicesStyle"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--#region Thicknesses-->
+    <Thickness x:Key="NextPrevNavigationThickness">0,0,0,5</Thickness>
+    <Thickness x:Key="Thickness50to0">50,0</Thickness>
+    <Thickness x:Key="Thickness50to10">50,10</Thickness>
+    <Thickness x:Key="MT-40">0,40,0,0</Thickness>
+    <Thickness x:Key="MT-20">0,20,0,0</Thickness>
+    <Thickness x:Key="MR-20">0,0,10,0</Thickness>
+    <!--#endregion-->
 
+    <!--#region Heights-->
     <!--#region RegisterPage style-->
 
-    <!--Path with Logo-->
-    <Style TargetType="Path" x:Key="LogoPath">
+    <!--  Path with Logo  -->
+    <Style x:Key="LogoPath" TargetType="Path">
         <Setter Property="Aspect" Value="UniformToFill" />
         <Setter Property="FlowDirection" Value="LeftToRight" />
         <Setter Property="Data">M574.013 54.2383C576.234 -0.834323 574.013 0.00072339 574.013 0.00072339H0C109.478 111.046 571.793 109.311 574.013 54.2383Z</Setter>
         <Setter Property="Fill" Value="#65DBDB" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
     </Style>
-    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo_Revert">
-        <On Platform="Android" Value="healthcare020_150x150_revert.png"></On>
-        <On Platform="UWP" Value="Assets/healthcare020_150x150_revert"></On>
+    <OnPlatform x:Key="Logo_Revert" x:TypeArguments="ImageSource">
+        <On Platform="Android" Value="healthcare020_150x150_revert.png" />
+        <On Platform="UWP" Value="Assets/healthcare020_150x150_revert" />
     </OnPlatform>
-    <Style TargetType="Image" x:Key="LogoImage">
+    <Style x:Key="LogoImage" TargetType="Image">
         <Setter Property="HorizontalOptions" Value="End" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HeightRequest">150</Setter>
         <Setter Property="Source" Value="{StaticResource Logo_Revert}" />
     </Style>
-    <!--/Path with Logo-->
+    <!--  /Path with Logo  -->
 
-    <!--Path with Label-->
-    <Style TargetType="Path" x:Key="TitlePath">
+    <!--  Path with Label  -->
+    <Style x:Key="TitlePath" TargetType="Path">
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="Aspect" Value="None" />
         <Setter Property="FlowDirection" Value="LeftToRight" />
         <Setter Property="Data">M-1 1.65443e-05C-1 1.65443e-05 110.12 -2.06804e-05 128.827 1.65443e-05C147.534 5.37691e-05 150.527 37 128.827 37C107.126 37 -1 37 -1 37V1.65443e-05Z</Setter>
         <Setter Property="Fill" Value="#65DBDB" />
     </Style>
-    <Style TargetType="Label" x:Key="TitleLabel">
+    <Style x:Key="TitleLabel" TargetType="Label">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="Text" Value="Registracija" />
         <Setter Property="HorizontalOptions" Value="Start" />
@@ -42,54 +52,54 @@
         <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />
         <Setter Property="Margin">-130,7,0,0</Setter>
     </Style>
-    <Style TargetType="StackLayout" x:Key="TitleLabelStackStyle">
+    <Style x:Key="TitleLabelStackStyle" TargetType="StackLayout">
         <Setter Property="Margin">0,130,0,0</Setter>
         <Setter Property="Orientation">Horizontal</Setter>
         <Setter Property="HorizontalOptions">Start</Setter>
     </Style>
-    <!--/Path with Label-->
+    <!--  /Path with Label  -->
 
-    <Style TargetType="StackLayout" x:Key="RegisterFormStackBody">
+    <Style x:Key="RegisterFormStackBody" TargetType="StackLayout">
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
         <Setter Property="BackgroundColor" Value="{StaticResource LighterSmokeWhite}" />
         <Setter Property="Margin" Value="70,-20,70,0" />
     </Style>
 
     <Style x:Key="CustomEntry" TargetType="Entry">
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}"></Setter>
-        <Setter Property="TextColor" Value="Black"></Setter>
-        <Setter Property="Margin" Value="5"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="Margin" Value="5" />
     </Style>
 
     <!--#endregion-->
 
     <!--#region General styles-->
 
-    <Style TargetType="Button" x:Key="CustomButtonStyle">
+    <Style x:Key="CustomButtonStyle" TargetType="Button">
         <Setter Property="ContentLayout">Left,0</Setter>
-        <Setter Property="BackgroundColor" Value="{StaticResource CustomBlue}"></Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource CustomBlue}" />
         <Setter Property="TextColor">WhiteSmoke</Setter>
         <Setter Property="CornerRadius">15</Setter>
-        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
         <Setter Property="VerticalOptions">FillAndExpand</Setter>
         <Setter Property="HorizontalOptions">FillAndExpand</Setter>
         <Setter Property="HeightRequest">60</Setter>
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
         <Setter Property="Margin">15,10,15,10</Setter>
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}"></Setter>
-        <Setter Property="TextColor" Value="{StaticResource CustomDarkBlue}"></Setter>
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
+        <Setter Property="TextColor" Value="{StaticResource CustomDarkBlue}" />
     </Style>
 
-    <OnPlatform x:TypeArguments="ImageSource" x:Key="Logo">
-        <On Platform="Android" Value="healthcare020_200x200.png"></On>
-        <On Platform="UWP" Value="Assets/healthcare020_200x200.png"></On>
+    <OnPlatform x:Key="Logo" x:TypeArguments="ImageSource">
+        <On Platform="Android" Value="healthcare020_200x200.png" />
+        <On Platform="UWP" Value="Assets/healthcare020_200x200.png" />
     </OnPlatform>
 
-    <!--Font sizes-->
+    <!--  Font sizes  -->
     <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
         <On Platform="UWP">24</On>
         <On Platform="Android">20</On>
@@ -109,7 +119,7 @@
         <On Platform="UWP">26</On>
         <On Platform="Android">24</On>
     </OnPlatform>
-    <!--/Font sizes-->
+    <!--  /Font sizes  -->
 
     <!--#region Margin-Responsive-->
     <OnPlatform x:Key="5mr" x:TypeArguments="x:Double">
@@ -145,17 +155,17 @@
     <!--#endregion-->
 
     <!--#region WelcomePage styles-->
-    <Style TargetType="Path" x:Key="WelcomePageLogoPath">
+    <Style x:Key="WelcomePageLogoPath" TargetType="Path">
         <Setter Property="Data">M364 0C364 34.275 359.292 68.2144 350.146 99.8804C341 131.546 327.594 160.319 310.693 184.555C293.793 208.791 273.73 228.016 251.648 241.133C229.567 254.249 205.901 261 182 261C158.099 261 134.433 254.249 112.352 241.133C90.2703 228.016 70.2068 208.791 53.3066 184.555C36.4063 160.319 23.0003 131.546 13.8539 99.8804C4.70756 68.2144 -2.08945e-06 34.275 0 -2.28173e-05L182 0H364Z</Setter>
-        <Setter Property="Aspect" Value="Uniform"></Setter>
+        <Setter Property="Aspect" Value="Uniform" />
         <Setter Property="HeightRequest">190</Setter>
     </Style>
 
     <!--#endregion-->
 
     <!--#region LoginPage styles-->
-    <Style TargetType="Entry" x:Key="LoginPageEntryStyle">
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}"></Setter>
+    <Style x:Key="LoginPageEntryStyle" TargetType="Entry">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />
     </Style>
 
     <!--#endregion-->

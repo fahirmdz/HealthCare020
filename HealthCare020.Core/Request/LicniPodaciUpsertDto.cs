@@ -7,19 +7,19 @@ namespace HealthCare020.Core.Request
     public class LicniPodaciUpsertDto
     {
         [RequiredWithMessage]
-        [StringLengthWithMessage(2,15)]
+        [StringLengthWithMessage(2, 15)]
         public string Ime { get; set; }
 
         [RequiredWithMessage]
-        [StringLengthWithMessage(2,15)]
+        [StringLengthWithMessage(2, 15)]
         public string Prezime { get; set; }
 
         [RequiredWithMessage]
-        [StringLengthWithMessage(3,30)]
+        [StringLengthWithMessage(3, 30)]
         public string Adresa { get; set; }
 
         [RequiredWithMessage]
-        [StringLengthWithMessage(9,12)]
+        [StringLengthWithMessage(9, 12)]
         public string JMBG { get; set; }
 
         [RequiredWithMessage]

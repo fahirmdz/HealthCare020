@@ -25,7 +25,7 @@ namespace HealthCare020.Services
             IHttpContextAccessor httpContextAccessor,
             ICRUDService<LicniPodaci, LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaciUpsertDto, LicniPodaciUpsertDto> licniPodaciService,
             IAuthService authService) :
-            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor,authService)
+            base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _licniPodaciService = licniPodaciService;
         }
@@ -97,8 +97,8 @@ namespace HealthCare020.Services
             if (zdravstvenaKnjizicaFromDb == null)
                 return ServiceResult.NotFound($"Zdravstvena knjizica sa ID-em {id} nije pronadjena.");
 
-            if(await _dbContext.Pacijenti.AnyAsync(x=>x.ZdravstvenaKnjizicaId==id))
-                return ServiceResult.BadRequest($"Ne mozete izbrisati zdravstvenu knjizicu, jer postoji pacijent koji je koristi."); 
+            if (await _dbContext.Pacijenti.AnyAsync(x => x.ZdravstvenaKnjizicaId == id))
+                return ServiceResult.BadRequest($"Ne mozete izbrisati zdravstvenu knjizicu, jer postoji pacijent koji je koristi.");
 
             await Task.Run(() =>
             {
@@ -116,27 +116,57 @@ namespace HealthCare020.Services
             if (!await result.AnyAsync())
                 return null;
 
-            if(resourceParameters!=null)
+            if (resourceParameters != null)
             {
                 if (!string.IsNullOrWhiteSpace(resourceParameters.DoktorIme))
-                    result = result.Where(x =>
-                        x.Doktor.Radnik.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.DoktorIme.ToLower()));
+                {
+                    var nazivToSearch = resourceParameters.DoktorIme.ToLower();
+                    if (result.Where(x => x.Doktor.Radnik.LicniPodaci.Ime.StartsWith(nazivToSearch)) is { } filtered && await filtered.AnyAsync())
+                    {
+                        result = filtered;
+                    }
+                    else if (!string.IsNullOrWhiteSpace(resourceParameters.DoktorPrezime))
+                    {
+                        result = result.Where(x =>
+                            x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
+                                .StartsWith(resourceParameters.DoktorPrezime.ToLower()));
+                    }
+                }
 
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.DoktorPrezime))
-                    result = result.Where(x => x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
-                        .StartsWith(resourceParameters.DoktorPrezime.ToLower()));
+                if (await result.AnyAsync())
+                {
+                    if (!string.IsNullOrWhiteSpace(resourceParameters.Ime))
+                    {
+                        var nazivToSearch = resourceParameters.Ime.ToLower();
+                        if (result.Where(x => x.LicniPodaci.Ime.ToLower().StartsWith(nazivToSearch)) is { } filtered && await filtered.AnyAsync())
+                        {
+                            result = filtered;
+                        }
+                        else if (!string.IsNullOrWhiteSpace(resourceParameters.DoktorPrezime))
+                        {
+                            result = result.Where(x =>
+                                x.Doktor.Radnik.LicniPodaci.Prezime.ToLower()
+                                    .StartsWith(resourceParameters.DoktorPrezime.ToLower()));
+                        }
+                    }
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
 
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Ime))
-                    result = result.Where(x => x.LicniPodaci.Ime.ToLower().StartsWith(resourceParameters.Ime));
-
-                if (await result.AnyAsync() && !string.IsNullOrWhiteSpace(resourceParameters.Prezime))
-                    result = result.Where(x => x.LicniPodaci.Prezime.ToLower().StartsWith(resourceParameters.Prezime));
-
-                if (await result.AnyAsync() && resourceParameters.DoktorId.HasValue)
-                    result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.DoktorId.HasValue)
+                        result = result.Where(x => x.DoktorId == resourceParameters.DoktorId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
             }
 
-            return await base.FilterAndPrepare(result,resourceParameters);
+            return await base.FilterAndPrepare(result, resourceParameters);
         }
 
         public override async Task<bool> AuthorizePacijentForGetById(int id)

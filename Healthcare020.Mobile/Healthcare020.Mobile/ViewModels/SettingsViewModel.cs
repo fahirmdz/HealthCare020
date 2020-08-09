@@ -43,6 +43,12 @@ namespace Healthcare020.Mobile.ViewModels
 
         public async void InitializeAsync()
         {
+            if (!Auth.IsAuthenticated())
+            {
+                NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
+                return;
+            }
+
             var pacijentResult = await _apiSerivce.Get<PacijentDtoEL>(new PacijentResourceParameters
             {
                 EagerLoaded = true,

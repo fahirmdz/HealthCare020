@@ -10,8 +10,10 @@ using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.ViewModels;
+using Healthcare020.Mobile.Views.Dialogs;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -103,6 +105,10 @@ namespace Healthcare020.Mobile.Views
         private void WelcomeBtn_OnClicked(object sender, EventArgs e)
         {
             Application.Current.MainPage=new WelcomePage();
+        }
+
+        private async void DialogButton_OnClicked(object sender, EventArgs e)
+        {
         }
     }
 }

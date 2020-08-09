@@ -1,84 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
-             xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
-             mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.WelcomePage">
+<ContentPage
+    x:Class="Healthcare020.Mobile.Views.WelcomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
+    mc:Ignorable="d">
 
     <ContentPage.BindingContext>
         <viewModels:WelcomeViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="WhiteSmoke">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <AbsoluteLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
-                <Grid HorizontalOptions="FillAndExpand">
-                    <Path Style="{StaticResource WelcomePageLogoPath}"
-                          Fill="{StaticResource HealthcareCyan}"/>
-                    <Image HorizontalOptions="Center"
-                       Aspect="AspectFit"
-                       VerticalOptions="Center"
-                       Source="{StaticResource Logo_Revert}">
-                    </Image>
-                </Grid>
-            </AbsoluteLayout>
-            <CarouselView Grid.Row="1"
-                          x:Name="CarouselImages"
-                          HorizontalOptions="FillAndExpand"
-                          IsScrollAnimated="true"
-                          IsSwipeEnabled="True"
-                          VerticalOptions="End"
-                          ItemsSource="{Binding ImageUrls}"
-                          Style="{StaticResource WelcomePageCarouselStyle}">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                            <Image Aspect="AspectFit" Source="{Binding item}"></Image>
-                        </Grid>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+        <ScrollView>
+            <Grid
+                BackgroundColor="WhiteSmoke"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <AbsoluteLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Path Fill="{StaticResource HealthcareCyan}" Style="{StaticResource WelcomePageLogoPath}" />
+                        <Image
+                            Aspect="AspectFit"
+                            HorizontalOptions="Center"
+                            Source="{StaticResource Logo_Revert}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </AbsoluteLayout>
+                <CarouselView
+                    x:Name="CarouselImages"
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    IsScrollAnimated="true"
+                    IsSwipeEnabled="True"
+                    ItemsSource="{Binding ImageUrls}"
+                    Style="{StaticResource WelcomePageCarouselStyle}"
+                    VerticalOptions="End">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image Aspect="AspectFit" Source="{Binding item}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
-            <StackLayout Grid.Row="2" Margin="0,30"
-                         HorizontalOptions="Fill"
-                         VerticalOptions="End">
-                <StackLayout.Resources>
-                    <Style BasedOn="{StaticResource BigButtonRadiusStyle}" TargetType="Button"></Style>
-                </StackLayout.Resources>
-                <Button x:Name="LoginButton"
+                <StackLayout
+                    Grid.Row="2"
+                    Margin="0,30"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="End">
+                    <StackLayout.Resources>
+                        <Style BasedOn="{StaticResource BigButtonRadiusStyle}" TargetType="Button" />
+                    </StackLayout.Resources>
+                    <Button
+                        x:Name="LoginButton"
                         BackgroundColor="#00bebe"
+                        Command="{Binding LoginPageCommand}"
                         Text="Log In"
-                        TextColor="#31373d"
-                        Command="{Binding LoginPageCommand}">
-                </Button>
+                        TextColor="#31373d" />
 
-                <Button x:Name="RegisterButton"
+                    <Button
+                        x:Name="RegisterButton"
+                        Command="{Binding RegisterPageCommand}"
                         Text="Register"
-                        TextColor="#31373d"
-                        Command="{Binding RegisterPageCommand}">
-                </Button>
+                        TextColor="#31373d" />
 
-                <Button x:Name="PosetaButton"
+                    <Button
+                        x:Name="PosetaButton"
+                        BackgroundColor="{StaticResource CustomBlue}"
+                        Command="{Binding PosetaPageCommand}"
                         Text="Poseta"
+                        TextColor="WhiteSmoke" />
+                    <Button
+                        x:Name="TEST"
                         BackgroundColor="{StaticResource CustomBlue}"
-                        TextColor="WhiteSmoke"
-                        Command="{Binding PosetaPageCommand}">
-                </Button>
-                <Button x:Name="TEST"
+                        Clicked="TEST_OnClicked"
                         Text="TEST"
-                        BackgroundColor="{StaticResource CustomBlue}"
-                        TextColor="WhiteSmoke"
-                       Clicked="TEST_OnClicked">
-                </Button>
-            </StackLayout>
-        </Grid>
+                        TextColor="WhiteSmoke" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
