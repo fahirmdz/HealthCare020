@@ -359,6 +359,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pretraga po opisu stanja.
+        /// </summary>
+        public static string SearchByOpisStanja {
+            get {
+                return ResourceManager.GetString("SearchByOpisStanja", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pretraga pregleda po napomeni.
         /// </summary>
         public static string SearchPreglediByNapomena {

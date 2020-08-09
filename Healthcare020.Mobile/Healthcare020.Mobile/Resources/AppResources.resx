@@ -220,6 +220,9 @@
   <data name="SearchByDoktor" xml:space="preserve">
     <value>Pretraga po doktoru</value>
   </data>
+  <data name="SearchByOpisStanja" xml:space="preserve">
+    <value>Pretraga po opisu stanja</value>
+  </data>
   <data name="SearchPreglediByNapomena" xml:space="preserve">
     <value>Pretraga pregleda po napomeni</value>
   </data>

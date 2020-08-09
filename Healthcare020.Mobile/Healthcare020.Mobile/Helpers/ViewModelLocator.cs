@@ -14,7 +14,7 @@ namespace Healthcare020.Mobile.Helpers
             Locator.Register<SettingsViewModel>();
             Locator.Register<PregledViewModel>();
             Locator.Register<LekarskoUverenjeViewModel>();
-
+            Locator.Register<LekarskaUverenjaViewModel>();
         }
 
         public static WelcomeViewModel WelcomeViewModel => Locator.GetInstance<WelcomeViewModel>();
@@ -25,5 +25,7 @@ namespace Healthcare020.Mobile.Helpers
         public static PreglediViewModel PreglediViewModel => Bootstrap.GetContainer().Resolve<PreglediViewModel>();
         public static PregledViewModel PregledViewModel => Locator.GetInstance<PregledViewModel>();
         public static LekarskoUverenjeViewModel LekarskoUverenjeViewModel => Locator.GetInstance<LekarskoUverenjeViewModel>();
+        public static LekarskaUverenjaViewModel LekarskaUverenjaViewModel => Locator.GetInstance<LekarskaUverenjaViewModel>();
+
     }
 }

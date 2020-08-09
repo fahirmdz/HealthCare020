@@ -1,24 +1,23 @@
-﻿using Healthcare020.Mobile.Helpers;
-using Healthcare020.Mobile.Models;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
-using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using Healthcare020.Mobile.Helpers;
+using Healthcare020.Mobile.Models;
 
 namespace Healthcare020.Mobile.ViewModels
 {
-    public class PreglediViewModel : BaseListViewModel
+    public class LekarskaUverenjaViewModel : BaseListViewModel
     {
-        public PreglediViewModel() : base()
+        public LekarskaUverenjaViewModel() : base()
         {
-            base.APIRouteToCollection = Routes.PreglediRoute;
+            base.APIRouteToCollection = Routes.LekarskoUverenjeRoute;
             var RowsCount = ResourceParameters.PageSize;
-            ResourceParameters = new PregledResourceParameters
+            ResourceParameters = new LekarskoUverenjeResourceParameters()
             {
                 PageSize = RowsCount,
-                OnlyZakazani = false,
                 EagerLoaded = true
             };
         }
@@ -26,15 +25,14 @@ namespace Healthcare020.Mobile.ViewModels
         protected override ObservableCollection<CollectionViewItem> CollectionViewItemConvertor(ObservableCollection<object> collection)
         {
             var collectionToReturn = new ObservableCollection<CollectionViewItem>();
-            foreach (var item in collection.GetAs<PregledDtoEL>())
+            foreach (var item in collection.GetAs<LekarskoUverenjeDtoEL>())
             {
                 collectionToReturn.Add(new CollectionViewItem
                 {
                     Id = item.Id,
-                    DateTime = item.DatumPregleda,
-                    PrimaryTextTitle = "Doktor: ",
-                    PrimaryTextContent = item.Doktor,
-                    ItemFlag = item.IsOdradjen
+                    DateTime = item.Pregled?.DatumPregleda??new DateTime(),
+                    PrimaryTextTitle = "Zdravstveno stanje: ",
+                    PrimaryTextContent = item.ZdravstvenoStanje?.Opis??"N/A"
                 });
             }
 
@@ -43,12 +41,11 @@ namespace Healthcare020.Mobile.ViewModels
 
         protected override async Task Search()
         {
-            if (string.Equals(SearchString, (ResourceParameters as PregledResourceParameters).DoktorIme,
+            if (string.Equals(SearchString, (ResourceParameters as LekarskoUverenjeResourceParameters).OpisStanja,
                 StringComparison.InvariantCultureIgnoreCase))
                 return;
 
-            (ResourceParameters as PregledResourceParameters).DoktorIme = SearchString;
-            (ResourceParameters as PregledResourceParameters).DoktorPrezime = SearchString;
+            (ResourceParameters as LekarskoUverenjeResourceParameters).OpisStanja = SearchString;
 
             await LoadData();
         }

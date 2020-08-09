@@ -1,9 +1,11 @@
-﻿using Healthcare020.Mobile.Helpers;
+﻿using System.Linq;
+using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Models;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
 using Healthcare020.Mobile.Views.Dialogs;
 using HealthCare020.Core.ResourceParameters;
+using Healthcare020.Mobile.Constants;
 using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -31,9 +33,10 @@ namespace Healthcare020.Mobile.Views
                 };
 
         }
-        
+
         protected override async void OnAppearing()
         {
+            ResourceKeys.FlagIconsStyle.ChangeStyleSetterValue(nameof(IsVisible), true);
             base.OnAppearing();
             await PreglediVM.Init();
         }

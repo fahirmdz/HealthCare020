@@ -6,7 +6,6 @@ using Healthcare020.Mobile.Services;
 using HealthCare020.Core.Extensions;
 using HealthCare020.Core.ResourceParameters;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -23,7 +22,7 @@ namespace Healthcare020.Mobile.ViewModels
         public BaseListViewModel()
         {
             ResourceParameters = new BaseResourceParameters
-                {PageSize = ResourceKeys.RowCountZahteviZaPregled.AsResourceType<int>()};
+            { PageSize = ResourceKeys.RowCountZahteviZaPregled.AsResourceType<int>() };
 
             //Commands init
             NextPageCommand = new Command(NextPage);
@@ -31,9 +30,10 @@ namespace Healthcare020.Mobile.ViewModels
             InitCommand = new Command(async () => await Init());
             RefreshDataCommand = new Command(async () => await LoadData());
             SearchCommand = new Command(async () => await Search());
-            CollectionItemTappedCommand=new Command(async ()=>await CollectionItem_Tapped());
+            CollectionItemTappedCommand = new Command(async () => await CollectionItem_Tapped());
             DataAvailable = true;
         }
+
         public virtual async Task Init()
         {
             await LoadData();
@@ -43,9 +43,10 @@ namespace Healthcare020.Mobile.ViewModels
         {
             return;
         }
+
         #region Properties
 
-        private bool _enabledFlagIcons;
+        protected bool _enabledFlagIcons;
         public bool EnabledFlagIcons
         {
             get => _enabledFlagIcons;
@@ -53,12 +54,14 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         protected string _searchEntryPlaceholder;
-        public string SearchEntryPlaceholder  {
+
+        public string SearchEntryPlaceholder
+        {
             get => _searchEntryPlaceholder;
             set => SetProperty(ref _searchEntryPlaceholder, value);
         }
-        protected string _searchString;
 
+        protected string _searchString;
         public string SearchString
         {
             get => _searchString;
@@ -141,8 +144,6 @@ namespace Healthcare020.Mobile.ViewModels
 
         protected async Task LoadData()
         {
-            await Auth.AuthenticateWithPassword("pacijent", "testtest");
-
             IsBusy = true;
             _apiService = new APIService();
             _apiService.ChangeRoute(APIRouteToCollection);

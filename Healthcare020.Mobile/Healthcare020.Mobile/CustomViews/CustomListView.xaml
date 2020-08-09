@@ -7,9 +7,9 @@
     xmlns:converters="clr-namespace:Healthcare020.Mobile.Converters;assembly=Healthcare020.Mobile"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
+
     <ContentView.Content>
         <StackLayout>
             <controls:NoDataFrame IsVisible="{Binding DataAvailable, Converter={StaticResource OppositeBooleanConverter}}" Message="Trenutno nema dostupnih zahteva za pregled">
@@ -17,7 +17,6 @@
                     <TapGestureRecognizer Command="{Binding RefreshDataCommand}" />
                 </controls:NoDataFrame.GestureRecognizers>
             </controls:NoDataFrame>
-
             <StackLayout
                 HorizontalOptions="FillAndExpand"
                 IsVisible="{Binding DataAvailable}"
@@ -132,12 +131,10 @@
                                                     TextColor="White" />
                                             </StackLayout>
                                             <StackLayout
-                                                x:Name="FlagIcons"
                                                 Grid.Column="1"
-                                                BindingContext="{Binding}"
                                                 HorizontalOptions="FillAndExpand"
-                                                IsVisible="{Binding EnabledFlagIcons}"
                                                 Orientation="Horizontal"
+                                                Style="{DynamicResource FlagIconsStyle}"
                                                 VerticalOptions="Fill">
                                                 <Image
                                                     HorizontalOptions="FillAndExpand"
