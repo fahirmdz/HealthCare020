@@ -15,7 +15,11 @@
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries>
 
-
+            <!--#region HelpVariables-->
+            <Style x:Key="FlagIconsStyle" TargetType="StackLayout">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+            <!--#endregion-->
             <!--#region Images-->
             <OnPlatform x:Key="Logo_Revert_Medium" x:TypeArguments="ImageSource">
                 <On Platform="Android" Value="healthcare020_150x150_revert.png" />

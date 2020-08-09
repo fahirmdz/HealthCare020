@@ -1,15 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="Healthcare020.Mobile.Views.LekarskaUverenjaMainPage">
+<ContentPage
+    x:Class="Healthcare020.Mobile.Views.LekarskaUverenjaMainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customViews="clr-namespace:Healthcare020.Mobile.CustomViews;assembly=Healthcare020.Mobile"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="LEKARSKA UVERENJA"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid Padding="0" BackgroundColor="{StaticResource LightSmokeWhite}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="{StaticResource ZahteviZaPregled1Row}" />
+            </Grid.RowDefinitions>
+            <Frame
+                Grid.Row="0"
+                BackgroundColor="{StaticResource LightSmokeWhite}"
+                BorderColor="Transparent"
+                HasShadow="False"
+                HorizontalOptions="FillAndExpand">
+                <Image
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center"
+                    Source="{StaticResource Logo}" />
+            </Frame>
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <customViews:CustomListView x:Name="ListView" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
