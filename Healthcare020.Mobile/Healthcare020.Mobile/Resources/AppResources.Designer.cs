@@ -97,6 +97,33 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Datum.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum pregleda.
+        /// </summary>
+        public static string DateOfPregled {
+            get {
+                return ResourceManager.GetString("DateOfPregled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum i vreme.
+        /// </summary>
+        public static string DateTime {
+            get {
+                return ResourceManager.GetString("DateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Polje može sadržati samo cifre.
         /// </summary>
         public static string DigitsOnlyError {
@@ -106,11 +133,29 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Doktor.
+        /// </summary>
+        public static string Doktor {
+            get {
+                return ResourceManager.GetString("Doktor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Izmena profila.
         /// </summary>
         public static string EditProfilePageTitle {
             get {
                 return ResourceManager.GetString("EditProfilePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greška pri učitavanju.
+        /// </summary>
+        public static string ErrorWhenLoadingResourceMessage {
+            get {
+                return ResourceManager.GetString("ErrorWhenLoadingResourceMessage", resourceCulture);
             }
         }
         
@@ -223,11 +268,29 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Napomena.
+        /// </summary>
+        public static string Napomena {
+            get {
+                return ResourceManager.GetString("Napomena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Novi zahtev za pregled.
         /// </summary>
         public static string NoviZahtevZaPregledPageTitle {
             get {
                 return ResourceManager.GetString("NoviZahtevZaPregledPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opis stanja.
+        /// </summary>
+        public static string OpisStanja {
+            get {
+                return ResourceManager.GetString("OpisStanja", resourceCulture);
             }
         }
         
@@ -287,6 +350,33 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pretraga po doktoru.
+        /// </summary>
+        public static string SearchByDoktor {
+            get {
+                return ResourceManager.GetString("SearchByDoktor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pretraga pregleda po napomeni.
+        /// </summary>
+        public static string SearchPreglediByNapomena {
+            get {
+                return ResourceManager.GetString("SearchPreglediByNapomena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pretraga zahteva za pregled po napomeni.
+        /// </summary>
+        public static string SearchZahteveZaPregledByNapomena {
+            get {
+                return ResourceManager.GetString("SearchZahteveZaPregledByNapomena", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 68a26225-ab2c-4034-94ba-227e043e7a8a.
         /// </summary>
         public static string ServiceIdentificationSecret {
@@ -334,6 +424,15 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Svi pregledi.
         /// </summary>
+        public static string Svi_preglediPageTitle {
+            get {
+                return ResourceManager.GetString("Svi preglediPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Svi pregledi.
+        /// </summary>
         public static string SviPreglediPageTitle {
             get {
                 return ResourceManager.GetString("SviPreglediPageTitle", resourceCulture);
@@ -346,6 +445,24 @@ namespace Healthcare020.Mobile.Resources {
         public static string UnableToLoadDataError {
             get {
                 return ResourceManager.GetString("UnableToLoadDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Morate biti autentificirani.
+        /// </summary>
+        public static string UnauthenticatedAccessMessage {
+            get {
+                return ResourceManager.GetString("UnauthenticatedAccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neautorizovan pristup.
+        /// </summary>
+        public static string UnauthorizedAccessMessage {
+            get {
+                return ResourceManager.GetString("UnauthorizedAccessMessage", resourceCulture);
             }
         }
         
@@ -400,6 +517,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string ZakazaniPreglediPageTitle {
             get {
                 return ResourceManager.GetString("ZakazaniPreglediPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zdravstveno stanje.
+        /// </summary>
+        public static string ZdravstvenoStanje {
+            get {
+                return ResourceManager.GetString("ZdravstvenoStanje", resourceCulture);
             }
         }
     }

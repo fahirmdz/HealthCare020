@@ -22,6 +22,11 @@
 
     <!--#region Thicknesses-->
     <Thickness x:Key="NextPrevNavigationThickness">0,0,0,40</Thickness>
+    <Thickness x:Key="Thickness50to0">20,0</Thickness>
+    <Thickness x:Key="Thickness50to10">50,10</Thickness>
+    <Thickness x:Key="MT-40">0,40,0,0</Thickness>
+    <Thickness x:Key="MT-20">0,20,0,0</Thickness>
+    <Thickness x:Key="MR-20">0,0,20,0</Thickness>
     <!--#endregion-->
 
     <!--#region GridLengths-->

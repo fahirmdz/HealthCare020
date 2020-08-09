@@ -13,14 +13,14 @@ using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
-    public class BaseCollectionViewModel : BaseViewModel
+    public class BaseListViewModel : BaseViewModel
     {
         protected IAPIService _apiService;
         protected string APIRouteToCollection;
         public BaseResourceParameters ResourceParameters { get; protected set; }
         public int TotalPages { get; protected set; }
 
-        public BaseCollectionViewModel()
+        public BaseListViewModel()
         {
             ResourceParameters = new BaseResourceParameters
                 {PageSize = ResourceKeys.RowCountZahteviZaPregled.AsResourceType<int>()};
@@ -31,15 +31,32 @@ namespace Healthcare020.Mobile.ViewModels
             InitCommand = new Command(async () => await Init());
             RefreshDataCommand = new Command(async () => await LoadData());
             SearchCommand = new Command(async () => await Search());
+            CollectionItemTappedCommand=new Command(async ()=>await CollectionItem_Tapped());
             DataAvailable = true;
         }
-        public async Task Init()
+        public virtual async Task Init()
         {
             await LoadData();
         }
 
+        protected virtual async Task CollectionItem_Tapped()
+        {
+            return;
+        }
         #region Properties
 
+        private bool _enabledFlagIcons;
+        public bool EnabledFlagIcons
+        {
+            get => _enabledFlagIcons;
+            set => SetProperty(ref _enabledFlagIcons, value);
+        }
+
+        protected string _searchEntryPlaceholder;
+        public string SearchEntryPlaceholder  {
+            get => _searchEntryPlaceholder;
+            set => SetProperty(ref _searchEntryPlaceholder, value);
+        }
         protected string _searchString;
 
         public string SearchString
@@ -84,11 +101,13 @@ namespace Healthcare020.Mobile.ViewModels
 
         #region Comamnds
 
-        public ICommand InitCommand { get; set; }
-        public ICommand RefreshDataCommand { get; set; }
-        public ICommand SearchCommand { get; set; }
-        public ICommand NextPageCommand { get; set; }
-        public ICommand PrevPageCommand { get; set; }
+        public ICommand InitCommand { get; }
+        public ICommand RefreshDataCommand { get; }
+        public ICommand SearchCommand { get; }
+        public ICommand NextPageCommand { get; }
+        public ICommand PrevPageCommand { get; }
+
+        public ICommand CollectionItemTappedCommand { get; }
 
         #endregion Comamnds
 

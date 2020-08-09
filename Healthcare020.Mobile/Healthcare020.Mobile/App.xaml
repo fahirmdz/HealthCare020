@@ -33,6 +33,11 @@
 
             <!--#region Thicknesses-->
             <Thickness x:Key="NextPrevNavigationThickness">0,0,0,5</Thickness>
+            <Thickness x:Key="Thickness50to0">30,0</Thickness>
+            <Thickness x:Key="Thickness50to10">50,10</Thickness>
+            <Thickness x:Key="MT-40">0,40,0,0</Thickness>
+            <Thickness x:Key="MT-20">0,20,0,0</Thickness>
+            <Thickness x:Key="MR-20">0,0,20,0</Thickness>
             <!--#endregion-->
 
             <!--#region GridLengths-->
@@ -53,6 +58,7 @@
             <Color x:Key="LighterNavyBlue">#7d9bb5</Color>
             <Color x:Key="CustomNavyBlue">#0b2236</Color>
             <Color x:Key="CustomNavyBlueDark">#354452</Color>
+            <Color x:Key="CustomRed">#dc3545</Color>
 
             <Color x:Key="CustomLightGreen">#c2f1db</Color>
 
@@ -80,9 +86,13 @@
 
             <OnPlatform x:Key="FontSize-Large" x:TypeArguments="x:Double">
                 <On Platform="UWP">24</On>
-                <On Platform="Android">21</On>
+                <On Platform="Android">24</On>
             </OnPlatform>
             <!--  /Font sizes  -->
+
+            <!--#region PopupDialogStyles-->
+
+            <!--#endregion-->
 
             <!--#region Margin-Responsive-->
             <OnPlatform x:Key="5mr" x:TypeArguments="x:Double">
@@ -294,6 +304,13 @@
             <!--#endregion-->
 
 
+            <Style x:Key="MediumLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+                <Setter Property="TextColor" Value="{StaticResource CustomNavyBlueDark}" />
+                <Setter Property="Margin" Value="7,0,5,0" />
+                <Setter Property="CharacterSpacing" Value="1" />
+            </Style>
+
             <!--#region NoviZahtevZaPregledPage styles-->
             <Style x:Key="MainStackNoviZahtevZaPregledStyle" TargetType="StackLayout">
                 <Setter Property="Margin" Value="20,120,20,0" />
@@ -301,89 +318,6 @@
             <!--#endregion-->
 
             <!--#region DataTemplates-->
-
-            <DataTemplate x:Key="CustomDataTemplate">
-                <pancakeView:PancakeView
-                    Margin="10"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="StartAndExpand">
-                    <Grid
-                        BackgroundColor="{StaticResource LighterNavyBlue}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="StartAndExpand">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <BoxView
-                            BackgroundColor="{StaticResource LighterNavyBlue}"
-                            HorizontalOptions="Start"
-                            VerticalOptions="FillAndExpand"
-                            WidthRequest="3" />
-                        <Grid
-                            Grid.Column="1"
-                            BackgroundColor="{StaticResource LightNavyBlue}"
-                            HorizontalOptions="FillAndExpand">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="3.5*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.GestureRecognizers />
-                            <StackLayout
-                                BackgroundColor="{StaticResource LightNavyBlue}"
-                                ClassId="LabelsToScaleStack"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center">
-                                <Label
-                                    ClassId="MonthDateLabel"
-                                    FontSize="{StaticResource FontSize-Medium}"
-                                    HorizontalOptions="Center"
-                                    Text="{Binding DateTime, StringFormat='{0:dd}'}"
-                                    TextColor="Aqua" />
-                                <Label
-                                    Margin="0,-5,0,0"
-                                    ClassId="MonthNameLabel"
-                                    FontSize="{StaticResource FontSize-Small}"
-                                    HorizontalOptions="Center"
-                                    Text="{Binding DateTime, StringFormat='{0:MMMM}'}"
-                                    TextColor="Aqua" />
-                                <Label
-                                    Margin="0,-10,0,0"
-                                    ClassId="MonthNameLabel"
-                                    FontSize="{StaticResource FontSize-Smaller}"
-                                    HorizontalOptions="Center"
-                                    Text="{Binding DateTime, StringFormat='{0:yyyy}'}"
-                                    TextColor="Aqua" />
-                            </StackLayout>
-                            <BoxView
-                                Grid.Column="1"
-                                HorizontalOptions="Start"
-                                VerticalOptions="FillAndExpand"
-                                WidthRequest="1" />
-                            <StackLayout
-                                Grid.Column="2"
-                                Margin="20"
-                                HorizontalOptions="Start"
-                                VerticalOptions="Center">
-                                <StackLayout>
-                                    <Label
-                                        FontAttributes="Bold"
-                                        FontFamily="{StaticResource Montserrat-Bold}"
-                                        FontSize="{StaticResource FontSize-Small}"
-                                        Text="{Binding PrimaryTextTitle}"
-                                        TextColor="White" />
-                                    <Label
-                                        FontFamily="{StaticResource Montserrat-Light}"
-                                        FontSize="{StaticResource FontSize-Small}"
-                                        Text="{Binding PrimaryTextContent}"
-                                        TextColor="White" />
-                                </StackLayout>
-                            </StackLayout>
-                        </Grid>
-                    </Grid>
-                </pancakeView:PancakeView>
-            </DataTemplate>
             <!--#endregion-->
         </ResourceDictionary>
     </Application.Resources>

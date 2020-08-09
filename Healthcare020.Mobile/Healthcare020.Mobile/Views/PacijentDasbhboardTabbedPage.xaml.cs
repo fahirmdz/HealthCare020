@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using Healthcare020.Mobile.Constants;
+using Healthcare020.Mobile.Resources;
+using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -22,11 +24,15 @@ namespace Healthcare020.Mobile.Views
 
             this.SelectedTabColor = (Color)Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
             this.UnselectedTabColor = (Color)Application.Current.Resources[ResourceKeys.CustomNavyBlueDarkColor];
-            var st = new StackLayout();
         }
 
         protected override async void OnAppearing()
         {
+            if (!Auth.IsAuthenticated())
+            {
+                NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
+                return;
+            }
             base.OnAppearing();
         }
 

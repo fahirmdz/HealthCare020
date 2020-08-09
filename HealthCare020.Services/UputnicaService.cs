@@ -119,6 +119,46 @@ namespace HealthCare020.Services
                         || x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.Prezime.ToLower()
                             .Contains(resourceParameters.PacijentImePrezime.ToLower()));
                 }
+
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.Datum.HasValue)
+                        result = result.Where(x => x.DatumVreme.Date == resourceParameters.Datum.Value.Date);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
+
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.UputioDoktorId.HasValue)
+                        result = result.Where(x => x.UputioDoktorId==resourceParameters.UputioDoktorId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
+
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.UpucenKodDoktoraId.HasValue)
+                        result = result.Where(x => x.UpucenKodDoktoraId == resourceParameters.UpucenKodDoktoraId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
+
+                if (await result.AnyAsync())
+                {
+                    if (resourceParameters.PacijentId.HasValue)
+                        result = result.Where(x => x.PacijentId == resourceParameters.PacijentId);
+                }
+                else
+                {
+                    return await base.FilterAndPrepare(result, resourceParameters);
+                }
             }
 
             //CONSTRAINT -> Pacijent moze samo svoje preglede videti

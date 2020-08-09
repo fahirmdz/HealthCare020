@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -130,11 +130,26 @@
   <data name="ChangePasswordPageTitle" xml:space="preserve">
     <value>Izmena lozinke</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="DateOfPregled" xml:space="preserve">
+    <value>Datum pregleda</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Datum i vreme</value>
+  </data>
   <data name="DigitsOnlyError" xml:space="preserve">
     <value>Polje može sadržati samo cifre</value>
   </data>
+  <data name="Doktor" xml:space="preserve">
+    <value>Doktor</value>
+  </data>
   <data name="EditProfilePageTitle" xml:space="preserve">
     <value>Izmena profila</value>
+  </data>
+  <data name="ErrorWhenLoadingResourceMessage" xml:space="preserve">
+    <value>Greška pri učitavanju</value>
   </data>
   <data name="FaceAPI_PersonGroup" xml:space="preserve">
     <value>Healthcare020_Pacijenti</value>
@@ -174,8 +189,14 @@
   <data name="MaxLength180Error" xml:space="preserve">
     <value>Maksimalan broj karaketera je 180</value>
   </data>
+  <data name="Napomena" xml:space="preserve">
+    <value>Napomena</value>
+  </data>
   <data name="NoviZahtevZaPregledPageTitle" xml:space="preserve">
     <value>Novi zahtev za pregled</value>
+  </data>
+  <data name="OpisStanja" xml:space="preserve">
+    <value>Opis stanja</value>
   </data>
   <data name="PasswordDoNotMatchError" xml:space="preserve">
     <value>Lozinke se ne podudaraju</value>
@@ -196,6 +217,15 @@
   <data name="RSAPublicKeyXml" xml:space="preserve">
     <value>&lt;RSAKeyValue&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;  &lt;Modulus&gt;1nEbK/j2UssTOXcRdiroS2n1PoOlnfeY9S8dvSxFaD3oMpWkVjq32qt66by772WVHzpVX6aRASecCb91n1sk7LG9Jdqo6SMu47S61970nOYWOXdlyvuvXzR4l/bVSZrBRD72vjB2Yme+aggLZUzKgU1TsJ5SThOpCV/fSj6aD26C5w7chQdTUJNmqaGF4XnpvpU1ebE7mmKpU8aWdONEGsuAUHx50rh5bfNSHGcrR0pji1PQjBSoOskSGnVFTodDsYH3FeheDN9DjzjIrUBuZc8Asn4M8MCE6TKV1lN0voADTGYDBSSSwpIOQ4Hs0lsXFZzYyTcv1ugdTPMk8ZrcKdG8EmGXxlgyofq37hFMeiJgPOwDfyO6Pmq9po9RY3h6Yrob+AtGoxa4Jg0J4ecfRPrnurOlzzS9n2u4PIZLNWz/WLxJNVIUI+1o3UQvVecw8hf3EuMXUjFSNL6ahkpV0yT1K+YJdmy/7Ahc0RY5PzNwEk/ql25lzRRVdDqCXJ9UZlgKSlBiu69PWNRIc7ZTR/Ah9aopOnhMPoEmfWGBc+M9r6kDHeVuJ10rqk/muUWRynh/h0oPZzEo7Ov96MDT02vfVb0YHcy3lq26RE18Hr2nN8sE6RAG1keNWVDuSSamwGBzK5Hx0dJ4mGU3c5n8uXUNETR214CPN+Z+dcOjpxU=&lt;/Modulus&gt;&lt;/RSAKeyValue&gt;</value>
   </data>
+  <data name="SearchByDoktor" xml:space="preserve">
+    <value>Pretraga po doktoru</value>
+  </data>
+  <data name="SearchPreglediByNapomena" xml:space="preserve">
+    <value>Pretraga pregleda po napomeni</value>
+  </data>
+  <data name="SearchZahteveZaPregledByNapomena" xml:space="preserve">
+    <value>Pretraga zahteva za pregled po napomeni</value>
+  </data>
   <data name="ServiceIdentificationSecret" xml:space="preserve">
     <value>68a26225-ab2c-4034-94ba-227e043e7a8a</value>
   </data>
@@ -211,11 +241,20 @@
   <data name="SuccessfullyCreatedZahtevZaPregledMessage" xml:space="preserve">
     <value>Uspešno kreiran zahtev za pregled</value>
   </data>
+  <data name="Svi preglediPageTitle" xml:space="preserve">
+    <value>Svi pregledi</value>
+  </data>
   <data name="SviPreglediPageTitle" xml:space="preserve">
     <value>Svi pregledi</value>
   </data>
   <data name="UnableToLoadDataError" xml:space="preserve">
     <value>Greška pri učitavanju podataka</value>
+  </data>
+  <data name="UnauthenticatedAccessMessage" xml:space="preserve">
+    <value>Morate biti autentificirani</value>
+  </data>
+  <data name="UnauthorizedAccessMessage" xml:space="preserve">
+    <value>Neautorizovan pristup</value>
   </data>
   <data name="UnsuccessfullyAuthentication" xml:space="preserve">
     <value>Neuspešna autentifikacija!</value>
@@ -234,5 +273,8 @@
   </data>
   <data name="ZakazaniPreglediPageTitle" xml:space="preserve">
     <value>Zakazani pregledi</value>
+  </data>
+  <data name="ZdravstvenoStanje" xml:space="preserve">
+    <value>Zdravstveno stanje</value>
   </data>
 </root>
