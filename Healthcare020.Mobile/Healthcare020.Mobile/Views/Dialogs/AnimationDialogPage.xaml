@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    x:Class="Healthcare020.Mobile.Views.Dialogs.AnimationDialogPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    mc:Ignorable="d">
+    <pages:PopupPage.Content>
+        <Grid
+            Margin="50,200"
+            BackgroundColor="Transparent"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="CenterAndExpand">
+            <forms:AnimationView
+                x:Name="MainAnimation"
+                HorizontalOptions="CenterAndExpand"
+                IsPlaying="True"
+                Loop="True"
+                VerticalOptions="CenterAndExpand" />
+        </Grid>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

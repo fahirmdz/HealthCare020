@@ -10,7 +10,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Helpers;
+using Healthcare020.Mobile.Views.Dialogs;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
@@ -60,6 +64,8 @@ namespace Healthcare020.Mobile.ViewModels
             if (!IsValidModel)
                 return;
 
+            MainBodyVisible = false;
+
             _apiService.ChangeRoute(Routes.ZahteviZaPregledRoute);
             var upsertDto = new ZahtevZaPregledUpsertDto
             {
@@ -68,6 +74,8 @@ namespace Healthcare020.Mobile.ViewModels
             };
 
             var result = await _apiService.Post<ZahtevZaPregledDtoLL>(upsertDto);
+
+            await Task.Delay(3000);
             IsBusy = false;
 
             if (result.Succeeded)
@@ -127,5 +135,16 @@ namespace Healthcare020.Mobile.ViewModels
         public ICommand SaveCommand { get; private set; }
 
         #endregion Commands
+
+        #region Properties
+
+        private bool _mainBodyVisible = true;
+        public bool MainBodyVisible
+        {
+            get => _mainBodyVisible;
+            set => SetProperty(ref _mainBodyVisible, value);
+        }
+
+        #endregion
     }
 }

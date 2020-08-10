@@ -77,6 +77,9 @@
     <EmbeddedResource Update="Views\Dialogs\LekarskoUverenjeDialogPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Dialogs\AnimationDialogPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Dialogs\PregledDialogPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -154,6 +157,9 @@
     </Compile>
     <Compile Update="Views\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Dialogs\AnimationDialogPage.xaml.cs">
+      <DependentUpon>AnimationDialogPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\PreglediPage.xaml.cs">
       <DependentUpon>PreglediPage.xaml</DependentUpon>

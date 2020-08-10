@@ -36,10 +36,11 @@
             HorizontalOptions="FillAndExpand"
             Orientation="Horizontal">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="ColumnDefinitions" Value="{StaticResource Grid2CNormal251}" />
+                    </Style>
+                </Grid.Style>
                 <Label
                     Grid.Column="0"
                     Margin="100,0,0,0"

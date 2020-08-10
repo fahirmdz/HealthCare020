@@ -14,6 +14,7 @@ namespace Healthcare020.Mobile.ViewModels
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public string LoadingMessage { get; set; }= string.Empty;
 
+        protected bool EnabledLoadingSpinner = false;
         private bool isBusy = false;
 
         public bool IsBusy
@@ -21,10 +22,13 @@ namespace Healthcare020.Mobile.ViewModels
             get => isBusy;
             set
             {
-                if (value)
-                    UserDialogs.Instance.ShowLoading(LoadingMessage);
-                else
-                    UserDialogs.Instance.HideLoading();
+                if (EnabledLoadingSpinner)
+                {
+                    if (value)
+                        UserDialogs.Instance.ShowLoading(LoadingMessage);
+                    else
+                        UserDialogs.Instance.HideLoading();
+                }
                 SetProperty(ref isBusy, value);
             }
         }

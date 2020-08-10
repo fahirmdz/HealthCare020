@@ -17,7 +17,8 @@ namespace Healthcare020.Mobile.Views
         public SplashScreenPage()
         {
             InitializeComponent();
-            BindingContext = BaseVM = new BaseViewModel {
+            BindingContext = BaseVM = new BaseViewModel
+            {
                 LoadingMessage = AppResources.LoggingInLoadingMessage
             };
         }
@@ -25,14 +26,14 @@ namespace Healthcare020.Mobile.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            //Animation displaying
             await Task.Delay(5000);
 
-            if (await SecureStorage.GetAsync(PreferencesKeys.HasSavedLoginCredentials) is string val && val == true.ToString())
+            if (await SecureStorage.GetAsync(PreferencesKeys.HasSavedLoginCredentials) is { } val && val == true.ToString())
             {
-                var loggedInWithSavedCredentials = await Auth.AuthenticateWithSavedCredentials();
-                if (loggedInWithSavedCredentials)
+                if (await Auth.AuthenticateWithSavedCredentials())
                     Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
-
             }
             else
                 Application.Current.MainPage = new WelcomePage();

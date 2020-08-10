@@ -9,8 +9,8 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <forms:AnimationView
-            x:Name="animationView"
-            Animation="welcome_animationview.json"
+            x:Name="MainAnimation"
+            Animation="{StaticResource WelcomeAnimationPath}"
             HorizontalOptions="FillAndExpand"
             IsPlaying="True"
             Loop="True"

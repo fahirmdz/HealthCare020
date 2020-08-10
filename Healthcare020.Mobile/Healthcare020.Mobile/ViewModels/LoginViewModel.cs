@@ -9,11 +9,8 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Plugin.Media;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
@@ -26,7 +23,7 @@ namespace Healthcare020.Mobile.ViewModels
         public LoginViewModel()
         {
             _apiService = new APIService();
-            _faceRecognitionService=new FaceRecognitionService();
+            _faceRecognitionService = new FaceRecognitionService();
             //Init commands
             LoginCommand = new Command(async () => await Login());
             RegisterNavigationCommand = new Command(() => Application.Current.MainPage = new RegisterPage());
@@ -45,6 +42,7 @@ namespace Healthcare020.Mobile.ViewModels
             if (photo == null)
                 return;
 
+            this.EnabledLoadingSpinner = true;
             this.IsBusy = true;
 
             SelfieForFaceID = photo.GetStream().AsByteArray();
@@ -53,7 +51,8 @@ namespace Healthcare020.Mobile.ViewModels
 
             if (authenticatedPerson == null)
             {
-                this.IsBusy = false;
+                IsBusy = false;
+                this.EnabledLoadingSpinner = false;
                 await Task.Delay(100);
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return;
@@ -68,7 +67,8 @@ namespace Healthcare020.Mobile.ViewModels
 
             if (!result.Succeeded || !result.HasData)
             {
-                this.IsBusy = false;
+                IsBusy = false;
+                this.EnabledLoadingSpinner = false;
                 await Task.Delay(100);
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return;
@@ -86,7 +86,8 @@ namespace Healthcare020.Mobile.ViewModels
 
             if (!insertFaceIdRecognitionRecords.Succeeded)
             {
-                this.IsBusy = false;
+                IsBusy = false;
+                this.EnabledLoadingSpinner = false;
                 await Task.Delay(100);
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return;
@@ -101,6 +102,7 @@ namespace Healthcare020.Mobile.ViewModels
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
             }
             this.IsBusy = false;
+            this.EnabledLoadingSpinner = false;
         }
 
         public async Task Login()

@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
@@ -41,51 +42,69 @@
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
                     <StackLayout Spacing="10" Style="{StaticResource LoginFormBodyStyle}">
-                        <StackLayout>
-                            <Label Style="{StaticResource TitleLabelStyle}" Text="Zakazivanje pregleda" />
-                            <BoxView BackgroundColor="LightGray" HeightRequest=".1" />
-                        </StackLayout>
-                        <!--  FORM BODY  -->
-                        <StackLayout x:Name="FormBody" Spacing="0">
-                            <StackLayout.Resources>
-                                <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
-                            </StackLayout.Resources>
-                            <Picker
-                                x:Name="DoktoriPicker"
-                                Title="-- Odaberite doktora * --"
-                                Margin="10"
-                                ClassId="PickedDoktor"
-                                ItemDisplayBinding="{Binding Radnik.ImePrezime}"
-                                ItemsSource="{Binding Doktori}"
-                                SelectedItem="{Binding PickedDoktor}" />
-                            <Label x:Name="PickedDoktorValidation" />
-
-                            <StackLayout HeightRequest="180">
-                                <Editor
-                                    ClassId="Napomena"
-                                    Placeholder="Napomena"
-                                    Style="{StaticResource CustomEditorStyle}"
-                                    Text="{Binding Napomena}"
-                                    VerticalOptions="CenterAndExpand" />
-                            </StackLayout>
-                            <Label x:Name="NapomenaValidation" />
-                        </StackLayout>
-                        <!--  /FORM BODY  -->
-
-                        <!--  Save BUTTON  -->
                         <Frame
-                            Padding="0"
+                            BackgroundColor="White"
                             HasShadow="False"
-                            HorizontalOptions="FillAndExpand">
-                            <Button
-                                x:Name="ProslediButton"
-                                BackgroundColor="#00bebe"
-                                Clicked="ProslediButton_OnClicked"
-                                Style="{StaticResource BigButtonRadiusStyle}"
-                                Text="Prosledi"
-                                TextColor="WhiteSmoke" />
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding MainBodyVisible, Converter={StaticResource OppositeBooleanConverter}}"
+                            VerticalOptions="FillAndExpand">
+                            <forms:AnimationView
+                                x:Name="MainAnimation"
+                                Animation="{StaticResource PregledAnimationPath}"
+                                HorizontalOptions="FillAndExpand"
+                                IsPlaying="True"
+                                Loop="True"
+                                VerticalOptions="FillAndExpand" />
                         </Frame>
-                        <!--  /FORM BODY  -->
+
+                        <StackLayout IsVisible="{Binding MainBodyVisible}">
+                            <StackLayout>
+                                <Label Style="{StaticResource TitleLabelStyle}" Text="Zakazivanje pregleda" />
+                                <BoxView BackgroundColor="LightGray" HeightRequest=".1" />
+                            </StackLayout>
+                            <!--  FORM BODY  -->
+                            <StackLayout x:Name="FormBody" Spacing="0">
+                                <StackLayout.Resources>
+                                    <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
+                                </StackLayout.Resources>
+                                <Picker
+                                    x:Name="DoktoriPicker"
+                                    Title="-- Odaberite doktora * --"
+                                    Margin="10"
+                                    ClassId="PickedDoktor"
+                                    ItemDisplayBinding="{Binding Radnik.ImePrezime}"
+                                    ItemsSource="{Binding Doktori}"
+                                    SelectedItem="{Binding PickedDoktor}" />
+                                <Label x:Name="PickedDoktorValidation" />
+
+                                <StackLayout HeightRequest="180">
+                                    <Editor
+                                        ClassId="Napomena"
+                                        Placeholder="Napomena"
+                                        Style="{StaticResource CustomEditorStyle}"
+                                        Text="{Binding Napomena}"
+                                        VerticalOptions="CenterAndExpand" />
+                                </StackLayout>
+                                <Label x:Name="NapomenaValidation" />
+                            </StackLayout>
+                            <!--  /FORM BODY  -->
+
+                            <!--  Save BUTTON  -->
+                            <Frame
+                                Padding="0"
+                                HasShadow="False"
+                                HorizontalOptions="FillAndExpand">
+                                <Button
+                                    x:Name="ProslediButton"
+                                    BackgroundColor="#00bebe"
+                                    Clicked="ProslediButton_OnClicked"
+                                    Style="{StaticResource BigButtonRadiusStyle}"
+                                    Text="Prosledi"
+                                    TextColor="WhiteSmoke" />
+                            </Frame>
+                            <!--  /FORM BODY  -->
+                        </StackLayout>
+
                     </StackLayout>
                 </Frame>
             </StackLayout>

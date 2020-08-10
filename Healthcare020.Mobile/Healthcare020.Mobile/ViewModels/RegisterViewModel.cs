@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Helpers;
 using Xamarin.Forms;
 
@@ -31,7 +32,12 @@ namespace Healthcare020.Mobile.ViewModels
             UploadProfilePictureCommand = new Command(async () => await UploadProfilePicture());
             RegisterCommand = new Command(async () => await Register());
             CancelRegistrationCommand = new Command(() => { Application.Current.MainPage = new WelcomePage(); });
-            ProfilePicture = IconFont.User.GetIcon();
+
+
+            var profilePicIcon = IconFont.User.GetIcon();
+            profilePicIcon.Color = (Color) Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
+
+            ProfilePicture = profilePicIcon;
         }
 
         #region Methods
@@ -65,6 +71,7 @@ namespace Healthcare020.Mobile.ViewModels
             if (ProfilePicture == null)
                 return;
 
+            this.EnabledLoadingSpinner = true;
             IsBusy = true;
             if (!IsValidModel)
                 return;
@@ -87,6 +94,7 @@ namespace Healthcare020.Mobile.ViewModels
 
             var result = await _apiService.Post<PacijentDtoLL>(upsertDto);
             IsBusy = false;
+            this.EnabledLoadingSpinner = false;
 
             if (result.Succeeded)
             {
