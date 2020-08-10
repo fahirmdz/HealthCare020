@@ -3,6 +3,19 @@
     x:Class="Healthcare020.Mobile.Resources.SmallDevicesStyle"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--#region GridStyles-->
+    <ColumnDefinitionCollection x:Key="Grid2CNormal41Small31">
+        <ColumnDefinition Width="3*" />
+        <ColumnDefinition Width="*" />
+    </ColumnDefinitionCollection>
+    <ColumnDefinitionCollection x:Key="Grid2CNormal41Small21">
+        <ColumnDefinition Width="2*" />
+        <ColumnDefinition Width="*" />
+    </ColumnDefinitionCollection>
+    <!--#endregion-->
+
+
     <!--#region Thicknesses-->
     <Thickness x:Key="NextPrevNavigationThickness">0,0,0,5</Thickness>
     <Thickness x:Key="Thickness50to0">50,0</Thickness>
@@ -14,6 +27,10 @@
 
     <!--#region Heights-->
     <!--#region RegisterPage style-->
+
+    <!--#region ResponsiveUnits-->
+    <x:Double x:Key="UnitNormal60Small40">40</x:Double>
+    <!--#endregion-->
 
     <!--  Path with Logo  -->
     <Style x:Key="LogoPath" TargetType="Path">
@@ -76,19 +93,6 @@
 
     <!--#region General styles-->
 
-    <Style x:Key="CustomButtonStyle" TargetType="Button">
-        <Setter Property="ContentLayout">Left,0</Setter>
-        <Setter Property="BackgroundColor" Value="{StaticResource CustomBlue}" />
-        <Setter Property="TextColor">WhiteSmoke</Setter>
-        <Setter Property="CornerRadius">15</Setter>
-        <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
-        <Setter Property="VerticalOptions">FillAndExpand</Setter>
-        <Setter Property="HorizontalOptions">FillAndExpand</Setter>
-        <Setter Property="HeightRequest">60</Setter>
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
-        <Setter Property="Margin">15,10,15,10</Setter>
-    </Style>
-
     <Style TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
         <Setter Property="TextColor" Value="{StaticResource CustomDarkBlue}" />
@@ -98,26 +102,25 @@
         <On Platform="Android" Value="healthcare020_200x200.png" />
         <On Platform="UWP" Value="Assets/healthcare020_200x200.png" />
     </OnPlatform>
-
     <!--  Font sizes  -->
     <OnPlatform x:Key="FontSize-Medium" x:TypeArguments="x:Double">
-        <On Platform="UWP">24</On>
-        <On Platform="Android">20</On>
+        <On Platform="UWP">23</On>
+        <On Platform="Android">15</On>
     </OnPlatform>
 
     <OnPlatform x:Key="FontSize-Smaller" x:TypeArguments="x:Double">
         <On Platform="UWP">16</On>
-        <On Platform="Android">11</On>
+        <On Platform="Android">10</On>
     </OnPlatform>
 
     <OnPlatform x:Key="FontSize-Small" x:TypeArguments="x:Double">
         <On Platform="UWP">17</On>
-        <On Platform="Android">13</On>
+        <On Platform="Android">12</On>
     </OnPlatform>
 
     <OnPlatform x:Key="FontSize-Large" x:TypeArguments="x:Double">
         <On Platform="UWP">26</On>
-        <On Platform="Android">24</On>
+        <On Platform="Android">21</On>
     </OnPlatform>
     <!--  /Font sizes  -->
 
@@ -166,6 +169,14 @@
     <!--#region LoginPage styles-->
     <Style x:Key="LoginPageEntryStyle" TargetType="Entry">
         <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />
+    </Style>
+
+
+    <Style x:Key="MediumLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
+        <Setter Property="TextColor" Value="{StaticResource CustomNavyBlueDark}" />
+        <Setter Property="Margin" Value="7,0,5,0" />
+        <Setter Property="CharacterSpacing" Value="1" />
     </Style>
 
     <!--#endregion-->

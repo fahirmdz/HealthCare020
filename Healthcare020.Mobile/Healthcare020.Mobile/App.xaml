@@ -6,7 +6,6 @@
     xmlns:converters="clr-namespace:Healthcare020.Mobile.Converters;assembly=Healthcare020.Mobile"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:themes="clr-namespace:Healthcare020.Mobile.Themes;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
     <Application.Resources>
@@ -14,6 +13,50 @@
             <ResourceDictionary.MergedDictionaries>
                 <themes:LightTheme />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--#region GridStyles-->
+            <ColumnDefinitionCollection x:Key="Grid2CNormal41Small31">
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="*" />
+            </ColumnDefinitionCollection>
+            <ColumnDefinitionCollection x:Key="Grid2CNormal41Small21">
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="*" />
+            </ColumnDefinitionCollection>
+            <ColumnDefinitionCollection x:Key="Grid2CNormal31Small21">
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </ColumnDefinitionCollection>
+            <ColumnDefinitionCollection x:Key="Grid2CNormal251">
+                <ColumnDefinition Width="2.5*" />
+                <ColumnDefinition Width="*" />
+            </ColumnDefinitionCollection>
+            <!--#endregion-->
+
+            <!--#region ResponsiveUnits-->
+            <x:Double x:Key="UnitNormal60Small50">60</x:Double>
+            <!--#endregion-->
+
+            <!--#region Animations-->
+            <OnPlatform x:Key="LetterPackAnimationPath" x:TypeArguments="x:String">
+                <On Platform="Android" Value="letter-pack-animation.json" />
+                <On Platform="Android" Value="Assets/letter-pack-animation.json" />
+            </OnPlatform>
+            <OnPlatform x:Key="WelcomeAnimationPath" x:TypeArguments="x:String">
+                <On Platform="Android" Value="welcome_animationview.json" />
+                <On Platform="Android" Value="Assets/welcome_animationview.json" />
+            </OnPlatform>
+            <OnPlatform x:Key="PregledAnimationPath" x:TypeArguments="x:String">
+                <On Platform="Android" Value="pregled-animation.json" />
+                <On Platform="Android" Value="Assets/pregled-animation.json" />
+            </OnPlatform>
+            <!--#endregion-->
+            <!--#region Backgrounds-->
+            <OnPlatform x:Key="LogoutButtonBg" x:TypeArguments="ImageSource">
+                <On Platform="Android" Value="logout_btn.png" />
+                <On Platform="UWP" Value="Assets/logout_btn.png" />
+            </OnPlatform>
+            <!--#endregion-->
 
             <!--#region HelpVariables-->
             <Style x:Key="FlagIconsStyle" TargetType="StackLayout">
@@ -162,15 +205,15 @@
 
             <Style x:Key="CustomButtonStyle" TargetType="Button">
                 <Setter Property="ContentLayout">Left,0</Setter>
-                <Setter Property="BackgroundColor" Value="{StaticResource LightNavyBlue}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource CustomNavyBlueDark}" />
                 <Setter Property="TextColor">WhiteSmoke</Setter>
                 <Setter Property="CornerRadius">25</Setter>
                 <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
                 <Setter Property="VerticalOptions">FillAndExpand</Setter>
                 <Setter Property="HorizontalOptions">FillAndExpand</Setter>
-                <Setter Property="HeightRequest">60</Setter>
-                <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
-                <Setter Property="Margin">15,10,15,10</Setter>
+                <Setter Property="HeightRequest" Value="{StaticResource UnitNormal60Small50}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
+                <Setter Property="Margin">15,0,15,10</Setter>
             </Style>
 
             <Style TargetType="Label">
@@ -219,7 +262,7 @@
             <!--#region RegisterPage style-->
             <!--  Path with Logo  -->
             <Style x:Key="LogoPath" TargetType="Path">
-                <Setter Property="Aspect" Value="Uniform" />
+                <Setter Property="Aspect" Value="UniformToFill" />
                 <Setter Property="FlowDirection" Value="LeftToRight" />
                 <Setter Property="Data">M574.013 89.4038C576.234 -1.37526 574.013 0.0011924 574.013 0.0011924H0C109.478 183.043 571.793 180.183 574.013 89.4038Z</Setter>
                 <Setter Property="Fill" Value="#65DBDB" />
@@ -281,7 +324,7 @@
             <Style x:Key="WelcomePageLogoPath" TargetType="Path">
                 <Setter Property="Data">M364 0C364 34.275 359.292 68.2144 350.146 99.8804C341 131.546 327.594 160.319 310.693 184.555C293.793 208.791 273.73 228.016 251.648 241.133C229.567 254.249 205.901 261 182 261C158.099 261 134.433 254.249 112.352 241.133C90.2703 228.016 70.2068 208.791 53.3066 184.555C36.4063 160.319 23.0003 131.546 13.8539 99.8804C4.70756 68.2144 -2.08945e-06 34.275 0 -2.28173e-05L182 0H364Z</Setter>
                 <Setter Property="HeightRequest">250</Setter>
-                <Setter Property="Aspect" Value="Uniform" />
+                <Setter Property="Aspect" Value="UniformToFill" />
             </Style>
             <Style x:Key="WelcomePageCarouselStyle" TargetType="CarouselView">
                 <Setter Property="Margin">0,50,0,0</Setter>
@@ -309,7 +352,7 @@
 
 
             <Style x:Key="MediumLabelStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
                 <Setter Property="TextColor" Value="{StaticResource CustomNavyBlueDark}" />
                 <Setter Property="Margin" Value="7,0,5,0" />
                 <Setter Property="CharacterSpacing" Value="1" />

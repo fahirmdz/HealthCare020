@@ -234,4 +234,12 @@
         <Setter Property="Margin" Value="20,0,20,0" />
     </Style>
     <!--#endregion-->
+
+
+    <Style x:Key="MediumLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSize-Large}" />
+        <Setter Property="TextColor" Value="{StaticResource CustomNavyBlueDark}" />
+        <Setter Property="Margin" Value="7,0,5,0" />
+        <Setter Property="CharacterSpacing" Value="1" />
+    </Style>
 </ResourceDictionary>

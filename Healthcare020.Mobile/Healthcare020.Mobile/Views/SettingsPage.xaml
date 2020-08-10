@@ -39,7 +39,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*" />
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="1.5*" />
                     </Grid.RowDefinitions>
                     <StackLayout
                         Grid.Row="0"
@@ -48,7 +48,7 @@
                         VerticalOptions="End">
                         <!--  top controls  -->
                         <Frame
-                            Margin="0,40,0,0"
+                            Margin="0,20,0,0"
                             BackgroundColor="{StaticResource LightSmokeWhite}"
                             CornerRadius="50"
                             HorizontalOptions="FillAndExpand"
@@ -62,9 +62,7 @@
                                     x:Name="ProfilePic"
                                     Grid.Row="0"
                                     Aspect="AspectFit"
-                                    HorizontalOptions="Center"
-                                    Source="{Binding ProfilePicImageSource}"
-                                    VerticalOptions="Center">
+                                    Source="{Binding ProfilePicImageSource}">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding ProfilePicturePick}" NumberOfTapsRequired="1" />
                                     </Image.GestureRecognizers>
@@ -75,13 +73,13 @@
                                     FontFamily="{StaticResource Montserrat-Light}"
                                     FontSize="{StaticResource FontSize-Smaller}"
                                     HorizontalOptions="Center"
-                                    Text="Tap to change profile picture"
+                                    Text="{x:Static resources:AppResources.TapToChangeProfilePicture}"
                                     TextColor="{StaticResource LightNavyBlue}" />
                                 <Label
                                     Grid.Row="1"
                                     Margin="0,30,0,10"
                                     FontFamily="{StaticResource Montserrat-Medium}"
-                                    FontSize="{StaticResource FontSize-Large}"
+                                    FontSize="{StaticResource FontSize-Medium}"
                                     HorizontalOptions="Center"
                                     Text="{Binding Pacijent.ZdravstvenaKnjizica.LicniPodaci.ImePrezime}"
                                     TextColor="{StaticResource CustomNavyBlueDark}" />
@@ -106,12 +104,12 @@
                                     Clicked="EditProfileBtn_OnClicked"
                                     Command="{Binding EditProfileNavigationCommand}"
                                     Style="{StaticResource CustomButtonStyle}"
-                                    Text="Edit profile" />
+                                    Text="{x:Static resources:AppResources.EditProfile}" />
                                 <Button
                                     x:Name="ChangePasswordBtn"
                                     Clicked="ChangePasswordBtn_OnClicked"
                                     Style="{StaticResource CustomButtonStyle}"
-                                    Text="Change password" />
+                                    Text="{x:Static resources:AppResources.ChangePassword}" />
                             </StackLayout>
                         </Frame>
                     </StackLayout>
@@ -128,18 +126,13 @@
                             HeightRequest="55"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="End">
-                            <Button
+                            <ImageButton
                                 x:Name="LogoutBtn"
-                                BackgroundColor="{StaticResource LightNavyBlue}"
+                                BackgroundColor="{StaticResource CustomRed}"
                                 Command="{Binding LogoutCommand}"
-                                ContentLayout="Left,0"
                                 CornerRadius="25"
-                                FontFamily="{StaticResource Montserrat-Regular}"
-                                FontSize="{StaticResource FontSize-Medium}"
-                                HeightRequest="50"
                                 HorizontalOptions="FillAndExpand"
-                                Text="Logout"
-                                TextColor="WhiteSmoke"
+                                Source="{StaticResource LogoutButtonBg}"
                                 VerticalOptions="FillAndExpand" />
                         </Frame>
                         <Label

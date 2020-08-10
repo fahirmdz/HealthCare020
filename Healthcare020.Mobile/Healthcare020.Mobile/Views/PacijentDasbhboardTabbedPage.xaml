@@ -40,40 +40,42 @@
             Color="{StaticResource CustomBlue}" />
     </TabbedPage.Resources>
     <!--  Pages can be added as references or inline  -->
-    <NavigationPage
-        x:Name="PreglediTab"
-        Title="{x:Static resources:AppResources.PreglediTabTitle}"
-        IconImageSource="{StaticResource StethoscopeIcon}">
-        <x:Arguments>
-            <pages:PreglediMainPage />
-        </x:Arguments>
-    </NavigationPage>
+    <TabbedPage.Children>
+        <NavigationPage
+            x:Name="PreglediTab"
+            Title="{x:Static resources:AppResources.PreglediTabTitle}"
+            IconImageSource="{StaticResource StethoscopeIcon}">
+            <x:Arguments>
+                <pages:PreglediMainPage />
+            </x:Arguments>
+        </NavigationPage>
 
-    <NavigationPage
-        x:Name="UverenjaTab"
-        Title="{x:Static resources:AppResources.UverenjaTabTitle}"
-        IconImageSource="{StaticResource FileSignatureIcon}">
-        <x:Arguments>
-            <pages:LekarskaUverenjaMainPage />
-        </x:Arguments>
-    </NavigationPage>
+        <NavigationPage
+            x:Name="UverenjaTab"
+            Title="{x:Static resources:AppResources.UverenjaTabTitle}"
+            IconImageSource="{StaticResource FileSignatureIcon}">
+            <x:Arguments>
+                <pages:LekarskaUverenjaMainPage />
+            </x:Arguments>
+        </NavigationPage>
 
-    <!--  ****Title attribute sets title of bottom tab item  -->
-    <NavigationPage
-        x:Name="ZahteviTab"
-        Title="{x:Static resources:AppResources.ZahteviTabTitle}"
-        IconImageSource="{StaticResource QuestionIcon}">
-        <x:Arguments>
-            <pages:ZahteviZaPregledMainPage />
-        </x:Arguments>
-    </NavigationPage>
+        <!--  ****Title attribute sets title of bottom tab item  -->
+        <NavigationPage
+            x:Name="ZahteviTab"
+            Title="{x:Static resources:AppResources.ZahteviTabTitle}"
+            IconImageSource="{StaticResource QuestionIcon}">
+            <x:Arguments>
+                <pages:ZahteviZaPregledMainPage />
+            </x:Arguments>
+        </NavigationPage>
 
-    <NavigationPage
-        x:Name="SettingsTab"
-        Title="{x:Static resources:AppResources.SettingsTabTitle}"
-        IconImageSource="{StaticResource CogIcon}">
-        <x:Arguments>
-            <pages:SettingsPage />
-        </x:Arguments>
-    </NavigationPage>
+        <NavigationPage
+            x:Name="SettingsTab"
+            Title="{x:Static resources:AppResources.SettingsTabTitle}"
+            IconImageSource="{StaticResource CogIcon}">
+            <x:Arguments>
+                <pages:SettingsPage />
+            </x:Arguments>
+        </NavigationPage>
+    </TabbedPage.Children>
 </TabbedPage>

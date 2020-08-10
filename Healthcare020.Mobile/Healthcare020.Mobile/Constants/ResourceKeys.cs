@@ -21,5 +21,10 @@ namespace Healthcare020.Mobile.Constants
         public static string LightNavyBlueColor => "LightNavyBlue";
         public static string RowCountZahteviZaPregled => "RowCountZahteviZaPregled";
         public static string FlagIconsStyle => "FlagIconsStyle";
+        public static string LogoutButtonBg => "LogoutButtonBg";
+        public static string PregledAnimationPath => "PregledAnimationPath";
+        public static string LetterPackAnimationPath => "LetterPackAnimationPath";
+        public static string WelcomeAnimationPath => "WelcomeAnimationPath";
+
     }
 }

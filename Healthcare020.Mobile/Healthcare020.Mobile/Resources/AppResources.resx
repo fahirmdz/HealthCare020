@@ -127,6 +127,9 @@
   <data name="AzureFaceAPI_Key" xml:space="preserve">
     <value>a2cc66d67831414ebff902da6e1ce412</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Izmena lozinke</value>
+  </data>
   <data name="ChangePasswordPageTitle" xml:space="preserve">
     <value>Izmena lozinke</value>
   </data>
@@ -144,6 +147,9 @@
   </data>
   <data name="Doktor" xml:space="preserve">
     <value>Doktor</value>
+  </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Izmena profila</value>
   </data>
   <data name="EditProfilePageTitle" xml:space="preserve">
     <value>Izmena profila</value>
@@ -185,6 +191,9 @@
   </data>
   <data name="LoggingInLoadingMessage" xml:space="preserve">
     <value>Logiranje..</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Odjavi se</value>
   </data>
   <data name="MaxLength180Error" xml:space="preserve">
     <value>Maksimalan broj karaketera je 180</value>
@@ -249,6 +258,9 @@
   </data>
   <data name="SviPreglediPageTitle" xml:space="preserve">
     <value>Svi pregledi</value>
+  </data>
+  <data name="TapToChangeProfilePicture" xml:space="preserve">
+    <value>Kliknite za izmenu profilne slike</value>
   </data>
   <data name="UnableToLoadDataError" xml:space="preserve">
     <value>Greška pri učitavanju podataka</value>

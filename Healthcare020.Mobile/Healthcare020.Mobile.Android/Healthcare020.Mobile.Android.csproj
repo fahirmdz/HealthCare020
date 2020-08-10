@@ -118,6 +118,8 @@
     <AndroidResource Include="Resources\xml\file_paths.xml" />
     <AndroidAsset Include="Assets\Montserrat-Light.ttf" />
     <AndroidAsset Include="Assets\welcome_animationview.json" />
+    <AndroidAsset Include="Assets\letter-pack-animation.json" />
+    <AndroidAsset Include="Assets\pregled-animation.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -205,11 +207,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\healthcare020_150x150_revert.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logout_btn.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptionHealthcare020MobileAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionHealthcare020MobileAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthcare020MobileAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionHealthcare020MobileAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

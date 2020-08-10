@@ -90,6 +90,15 @@ namespace Healthcare020.Mobile.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Izmena lozinke.
         /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izmena lozinke.
+        /// </summary>
         public static string ChangePasswordPageTitle {
             get {
                 return ResourceManager.GetString("ChangePasswordPageTitle", resourceCulture);
@@ -138,6 +147,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string Doktor {
             get {
                 return ResourceManager.GetString("Doktor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izmena profila.
+        /// </summary>
+        public static string EditProfile {
+            get {
+                return ResourceManager.GetString("EditProfile", resourceCulture);
             }
         }
         
@@ -255,6 +273,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string LoggingInLoadingMessage {
             get {
                 return ResourceManager.GetString("LoggingInLoadingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odjavi se.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -445,6 +472,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string SviPreglediPageTitle {
             get {
                 return ResourceManager.GetString("SviPreglediPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kliknite za izmenu profilne slike.
+        /// </summary>
+        public static string TapToChangeProfilePicture {
+            get {
+                return ResourceManager.GetString("TapToChangeProfilePicture", resourceCulture);
             }
         }
         

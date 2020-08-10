@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
@@ -32,6 +33,11 @@ namespace Healthcare020.Mobile.Views
 
             _faceRecognitionService=new FaceRecognitionService();
 
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
         }
 
 
@@ -109,6 +115,7 @@ namespace Healthcare020.Mobile.Views
 
         private async void DialogButton_OnClicked(object sender, EventArgs e)
         {
+            await Application.Current.MainPage.Navigation.PushPopupAsync(new AnimationDialogPage(Application.Current.Resources[ResourceKeys.PregledAnimationPath] as OnPlatform<string>));
         }
     }
 }

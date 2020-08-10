@@ -3,6 +3,7 @@ using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
 using System;
 using System.Threading.Tasks;
+using Healthcare020.Mobile.Constants;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,8 +20,6 @@ namespace Healthcare020.Mobile.Views
             Title = AppResources.SettingsPageTitle;
             InitializeComponent();
             BindingContext = SettingsVM = ViewModelLocator.SettingsViewModel;
-
-            LogoutBtn.ImageSource = IconFont.SignOutAlt.GetIcon();
 
             EditProfileBtn.ImageSource = IconFont.Edit.GetIcon(); ;
 

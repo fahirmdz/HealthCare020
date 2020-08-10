@@ -14,79 +14,71 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <ScrollView>
-            <Grid
-                BackgroundColor="WhiteSmoke"
+        <Grid
+            BackgroundColor="WhiteSmoke"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <AbsoluteLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Path Fill="{StaticResource HealthcareCyan}" Style="{StaticResource WelcomePageLogoPath}" />
+                    <Image
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        Source="{StaticResource Logo_Revert}"
+                        VerticalOptions="Center" />
+                </Grid>
+            </AbsoluteLayout>
+            <CarouselView
+                x:Name="CarouselImages"
+                Grid.Row="1"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <AbsoluteLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
-                    <Grid HorizontalOptions="FillAndExpand">
-                        <Path Fill="{StaticResource HealthcareCyan}" Style="{StaticResource WelcomePageLogoPath}" />
-                        <Image
-                            Aspect="AspectFit"
-                            HorizontalOptions="Center"
-                            Source="{StaticResource Logo_Revert}"
-                            VerticalOptions="Center" />
-                    </Grid>
-                </AbsoluteLayout>
-                <CarouselView
-                    x:Name="CarouselImages"
-                    Grid.Row="1"
-                    HorizontalOptions="FillAndExpand"
-                    IsScrollAnimated="true"
-                    IsSwipeEnabled="True"
-                    ItemsSource="{Binding ImageUrls}"
-                    Style="{StaticResource WelcomePageCarouselStyle}"
-                    VerticalOptions="End">
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
-                                <Image Aspect="AspectFit" Source="{Binding item}" />
-                            </Grid>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+                IsScrollAnimated="true"
+                IsSwipeEnabled="True"
+                ItemsSource="{Binding ImageUrls}"
+                Style="{StaticResource WelcomePageCarouselStyle}"
+                VerticalOptions="End">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Aspect="AspectFit" Source="{Binding item}" />
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
 
-                <StackLayout
-                    Grid.Row="2"
-                    Margin="0,30"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="End">
-                    <StackLayout.Resources>
-                        <Style BasedOn="{StaticResource BigButtonRadiusStyle}" TargetType="Button" />
-                    </StackLayout.Resources>
-                    <Button
-                        x:Name="LoginButton"
-                        BackgroundColor="#00bebe"
-                        Command="{Binding LoginPageCommand}"
-                        Text="Log In"
-                        TextColor="#31373d" />
+            <StackLayout
+                Grid.Row="2"
+                Margin="0,30"
+                HorizontalOptions="Fill"
+                VerticalOptions="End">
+                <StackLayout.Resources>
+                    <Style BasedOn="{StaticResource BigButtonRadiusStyle}" TargetType="Button" />
+                </StackLayout.Resources>
+                <Button
+                    x:Name="LoginButton"
+                    BackgroundColor="#00bebe"
+                    Command="{Binding LoginPageCommand}"
+                    Text="Log In"
+                    TextColor="#31373d" />
 
-                    <Button
-                        x:Name="RegisterButton"
-                        Command="{Binding RegisterPageCommand}"
-                        Text="Register"
-                        TextColor="#31373d" />
+                <Button
+                    x:Name="RegisterButton"
+                    Command="{Binding RegisterPageCommand}"
+                    Text="Register"
+                    TextColor="#31373d" />
 
-                    <Button
-                        x:Name="PosetaButton"
-                        BackgroundColor="{StaticResource CustomBlue}"
-                        Command="{Binding PosetaPageCommand}"
-                        Text="Poseta"
-                        TextColor="WhiteSmoke" />
-                    <Button
-                        x:Name="TEST"
-                        BackgroundColor="{StaticResource CustomBlue}"
-                        Clicked="TEST_OnClicked"
-                        Text="TEST"
-                        TextColor="WhiteSmoke" />
-                </StackLayout>
-            </Grid>
-        </ScrollView>
+                <Button
+                    x:Name="PosetaButton"
+                    BackgroundColor="{StaticResource CustomBlue}"
+                    Command="{Binding PosetaPageCommand}"
+                    Text="Poseta"
+                    TextColor="WhiteSmoke" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
