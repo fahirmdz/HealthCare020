@@ -1,5 +1,4 @@
-﻿using Healthcare020.WinUI.Forms.AdministratorDashboard;
-using Healthcare020.WinUI.Forms.KorisnickiNalog;
+﻿using Healthcare020.WinUI.Forms.KorisnickiNalog;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.CustomElements;
 using System;
@@ -7,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AdminDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 

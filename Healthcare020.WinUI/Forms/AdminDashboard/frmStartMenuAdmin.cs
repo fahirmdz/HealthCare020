@@ -1,13 +1,13 @@
-﻿using FontAwesome.Sharp;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.CustomElements;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using FontAwesome.Sharp;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.CustomElements;
+using Healthcare020.WinUI.Helpers.Dialogs;
 
-namespace Healthcare020.WinUI.Forms.AdministratorDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmStartMenuAdministrator : Form
     {
@@ -23,8 +23,10 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
         {
             InitializeComponent();
 
-            leftBorderBtn = new Panel();
-            leftBorderBtn.Size = new Size(7, 60);
+            leftBorderBtn = new Panel
+            {
+                Size = new Size(7, 80)
+            };
             panelMenu.Controls.Add(leftBorderBtn);
         }
 
@@ -100,7 +102,7 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
         private void btnStatistics_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
-            var frmStatisticsMenu = AdministratorDashboard.frmStatisticsMenu.Instance;
+            var frmStatisticsMenu = AdminDashboard.frmStatisticsMenu.Instance;
             if (frmStatisticsMenu != null)
             {
                 frmStatisticsMenu.OpenAsChildOfControl(pnlBody);
@@ -114,7 +116,7 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
         private void btnUsers_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
-            var frmUsers = AdministratorDashboard.frmUsers.Instance;
+            var frmUsers = AdminDashboard.frmUsers.Instance;
             if (frmUsers != null)
             {
                 frmUsers.OpenAsChildOfControl(pnlBody);
@@ -124,7 +126,19 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
                 MessageBox.Show(Properties.Resources.NotLoggedIn);
             }
         }
-
+        private void btnSecurity_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color5);
+            var frmSecurity = AdminDashboard.frmSecurity.Instance;
+            if (frmSecurity != null)
+            {
+                frmSecurity.OpenAsChildOfControl(pnlBody);
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.NotLoggedIn);
+            }
+        }
         private void userMenuDropdown_MouseClick(object sender, EventArgs e)
         {
             if (pnlUserMenuDropdown.Visible)
@@ -190,5 +204,7 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
         {
             btnStatistics.PerformClick();
         }
+
+
     }
 }

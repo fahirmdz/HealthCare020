@@ -1,6 +1,6 @@
-﻿namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
+﻿namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    partial class frmDrzave
+    partial class frmSecurity
     {
         /// <summary>
         /// Required designer variable.
@@ -29,17 +29,14 @@
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            // frmDrzave
+            // 
+            // frmSecurity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(776, 486);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "frmDrzave";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.UseWaitCursor = true;
-            this.Load += new System.EventHandler(this.frmDrzave_Load);
+            this.ClientSize = new System.Drawing.Size(1004, 584);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmSecurity";
             this.ResumeLayout(false);
 
         }

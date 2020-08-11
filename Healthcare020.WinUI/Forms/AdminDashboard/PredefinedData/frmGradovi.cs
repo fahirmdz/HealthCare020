@@ -1,15 +1,15 @@
-﻿using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Services;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
     public partial class frmGradovi : DisplayDataForm<GradDtoEL>
     {

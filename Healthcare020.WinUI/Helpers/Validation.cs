@@ -14,21 +14,23 @@ namespace Healthcare020.WinUI.Helpers
             Digits, Letters, Mixed
         }
 
-        public static bool ValidTextInput(this MaterialSingleLineTextField textField, ErrorProvider errors, TextInputType textInputType = TextInputType.Letters)
+        public static bool ValidTextInput(this MaterialSingleLineTextField textField, ErrorProvider errors, TextInputType textInputType = TextInputType.Letters, bool SetErrors=true)
         {
             if (errors == null)
                 return false;
 
             if (string.IsNullOrWhiteSpace(textField.Text))
             {
-                errors.SetError(textField, Properties.Resources.RequiredField);
+                if (SetErrors)
+                    errors.SetError(textField, Properties.Resources.RequiredField);
                 return false;
             }
 
-            if ((textInputType == TextInputType.Digits && textField.Text.Any(char.IsLetter)) 
+            if ((textInputType == TextInputType.Digits && textField.Text.Any(char.IsLetter))
                 || (textInputType == TextInputType.Letters && textField.Text.Any(char.IsDigit)))
             {
-                errors.SetError(textField, Properties.Resources.InvalidFormat);
+                if (SetErrors)
+                    errors.SetError(textField, Properties.Resources.InvalidFormat);
                 return false;
             }
 
@@ -46,7 +48,7 @@ namespace Healthcare020.WinUI.Helpers
                 return false;
             }
 
-            if ((textInputType == TextInputType.Digits && textField.Text.Any(char.IsLetter)) 
+            if ((textInputType == TextInputType.Digits && textField.Text.Any(char.IsLetter))
                 || (textInputType == TextInputType.Letters && textField.Text.Any(char.IsDigit)))
             {
                 errors.SetError(textField, Properties.Resources.InvalidFormat);

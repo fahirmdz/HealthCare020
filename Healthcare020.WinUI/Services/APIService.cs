@@ -106,7 +106,7 @@ namespace Healthcare020.WinUI.Services
         /// <typeparam name="T">Type of return data</typeparam>
         /// <param name="id">Unique identifier of entity that will be partially updated</param>
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
-        public async Task<APIServiceResult<T>> Delete<T>(int id, string pathToAppend = "")
+        public async Task<APIServiceResult<T>> Delete<T>(object id, string pathToAppend = "")
         {
             try
             {
