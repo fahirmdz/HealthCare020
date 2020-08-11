@@ -4,11 +4,9 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using HealthCare020.API.Constants;
-using HealthCare020.Core.ServiceModels;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {
@@ -19,12 +17,6 @@ namespace HealthCare020.API.Controllers
             base(crudService)
         {
         }
-
-        public override async Task<IActionResult> Get(PacijentResourceParameters resourceParameters)
-        {
-            return await base.Get(resourceParameters);
-        }
-
 
         [AllowAnonymous]
         public override async Task<IActionResult> Insert(PacijentUpsertDto dtoForCreation)

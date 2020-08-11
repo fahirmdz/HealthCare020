@@ -8,6 +8,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthCare020.Core.Constants;
@@ -36,7 +37,12 @@ namespace Healthcare020.Mobile.ViewModels
 
             ProfilePicImageSource = UserCircleIcon;
             UploadedPic = null;
+
+            //Init commands
+            DeleteAccountCommand=new Command(async () => { await DeleteAccount();});
         }
+
+        #region Methods
 
         public async Task InitializeAsync()
         {
@@ -69,6 +75,24 @@ namespace Healthcare020.Mobile.ViewModels
                 return;
             }
         }
+
+        public async Task DeleteAccount()
+        {
+            if((await NotificationService.Instance.Prompt())?.Ok ?? false)
+            {
+                _apiSerivce.ChangeRoute(Routes.PacijentiRoute);
+                var result = await _apiSerivce.Delete<int>(0);
+                if (result.StatusCode != HttpStatusCode.NoContent)
+                {
+                    NotificationService.Instance.Error(AppResources.Error);
+                    return;
+                }
+
+                await Auth.Logout();
+            }
+        }
+
+        #endregion
 
         private ImageSource _profilePicImageSource;
         public ImageSource ProfilePicImageSource
@@ -104,7 +128,13 @@ namespace Healthcare020.Mobile.ViewModels
              }
          });
 
+        #region Commands
+
+        public ICommand DeleteAccountCommand { get; }
         public ICommand LogoutCommand => new Command(async () => { await Auth.Logout(); });
+
+
+        #endregion
 
         private async Task UpdateLicniPodaci()
         {

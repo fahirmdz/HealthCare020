@@ -1,4 +1,5 @@
-﻿using Healthcare020.Mobile.Interfaces;
+﻿using Healthcare020.Mobile.Helpers;
+using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
 using HealthCare020.Core.Constants;
@@ -10,23 +11,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Healthcare020.Mobile.Constants;
-using Healthcare020.Mobile.Helpers;
-using Healthcare020.Mobile.Views.Dialogs;
-using Rg.Plugins.Popup.Extensions;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
     public class NoviZahtevZaPregledViewModel : BaseValidationViewModel
     {
-        private readonly IAPIService _apiService;
+        private IAPIService _apiService;
 
-        public NoviZahtevZaPregledViewModel(IAPIService apiService)
+        public NoviZahtevZaPregledViewModel()
         {
-            _apiService = apiService;
-
             //Init commands
             InitCommand = new Command(async () => await Init());
             SaveCommand = new Command(async () => await Save());
@@ -41,6 +35,7 @@ namespace Healthcare020.Mobile.ViewModels
                 NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
                 return;
             }
+            _apiService = new APIService();
 
             _apiService.ChangeRoute(Routes.DoktoriRoute);
             var result = await _apiService.Get<DoktorDtoEL>(new DoktorResourceParameters { EagerLoaded = true });
@@ -97,6 +92,7 @@ namespace Healthcare020.Mobile.ViewModels
         #region Properties
 
         private IList<DoktorDtoEL> _doktori;
+
         public IList<DoktorDtoEL> Doktori
         {
             get => _doktori;
@@ -104,6 +100,7 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         private DoktorDtoEL _pickedDoktor;
+
         [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
         public DoktorDtoEL PickedDoktor
         {
@@ -116,6 +113,7 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         private string _napomena;
+
         [MaxLength(180, ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.MaxLength180Error))]
         public string Napomena
         {
@@ -139,12 +137,13 @@ namespace Healthcare020.Mobile.ViewModels
         #region Properties
 
         private bool _mainBodyVisible = true;
+
         public bool MainBodyVisible
         {
             get => _mainBodyVisible;
             set => SetProperty(ref _mainBodyVisible, value);
         }
 
-        #endregion
+        #endregion Properties
     }
 }

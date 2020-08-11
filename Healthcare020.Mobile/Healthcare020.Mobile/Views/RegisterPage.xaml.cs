@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RegisterPage : BaseValidationContentPage
+    public partial class RegisterPage
     {
         public RegisterViewModel RegisterVM;
 
@@ -20,6 +20,12 @@ namespace Healthcare020.Mobile.Views
             BaseValidationVM = RegisterVM;
             SetFormBodyElement();
             SetErrorsClearOnTextChanged();
+        }
+
+        protected override void OnAppearing()
+        {
+            RegisterVM.Init();
+            base.OnAppearing();
         }
 
         private void RegisterButton_OnClicked(object sender, EventArgs e)

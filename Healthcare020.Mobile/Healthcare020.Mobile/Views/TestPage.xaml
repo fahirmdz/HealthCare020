@@ -3,83 +3,27 @@
     x:Class="Healthcare020.Mobile.Views.TestPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="5,20">
-                <Label
-                    FontSize="15"
+            <Frame
+                x:Name="AnimationFrame"
+                BackgroundColor="White"
+                HasShadow="False"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="True"
+                VerticalOptions="FillAndExpand">
+                <forms:AnimationView
+                    x:Name="MainAnimation"
+                    Animation="{StaticResource PasswordAnimationPath}"
                     HorizontalOptions="CenterAndExpand"
-                    Text="Picture to add" />
-                <abstractions:CircleImage
-                    x:Name="PicToAdd"
-                    Aspect="AspectFit"
-                    HeightRequest="100"
-                    HorizontalOptions="Center"
-                    Source="{Binding PictureToAdd}"
-                    VerticalOptions="Center"
-                    WidthRequest="100">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="PicToAdd_TapGestureRecognizer_OnTapped" />
-                    </Image.GestureRecognizers>
-                </abstractions:CircleImage>
-                <Label HorizontalOptions="CenterAndExpand" Text="Ime i prezime" />
-                <Entry
-                    x:Name="PictureToAddImePrezime"
-                    FontSize="20"
-                    HorizontalOptions="FillAndExpand" />
-
-
-                <Label
-                    FontSize="15"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="Picture to identify" />
-                <abstractions:CircleImage
-                    x:Name="PicToIdentify"
-                    Aspect="AspectFit"
-                    HeightRequest="100"
-                    HorizontalOptions="Center"
-                    Source="{Binding PictureToIdentify}"
-                    VerticalOptions="Center"
-                    WidthRequest="100">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="PicToIdentify_TapGestureRecognizer_OnTapped" />
-                    </Image.GestureRecognizers>
-                </abstractions:CircleImage>
-                <Button
-                    x:Name="CreatePersonGroupButton"
-                    Margin="5,20"
-                    BackgroundColor="Aquamarine"
-                    Clicked="CreatePersonGroupButton_OnClicked"
-                    FontSize="15"
-                    Text="CREATE PERSON GROUP" />
-
-                <Button
-                    Margin="5,20"
-                    BackgroundColor="Red"
-                    Clicked="Button_OnClicked"
-                    FontSize="15"
-                    Text="DELETE PERSON GROUP" />
-
-                <Button
-                    x:Name="WelcomeBtn"
-                    Margin="5,20"
-                    BackgroundColor="Red"
-                    Clicked="WelcomeBtn_OnClicked"
-                    FontSize="15"
-                    Text="WELCOME PAGE" />
-
-                <Button
-                    x:Name="DialogButton"
-                    Margin="5,20"
-                    BackgroundColor="DarkGreen"
-                    Clicked="DialogButton_OnClicked"
-                    FontSize="15"
-                    Text="DIALOG" />
-            </StackLayout>
+                    IsPlaying="True"
+                    Loop="True"
+                    VerticalOptions="CenterAndExpand" />
+            </Frame>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

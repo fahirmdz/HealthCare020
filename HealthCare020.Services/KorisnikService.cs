@@ -151,6 +151,9 @@ namespace HealthCare020.Services
             if (korisnickiNalog == null)
                 return ServiceResult.NotFound("Korisnicki nalog nije pronadjen");
 
+            await _faceRecognitionService.DeletePersonFromGroup(Guid.Parse(korisnickiNalog.FaceId),
+                Resources.FaceAPI_PersonGroupId);
+
             var rolesToDelete = _dbContext.RolesKorisnickiNalozi.Where(x => x.KorisnickiNalogId == korisnickiNalog.Id).ToList();
             if (rolesToDelete.Any())
                 _dbContext.RemoveRange(rolesToDelete);

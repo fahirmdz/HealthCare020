@@ -65,10 +65,20 @@ namespace HealthCare020.Services.Services
 
         public async Task<PersistedFace> AddFaceToPerson(string personGroupId, Guid personId, Stream stream)
         {
-            var persistedFace = await _faceClinet.PersonGroupPerson.AddFaceFromStreamAsync(personGroupId, personId, stream);
-            if (!await TrainModel(personGroupId))
+            try
+            {
+                var persistedFace =
+                    await _faceClinet.PersonGroupPerson.AddFaceFromStreamWithHttpMessagesAsync(personGroupId, personId,
+                        stream);
+                if (!await TrainModel(personGroupId))
+                    return null;
+                return persistedFace.Body;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
                 return null;
-            return persistedFace;
+            }
         }
 
         private async Task<bool> TrainModel(string personGroupId)

@@ -19,16 +19,23 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class PosetaViewModel : BaseValidationViewModel
     {
-        private readonly IAPIService _apiService;
+        private IAPIService _apiService;
 
         public string CurrentPacijentSearch;
 
-        public PosetaViewModel(IAPIService apiService)
-        {
-            _apiService = apiService;
-            _apiService.ChangeRoute(Routes.PacijentNaLecenjuRoute);
-        }
+        public PosetaViewModel()
+        { }
 
+        public async Task Init()
+        {
+            if (!Auth.IsAuthenticated())
+            {
+                NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
+                return;
+            }
+
+            _apiService=new APIService();
+        }
 
         #region Commands
 

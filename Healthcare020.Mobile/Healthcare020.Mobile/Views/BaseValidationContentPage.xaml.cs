@@ -23,6 +23,7 @@ namespace Healthcare020.Mobile.Views
             InitializeComponent();
         }
 
+
         /// <summary>
         /// Hide validation message for input caller (it is recommended to set the FormBody element on Page initialization)
         /// </summary>

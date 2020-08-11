@@ -24,6 +24,12 @@ namespace Healthcare020.Mobile.Views
             SetErrorsClearOnTextChanged();
         }
 
+        protected override async void OnAppearing()
+        {
+            await PosetaVM.Init();
+            base.OnAppearing();
+        }
+
         private void SearchButton_OnClicked(object sender, EventArgs e)
         {
             PosetaVM.SearchPacijentiCommand.Execute(sender);

@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.IO;
+using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
@@ -12,18 +14,21 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Services.Properties;
 
 namespace HealthCare020.Services
 {
     public class LicniPodaciService : BaseCRUDService<LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaci, LicniPodaciUpsertDto, LicniPodaciUpsertDto>
     {
+        private readonly IFaceRecognitionService _faceRecognitionService;
         public LicniPodaciService(IMapper mapper,
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
+            IAuthService authService, IFaceRecognitionService faceRecognitionService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
+            _faceRecognitionService = faceRecognitionService;
         }
 
         public override async Task<ServiceResult> GetById(int id, bool EagerLoaded)
@@ -87,6 +92,21 @@ namespace HealthCare020.Services
             var entity = await _dbContext.LicniPodaci.FindAsync(id);
             if (entity == null)
                 return ServiceResult.NotFound("Licni podaci nisu pronadjeni");
+
+            if (_authService.UserIsPacijent())
+            {
+                var pacijent = await _authService.GetCurrentLoggedInPacijent();
+                if(pacijent==null)
+                    return ServiceResult.BadRequest();
+
+                var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(pacijent.KorisnickiNalogId);
+
+                if (!entity.ProfilePicture.SequenceEqual(request.ProfilePicture))
+                {
+                    var person = await _faceRecognitionService.AddFaceToPerson(Resources.FaceAPI_PersonGroupId,Guid.Parse(korisnickiNalog.FaceId),new MemoryStream(request.ProfilePicture));
+                }
+
+            }
 
             if (!_dbContext.Gradovi.Any(x => x.Id == request.GradId))
             {

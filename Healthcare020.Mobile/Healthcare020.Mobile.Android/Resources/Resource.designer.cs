@@ -22813,19 +22813,22 @@ namespace Healthcare020.Mobile.Droid
 			public const int roundedbgdark = 2131165359;
 			
 			// aapt resource value: 0x7F0700B0
-			public const int tooltip_frame_dark = 2131165360;
+			public const int security = 2131165360;
 			
 			// aapt resource value: 0x7F0700B1
-			public const int tooltip_frame_light = 2131165361;
+			public const int tooltip_frame_dark = 2131165361;
 			
 			// aapt resource value: 0x7F0700B2
-			public const int welcome_poseta = 2131165362;
+			public const int tooltip_frame_light = 2131165362;
 			
 			// aapt resource value: 0x7F0700B3
-			public const int welcome_stetoscope = 2131165363;
+			public const int welcome_poseta = 2131165363;
 			
 			// aapt resource value: 0x7F0700B4
-			public const int xamarin_logo = 2131165364;
+			public const int welcome_stetoscope = 2131165364;
+			
+			// aapt resource value: 0x7F0700B5
+			public const int xamarin_logo = 2131165365;
 			
 			static Drawable()
 			{

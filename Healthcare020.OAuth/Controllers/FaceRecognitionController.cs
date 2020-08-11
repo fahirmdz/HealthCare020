@@ -32,8 +32,8 @@ namespace Healthcare020.OAuth.Controllers
         }
 
         [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
-        public async Task<IActionResult> LoginWithFaceID([FromForm]TokenEndpointRequestBody model)
+        [Consumes("application/json")]
+        public async Task<IActionResult> LoginWithFaceID([FromBody]TokenEndpointRequestBody model)
         {
             if (model == null)
                 return BadRequest();

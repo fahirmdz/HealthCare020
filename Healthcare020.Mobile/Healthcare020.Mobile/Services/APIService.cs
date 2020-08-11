@@ -3,6 +3,7 @@ using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
 using HealthCare020.Core.Extensions;
 using HealthCare020.Core.ResponseModels;
+using HealthCare020.Core.ServiceModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using HealthCare020.Core.ServiceModels;
 using Xamarin.Forms;
 
 #pragma warning disable 168
@@ -222,8 +222,8 @@ namespace Healthcare020.Mobile.Services
                 }
 
                 HttpResponseMessage response = null;
-
                 request.Url.AppendPathSegment(id.ToString());
+
                 response = await request.GetAsync();
 
                 RevertToBaseRequest();
@@ -246,9 +246,7 @@ namespace Healthcare020.Mobile.Services
 
                 return APIServiceResult<T>.OK(result);
             }
-#pragma warning disable 168
             catch (Exception ex)
-#pragma warning restore 168
             {
                 return APIServiceResult<T>.Exception();
             }
@@ -321,7 +319,6 @@ namespace Healthcare020.Mobile.Services
 
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-
                     if (response.StatusCode == HttpStatusCode.Forbidden)
                     {
                     }
@@ -329,7 +326,6 @@ namespace Healthcare020.Mobile.Services
                     {
                         var errorDetails = await response.Content?.ReadAsStringAsync();
                         return APIServiceResult<T>.BadRequest(errorDetails);
-
                     }
                     else if ((int)response.StatusCode == 422)
                     {

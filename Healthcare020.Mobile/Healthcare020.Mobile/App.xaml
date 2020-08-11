@@ -50,6 +50,14 @@
                 <On Platform="Android" Value="pregled-animation.json" />
                 <On Platform="Android" Value="Assets/pregled-animation.json" />
             </OnPlatform>
+            <OnPlatform x:Key="PasswordAnimationPath" x:TypeArguments="x:String">
+                <On Platform="Android" Value="pw-animation.json" />
+                <On Platform="Android" Value="Assets/pw-animation.json" />
+            </OnPlatform>
+            <OnPlatform x:Key="KeyAnimationPath" x:TypeArguments="x:String">
+                <On Platform="Android" Value="key-animation.json" />
+                <On Platform="Android" Value="Assets/key-animation.json" />
+            </OnPlatform>
             <!--#endregion-->
             <!--#region Backgrounds-->
             <OnPlatform x:Key="LogoutButtonBg" x:TypeArguments="ImageSource">
@@ -71,6 +79,10 @@
             <OnPlatform x:Key="Logo_Revert" x:TypeArguments="ImageSource">
                 <On Platform="Android" Value="healthcare020_200x200_revert.png" />
                 <On Platform="UWP" Value="Assets/healthcare020_200x200_revert.png" />
+            </OnPlatform>
+            <OnPlatform x:Key="SecurityImageSource" x:TypeArguments="ImageSource">
+                <On Platform="Android" Value="security.png" />
+                <On Platform="UWP" Value="Assets/security.png" />
             </OnPlatform>
             <!--#endregion-->
 
@@ -209,7 +221,6 @@
                 <Setter Property="TextColor">WhiteSmoke</Setter>
                 <Setter Property="CornerRadius">25</Setter>
                 <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
-                <Setter Property="VerticalOptions">FillAndExpand</Setter>
                 <Setter Property="HorizontalOptions">FillAndExpand</Setter>
                 <Setter Property="HeightRequest" Value="{StaticResource UnitNormal60Small50}" />
                 <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
