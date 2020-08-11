@@ -1,43 +1,37 @@
 ﻿using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Resources;
+using Healthcare020.Mobile.Views;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Extensions;
 using HealthCare020.Core.Models;
+using HealthCare020.Core.ServiceModels;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using Healthcare020.Mobile.Views;
+using System.Web;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.Services
 {
-    internal class TokenResponse
+    public enum AuthType
     {
-        [JsonProperty("access_token")]
-        public string AccessToken { get; set; }
-
-        [JsonProperty("token_type")]
-        public string TokenType { get; set; }
-
-        [JsonProperty("scope")]
-        public string Scope { get; set; }
-
-        [JsonProperty("expires_in")]
-        public string ExpiresIN { get; set; }
-
-        [JsonProperty("refresh_token")]
-        public string RefreshToken { get; set; }
+        Credentials,
+        FaceID
     }
 
     public sealed class Auth
     {
         public static SecureString AccessToken { get; private set; }
+
+        #region Properties
 
         /// <summary>
         /// Current logged in user
@@ -48,15 +42,18 @@ namespace Healthcare020.Mobile.Services
         }
 
         public static PacijentDtoEL Pacijent { get; set; }
+
         /// <summary>
         /// Role of current logged in user
         /// </summary>
         public static RoleType Role { get; private set; }
 
+        #endregion Properties
+
         /// <summary>
         /// Authenticate user with username and password and get access token (store it in Auth.AccessToken)
         /// </summary>
-        /// <returns>Returns boolean that indicates operation was succeeded or no</returns>
+        /// <returns>Returns boolean that indicates operation was succeeded or not</returns>
         public static async Task<bool> AuthenticateWithPassword(string username, string password, bool RememberMe = false)
         {
             try
@@ -67,72 +64,30 @@ namespace Healthcare020.Mobile.Services
                     await SecureStorage.SetAsync("Password", password);
                     await SecureStorage.SetAsync(PreferencesKeys.HasSavedLoginCredentials, true.ToString());
                 }
-                //System.Net.ServicePointManager.ServerCertificateValidationCallback +=
-                //    (sender, cert, chain, sslPolicyErrors) =>
-                //    {
-                //        if (cert != null) System.Diagnostics.Debug.WriteLine(cert);
-                //        return true;
-                //    };
 
-#if DEBUG
-                HttpClientHandler clientHandler;
+                var responseToken =
+                    await GetTokenAndSetAccessTokenAsync(GetTokenEndpointCredentialsRequestBodyContent(username, password));
 
-                if (Device.RuntimePlatform == Device.Android)
-                    clientHandler = new HttpClientHandler
-                    {
-                        ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-                    };
-                else
-                    clientHandler = new HttpClientHandler();
-#endif
+                return await SetCurrentKorisnickiNalog();
+            }
+            catch (Exception ex)
+            {
+                NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
+                return false;
+            }
+        }
 
-                using (var client = new HttpClient(clientHandler))
-                {
-                    var accept = "application/json";
-                    client.DefaultRequestHeaders.Add("Accept", accept);
-                    var postBody = @"client_id=" + AppResources.IdpClientId
-                                                 + "&client_secret=" + AppResources.IdpClientSecret
-                                                 + "&grant_type=password&username="
-                                                 + username + "&password=" + password
-                                                 + "&scope=openid offline_access";
+        /// <summary>
+        /// Authenticate user with Face ID
+        /// </summary>
+        /// <returns>Returns boolean that indicates operation was succeeded or not</returns>
+        public static async Task<bool> AuthenticateWithFaceID(byte[] image, bool RememberMe = false)
+        {
+            try
+            {
+                var responseToken = await GetTokenAndSetAccessTokenAsync(GetTokenEndpointFaceRecognitionRequestBodyContent(image), AuthType.FaceID);
 
-                    var response = client.PostAsync(Device.RuntimePlatform == Device.Android ? AppResources.IdpTokenEndpointAndroid : AppResources.IdpTokenEndpoint,
-                        new StringContent(postBody, Encoding.UTF8, "application/x-www-form-urlencoded")).Result;
-                    var str = await response.Content.ReadAsStringAsync();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var responseJson = await response.Content.ReadAsStringAsync();
-                        var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseJson);
-                        if (tokenResponse != null && !string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
-                            AccessToken = tokenResponse.AccessToken.ConvertToSecureString();
-                        else
-                        {
-                            NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        var error = await response.Content.ReadAsStringAsync();
-                        NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
-                        return false;
-                    }
-                }
-
-                var apiSerivce = new APIService(Routes.KorisniciRoute);
-
-                var result = await apiSerivce.GetById<KorisnickiNalogDtoLL>(0);
-                if (!result.Succeeded)
-                {
-                    AccessToken = null;
-                    return false;
-                }
-                KorisnickiNalog = result.Data;
-
-                var topRole = KorisnickiNalog.Roles?.Min(x => x);
-                Role = topRole.HasValue ? (RoleType)topRole : RoleType.Pacijent;
-
-                return true;
+                return await SetCurrentKorisnickiNalog();
             }
             catch (Exception ex)
             {
@@ -171,9 +126,105 @@ namespace Healthcare020.Mobile.Services
 
             await SecureStorage.SetAsync(PreferencesKeys.HasSavedLoginCredentials, false.ToString());
 
-            Application.Current.MainPage=new LoginPage();
+            Application.Current.MainPage = new LoginPage();
         }
 
         public static bool IsAuthenticated() => AccessToken != null;
+
+        //==================Helpers methods============================
+        private static HttpContent GetTokenEndpointCredentialsRequestBodyContent(string username, string password)
+        {
+            var formDataAsQueryString = HttpUtility.ParseQueryString(string.Empty);
+            formDataAsQueryString.Add("client_id", AppResources.IdpClientId);
+            formDataAsQueryString.Add("client_secret", AppResources.IdpClientSecret);
+            formDataAsQueryString.Add("grant_type", "password");
+            formDataAsQueryString.Add("username", username);
+            formDataAsQueryString.Add("password", password);
+            formDataAsQueryString.Add("scope", "openid offline_access");
+
+            return new StringContent(formDataAsQueryString.ToString(), Encoding.UTF8, "application/x-www-form-urlencoded");
+        }
+
+        private static HttpContent GetTokenEndpointFaceRecognitionRequestBodyContent(byte[] image)
+        {
+            if (image == null || !image.Any())
+                return null;
+
+            var formDataDictionary = new Dictionary<string, string>
+            {
+                {"ClientId", AppResources.IdpClientId },
+                {"ClientSecret", AppResources.IdpClientSecret },
+                {"GrantType", "password" },
+                {"Image", Convert.ToBase64String(image) },
+                {"Scope", "openid offline_access face-recognition" }
+            };
+            var content = new FormUrlEncodedContent(formDataDictionary);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            return content;
+        }
+
+        private static async Task<TokenResponse> GetTokenAndSetAccessTokenAsync(HttpContent content, AuthType authType = AuthType.Credentials)
+        {
+            if (content == null)
+                return null;
+
+            string uri = authType == AuthType.Credentials ? AppResources.IdpTokenEndpoint : AppResources.IdpTokenEndpointFaceId;
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                if (Device.RuntimePlatform == Device.Android)
+                    clientHandler = new HttpClientHandler
+                    {
+                        ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+                    };
+
+                using (var client = new HttpClient(clientHandler))
+                {
+                    response = await client.PostAsync(uri, content);
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseJson = await response.Content.ReadAsStringAsync();
+                    var tokenResponse = JsonConvert.DeserializeObject<TokenResponse>(responseJson);
+                    if (tokenResponse != null && !string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
+                    {
+                        AccessToken = tokenResponse.AccessToken.ConvertToSecureString();
+                        return tokenResponse;
+                    }
+                }
+
+                var error = await response.Content.ReadAsStringAsync();
+                NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                var responseString = await response.Content.ReadAsStringAsync();
+                return null;
+            }
+        }
+
+        private static async Task<bool> SetCurrentKorisnickiNalog()
+        {
+            var apiSerivce = new APIService(Routes.KorisniciRoute);
+
+            var result = await apiSerivce.GetById<KorisnickiNalogDtoLL>(0);
+            if (!result.Succeeded)
+            {
+                AccessToken = null;
+                return false;
+            }
+            KorisnickiNalog = result.Data;
+            var topRole = KorisnickiNalog.Roles?.Min(x => x);
+            Role = topRole.HasValue ? (RoleType)topRole : RoleType.Pacijent;
+
+            return true;
+        }
+
+        //==================/Helpers methods============================
     }
 }

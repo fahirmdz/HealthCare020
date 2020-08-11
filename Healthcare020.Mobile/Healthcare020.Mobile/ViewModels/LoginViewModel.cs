@@ -46,9 +46,6 @@ namespace Healthcare020.Mobile.ViewModels
 
             SelfieForFaceID = photo.GetStream().AsByteArray();
 
-
-
-
             _apiService.ChangeRoute(Routes.PacijentiRoute);
             var result = await _apiService.Get<PacijentDtoEL>(new PacijentResourceParameters
             {
@@ -64,17 +61,7 @@ namespace Healthcare020.Mobile.ViewModels
                 return;
             }
 
-            var pacijent = result.Data.FirstOrDefault();
-
-            _apiService.ChangeRoute(Routes.FaceRecognitionRecordsRoute);
-            var insertFaceIdRecognitionRecords = await _apiService.Post<FaceRecognitionDto>(
-                new FaceRecognitionRecordUpsertDto
-                {
-                    KorisnickiNalogId = pacijent.KorisnickiNalogId,
-                    Key = AppResources.ServiceIdentificationSecret.Encrypt(AppResources.RSAPublicKeyXml)
-                });
-
-            if (!insertFaceIdRecognitionRecords.Succeeded)
+            if (!await Auth.AuthenticateWithFaceID(SelfieForFaceID))
             {
                 IsBusy = false;
                 this.EnabledLoadingSpinner = false;
@@ -83,16 +70,9 @@ namespace Healthcare020.Mobile.ViewModels
                 return;
             }
 
-            if (await Auth.AuthenticateWithPassword(pacijent.Username, pacijent.FaceId))
-            {
-                Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
-            }
-            else
-            {
-                NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
-            }
             this.IsBusy = false;
             this.EnabledLoadingSpinner = false;
+            Application.Current.MainPage=new PacijentDasbhboardTabbedPage();
         }
 
         public async Task Login()

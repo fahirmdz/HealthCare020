@@ -27,7 +27,8 @@ namespace Healthcare020.OAuth.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginWithFaceID([FromBody] TokenEndpointRequestBody model)
+        [Consumes("application/x-www-form-urlencoded")]
+        public async Task<IActionResult> LoginWithFaceID([FromForm]TokenEndpointRequestBody model)
         {
             var img = Convert.FromBase64String(model.Image);
 

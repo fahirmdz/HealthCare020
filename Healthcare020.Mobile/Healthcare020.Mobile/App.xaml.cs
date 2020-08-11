@@ -40,7 +40,8 @@ namespace Healthcare020.Mobile
 
         protected override async void OnStart()
         {
-            await Auth.AuthenticateWithPassword("pacijent", "testtest");
+            if (!Auth.IsAuthenticated())
+                await Auth.AuthenticateWithPassword("pacijent", "testtest");
 
             Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture= new CultureInfo("bs-Latn-BA");
         }
