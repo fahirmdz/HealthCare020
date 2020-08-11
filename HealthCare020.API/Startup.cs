@@ -95,7 +95,7 @@ namespace HealthCare020.API
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
             services.AddHealthCare020Services(Configuration);
-
+            services.AddDistributedMemoryCache();
             services.AddResponseCaching();
 
             services.Configure<RequestLocalizationOptions>(options =>
@@ -107,7 +107,7 @@ namespace HealthCare020.API
             services.AddAuthConfiguration(Environment);
 
             var logger = new LoggerManager();
-
+            services.AddSession();
             services.AddControllers(cfg =>
                 {
                     cfg.Filters.Add(typeof(ErrorFilter));
@@ -170,7 +170,6 @@ namespace HealthCare020.API
             }
 
             app.ConfigureExceptionHandler(logger);
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -185,7 +184,7 @@ namespace HealthCare020.API
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,5 +1,4 @@
 ﻿using FontAwesome.Sharp;
-using Healthcare020.WinUI.Forms.AdministratorDashboard;
 using Healthcare020.WinUI.Forms.KorisnickiNalog;
 using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
@@ -10,6 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AdminDashboard;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {

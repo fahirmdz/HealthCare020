@@ -211,6 +211,9 @@
   <data name="frmRoles" xml:space="preserve">
     <value>Predefinisani podaci - Uloge</value>
   </data>
+  <data name="frmSecurityTitle" xml:space="preserve">
+    <value>Sigurnost - Face ID person group - Pacijenti</value>
+  </data>
   <data name="frmStartMenuAdministrator" xml:space="preserve">
     <value>Administratorski meni</value>
   </data>

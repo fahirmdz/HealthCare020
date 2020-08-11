@@ -117,19 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FaceAPI_PersonGroupId" xml:space="preserve">
-    <value>healthcare020_pacijenti_person_group_00423122</value>
-  </data>
-  <data name="FaceAPI_PersonGroupName" xml:space="preserve">
-    <value>Healthcare020_Pacijenti</value>
-  </data>
-  <data name="IdpClientIdMobile" xml:space="preserve">
-    <value>Healthcare020_Mobile</value>
-  </data>
-  <data name="IdpClientSecretMobile" xml:space="preserve">
-    <value>devsecret_mobile</value>
-  </data>
-  <data name="IdpTokenEndpoint" xml:space="preserve">
-    <value>https://healthcare020-oauth.com:5005/connect/token</value>
-  </data>
 </root>

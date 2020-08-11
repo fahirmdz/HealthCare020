@@ -1,6 +1,6 @@
 ﻿using Healthcare020.WinUI.Helpers.CustomElements;
 
-namespace Healthcare020.WinUI.Forms.AdministratorDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     partial class frmStartMenuAdministrator
     {
@@ -32,6 +32,7 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStartMenuAdministrator));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnSecurity = new FontAwesome.Sharp.IconButton();
             this.btnStatistics = new FontAwesome.Sharp.IconButton();
             this.btnPredefinedData = new FontAwesome.Sharp.IconButton();
             this.btnUsers = new FontAwesome.Sharp.IconButton();
@@ -58,6 +59,7 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.panelMenu.Controls.Add(this.btnSecurity);
             this.panelMenu.Controls.Add(this.btnStatistics);
             this.panelMenu.Controls.Add(this.btnPredefinedData);
             this.panelMenu.Controls.Add(this.btnUsers);
@@ -67,6 +69,31 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(220, 644);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnSecurity
+            // 
+            this.btnSecurity.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSecurity.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSecurity.FlatAppearance.BorderSize = 0;
+            this.btnSecurity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSecurity.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnSecurity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSecurity.ForeColor = System.Drawing.Color.White;
+            this.btnSecurity.IconChar = FontAwesome.Sharp.IconChar.ShieldAlt;
+            this.btnSecurity.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(96)))), ((int)(((byte)(117)))));
+            this.btnSecurity.IconSize = 32;
+            this.btnSecurity.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSecurity.Location = new System.Drawing.Point(0, 439);
+            this.btnSecurity.Name = "btnSecurity";
+            this.btnSecurity.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.btnSecurity.Rotation = 0D;
+            this.btnSecurity.Size = new System.Drawing.Size(220, 80);
+            this.btnSecurity.TabIndex = 5;
+            this.btnSecurity.Text = "Security";
+            this.btnSecurity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSecurity.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSecurity.UseVisualStyleBackColor = true;
+            this.btnSecurity.Click += new System.EventHandler(this.btnSecurity_Click);
             // 
             // btnStatistics
             // 
@@ -314,5 +341,6 @@ namespace Healthcare020.WinUI.Forms.AdministratorDashboard
         private System.Windows.Forms.Label lblCopyright;
         private UserMenuDropdownPanel pnlUserMenuDropdown;
         private System.Windows.Forms.Panel pnlBody;
+        private FontAwesome.Sharp.IconButton btnSecurity;
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Net;
-using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Constants;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdministratorDashboard.Statistics;
+using HealthCare020.Core.Constants;
+using Healthcare020.WinUI.Forms.AdminDashboard.Statistics;
 using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Forms.AdministratorDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmStatisticsMenu : Form
     {

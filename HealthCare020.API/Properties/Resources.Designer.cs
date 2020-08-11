@@ -70,6 +70,15 @@ namespace HealthCare020.API.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Healthcare020_Pacijenti.
+        /// </summary>
+        internal static string FaceAPI_PersonGroupName {
+            get {
+                return ResourceManager.GetString("FaceAPI_PersonGroupName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Healthcare020_Mobile.
         /// </summary>
         internal static string IdpClientIdMobile {

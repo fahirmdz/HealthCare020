@@ -1,22 +1,22 @@
-﻿using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Models;
-using Healthcare020.WinUI.Properties;
-using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Constants;
-using HealthCare020.Core.Enums;
-using HealthCare020.Core.Models;
-using HealthCare020.Core.Request;
-using HealthCare020.Core.ResourceParameters;
-using MaterialSkin.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
+using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
+using HealthCare020.Core.ResourceParameters;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
+using MaterialSkin.Controls;
 
-namespace Healthcare020.WinUI.Forms.AdministratorDashboard
+namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
     public partial class frmNewUser : Form
     {

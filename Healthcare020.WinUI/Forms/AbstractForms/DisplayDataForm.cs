@@ -35,6 +35,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             dgrvMain.SetDgrvDesignConfig();
             MainDgrv = dgrvMain;
             dgrvMain.AllowUserToDeleteRows = true;
+            ResourceParameters=new BaseResourceParameters();
 
             btnPrevPage.Enabled = false;
 

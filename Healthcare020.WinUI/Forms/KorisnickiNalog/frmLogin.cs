@@ -1,5 +1,4 @@
-﻿using Healthcare020.WinUI.Forms.AdministratorDashboard;
-using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
+﻿using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
@@ -12,6 +11,7 @@ using Microsoft.Win32;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Forms.AdminDashboard;
 
 namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
@@ -58,13 +58,18 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
         public async void Login(string _username = "", string _password = "", bool ExternalLoginCall = false)
         {
-            if (!ExternalLoginCall && !ValidateInput())
+            if (ExternalLoginCall)
             {
-                return;
+                txtUsername.Text = _username;
+                txtPassword.Text = _password;
             }
 
-            var username = ExternalLoginCall ? _username : txtUsername.Text;
-            var password = ExternalLoginCall ? _password : txtPassword.Text;
+            var username = txtUsername.Text;
+            var password = txtPassword.Text;
+
+            if (!ValidateInput(setErrors:!ExternalLoginCall))
+                return;
+
 
             var accountLockedResult =
                 await _apiService.Post<bool>(new LoginDto { Username = username, Password = password });
@@ -140,12 +145,12 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             }
         }
 
-        private bool ValidateInput()
+        private bool ValidateInput(bool setErrors=true)
         {
-            if (!txtUsername.ValidTextInput(Errors, Validation.TextInputType.Mixed))
+            if (!txtUsername.ValidTextInput(Errors, Validation.TextInputType.Mixed,setErrors))
                 return false;
 
-            if (!txtPassword.ValidTextInput(Errors, Validation.TextInputType.Mixed))
+            if (!txtPassword.ValidTextInput(Errors, Validation.TextInputType.Mixed,setErrors))
                 return false;
 
             Errors.Clear();

@@ -163,6 +163,12 @@
     <Compile Include="Forms\AdminDashboard\frmPredefinedDataMenu.Designer.cs">
       <DependentUpon>frmPredefinedDataMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminDashboard\frmSecurity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminDashboard\frmSecurity.Designer.cs">
+      <DependentUpon>frmSecurity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminDashboard\frmStatisticsMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -445,6 +451,7 @@
     <Compile Include="Helpers\Validation.cs" />
     <Compile Include="Models\APIServiceResult.cs" />
     <Compile Include="Models\ComboBoxItem.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -462,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\frmPredefinedDataMenu.resx">
       <DependentUpon>frmPredefinedDataMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminDashboard\frmSecurity.resx">
+      <DependentUpon>frmSecurity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminDashboard\frmStatisticsMenu.resx">
       <DependentUpon>frmStatisticsMenu.cs</DependentUpon>

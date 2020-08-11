@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
@@ -14,7 +8,7 @@ using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
+namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
     public partial class frmRoles : DisplayDataForm<TwoFieldsDto>
     {

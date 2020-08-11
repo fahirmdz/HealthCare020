@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI.Forms.AdministratorDashboard.PredefinedData
+﻿namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
     partial class frmNewNaucnaOblast
     {

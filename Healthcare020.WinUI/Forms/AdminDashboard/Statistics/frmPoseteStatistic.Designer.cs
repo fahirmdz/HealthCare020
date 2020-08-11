@@ -1,4 +1,4 @@
-﻿namespace Healthcare020.WinUI.Forms.AdministratorDashboard.Statistics
+﻿namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
     partial class frmPoseteStatistic
     {

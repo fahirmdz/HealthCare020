@@ -25,5 +25,7 @@
         public const string ZahteviZaPosetuAutoSchedulingRoute = "zahtevi-za-posetu"+"/auto-scheduling";
         public const string AccountLockedRoute = KorisniciRoute + "/zakljucan";
         public const string FaceRecognitionRoute = "face-recognition";
+        public static string FaceRecognitionRoutePersonGroup = $"{FaceRecognitionRoute}/person-group";
+        public static string FaceRecognitionPersonGroupPersonsRoute = $"{FaceRecognitionRoutePersonGroup}/persons";
     }
 }

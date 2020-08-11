@@ -340,6 +340,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sigurnost - Face ID person group - Pacijenti.
+        /// </summary>
+        public static string frmSecurityTitle {
+            get {
+                return ResourceManager.GetString("frmSecurityTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administratorski meni.
         /// </summary>
         public static string frmStartMenuAdministrator {

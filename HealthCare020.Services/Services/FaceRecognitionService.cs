@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services.Services
@@ -21,6 +22,24 @@ namespace HealthCare020.Services.Services
         {
             _logger = LogManager.GetCurrentClassLogger();
             _faceClinet = new FaceClient(new ApiKeyServiceClientCredentials(Resources.AzureFaceAPI_Key)) { Endpoint = Resources.AzureFaceAPI_Endpoint };
+        }
+
+        public async Task<IList<Person>> GetPersonGroupPersonsList(string personGroupId, int pageSize=6,string startPersonId="")
+        {
+            try
+            {
+                var result = await _faceClinet.PersonGroupPerson.ListWithHttpMessagesAsync(personGroupId,start:startPersonId,top:pageSize);
+                if (result.Response.StatusCode == HttpStatusCode.OK)
+                {
+                    return result.Body;
+                }
+                _logger.Error(await result.Response.Content.ReadAsStringAsync());
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+            return new List<Person>();
         }
 
         public async Task<bool> CreatePersonGroup(string personGroupId, string groupName)
@@ -39,14 +58,14 @@ namespace HealthCare020.Services.Services
 
         public async Task<Person> CreatePersonInGroup(string personGroupId, string name)
         {
-            var person = await _faceClinet.PersonGroupPerson.CreateAsync(personGroupId, name);
+            var person = await _faceClinet.PersonGroupPerson.CreateAsync(personGroupId, name,$"Date and time created: {DateTime.Now:g}");
 
             return person;
         }
 
         public async Task<PersistedFace> AddFaceToPerson(string personGroupId, Guid personId, Stream stream)
         {
-            var persistedFace= await _faceClinet.PersonGroupPerson.AddFaceFromStreamAsync(personGroupId, personId, stream);
+            var persistedFace = await _faceClinet.PersonGroupPerson.AddFaceFromStreamAsync(personGroupId, personId, stream);
             if (!await TrainModel(personGroupId))
                 return null;
             return persistedFace;
@@ -69,7 +88,7 @@ namespace HealthCare020.Services.Services
                     return null;
 
                 var identificationResultResponse = (await _faceClinet.Face.IdentifyWithHttpMessagesAsync(
-                    faceIds: new List<Guid> {detectedFace.FaceId.Value},
+                    faceIds: new List<Guid> { detectedFace.FaceId.Value },
                     personGroupId,
                     confidenceThreshold: 0.5));
 

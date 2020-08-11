@@ -1,11 +1,11 @@
-﻿using Healthcare020.WinUI.Services;
-using HealthCare020.Core.Constants;
-using System;
+﻿using System;
 using FontAwesome.Sharp;
+using HealthCare020.Core.Constants;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
 
-namespace Healthcare020.WinUI.Forms.AdministratorDashboard.Statistics
+namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
     public partial class frmZahteviZaPregledStatistic : StatisticChartForm
     {

@@ -6,10 +6,13 @@ using HealthCare020.Services.Interfaces;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using IdentityServer4.Stores;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Healthcare020.OAuth.Controllers
 {
@@ -18,19 +21,32 @@ namespace Healthcare020.OAuth.Controllers
     {
         private readonly IKorisnikService _korisnikService;
         private readonly IEventService _events;
+        private readonly IClientStore _clientStore;
 
         public FaceRecognitionController(IKorisnikService korisnikService,
-            IEventService events)
+            IEventService events, IClientStore clientStore)
         {
             _korisnikService = korisnikService;
             _events = events;
+            _clientStore = clientStore;
         }
 
         [HttpPost]
         [Consumes("application/x-www-form-urlencoded")]
         public async Task<IActionResult> LoginWithFaceID([FromForm]TokenEndpointRequestBody model)
         {
-            var img = Convert.FromBase64String(model.Image);
+            if (model == null)
+                return BadRequest();
+            byte[] img=null;
+
+            try
+            {
+                 img = Convert.FromBase64String(model.Image);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             var korisnickiNalog = await _korisnikService.Authenticate(img);
             if (korisnickiNalog == null)
