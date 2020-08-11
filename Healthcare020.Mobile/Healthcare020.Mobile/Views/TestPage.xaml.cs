@@ -23,15 +23,12 @@ namespace Healthcare020.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TestPage : ContentPage
     {
-        private readonly IFaceRecognitionService _faceRecognitionService;
         public TestViewModel TestVM;
 
         public TestPage()
         {
             InitializeComponent();
             BindingContext = TestVM=new TestViewModel();
-
-            _faceRecognitionService=new FaceRecognitionService();
 
         }
 
@@ -60,8 +57,6 @@ namespace Healthcare020.Mobile.Views
 
                     TestVM.PictureToAdd = ImageSource.FromStream(() => UploadedPic.GetStream());
                     TestVM.PictureToAddAsBytes = UploadedPic.GetStream().AsByteArray();
-                    if (await _faceRecognitionService.AddPersonToGruop(PictureToAddImePrezime.Text, TestVM.PictureToAddAsBytes))
-                        UserDialogs.Instance.Alert("Uspesno dodat korisnik u Pacijentu group");
                 }
             }
             catch
@@ -86,7 +81,6 @@ namespace Healthcare020.Mobile.Views
                 {
                     TestVM.PictureToIdentify = ImageSource.FromStream(() => UploadedPic.GetStream());
                     TestVM.PictureToIdentifyAsBytes = UploadedPic.GetStream().AsByteArray();
-                    await _faceRecognitionService.IdentifyFace(TestVM.PictureToIdentifyAsBytes);
                 }
             }
             catch
@@ -97,15 +91,12 @@ namespace Healthcare020.Mobile.Views
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
-            if (await _faceRecognitionService.DeletePersonGroup(AppResources.FaceAPI_PersonGroupId))
-                await UserDialogs.Instance.AlertAsync("Uspesno izbrisana person grupa");
 
         }
 
         private async void CreatePersonGroupButton_OnClicked(object sender, EventArgs e)
         {
-            if (await _faceRecognitionService.CreatePersounGroup(AppResources.FaceAPI_PersonGroupId,"Person group - Pacijenti"))
-                await UserDialogs.Instance.AlertAsync($"Uspesno kreirana grupa -> Person group - Pacijenti");
+
         }
 
         private void WelcomeBtn_OnClicked(object sender, EventArgs e)

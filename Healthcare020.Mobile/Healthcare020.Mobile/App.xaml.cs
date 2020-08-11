@@ -33,13 +33,15 @@ namespace Healthcare020.Mobile
             DependencyService.Register<MockDataStore>();
             Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
 
-            MainPage = new PacijentDasbhboardTabbedPage();
+            MainPage = new TestPage();
 
 
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
+            await Auth.AuthenticateWithPassword("pacijent", "testtest");
+
             Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture= new CultureInfo("bs-Latn-BA");
         }
 

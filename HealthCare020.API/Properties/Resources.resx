@@ -117,55 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Address" xml:space="preserve">
-    <value>Adresa</value>
+  <data name="FaceAPI_PersonGroupId" xml:space="preserve">
+    <value>healthcare020_pacijenti_person_group_00423122</value>
   </data>
-  <data name="City" xml:space="preserve">
-    <value>Grad</value>
+  <data name="IdpClientIdMobile" xml:space="preserve">
+    <value>Healthcare020_Mobile</value>
   </data>
-  <data name="EmailAddress" xml:space="preserve">
-    <value>E-mail adresa</value>
+  <data name="IdpClientSecretMobile" xml:space="preserve">
+    <value>devsecret_mobile</value>
   </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Ime</value>
-  </data>
-  <data name="FutureDateTimeConstraintMessage" xml:space="preserve">
-    <value>Datum mora biti u budućnosti</value>
-  </data>
-  <data name="Gender" xml:space="preserve">
-    <value>Pol</value>
-  </data>
-  <data name="InvalidGenderFormatMessage" xml:space="preserve">
-    <value>Neispravan format pola. Trebao bi biti 'M' ili 'Z'</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Prezime</value>
-  </data>
-  <data name="PhoneNumber" xml:space="preserve">
-    <value>Broj telefona</value>
-  </data>
-  <data name="ProfilePicture" xml:space="preserve">
-    <value>Profilna slika</value>
-  </data>
-  <data name="RequiredPickMessage" xml:space="preserve">
-    <value>Morate odabrati #</value>
-    <comment># will be replaced with property name</comment>
-  </data>
-  <data name="RequiredReplacementValidationError" xml:space="preserve">
-    <value># je obavezno polje</value>
-  </data>
-  <data name="RequiredValidationError" xml:space="preserve">
-    <value>Obavezno polje</value>
-  </data>
-  <data name="ResourceNotFoundValidationMessage" xml:space="preserve">
-    <value># # nije pronađen/a</value>
-    <comment># will be replaced with resource name</comment>
-  </data>
-  <data name="StringLengthValidationErrorMask" xml:space="preserve">
-    <value>Polje može sadržati između # i # karaktera</value>
-    <comment># will be replaced with minimum and maximum string length</comment>
-  </data>
-  <data name="UnsuccessfulFaceIdAuthentication" xml:space="preserve">
-    <value>Face ID autentifikacija nije uspela</value>
+  <data name="IdpTokenEndpoint" xml:space="preserve">
+    <value>https://healthcare020-oauth.com:5005/connect/token</value>
   </data>
 </root>

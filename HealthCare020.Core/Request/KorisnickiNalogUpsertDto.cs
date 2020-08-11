@@ -21,6 +21,8 @@ namespace HealthCare020.Core.Request
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
 
+        public string FaceId { get; set; }
+
         public string RoleType { get; set; } = string.Empty;
     }
 }

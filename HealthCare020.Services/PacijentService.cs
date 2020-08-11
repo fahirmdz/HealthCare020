@@ -8,14 +8,16 @@ using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using HealthCare020.Services.Properties;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
+using NLog;
 using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Core.Extensions;
 
 namespace HealthCare020.Services
 {
@@ -23,6 +25,8 @@ namespace HealthCare020.Services
     {
         private readonly ISecurityService _securityService;
         private readonly ICipherService _cipherService;
+        private readonly IFaceRecognitionService _faceRecognitionService;
+        private readonly Logger _logger;
 
         public PacijentService(IMapper mapper,
             HealthCare020DbContext dbContext,
@@ -30,11 +34,15 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IHttpContextAccessor httpContextAccessor,
             IAuthService authService,
-            ISecurityService securityService, ICipherService cipherService) :
+            ISecurityService securityService,
+            ICipherService cipherService,
+            IFaceRecognitionService faceRecognitionService) :
             base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
+            _logger = LogManager.GetCurrentClassLogger();
             _securityService = securityService;
             _cipherService = cipherService;
+            _faceRecognitionService = faceRecognitionService;
         }
 
         public override IQueryable<Pacijent> GetWithEagerLoad(int? id = null)
@@ -69,12 +77,15 @@ namespace HealthCare020.Services
                 return ServiceResult.BadRequest("Lozinke se ne podudaraju");
             }
 
+            var addedPersonId =
+                await AddFaceForUser(dtoForCreation.ProfilePicture, dtoForCreation.KorisnickiNalog.Username);
+
             korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
             korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, dtoForCreation.KorisnickiNalog.Password);
-            korisnickiNalog.FaceId = await GetUniqueInteger();
 
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;
+            korisnickiNalog.FaceId = addedPersonId.ToString();
 
             await _dbContext.KorisnickiNalozi.AddAsync(korisnickiNalog);
             await _dbContext.SaveChangesAsync();
@@ -100,10 +111,9 @@ namespace HealthCare020.Services
             if (zdravstvenaKnjizicaFromDb != null)
             {
                 zdravstvenaKnjizicaFromDb.LicniPodaci.ProfilePicture = dtoForCreation.ProfilePicture;
-                 _dbContext.Update(zdravstvenaKnjizicaFromDb.LicniPodaci);
-                 await _dbContext.SaveChangesAsync();
+                _dbContext.Update(zdravstvenaKnjizicaFromDb.LicniPodaci);
+                await _dbContext.SaveChangesAsync();
             }
-
 
             return ServiceResult.OK(_mapper.Map<PacijentDtoLL>(pacijent));
         }
@@ -120,7 +130,12 @@ namespace HealthCare020.Services
             if (pacijent == null)
                 return ServiceResult.NotFound($"Pacijent povezan sa vasim korisnickim nalogom nije pronadjen.");
 
+            var addedPersonId = await AddFaceForUser(dtoForUpdate.ProfilePicture, dtoForUpdate.KorisnickiNalog.Username, Guid.Parse(pacijent.KorisnickiNalog.FaceId), update: true);
+
             _mapper.Map(dtoForUpdate.KorisnickiNalog, pacijent.KorisnickiNalog);
+
+            pacijent.KorisnickiNalog.FaceId = _cipherService.Encrypt(addedPersonId.ToString());
+
             await _dbContext.SaveChangesAsync();
 
             return ServiceResult.OK(_mapper.Map<PacijentDtoLL>(pacijent));
@@ -257,6 +272,37 @@ namespace HealthCare020.Services
             } while (await _dbContext.KorisnickiNalozi.AnyAsync(x => x.FaceId == number.ToString()));
 
             return number.ToString();
+        }
+
+        private async Task<Guid> AddFaceForUser(byte[] image, string username, Guid? personId = null, bool update = false)
+        {
+            if (!update)
+            {
+                var addedPerson =
+                    await _faceRecognitionService.CreatePersonInGroup(Resources.FaceAPI_PersonGroupId, username);
+
+                if (addedPerson == null)
+                {
+                    var logger = LogManager.GetCurrentClassLogger();
+                    logger.Error($"Greška pri dodavanju pacijenta u person grupu Face API-ja. Username:{username}");
+                }
+
+                personId = addedPerson.PersonId;
+            }
+
+            using (var ms = new MemoryStream(image))
+            {
+                var addedFace = await
+                    _faceRecognitionService.AddFaceToPerson(Resources.FaceAPI_PersonGroupId, personId.Value, ms);
+
+                if (addedFace == null)
+                {
+                    var logger = LogManager.GetCurrentClassLogger();
+                    logger.Error($"Greška pri dodavanju lica u person grupu Face API-ja. Username:{username}");
+                }
+            }
+
+            return personId.Value;
         }
     }
 }

@@ -11,19 +11,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Plugin.Media;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
     public class LoginViewModel : BaseValidationViewModel
     {
-        private IFaceRecognitionService _faceRecognitionService;
         private IAPIService _apiService;
 
         public LoginViewModel()
         {
             _apiService = new APIService();
-            _faceRecognitionService = new FaceRecognitionService();
             //Init commands
             LoginCommand = new Command(async () => await Login());
             RegisterNavigationCommand = new Command(() => Application.Current.MainPage = new RegisterPage());
@@ -34,10 +33,10 @@ namespace Healthcare020.Mobile.ViewModels
 
         public async Task FaceIDLogin()
         {
-            var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(
-                new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+            //var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(
+            //    new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
 
-            //var photo = await CrossMedia.Current.PickPhotoAsync();
+            var photo = await CrossMedia.Current.PickPhotoAsync();
 
             if (photo == null)
                 return;
@@ -47,22 +46,13 @@ namespace Healthcare020.Mobile.ViewModels
 
             SelfieForFaceID = photo.GetStream().AsByteArray();
 
-            var authenticatedPerson = await _faceRecognitionService.IdentifyFace(SelfieForFaceID);
 
-            if (authenticatedPerson == null)
-            {
-                IsBusy = false;
-                this.EnabledLoadingSpinner = false;
-                await Task.Delay(100);
-                NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
-                return;
-            }
+
 
             _apiService.ChangeRoute(Routes.PacijentiRoute);
             var result = await _apiService.Get<PacijentDtoEL>(new PacijentResourceParameters
             {
                 EagerLoaded = true,
-                Username = authenticatedPerson.Name
             });
 
             if (!result.Succeeded || !result.HasData)

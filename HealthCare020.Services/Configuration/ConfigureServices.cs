@@ -25,6 +25,7 @@ namespace HealthCare020.Services.Configuration
                 });
 
             services.AddScoped<ICipherService, CipherService>();
+            services.AddScoped<IFaceRecognitionService, FaceRecognitionService>();
 
             services.Configure<ServicesConfiguration>(Configuration.GetSection("ServicesConfiguration"));
             services.ConfigureHealthcare020Core();
@@ -98,10 +99,6 @@ namespace HealthCare020.Services.Configuration
             services
                 .AddScoped<ICRUDService<Uputnica, UputnicaDtoLL, UputnicaDtoEL, UputnicaResourceParameters,
                     UputnicaUpsertDto, UputnicaUpsertDto>, UputnicaService>();
-
-            services
-                .AddScoped<ICRUDService<FaceRecognition, FaceRecognitionDto, FaceRecognitionDto, BaseResourceParameters,
-                    FaceRecognitionRecordUpsertDto, FaceRecognitionRecordUpsertDto>, FaceRegonitionRecordService>();
 
             services.AddScoped<IRadnikService, RadnikService>();
 

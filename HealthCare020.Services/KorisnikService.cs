@@ -9,11 +9,13 @@ using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using HealthCare020.Services.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -26,6 +28,7 @@ namespace HealthCare020.Services
     {
         private readonly ISecurityService _securityService;
         private readonly ICipherService _cipherService;
+        private readonly IFaceRecognitionService _faceRecognitionService;
 
         public KorisnikService(IMapper mapper,
             HealthCare020DbContext dbContext,
@@ -34,10 +37,11 @@ namespace HealthCare020.Services
             IHttpContextAccessor httpContextAccessor,
             ISecurityService securityService,
             IAuthService authService,
-            ICipherService cipherService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
+            ICipherService cipherService, IFaceRecognitionService faceRecognitionService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _securityService = securityService;
             _cipherService = cipherService;
+            _faceRecognitionService = faceRecognitionService;
         }
 
         public override IQueryable<KorisnickiNalog> GetWithEagerLoad(int? id = null)
@@ -83,7 +87,11 @@ namespace HealthCare020.Services
 
             korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
             korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, request.Password);
-            korisnickiNalog.FaceId = _cipherService.Encrypt(Guid.NewGuid().ToString() + Guid.NewGuid().ToString());
+
+            if (!string.IsNullOrWhiteSpace(request.FaceId))
+            {
+                korisnickiNalog.FaceId = _cipherService.Encrypt(request.FaceId);
+            }
 
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;
@@ -220,6 +228,23 @@ namespace HealthCare020.Services
                 }
             }
             return null;
+        }
+
+        public async Task<KorisnickiNalogDtoLL> Authenticate(byte[] imageToIdentity)
+        {
+            var stream = new MemoryStream(imageToIdentity);
+            var identifiedPersonGuid = await _faceRecognitionService.IdentifyFace(stream, Resources.FaceAPI_PersonGroupId);
+            if (!identifiedPersonGuid.HasValue)
+                return null;
+
+            var encryptedPersonGuid = identifiedPersonGuid.ToString();
+
+            var korisnickiNalog =
+                await _dbContext.KorisnickiNalozi.FirstOrDefaultAsync(x => x.FaceId == encryptedPersonGuid);
+            if (korisnickiNalog == null)
+                return null;
+
+            return _mapper.Map<KorisnickiNalog, KorisnickiNalogDtoLL>(korisnickiNalog);
         }
 
         public async Task<ServiceResult> ToggleLock(int id, bool isForLockout, DateTime? until = null)

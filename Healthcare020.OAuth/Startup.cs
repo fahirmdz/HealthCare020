@@ -1,4 +1,5 @@
 using System;
+using HealthCare020.Core.Constants;
 using Healthcare020.LoggerService.Configuration;
 using Healthcare020.LoggerService.Interfaces;
 using Healthcare020.OAuth.Configuration;
@@ -45,14 +46,21 @@ namespace Healthcare020.OAuth
             };
             services.AddSingleton<ICorsPolicyService>(cors);
 
-            services.AddIdentityServer(opt=>opt.IssuerUri="https://healthcare020-oauth.com/")
+            services.AddIdentityServer(opt=>
+                {
+                    opt.IssuerUri = "https://healthcare020-oauth.com/";
+                    opt.Discovery.CustomEntries.Add("face-recognition",$"~/{Routes.FaceRecognitionRoute}");
+                })
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
+                .AddInMemoryApiResources(InMemoryConfig.Apis)
                 .AddDeveloperSigningCredential()
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 
             services.AddHealthCare020Services(Configuration);
+
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
@@ -62,9 +70,14 @@ namespace Healthcare020.OAuth
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseRouting();
             app.ConfigureExceptionHandler(logger);
 
             app.UseIdentityServer();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

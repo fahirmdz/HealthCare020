@@ -11,7 +11,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthCare020.Core.Constants;
+using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
+using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Helpers;
 using Xamarin.Forms;
 
@@ -19,7 +21,7 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        private readonly APIService _apiSerivce;
+        private  APIService _apiSerivce;
         private MediaFile UploadedPic;
         private readonly IMapper _mapper;
 
@@ -28,31 +30,27 @@ namespace Healthcare020.Mobile.ViewModels
             _mapper = mapper;
             var FontAwesomeRegular = Application.Current.Resources["FontAwesomeRegular"] as OnPlatform<string>;
 
-            _apiSerivce = new APIService(Routes.PacijentiRoute);
-            _profilePicImageSource = new FontImageSource
-            {
-                FontFamily = FontAwesomeRegular,
-                Glyph = IconFont.UserCircle,
-                Color = Color.FromRgb(83, 107, 128),
-                Size = 70
-            };
 
-            InitializeAsync();
+            var UserCircleIcon = IconFont.UserCircle.GetIcon(70);
+            UserCircleIcon.Color = (Color) Application.Current.Resources[ResourceKeys.CustomNavyBlueDarkColor];
+
+            ProfilePicImageSource = UserCircleIcon;
             UploadedPic = null;
         }
 
-        public async void InitializeAsync()
+        public async Task InitializeAsync()
         {
             if (!Auth.IsAuthenticated())
             {
                 NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
                 return;
             }
+            _apiSerivce = new APIService(Routes.PacijentiRoute);
 
             var pacijentResult = await _apiSerivce.Get<PacijentDtoEL>(new PacijentResourceParameters
             {
                 EagerLoaded = true,
-                KorisnickiNalogId = Auth.KorisnickiNalog.Id
+                KorisnickiNalogId = Auth.KorisnickiNalog?.Id
             });
             //Pacijent = DevelopmentTestEntities.GetTestPacijent();
 
@@ -73,7 +71,6 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         private ImageSource _profilePicImageSource;
-
         public ImageSource ProfilePicImageSource
         {
             get => _profilePicImageSource;
@@ -111,32 +108,29 @@ namespace Healthcare020.Mobile.ViewModels
 
         private async Task UpdateLicniPodaci()
         {
-            //_apiSerivce.ChangeRoute(Routes.LicniPodaciRoute);
-            //byte[] uploadedPicBytes=null;
+            _apiSerivce.ChangeRoute(Routes.LicniPodaciRoute);
+            byte[] uploadedPicBytes = null;
 
-            //if (UploadedPic != null)
-            //{
-            //    using (var ms = new MemoryStream())
-            //    {
-            //        await UploadedPic.GetStream().CopyToAsync(ms);
-            //        uploadedPicBytes = ms.ToArray();
-            //    }
-            //}
+            if (UploadedPic != null)
+            {
+                using var ms = new MemoryStream();
+                await UploadedPic.GetStream().CopyToAsync(ms);
+                uploadedPicBytes = ms.ToArray();
+            }
 
-            //var licniPodaci = Pacijent.ZdravstvenaKnjizica.LicniPodaci;
-            //var licniPodaciUpsertDto = _mapper.Map<LicniPodaciUpsertDto>(licniPodaci);
+            var licniPodaci = Pacijent.ZdravstvenaKnjizica.LicniPodaci;
+            var licniPodaciUpsertDto = _mapper.Map<LicniPodaciUpsertDto>(licniPodaci);
 
-            //licniPodaciUpsertDto.ProfilePicture = uploadedPicBytes;
+            licniPodaciUpsertDto.ProfilePicture = uploadedPicBytes;
 
-            //var updateResult = await _apiSerivce.Update<LicniPodaciDto>(Pacijent.ZdravstvenaKnjizica.LicniPodaci.Id, licniPodaciUpsertDto);
+            var updateResult = await _apiSerivce.Update<LicniPodaciDto>(Pacijent.ZdravstvenaKnjizica.LicniPodaci.Id, licniPodaciUpsertDto);
 
-            //if (updateResult.Succeeded)
-            //{
-            //    ProfilePicImageSource = ImageSource.FromStream(()=>UploadedPic.GetStream());
-            //}
+            if (updateResult.Succeeded)
+            {
+                ProfilePicImageSource = ImageSource.FromStream(() => UploadedPic.GetStream());
+            }
 
-            ProfilePicImageSource = ImageSource.FromStream(() => UploadedPic.GetStream());
-            var toastCfg = new ToastConfig("Uspesno")
+            var toastCfg = new ToastConfig(AppResources.Success)
             {
                 Position = ToastPosition.Top,
                 MessageTextColor = System.Drawing.Color.White

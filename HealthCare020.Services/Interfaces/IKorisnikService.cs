@@ -12,12 +12,16 @@ namespace HealthCare020.Services.Interfaces
     {
         Task<KorisnickiNalogDtoLL> Authenticate(string username, string password);
 
+        Task<KorisnickiNalogDtoLL> Authenticate(byte[] imageToIdentity);
+
         Task<ServiceResult> ToggleLock(int id, bool isForLockout, DateTime? until = null);
 
         Task<ServiceResult> AddInRoles(int id, KorisnickiNalogRolesUpsertDto request);
 
         Task<ServiceResult> RemoveFromRoles(int id, KorisnickiNalogRolesUpsertDto request);
+
         Task<ServiceResult> ChangePassword(string currentPassword, string newPassword);
+
         Task<ServiceResult> AccountLocked(string username, string password);
     }
 }

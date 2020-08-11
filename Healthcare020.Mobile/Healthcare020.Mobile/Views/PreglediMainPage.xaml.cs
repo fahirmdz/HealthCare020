@@ -1,7 +1,6 @@
 ﻿using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Resources;
 using System;
-using Healthcare020.Mobile.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,8 +19,6 @@ namespace Healthcare020.Mobile.Views
 
         protected override async void OnAppearing()
         {
-            await Auth.AuthenticateWithPassword("pacijent", "testtest");
-
             base.OnAppearing();
             NavigationPageParent = (NavigationPage)Parent;
         }

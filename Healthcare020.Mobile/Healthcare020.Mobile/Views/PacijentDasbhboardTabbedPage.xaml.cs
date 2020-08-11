@@ -24,6 +24,7 @@ namespace Healthcare020.Mobile.Views
 
             this.SelectedTabColor = (Color)Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
             this.UnselectedTabColor = (Color)Application.Current.Resources[ResourceKeys.CustomNavyBlueDarkColor];
+
         }
 
         protected override async void OnAppearing()
