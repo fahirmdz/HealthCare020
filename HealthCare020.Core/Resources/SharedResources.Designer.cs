@@ -194,5 +194,14 @@ namespace HealthCare020.Core.Resources {
                 return ResourceManager.GetString("StringLengthValidationErrorMask", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Face ID autentifikacija nije uspela.
+        /// </summary>
+        public static string UnsuccessfulFaceIdAuthentication {
+            get {
+                return ResourceManager.GetString("UnsuccessfulFaceIdAuthentication", resourceCulture);
+            }
+        }
     }
 }

@@ -79,7 +79,16 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to a2cc66d67831414ebff902da6e1ce412.
+        ///   Looks up a localized string similar to https://healthcare020.cognitiveservices.azure.com/.
+        /// </summary>
+        public static string AzureFaceAPI_Endpoint {
+            get {
+                return ResourceManager.GetString("AzureFaceAPI_Endpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to e56df11bf5754139a03b2cc4170c2897.
         /// </summary>
         public static string AzureFaceAPI_Key {
             get {
@@ -436,6 +445,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string SettingsTabTitle {
             get {
                 return ResourceManager.GetString("SettingsTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uspešno.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         

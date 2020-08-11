@@ -24,6 +24,6 @@
         public const string ChangePasswordRoute = "change-password";
         public const string ZahteviZaPosetuAutoSchedulingRoute = "zahtevi-za-posetu"+"/auto-scheduling";
         public const string AccountLockedRoute = KorisniciRoute + "/zakljucan";
-        public const string FaceRecognitionRecordsRoute = "face-recognition-records";
+        public const string FaceRecognitionRoute = "face-recognition";
     }
 }

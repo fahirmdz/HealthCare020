@@ -1,20 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Claims;
-using HealthCare020.Core.Constants;
+﻿using HealthCare020.Core.Constants;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Healthcare020.OAuth.Configuration
 {
     public static class InMemoryConfig
     {
-        public static IEnumerable<IdentityResource> GetIdentityResources()=>
+        public static string FaceRecognitionScope = "face-recognition";
+        public static IEnumerable<IdentityResource> GetIdentityResources() =>
         new List<IdentityResource>
         {
             new IdentityResources.OpenId(),
-            new IdentityResources.Profile()
+            new IdentityResources.Profile(),
+            new IdentityResource(FaceRecognitionScope,new []{""})
+        };
+
+        public static IEnumerable<ApiResource> Apis = new List<ApiResource>
+        {
+            // local API
+            new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
         public static IEnumerable<Client> GetClients() =>
@@ -25,7 +32,7 @@ namespace Healthcare020.OAuth.Configuration
                     ClientId = OAuthConstants.WebAPIClientId,
                     ClientSecrets = new [] { new Secret("devsecret_api".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId },
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,FaceRecognitionScope,IdentityServerConstants.LocalApi.ScopeName },
                     RefreshTokenUsage = TokenUsage.ReUse,
                     RefreshTokenExpiration = TokenExpiration.Sliding,
                     AbsoluteRefreshTokenLifetime = 2592000,
@@ -36,7 +43,7 @@ namespace Healthcare020.OAuth.Configuration
                     ClientId = OAuthConstants.MobileClientId,
                     ClientSecrets = new [] { new Secret("devsecret_mobile".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId },
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,FaceRecognitionScope,IdentityServerConstants.LocalApi.ScopeName },
                     RefreshTokenUsage = TokenUsage.ReUse,
                     RefreshTokenExpiration = TokenExpiration.Sliding,
                     AbsoluteRefreshTokenLifetime = 2592000,
@@ -47,12 +54,12 @@ namespace Healthcare020.OAuth.Configuration
                     ClientId = OAuthConstants.DesktopClientId,
                     ClientSecrets = new [] { new Secret("devsecret_desktop".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId },
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.LocalApi.ScopeName },
                     RefreshTokenUsage = TokenUsage.ReUse,
                     RefreshTokenExpiration = TokenExpiration.Sliding,
                     AbsoluteRefreshTokenLifetime = 2592000,
                     AllowOfflineAccess = true
-                }
+                    }
             };
 
         public static List<TestUser> GetUsers() =>

@@ -124,8 +124,11 @@
     <value>https://192.168.100.18:7500/api/</value>
     <comment> 10.0.2.2:5001</comment>
   </data>
+  <data name="AzureFaceAPI_Endpoint" xml:space="preserve">
+    <value>https://healthcare020.cognitiveservices.azure.com/</value>
+  </data>
   <data name="AzureFaceAPI_Key" xml:space="preserve">
-    <value>a2cc66d67831414ebff902da6e1ce412</value>
+    <value>e56df11bf5754139a03b2cc4170c2897</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Izmena lozinke</value>
@@ -246,6 +249,9 @@
   </data>
   <data name="SettingsTabTitle" xml:space="preserve">
     <value>Podešavanja</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Uspešno</value>
   </data>
   <data name="SuccessfullyCreatedAccount" xml:space="preserve">
     <value>Uspešno kreiran korisnički nalog</value>

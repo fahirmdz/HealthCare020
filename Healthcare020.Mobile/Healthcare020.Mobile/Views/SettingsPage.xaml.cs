@@ -26,8 +26,9 @@ namespace Healthcare020.Mobile.Views
             ChangePasswordBtn.ImageSource = IconFont.Key.GetIcon(); ;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
+            await SettingsVM.InitializeAsync();
             base.OnAppearing();
             NavigationPageParent = (NavigationPage)Parent;
         }

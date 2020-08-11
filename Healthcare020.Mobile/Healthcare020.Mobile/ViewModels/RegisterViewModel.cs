@@ -23,11 +23,9 @@ namespace Healthcare020.Mobile.ViewModels
     public class RegisterViewModel : BaseValidationViewModel
     {
         private readonly IAPIService _apiService;
-        private readonly IFaceRecognitionService _faceRecognitionService;
 
         public RegisterViewModel(IAPIService apiService)
         {
-            _faceRecognitionService=new FaceRecognitionService();
             _apiService = apiService;
             UploadProfilePictureCommand = new Command(async () => await UploadProfilePicture());
             RegisterCommand = new Command(async () => await Register());
@@ -98,7 +96,6 @@ namespace Healthcare020.Mobile.ViewModels
 
             if (result.Succeeded)
             {
-                await _faceRecognitionService.AddPersonToGruop(Username, ProfilePictureAsBytes);
                 NotificationService.Instance.Success(AppResources.SuccessfullyCreatedAccount);
                 await Task.Delay(100);
                 Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
