@@ -223,7 +223,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://healthcare020-oauth.com:5005/connect/token.
+        ///   Looks up a localized string similar to https://192.168.100.18:7600/connect/token.
         /// </summary>
         public static string IdpTokenEndpoint {
             get {
@@ -237,6 +237,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string IdpTokenEndpointAndroid {
             get {
                 return ResourceManager.GetString("IdpTokenEndpointAndroid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://192.168.100.18:7600/face-recognition.
+        /// </summary>
+        public static string IdpTokenEndpointFaceId {
+            get {
+                return ResourceManager.GetString("IdpTokenEndpointFaceId", resourceCulture);
             }
         }
         
