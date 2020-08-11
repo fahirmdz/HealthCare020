@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Healthcare020.Mobile.Constants;
+using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
@@ -10,35 +11,35 @@ using HealthCare020.Core.ValidationAttributes;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Healthcare020.Mobile.Constants;
-using Healthcare020.Mobile.Helpers;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
     public class RegisterViewModel : BaseValidationViewModel
     {
-        private readonly IAPIService _apiService;
+        private IAPIService _apiService;
 
-        public RegisterViewModel(IAPIService apiService)
+        public RegisterViewModel()
         {
-            _apiService = apiService;
             UploadProfilePictureCommand = new Command(async () => await UploadProfilePicture());
             RegisterCommand = new Command(async () => await Register());
             CancelRegistrationCommand = new Command(() => { Application.Current.MainPage = new WelcomePage(); });
 
-
             var profilePicIcon = IconFont.User.GetIcon();
-            profilePicIcon.Color = (Color) Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
+            profilePicIcon.Color = (Color)Application.Current.Resources[ResourceKeys.HealthcareCyanColor];
 
             ProfilePicture = profilePicIcon;
         }
 
         #region Methods
+
+        public void Init()
+        {
+            _apiService = new APIService();
+        }
 
         private async Task UploadProfilePicture()
         {
@@ -98,7 +99,10 @@ namespace Healthcare020.Mobile.ViewModels
             {
                 NotificationService.Instance.Success(AppResources.SuccessfullyCreatedAccount);
                 await Task.Delay(100);
-                Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
+                if(await Auth.AuthenticateWithPassword(upsertDto.KorisnickiNalog.Username,upsertDto.KorisnickiNalog.Password))
+                {
+                    Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
+                }
             }
             else
             {
@@ -129,8 +133,7 @@ namespace Healthcare020.Mobile.ViewModels
         public ImageSource ProfilePicture
         {
             get => _profilePicture;
-            set=>SetProperty(ref _profilePicture, value);
-
+            set => SetProperty(ref _profilePicture, value);
         }
 
         private string _brojKnjizice;

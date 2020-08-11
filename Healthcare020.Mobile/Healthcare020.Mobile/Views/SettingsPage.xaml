@@ -140,7 +140,11 @@
                             FontSize="{StaticResource FontSize-Smaller}"
                             HorizontalOptions="Center"
                             Text="Delete account"
-                            TextColor="DarkRed" />
+                            TextColor="DarkRed">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="DeleteAccountLabel" Tapped="DeleteAccountLabel_OnTapped"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
                     </StackLayout>
                 </Grid>
             </StackLayout>

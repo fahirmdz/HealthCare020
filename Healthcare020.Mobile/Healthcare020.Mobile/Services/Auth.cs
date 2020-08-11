@@ -8,7 +8,6 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.ServiceModels;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -134,33 +133,48 @@ namespace Healthcare020.Mobile.Services
         //==================Helpers methods============================
         private static HttpContent GetTokenEndpointCredentialsRequestBodyContent(string username, string password)
         {
-            var formDataAsQueryString = HttpUtility.ParseQueryString(string.Empty);
-            formDataAsQueryString.Add("client_id", AppResources.IdpClientId);
-            formDataAsQueryString.Add("client_secret", AppResources.IdpClientSecret);
-            formDataAsQueryString.Add("grant_type", "password");
-            formDataAsQueryString.Add("username", username);
-            formDataAsQueryString.Add("password", password);
-            formDataAsQueryString.Add("scope", "openid offline_access");
+            try
+            {
+                var formDataAsQueryString = HttpUtility.ParseQueryString(string.Empty);
+                formDataAsQueryString.Add("client_id", AppResources.IdpClientId);
+                formDataAsQueryString.Add("client_secret", AppResources.IdpClientSecret);
+                formDataAsQueryString.Add("grant_type", "password");
+                formDataAsQueryString.Add("username", username);
+                formDataAsQueryString.Add("password", password);
+                formDataAsQueryString.Add("scope", "openid offline_access");
 
-            return new StringContent(formDataAsQueryString.ToString(), Encoding.UTF8, "application/x-www-form-urlencoded");
+                return new StringContent(formDataAsQueryString.ToString(), Encoding.UTF8,
+                    "application/x-www-form-urlencoded");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private static HttpContent GetTokenEndpointFaceRecognitionRequestBodyContent(byte[] image)
         {
-            if (image == null || !image.Any())
-                return null;
-
-            var formDataDictionary = new Dictionary<string, string>
+            try
             {
-                {"ClientId", AppResources.IdpClientId },
-                {"ClientSecret", AppResources.IdpClientSecret },
-                {"GrantType", "password" },
-                {"Image", Convert.ToBase64String(image) },
-                {"Scope", "openid offline_access face-recognition" }
-            };
-            var content = new FormUrlEncodedContent(formDataDictionary);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-            return content;
+                if (image == null || !image.Any())
+                    return null;
+
+                var requestBody = new
+                {
+                    ClientId = AppResources.IdpClientId,
+                    ClientSecret = AppResources.IdpClientSecret,
+                    GrantType = "password",
+                    Image = Convert.ToBase64String(image),
+                    Scope = "openid offline_access face-recognition"
+                };
+                var content =new StringContent(JsonConvert.SerializeObject(requestBody));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                return content;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private static async Task<TokenResponse> GetTokenAndSetAccessTokenAsync(HttpContent content, AuthType authType = AuthType.Credentials)
@@ -210,19 +224,27 @@ namespace Healthcare020.Mobile.Services
 
         private static async Task<bool> SetCurrentKorisnickiNalog()
         {
-            var apiSerivce = new APIService(Routes.KorisniciRoute);
-
-            var result = await apiSerivce.GetById<KorisnickiNalogDtoLL>(0);
-            if (!result.Succeeded)
+            try
             {
-                AccessToken = null;
+                var apiSerivce = new APIService(Routes.KorisniciRoute);
+
+                var result = await apiSerivce.GetById<KorisnickiNalogDtoLL>(0);
+                if (!result.Succeeded)
+                {
+                    AccessToken = null;
+                    return false;
+                }
+
+                KorisnickiNalog = result.Data;
+                var topRole = KorisnickiNalog.Roles?.Min(x => x);
+                Role = topRole.HasValue ? (RoleType)topRole : RoleType.Pacijent;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
                 return false;
             }
-            KorisnickiNalog = result.Data;
-            var topRole = KorisnickiNalog.Roles?.Min(x => x);
-            Role = topRole.HasValue ? (RoleType)topRole : RoleType.Pacijent;
-
-            return true;
         }
 
         //==================/Helpers methods============================

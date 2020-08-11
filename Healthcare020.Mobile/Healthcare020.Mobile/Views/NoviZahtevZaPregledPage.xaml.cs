@@ -1,22 +1,22 @@
 ﻿using System;
+using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Resources;
-using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.ViewModels;
 using Xamarin.Forms.Xaml;
 
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NoviZahtevZaPregledPage : BaseValidationContentPage
+    public partial class NoviZahtevZaPregledPage
     {
         private NoviZahtevZaPregledViewModel NoviZahtevZaPregledVM;
 
         public NoviZahtevZaPregledPage()
         {
-            Title = AppResources.NoviZahtevZaPregledPageTitle;
             InitializeComponent();
+            Title = AppResources.NoviZahtevZaPregledPageTitle;
 
-            BindingContext = NoviZahtevZaPregledVM = new NoviZahtevZaPregledViewModel(new APIService());
+            BindingContext = NoviZahtevZaPregledVM = ViewModelLocator.NoviZahtevZaPregledViewModel;
 
             //Validation requirements
             BaseValidationVM = NoviZahtevZaPregledVM;

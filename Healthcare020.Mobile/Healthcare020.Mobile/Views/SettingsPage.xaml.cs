@@ -47,5 +47,10 @@ namespace Healthcare020.Mobile.Views
         {
             await NavigationPageParent.PushAsync(page, true);
         }
+
+        private void DeleteAccountLabel_OnTapped(object sender, EventArgs e)
+        {
+           SettingsVM.DeleteAccountCommand.Execute(sender);
+        }
     }
 }

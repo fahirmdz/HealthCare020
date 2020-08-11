@@ -36,9 +36,9 @@ namespace Healthcare020.Mobile.Views
 
         protected override async void OnAppearing()
         {
+            await PreglediVM.Init();
             ResourceKeys.FlagIconsStyle.ChangeStyleSetterValue(nameof(IsVisible), true);
             base.OnAppearing();
-            await PreglediVM.Init();
         }
     }
 }

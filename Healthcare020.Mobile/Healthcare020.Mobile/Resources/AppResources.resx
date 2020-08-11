@@ -136,6 +136,9 @@
   <data name="ChangePasswordPageTitle" xml:space="preserve">
     <value>Izmena lozinke</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Potvrdi</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Datum</value>
   </data>
@@ -156,6 +159,9 @@
   </data>
   <data name="EditProfilePageTitle" xml:space="preserve">
     <value>Izmena profila</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Greška!</value>
   </data>
   <data name="ErrorWhenLoadingResourceMessage" xml:space="preserve">
     <value>Greška pri učitavanju</value>
@@ -207,11 +213,23 @@
   <data name="Napomena" xml:space="preserve">
     <value>Napomena</value>
   </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nova lozinka</value>
+  </data>
+  <data name="NewPasswordSameAsOldValidationError" xml:space="preserve">
+    <value>Lozinka se mora razlikovati od stare</value>
+  </data>
   <data name="NoviZahtevZaPregledPageTitle" xml:space="preserve">
     <value>Novi zahtev za pregled</value>
   </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Stara lozinka</value>
+  </data>
   <data name="OpisStanja" xml:space="preserve">
     <value>Opis stanja</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Potvrda lozinke</value>
   </data>
   <data name="PasswordDoNotMatchError" xml:space="preserve">
     <value>Lozinke se ne podudaraju</value>

@@ -16,9 +16,6 @@ namespace Healthcare020.Mobile.Helpers
             var container = new TinyIoCContainer();
             container.Register<IAPIService, APIService>();
 
-            container.Register<RegisterViewModel>(new RegisterViewModel(new APIService()));
-            container.Register<PosetaViewModel>(new PosetaViewModel(new APIService()));
-            container.Register<PreglediViewModel>(new PreglediViewModel());
 
 
             var cfg = new MapperConfiguration(MapperConfig.MapperConfiguration());

@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.ViewModels;
+using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,20 +14,14 @@ namespace Healthcare020.Mobile.Views
 
         public WelcomePage()
         {
-            WelcomeVM=new WelcomeViewModel();
-            BindingContext = WelcomeVM;
             InitializeComponent();
+            BindingContext = WelcomeVM = ViewModelLocator.WelcomeViewModel;
             LoadDataForCarouselView();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
         }
 
         private void LoadDataForCarouselView()
         {
-            WelcomeVM.ImageUrls= new ObservableCollection<SinglePropertyItemsViewModel<ImageSource>>
+            WelcomeVM.ImageUrls = new ObservableCollection<SinglePropertyItemsViewModel<ImageSource>>
             {
                 new SinglePropertyItemsViewModel<ImageSource>(){item= Device.RuntimePlatform==Device.Android?ImageSource.FromFile("welcome_poseta.png"):ImageSource.FromFile("Assets/welcome_Poseta.png")},
                 new SinglePropertyItemsViewModel<ImageSource>(){
@@ -44,7 +39,7 @@ namespace Healthcare020.Mobile.Views
 
         private void TEST_OnClicked(object sender, EventArgs e)
         {
-           Application.Current.MainPage=new TestPage();
+            Application.Current.MainPage = new TestPage();
         }
     }
 }

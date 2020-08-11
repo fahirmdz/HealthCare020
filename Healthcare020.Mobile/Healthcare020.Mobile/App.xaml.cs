@@ -5,6 +5,7 @@ using Healthcare020.Mobile.Views;
 using HealthCare020.Core.Extensions;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -33,15 +34,14 @@ namespace Healthcare020.Mobile
             DependencyService.Register<MockDataStore>();
             Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
 
-            MainPage = new TestPage();
-
-
+            if (!Auth.IsAuthenticated())
+                Task.Run(async () => { await Auth.AuthenticateWithPassword("pacijent", "testtet"); });
+            MainPage = new PacijentDasbhboardTabbedPage();
         }
 
         protected override async void OnStart()
         {
-            if (!Auth.IsAuthenticated())
-                await Auth.AuthenticateWithPassword("pacijent", "testtest");
+
 
             Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture= new CultureInfo("bs-Latn-BA");
         }

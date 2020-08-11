@@ -24,6 +24,7 @@ namespace HealthCare020.Services
     public class PacijentService : BaseCRUDService<PacijentDtoLL, PacijentDtoEL, PacijentResourceParameters, Pacijent, PacijentUpsertDto, PacijentUpsertDto>
     {
         private readonly ISecurityService _securityService;
+        private readonly IKorisnikService _korisnikService;
         private readonly ICipherService _cipherService;
         private readonly IFaceRecognitionService _faceRecognitionService;
         private readonly Logger _logger;
@@ -36,13 +37,15 @@ namespace HealthCare020.Services
             IAuthService authService,
             ISecurityService securityService,
             ICipherService cipherService,
-            IFaceRecognitionService faceRecognitionService) :
+            IFaceRecognitionService faceRecognitionService,
+            IKorisnikService korisnikService) :
             base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _logger = LogManager.GetCurrentClassLogger();
             _securityService = securityService;
             _cipherService = cipherService;
             _faceRecognitionService = faceRecognitionService;
+            _korisnikService = korisnikService;
         }
 
         public override IQueryable<Pacijent> GetWithEagerLoad(int? id = null)
@@ -130,11 +133,7 @@ namespace HealthCare020.Services
             if (pacijent == null)
                 return ServiceResult.NotFound($"Pacijent povezan sa vasim korisnickim nalogom nije pronadjen.");
 
-            var addedPersonId = await AddFaceForUser(dtoForUpdate.ProfilePicture, dtoForUpdate.KorisnickiNalog.Username, Guid.Parse(pacijent.KorisnickiNalog.FaceId), update: true);
-
             _mapper.Map(dtoForUpdate.KorisnickiNalog, pacijent.KorisnickiNalog);
-
-            pacijent.KorisnickiNalog.FaceId = _cipherService.Encrypt(addedPersonId.ToString());
 
             await _dbContext.SaveChangesAsync();
 
@@ -168,14 +167,9 @@ namespace HealthCare020.Services
             await Task.Run(() =>
             {
                 //Brisanje svih podataka vezanih za pacijenta
-                var zahtevi = _dbContext.ZahteviZaPregled.Where(x => x.PacijentId == pacijent.Id);
-                if (zahtevi.Any())
-                    _dbContext.RemoveRange(zahtevi);
-
                 var uputnice = _dbContext.Uputnice.Where(x => x.PacijentId == pacijent.Id);
                 if (uputnice.Any())
                     _dbContext.RemoveRange(uputnice);
-
                 var pregledi = _dbContext.Pregledi.Where(x => x.PacijentId == pacijent.Id);
                 foreach (var pregled in pregledi)
                 {
@@ -187,14 +181,15 @@ namespace HealthCare020.Services
                 if (pregledi.Any())
                     _dbContext.RemoveRange(pregledi);
 
-                var rolesKorisnickiNalog =
-                    _dbContext.RolesKorisnickiNalozi.Where(x => x.KorisnickiNalogId == pacijent.KorisnickiNalogId);
-                if (rolesKorisnickiNalog.Any())
-                    _dbContext.RemoveRange(rolesKorisnickiNalog);
+                var zahtevi = _dbContext.ZahteviZaPregled.Where(x => x.PacijentId == pacijent.Id);
+                if (zahtevi.Any())
+                    _dbContext.RemoveRange(zahtevi);
 
-                _dbContext.Remove(pacijent.KorisnickiNalog);
                 _dbContext.Remove(pacijent);
             });
+
+            var korisnickiNalogDeleteResult = await _korisnikService.Delete(pacijent.KorisnickiNalogId);
+
             await _dbContext.SaveChangesAsync();
 
             return ServiceResult.NoContent();

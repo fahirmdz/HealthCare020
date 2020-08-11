@@ -114,6 +114,7 @@
     <Content Include="Assets\Healthcare020_Logo_250x250.png" />
     <Content Include="Assets\Healthcare020_120x120.png" />
     <AndroidResource Include="Assets\logout_btn.png" />
+    <AndroidResource Include="Assets\security.png" />
     <Content Include="Assets\welcome_Poseta.png" />
     <Content Include="Assets\welcome_stetoscope.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -226,6 +227,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\pregled-animation.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\password-animation.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\pw-animation.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\key-animation.json" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
