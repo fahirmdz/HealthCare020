@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Healthcare020.Mobile.Constants;
 using Plugin.Media;
 using Xamarin.Forms;
 
@@ -41,8 +42,9 @@ namespace Healthcare020.Mobile.ViewModels
             if (photo == null)
                 return;
 
-            this.EnabledLoadingSpinner = true;
             this.IsBusy = true;
+            this.MainBodyVisible = false;
+            this.AnimationFrameVisible = true;
 
             SelfieForFaceID = photo.GetStream().AsByteArray();
 
@@ -52,10 +54,14 @@ namespace Healthcare020.Mobile.ViewModels
                 EagerLoaded = true,
             });
 
+            await Task.Delay(4000);
+
             if (!result.Succeeded || !result.HasData)
             {
                 IsBusy = false;
-                this.EnabledLoadingSpinner = false;
+                this.MainBodyVisible = true;
+                this.AnimationFrameVisible = false;
+
                 await Task.Delay(100);
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return;
@@ -64,14 +70,19 @@ namespace Healthcare020.Mobile.ViewModels
             if (!await Auth.AuthenticateWithFaceID(SelfieForFaceID))
             {
                 IsBusy = false;
-                this.EnabledLoadingSpinner = false;
+                this.MainBodyVisible = true;
+                this.AnimationFrameVisible = false;
+
                 await Task.Delay(100);
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return;
             }
-
+            this.MainBodyVisible = false;
+            this.AnimationFrameVisible = false;
+            this.AnimationSuccessFrameVisible = true;
+            await Task.Delay(2850);
             this.IsBusy = false;
-            this.EnabledLoadingSpinner = false;
+
             Application.Current.MainPage=new PacijentDasbhboardTabbedPage();
         }
 
@@ -97,12 +108,45 @@ namespace Healthcare020.Mobile.ViewModels
                 Application.Current.MainPage = new PacijentDasbhboardTabbedPage();
             }
 
+            //Face scanned
+            MainAnimationPath=Application.Current.Resources[ResourceKeys.FaceIdAnimationPath] as OnPlatform<string>;
+            await Task.Delay(1500);
+
             IsBusy = false;
         }
 
         #endregion Methods
 
         #region Properties
+
+        private string _mainAnimationPath =
+            Application.Current.Resources[ResourceKeys.ScanFaceAnimationPath] as OnPlatform<string>;
+        public string MainAnimationPath
+        {
+            get => _mainAnimationPath;
+            set => SetProperty(ref _mainAnimationPath, value);
+        }
+
+        private bool _mainBodyVisible = true;
+        public bool MainBodyVisible
+        {
+            get => _mainBodyVisible;
+            set => SetProperty(ref _mainBodyVisible, value);
+        }
+
+        private bool _animationSuccessFrameVisible;
+        public bool AnimationSuccessFrameVisible
+        {
+            get => _animationSuccessFrameVisible;
+            set => SetProperty(ref _animationSuccessFrameVisible, value);
+        }
+
+        private bool _animationFrameVisible;
+        public bool AnimationFrameVisible
+        {
+            get => _animationFrameVisible;
+            set => SetProperty(ref _animationFrameVisible, value);
+        }
 
         private byte[] SelfieForFaceID;
 

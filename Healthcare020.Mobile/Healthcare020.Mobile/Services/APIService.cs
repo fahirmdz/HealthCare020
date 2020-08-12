@@ -48,7 +48,7 @@ namespace Healthcare020.Mobile.Services
 
                 _flurlClient = new FlurlClient(httpClient);
                 request = _flurlClient.Request(route).AllowAnyHttpStatus();
-                if (Auth.IsAuthenticated())
+                if (Auth.IsAuthenticated(setLoginPage:false))
                     request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
                 BaseUrl = request.Url;
             }

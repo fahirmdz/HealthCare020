@@ -25,6 +25,8 @@ namespace Healthcare020.Mobile.Constants
         public static string PregledAnimationPath => "PregledAnimationPath";
         public static string LetterPackAnimationPath => "LetterPackAnimationPath";
         public static string WelcomeAnimationPath => "WelcomeAnimationPath";
+        public static string FaceIdAnimationPath => "FaceIdAnimationPath";
+        public static string ScanFaceAnimationPath => "ScanFaceAnimationPath";
 
     }
 }

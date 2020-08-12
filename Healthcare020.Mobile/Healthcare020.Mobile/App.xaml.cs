@@ -34,7 +34,7 @@ namespace Healthcare020.Mobile
             DependencyService.Register<MockDataStore>();
             Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
 
-            if (!Auth.IsAuthenticated())
+            if (!Auth.IsAuthenticated(false))
                 Task.Run(async () => { await Auth.AuthenticateWithPassword("pacijent", "testtet"); });
             MainPage = new PacijentDasbhboardTabbedPage();
         }

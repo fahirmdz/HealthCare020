@@ -8,22 +8,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <ScrollView>
+        <ContentView>
             <Frame
                 x:Name="AnimationFrame"
                 BackgroundColor="White"
                 HasShadow="False"
                 HorizontalOptions="FillAndExpand"
-                IsVisible="True"
                 VerticalOptions="FillAndExpand">
                 <forms:AnimationView
                     x:Name="MainAnimation"
-                    Animation="{StaticResource PasswordAnimationPath}"
-                    HorizontalOptions="CenterAndExpand"
+                    Animation="{StaticResource ScanFaceAnimationPath}"
+                    HorizontalOptions="FillAndExpand"
                     IsPlaying="True"
                     Loop="True"
-                    VerticalOptions="CenterAndExpand" />
+                    VerticalOptions="FillAndExpand" />
             </Frame>
-        </ScrollView>
+        </ContentView>
     </ContentPage.Content>
 </ContentPage>

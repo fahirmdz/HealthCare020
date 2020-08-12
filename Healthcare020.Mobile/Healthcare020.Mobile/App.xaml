@@ -58,6 +58,14 @@
                 <On Platform="Android" Value="key-animation.json" />
                 <On Platform="Android" Value="Assets/key-animation.json" />
             </OnPlatform>
+            <OnPlatform x:Key="ScanFaceAnimationPath" x:TypeArguments="x:String">
+                <On Platform="Android" Value="scanface-animation.json" />
+                <On Platform="Android" Value="Assets/scanface-animation.json" />
+            </OnPlatform>
+            <OnPlatform x:Key="FaceIdAnimationPath" x:TypeArguments="x:String">
+                <On Platform="Android" Value="faceid-animation.json" />
+                <On Platform="Android" Value="Assets/faceid-animation.json" />
+            </OnPlatform>
             <!--#endregion-->
             <!--#region Backgrounds-->
             <OnPlatform x:Key="LogoutButtonBg" x:TypeArguments="ImageSource">
