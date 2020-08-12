@@ -237,6 +237,12 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\key-animation.json" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\scanface-animation.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\faceid-animation.json" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

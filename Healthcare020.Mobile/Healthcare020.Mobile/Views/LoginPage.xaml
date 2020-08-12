@@ -4,13 +4,17 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
 
     <ContentPage.Content>
-        <ScrollView>
-            <Grid BackgroundColor="WhiteSmoke" VerticalOptions="FillAndExpand">
+        <ContentView>
+            <Grid
+                BackgroundColor="WhiteSmoke"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
                 <StackLayout Margin="0" Padding="0">
                     <Grid
                         HorizontalOptions="FillAndExpand"
@@ -24,143 +28,179 @@
                         <Frame Grid.Row="1" BackgroundColor="WhiteSmoke" />
                     </Grid>
                 </StackLayout>
-
-                <StackLayout Margin="45,20,45,70" VerticalOptions="Center">
+                <Grid>
                     <Frame
-                        Margin="0"
-                        Padding="0"
-                        BackgroundColor="White"
+                        x:Name="AnimationFrame"
+                        BackgroundColor="Transparent"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding AnimationFrameVisible}"
                         VerticalOptions="FillAndExpand">
-
-                        <StackLayout Spacing="10" Style="{StaticResource LoginFormBodyStyle}">
-
-                            <Frame
-                                Margin="0"
-                                Padding="0"
-                                HasShadow="False"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="Fill">
-                                <Image
-                                    Aspect="AspectFit"
-                                    HorizontalOptions="Center"
-                                    Source="{StaticResource Logo}" />
-                            </Frame>
-
-                            <!--  FORM BODY  -->
-                            <StackLayout x:Name="FormBody" Spacing="0">
-                                <StackLayout.Resources>
-                                    <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
-                                    <Style BasedOn="{StaticResource LoginPageEntryStyle}" TargetType="Entry" />
-                                </StackLayout.Resources>
-                                <Entry
-                                    ClassId="Username"
-                                    MaxLength="20"
-                                    Placeholder="Korisničko ime"
-                                    Text="{Binding Username}" />
-                                <Label x:Name="UsernameValidation" />
-                                <Entry
-                                    ClassId="Password"
-                                    IsPassword="True"
-                                    MaxLength="20"
-                                    Placeholder="Lozinka"
-                                    Text="{Binding Password}" />
-                                <Label x:Name="PasswordValidation" />
-                            </StackLayout>
-                            <!--  /FORM BODY  -->
-
-                            <!--  REMEMBER ME  -->
-                            <Grid HorizontalOptions="Start" VerticalOptions="Center">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Label
-                                    Grid.Column="0"
-                                    Margin="8,0"
-                                    FontSize="{StaticResource FontSize-Small}"
-                                    Text="Zapamti me"
-                                    TextColor="#666769"
-                                    VerticalTextAlignment="Center" />
-                                <Switch
-                                    x:Name="RememberMe"
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    HorizontalOptions="End"
-                                    Toggled="RememberMe_OnToggled"
-                                    VerticalOptions="Center" />
-                            </Grid>
-                            <!--  /REMEMBER ME  -->
-
-                            <!--  LOGIN BUTTON  -->
-                            <Frame
-                                Margin="0"
-                                Padding="0"
-                                HasShadow="False"
-                                HorizontalOptions="FillAndExpand">
-                                <Button
-                                    BackgroundColor="#00bebe"
-                                    Clicked="Button_OnClicked"
-                                    Style="{StaticResource BigButtonRadiusStyle}"
-                                    Text="Log in"
-                                    TextColor="WhiteSmoke" />
-                            </Frame>
-
-                            <Label
-                                FontSize="{StaticResource FontSize-Small}"
-                                HorizontalOptions="Center"
-                                Text="Forgotten password?"
-                                TextColor="#496075" />
-                            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                                <BoxView
-                                    BackgroundColor="#555"
-                                    HeightRequest="0.1"
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="Center" />
-                                <Label
-                                    FontSize="{StaticResource FontSize-Small}"
-                                    HorizontalOptions="Center"
-                                    Text="OR"
-                                    TextColor="#555"
-                                    VerticalOptions="Center" />
-                                <BoxView
-                                    BackgroundColor="#555"
-                                    HeightRequest="0.2"
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="Center" />
-                            </StackLayout>
-                            <Frame
-                                Margin="0"
-                                Padding="0"
-                                HasShadow="False"
-                                HorizontalOptions="FillAndExpand">
-                                <Button
-                                    x:Name="RegisterButton"
-                                    Clicked="RegisterButton_OnClicked"
-                                    Style="{StaticResource BigButtonRadiusStyle}"
-                                    Text="Register"
-                                    TextColor="#31373d" />
-                            </Frame>
-                            <Frame
-                                Margin="0"
-                                Padding="0"
-                                HasShadow="False"
-                                HorizontalOptions="FillAndExpand">
-                                <Button
-                                    x:Name="FaceIDLogin"
-                                    Style="{StaticResource BigButtonRadiusStyle}"
-                                    Text="Login with Face ID"
-                                    TextColor="#31373d" Clicked="FaceIDLogin_OnClicked">
-                                </Button>
-                            </Frame>
-                        </StackLayout>
+                        <forms:AnimationView
+                            x:Name="MainAnimation"
+                            Animation="{StaticResource ScanFaceAnimationPath}"
+                            HorizontalOptions="FillAndExpand"
+                            IsPlaying="True"
+                            Loop="True"
+                            VerticalOptions="FillAndExpand" />
                     </Frame>
-                </StackLayout>
+                    <Frame
+                        x:Name="AnimationSuccessFrame"
+                        BackgroundColor="Transparent"
+                        HasShadow="False"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding AnimationSuccessFrameVisible}"
+                        VerticalOptions="FillAndExpand">
+                        <forms:AnimationView
+                            x:Name="SuccessAnimation"
+                            Animation="{StaticResource FaceIdAnimationPath}"
+                            HorizontalOptions="FillAndExpand"
+                            IsPlaying="True"
+                            Loop="True"
+                            VerticalOptions="FillAndExpand" />
+                    </Frame>
+                    <!--  IsVisible="{Binding MainBodyVisible, Converter={StaticResource OppositeBooleanConverter}}"  -->
+                    <StackLayout
+                        Margin="45,20,45,70"
+                        IsVisible="{Binding MainBodyVisible}"
+                        VerticalOptions="Center">
+                        <Frame
+                            Margin="0"
+                            Padding="0"
+                            BackgroundColor="White"
+                            HasShadow="False"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <StackLayout Spacing="10" Style="{StaticResource LoginFormBodyStyle}">
+
+                                    <Frame
+                                        Margin="0"
+                                        Padding="0"
+                                        HasShadow="False"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="Fill">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HorizontalOptions="Center"
+                                            Source="{StaticResource Logo}" />
+                                    </Frame>
+
+                                    <!--  FORM BODY  -->
+                                    <StackLayout x:Name="FormBody" Spacing="0">
+                                        <StackLayout.Resources>
+                                            <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
+                                            <Style BasedOn="{StaticResource LoginPageEntryStyle}" TargetType="Entry" />
+                                        </StackLayout.Resources>
+                                        <Entry
+                                            ClassId="Username"
+                                            MaxLength="20"
+                                            Placeholder="Korisničko ime"
+                                            Text="{Binding Username}" />
+                                        <Label x:Name="UsernameValidation" />
+                                        <Entry
+                                            ClassId="Password"
+                                            IsPassword="True"
+                                            MaxLength="20"
+                                            Placeholder="Lozinka"
+                                            Text="{Binding Password}" />
+                                        <Label x:Name="PasswordValidation" />
+                                    </StackLayout>
+                                    <!--  /FORM BODY  -->
+
+                                    <!--  REMEMBER ME  -->
+                                    <Grid HorizontalOptions="Start" VerticalOptions="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="40" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Column="0"
+                                            Margin="8,0"
+                                            FontSize="{StaticResource FontSize-Small}"
+                                            Text="Zapamti me"
+                                            TextColor="#666769"
+                                            VerticalTextAlignment="Center" />
+                                        <Switch
+                                            x:Name="RememberMe"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            HorizontalOptions="End"
+                                            Toggled="RememberMe_OnToggled"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                    <!--  /REMEMBER ME  -->
+
+                                    <!--  LOGIN BUTTON  -->
+                                    <Frame
+                                        Margin="0"
+                                        Padding="0"
+                                        HasShadow="False"
+                                        HorizontalOptions="FillAndExpand">
+                                        <Button
+                                            BackgroundColor="#00bebe"
+                                            Clicked="Button_OnClicked"
+                                            Style="{StaticResource BigButtonRadiusStyle}"
+                                            Text="Log in"
+                                            TextColor="WhiteSmoke" />
+                                    </Frame>
+
+                                    <Label
+                                        FontSize="{StaticResource FontSize-Small}"
+                                        HorizontalOptions="Center"
+                                        Text="Forgotten password?"
+                                        TextColor="#496075" />
+                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                        <BoxView
+                                            BackgroundColor="#555"
+                                            HeightRequest="0.1"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            FontSize="{StaticResource FontSize-Small}"
+                                            HorizontalOptions="Center"
+                                            Text="OR"
+                                            TextColor="#555"
+                                            VerticalOptions="Center" />
+                                        <BoxView
+                                            BackgroundColor="#555"
+                                            HeightRequest="0.2"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="Center" />
+                                    </StackLayout>
+                                    <Frame
+                                        Margin="0"
+                                        Padding="0"
+                                        HasShadow="False"
+                                        HorizontalOptions="FillAndExpand">
+                                        <Button
+                                            x:Name="RegisterButton"
+                                            Clicked="RegisterButton_OnClicked"
+                                            Style="{StaticResource BigButtonRadiusStyle}"
+                                            Text="Register"
+                                            TextColor="#31373d" />
+                                    </Frame>
+                                    <Frame
+                                        Margin="0"
+                                        Padding="0"
+                                        HasShadow="False"
+                                        HorizontalOptions="FillAndExpand">
+                                        <Button
+                                            x:Name="FaceIDLogin"
+                                            Clicked="FaceIDLogin_OnClicked"
+                                            Style="{StaticResource BigButtonRadiusStyle}"
+                                            Text="Login with Face ID"
+                                            TextColor="#31373d" />
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
             </Grid>
-        </ScrollView>
+        </ContentView>
     </ContentPage.Content>
 </views:BaseValidationContentPage>

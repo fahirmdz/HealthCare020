@@ -128,7 +128,19 @@ namespace Healthcare020.Mobile.Services
             Application.Current.MainPage = new LoginPage();
         }
 
-        public static bool IsAuthenticated() => AccessToken != null;
+        /// <summary>
+        /// User is logged in or not
+        /// </summary>
+        /// <param name="setLoginPage">Set Login page as the main page, if the user is not logged in. Default is TRUE</param>
+        /// <returns>TRUE is the user is logged in, otherwise FALSE</returns>
+        public static bool IsAuthenticated(bool setLoginPage = true)
+        {
+            var authenticated = AccessToken != null;
+
+            if(setLoginPage && !authenticated)
+                Application.Current.MainPage=new LoginPage();
+            return authenticated;
+        }
 
         //==================Helpers methods============================
         private static HttpContent GetTokenEndpointCredentialsRequestBodyContent(string username, string password)
