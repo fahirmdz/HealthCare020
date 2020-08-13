@@ -122,5 +122,32 @@ namespace HealthCare020.Services.Properties {
                 return ResourceManager.GetString("IdpTokenEndpoint", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Netačna lozinka.
+        /// </summary>
+        internal static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vrijemepregledaml.
+        /// </summary>
+        internal static string MLModelName {
+            get {
+                return ResourceManager.GetString("MLModelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lozinke se ne poklapaju.
+        /// </summary>
+        internal static string PasswordsDoNotMatch {
+            get {
+                return ResourceManager.GetString("PasswordsDoNotMatch", resourceCulture);
+            }
+        }
     }
 }

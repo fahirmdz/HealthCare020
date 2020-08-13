@@ -294,12 +294,6 @@ namespace HealthCare020.Core.Mappers
                 .ForMember(dest => dest.Id, x => x.Ignore());
             CreateMap<ZahtevZaPosetu, ZahtevZaPosetuPatchDto>();
 
-            #region FaceRecognition
-
-            CreateMap<FaceRecognition, FaceRecognitionDto>();
-            CreateMap<FaceRecognitionRecordUpsertDto, FaceRecognition>();
-
-            #endregion FaceRecognition
         }
     }
 }

@@ -138,4 +138,13 @@
   <data name="IdpTokenEndpoint" xml:space="preserve">
     <value>https://healthcare020-oauth.com:5005/connect/token</value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Netačna lozinka</value>
+  </data>
+  <data name="MLModelName" xml:space="preserve">
+    <value>vrijemepregledaml</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Lozinke se ne poklapaju</value>
+  </data>
 </root>

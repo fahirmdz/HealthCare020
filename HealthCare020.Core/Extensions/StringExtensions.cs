@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -81,6 +82,17 @@ namespace HealthCare020.Core.Extensions
                 return str;
 
             return str.Replace(str[0], char.ToUpper(str[0]));
+        }
+
+        public static string CombinePaths(this string rootPath, string relativePath)
+        {
+            DirectoryInfo dir = new DirectoryInfo(rootPath);
+            while (relativePath.StartsWith("..\\"))
+            {
+                dir = dir.Parent;
+                relativePath = relativePath.Substring(3);
+            }
+            return Path.Combine(dir.FullName, relativePath);
         }
     }
 }

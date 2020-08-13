@@ -22,6 +22,8 @@ namespace HealthCare020.Services.Interfaces
 
         Task<ServiceResult> ChangePassword(string currentPassword, string newPassword);
 
+        Task<ServiceResult> CheckPassword(string password);
+
         Task<ServiceResult> AccountLocked(string username, string password);
     }
 }

@@ -50,7 +50,7 @@ namespace Healthcare020.Mobile.Views
 
         private void DeleteAccountLabel_OnTapped(object sender, EventArgs e)
         {
-           SettingsVM.DeleteAccountCommand.Execute(sender);
+           SettingsVM.PasswordCheckNavigationCommand.Execute(sender);
         }
     }
 }

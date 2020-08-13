@@ -94,6 +94,18 @@ namespace HealthCare020.API.Controllers
             return Ok(result.Data);
         }
 
+        [Authorize]
+        [HttpPost(Routes.CheckPasswordRoute)]
+        [Consumes("application/json")]
+        public async Task<IActionResult> CheckPassword([FromBody]string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+                return BadRequest();
+
+            var result = await _korisnikService.CheckPassword(password);
+            return WithStatusCode(result.StatusCode, result.Message);
+        }
+
         [HttpPost(Routes.ChangePasswordRoute)]
         public async Task<IActionResult> ChangePassword(ChangePasswordDto dto)
         {
@@ -115,7 +127,5 @@ namespace HealthCare020.API.Controllers
 
             return WithStatusCode(result.StatusCode, result.Message);
         }
-
-
     }
 }
