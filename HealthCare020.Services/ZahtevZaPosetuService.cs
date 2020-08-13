@@ -211,6 +211,7 @@ namespace HealthCare020.Services
 
             var brojKrevetaUSobi = 3;
             var maxBrojPosetiocaPoPacijentu = 2;
+            var dnevniBrojTerminaZaPosete = 2;
             var maxPacijenataUSobi = brojKrevetaUSobi * maxBrojPosetiocaPoPacijentu;
 
             var currentDate = DateTime.Now.Date;
@@ -219,6 +220,15 @@ namespace HealthCare020.Services
 
             var drugiTerminPosetePocetak = new DateTime(currentDate.Year, currentDate.Month, currentDate.Day, 18, 0, 0);
             var drugiTerminPoseteKraj = drugiTerminPosetePocetak.AddMinutes(30);
+
+            if (DateTime.Now >= drugiTerminPosetePocetak)
+                return ServiceResult.BadRequest("Vrijeme današnjih poseta je isteklo");
+
+            if (DateTime.Now >= prviTerminPosetePocetak)
+            {
+                dnevniBrojTerminaZaPosete = 1;
+            }
+            bool IsPrviTerminPoseteIstekao = dnevniBrojTerminaZaPosete == 1;
 
             var pacijentiZaPosete = zahteviZaPoseteDanas
                 .GroupBy(x => x.PacijentNaLecenjuId)
@@ -229,28 +239,31 @@ namespace HealthCare020.Services
 
             foreach (var pacijentId in pacijentiZaPosete)
             {
+                //==== SINGLE PACIJENT ITERATION ====
+
                 var zahteviZaPacijenta = zahteviZaPoseteDanas.Where(x => x.PacijentNaLecenjuId == pacijentId).ToList();
 
-                if (zahteviZaPacijenta.Count() > maxBrojPosetiocaPoPacijentu * 2) //2 su termina dnevno
+                if (zahteviZaPacijenta.Count() > maxBrojPosetiocaPoPacijentu * dnevniBrojTerminaZaPosete)
                 {
+                    //If the number of requests exceeds maxBrojPosetiocaPoPacijentu * dnevniBrojTerminaZaPosete
                     zahteviZaPacijenta = zahteviZaPacijenta
                         .OrderBy(x => x.DatumVremeKreiranja)
-                        .Take(maxBrojPosetiocaPoPacijentu * 2)
+                        .Take(maxBrojPosetiocaPoPacijentu * dnevniBrojTerminaZaPosete)
                         .ToList();
                 }
 
                 var flagCounter = 0;
-                var vrijeme = prviTerminPosetePocetak;
+                var vrijeme = IsPrviTerminPoseteIstekao ? drugiTerminPosetePocetak : prviTerminPosetePocetak; // Ako je prvi istekao, bice dostupan samo drugi termin za posetu
                 foreach (var zahtev in zahteviZaPacijenta)
                 {
-                    if (flagCounter == 2)
+                    if (!IsPrviTerminPoseteIstekao && flagCounter == maxBrojPosetiocaPoPacijentu)
                         vrijeme = drugiTerminPosetePocetak;
+
                     zahtev.ZakazanoDatumVreme = vrijeme;
 
                     //SMS notifications
                     _smsGateway.Send(zahtev.BrojTelefonaPosetioca, $"Zahtev za posetu koji ste poslali je odobren. Odobreno vreme je: " +
                                                                    $"{zahtev.ZakazanoDatumVreme.Value.ToString("G", CultureInfo.CreateSpecificCulture("de-De"))}");
-
                     flagCounter++;
                 }
 
