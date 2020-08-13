@@ -9,11 +9,13 @@ using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DateTime = System.DateTime;
 
 namespace Healthcare020.WinUI.Services
 {
@@ -148,10 +150,18 @@ namespace Healthcare020.WinUI.Services
         /// <param name="resourceParameters">Resource parameters that will be sent as query string params</param>
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
         /// <returns></returns>
-        public async Task<APIServiceResult<List<T>>> Get<T>(object resourceParameters = null, string pathToAppend = "")
+        public async Task<APIServiceResult<List<T>>> Get<T>(object resourceParameters = null, string pathToAppend = "", Dictionary<string, string> queryStringCollection = null)
         {
             try
             {
+                if (queryStringCollection != null)
+                {
+                    foreach (var queryString in queryStringCollection)
+                    {
+                        request.Url.QueryParams.Add(queryString.Key, queryString.Value);
+                    }
+                }
+
                 if (!string.IsNullOrWhiteSpace(pathToAppend))
                 {
                     request.Url.AppendPathSegment(pathToAppend);
@@ -176,7 +186,9 @@ namespace Healthcare020.WinUI.Services
                 var result = await response.Content.ReadAsAsync<List<T>>();
 
                 if (response.StatusCode == HttpStatusCode.OK && result == null)
+                {
                     return APIServiceResult<List<T>>.OK();
+                }
 
                 var xpaginationHeader = headers.FirstOrDefault(x => x.Key == "X-Pagination").Value?.FirstOrDefault();
 
@@ -199,6 +211,73 @@ namespace Healthcare020.WinUI.Services
                 logger.Error(ex);
                 dlgError.ShowDialog(Resources.TemporarilyUnvailable);
                 return APIServiceResult<List<T>>.Exception();
+            }
+        }
+
+        public async Task<APIServiceResult<T>> GetAsSingle<T>(string pathToAppend = "", Dictionary<string, string> queryStringCollection = null)
+        {
+            try
+            {
+                if (queryStringCollection != null)
+                {
+                    foreach (var queryString in queryStringCollection)
+                    {
+                        request.Url.QueryParams.Add(queryString.Key, queryString.Value);
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(pathToAppend))
+                {
+                    request.Url.AppendPathSegment(pathToAppend);
+                }
+
+                var response = await request.GetAsync();
+                RevertToBaseRequest();
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                        dlgError.ShowDialog(Properties.Resources.AccessDenied);
+
+                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                        dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
+
+                    return APIServiceResult<T>.WithStatusCode(response.StatusCode);
+                }
+
+                var headers = response.Headers;
+
+
+                object result;
+
+                if (typeof(T) == typeof(DateTime))
+                {
+                    var textPlain = await response.Content.ReadAsStringAsync();
+                    var dateTimeResult =
+                        DateTime.Parse(textPlain, CultureInfo.InvariantCulture);;
+                    result = dateTimeResult;
+                }
+                else
+                {
+                    result = await response.Content.ReadAsAsync<T>();
+                }
+
+                if (response.StatusCode == HttpStatusCode.OK && result == null)
+                {
+                    return APIServiceResult<T>.OK();
+                }
+
+                return new APIServiceResult<T>
+                {
+                    Data = (T)result,
+                    HasData = result != null
+                };
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                dlgError.ShowDialog(Resources.TemporarilyUnvailable);
+                return APIServiceResult<T>.Exception();
             }
         }
 

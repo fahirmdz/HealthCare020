@@ -569,30 +569,6 @@
     <EmbeddedResource Include="Forms\RadnikDashboard\RadnikPrijem\frmRadnikPrijemMainDashboard.resx">
       <DependentUpon>frmRadnikPrijemMainDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\CustomElements\NoDataPanel.resx">
-      <DependentUpon>NoDataPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\CustomElements\PanelCheckInternetConnection.resx">
-      <DependentUpon>PanelCheckInternetConnection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\CustomElements\pnlDisplayData.resx">
-      <DependentUpon>pnlDisplayData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\Dialogs\dlgAccountLock.resx">
-      <DependentUpon>dlgAccountLock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\Dialogs\dlgForm.resx">
-      <DependentUpon>dlgForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\Dialogs\dlgError.resx">
-      <DependentUpon>dlgError.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\Dialogs\dlgPropmpt.resx">
-      <DependentUpon>dlgPropmpt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\Dialogs\dlgSuccess.resx">
-      <DependentUpon>dlgSuccess.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\KorisnickiNalog\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>

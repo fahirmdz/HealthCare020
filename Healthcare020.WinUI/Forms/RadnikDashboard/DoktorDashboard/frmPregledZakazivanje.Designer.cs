@@ -45,8 +45,11 @@
             this.timePregled = new System.Windows.Forms.DateTimePicker();
             this.lblVremePregleda = new System.Windows.Forms.Label();
             this.Errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.icnRecommendedTime = new FontAwesome.Sharp.IconPictureBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.icnRecommendedTime)).BeginInit();
             this.SuspendLayout();
             // 
             // lblDatumPregleda
@@ -222,12 +225,32 @@
             this.Errors.ContainerControl = this;
             this.Errors.Icon = ((System.Drawing.Icon)(resources.GetObject("Errors.Icon")));
             // 
+            // icnRecommendedTime
+            // 
+            this.icnRecommendedTime.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.icnRecommendedTime.BackColor = System.Drawing.Color.White;
+            this.icnRecommendedTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
+            this.icnRecommendedTime.IconChar = FontAwesome.Sharp.IconChar.QuestionCircle;
+            this.icnRecommendedTime.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
+            this.icnRecommendedTime.IconSize = 25;
+            this.icnRecommendedTime.Location = new System.Drawing.Point(366, 268);
+            this.icnRecommendedTime.Name = "icnRecommendedTime";
+            this.icnRecommendedTime.Size = new System.Drawing.Size(32, 25);
+            this.icnRecommendedTime.TabIndex = 65;
+            this.icnRecommendedTime.TabStop = false;
+            // 
+            // toolTip
+            // 
+            this.toolTip.BackColor = System.Drawing.Color.Gainsboro;
+            this.toolTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
+            // 
             // frmPregledZakazivanje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(740, 377);
+            this.Controls.Add(this.icnRecommendedTime);
             this.Controls.Add(this.timePregled);
             this.Controls.Add(this.lblVremePregleda);
             this.Controls.Add(this.datePregled);
@@ -250,6 +273,7 @@
             this.Load += new System.EventHandler(this.frmZahtevZaPregled_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Errors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.icnRecommendedTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +296,7 @@
         private System.Windows.Forms.DateTimePicker timePregled;
         private System.Windows.Forms.Label lblVremePregleda;
         private System.Windows.Forms.ErrorProvider Errors;
+        private FontAwesome.Sharp.IconPictureBox icnRecommendedTime;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

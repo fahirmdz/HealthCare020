@@ -53,8 +53,7 @@ namespace HealthCare020.API.Controllers
             return await base.Update(id, dtoForUpdate);
         }
 
-        //[Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
-        [AllowAnonymous]
+        [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
         public override async Task<IActionResult> Insert(PregledUpsertDto dtoForCreation)
         {
             return await base.Insert(dtoForCreation);

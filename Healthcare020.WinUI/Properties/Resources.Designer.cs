@@ -713,6 +713,15 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ovo je preporučeno vrijeme pregleda, bazirano na godini rodjenja pacijenta.
+        /// </summary>
+        public static string RecommendedTimeForPregledMessage {
+            get {
+                return ResourceManager.GetString("RecommendedTimeForPregledMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CurrentPassword.
         /// </summary>
         public static string RegistryKeyValuePassword {

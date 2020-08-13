@@ -336,6 +336,9 @@
   <data name="NotLoggedIn" xml:space="preserve">
     <value>"Niste prijavljeni na sistem!"</value>
   </data>
+  <data name="RecommendedTimeForPregledMessage" xml:space="preserve">
+    <value>Ovo je preporučeno vrijeme pregleda, bazirano na godini rodjenja pacijenta</value>
+  </data>
   <data name="RegistryKeyValuePassword" xml:space="preserve">
     <value>CurrentPassword</value>
   </data>
