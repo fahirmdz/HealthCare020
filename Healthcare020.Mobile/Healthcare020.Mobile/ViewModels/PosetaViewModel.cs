@@ -28,13 +28,7 @@ namespace Healthcare020.Mobile.ViewModels
 
         public async Task Init()
         {
-            if (!Auth.IsAuthenticated())
-            {
-                NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
-                return;
-            }
-
-            _apiService=new APIService();
+            _apiService=new APIService(Routes.PacijentNaLecenjuRoute);
         }
 
         #region Commands
