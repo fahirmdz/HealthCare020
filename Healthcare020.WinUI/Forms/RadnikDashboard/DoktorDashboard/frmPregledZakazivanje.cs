@@ -5,7 +5,10 @@ using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
@@ -15,12 +18,14 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         private ZahtevZaPregledDtoEL ZahtevZaPregled;
 
         private readonly APIService _apiService;
+        private DateTime RecommendedDateTime;
 
         private frmPregledZakazivanje(ZahtevZaPregledDtoEL zahtevZaPregled)
         {
             ZahtevZaPregled = zahtevZaPregled;
             _apiService = new APIService(Routes.PreglediRoute);
             InitializeComponent();
+            toolTip.SetToolTip(icnRecommendedTime,Resources.RecommendedTimeForPregledMessage);
         }
 
         public static frmPregledZakazivanje InstanceWithData(ZahtevZaPregledDtoEL zahtevZaPregled)
@@ -32,11 +37,17 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             return _instance;
         }
 
-        private void frmZahtevZaPregled_Load(object sender, System.EventArgs e)
+        private async void frmZahtevZaPregled_Load(object sender, System.EventArgs e)
         {
+            _apiService.ChangeRoute(Routes.RecommendPregledTimeRoute);
+            var result = await _apiService.GetAsSingle<DateTime>(queryStringCollection:new Dictionary<string, string>{{"godiste",ZahtevZaPregled?.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.DatumRodjenja.Year.ToString()}});
+            if (result.Succeeded && result.HasData)
+            {
+                RecommendedDateTime = result.Data;
+                timePregled.Value = RecommendedDateTime;
+            }
             txtZahtevZaPregled.Text = ZahtevZaPregled.Id.ToString();
             datePregled.MinDate = DateTime.Now;
-            timePregled.MinDate = DateTime.Now;
             txtDoktor.Text = ZahtevZaPregled.Doktor;
             txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
         }
@@ -73,8 +84,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 return false;
             }
 
-            if (datePregled.Value.Date == DateTime.Now.Date 
-                && (timePregled.Value.Hour < DateTime.Now.Hour 
+            if (datePregled.Value.Date == DateTime.Now.Date
+                && (timePregled.Value.Hour < DateTime.Now.Hour
                     || (timePregled.Value.Hour < DateTime.Now.Hour && timePregled.Value.Minute < DateTime.Now.Minute)))
 
             {

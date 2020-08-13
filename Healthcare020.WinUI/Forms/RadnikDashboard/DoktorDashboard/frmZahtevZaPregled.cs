@@ -44,6 +44,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         {
             dlgForm.SetShouldDisposeOnChildClose(false);
             frmPregledZakazivanje.InstanceWithData(ZahtevZaPregled).OpenAsChildOfControl(Parent);
+            dlgForm.SetShouldDisposeOnChildClose(true);
         }
     }
 }

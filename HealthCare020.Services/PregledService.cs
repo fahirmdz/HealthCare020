@@ -95,6 +95,10 @@ namespace HealthCare020.Services
             if (await ValidateModel(dtoForCreation) is { } result && !result.Succeeded)
                 return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
+            if (await _dbContext.Pregledi.AnyAsync(x => x.DatumPregleda == dtoForCreation.DatumPregleda))
+            {
+                return ServiceResult.BadRequest($"Termin {dtoForCreation.DatumPregleda :g} je već zauzet");
+            }
             var entity = new Pregled
             {
                 DoktorId = doktor.Id,
