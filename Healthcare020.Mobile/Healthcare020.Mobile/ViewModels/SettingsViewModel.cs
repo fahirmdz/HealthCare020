@@ -16,6 +16,8 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Helpers;
+using Healthcare020.Mobile.Views.Dialogs;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
@@ -40,9 +42,46 @@ namespace Healthcare020.Mobile.ViewModels
 
             //Init commands
             DeleteAccountCommand=new Command(async () => { await DeleteAccount();});
+            PasswordCheckNavigationCommand = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushPopupAsync(
+                    new PasswordCheckDialogPage(DeleteAccountCommand));
+            });
         }
 
         #region Methods
+
+        private async Task UpdateLicniPodaci()
+        {
+            _apiSerivce.ChangeRoute(Routes.LicniPodaciRoute);
+            byte[] uploadedPicBytes = null;
+
+            if (UploadedPic != null)
+            {
+                using var ms = new MemoryStream();
+                await UploadedPic.GetStream().CopyToAsync(ms);
+                uploadedPicBytes = ms.ToArray();
+            }
+
+            var licniPodaci = Pacijent.ZdravstvenaKnjizica.LicniPodaci;
+            var licniPodaciUpsertDto = _mapper.Map<LicniPodaciUpsertDto>(licniPodaci);
+
+            licniPodaciUpsertDto.ProfilePicture = uploadedPicBytes;
+
+            var updateResult = await _apiSerivce.Update<LicniPodaciDto>(Pacijent.ZdravstvenaKnjizica.LicniPodaci.Id, licniPodaciUpsertDto);
+
+            if (updateResult.Succeeded)
+            {
+                ProfilePicImageSource = ImageSource.FromStream(() => UploadedPic.GetStream());
+            }
+
+            var toastCfg = new ToastConfig(AppResources.Success)
+            {
+                Position = ToastPosition.Top,
+                MessageTextColor = System.Drawing.Color.White
+            };
+            UserDialogs.Instance.Toast(toastCfg);
+        }
 
         public async Task InitializeAsync()
         {
@@ -94,6 +133,7 @@ namespace Healthcare020.Mobile.ViewModels
 
         #endregion
 
+        #region Properties
         private ImageSource _profilePicImageSource;
         public ImageSource ProfilePicImageSource
         {
@@ -109,63 +149,34 @@ namespace Healthcare020.Mobile.ViewModels
             set => SetProperty(ref _pacijent, value);
         }
 
-        public ICommand ProfilePicturePick => new Command(async () =>
-         {
-             if (!CrossMedia.Current.IsPickPhotoSupported)
-             {
-                 return;
-             }
-
-             try
-             {
-                 UploadedPic = await CrossMedia.Current.PickPhotoAsync();
-                 if (UploadedPic != null)
-                     await UpdateLicniPodaci();
-             }
-             catch
-             {
-                 //ignore
-             }
-         });
-
-        #region Commands
-
-        public ICommand DeleteAccountCommand { get; }
-        public ICommand LogoutCommand => new Command(async () => { await Auth.Logout(); });
-
-
         #endregion
 
-        private async Task UpdateLicniPodaci()
+
+
+
+        #region Commands
+        public ICommand PasswordCheckNavigationCommand { get; set; }
+        public ICommand DeleteAccountCommand { get; }
+        public ICommand LogoutCommand => new Command(async () => { await Auth.Logout(); });
+        public ICommand ProfilePicturePick => new Command(async () =>
         {
-            _apiSerivce.ChangeRoute(Routes.LicniPodaciRoute);
-            byte[] uploadedPicBytes = null;
-
-            if (UploadedPic != null)
+            if (!CrossMedia.Current.IsPickPhotoSupported)
             {
-                using var ms = new MemoryStream();
-                await UploadedPic.GetStream().CopyToAsync(ms);
-                uploadedPicBytes = ms.ToArray();
+                return;
             }
 
-            var licniPodaci = Pacijent.ZdravstvenaKnjizica.LicniPodaci;
-            var licniPodaciUpsertDto = _mapper.Map<LicniPodaciUpsertDto>(licniPodaci);
-
-            licniPodaciUpsertDto.ProfilePicture = uploadedPicBytes;
-
-            var updateResult = await _apiSerivce.Update<LicniPodaciDto>(Pacijent.ZdravstvenaKnjizica.LicniPodaci.Id, licniPodaciUpsertDto);
-
-            if (updateResult.Succeeded)
+            try
             {
-                ProfilePicImageSource = ImageSource.FromStream(() => UploadedPic.GetStream());
+                UploadedPic = await CrossMedia.Current.PickPhotoAsync();
+                if (UploadedPic != null)
+                    await UpdateLicniPodaci();
             }
-
-            var toastCfg = new ToastConfig(AppResources.Success)
+            catch
             {
-                Position = ToastPosition.Top,
-                MessageTextColor = System.Drawing.Color.White
-            };
-            UserDialogs.Instance.Toast(toastCfg);
-        }
+                //ignore
+            }
+        });
+        #endregion
+
     }
 }

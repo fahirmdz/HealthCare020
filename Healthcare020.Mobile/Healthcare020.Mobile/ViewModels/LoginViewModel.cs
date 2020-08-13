@@ -54,7 +54,7 @@ namespace Healthcare020.Mobile.ViewModels
                 EagerLoaded = true,
             });
 
-            await Task.Delay(4000);
+            await Task.Delay(3500);
 
             if (!result.Succeeded || !result.HasData)
             {

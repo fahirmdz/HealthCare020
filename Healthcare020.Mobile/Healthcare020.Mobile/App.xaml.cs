@@ -35,7 +35,7 @@ namespace Healthcare020.Mobile
             Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
 
             if (!Auth.IsAuthenticated(false))
-                Task.Run(async () => { await Auth.AuthenticateWithPassword("pacijent", "testtet"); });
+                Task.Run(async () => { await Auth.AuthenticateWithPassword("fahirmdz", "testtest"); });
             MainPage = new PacijentDasbhboardTabbedPage();
         }
 

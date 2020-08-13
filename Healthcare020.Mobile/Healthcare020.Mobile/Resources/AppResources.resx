@@ -228,6 +228,9 @@
   <data name="OpisStanja" xml:space="preserve">
     <value>Opis stanja</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Lozinka</value>
+  </data>
   <data name="PasswordConfirmation" xml:space="preserve">
     <value>Potvrda lozinke</value>
   </data>

@@ -7,18 +7,28 @@ using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using HealthCare020.Services.Properties;
+using HealthCare020.Services.ServiceModels.Recommender;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.ML;
+using Microsoft.ML.Trainers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
-    public class PregledService : BaseCRUDService<PregledDtoLL, PregledDtoEL, PregledResourceParameters, Pregled, PregledUpsertDto, PregledUpsertDto>
+    public class PregledService : BaseCRUDService<PregledDtoLL, PregledDtoEL, PregledResourceParameters, Pregled, PregledUpsertDto, PregledUpsertDto>, IPregledService
     {
+        private static string MODEL_PATH = Path.Combine(Environment.CurrentDirectory, "Data", Resources.MLModelName);
+        private static MLContext mlContext = new MLContext(1);
+        private static uint[] TimeOfDayHalfsUids = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }; // => Starts at 9 AM and every iteration is 30 minutes to add
+
         public PregledService(IMapper mapper, HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, IHttpContextAccessor httpContextAccessor,
             IAuthService authService) :
@@ -82,7 +92,6 @@ namespace HealthCare020.Services
             var doktor = await _authService.GetCurrentLoggedInDoktor();
             if (doktor == null)
                 return ServiceResult.Forbidden($"Samo doktori mogu kreirati novi pregled.");
-
             if (await ValidateModel(dtoForCreation) is { } result && !result.Succeeded)
                 return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
@@ -100,6 +109,17 @@ namespace HealthCare020.Services
 
             await _dbContext.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
+
+            var pacijent = await _dbContext.Pacijenti
+                .Include(x => x.ZdravstvenaKnjizica)
+                .ThenInclude(x => x.LicniPodaci)
+                .FirstOrDefaultAsync(x => x.Id == entity.PacijentId);
+
+            await AddAndTrainModel(new GodisteVrijemeIdModel
+            {
+                Godiste = (uint)pacijent.ZdravstvenaKnjizica.LicniPodaci.DatumRodjenja.Year,
+                VrijemeUid = GetVrijemeUid(entity.DatumPregleda.TimeOfDay.Minutes)
+            });
 
             return ServiceResult.OK(_mapper.Map<PregledDtoLL>(entity));
         }
@@ -283,5 +303,147 @@ namespace HealthCare020.Services
 
             return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
+
+        public async Task<DateTime> GetRecommendedVrijemePregleda(int godistePacijenta)
+        {
+            var recommendedMinutesToAdd = await RecommendTimeForPregled(godistePacijenta);
+            var dateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            dateTime = dateTime.AddHours(9);//POCETAK RADNOG VREMENA
+
+            dateTime = dateTime.AddMinutes(recommendedMinutesToAdd);
+            if (dateTime.Hour >= 16)
+            {
+                dateTime = dateTime.AddHours(17); // Pocetak radnog vremena 9AM
+            }
+
+            while (await _dbContext.Pregledi.AnyAsync(x => x.DatumPregleda == dateTime))
+            {
+                dateTime = dateTime.AddMinutes(30);
+                if (dateTime.Hour >= 16)
+                {
+                    dateTime = dateTime.AddHours(17); // Pocetak radnog vremena 9AM
+                }
+            }
+
+            return dateTime;
+        }
+
+        //====================RECOMMENDATION SYSTEM====================
+
+        #region RecommendationSystem
+
+        /// <summary>
+        /// Recommend time for Pregled for specific year of birth
+        /// </summary>
+        /// <param name="godistePacijenta"></param>
+        /// <returns>Minutes to add from 9AM for specific day</returns>
+        public async Task<uint> RecommendTimeForPregled(int godistePacijenta)
+        {
+            ITransformer model;
+            if (File.Exists(MODEL_PATH))
+            {
+                model = mlContext.Model.Load(MODEL_PATH, out DataViewSchema modelSchema);
+            }
+            else
+            {
+                model = await CreateModel();
+            }
+
+            var predictionResult = new List<Tuple<uint, float>>();
+            var predictionEngine = mlContext.Model.CreatePredictionEngine<GodisteVrijemeIdModel, PredictionResult>(model);
+
+            foreach (var Uid in TimeOfDayHalfsUids)
+            {
+                var prediction = predictionEngine.Predict(new GodisteVrijemeIdModel
+                {
+                    Godiste = (uint)godistePacijenta,
+                    VrijemeUid = Uid
+                });
+
+                predictionResult.Add(new Tuple<uint, float>(Uid, prediction.Score));
+            }
+
+            predictionResult = predictionResult.OrderByDescending(x => x.Item2).ToList(); //Highest score on top
+            foreach (var predict in predictionResult)
+            {
+                Console.WriteLine($"{predict?.Item1} => {predict.Item2}");
+            }
+
+            Console.WriteLine();
+            return GetMinutesToAddBasedOnVrijemeUid(predictionResult.First().Item1);
+        }
+
+        private async Task<ITransformer> AddAndTrainModel(GodisteVrijemeIdModel toAdd)
+        {
+            return await CreateModel(toAdd);
+        }
+
+        private async Task<ITransformer> CreateModel(GodisteVrijemeIdModel toAdd = null)
+        {
+            MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options
+            {
+                MatrixColumnIndexColumnName = nameof(GodisteVrijemeIdModel.Godiste),
+                MatrixRowIndexColumnName = nameof(GodisteVrijemeIdModel.VrijemeUid),
+                LabelColumnName = "Label",
+                LossFunction = MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass,
+                Alpha = 0.01,
+                Lambda = 0.025
+            };
+
+            var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
+
+            var dataFromDb = await _dbContext.Pregledi.Select(x => new GodisteVrijemeIdModel
+            {
+                Godiste = (uint)x.Pacijent.ZdravstvenaKnjizica.LicniPodaci.DatumRodjenja.Year,
+                VrijemeUid = x.VrijemePregledaUid
+            }).ToListAsync();
+            if (toAdd != null)
+                dataFromDb.Add(toAdd);
+            var dataView = mlContext.Data.LoadFromEnumerable(dataFromDb);
+
+            var model = est.Fit(dataView);
+
+            mlContext.Model.Save(model, dataView.Schema, MODEL_PATH);
+            return model;
+        }
+
+        #endregion RecommendationSystem
+
+        //====================/RECOMMENDATION SYSTEM====================
+
+        //====================HELPERS====================
+
+        #region Helpers
+
+        private static uint GetVrijemeUid(int minutes)
+        {
+            var temp = (uint)minutes - 539 / 30;
+            return temp < 1 ? 1 : temp > TimeOfDayHalfsUids.Length ? (uint)TimeOfDayHalfsUids.Length - 1 : temp;
+        }
+
+        /// <summary>
+        /// Vraca broj minuta u koji treba dodati na pocetak radnog vremena
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        private uint GetMinutesToAddBasedOnVrijemeUid(uint uid)
+        {
+            return uid * 30;
+        }
+
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+
+        #endregion Helpers
+
+        //===============================================
     }
 }

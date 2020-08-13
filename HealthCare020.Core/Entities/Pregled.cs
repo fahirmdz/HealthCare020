@@ -23,6 +23,8 @@ namespace HealthCare020.Core.Entities
         public Pacijent Pacijent { get; set; }
 
         public DateTime DatumPregleda { get; set; }
+        public uint VrijemePregledaUid { get; set; }
+
         public bool IsOdradjen { get; set; }
     }
 }

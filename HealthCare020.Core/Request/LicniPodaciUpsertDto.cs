@@ -1,4 +1,5 @@
-﻿using HealthCare020.Core.ValidationAttributes;
+﻿using System;
+using HealthCare020.Core.ValidationAttributes;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,6 +22,9 @@ namespace HealthCare020.Core.Request
         [RequiredWithMessage]
         [StringLengthWithMessage(9, 12)]
         public string JMBG { get; set; }
+
+        [RequiredWithMessage]
+        public DateTime DatumRodjenja { get; set; }
 
         [RequiredWithMessage]
         [DefaultValue("M")]

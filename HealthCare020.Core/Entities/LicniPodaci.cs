@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Entities
 {
@@ -20,6 +20,9 @@ namespace HealthCare020.Core.Entities
         [Required(AllowEmptyStrings = false)]
         [StringLength(maximumLength:12,MinimumLength = 9)]
         public string JMBG { get; set; }
+
+        [Required]
+        public DateTime DatumRodjenja { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(maximumLength: 30, MinimumLength = 3)]

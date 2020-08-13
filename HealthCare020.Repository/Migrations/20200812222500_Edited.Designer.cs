@@ -4,14 +4,16 @@ using HealthCare020.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthCare020.Repository.Migrations
 {
     [DbContext(typeof(HealthCare020DbContext))]
-    partial class HealthCare020DbContextModelSnapshot : ModelSnapshot
+    [Migration("20200812222500_Edited")]
+    partial class Edited
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,9 +305,6 @@ namespace HealthCare020.Repository.Migrations
 
                     b.Property<int>("PacijentId")
                         .HasColumnType("int");
-
-                    b.Property<long>("VrijemePregledaUid")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("ZahtevZaPregledId")
                         .HasColumnType("int");

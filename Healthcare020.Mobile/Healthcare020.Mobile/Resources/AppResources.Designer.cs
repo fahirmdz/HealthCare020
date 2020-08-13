@@ -385,6 +385,15 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lozinka.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Potvrda lozinke.
         /// </summary>
         public static string PasswordConfirmation {

@@ -4,14 +4,16 @@ using HealthCare020.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthCare020.Repository.Migrations
 {
     [DbContext(typeof(HealthCare020DbContext))]
-    partial class HealthCare020DbContextModelSnapshot : ModelSnapshot
+    [Migration("20200812222007_Added_DatumRodjenja_To_LicniPodaci")]
+    partial class Added_DatumRodjenja_To_LicniPodaci
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +60,26 @@ namespace HealthCare020.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Drzave");
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.FaceRecognition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("KorisnickiNalogId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KorisnickiNalogId");
+
+                    b.ToTable("FaceRecognitions");
                 });
 
             modelBuilder.Entity("HealthCare020.Core.Entities.Grad", b =>
@@ -303,9 +325,6 @@ namespace HealthCare020.Repository.Migrations
 
                     b.Property<int>("PacijentId")
                         .HasColumnType("int");
-
-                    b.Property<long>("VrijemePregledaUid")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("ZahtevZaPregledId")
                         .HasColumnType("int");
@@ -572,6 +591,15 @@ namespace HealthCare020.Repository.Migrations
                     b.HasOne("HealthCare020.Core.Entities.Radnik", "Radnik")
                         .WithMany()
                         .HasForeignKey("RadnikId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthCare020.Core.Entities.FaceRecognition", b =>
+                {
+                    b.HasOne("HealthCare020.Core.Entities.KorisnickiNalog", "KorisnickiNalog")
+                        .WithMany()
+                        .HasForeignKey("KorisnickiNalogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -22,6 +22,7 @@
         public const string LekarskoUverenjeRoute = "lekarska-uverenja";
         public const string UputnicaRoute = "uputnice";
         public const string ChangePasswordRoute = "change-password";
+        public const string CheckPasswordRoute = "check-password";
         public const string ZahteviZaPosetuAutoSchedulingRoute = "zahtevi-za-posetu"+"/auto-scheduling";
         public const string AccountLockedRoute = KorisniciRoute + "/zakljucan";
         public const string FaceRecognitionRoute = "face-recognition";

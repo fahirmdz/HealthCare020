@@ -215,20 +215,6 @@ namespace HealthCare020.Services
 
                 if (newHash == korisnickiNalog.PasswordHash)
                     return _mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog);
-                else
-                {
-                    var lastFaceRecognitionRecord = await _dbContext.FaceRecognitions.OrderByDescending(x => x.DateTime)
-                        .FirstOrDefaultAsync(x => x.KorisnickiNalogId == korisnickiNalog.Id);
-                    //If the user has successfully scanned the face in the past 10 seconds
-                    if (lastFaceRecognitionRecord != null && lastFaceRecognitionRecord.DateTime.SecondsDifference(DateTime.Now) <= 10)
-
-                    {
-                        var faceId = password;
-                        //If FaceId encrypted passed as password
-                        if (korisnickiNalog.FaceId == faceId)
-                            return _mapper.Map<KorisnickiNalogDtoLL>(korisnickiNalog);
-                    }
-                }
             }
             return null;
         }
@@ -343,6 +329,18 @@ namespace HealthCare020.Services
             await _dbContext.SaveChangesAsync();
 
             return ServiceResult.OK();
+        }
+
+        public async Task<ServiceResult> CheckPassword(string password)
+        {
+            var user = await _authService.LoggedInUser();
+            if (user == null)
+                return ServiceResult.Unauthorized();
+
+            if (user.PasswordHash == _securityService.GenerateHash(user.PasswordSalt, password))
+                return ServiceResult.OK();
+
+            return ServiceResult.BadRequest(Resources.IncorrectPassword);
         }
 
         public async Task<ServiceResult> AccountLocked(string username, string password)
