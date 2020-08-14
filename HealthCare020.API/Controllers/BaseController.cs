@@ -1,4 +1,5 @@
-﻿using HealthCare020.API.Constants;
+﻿using System;
+using HealthCare020.API.Constants;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
@@ -24,19 +25,20 @@ namespace HealthCare020.API.Controllers
         [HttpHead]
         public virtual async Task<IActionResult> Get([FromQuery] TResourceParameters resourceParameters)
         {
-            var result = await _service.Get(resourceParameters);
+            //var result = await _service.Get(resourceParameters);
 
-            if (!result.Succeeded)
-                return WithStatusCode(result.StatusCode, result.Message);
+            //if (!result.Succeeded)
+            //    return WithStatusCode(result.StatusCode, result.Message);
 
-            if (result.Data is SequenceResult resultSequence)
-            {
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultSequence.PaginationMetadata));
+            //if (result.Data is SequenceResult resultSequence)
+            //{
+            //    Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultSequence.PaginationMetadata));
 
-                return Ok(resultSequence.Data);
-            }
+            //    return Ok(resultSequence.Data);
+            //}
 
-            return Ok(result.Data);
+            //return Ok(result.Data);
+            throw new ArgumentNullException();
         }
 
         [HttpGet("{id}")]
