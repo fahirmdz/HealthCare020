@@ -1,18 +1,19 @@
-﻿using System;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Forms.AbstractForms;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Services;
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmDrzave : DisplayDataForm<DrzavaDto>
+    public sealed partial class frmDrzave : DisplayDataForm<DrzavaDto>
     {
         private static frmDrzave _instance;
 
@@ -27,41 +28,41 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-        private frmDrzave() : base()
+        private frmDrzave()
         {
             var ID = new DataGridViewTextBoxColumn { DataPropertyName = nameof(DrzavaDto.Id), HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
 
-            var Naziv = new DataGridViewColumn { DataPropertyName = nameof(DrzavaDto.Naziv), HeaderText = "Naziv", Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
+            var Naziv = new DataGridViewColumn { DataPropertyName = nameof(DrzavaDto.Naziv), HeaderText = Resources.Name, Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
 
             var PozivniBroj = new DataGridViewColumn
             {
                 DataPropertyName = nameof(DrzavaDto.PozivniBroj),
-                HeaderText = "Pozivni broj",
+                HeaderText = Resources.PrefixNumber,
                 Name = "PozivniBroj",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
             var Brisi = new DataGridViewButtonColumn
             {
-                HeaderText = "Brisanje",
-                Name = "Izbriši",
-                Text = "Izbriši",
-                ToolTipText = "Izbriši državu",
+                HeaderText = Resources.DeleteVerb,
+                Name = Resources.DeleteIt,
+                Text = "Resources.DeleteIt",
+                ToolTipText = Resources.DeleteCountry,
                 UseColumnTextForButtonValue = true,
-                CellTemplate = new DataGridViewButtonCell { ToolTipText = "Izbriši državu", UseColumnTextForButtonValue = true },
+                CellTemplate = new DataGridViewButtonCell { ToolTipText = Resources.DeleteCountry, UseColumnTextForButtonValue = true },
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent }
             };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Naziv, PozivniBroj, Brisi });
+            AddColumnsToMainDgrv(new[] { ID, Naziv, PozivniBroj, Brisi });
 
             _apiService = new APIService(Routes.DrzaveRoute);
-            Text = Properties.Resources.frmDrzave;
+            Text = Resources.frmDrzave;
             ResourceParameters = new DrzavaResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount };
 
             InitializeComponent();
         }
 
-        private  void frmDrzave_Load(object sender, EventArgs e)
+        private void frmDrzave_Load(object sender, EventArgs e)
         {
             DisplayDataForm_Load(sender, e);
             FormForBackButton = frmPredefinedDataMenu.Instance;
@@ -73,13 +74,16 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var drzavaResParams = ResourceParameters as DrzavaResourceParameters;
 
-            bool isPozivni = SearchText.Any(char.IsDigit), ShouldLoad = (isPozivni && SearchText != drzavaResParams.PozivniBroj) || (!isPozivni && SearchText != drzavaResParams.Naziv);
+            bool isPozivni = SearchText.Any(char.IsDigit), ShouldLoad = drzavaResParams != null && ((isPozivni && SearchText != drzavaResParams.PozivniBroj) || (!isPozivni && SearchText != drzavaResParams.Naziv));
 
-            drzavaResParams.Naziv = isPozivni ? string.Empty : SearchText.Trim();
-            drzavaResParams.PozivniBroj = isPozivni ? SearchText.Trim() : string.Empty;
+            if (drzavaResParams != null)
+            {
+                drzavaResParams.Naziv = isPozivni ? string.Empty : SearchText.Trim();
+                drzavaResParams.PozivniBroj = isPozivni ? SearchText.Trim() : string.Empty;
+            }
 
             if (ShouldLoad)
-                await base.LoadData();
+                await LoadData();
         }
 
         protected override void btnNew_Click(object sender, EventArgs e)

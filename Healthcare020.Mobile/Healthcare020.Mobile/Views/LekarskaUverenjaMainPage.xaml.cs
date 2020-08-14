@@ -1,19 +1,16 @@
-﻿using System.Linq;
-using HealthCare020.Core.ResourceParameters;
-using Healthcare020.Mobile.Constants;
+﻿using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Models;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
 using Healthcare020.Mobile.Views.Dialogs;
 using Rg.Plugins.Popup.Extensions;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LekarskaUverenjaMainPage : ContentPage
+    public partial class LekarskaUverenjaMainPage
     {
         public LekarskaUverenjaViewModel LekarskaUverenjaVM { get; set; }
 

@@ -1,21 +1,20 @@
 ﻿using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
+using Healthcare020.Mobile.Views.Dialogs;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Healthcare020.Mobile.Models;
-using Healthcare020.Mobile.Views.Dialogs;
-using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
-    public class PregledViewModel : BaseViewModel, IDisposable
+    public class PregledViewModel : BaseViewModel
     {
         private readonly IAPIService _apiService;
         private PregledDtoEL Pregled;
@@ -74,19 +73,18 @@ namespace Healthcare020.Mobile.ViewModels
 
         #endregion Methods
 
-
         #region Commands
 
-        public ICommand LekarskoUverenjeCommand=>new Command(async () =>
-        {
-            if(LekarskoUverenjeId.HasValue)
-            {
-                await Application.Current.MainPage.Navigation.PushPopupAsync(
-                    new LekarskoUverenjeDialogPage(LekarskoUverenjeId.Value));
-            }
-        });
+        public ICommand LekarskoUverenjeCommand => new Command(async () =>
+          {
+              if (LekarskoUverenjeId.HasValue)
+              {
+                  await Application.Current.MainPage.Navigation.PushPopupAsync(
+                      new LekarskoUverenjeDialogPage(LekarskoUverenjeId.Value));
+              }
+          });
 
-        #endregion
+        #endregion Commands
 
         #region Properties
 
@@ -113,6 +111,7 @@ namespace Healthcare020.Mobile.ViewModels
             get => _dateTime;
             set => SetProperty(ref _dateTime, value);
         }
+
         public bool _isOdradjen;
 
         public bool IsOdradjen
@@ -122,10 +121,5 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         #endregion Properties
-
-        public void Dispose()
-        {
-            this.Dispose();
-        }
     }
 }

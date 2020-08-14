@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    partial class dlgSuccess
+    sealed partial class dlgSuccess
     {
         /// <summary>
         /// Required designer variable.

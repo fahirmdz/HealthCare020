@@ -17,7 +17,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
 
         private void NoDataPanel_SizeChanged(object sender, System.EventArgs e)
         {
-            pnlMain.PointToClient(new Point(this.Size.Width / 2, this.Size.Height / 2));
+            pnlMain.PointToClient(new Point(Size.Width / 2, Size.Height / 2));
         }
     }
 }

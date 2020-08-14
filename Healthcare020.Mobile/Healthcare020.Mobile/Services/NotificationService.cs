@@ -7,8 +7,8 @@ namespace Healthcare020.Mobile.Services
 {
     public class NotificationService
     {
-        private static NotificationService _instance = null;
-        public static NotificationService Instance => _instance ?? (_instance = new NotificationService());
+        private static NotificationService _instance;
+        public static NotificationService Instance => _instance ??= new NotificationService();
 
         private readonly IHud HudNotify;
 

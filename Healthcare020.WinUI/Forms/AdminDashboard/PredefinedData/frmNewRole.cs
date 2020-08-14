@@ -1,19 +1,19 @@
-﻿using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Models;
-using Healthcare020.WinUI.Services;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmNewRole : Form
+    public sealed partial class frmNewRole : Form
     {
-        private static frmNewRole _instance = null;
-        private APIService _apiService;
+        private static frmNewRole _instance;
+        private readonly APIService _apiService;
         private TwoFieldsDto Role;
 
         public new static frmNewRole ShowDialog()
@@ -51,13 +51,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             Text = Role == null ? Properties.Resources.frmNewRoleAdd : Properties.Resources.frmNewRoleUpdate;
 
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
+            Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
-            this.FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
 
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
-            this.TransparencyKey = Color.Transparent;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            TransparencyKey = Color.Transparent;
             pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
         }
 
@@ -73,13 +73,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private bool ValidateInput()
         {
-            if(string.IsNullOrWhiteSpace(txtNaziv.Text))
+            if (string.IsNullOrWhiteSpace(txtNaziv.Text))
             {
                 Errors.SetError(txtNaziv, Properties.Resources.RequiredField);
                 return false;
             }
 
-            if(txtNaziv.Text.Any(char.IsDigit))
+            if (txtNaziv.Text.Any(char.IsDigit))
             {
                 Errors.SetError(txtNaziv, Properties.Resources.InvalidFormat);
                 return false;
@@ -95,7 +95,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             {
                 APIServiceResult<TwoFieldsDto> result;
                 var upsertDto = new RoleUpsertDto
-                    {Naziv = txtNaziv.Text};
+                { Naziv = txtNaziv.Text };
 
                 if (Role == null)
                     result = await _apiService.Post<TwoFieldsDto>(upsertDto);

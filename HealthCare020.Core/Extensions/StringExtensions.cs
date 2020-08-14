@@ -89,10 +89,10 @@ namespace HealthCare020.Core.Extensions
             DirectoryInfo dir = new DirectoryInfo(rootPath);
             while (relativePath.StartsWith("..\\"))
             {
-                dir = dir.Parent;
+                dir = dir?.Parent;
                 relativePath = relativePath.Substring(3);
             }
-            return Path.Combine(dir.FullName, relativePath);
+            return Path.Combine(dir?.FullName??string.Empty, relativePath);
         }
     }
 }

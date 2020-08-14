@@ -2,6 +2,7 @@
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using System;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    public partial class frmSecurity : DisplayDataForm<Person>
+    public sealed partial class frmSecurity : DisplayDataForm<Person>
     {
         private static frmSecurity _instance;
 
@@ -31,11 +32,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private frmSecurity()
         {
-            base.pnlSearch.Visible = base.btnNew.Visible = false;
+            pnlSearch.Visible = btnNew.Visible = false;
 
             _apiService = new APIService(Routes.FaceRecognitionPersonGroupPersonsRoute);
             _dataForDgrv = new BindingSource();
-            this.Text = Properties.Resources.frmSecurityTitle;
+            Text = Resources.frmSecurityTitle;
 
             var Id = new DataGridViewColumn
             {
@@ -48,24 +49,24 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var Username = new DataGridViewColumn
             {
                 DataPropertyName = "Name",
-                HeaderText = "Username",
+                HeaderText = Resources.Username,
                 Name = "Username",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
             var Brisanje = new DataGridViewButtonColumn
             {
-                HeaderText = "Brisanje",
-                Name = "Obriši",
-                Text = "Obriši",
-                ToolTipText = "Obriši osobu iz grupe",
+                HeaderText = Resources.DeleteVerb,
+                Name = Resources.DeleteIt,
+                Text = Resources.DeleteIt,
+                ToolTipText = Resources.DeletePersonFromGroup,
                 UseColumnTextForButtonValue = true,
-                CellTemplate = new DataGridViewButtonCell { UseColumnTextForButtonValue = true, ToolTipText = "Obriši osobu iz grupe" },
+                CellTemplate = new DataGridViewButtonCell { UseColumnTextForButtonValue = true, ToolTipText = Resources.DeletePersonFromGroup },
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent },
             };
 
-            base.DgrvColumnsStyle();
-            base.AddColumnsToMainDgrv(new[] { Id, Username, Brisanje });
+            DgrvColumnsStyle();
+            AddColumnsToMainDgrv(new[] { Id, Username, Brisanje });
 
             InitializeComponent();
             btnBack.Visible = false;
@@ -79,14 +80,11 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             //Delete person from group
             if (e.ColumnIndex == 2)
             {
-                Form promptDialog = null;
-
-                promptDialog = dlgPropmpt.ShowDialog();
+                var promptDialog = dlgPropmpt.ShowDialog();
 
                 if (promptDialog?.DialogResult == DialogResult.OK)
                 {
                     var result = await _apiService.Delete<Person>(person.PersonId);
-
 
                     if (result.Succeeded)
                     {
@@ -95,12 +93,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                     }
                 }
             }
-        }
-
-        protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (!(MainDgrv.CurrentRow?.DataBoundItem is Person person))
-                return;
         }
 
         protected override void btnNew_Click(object sender, EventArgs e)

@@ -70,7 +70,7 @@ namespace Healthcare020.Mobile.ViewModels
             if (ProfilePicture == null)
                 return;
 
-            this.EnabledLoadingSpinner = true;
+            EnabledLoadingSpinner = true;
             IsBusy = true;
             if (!IsValidModel)
                 return;
@@ -93,7 +93,7 @@ namespace Healthcare020.Mobile.ViewModels
 
             var result = await _apiService.Post<PacijentDtoLL>(upsertDto);
             IsBusy = false;
-            this.EnabledLoadingSpinner = false;
+            EnabledLoadingSpinner = false;
 
             if (result.Succeeded)
             {

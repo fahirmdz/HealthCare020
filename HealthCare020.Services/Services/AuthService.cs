@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
@@ -13,7 +12,7 @@ namespace HealthCare020.Services.Services
 {
     public class AuthService : IAuthService
     {
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         protected readonly HealthCare020DbContext _dbContext;
 
         public AuthService(IHttpContextAccessor httpContextAccessor, HealthCare020DbContext dbContext)

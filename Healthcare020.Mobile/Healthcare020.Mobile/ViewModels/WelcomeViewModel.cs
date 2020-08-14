@@ -7,10 +7,6 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class WelcomeViewModel : BaseViewModel
     {
-        public WelcomeViewModel()
-        {
-        }
-
         private ObservableCollection<SinglePropertyItemsViewModel<ImageSource>> _imageUrls;
 
         public ObservableCollection<SinglePropertyItemsViewModel<ImageSource>> ImageUrls

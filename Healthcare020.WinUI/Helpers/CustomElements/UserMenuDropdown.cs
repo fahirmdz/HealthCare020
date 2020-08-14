@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using Healthcare020.WinUI.Forms.AdminDashboard;
 using Healthcare020.WinUI.Forms.KorisnickiNalog;
 using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
 using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
@@ -9,31 +10,28 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {
-    public class UserMenuDropdownPanel : Panel
+    public sealed class UserMenuDropdownPanel : Panel
     {
-        private bool _closeOnAnyActionOutside;
         private UserMenuButton _toggler;
 
         public UserMenuDropdownPanel()
         {
-            _toggler = new UserMenuButton();
-            this.Name = "pnlUserMenuDropdown";
-            this.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            this.BackColor = Color.FromArgb(0, 190, 190);
-            this.BorderStyle = BorderStyle.None;
+            Name = "pnlUserMenuDropdown";
+            Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            BackColor = Color.FromArgb(0, 190, 190);
+            BorderStyle = BorderStyle.None;
 
             ArrangeButtons();
 
-            this.Hide();
+            Hide();
         }
 
         public void ArrangeButtons()
         {
-            var buttonsFromControls = this.Controls.OfType<IconButton>();
+            var buttonsFromControls = Controls.OfType<IconButton>();
             foreach (var btn in buttonsFromControls)
             {
                 Controls.Remove(btn);
@@ -74,21 +72,11 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 btn.IconSize = 36;
                 btn.Cursor = Cursors.Hand;
                 btn.FlatAppearance.BorderSize = 0;
-                btn.Size = new Size(this.Width, this.Height / 3);
+                btn.Size = new Size(Width, Height / 3);
                 btn.Font = new Font("Calibri", 11.25f, FontStyle.Bold);
             }
 
-            this.Controls.AddRange(buttons.ToArray());
-        }
-
-        [DefaultValue(false)]
-        public bool CloseOnAnyActionOutside
-        {
-            get => _closeOnAnyActionOutside;
-            set
-            {
-                _closeOnAnyActionOutside = value;
-            }
+            Controls.AddRange(controls: buttons.ToArray());
         }
 
         [Description("Icon button which toggles this dropdown list")]
@@ -102,10 +90,10 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             }
         }
 
-        protected void logoutButton_OnClick(object sender, EventArgs e)
+        private void logoutButton_OnClick(object sender, EventArgs e)
         {
             Auth.Logout();
-            this.Hide();
+            Hide();
         }
 
         protected override void OnResize(EventArgs eventargs)
@@ -113,17 +101,17 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             var buttonCount = Auth.Role == RoleType.Administrator ? 1 : 3;
             foreach (var btn in Controls.OfType<IconButton>())
             {
-                btn.Size = new Size(this.Width, this.Height / buttonCount);
+                btn.Size = new Size(Width, Height / buttonCount);
             }
         }
 
-        protected void profileButton_OnClick(object sender, EventArgs e)
+        private void profileButton_OnClick(object sender, EventArgs e)
         {
             frmUserProfile.Instance.OpenAsChildOfControl(Parent);
-            this.Hide();
+            Hide();
         }
 
-        protected void dashboardButton_OnClick(object sender, EventArgs e)
+        private void dashboardButton_OnClick(object sender, EventArgs e)
         {
             switch (Auth.Role)
             {
@@ -140,17 +128,17 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                     break;
             }
 
-            this.Hide();
+            Hide();
         }
 
-        protected void toggler_OnClick(object sender, EventArgs e)
+        private void toggler_OnClick(object sender, EventArgs e)
         {
-            if (this.Visible)
-                this.Hide();
+            if (Visible)
+                Hide();
             else
             {
-                this.Show();
-                this.BringToFront();
+                Show();
+                BringToFront();
             }
         }
     }

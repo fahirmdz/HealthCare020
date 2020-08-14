@@ -1,21 +1,19 @@
 ﻿using HealthCare020.Core.Models;
-using System;
 using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmPregledOverview : Form
     {
-        private static frmPregledOverview _instance = null;
-        private PregledDtoEL Pregled;
+        private static frmPregledOverview _instance;
 
         private frmPregledOverview(PregledDtoEL pregled)
         {
-            Pregled = pregled;
+            var _pregled = pregled;
             InitializeComponent();
-            txtDoktor.Text = Pregled.Doktor;
-            txtDatumVreme.Text = Pregled.DatumPregleda.ToString("g");
-            txtPacijent.Text = Pregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
+            txtDoktor.Text = _pregled.Doktor;
+            txtDatumVreme.Text = _pregled.DatumPregleda.ToString("g");
+            txtPacijent.Text = _pregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
         }
 
         public static frmPregledOverview InstanceWithData(PregledDtoEL pregled, bool newInstance = false)
@@ -28,10 +26,6 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 _instance = new frmPregledOverview(pregled);
             }
             return _instance;
-        }
-
-        private void frmPregledOverview_Load(object sender, EventArgs e)
-        {
         }
     }
 }

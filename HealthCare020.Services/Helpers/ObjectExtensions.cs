@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
-using HealthCare020.Services.Exceptions;
 
 namespace HealthCare020.Services.Helpers
 {

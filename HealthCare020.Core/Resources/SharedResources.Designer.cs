@@ -97,6 +97,15 @@ namespace HealthCare020.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot set property on attached control. Error: .
+        /// </summary>
+        public static string FocusEffect_OnAttached_Cannot_set_property_on_attached_control__Error__ {
+            get {
+                return ResourceManager.GetString("FocusEffect_OnAttached_Cannot_set_property_on_attached_control__Error__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Datum mora biti u budućnosti.
         /// </summary>
         public static string FutureDateTimeConstraintMessage {

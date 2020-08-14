@@ -1,5 +1,4 @@
-﻿using System;
-using HealthCare020.Services.Exceptions;
+﻿using HealthCare020.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;

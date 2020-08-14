@@ -92,6 +92,10 @@
                 <On Platform="Android" Value="security.png" />
                 <On Platform="UWP" Value="Assets/security.png" />
             </OnPlatform>
+            <OnPlatform x:Key="EditProfileImageSource" x:TypeArguments="ImageSource">
+                <On Platform="Android" Value="edit_profile.png" />
+                <On Platform="UWP" Value="Assets/edit-profile.png" />
+            </OnPlatform>
             <!--#endregion-->
 
             <!--#region ConstantValues-->

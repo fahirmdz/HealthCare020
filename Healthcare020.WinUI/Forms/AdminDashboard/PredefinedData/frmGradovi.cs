@@ -7,13 +7,14 @@ using HealthCare020.Core.ResourceParameters;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmGradovi : DisplayDataForm<GradDtoEL>
+    public sealed partial class frmGradovi : DisplayDataForm<GradDtoEL>
     {
-        private static frmGradovi _instance = null;
+        private static frmGradovi _instance;
 
         public static frmGradovi Instance
         {
@@ -25,7 +26,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-        private frmGradovi() : base()
+        private frmGradovi()
         {
 
             var ID = new DataGridViewColumn
@@ -36,37 +37,37 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            var Naziv = new DataGridViewColumn { DataPropertyName = "Naziv", HeaderText = "Naziv", Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
+            var Naziv = new DataGridViewColumn { DataPropertyName = "Naziv", HeaderText = Resources.Name, Name = "Naziv", CellTemplate = new DataGridViewTextBoxCell() };
 
             var Drzava = new DataGridViewColumn
             {
                 DataPropertyName = "Drzava.Naziv",
-                HeaderText = "Država",
+                HeaderText = Resources.Country,
                 Name = "Država",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
             var Brisi = new DataGridViewButtonColumn
             {
-                HeaderText = "Brisanje",
+                HeaderText = Resources.DeleteVerb,
                 Name = "Brisanje",
-                Text = "Izbriši",
-                ToolTipText = "Izbriši grad",
+                Text = Resources.DeleteIt,
+                ToolTipText = Resources.DeleteCity,
                 UseColumnTextForButtonValue = true,
-                CellTemplate = new DataGridViewButtonCell { ToolTipText = "Izbriši grad", UseColumnTextForButtonValue = true },
+                CellTemplate = new DataGridViewButtonCell { ToolTipText = Resources.DeleteCity, UseColumnTextForButtonValue = true },
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent }
             };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Naziv, Drzava, Brisi });
+            AddColumnsToMainDgrv(new[] { ID, Naziv, Drzava, Brisi });
 
             _apiService = new APIService(Routes.GradoviRoute);
-            Text = Properties.Resources.frmGradovi;
+            Text = Resources.frmGradovi;
             ResourceParameters = new GradResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
 
             InitializeComponent();
         }
 
-        private void frmGradovi_Load(object sender, System.EventArgs e)
+        private void frmGradovi_Load(object sender, EventArgs e)
         {
             DisplayDataForm_Load(sender, e);
             FormForBackButton = frmPredefinedDataMenu.Instance;
@@ -118,11 +119,12 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var gradResParams = ResourceParameters as GradResourceParameters;
 
-            if (gradResParams.Naziv != SearchText)
+            if (gradResParams?.Naziv != SearchText)
             {
-                gradResParams.Naziv = SearchText.Trim();
+                if (gradResParams != null)
+                    gradResParams.Naziv = SearchText.Trim();
 
-                await base.LoadData();
+                await LoadData();
             }
         }
     }

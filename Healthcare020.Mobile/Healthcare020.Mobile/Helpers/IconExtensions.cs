@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32.SafeHandles;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.Helpers
 {
@@ -8,7 +7,7 @@ namespace Healthcare020.Mobile.Helpers
         /// <summary>
         /// Get Font Awesome icon based on glyph string
         /// </summary>
-        /// <param name="icnFont"></param>
+        /// <param name="glyph"></param>
         /// <param name="size"></param>
         /// <returns>FontImageSource object of icon</returns>
         public static FontImageSource GetIcon(this string glyph, int size = 30)
@@ -19,10 +18,9 @@ namespace Healthcare020.Mobile.Helpers
             {
                 FontFamily = FontAwesomeRegular,
                 Glyph = glyph,
-                Color=Color.WhiteSmoke,
-                Size=size
+                Color = Color.WhiteSmoke,
+                Size = size
             };
-
         }
     }
 }

@@ -6,12 +6,12 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Repository;
 using HealthCare020.Services;
-using HealthCare020.Services.Exceptions;
 using HealthCare020.Services.Services;
 using HealthCore020.Test.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.DataProtection;
 using Xunit;
 
 namespace HealthCore020.Test.UnitTests
@@ -27,14 +27,14 @@ namespace HealthCore020.Test.UnitTests
             HealthCore020DataDBInitializer.Seed_Korisnik(_dbContext);
 
             _service = new KorisnikService(
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Core.Mappers.Mapper()))),
                 _dbContext,
                 new PropertyMappingService(),
                 new PropertyCheckerService(),
                 new HttpContextAccessor(),
                 new SecurityService(),
-                new AuthService(new HttpContextAccessor(),
-                    _dbContext));
+                new AuthService(new HttpContextAccessor(),_dbContext),new CipherService(new EphemeralDataProtectionProvider()),
+                new FaceRecognitionService());
         }
 
         #region Get By Id

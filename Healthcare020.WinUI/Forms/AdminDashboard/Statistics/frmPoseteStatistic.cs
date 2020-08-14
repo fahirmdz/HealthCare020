@@ -1,14 +1,14 @@
 ﻿using FontAwesome.Sharp;
-using HealthCare020.Core.Constants;
 using Healthcare020.WinUI.Forms.AbstractForms;
 using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
-    public partial class frmPoseteStatistic : StatisticChartForm
+    public sealed partial class frmPoseteStatistic : StatisticChartForm
     {
-        private static frmPoseteStatistic _instnace = null;
+        private static frmPoseteStatistic _instnace;
 
         public static frmPoseteStatistic Instance
         {

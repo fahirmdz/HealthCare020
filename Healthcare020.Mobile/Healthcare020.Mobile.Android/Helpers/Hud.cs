@@ -13,10 +13,6 @@ namespace Healthcare020.Mobile.Droid.Helpers
 {
     public class Hud : IHud
     {
-        public Hud()
-        {
-        }
-
         public void Show()
         {
             AndHUD.Shared.Show(CrossCurrentActivity.Current.Activity);
@@ -39,12 +35,12 @@ namespace Healthcare020.Mobile.Droid.Helpers
 
         public void Progress()
         {
-            ShowProgress(progress => AndHUD.Shared.Show(CrossCurrentActivity.Current.Activity, "Loading... " + progress + "%", progress, MaskType.Black));
+            ShowProgress(progress => AndHUD.Shared.Show(CrossCurrentActivity.Current.Activity, "Loading... " + progress + "%", progress));
         }
 
         public void Toast(string message)
         {
-            AndHUD.Shared.ShowToast(CrossCurrentActivity.Current.Activity, message, MaskType.Black, TimeSpan.FromSeconds(1.5), true);
+            AndHUD.Shared.ShowToast(CrossCurrentActivity.Current.Activity, message, MaskType.Black, TimeSpan.FromSeconds(1.5));
 
         }
 

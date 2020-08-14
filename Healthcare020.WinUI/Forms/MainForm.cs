@@ -1,4 +1,5 @@
-﻿using Healthcare020.WinUI.Forms.KorisnickiNalog;
+﻿using Healthcare020.WinUI.Forms.AdminDashboard;
+using Healthcare020.WinUI.Forms.KorisnickiNalog;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.CustomElements;
 using System;
@@ -6,13 +7,10 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard;
-using Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard;
-using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 
 namespace Healthcare020.WinUI.Forms
 {
-    public partial class MainForm : Form
+    public sealed partial class MainForm : Form
     {
         private static MainForm _instance;
         private Form currentChild;
@@ -33,7 +31,7 @@ namespace Healthcare020.WinUI.Forms
         private MainForm()
         {
             InitializeComponent();
-            this.Icon = Properties.Resources.Healthcare020_Icon;
+            Icon = Properties.Resources.Healthcare020_Icon;
             Text = string.Empty;
             ControlBox = false;
             DoubleBuffered = true;
@@ -43,21 +41,20 @@ namespace Healthcare020.WinUI.Forms
 
         public void ReloadUserDropdownMenu()
         {
-           userMenuDropdown.ArrangeButtons();
+            userMenuDropdown.ArrangeButtons();
         }
 
-        private async void MainForm_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             //Region = Region.FromHrgn(this.CreateRoundRect(20, 20));
 
             if (currentChild == null)
             {
                 //await Auth.AuthenticateWithPassword("radnikprijem1", "testtest");
-                if(Auth.IsAuthenticated())
+                if (Auth.IsAuthenticated())
                     frmStartMenuAdministrator.Instance.OpenAsChildOfControl(panelDesktop);
                 else
                     frmLogin.Instance.OpenAsChildOfControl(panelDesktop);
-
             }
 
             picClose.BringToFront();
@@ -83,7 +80,7 @@ namespace Healthcare020.WinUI.Forms
         private void panelMainForm_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(Handle, 0x112, 0xf012, 0);
             //mouseDown = true;
             //mouseX = Cursor.Position.X - this.Left;
             //mouseY = Cursor.Position.Y - this.Top;
@@ -108,7 +105,6 @@ namespace Healthcare020.WinUI.Forms
             picMaximize.BackColor = Color.FromArgb(0, 170, 180);
         }
 
-
         private void picMaximize_MouseLeave(object sender, EventArgs e)
         {
             picMaximize.BackColor = Color.FromArgb(0, 190, 190);
@@ -131,24 +127,12 @@ namespace Healthcare020.WinUI.Forms
 
         private void picMaximize_Click(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Maximized)
-            {
-                WindowState = FormWindowState.Normal;
-            }
-            else
-            {
-                WindowState = FormWindowState.Maximized;
-            }
+            WindowState = WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
         }
 
         private void picMinimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
-        }
-
-        public Panel GetMainPanel()
-        {
-            return panelDesktop;
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -175,7 +159,7 @@ namespace Healthcare020.WinUI.Forms
                 x => !(x is UserMenuDropdownPanel) && !(x is UserMenuButton),
                 nestingCounter: currentChild is frmStartMenuAdministrator ? 3 : 2);
 
-            if (currentChild is frmLogin || currentChild is frmStartMenuAdministrator) 
+            if (currentChild is frmLogin || currentChild is frmStartMenuAdministrator)
             {
                 pnlTop.Hide();
             }
@@ -185,7 +169,7 @@ namespace Healthcare020.WinUI.Forms
             }
         }
 
-        protected void userMenuDropdown_MouseClick(object sender, EventArgs e)
+        private void userMenuDropdown_MouseClick(object sender, EventArgs e)
         {
             if (userMenuDropdown.Visible)
                 userMenuDropdown.Hide();

@@ -1,23 +1,18 @@
-﻿using HealthCare020.Core.Models;
-using System.Windows.Forms;
-using HealthCare020.Core.Constants;
-using Healthcare020.WinUI.Helpers;
+﻿using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Models;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmZahtevZaPregled : Form
     {
-        private static frmZahtevZaPregled _instance = null;
-        private ZahtevZaPregledDtoEL ZahtevZaPregled;
-
-        private readonly APIService _apiService;
+        private static frmZahtevZaPregled _instance;
+        private readonly ZahtevZaPregledDtoEL ZahtevZaPregled;
 
         private frmZahtevZaPregled(ZahtevZaPregledDtoEL zahtevZaPregled)
         {
             ZahtevZaPregled = zahtevZaPregled;
-            _apiService=new APIService(Routes.ZahteviZaPregledRoute);
             InitializeComponent();
             btnZakazi.Visible = !ZahtevZaPregled.IsObradjen;
         }
@@ -30,11 +25,12 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 _instance = new frmZahtevZaPregled(zahtevZaPregled);
             return _instance;
         }
+
         private void frmZahtevZaPregled_Load(object sender, System.EventArgs e)
         {
             txtDatumZahteva.Text = ZahtevZaPregled.DatumVreme.ToString("g");
             txtDoktor.Text = ZahtevZaPregled.Doktor;
-            txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime??"N/A";
+            txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
             txtNapomena.Text = ZahtevZaPregled.Napomena;
             txtNapomena.ReadOnly = true;
             txtIsObradjen.Text = ZahtevZaPregled.IsObradjen ? "DA" : "NE";

@@ -14,7 +14,7 @@ namespace HealthCare020.Services.Services
 {
     public class FaceRecognitionService : IFaceRecognitionService
     {
-        private string RecognitionModel = "recognition_02";
+        private readonly string RecognitionModel = "recognition_02";
         private readonly IFaceClient _faceClinet;
         private readonly ILogger _logger;
 

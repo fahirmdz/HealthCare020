@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using ValidationContext = AutoMapper.ValidationContext;
 
 namespace HealthCore020.Test
 {

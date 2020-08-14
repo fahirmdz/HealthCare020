@@ -430,16 +430,6 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] prof {
-            get {
-                object obj = ResourceManager.GetObject("prof", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Obavezno polje.
         /// </summary>
         public static string RequiredFieldError {

@@ -7,7 +7,6 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using System;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -15,9 +14,9 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmNewUputnica : Form
     {
-        private static frmNewUputnica _instance = null;
-        private PacijentDtoEL Pacijent;
-        private UputnicaDtoEL Uputnica;
+        private static frmNewUputnica _instance;
+        private readonly PacijentDtoEL Pacijent;
+        private readonly UputnicaDtoEL Uputnica;
         private readonly APIService _apiService;
 
         public static frmNewUputnica InstanceWithData(PacijentDtoEL pacijent, bool newInstance = false)

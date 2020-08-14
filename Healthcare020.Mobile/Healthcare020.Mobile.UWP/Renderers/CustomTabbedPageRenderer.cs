@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Healthcare020.Mobile.UWP.Renderers;
 using Healthcare020.Mobile.Views;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 using Image = Windows.UI.Xaml.Controls.Image;
 
@@ -25,15 +24,13 @@ namespace Healthcare020.Mobile.UWP.Renderers
         private async void Control_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             // replace 'TabbedHomePage' with whatever your page type is with the tabs
-            if (!(this.Element is TabbedPage))
+            if (this.Element == null)
                 return;
 
             switch (e.OriginalSource)
             {
-                case Image image when image.Parent is StackPanel:
+                case Image image when image.Parent is StackPanel sp:
                 {
-                    var sp = (StackPanel)image.Parent;
-
                     var tb = sp.Children.FirstOrDefault(c => c is TextBlock) as TextBlock;
 
                     await HandleRetab(tb);
@@ -58,7 +55,8 @@ namespace Healthcare020.Mobile.UWP.Renderers
                     tb.Name == "TabbedPageHeaderTextBlock")
                 {
                     // do your thing here, a tab retap happened, like:
-                    await newPage.Navigation.PopToRootAsync();
+                    if (newPage != null)
+                        await newPage.Navigation.PopToRootAsync();
                 }
 
                 _prevPage = newPage;

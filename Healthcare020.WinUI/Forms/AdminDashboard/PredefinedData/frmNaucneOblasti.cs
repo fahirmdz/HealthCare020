@@ -1,33 +1,33 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Forms.AbstractForms;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Services;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmNaucneOblasti : DisplayDataForm<TwoFieldsDto>
+    public sealed partial class frmNaucneOblasti : DisplayDataForm<TwoFieldsDto>
     {
-        private static frmNaucneOblasti _instance = null;
+        private static frmNaucneOblasti _instance;
 
         public static frmNaucneOblasti Instance
         {
             get
             {
                 if (_instance == null || _instance.IsDisposed)
-                    _instance=new frmNaucneOblasti();
+                    _instance = new frmNaucneOblasti();
                 return _instance;
             }
         }
 
         private frmNaucneOblasti()
         {
-
-            this.Text = Properties.Resources.frmNaucneOblasti;
+            Text = Resources.frmNaucneOblasti;
 
             var ID = new DataGridViewTextBoxColumn
             {
@@ -39,7 +39,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var Naziv = new DataGridViewTextBoxColumn
             {
-                HeaderText = "Naziv",
+                HeaderText = Resources.Name,
                 Name = "Naziv",
                 DataPropertyName = "Naziv",
                 CellTemplate = new DataGridViewTextBoxCell()
@@ -47,18 +47,18 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var Brisi = new DataGridViewButtonColumn
             {
-                HeaderText = "Brisanje",
+                HeaderText = Resources.DeleteVerb,
                 Name = "Brisanje",
-                Text = "Izbriši",
-                ToolTipText = "Izbriši grad",
+                Text = Resources.DeleteIt,
+                ToolTipText = Resources.DeleteIt,
                 UseColumnTextForButtonValue = true,
-                CellTemplate = new DataGridViewButtonCell { ToolTipText = "Izbriši grad", UseColumnTextForButtonValue = true },
+                CellTemplate = new DataGridViewButtonCell { ToolTipText = Resources.DeleteIt, UseColumnTextForButtonValue = true },
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent }
             };
 
             AddColumnsToMainDgrv(new DataGridViewColumn[] { ID, Naziv, Brisi });
             ResourceParameters = new TwoFieldsResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount };
-            _apiService=new APIService(Routes.NaucneOblastiRoute);
+            _apiService = new APIService(Routes.NaucneOblastiRoute);
             InitializeComponent();
         }
 
@@ -68,10 +68,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             {
                 if (MainDgrv.Columns[e.ColumnIndex].Name == "Brisanje")
                 {
-
                     var prompt = dlgPropmpt.ShowDialog();
 
-                    if(prompt.DialogResult==DialogResult.OK)
+                    if (prompt.DialogResult == DialogResult.OK)
                     {
                         var result = await _apiService.Delete<TwoFieldsDto>(naucnaOblast.Id);
 
@@ -103,9 +102,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var twoFieldsResParams = ResourceParameters as TwoFieldsResourceParameters;
 
-            if (SearchText != twoFieldsResParams.Naziv)
+            if (SearchText != twoFieldsResParams?.Naziv)
             {
-                twoFieldsResParams.Naziv = SearchText;
+                if (twoFieldsResParams != null)
+                    twoFieldsResParams.Naziv = SearchText;
                 await LoadData();
             }
         }

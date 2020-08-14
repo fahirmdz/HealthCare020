@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Healthcare020.LoggerService.Interfaces;
+﻿using Healthcare020.LoggerService.Interfaces;
 using Healthcare020.LoggerService.Services;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;

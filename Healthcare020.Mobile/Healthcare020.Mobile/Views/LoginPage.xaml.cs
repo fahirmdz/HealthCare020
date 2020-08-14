@@ -1,15 +1,15 @@
-﻿using Healthcare020.Mobile.ViewModels;
+﻿using Healthcare020.Mobile.Helpers;
+using Healthcare020.Mobile.ViewModels;
 using System;
-using Healthcare020.Mobile.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : BaseValidationContentPage
+    public partial class LoginPage
     {
-        private LoginViewModel LoginVM;
+        private readonly LoginViewModel LoginVM;
 
         public LoginPage()
         {
@@ -20,11 +20,6 @@ namespace Healthcare020.Mobile.Views
             BaseValidationVM = LoginVM;
             SetFormBodyElement();
             SetErrorsClearOnTextChanged();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
         }
 
         private void RememberMe_OnToggled(object sender, ToggledEventArgs e) => LoginVM.RememberMe = RememberMe.IsToggled;
@@ -43,7 +38,6 @@ namespace Healthcare020.Mobile.Views
         private void FaceIDLogin_OnClicked(object sender, EventArgs e)
         {
             LoginVM.FaceIDLoginCommand.Execute(sender);
-
         }
     }
 }

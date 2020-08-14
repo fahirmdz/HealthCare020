@@ -6,21 +6,21 @@ using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    public partial class dlgError : Form
+    public sealed partial class dlgError : Form
     {
-        private static dlgError _instance = null;
+        private static dlgError _instance;
 
         private dlgError(string message = "")
         {
             InitializeComponent();
-            lblError.Text = string.IsNullOrWhiteSpace(message)?"Greška":message;
-            this.FormBorderStyle = FormBorderStyle.None;
+            lblError.Text = string.IsNullOrWhiteSpace(message) ? "Greška" : message;
+            FormBorderStyle = FormBorderStyle.None;
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
+            Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
-            this.BackColor=Color.Transparent;
-            this.TransparencyKey=Color.Transparent;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            TransparencyKey = Color.Transparent;
             pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
         }
 
@@ -35,7 +35,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
                 _instance = new dlgError(message);
             }
 
-            ((Form) _instance).Visible = false;
+            _instance.Visible = false;
             ((Form)_instance).ShowDialog();
         }
 
@@ -46,7 +46,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private async void dlgError_Load(object sender, EventArgs e)
         {
-            this.Dock = DockStyle.Fill;
+            Dock = DockStyle.Fill;
             await Task.Delay(1200);
             Close();
             Dispose();

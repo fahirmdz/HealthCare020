@@ -8,9 +8,9 @@ using Xamarin.Forms.Xaml;
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class WelcomePage : ContentPage
+    public partial class WelcomePage
     {
-        private WelcomeViewModel WelcomeVM;
+        private readonly WelcomeViewModel WelcomeVM;
 
         public WelcomePage()
         {
@@ -35,11 +35,6 @@ namespace Healthcare020.Mobile.Views
                 CarouselImages.Position = (CarouselImages.Position + 1) % WelcomeVM.ImageUrls.Count;
                 return true;
             });
-        }
-
-        private void TEST_OnClicked(object sender, EventArgs e)
-        {
-            Application.Current.MainPage = new TestPage();
         }
     }
 }

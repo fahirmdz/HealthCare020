@@ -1,6 +1,5 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace HealthCare020.Services.Interfaces
 {
     public interface IFaceRecognitionService
     {
-        Task<IList<Person>> GetPersonGroupPersonsList(string personGroupId, int pageSize=6,string startPersonId="");
+        Task<IList<Person>> GetPersonGroupPersonsList(string personGroupId, int pageSize = 6, string startPersonId = "");
 
         Task<bool> CreatePersonGroup(string personGroupId, string groupName);
 

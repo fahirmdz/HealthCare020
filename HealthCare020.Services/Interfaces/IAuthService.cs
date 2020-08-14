@@ -1,7 +1,6 @@
 ﻿using HealthCare020.Core.Entities;
 using HealthCare020.Core.Enums;
 using System.Threading.Tasks;
-using HealthCare020.Core.Models;
 
 namespace HealthCare020.Services.Interfaces
 {

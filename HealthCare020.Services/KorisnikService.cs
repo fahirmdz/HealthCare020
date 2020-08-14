@@ -190,11 +190,12 @@ namespace HealthCare020.Services
 
         public override IEnumerable PrepareDataForClient(IEnumerable<KorisnickiNalog> data, KorisnickiNalogResourceParameters resourceParameters)
         {
-            foreach (var x in data)
+            var korisnickiNalogs = data.ToList();
+            foreach (var x in korisnickiNalogs)
             {
                 _dbContext.Entry(x).Collection(c => c.RolesKorisnickiNalog).Load();
             }
-            return base.PrepareDataForClient(data, resourceParameters);
+            return base.PrepareDataForClient(korisnickiNalogs, resourceParameters);
         }
 
         public override T PrepareDataForClient<T>(KorisnickiNalog data)
@@ -321,7 +322,7 @@ namespace HealthCare020.Services
             var userFromDb = await _dbContext.KorisnickiNalozi.FindAsync(currentUser.Id);
             var hashedCurrentPassword = _securityService.GenerateHash(userFromDb.PasswordSalt, currentPassword);
             if (userFromDb.PasswordHash != hashedCurrentPassword)
-                return ServiceResult.BadRequest($"Netačna trenutna lozinka");
+                return ServiceResult.BadRequest("Netačna trenutna lozinka");
 
             userFromDb.PasswordSalt = _securityService.GenerateSalt();
             var hash = _securityService.GenerateHash(userFromDb.PasswordSalt, newPassword);
@@ -347,7 +348,7 @@ namespace HealthCare020.Services
         {
             var user = await Authenticate(username, password);
             if (user == null)
-                return ServiceResult.BadRequest($"Korisnicki nalog nije pronadjen");
+                return ServiceResult.BadRequest("Korisnicki nalog nije pronadjen");
 
             if (user.LockedOut)
                 return ServiceResult.WithStatusCode(HttpStatusCode.Locked);

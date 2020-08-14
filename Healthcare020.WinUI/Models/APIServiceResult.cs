@@ -17,7 +17,7 @@ namespace Healthcare020.WinUI.Models
         }
 
         public T Data { get; set; }
-        public bool HasData { get; set; } = false;
+        public bool HasData { get; set; }
         public string Message { get; set; } = string.Empty;
         public PaginationMetadata PaginationMetadata { get; set; }
         public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;

@@ -11,9 +11,9 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class LekarskaUverenjaViewModel : BaseListViewModel
     {
-        public LekarskaUverenjaViewModel() : base()
+        public LekarskaUverenjaViewModel()
         {
-            base.APIRouteToCollection = Routes.LekarskoUverenjeRoute;
+            APIRouteToCollection = Routes.LekarskoUverenjeRoute;
             var RowsCount = ResourceParameters.PageSize;
             ResourceParameters = new LekarskoUverenjeResourceParameters()
             {
@@ -41,11 +41,11 @@ namespace Healthcare020.Mobile.ViewModels
 
         protected override async Task Search()
         {
-            if (string.Equals(SearchString, (ResourceParameters as LekarskoUverenjeResourceParameters).OpisStanja,
+            if (string.Equals(SearchString, (ResourceParameters as LekarskoUverenjeResourceParameters)?.OpisStanja,
                 StringComparison.InvariantCultureIgnoreCase))
                 return;
 
-            (ResourceParameters as LekarskoUverenjeResourceParameters).OpisStanja = SearchString;
+            ((LekarskoUverenjeResourceParameters) ResourceParameters).OpisStanja = SearchString;
 
             await LoadData();
         }

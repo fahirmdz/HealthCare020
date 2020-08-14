@@ -18,7 +18,7 @@ namespace Healthcare020.OAuth.Validators
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
         private readonly IKorisnikService _korisnikService;
-        private IEventService _events;
+        private readonly IEventService _events;
 
         public ResourceOwnerPasswordValidator(IKorisnikService korisnikService, IEventService events)
         {
@@ -84,7 +84,7 @@ namespace Healthcare020.OAuth.Validators
             }
         }
 
-        private async Task BuildSuccessResultAsync(string username, string userId, ResourceOwnerPasswordValidationContext context, bool sendRememberToken = false)
+        private async Task BuildSuccessResultAsync(string username, string userId, ResourceOwnerPasswordValidationContext context)
         {
             await _events.RaiseAsync(new UserLoginSuccessEvent(username, userId, username, false));
 

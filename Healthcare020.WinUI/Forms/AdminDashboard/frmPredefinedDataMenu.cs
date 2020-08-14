@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCare020.Core.Constants;
-using Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    public partial class frmPredefinedDataMenu : Form
+    public sealed partial class frmPredefinedDataMenu : Form
     {
         private static frmPredefinedDataMenu _instance;
         private APIService _apiService;
@@ -37,8 +37,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 return _instance;
             }
         }
-
-        
 
         //PREDEFINED DATA COUNTS
         public int DrzavaCount { get; set; }
@@ -73,7 +71,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                     _apiService.ChangeRoute(Routes.NaucneOblastiRoute);
                     NaucneOblastiCount = (await _apiService.Count())?.Data.First() ?? 0;
                     lblNaucneOblastiCounter.Text = NaucneOblastiCount.ToString();
-                
+
                     break;
 
                 case Routes.RolesRoute:

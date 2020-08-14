@@ -7,7 +7,7 @@ namespace Healthcare020.Mobile.CustomViews
     /// Custom collection view
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomListView : ContentView
+    public partial class CustomListView
     {
         public ListView MainListView { get;}
         public CustomListView()

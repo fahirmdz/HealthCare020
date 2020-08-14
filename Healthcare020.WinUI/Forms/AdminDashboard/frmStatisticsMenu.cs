@@ -9,9 +9,9 @@ using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    public partial class frmStatisticsMenu : Form
+    public sealed partial class frmStatisticsMenu : Form
     {
-        private static frmStatisticsMenu _instance = null;
+        private static frmStatisticsMenu _instance;
         private readonly APIService _apiService;
 
         private int PreglediCounter;

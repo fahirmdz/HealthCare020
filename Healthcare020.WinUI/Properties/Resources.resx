@@ -126,6 +126,30 @@
   <data name="CopyrightText" xml:space="preserve">
     <value>© 2020. Fahir Mumdžić. All rights reserved.</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Država</value>
+  </data>
+  <data name="DateCreated" xml:space="preserve">
+    <value>Datum kreiranja</value>
+  </data>
+  <data name="DeleteCity" xml:space="preserve">
+    <value>Izbriši grad</value>
+  </data>
+  <data name="DeleteCountry" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DeleteIt" xml:space="preserve">
+    <value>Obriši</value>
+  </data>
+  <data name="DeletePersonFromGroup" xml:space="preserve">
+    <value>Obriši osobu iz grupe</value>
+  </data>
+  <data name="DeleteVerb" xml:space="preserve">
+    <value>Brisanje</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value />
+  </data>
   <data name="DifferentPasswords" xml:space="preserve">
     <value>Lozinke se ne podudaraju</value>
   </data>
@@ -314,9 +338,24 @@
   <data name="LabelUserProfile" xml:space="preserve">
     <value>Korisnički profil</value>
   </data>
+  <data name="LastOnline" xml:space="preserve">
+    <value>Zadnji put online</value>
+  </data>
+  <data name="LineChart" xml:space="preserve">
+    <value>Line chart</value>
+  </data>
+  <data name="LockAccount" xml:space="preserve">
+    <value>Zaključaj korisnički nalog</value>
+  </data>
+  <data name="LockVerb" xml:space="preserve">
+    <value>Zaključavanje</value>
+  </data>
   <data name="LogFilePath" xml:space="preserve">
     <value>C:/Temp/logs/Helathcare020_Desktop_Logs/#_logfile.txt</value>
     <comment># will be replaced with DateTime format 2020-08-10</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Naziv</value>
   </data>
   <data name="NoDataLekarskaUverenjaMessage" xml:space="preserve">
     <value />
@@ -335,6 +374,12 @@
   </data>
   <data name="NotLoggedIn" xml:space="preserve">
     <value>"Niste prijavljeni na sistem!"</value>
+  </data>
+  <data name="PieChart" xml:space="preserve">
+    <value>Pie chart</value>
+  </data>
+  <data name="PrefixNumber" xml:space="preserve">
+    <value>Pozivni broj</value>
   </data>
   <data name="RecommendedTimeForPregledMessage" xml:space="preserve">
     <value>Ovo je preporučeno vrijeme pregleda, bazirano na godini rodjenja pacijenta</value>
@@ -371,6 +416,9 @@
   </data>
   <data name="UnableToLoadUserProfileMessage" xml:space="preserve">
     <value>Nije moguće učitati podatke o profilu</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Korisničko ime</value>
   </data>
   <data name="WrongUsernameOrPasswordMessage" xml:space="preserve">
     <value>Netačno korisničko ime ili lozinka</value>

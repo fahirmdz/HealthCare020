@@ -8,9 +8,9 @@ using Xamarin.Forms.Xaml;
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PosetaPage : BaseValidationContentPage
+    public partial class PosetaPage
     {
-        private PosetaViewModel PosetaVM;
+        private readonly PosetaViewModel PosetaVM;
 
         public PosetaPage()
         {

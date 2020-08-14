@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using Healthcare020.Mobile.Models;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Healthcare020.Mobile.ViewModels

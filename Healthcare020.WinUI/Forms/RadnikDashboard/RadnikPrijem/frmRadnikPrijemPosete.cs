@@ -1,4 +1,5 @@
 ﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
@@ -6,17 +7,13 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Helpers.Dialogs;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 {
     public sealed partial class frmRadnikPrijemPosete : DisplayDataForm<ZahtevZaPosetuDtoEL>
     {
-        private static frmRadnikPrijemPosete _instance = null;
-        private readonly bool NeobradjeniZahteviOnly;
-        private readonly bool ObradjeniZahteviOnly;
+        private static frmRadnikPrijemPosete _instance;
 
         public static frmRadnikPrijemPosete InstanceWithData(bool NeobradjeniZahteviOnly = false, bool ObradjeniZahteviOnly = false) //if false then Kreirane
         {
@@ -27,15 +24,12 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 
         private frmRadnikPrijemPosete(bool NeobradjeniZahteviOnly = false, bool ObradjeniZahteviOnly = false)
         {
-            this.NeobradjeniZahteviOnly = NeobradjeniZahteviOnly;
-            this.ObradjeniZahteviOnly = ObradjeniZahteviOnly;
-
-            if (this.NeobradjeniZahteviOnly)
-                this.Text = Resources.frmRadnikPrijemPoseteNeobradjeniZahtevi;
-            else if (this.ObradjeniZahteviOnly)
-                this.Text = Resources.frmRadnikPrijemPoseteObradjeniZahteviOnly;
+            if (NeobradjeniZahteviOnly)
+                Text = Resources.frmRadnikPrijemPoseteNeobradjeniZahtevi;
+            else if (ObradjeniZahteviOnly)
+                Text = Resources.frmRadnikPrijemPoseteObradjeniZahteviOnly;
             else
-                this.Text = Resources.frmRadnikPrijemPoseteSviZahtevi;
+                Text = Resources.frmRadnikPrijemPoseteSviZahtevi;
 
             var ID = new DataGridViewTextBoxColumn
             {
@@ -69,12 +63,12 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            var columnsToAdd = new List<DataGridViewColumn> { ID, Pacijent, brojTelefona};
+            var columnsToAdd = new List<DataGridViewColumn> { ID, Pacijent, brojTelefona };
 
-            if (!this.NeobradjeniZahteviOnly)
+            if (!NeobradjeniZahteviOnly)
                 columnsToAdd.Add(ZakazanoDatumVreme);
 
-            base.AddColumnsToMainDgrv(columnsToAdd.ToArray());
+            AddColumnsToMainDgrv(columnsToAdd.ToArray());
 
             _apiService = new APIService(Routes.ZahtevZaPosetuRoute);
             ResourceParameters = new ZahtevZaPosetuResourceParameters()
@@ -82,8 +76,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
                 PageNumber = 1,
                 PageSize = PossibleRowsCount,
                 EagerLoaded = true,
-                NeobradjeneOnly = this.NeobradjeniZahteviOnly,
-                ObradjeneOnly = this.ObradjeniZahteviOnly
+                NeobradjeneOnly = NeobradjeniZahteviOnly,
+                ObradjeneOnly = ObradjeniZahteviOnly
             };
 
             InitializeComponent();
@@ -103,7 +97,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
                 e.Value = zahtevZaPosetu.PacijentNaLecenju.ImePrezime;
 
             if (dgrvMain.Columns[e.ColumnIndex].Name == nameof(ZahtevZaPosetuDtoEL.ZakazanoDatumVreme))
-                e.Value = zahtevZaPosetu.ZakazanoDatumVreme.HasValue?zahtevZaPosetu.ZakazanoDatumVreme.Value.ToString("g"):"ODBIJEN";
+                e.Value = zahtevZaPosetu.ZakazanoDatumVreme.HasValue ? zahtevZaPosetu.ZakazanoDatumVreme.Value.ToString("g") : "ODBIJEN";
         }
 
         protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -112,11 +106,6 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
                 return;
             dlgForm.ShowDialog(frmPosetaOverview.InstanceWithData(zahtevZaPosetu, newInstance: true),
                 NewInstance: true);
-        }
-
-        private void frmRadnikPrijemPosete_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Dispose();
         }
 
         protected override async void txtSearch_Leave(object sender, EventArgs e)
@@ -132,7 +121,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
             {
                 zahtevZaPosetuiResParams.PacijentIme = SearchText;
                 zahtevZaPosetuiResParams.PacijentPrezime = SearchText;
-                await base.LoadData();
+                await LoadData();
             }
         }
     }

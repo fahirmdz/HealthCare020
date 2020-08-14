@@ -1,8 +1,5 @@
-﻿using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms.AdminDashboard;
 
 namespace Healthcare020.WinUI.Helpers
 {
@@ -33,26 +30,6 @@ namespace Healthcare020.WinUI.Helpers
             parentControl.Controls.Add(form);
             form.Parent = parentControl;
             form.Show();
-        }
-
-        public static void ShowDialogWithBlurryBackground(this Form dialog)
-        {
-            var panel = new Panel();
-            dialog.TopLevel = false;
-            panel.Controls.Add(dialog);
-            panel.Tag = dialog;
-            panel.Dock = DockStyle.Fill;
-            panel.BackColor = Color.FromArgb(25, Color.Black);
-            panel.BringToFront();
-            frmStartMenuAdministrator.Instance.Controls.Add(panel);
-
-            panel.Show();
-        }
-
-        public static async Task CloseAfterDelay(this Form form, int millisecondsDelay)
-        {
-            await Task.Delay(millisecondsDelay);
-            form.Close();
         }
     }
 }

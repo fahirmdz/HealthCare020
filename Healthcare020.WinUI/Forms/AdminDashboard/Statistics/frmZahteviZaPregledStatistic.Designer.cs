@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
-    partial class frmZahteviZaPregledStatistic
+    sealed partial class frmZahteviZaPregledStatistic
     {
         /// <summary>
         /// Required designer variable.

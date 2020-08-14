@@ -168,4 +168,7 @@
   <data name="UnsuccessfulFaceIdAuthentication" xml:space="preserve">
     <value>Face ID autentifikacija nije uspela</value>
   </data>
+  <data name="FocusEffect_OnAttached_Cannot_set_property_on_attached_control__Error__" xml:space="preserve">
+    <value>Cannot set property on attached control. Error: </value>
+  </data>
 </root>

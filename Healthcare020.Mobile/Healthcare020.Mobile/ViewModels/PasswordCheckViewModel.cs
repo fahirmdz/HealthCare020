@@ -1,29 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Healthcare020.Mobile.Interfaces;
+using Healthcare020.Mobile.Resources;
+using Healthcare020.Mobile.Services;
+using HealthCare020.Core.Constants;
+using Rg.Plugins.Popup.Services;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using HealthCare020.Core.Constants;
-using Healthcare020.Mobile.Interfaces;
-using Healthcare020.Mobile.Resources;
-using Healthcare020.Mobile.Services;
-using Rg.Plugins.Popup.Services;
-using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
-    public class PasswordCheckViewModel: BaseValidationViewModel
+    public class PasswordCheckViewModel : BaseValidationViewModel
     {
         private IAPIService _apiService;
         private ICommand CommandToExecute;
 
-        public PasswordCheckViewModel()
-        {
-
-        }
-
         #region Methods
 
-        public bool ValidInput()=>!string.IsNullOrWhiteSpace(Password);
+        public bool ValidInput() => !string.IsNullOrWhiteSpace(Password);
 
         public void Init(ICommand commandToExecute)
         {
@@ -34,7 +28,7 @@ namespace Healthcare020.Mobile.ViewModels
             }
 
             CommandToExecute = commandToExecute;
-            _apiService=new APIService();
+            _apiService = new APIService();
         }
 
         public async Task CheckPassword()
@@ -52,14 +46,16 @@ namespace Healthcare020.Mobile.ViewModels
                 return;
             }
 
-            //CommandToExecute?.Execute(null);
+            CommandToExecute?.Execute(null);
             await PopupNavigation.Instance.PopAsync();
         }
-        #endregion
+
+        #endregion Methods
 
         #region Properties
 
         private string _password;
+
         [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
         [StringLength(15, ErrorMessageResourceName = nameof(AppResources.PasswordLengthError), ErrorMessageResourceType = typeof(AppResources), MinimumLength = 6)]
         public string Password
@@ -74,6 +70,6 @@ namespace Healthcare020.Mobile.ViewModels
             }
         }
 
-        #endregion
+        #endregion Properties
     }
 }

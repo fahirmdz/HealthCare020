@@ -6,9 +6,9 @@ using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
-    public partial class frmPreglediStatistic : StatisticChartForm
+    public sealed partial class frmPreglediStatistic : StatisticChartForm
     {
-        private static frmPreglediStatistic _instnace = null;
+        private static frmPreglediStatistic _instnace;
 
         public static frmPreglediStatistic Instance
         {
@@ -26,7 +26,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
             NoDataMessage = Resources.NoDataPreglediObavljeniStatisticMessage;
             YAxisTitle = "Broj obavljenih pregleda";
             IcnCharForNoData = IconChar.Stethoscope;
-            Text = Properties.Resources.frmPreglediStatistic;
+            Text = Resources.frmPreglediStatistic;
             _apiService = new APIService(Routes.PreglediRoute);
             InitializeComponent();
         }

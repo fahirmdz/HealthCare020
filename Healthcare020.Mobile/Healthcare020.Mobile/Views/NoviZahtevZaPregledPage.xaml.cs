@@ -9,7 +9,7 @@ namespace Healthcare020.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NoviZahtevZaPregledPage
     {
-        private NoviZahtevZaPregledViewModel NoviZahtevZaPregledVM;
+        private readonly NoviZahtevZaPregledViewModel NoviZahtevZaPregledVM;
 
         public NoviZahtevZaPregledPage()
         {

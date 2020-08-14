@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    partial class frmUsers
+    sealed partial class frmUsers
     {
         /// <summary>
         /// Required designer variable.

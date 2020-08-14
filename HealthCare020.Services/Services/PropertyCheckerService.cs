@@ -1,5 +1,4 @@
 ﻿using HealthCare020.Services.Interfaces;
-using System;
 using System.Reflection;
 
 namespace HealthCare020.Services.Services

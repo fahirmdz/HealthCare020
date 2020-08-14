@@ -90,7 +90,7 @@ namespace HealthCare020.Services
             var doktorFromDb = getDoktorResult.doktor;
 
             if (!await _authService.CurrentUserIsInRoleAsync(RoleType.Administrator) && doktorFromDb.Radnik.KorisnickiNalogId != ((await _authService.LoggedInUser())?.Id ?? 0))
-                return ServiceResult.Forbidden($"Ne mozete vrsiti izmene na drugim profilima doktora.");
+                return ServiceResult.Forbidden("Ne mozete vrsiti izmene na drugim profilima doktora.");
 
             if (doktorFromDb.NaucnaOblastId != dtoForUpdate.NaucnaOblastId)
             {
@@ -118,7 +118,7 @@ namespace HealthCare020.Services
             var doktorFromDb = getDoktorResult.doktor;
 
             if (!await _authService.CurrentUserIsInRoleAsync(RoleType.Administrator) && doktorFromDb.Radnik.KorisnickiNalogId != ((await _authService.LoggedInUser())?.Id ?? 0))
-                return ServiceResult.Forbidden($"Ne mozete vrsiti izmene na drugim profilima doktora.");
+                return ServiceResult.Forbidden("Ne mozete vrsiti izmene na drugim profilima doktora.");
 
             if (await _dbContext.Uputnice.AnyAsync(x => x.UputioDoktorId == doktorFromDb.Id || x.UpucenKodDoktoraId == doktorFromDb.Id))
                 return ServiceResult.BadRequest("Ne mozete izbrisati profil doktora sve dok postoje uputnice koje su povezane sa ovim doktorom.");

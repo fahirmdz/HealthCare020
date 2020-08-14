@@ -18,16 +18,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services
 {
     public class PregledService : BaseCRUDService<PregledDtoLL, PregledDtoEL, PregledResourceParameters, Pregled, PregledUpsertDto, PregledUpsertDto>, IPregledService
     {
-        private static string MODEL_PATH = Path.Combine(Environment.CurrentDirectory, "Data", Resources.MLModelName);
-        private static MLContext mlContext = new MLContext(1);
-        private static uint[] TimeOfDayHalfsUids = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }; // => Starts at 9 AM and every iteration is 30 minutes to add
+        private static readonly string MODEL_PATH = Path.Combine(Environment.CurrentDirectory, "Data", Resources.MLModelName);
+        private static readonly MLContext mlContext = new MLContext(1);
+        private static readonly uint[] TimeOfDayHalfsUids = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }; // => Starts at 9 AM and every iteration is 30 minutes to add
 
         public PregledService(IMapper mapper, HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService, IPropertyCheckerService propertyCheckerService, IHttpContextAccessor httpContextAccessor,
@@ -91,7 +90,7 @@ namespace HealthCare020.Services
         {
             var doktor = await _authService.GetCurrentLoggedInDoktor();
             if (doktor == null)
-                return ServiceResult.Forbidden($"Samo doktori mogu kreirati novi pregled.");
+                return ServiceResult.Forbidden("Samo doktori mogu kreirati novi pregled.");
             if (await ValidateModel(dtoForCreation) is { } result && !result.Succeeded)
                 return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
 
@@ -152,8 +151,11 @@ namespace HealthCare020.Services
 
             var pregledFromDb = getPregledResult.Data as Pregled;
 
+            if(pregledFromDb==null)
+                return ServiceResult.NotFound();
+
             if (await _dbContext.LekarskaUverenja.AnyAsync(x => x.PregledId == id))
-                return ServiceResult.BadRequest($"Ne mozete brisati pregled sve dok ima lekarskih uverenja povezanih sa ovim pregledom.");
+                return ServiceResult.BadRequest("Ne mozete brisati pregled sve dok ima lekarskih uverenja povezanih sa ovim pregledom.");
 
             await Task.Run(() =>
             {
@@ -270,14 +272,14 @@ namespace HealthCare020.Services
         {
             var doktor = await _authService.GetCurrentLoggedInDoktor();
             if (doktor == null)
-                return ServiceResult.Forbidden($"Samo doktori mogu vrsiti izmene pregleda.");
+                return ServiceResult.Forbidden("Samo doktori mogu vrsiti izmene pregleda.");
 
             var pregledFromDb = await _dbContext.Pregledi.FindAsync(id);
             if (pregledFromDb == null)
                 return ServiceResult.NotFound($"Pregled sa ID-em {id} nije pronadjen.");
 
             if (pregledFromDb.DoktorId != doktor.Id)
-                return ServiceResult.Forbidden($"Nemate permisije za izmenu pregleda koje je kreirao drugi doktor.");
+                return ServiceResult.Forbidden("Nemate permisije za izmenu pregleda koje je kreirao drugi doktor.");
 
             return ServiceResult.OK(pregledFromDb);
         }
@@ -303,7 +305,7 @@ namespace HealthCare020.Services
                 return ServiceResult.NotFound($"Zahtev za pregled sa ID-em {dto.ZahtevZaPregledId} nije pronadjen.");
 
             if (dto.DatumPregleda.Year < DateTime.Now.Year)
-                return ServiceResult.BadRequest($"Datum pregleda nije validan.");
+                return ServiceResult.BadRequest("Datum pregleda nije validan.");
 
             return ServiceResult.WithStatusCode(HttpStatusCode.OK);
         }
@@ -346,7 +348,7 @@ namespace HealthCare020.Services
             ITransformer model;
             if (File.Exists(MODEL_PATH))
             {
-                model = mlContext.Model.Load(MODEL_PATH, out DataViewSchema modelSchema);
+                model = mlContext.Model.Load(MODEL_PATH, out _);
             }
             else
             {
@@ -370,16 +372,17 @@ namespace HealthCare020.Services
             predictionResult = predictionResult.OrderByDescending(x => x.Item2).ToList(); //Highest score on top
             foreach (var predict in predictionResult)
             {
-                Console.WriteLine($"{predict?.Item1} => {predict.Item2}");
+                if (predict != null)
+                    Console.WriteLine($@"{predict.Item1} => {predict.Item2}");
             }
 
             Console.WriteLine();
             return GetMinutesToAddBasedOnVrijemeUid(predictionResult.First().Item1);
         }
 
-        private async Task<ITransformer> AddAndTrainModel(GodisteVrijemeIdModel toAdd)
+        private async Task AddAndTrainModel(GodisteVrijemeIdModel toAdd)
         {
-            return await CreateModel(toAdd);
+            await CreateModel(toAdd);
         }
 
         private async Task<ITransformer> CreateModel(GodisteVrijemeIdModel toAdd = null)
@@ -434,18 +437,6 @@ namespace HealthCare020.Services
         {
             return uid * 30;
         }
-
-        public static string AssemblyDirectory
-        {
-            get
-            {
-                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return Path.GetDirectoryName(path);
-            }
-        }
-
         #endregion Helpers
 
         //===============================================

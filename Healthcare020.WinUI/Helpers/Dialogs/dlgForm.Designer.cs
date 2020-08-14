@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    partial class dlgForm   
+    sealed partial class dlgForm   
     {
         /// <summary>
         /// Required designer variable.

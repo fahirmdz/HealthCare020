@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HealthCare020.Core.Request
+﻿namespace HealthCare020.Core.Request
 {
     public class JsonPatchDto
     {

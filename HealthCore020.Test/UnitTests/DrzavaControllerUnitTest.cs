@@ -25,7 +25,7 @@ namespace HealthCore020.Test.UnitTests
             HealthCore020DataDBInitializer.Seed_Drzave(_dbContext);
 
             _service = new DrzavaService(
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Core.Mappers.Mapper()))),
                 _dbContext,
                 new PropertyMappingService(),
                 new PropertyCheckerService(),

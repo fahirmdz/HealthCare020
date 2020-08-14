@@ -1,6 +1,6 @@
 ﻿using System;
+using HealthCare020.Core.Resources;
 using Healthcare020.Mobile.Droid.Effects;
-using Java.Util;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -22,7 +22,7 @@ namespace Healthcare020.Mobile.Droid.Effects
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Cannot set property on attached control. Error: ", ex.Message);
+                Console.WriteLine(SharedResources.FocusEffect_OnAttached_Cannot_set_property_on_attached_control__Error__, ex.Message);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Healthcare020.Mobile.Droid.Effects
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Cannot set property on attached control. Error: ", ex.Message);
+                Console.WriteLine(SharedResources.FocusEffect_OnAttached_Cannot_set_property_on_attached_control__Error__, ex.Message);
             }
         }
     }

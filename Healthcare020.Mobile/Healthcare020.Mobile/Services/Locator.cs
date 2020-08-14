@@ -1,11 +1,11 @@
-﻿using Healthcare020.Mobile.Interfaces;
-using TinyIoC;
+﻿using Healthcare020.Mobile.Helpers;
+using Healthcare020.Mobile.Interfaces;
 
 namespace Healthcare020.Mobile.Services
 {
     public class Locator : ILocator
     {
-        private TinyIoCContainer _container;
+        private readonly TinyIoCContainer _container;
 
         public Locator(TinyIoCContainer container)
         {

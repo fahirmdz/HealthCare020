@@ -7,7 +7,6 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
-    xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
 
     <ContentPage.Content>
@@ -142,7 +141,7 @@
                             Text="Delete account"
                             TextColor="DarkRed">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer x:Name="DeleteAccountLabel" Tapped="DeleteAccountLabel_OnTapped"></TapGestureRecognizer>
+                                <TapGestureRecognizer x:Name="DeleteAccountLabel" Tapped="DeleteAccountLabel_OnTapped" />
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>

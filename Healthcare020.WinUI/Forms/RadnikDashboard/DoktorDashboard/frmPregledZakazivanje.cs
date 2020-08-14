@@ -6,16 +6,14 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmPregledZakazivanje : Form
     {
-        private static frmPregledZakazivanje _instance = null;
-        private ZahtevZaPregledDtoEL ZahtevZaPregled;
+        private static frmPregledZakazivanje _instance;
+        private readonly ZahtevZaPregledDtoEL ZahtevZaPregled;
 
         private readonly APIService _apiService;
         private DateTime RecommendedDateTime;
@@ -25,7 +23,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             ZahtevZaPregled = zahtevZaPregled;
             _apiService = new APIService(Routes.PreglediRoute);
             InitializeComponent();
-            toolTip.SetToolTip(icnRecommendedTime,Resources.RecommendedTimeForPregledMessage);
+            toolTip.SetToolTip(icnRecommendedTime, Resources.RecommendedTimeForPregledMessage);
         }
 
         public static frmPregledZakazivanje InstanceWithData(ZahtevZaPregledDtoEL zahtevZaPregled)
@@ -37,24 +35,28 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             return _instance;
         }
 
-        private async void frmZahtevZaPregled_Load(object sender, System.EventArgs e)
+        private async void frmZahtevZaPregled_Load(object sender, EventArgs e)
         {
             _apiService.ChangeRoute(Routes.RecommendPregledTimeRoute);
-            var result = await _apiService.GetAsSingle<DateTime>(queryStringCollection:new Dictionary<string, string>{{"godiste",ZahtevZaPregled?.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.DatumRodjenja.Year.ToString()}});
+            var result = await _apiService.GetAsSingle<DateTime>(queryStringCollection: new Dictionary<string, string> { { "godiste", ZahtevZaPregled?.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.DatumRodjenja.Year.ToString() } });
             if (result.Succeeded && result.HasData)
             {
                 RecommendedDateTime = result.Data;
                 timePregled.Value = RecommendedDateTime;
             }
-            txtZahtevZaPregled.Text = ZahtevZaPregled.Id.ToString();
-            datePregled.MinDate = DateTime.Now;
-            txtDoktor.Text = ZahtevZaPregled.Doktor;
-            txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
+
+            if (ZahtevZaPregled != null)
+            {
+                txtZahtevZaPregled.Text = ZahtevZaPregled.Id.ToString();
+                datePregled.MinDate = DateTime.Now;
+                txtDoktor.Text = ZahtevZaPregled.Doktor;
+                txtPacijent.Text = ZahtevZaPregled.Pacijent?.ZdravstvenaKnjizica?.LicniPodaci?.ImePrezime ?? "N/A";
+            }
         }
 
-        private async void btnSave_Click(object sender, System.EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
-            if(ValidateInputs())
+            if (ValidateInputs())
             {
                 var datumVremePregleda = new DateTime(datePregled.Value.Year, datePregled.Value.Month,
                     datePregled.Value.Day, timePregled.Value.Hour, timePregled.Value.Minute, 0);

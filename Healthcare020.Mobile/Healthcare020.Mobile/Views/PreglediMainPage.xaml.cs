@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PreglediMainPage : ContentPage
+    public partial class PreglediMainPage
     {
         private NavigationPage NavigationPageParent;
 
@@ -17,7 +17,7 @@ namespace Healthcare020.Mobile.Views
             InitializeComponent();
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
             NavigationPageParent = (NavigationPage)Parent;

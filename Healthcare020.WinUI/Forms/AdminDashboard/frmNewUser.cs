@@ -18,11 +18,11 @@ using MaterialSkin.Controls;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    public partial class frmNewUser : Form
+    public sealed partial class frmNewUser : Form
     {
-        private static frmNewUser _instance = null;
+        private static frmNewUser _instance;
         private readonly APIService _apiService;
-        private Dictionary<string, Point> FieldsDefaultLocations;
+        private readonly Dictionary<string, Point> FieldsDefaultLocations;
 
         private frmNewUser()
         {
@@ -36,7 +36,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             FieldsDefaultLocations = new Dictionary<string, Point>();
 
             TopLevel = false;
-            Text = Properties.Resources.frmNewUser;
+            Text = Resources.frmNewUser;
             foreach (var control in Controls.OfType<MaterialSingleLineTextField>())
             {
                 Errors.SetIconPadding(control, 10);
@@ -71,9 +71,9 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             {
 
                 RoleType roleChecked = RoleType.Doktor;
-                if (rbtnRadnikPrijem.Checked) 
+                if (rbtnRadnikPrijem.Checked)
                     roleChecked = RoleType.RadnikPrijem;
-                else if (rbtnAdministrator.Checked) 
+                else if (rbtnAdministrator.Checked)
                     roleChecked = RoleType.Administrator;
 
                 var korisnickiNalogUpsertDto = new KorisnickiNalogUpsertDto
@@ -105,7 +105,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                     GradId = int.Parse(cmbGradovi.SelectedValue.ToString()),
                     Pol = cmbPolovi.SelectedIndex == 1 ? 'Z' : 'M'
                 };
-                
+
 
                 bool SuccededInsert = true;
                 if (rbtnDoktor.Checked)

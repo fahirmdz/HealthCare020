@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel;
-using Healthcare020.Mobile.Helpers;
+﻿using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
+using System;
 using Xamarin.Forms.Xaml;
 
 namespace Healthcare020.Mobile.Views
@@ -11,7 +10,7 @@ namespace Healthcare020.Mobile.Views
     public partial class ChangePasswordPage
     {
         public ChangePasswordViewModel ChangePasswordVM;
-        
+
         public ChangePasswordPage()
         {
             InitializeComponent();
@@ -24,19 +23,18 @@ namespace Healthcare020.Mobile.Views
             SetErrorsClearOnTextChanged();
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
-            await ChangePasswordVM.Init();
+            ChangePasswordVM.Init();
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
-
         }
 
-        private async void ChangePasswordBtn_OnClicked(object sender, EventArgs e)
+        private void ChangePasswordBtn_OnClicked(object sender, EventArgs e)
         {
-            if(ValidateModel())
+            if (ValidateModel())
             {
                 ChangePasswordVM.ChangePasswordCommand.Execute(sender);
             }

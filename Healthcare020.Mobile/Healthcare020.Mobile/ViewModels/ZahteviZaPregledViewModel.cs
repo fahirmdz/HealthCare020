@@ -17,7 +17,7 @@ namespace Healthcare020.Mobile.ViewModels
     public class ZahteviZaPregledViewModel : BaseViewModel
     {
         private IAPIService _apiService;
-        public ZahtevZaPregledResourceParameters ResourceParameters { get; private set; }
+        public ZahtevZaPregledResourceParameters ResourceParameters { get; }
         public int TotalPages { get; private set; }
 
         public ZahteviZaPregledViewModel()

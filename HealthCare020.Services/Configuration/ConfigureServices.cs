@@ -30,7 +30,6 @@ namespace HealthCare020.Services.Configuration
             services.Configure<ServicesConfiguration>(Configuration.GetSection("ServicesConfiguration"));
             services.ConfigureHealthcare020Core();
             services.AddSingleton<ISMSGateway, SMSGateway>();
-            services.AddSingleton<ITelegramBot, TelegramBot>();
 
             services.AddHttpContextAccessor();
             services.AddScoped<IAuthService, AuthService>();

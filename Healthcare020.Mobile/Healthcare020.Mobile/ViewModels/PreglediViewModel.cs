@@ -11,9 +11,9 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class PreglediViewModel : BaseListViewModel
     {
-        public PreglediViewModel() : base()
+        public PreglediViewModel()
         {
-            base.APIRouteToCollection = Routes.PreglediRoute;
+            APIRouteToCollection = Routes.PreglediRoute;
             var RowsCount = ResourceParameters.PageSize;
             ResourceParameters = new PregledResourceParameters
             {
@@ -43,12 +43,12 @@ namespace Healthcare020.Mobile.ViewModels
 
         protected override async Task Search()
         {
-            if (string.Equals(SearchString, (ResourceParameters as PregledResourceParameters).DoktorIme,
+            if (string.Equals(SearchString, (ResourceParameters as PregledResourceParameters)?.DoktorIme,
                 StringComparison.InvariantCultureIgnoreCase))
                 return;
 
-            (ResourceParameters as PregledResourceParameters).DoktorIme = SearchString;
-            (ResourceParameters as PregledResourceParameters).DoktorPrezime = SearchString;
+            ((PregledResourceParameters) ResourceParameters).DoktorIme = SearchString;
+            ((PregledResourceParameters) ResourceParameters).DoktorPrezime = SearchString;
 
             await LoadData();
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HealthCare020.Services.Interfaces
 {
-    public interface IService<TEntity, TResourceParameters>
+    public interface IService<TEntity, in TResourceParameters>
     {
         Task<ServiceResult> Get(TResourceParameters resourceParameters);
 

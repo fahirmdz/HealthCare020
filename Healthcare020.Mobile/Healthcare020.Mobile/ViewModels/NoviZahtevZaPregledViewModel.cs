@@ -42,10 +42,7 @@ namespace Healthcare020.Mobile.ViewModels
 
             if (result.Succeeded)
             {
-                if (result.HasData)
-                    Doktori = result.Data;
-                else
-                    Doktori = new List<DoktorDtoEL>();
+                Doktori = result.HasData ? result.Data : new List<DoktorDtoEL>();
             }
             else
             {
@@ -129,8 +126,8 @@ namespace Healthcare020.Mobile.ViewModels
 
         #region Commands
 
-        public ICommand InitCommand { get; private set; }
-        public ICommand SaveCommand { get; private set; }
+        public ICommand InitCommand { get; }
+        public ICommand SaveCommand { get; }
 
         #endregion Commands
 

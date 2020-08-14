@@ -1,6 +1,6 @@
 ﻿using HealthCare020.Core.ResourceParameters;
-using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -8,11 +8,10 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {
-    public class BaseCRUDController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters>
+    public class BaseCRUDController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters, TDtoForCreation, TDtoForUpdate> : BaseController<TEntity, TResourceParameters>
         where TResourceParameters : BaseResourceParameters
         where TDtoForUpdate : class
     {

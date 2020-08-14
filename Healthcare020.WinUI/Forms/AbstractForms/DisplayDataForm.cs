@@ -40,8 +40,8 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             btnPrevPage.Enabled = false;
 
             //Tool tips
-            this.toolTip.SetToolTip(btnPrevPage, "Previous page");
-            this.toolTip.SetToolTip(btnNextPage, "Next page");
+            toolTip.SetToolTip(btnPrevPage, "Previous page");
+            toolTip.SetToolTip(btnNextPage, "Next page");
 
             if (!ConnectionCheck.CheckForInternetConnection())
             {
@@ -88,7 +88,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             for (int i = 0; i < dgrvMain.Columns.Count; i++)
             {
                 var column = dgrvMain.Columns[i];
-                column.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 column.ReadOnly = true;
                 column.MinimumWidth = 2;
             }
@@ -121,7 +121,8 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
                 for (int i = 1; i < props.Length; i++)
                 {
                     propInfo = val.GetType().GetProperty(props[i]);
-                    val = propInfo.GetValue(val, null);
+                    if (propInfo != null)
+                        val = propInfo.GetValue(val, null);
                 }
                 e.Value = val;
             }
@@ -133,12 +134,12 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
         protected void DisplayDataForm_Load(object sender, EventArgs e)
         {
-            this.SizeChanged += formDisplayed_SizeChanged;
+            SizeChanged += formDisplayed_SizeChanged;
         }
 
         protected virtual async Task LoadData()
         {
-            this.UseWaitCursor = true;
+            UseWaitCursor = true;
 
             var result = await _apiService
                 .Get<TDto>(ResourceParameters);
@@ -154,11 +155,9 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             btnNextPage.Enabled = result.HasData && result.Data.Any() &&  ResourceParameters.PageNumber != result.PaginationMetadata.TotalPages;
             btnPrevPage.Enabled = ResourceParameters.PageNumber != 1;
 
-            this.UseWaitCursor = false;
+            UseWaitCursor = false;
             Cursor.Current = Cursors.Default;
         }
-
-        protected void SetSourceForDgrv(IBindingList source) => dgrvMain.DataSource = source;
 
         protected virtual void txtSearch_Leave(object sender, EventArgs e)
         {
@@ -197,12 +196,12 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
         private void DisplayDataForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.SizeChanged -= formDisplayed_SizeChanged;
+            SizeChanged -= formDisplayed_SizeChanged;
         }
 
         private void DisplayDataForm_Shown(object sender, EventArgs e)
         {
-            this.SizeChanged += formDisplayed_SizeChanged;
+            SizeChanged += formDisplayed_SizeChanged;
         }
 
         private async void DisplayDataForm_Load_1(object sender, EventArgs e)

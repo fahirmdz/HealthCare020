@@ -26,11 +26,11 @@ namespace Healthcare020.Mobile.Controls
         public static readonly BindableProperty MessageProperty =
             BindableProperty.Create("Message", typeof(string), typeof(NoDataFrame), "Trenutno nema dostupnih podataka", BindingMode.Default, null, MessageChanged);
 
-        public NoDataFrame() : base()
+        public NoDataFrame()
         {
-            this.HorizontalOptions = LayoutOptions.FillAndExpand;
-            this.VerticalOptions = LayoutOptions.FillAndExpand;
-            this.BackgroundColor=Color.Transparent;
+            HorizontalOptions = LayoutOptions.FillAndExpand;
+            VerticalOptions = LayoutOptions.FillAndExpand;
+            BackgroundColor=Color.Transparent;
             try
             {
                 var stackToAdd = new StackLayout
@@ -72,7 +72,7 @@ namespace Healthcare020.Mobile.Controls
                 };
                 stackToAdd.Children.Add(lblTapToRefresh);
 
-                this.Content = stackToAdd;
+                Content = stackToAdd;
             }
             catch (Exception ex)
             {

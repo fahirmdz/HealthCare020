@@ -7,8 +7,8 @@
 
         public ComboBoxItem(string text, int value)
         {
-            this.Text = text;
-            this.Value = value;
+            Text = text;
+            Value = value;
         }
         public override string ToString()
         {

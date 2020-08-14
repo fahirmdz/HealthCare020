@@ -1,14 +1,13 @@
 ﻿using HealthCare020.API.Constants;
 using HealthCare020.Core.Enums;
+using IdentityModel.Client;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using IdentityModel.Client;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 
 namespace HealthCare020.API.Configuration
 {
@@ -19,7 +18,7 @@ namespace HealthCare020.API.Configuration
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                .AddIdentityServerAuthentication(options =>
                {
-                   options.Authority ="https://healthcare020-oauth.com:5005/";
+                   options.Authority = "https://healthcare020-oauth.com:5005/";
                    options.RequireHttpsMetadata = false;
                    options.IntrospectionDiscoveryPolicy = new DiscoveryPolicy
                    {
@@ -65,7 +64,7 @@ namespace HealthCare020.API.Configuration
                     return handlerContext => true;
 
                 //If RadnikPrijem required (SAMO RadnikPrijem moze pristupiti podacima za koje je potreban RadnikPrijem policy)
-                if (string.Equals(roleOnTop,RoleType.RadnikPrijem.ToDescriptionString(),StringComparison.CurrentCultureIgnoreCase))
+                if (string.Equals(roleOnTop, RoleType.RadnikPrijem.ToDescriptionString(), StringComparison.CurrentCultureIgnoreCase))
                 {
                     if (!string.Equals(policy, RoleType.RadnikPrijem.ToDescriptionString(),
                         StringComparison.CurrentCultureIgnoreCase))
@@ -74,10 +73,9 @@ namespace HealthCare020.API.Configuration
                     return handlerContext => true;
                 }
 
-                var listOfRoles = roles?.Split(",").Select(x => x.Trim()).ToList();
+                var listOfRoles = roles.Split(",").Select(x => x.Trim()).ToList();
 
-                var isInRole = listOfRoles?.Any(x => x.Equals(policy, StringComparison.CurrentCultureIgnoreCase)) ??
-                               false;
+                var isInRole = listOfRoles.Any(x => x.Equals(policy, StringComparison.CurrentCultureIgnoreCase));
 
                 return handlerContext => isInRole;
             }
@@ -86,6 +84,5 @@ namespace HealthCare020.API.Configuration
 
             return services;
         }
-
     }
 }

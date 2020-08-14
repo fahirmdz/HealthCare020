@@ -5,10 +5,8 @@ using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
-using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Healthcare020.Mobile.Constants;
@@ -19,7 +17,7 @@ namespace Healthcare020.Mobile.ViewModels
 {
     public class LoginViewModel : BaseValidationViewModel
     {
-        private IAPIService _apiService;
+        private readonly IAPIService _apiService;
 
         public LoginViewModel()
         {
@@ -42,9 +40,9 @@ namespace Healthcare020.Mobile.ViewModels
             if (photo == null)
                 return;
 
-            this.IsBusy = true;
-            this.MainBodyVisible = false;
-            this.AnimationFrameVisible = true;
+            IsBusy = true;
+            MainBodyVisible = false;
+            AnimationFrameVisible = true;
 
             SelfieForFaceID = photo.GetStream().AsByteArray();
 
@@ -59,8 +57,8 @@ namespace Healthcare020.Mobile.ViewModels
             if (!result.Succeeded || !result.HasData)
             {
                 IsBusy = false;
-                this.MainBodyVisible = true;
-                this.AnimationFrameVisible = false;
+                MainBodyVisible = true;
+                AnimationFrameVisible = false;
 
                 await Task.Delay(100);
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
@@ -70,18 +68,18 @@ namespace Healthcare020.Mobile.ViewModels
             if (!await Auth.AuthenticateWithFaceID(SelfieForFaceID))
             {
                 IsBusy = false;
-                this.MainBodyVisible = true;
-                this.AnimationFrameVisible = false;
+                MainBodyVisible = true;
+                AnimationFrameVisible = false;
 
                 await Task.Delay(100);
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return;
             }
-            this.MainBodyVisible = false;
-            this.AnimationFrameVisible = false;
-            this.AnimationSuccessFrameVisible = true;
+            MainBodyVisible = false;
+            AnimationFrameVisible = false;
+            AnimationSuccessFrameVisible = true;
             await Task.Delay(2850);
-            this.IsBusy = false;
+            IsBusy = false;
 
             Application.Current.MainPage=new PacijentDasbhboardTabbedPage();
         }

@@ -9,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Acr.UserDialogs;
 using HealthCare020.Core.Request;
 using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
@@ -23,10 +22,9 @@ namespace Healthcare020.Mobile.ViewModels
 
         public string CurrentPacijentSearch;
 
-        public PosetaViewModel()
-        { }
-
+#pragma warning disable 1998
         public async Task Init()
+#pragma warning restore 1998
         {
             _apiService=new APIService(Routes.PacijentNaLecenjuRoute);
         }

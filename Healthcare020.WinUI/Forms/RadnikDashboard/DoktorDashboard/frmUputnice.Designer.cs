@@ -2,7 +2,7 @@
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
-    partial class frmUputnice
+    sealed partial class frmUputnice
     {
         /// <summary>
         /// Required designer variable.

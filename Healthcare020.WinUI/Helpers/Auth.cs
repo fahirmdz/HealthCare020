@@ -48,8 +48,8 @@ namespace Healthcare020.WinUI.Helpers
         {
             try
             {
-                var client = new OAuth2Client(new Uri(Properties.Settings.Default.IdpTokenEndpoint), Properties.Settings.Default.IdpClientId,
-                    Properties.Settings.Default.IdpClientSecret);
+                var client = new OAuth2Client(new Uri(Settings.Default.IdpTokenEndpoint), Settings.Default.IdpClientId,
+                    Settings.Default.IdpClientSecret);
                 var tokens = client.RequestAccessTokenUserName(username, password, string.Empty);
                 AccessToken = new NetworkCredential(string.Empty, tokens.AccessToken).SecurePassword;
 
@@ -88,7 +88,7 @@ namespace Healthcare020.WinUI.Helpers
         public static void Logout()
         {
             AccessToken = null;
-            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey, true))
+            using (var reg = Registry.CurrentUser.OpenSubKey(Settings.Default.RegistryKey, true))
             {
                 if (reg != null)
                 {

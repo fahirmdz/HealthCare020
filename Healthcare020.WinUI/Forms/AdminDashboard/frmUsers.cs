@@ -1,19 +1,20 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Forms.AbstractForms;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Models;
-using Healthcare020.WinUI.Services;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
-    public partial class frmUsers : DisplayDataForm<KorisnickiNalogDtoLL>
+    public sealed partial class frmUsers : DisplayDataForm<KorisnickiNalogDtoLL>
     {
         private static frmUsers _instance;
 
@@ -36,7 +37,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         {
             _apiService = new APIService(Routes.KorisniciRoute);
             _dataForDgrv = new BindingSource();
-            this.Text = Properties.Resources.frmUsers;
+            Text = Resources.frmUsers;
 
             var ID = new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "ID", Name = "ID", CellTemplate = new DataGridViewTextBoxCell() };
             ID.CellTemplate = new DataGridViewTextBoxCell();
@@ -44,7 +45,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var Username = new DataGridViewColumn
             {
                 DataPropertyName = "Username",
-                HeaderText = "Username",
+                HeaderText = Resources.Username,
                 Name = "Username",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
@@ -52,7 +53,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var LastOnline = new DataGridViewColumn
             {
                 DataPropertyName = "LastOnline",
-                HeaderText = "Last online",
+                HeaderText = Resources.LastOnline,
                 Name = "LastOnline",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
@@ -60,27 +61,27 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             var DateCreated = new DataGridViewColumn
             {
                 DataPropertyName = "DateCreated",
-                HeaderText = "Date created",
+                HeaderText = Resources.DateCreated,
                 Name = "DateCreated",
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
             var Zakljucaj = new DataGridViewButtonColumn
             {
-                HeaderText = "Zaključavanje",
+                HeaderText = Resources.LockVerb,
                 Name = "Zaključaj",
                 Text = "Zaključaj",
-                ToolTipText = "Zaključaj korisnički nalog",
+                ToolTipText = Resources.LockAccount,
                 UseColumnTextForButtonValue = true,
-                CellTemplate = new DataGridViewButtonCell{UseColumnTextForButtonValue = true,ToolTipText ="Zaključaj korisnički nalog" },
+                CellTemplate = new DataGridViewButtonCell { UseColumnTextForButtonValue = true, ToolTipText = Resources.LockAccount },
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent },
             };
 
-            base.DgrvColumnsStyle();
+            DgrvColumnsStyle();
 
-            base.AddColumnsToMainDgrv(new[] { ID, Username, LastOnline, DateCreated, Zakljucaj });
+            AddColumnsToMainDgrv(new[] { ID, Username, LastOnline, DateCreated, Zakljucaj });
 
-            Text = Properties.Resources.frmUsers;
+            Text = Resources.frmUsers;
             ResourceParameters = new KorisnickiNalogResourceParameters { PageNumber = 1, PageSize = CurrentRowCount };
 
             InitializeComponent();
@@ -89,7 +90,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
         private void frmUsers_Load(object sender, EventArgs e)
         {
-            base.DisplayDataForm_Load(sender, e);
+            DisplayDataForm_Load(sender, e);
         }
 
         protected override async void dgrvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -100,7 +101,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             //Account lock out
             if (e.ColumnIndex == 4)
             {
-                Form promptDialog = null;
+                Form promptDialog;
 
                 if (korisnik.LockedOut)
                 {
@@ -121,7 +122,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
                 if (promptDialog?.DialogResult == DialogResult.OK)
                 {
-                    APIServiceResult<KorisnickiNalogDtoLL> result = null;
+                    APIServiceResult<KorisnickiNalogDtoLL> result;
 
                     if (isForLockout)
                     {
@@ -144,17 +145,12 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             }
         }
 
-        protected override void dgrvMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            base.dgrvMain_CellValueChanged(sender, e);
-        }
-
         protected override void dgrvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == 4)
             {
                 var isLockedOut =
-                    (MainDgrv.Rows[e.RowIndex]?.DataBoundItem as KorisnickiNalogDtoLL)?.LockedOut;
+                    (MainDgrv.Rows[e.RowIndex].DataBoundItem as KorisnickiNalogDtoLL)?.LockedOut;
                 if (isLockedOut.HasValue)
                 {
                     e.Value = isLockedOut.Value ? "Otključaj" : "Zaključaj";
@@ -168,12 +164,12 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
 
             var korisnickiNalogResParams = ResourceParameters as KorisnickiNalogResourceParameters;
 
-            bool ShouldLoad = SearchText != korisnickiNalogResParams.Username;
+            bool ShouldLoad = korisnickiNalogResParams != null && SearchText != korisnickiNalogResParams.Username;
 
             if (ShouldLoad)
             {
                 korisnickiNalogResParams.Username = SearchText.Trim();
-                await base.LoadData();
+                await LoadData();
             }
         }
 

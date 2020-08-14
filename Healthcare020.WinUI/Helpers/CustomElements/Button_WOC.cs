@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Helpers.CustomElements
 {
-    public class Button_WOC : Button
+    public sealed class Button_WOC : Button
     {
         private Color _borderColor = Color.Silver;
         private Color _onHoverBorderColor = Color.Gray;
@@ -13,9 +13,8 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
         private Color _onHoverTextColor = Color.Gray;
 
         private bool _isHovering;
-        private int _borderThickness = 6;
-        private int _borderThicknessByTwo = 3;
-
+        private readonly int _borderThickness = 6;
+        private readonly int _borderThicknessByTwo = 3;
 
         public Button_WOC()
         {
@@ -31,7 +30,6 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 Invalidate();
             };
         }
-
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -63,7 +61,6 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
             SizeF stringSize = g.MeasureString(Text, Font);
             g.DrawString(Text, Font, brush, (Width - stringSize.Width) / 2, (Height - stringSize.Height) / 2);
         }
-
 
         public Color BorderColor
         {

@@ -26,7 +26,7 @@ namespace HealthCare020.Services
             IPropertyCheckerService propertyCheckerService,
             IRadnikService radnikService,
             IHttpContextAccessor httpContextAccessor,
-            IAuthService authService, 
+            IAuthService authService,
             IKorisnikService korisnikService) :
             base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
@@ -84,7 +84,7 @@ namespace HealthCare020.Services
                 return ServiceResult.NotFound($"Radnik sa ID-em {id} nije pronadjen");
 
             _mapper.Map(dtoForUpdate, radnikPrijemFromDb.Radnik);
-            var radnikUpdated = await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
+            await _radnikService.Update(radnikPrijemFromDb.RadnikId, dtoForUpdate);
 
             return new ServiceResult(_mapper.Map<RadnikPrijemDtoLL>(radnikPrijemFromDb));
         }

@@ -8,22 +8,20 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 {
     public enum DialogFormSize
     {
-        Small = 5,
         Medium = 8,
         Large = 10
     };
 
-    public partial class dlgForm : Form
+    public sealed partial class dlgForm : Form
     {
         public static bool ShouldDisposeOnChildClose;
 
         public bool ShouldDisposeOnOutsideClick;
         public bool DisabledCloseOnOutsideClick;
-        private static dlgForm _instance = null;
-        private Size BodyPanelSize;
+        private static dlgForm _instance;
         private Form Child;
 
-        private dlgForm(Form child, DialogFormSize bodyPanelSize = DialogFormSize.Medium, bool ShouldDisposeOnOutsideClick = true, bool DisabledCloseOnOutsideClick=false)
+        private dlgForm(Form child, DialogFormSize bodyPanelSize = DialogFormSize.Medium, bool ShouldDisposeOnOutsideClick = true, bool DisabledCloseOnOutsideClick = false)
         {
             this.ShouldDisposeOnOutsideClick = ShouldDisposeOnOutsideClick;
             this.DisabledCloseOnOutsideClick = DisabledCloseOnOutsideClick;
@@ -31,24 +29,24 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             ShouldDisposeOnChildClose = true;
             var sizeMultiplier = (int)bodyPanelSize;
 
-            BodyPanelSize = new Size(sizeMultiplier * 100, (int)((double)sizeMultiplier / 2) * 100);
+            var _bodyPanelSize = new Size(sizeMultiplier * 100, (int)((double)sizeMultiplier / 2) * 100);
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
+            Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
-            pnlBody.Size = BodyPanelSize;
+            pnlBody.Size = _bodyPanelSize;
             pnlBody.CenterToClient(this);
             txtLeftTitle.CenterToClient(pnlSide);
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
-            this.TransparencyKey = Color.Empty;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            TransparencyKey = Color.Empty;
             pnlMain.BackColor = Color.FromArgb(170, 0, 0, 0);
             Child = child;
             Child.OpenAsChildOfControl(pnlBody);
             //Left focus from left side title (because it is RichTextBox)
             txtLeftTitle.Enter += (s, e) => { txtLeftTitle.Parent.Focus(); };
-            this.KeyPreview = true;
+            KeyPreview = true;
         }
 
         public static void ShowDialog(Form child, DialogFormSize bodyPanelSize = DialogFormSize.Medium, bool NewInstance = false)
@@ -59,7 +57,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
                     NewInstance)
                     _instance = new dlgForm(child, bodyPanelSize);
 
-                ((Form) _instance).ShowDialog();
+                _instance.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -89,7 +87,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         private void dlgForm_Load(object sender, EventArgs e)
         {
             txtLeftTitle.HideCaret();
-            this.Dock = DockStyle.Fill;
+            Dock = DockStyle.Fill;
             ShouldDisposeOnChildClose = true;
         }
 
@@ -110,7 +108,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private void pnlMain_MouseClick(object sender, MouseEventArgs e)
         {
-            if (this.DisabledCloseOnOutsideClick)
+            if (DisabledCloseOnOutsideClick)
                 return;
 
             Close();
@@ -136,7 +134,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
         {
             if (e.KeyChar == 27)
             {
-                this.Close();
+                Close();
                 Child.Close();
             }
         }

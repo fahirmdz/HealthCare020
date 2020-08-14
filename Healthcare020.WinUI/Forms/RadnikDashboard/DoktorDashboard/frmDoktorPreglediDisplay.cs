@@ -10,11 +10,10 @@ using PregledResourceParameters = HealthCare020.Core.ResourceParameters.PregledR
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
-    public partial class frmDoktorPreglediDisplay : DisplayDataForm<PregledDtoEL>
+    public sealed partial class frmDoktorPreglediDisplay : DisplayDataForm<PregledDtoEL>
     {
-        private static frmDoktorPreglediDisplay _instance = null;
+        private static frmDoktorPreglediDisplay _instance;
         private int OpenedPregledId;
-        private bool OnlyZakazani;
 
         public static frmDoktorPreglediDisplay InstanceWithData(bool OnlyZakazani = false)
         {
@@ -25,8 +24,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         private frmDoktorPreglediDisplay(bool OnlyZakazani = false)
         {
-            this.OnlyZakazani = OnlyZakazani;
-            this.Text = OnlyZakazani ? Resources.frmDoktorZakazaniPregledi : Resources.frmDoktorPregledi;
+            Text = OnlyZakazani ? Resources.frmDoktorZakazaniPregledi : Resources.frmDoktorPregledi;
 
             var ID = new DataGridViewTextBoxColumn
             {
@@ -59,7 +57,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme, IsOdradjen });
+            AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme, IsOdradjen });
 
             _apiService = new APIService(Routes.PreglediRoute);
             ResourceParameters = new PregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true, OnlyZakazani = OnlyZakazani };
@@ -107,14 +105,14 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 newInstance = true;
             }
             if (!pregled.IsOdradjen)
-                dlgForm.ShowDialog(frmNewLekarskoUverenje.InstanceWithData(pregled,newInstance), DialogFormSize.Large,newInstance);
+                dlgForm.ShowDialog(frmNewLekarskoUverenje.InstanceWithData(pregled, newInstance), DialogFormSize.Large, newInstance);
             else
-                dlgForm.ShowDialog(frmPregledOverview.InstanceWithData(pregled,newInstance),NewInstance:newInstance);
+                dlgForm.ShowDialog(frmPregledOverview.InstanceWithData(pregled, newInstance), NewInstance: newInstance);
         }
 
         private void frmDoktorPreglediDisplay_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
 
         protected override async void txtSearch_Leave(object sender, EventArgs e)

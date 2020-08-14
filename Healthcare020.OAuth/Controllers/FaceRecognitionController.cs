@@ -3,16 +3,12 @@ using HealthCare020.Core.Constants;
 using HealthCare020.Core.Resources;
 using HealthCare020.Core.ServiceModels;
 using HealthCare020.Services.Interfaces;
-using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using IdentityServer4.Stores;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Healthcare020.OAuth.Controllers
 {
@@ -20,28 +16,23 @@ namespace Healthcare020.OAuth.Controllers
     public class FaceRecognitionController : Controller
     {
         private readonly IKorisnikService _korisnikService;
-        private readonly IEventService _events;
-        private readonly IClientStore _clientStore;
 
-        public FaceRecognitionController(IKorisnikService korisnikService,
-            IEventService events, IClientStore clientStore)
+        public FaceRecognitionController(IKorisnikService korisnikService)
         {
             _korisnikService = korisnikService;
-            _events = events;
-            _clientStore = clientStore;
         }
 
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> LoginWithFaceID([FromBody]TokenEndpointRequestBody model)
+        public async Task<IActionResult> LoginWithFaceID([FromBody] TokenEndpointRequestBody model)
         {
             if (model == null)
                 return BadRequest();
-            byte[] img=null;
+            byte[] img = null;
 
             try
             {
-                 img = Convert.FromBase64String(model.Image);
+                img = Convert.FromBase64String(model.Image);
             }
             catch (Exception ex)
             {

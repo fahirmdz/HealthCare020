@@ -3,14 +3,13 @@ using HealthCare020.API.Properties;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HealthCare020.API.Controllers
 {

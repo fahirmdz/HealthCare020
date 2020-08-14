@@ -12,10 +12,11 @@ namespace Healthcare020.WinUI.Helpers
         /// <summary>
         /// Set event to all childs of this control and optional to nested childs
         /// </summary>
-        /// <param name="eventToAttach">Mouse click event handler</param>
+        /// <param name="toAttach"></param>
         /// <param name="SetToNestedChilds">Boolean indicates to add event to nested childs</param>
         /// <param name="condition">Optional condition for every child/nested child control</param>
         /// <param name="nestingCounter">How much nesting in every child control. Max is 3</param>
+        /// <param name="c"></param>
         public static void SetMouseClickEventToChildControls(this Control c, MouseEventHandler toAttach , bool SetToNestedChilds = false,
             Func<Control, bool> condition = null, int nestingCounter=2)
         {

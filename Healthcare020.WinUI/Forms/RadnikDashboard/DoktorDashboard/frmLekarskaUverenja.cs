@@ -11,7 +11,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmLekarskaUverenja : DisplayDataForm<LekarskoUverenjeDtoEL>
     {
-        private static frmLekarskaUverenja _instance = null;
+        private static frmLekarskaUverenja _instance;
 
         public static frmLekarskaUverenja Instance
         {
@@ -55,7 +55,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme, ZdravstvenoStanje });
+            AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme, ZdravstvenoStanje });
 
             _apiService = new APIService(Routes.LekarskoUverenjeRoute);
             ResourceParameters = new LekarskoUverenjeResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };

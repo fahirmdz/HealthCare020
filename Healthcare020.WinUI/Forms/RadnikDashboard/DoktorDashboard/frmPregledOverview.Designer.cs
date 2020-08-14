@@ -157,7 +157,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmPregledOverview";
             this.Text = "frmPregledOverview";
-            this.Load += new System.EventHandler(this.frmPregledOverview_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

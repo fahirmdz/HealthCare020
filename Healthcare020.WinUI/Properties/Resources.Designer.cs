@@ -88,6 +88,78 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Država.
+        /// </summary>
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datum kreiranja.
+        /// </summary>
+        public static string DateCreated {
+            get {
+                return ResourceManager.GetString("DateCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izbriši grad.
+        /// </summary>
+        public static string DeleteCity {
+            get {
+                return ResourceManager.GetString("DeleteCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DeleteCountry {
+            get {
+                return ResourceManager.GetString("DeleteCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obriši.
+        /// </summary>
+        public static string DeleteIt {
+            get {
+                return ResourceManager.GetString("DeleteIt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obriši osobu iz grupe.
+        /// </summary>
+        public static string DeletePersonFromGroup {
+            get {
+                return ResourceManager.GetString("DeletePersonFromGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brisanje.
+        /// </summary>
+        public static string DeleteVerb {
+            get {
+                return ResourceManager.GetString("DeleteVerb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lozinke se ne podudaraju.
         /// </summary>
         public static string DifferentPasswords {
@@ -650,11 +722,56 @@ namespace Healthcare020.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zadnji put online.
+        /// </summary>
+        public static string LastOnline {
+            get {
+                return ResourceManager.GetString("LastOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line chart.
+        /// </summary>
+        public static string LineChart {
+            get {
+                return ResourceManager.GetString("LineChart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaključaj korisnički nalog.
+        /// </summary>
+        public static string LockAccount {
+            get {
+                return ResourceManager.GetString("LockAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaključavanje.
+        /// </summary>
+        public static string LockVerb {
+            get {
+                return ResourceManager.GetString("LockVerb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C:/Temp/logs/Helathcare020_Desktop_Logs/#_logfile.txt.
         /// </summary>
         public static string LogFilePath {
             get {
                 return ResourceManager.GetString("LogFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naziv.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -709,6 +826,24 @@ namespace Healthcare020.WinUI.Properties {
         public static string NotLoggedIn {
             get {
                 return ResourceManager.GetString("NotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pie chart.
+        /// </summary>
+        public static string PieChart {
+            get {
+                return ResourceManager.GetString("PieChart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozivni broj.
+        /// </summary>
+        public static string PrefixNumber {
+            get {
+                return ResourceManager.GetString("PrefixNumber", resourceCulture);
             }
         }
         
@@ -817,6 +952,15 @@ namespace Healthcare020.WinUI.Properties {
         public static string UnableToLoadUserProfileMessage {
             get {
                 return ResourceManager.GetString("UnableToLoadUserProfileMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korisničko ime.
+        /// </summary>
+        public static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
             }
         }
         
