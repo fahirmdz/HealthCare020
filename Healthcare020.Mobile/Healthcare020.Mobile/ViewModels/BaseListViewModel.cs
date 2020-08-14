@@ -61,7 +61,6 @@ namespace Healthcare020.Mobile.ViewModels
         }
 
         protected bool _dataAvailable;
-
         public bool DataAvailable
         {
             get => _dataAvailable;

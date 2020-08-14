@@ -3,6 +3,8 @@ using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
 using System;
 using System.Threading.Tasks;
+using Healthcare020.Mobile.Views.Dialogs;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,36 +22,37 @@ namespace Healthcare020.Mobile.Views
             InitializeComponent();
             BindingContext = SettingsVM = ViewModelLocator.SettingsViewModel;
 
-            EditProfileBtn.ImageSource = IconFont.Edit.GetIcon();
-
-            ChangePasswordBtn.ImageSource = IconFont.Key.GetIcon();
+            //Set icons on buttons
+            LicniPodaciBtn.ImageSource = IconFont.User.GetIcon(20);
+            EditProfileBtn.ImageSource = IconFont.Edit.GetIcon(20);
+            ChangePasswordBtn.ImageSource = IconFont.Key.GetIcon(20);
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
-            await SettingsVM.InitializeAsync();
+            SettingsVM.InitializeAsync();
             base.OnAppearing();
             NavigationPageParent = (NavigationPage)Parent;
         }
 
         private async void ChangePasswordBtn_OnClicked(object sender, EventArgs e)
         {
-            await PushToNavigationParent(new ChangePasswordPage());
+            await NavigationPageParent.PushAsync(new ChangePasswordPage(),true);
         }
 
         private async void EditProfileBtn_OnClicked(object sender, EventArgs e)
         {
-            await PushToNavigationParent(new EditProfilePage());
-        }
-
-        private async Task PushToNavigationParent(Page page)
-        {
-            await NavigationPageParent.PushAsync(page, true);
+            await NavigationPageParent.PushAsync(new EditProfilePage(),true);
         }
 
         private void DeleteAccountLabel_OnTapped(object sender, EventArgs e)
         {
             SettingsVM.PasswordCheckNavigationCommand.Execute(sender);
+        }
+
+        private async void LicniPodaciBtn_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushPopupAsync(new LicniPodaciDialogPage());
         }
     }
 }

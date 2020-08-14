@@ -20,15 +20,21 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Frame Grid.Column="0" BackgroundColor="#00bebe">
-                        <Frame
-                            Margin="0,-20,0,0"
-                            BackgroundColor="Transparent"
-                            VerticalOptions="Start">
-                            <Image
-                                Aspect="AspectFit"
-                                HorizontalOptions="Center"
-                                Source="{StaticResource Logo_Revert_Medium}" />
-                        </Frame>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="3*" />
+                            </Grid.RowDefinitions>
+                            <Frame
+                                Margin="0,-20,0,0"
+                                BackgroundColor="Transparent"
+                                VerticalOptions="Start">
+                                <Image
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    Source="{StaticResource Logo_Revert_Medium}" />
+                            </Frame>
+                        </Grid>
                     </Frame>
                     <Frame Grid.Column="1" BackgroundColor="WhiteSmoke" />
                 </Grid>

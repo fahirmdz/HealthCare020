@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using Microsoft.Extensions.Hosting;
 
 namespace HealthCare020.API.Configuration
 {
@@ -18,7 +19,8 @@ namespace HealthCare020.API.Configuration
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                .AddIdentityServerAuthentication(options =>
                {
-                   options.Authority = "https://healthcare020-oauth.com:5005/";
+                   //options.Authority = ;
+                   options.Authority = env.IsDevelopment()?"https://localhost:5007/":"https://healthcare020-oauth.com:5005/";
                    options.RequireHttpsMetadata = false;
                    options.IntrospectionDiscoveryPolicy = new DiscoveryPolicy
                    {

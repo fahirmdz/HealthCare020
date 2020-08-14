@@ -41,7 +41,7 @@ namespace Healthcare020.OAuth
 
             var cors = new DefaultCorsPolicyService(new Logger<DefaultCorsPolicyService>(new LoggerFactory()))
             {
-                AllowedOrigins = { "https://localhost:5001" }
+                AllowedOrigins = { "https://localhost:5001","https://localhost:5003" }
             };
             services.AddSingleton<ICorsPolicyService>(cors);
 

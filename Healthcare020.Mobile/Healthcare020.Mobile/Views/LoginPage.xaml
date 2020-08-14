@@ -148,11 +148,6 @@
                                             TextColor="WhiteSmoke" />
                                     </Frame>
 
-                                    <Label
-                                        FontSize="{StaticResource FontSize-Small}"
-                                        HorizontalOptions="Center"
-                                        Text="Forgotten password?"
-                                        TextColor="#496075" />
                                     <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                                         <BoxView
                                             BackgroundColor="#555"

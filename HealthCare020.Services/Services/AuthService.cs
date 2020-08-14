@@ -60,11 +60,20 @@ namespace HealthCare020.Services.Services
             return await _dbContext.KorisnickiNalozi.FindAsync(userId);
         }
 
-        public async Task<Pacijent> GetCurrentLoggedInPacijent()
+        public async Task<Pacijent> GetCurrentLoggedInPacijent(bool eagerLoaded=false)
         {
             var user = await LoggedInUser();
             if (user == null)
                 return null;
+
+            if (eagerLoaded)
+                return await _dbContext.Pacijenti
+                    .Include(x => x.ZdravstvenaKnjizica)
+                    .ThenInclude(x => x.LicniPodaci)
+                    .ThenInclude(x => x.Grad)
+                    .Include(x => x.KorisnickiNalog)
+                    .ThenInclude(x => x.RolesKorisnickiNalog)
+                    .FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
 
             return await _dbContext.Pacijenti.FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
         }

@@ -1,44 +1,43 @@
-﻿using System;
-using Acr.UserDialogs;
-using AutoMapper;
+﻿using AutoMapper;
+using Healthcare020.Mobile.Constants;
+using Healthcare020.Mobile.Helpers;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
+using Healthcare020.Mobile.Views.Dialogs;
+using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Rg.Plugins.Popup.Extensions;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using HealthCare020.Core.Constants;
-using HealthCare020.Core.Request;
-using HealthCare020.Core.ResourceParameters;
-using Healthcare020.Mobile.Constants;
-using Healthcare020.Mobile.Helpers;
-using Healthcare020.Mobile.Views.Dialogs;
-using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        private  APIService _apiSerivce;
+        private APIService _apiSerivce;
         private MediaFile UploadedPic;
         private readonly IMapper _mapper;
 
-        public SettingsViewModel(IMapper mapper)
+        public SettingsViewModel()
         {
-            _mapper = mapper;
+            _mapper = Bootstrap.GetContainer().Resolve<IMapper>();
+
             var UserCircleIcon = IconFont.UserCircle.GetIcon(70);
-            UserCircleIcon.Color = (Color) Application.Current.Resources[ResourceKeys.CustomNavyBlueDarkColor];
+            UserCircleIcon.Color = (Color)Application.Current.Resources[ResourceKeys.CustomNavyBlueDarkColor];
 
             ProfilePicImageSource = UserCircleIcon;
             UploadedPic = null;
 
             //Init commands
-            DeleteAccountCommand=new Command(async () => { await DeleteAccount();});
+            DeleteAccountCommand = new Command(async () => { await DeleteAccount(); });
             PasswordCheckNavigationCommand = new Command(async () =>
             {
                 await Application.Current.MainPage.Navigation.PushPopupAsync(
@@ -72,45 +71,29 @@ namespace Healthcare020.Mobile.ViewModels
                 ProfilePicImageSource = ImageSource.FromStream(() => UploadedPic.GetStream());
             }
 
-            var toastCfg = new ToastConfig(AppResources.Success)
-            {
-                Position = ToastPosition.Top,
-                MessageTextColor = System.Drawing.Color.White
-            };
-            UserDialogs.Instance.Toast(toastCfg);
+           NotificationService.Instance.Toast(AppResources.Success);
         }
 
-        public async Task InitializeAsync()
+        public void InitializeAsync()
         {
             if (!Auth.IsAuthenticated())
             {
                 NotificationService.Instance.Error(AppResources.UnauthenticatedAccessMessage);
                 return;
             }
-            _apiSerivce = new APIService(Routes.PacijentiRoute);
+            _apiSerivce=new APIService();
+            Pacijent = Auth.Pacijent;
+            var imgSourceForProfilePic = ImageSource.FromStream(() =>
+                new MemoryStream(Pacijent.ZdravstvenaKnjizica?.LicniPodaci?.ProfilePicture ?? Array.Empty<byte>()));
 
-            var pacijentResult = await _apiSerivce.Get<PacijentDtoEL>(new PacijentResourceParameters
-            {
-                EagerLoaded = true,
-                KorisnickiNalogId = Auth.KorisnickiNalog?.Id
-            });
-            //Pacijent = DevelopmentTestEntities.GetTestPacijent();
-
-            if (pacijentResult.Succeeded && (pacijentResult.Data?.Any() ?? false))
-            {
-                Pacijent = pacijentResult.Data.First();
-                var imgSourceForProfilePic = ImageSource.FromStream(() =>
-                    new MemoryStream(Pacijent.ZdravstvenaKnjizica?.LicniPodaci?.ProfilePicture ?? Array.Empty<byte>()));
-
-                if (imgSourceForProfilePic.IsEmpty)
-                    imgSourceForProfilePic = IconFont.UserCircle.GetIcon();
-                ProfilePicImageSource = imgSourceForProfilePic;
-            }
+            if (imgSourceForProfilePic.IsEmpty)
+                imgSourceForProfilePic = IconFont.UserCircle.GetIcon();
+            ProfilePicImageSource = imgSourceForProfilePic;
         }
 
         public async Task DeleteAccount()
         {
-            if((await NotificationService.Instance.Prompt())?.Ok ?? false)
+            if ((await NotificationService.Instance.Prompt())?.Ok ?? false)
             {
                 _apiSerivce.ChangeRoute(Routes.PacijentiRoute);
                 var result = await _apiSerivce.Delete<int>(0);
@@ -124,10 +107,12 @@ namespace Healthcare020.Mobile.ViewModels
             }
         }
 
-        #endregion
+        #endregion Methods
 
         #region Properties
+
         private ImageSource _profilePicImageSource;
+
         public ImageSource ProfilePicImageSource
         {
             get => _profilePicImageSource;
@@ -142,15 +127,14 @@ namespace Healthcare020.Mobile.ViewModels
             set => SetProperty(ref _pacijent, value);
         }
 
-        #endregion
-
-
-
+        #endregion Properties
 
         #region Commands
+
         public ICommand PasswordCheckNavigationCommand { get; set; }
         public ICommand DeleteAccountCommand { get; }
         public ICommand LogoutCommand => new Command(async () => { await Auth.Logout(); });
+
         public ICommand ProfilePicturePick => new Command(async () =>
         {
             if (!CrossMedia.Current.IsPickPhotoSupported)
@@ -169,7 +153,7 @@ namespace Healthcare020.Mobile.ViewModels
                 //ignore
             }
         });
-        #endregion
 
+        #endregion Commands
     }
 }

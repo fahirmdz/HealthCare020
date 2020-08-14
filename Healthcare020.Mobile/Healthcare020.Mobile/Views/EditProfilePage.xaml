@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<views:BaseValidationContentPage
     x:Class="Healthcare020.Mobile.Views.EditProfilePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
+    xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
     <ContentPage.Content>
         <Grid Padding="20" IsVisible="{Binding MainBodyVisible}">
@@ -13,7 +14,6 @@
                 <Style BasedOn="{StaticResource CustomEntry}" TargetType="Entry">
                     <Setter Property="Margin">0,15,0,0</Setter>
                 </Style>
-                <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -26,33 +26,30 @@
                 VerticalOptions="CenterAndExpand" />
 
             <StackLayout Grid.Row="1" Padding="40,10">
+
                 <StackLayout x:Name="FormBody">
                     <Entry
-                        ClassId="OldPassword"
+                        ClassId="EmailAddress"
                         IsPassword="True"
-                        Placeholder="{x:Static resources:AppResources.OldPassword}"
-                        Text="{Binding OldPassword}" />
-                    <Label x:Name="OldPasswordValidation" />
-
-                    <Entry
-                        ClassId="NewPassword"
-                        IsPassword="True"
-                        Placeholder="{x:Static resources:AppResources.NewPassword}"
-                        Text="{Binding NewPassword}" />
-                    <Label x:Name="NewPasswordValidation" />
-
-                    <Entry
-                        ClassId="NewPasswordConfirm"
-                        IsPassword="True"
-                        Placeholder="{x:Static resources:AppResources.PasswordConfirmation}"
-                        Text="{Binding NewPasswordConfirm}" />
-                    <Label x:Name="NewPasswordConfirmValidation" />
+                        Keyboard="Email"
+                        Placeholder="{x:Static resources:AppResources.EmailAddress}"
+                        Text="{Binding EmailAddress}" />
+                    <Label x:Name="EmailAddressValidation" Style="{StaticResource CustomValidationLabel}" />
+                    <Label Style="{StaticResource DescriptionLabelStyle}" Text="Možete izmeniti samo e-mail adresu, dok je za druge podatke potrebno predati lično zahtev za izmenu podataka" />
                     <Button
-                        x:Name="ChangePasswordBtn"
+                        x:Name="SaveBtn"
+                        Margin="0,10"
+                        Clicked="SaveBtn_OnClicked"
                         Style="{StaticResource CustomButtonStyle}"
                         Text="{x:Static resources:AppResources.Confirm}" />
+                    <Button
+                        x:Name="CancelBtn"
+                        BackgroundColor="Silver"
+                        Command="{Binding CancelNavigationCommand}"
+                        Style="{StaticResource CustomButtonStyle}"
+                        Text="{x:Static resources:AppResources.Cancel}" />
                 </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
-</ContentPage>
+</views:BaseValidationContentPage>

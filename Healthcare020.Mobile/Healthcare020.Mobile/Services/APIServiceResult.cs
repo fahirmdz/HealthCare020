@@ -1,5 +1,6 @@
-﻿using System.Net;
-using HealthCare020.Core.ResponseModels;
+﻿using HealthCare020.Core.ResponseModels;
+using System.Collections;
+using System.Net;
 
 namespace Healthcare020.Mobile.Services
 {
@@ -33,9 +34,28 @@ namespace Healthcare020.Mobile.Services
 
         public static APIServiceResult<T> NotFound(string message = "") => new APIServiceResult<T> { StatusCode = HttpStatusCode.NotFound, Succeeded = false, Message = message };
 
-        public static APIServiceResult<T> OK(T data, string message = "") => new APIServiceResult<T> { Data = data, Message = message, Succeeded = true, StatusCode = HttpStatusCode.OK, HasData = data != null };
+        public static APIServiceResult<T> OK(T data, string message = "") => new APIServiceResult<T>
+        {
+            Data = data,
+            Message = message,
+            Succeeded = true,
+            StatusCode = HttpStatusCode.OK,
+            HasData = data != null && (!typeof(T).IsAssignableFrom(typeof(IList)) || (data as IList)?.Count > 0)
+        };
 
-        public static APIServiceResult<T> OK() => new APIServiceResult<T> { Succeeded = true, StatusCode = HttpStatusCode.OK, HasData = true };
+        public static APIServiceResult<T> OK(T data, PaginationMetadata paginationMetadata)
+        {
+           return new APIServiceResult<T>
+           {
+               Data = data,
+               PaginationMetadata = paginationMetadata,
+               Succeeded = true,
+               StatusCode = HttpStatusCode.OK,
+               HasData = data != null && ((!typeof(T).IsAssignableFrom(typeof(IList))) ? (data as IList)?.Count > 0 : true)
+           };
+        }
+
+        public static APIServiceResult<T> OK() => new APIServiceResult<T> { Succeeded = true, StatusCode = HttpStatusCode.OK, HasData = false };
 
         public static APIServiceResult<T> Unauthorized(string message = "") => new APIServiceResult<T> { StatusCode = HttpStatusCode.Unauthorized, Succeeded = false, Message = message };
 

@@ -6,6 +6,7 @@
     xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
     xmlns:shapes="clr-namespace:Xamarin.Forms.Shapes;assembly=Xamarin.Forms.Core"
     xmlns:views="clr-namespace:Healthcare020.Mobile.Views;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
@@ -59,26 +60,38 @@
                             <TapGestureRecognizer Command="{Binding UploadProfilePictureCommand}" NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </abstractions:CircleImage>
+
+                    <BoxView
+                        Margin="0,5"
+                        HeightRequest=".5"
+                        HorizontalOptions="FillAndExpand"
+                        Color="LightGray" />
+                    <Label Style="{StaticResource SmallCenteredLabel}" Text="{x:Static resources:AppResources.TapToChangeProfilePicture}" />
+                    <Label Style="{StaticResource DescriptionLabelStyle}" Text="Lični podaci koje unosite služe za proveru već postojećih podataka" />
                     <Entry
                         ClassId="BrojKnjizice"
+                        Keyboard="Numeric"
                         Placeholder="Broj zdravstvene knjižice *"
                         Text="{Binding BrojKnjizice}" />
                     <Label x:Name="BrojKnjiziceValidation" />
 
                     <Entry
                         ClassId="JMBG"
+                        Keyboard="Numeric"
                         Placeholder="JMBG *"
                         Text="{Binding JMBG}" />
                     <Label x:Name="JMBGValidation" />
 
                     <Entry
                         ClassId="Ime"
+                        Keyboard="Text"
                         Placeholder="Ime *"
                         Text="{Binding Ime}" />
                     <Label x:Name="ImeValidation" />
 
                     <Entry
                         ClassId="Prezime"
+                        Keyboard="Text"
                         Placeholder="Prezime *"
                         Text="{Binding Prezime}" />
                     <Label x:Name="PrezimeValidation" />

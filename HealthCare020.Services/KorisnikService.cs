@@ -27,7 +27,6 @@ namespace HealthCare020.Services
         IKorisnikService
     {
         private readonly ISecurityService _securityService;
-        private readonly ICipherService _cipherService;
         private readonly IFaceRecognitionService _faceRecognitionService;
 
         public KorisnikService(IMapper mapper,
@@ -37,10 +36,10 @@ namespace HealthCare020.Services
             IHttpContextAccessor httpContextAccessor,
             ISecurityService securityService,
             IAuthService authService,
-            ICipherService cipherService, IFaceRecognitionService faceRecognitionService) : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
+            IFaceRecognitionService faceRecognitionService)
+            : base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
             _securityService = securityService;
-            _cipherService = cipherService;
             _faceRecognitionService = faceRecognitionService;
         }
 
@@ -87,11 +86,6 @@ namespace HealthCare020.Services
 
             korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
             korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, request.Password);
-
-            if (!string.IsNullOrWhiteSpace(request.FaceId))
-            {
-                korisnickiNalog.FaceId = _cipherService.Encrypt(request.FaceId);
-            }
 
             korisnickiNalog.DateCreated = DateTime.Now;
             korisnickiNalog.LastOnline = DateTime.Now;

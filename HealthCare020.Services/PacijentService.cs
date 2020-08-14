@@ -57,6 +57,20 @@ namespace HealthCare020.Services
             return result;
         }
 
+        public override async Task<ServiceResult> GetById(int id, bool EagerLoaded)
+        {
+            if (id == 0)
+            {
+                var pacijent = await _authService.GetCurrentLoggedInPacijent(EagerLoaded);
+                if(pacijent==null)
+                    return ServiceResult.Unauthorized();
+
+                return ServiceResult.OK(_mapper.Map<PacijentDtoEL>(pacijent));
+            }
+
+            return await base.GetById(id, EagerLoaded);
+        }
+
         public override async Task<ServiceResult> Insert(PacijentUpsertDto dtoForCreation)
         {
             var zdravstvenaKnjizica = await _dbContext.ZdravstvenaKnjizica

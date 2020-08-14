@@ -120,14 +120,12 @@ namespace HealthCare020.Services.Helpers
                     {
                         {nameof(PacijentDtoLL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
                         {nameof(PacijentDtoLL.ZdravstvenaKnjizicaId),new PropertyMappingValue(new List<string>(){nameof(Pacijent.ZdravstvenaKnjizicaId)})},
-                        {nameof(PacijentDtoEL.Username),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalog.Username)})},
                         {nameof(PacijentDtoLL.KorisnickiNalogId),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalogId)})}
                     })
                 },
                 {new PropertyMapping<PacijentDtoEL,Pacijent>(new Dictionary<string, PropertyMappingValue>(StringComparer.InvariantCultureIgnoreCase)
                     {
                         {nameof(PacijentDtoEL.Id),new PropertyMappingValue(new List<string>(){nameof(Pacijent.Id)})},
-                        {nameof(PacijentDtoEL.Username),new PropertyMappingValue(new List<string>(){nameof(Pacijent.KorisnickiNalog.Username)})},
                         {nameof(PacijentDtoEL.ZdravstvenaKnjizica),new PropertyMappingValue(new List<string>(){nameof(Pacijent.ZdravstvenaKnjizica)})},
                     })
                 },

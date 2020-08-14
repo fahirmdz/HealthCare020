@@ -21,6 +21,8 @@ namespace Healthcare020.Mobile.Helpers
             Locator.Register<PosetaViewModel>();
             Locator.Register<PreglediViewModel>();
             Locator.Register<PasswordCheckViewModel>();
+            Locator.Register<EditProfileViewModel>();
+            Locator.Register<LicniPodaciViewModel>();
         }
 
         public static WelcomeViewModel WelcomeViewModel => Locator.GetInstance<WelcomeViewModel>();
@@ -35,5 +37,7 @@ namespace Healthcare020.Mobile.Helpers
         public static ChangePasswordViewModel ChangePasswordViewModel => Locator.GetInstance<ChangePasswordViewModel>();
         public static NoviZahtevZaPregledViewModel NoviZahtevZaPregledViewModel => Locator.GetInstance<NoviZahtevZaPregledViewModel>();
         public static PasswordCheckViewModel PasswordCheckViewModel => Locator.GetInstance<PasswordCheckViewModel>();
+        public static EditProfileViewModel EditProfileViewModel => Locator.GetInstance<EditProfileViewModel>();
+        public static LicniPodaciViewModel LicniPodaciViewModel => Locator.GetInstance<LicniPodaciViewModel>();
     }
 }

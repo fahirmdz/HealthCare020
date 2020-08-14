@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Healthcare020.Mobile.Androi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Healthcare020.Mobile", "Healthcare020.Mobile\Healthcare020.Mobile\Healthcare020.Mobile.csproj", "{9787D3DD-4E7A-43FC-A10F-B7A67B70D77C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5C710A8-9DA7-402E-9160-3FF5240FAD9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

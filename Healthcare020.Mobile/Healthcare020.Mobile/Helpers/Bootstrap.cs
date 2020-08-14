@@ -13,11 +13,7 @@ namespace Healthcare020.Mobile.Helpers
             var container = new TinyIoCContainer();
             container.Register<IAPIService, APIService>();
 
-
-
-            var cfg = new MapperConfiguration(MapperConfig.MapperConfiguration());
-
-            container.Register<IMapper, Mapper>(new Mapper(cfg));
+            container.Register<IMapper, Mapper>(new Mapper(new MapperConfiguration(MapperConfig.MapperConfiguration())));
             return container;
         }
 

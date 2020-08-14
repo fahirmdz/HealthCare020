@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -130,6 +130,9 @@
   <data name="AzureFaceAPI_Key" xml:space="preserve">
     <value>e56df11bf5754139a03b2cc4170c2897</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Odustani</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Izmena lozinke</value>
   </data>
@@ -141,6 +144,9 @@
   </data>
   <data name="Date" xml:space="preserve">
     <value>Datum</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Datum rođenja</value>
   </data>
   <data name="DateOfPregled" xml:space="preserve">
     <value>Datum pregleda</value>
@@ -160,6 +166,9 @@
   <data name="EditProfilePageTitle" xml:space="preserve">
     <value>Izmena profila</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>E-mail adresa</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Greška!</value>
   </data>
@@ -171,6 +180,12 @@
   </data>
   <data name="FaceAPI_PersonGroupId" xml:space="preserve">
     <value>healthcare020_pacijenti_person_group_00423122</value>
+  </data>
+  <data name="FirstLastName" xml:space="preserve">
+    <value>Ime i prezime</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Pol</value>
   </data>
   <data name="IdpClientId" xml:space="preserve">
     <value>Healthcare020_Mobile</value>
@@ -192,8 +207,14 @@
   <data name="ImePrezimeLengthError" xml:space="preserve">
     <value>Polje mora sadržati izmedju 2 i 20 slova</value>
   </data>
+  <data name="InvalidEmailAddressFormat" xml:space="preserve">
+    <value>Neispravan format e-mail adrese</value>
+  </data>
   <data name="InvalidLoginCredentials" xml:space="preserve">
     <value>Neispravno korisničko ime ili lozinka</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Prezime</value>
   </data>
   <data name="LekarskaUverenjaPageTitle" xml:space="preserve">
     <value>Lekarska uverenja</value>
@@ -219,6 +240,9 @@
   <data name="NewPasswordSameAsOldValidationError" xml:space="preserve">
     <value>Lozinka se mora razlikovati od stare</value>
   </data>
+  <data name="NotApplicable" xml:space="preserve">
+    <value>N\A</value>
+  </data>
   <data name="NoviZahtevZaPregledPageTitle" xml:space="preserve">
     <value>Novi zahtev za pregled</value>
   </data>
@@ -239,6 +263,12 @@
   </data>
   <data name="PasswordLengthError" xml:space="preserve">
     <value>Lozinka mora sadržati izmedju 8 i 15 karaktera</value>
+  </data>
+  <data name="PersonalData" xml:space="preserve">
+    <value>LicniPodaci</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Broj telefona</value>
   </data>
   <data name="PreglediTabTitle" xml:space="preserve">
     <value>Pregledi</value>
@@ -269,6 +299,9 @@
   </data>
   <data name="SettingsTabTitle" xml:space="preserve">
     <value>Podešavanja</value>
+  </data>
+  <data name="StreetAddress" xml:space="preserve">
+    <value>Adresa</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Uspešno</value>
