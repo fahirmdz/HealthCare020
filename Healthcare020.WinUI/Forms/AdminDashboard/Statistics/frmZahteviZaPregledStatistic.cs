@@ -7,9 +7,9 @@ using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
 {
-    public partial class frmZahteviZaPregledStatistic : StatisticChartForm
+    public sealed partial class frmZahteviZaPregledStatistic : StatisticChartForm
     {
-        private static frmZahteviZaPregledStatistic _instnace = null;
+        private static frmZahteviZaPregledStatistic _instnace;
 
         public static frmZahteviZaPregledStatistic Instance
         {
@@ -28,13 +28,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.Statistics
             YAxisTitle = "Broj zahteva za pregled";
             IcnCharForNoData = IconChar.CalendarAlt;
             NoDataMessage = Resources.NoDataZahteviZaPregledStatisticMessage;
-            Text = Properties.Resources.frmZahteviZaPregledStatistic;
+            Text = Resources.frmZahteviZaPregledStatistic;
             InitializeComponent();
         }
 
         private void frmZahteviZaPregledStatistic_Load(object sender, EventArgs e)
         {
-            base.StatisticChartForm_Load(sender, e);
+            StatisticChartForm_Load(sender, e);
         }
     }
 }

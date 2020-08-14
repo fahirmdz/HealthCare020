@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Healthcare020.WinUI.Properties;
 using Brushes = System.Windows.Media.Brushes;
 
 namespace Healthcare020.WinUI.Forms.AbstractForms
@@ -35,11 +36,11 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
         protected NoDataPanel NoDataPanel;
         protected IconChar IcnCharForNoData;
 
-        protected StatisticChartForm()
+        public StatisticChartForm()
         {
             InitializeComponent();
             btnThreeMonths.Enabled = false;
-            Text = Properties.Resources.frmZahteviZaPregledStatistic;
+            Text = Resources.frmZahteviZaPregledStatistic;
             MonthsCount = 3;
             Months = new List<string> { "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" };
 
@@ -57,13 +58,13 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             {
                 ChartType = ChartType.Line;
                 btnChartTypeChange.IconChar = IconChar.ChartPie;
-                btnChartTypeChange.Text = "Pie chart";
+                btnChartTypeChange.Text = Resources.PieChart;
             }
             else
             {
                 ChartType = ChartType.Pie;
                 btnChartTypeChange.IconChar = IconChar.ChartLine;
-                btnChartTypeChange.Text = "Line chart";
+                btnChartTypeChange.Text = Resources.LineChart;
             }
 
             UpdateChart((await _apiService.Count(MonthsCount))?.Data ?? new List<int> { 0, 0, 0 });
@@ -142,10 +143,9 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
                 if (ChartType == ChartType.Line)
                     months.Add($"{monthYear.Month} - {monthYear.Year}");
 
-                ISeriesView serie;
                 if (ChartType == ChartType.Pie)
                 {
-                    serie = new PieSeries
+                    ISeriesView serie = new PieSeries
                     {
                         Title = $"{monthYear.Month} - {monthYear.Year}",
                         Values = new ChartValues<int> { MonthlyData[i] },
@@ -210,7 +210,7 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             };
             NoDataPanel.Left = (pnlMain.ClientSize.Width - NoDataPanel.Width) / 2;
             NoDataPanel.Top = pnlMain.ClientSize.Height / 2 - 60;
-            this.Controls.Add(NoDataPanel);
+            Controls.Add(NoDataPanel);
             NoDataPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Left;
             NoDataPanel.Hide();
 

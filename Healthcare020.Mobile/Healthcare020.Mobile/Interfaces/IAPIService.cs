@@ -6,11 +6,6 @@ namespace Healthcare020.Mobile.Interfaces
 {
     public interface IAPIService
     {
-        /// <summary>
-        /// Add route to the base request for the API. The route will be removed after the first request.
-        /// </summary>
-        void AddRoute(string route);
-
         void ChangeRoute(string route);
         Task<APIServiceResult<List<int>>> Count(int MonthsCount = 0);
 
@@ -48,6 +43,7 @@ namespace Healthcare020.Mobile.Interfaces
         /// </summary>
         /// <typeparam name="T">Type of return data</typeparam>
         /// <param name="dtoForCreation">Data Transfer Object for creating new entity</param>
+        /// <param name="ReturnData"></param>
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
         Task<APIServiceResult<T>> Post<T>(object dtoForCreation, bool ReturnData = false,
             string pathToAppend = "");
@@ -60,7 +56,5 @@ namespace Healthcare020.Mobile.Interfaces
         /// <param name="dtoForUpdate">Data Transfer Object for updating entity</param>
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
         Task<APIServiceResult<T>> Update<T>(int id, object dtoForUpdate, string pathToAppend = "");
-
-        void RevertToBaseRequest(object resourceParameters = null);
     }
 }

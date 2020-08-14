@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HealthCare020.Core.Models
+﻿namespace HealthCare020.Core.Models
 {
     public class RadnikPrijemDtoEL:RadnikDtoEL
     {

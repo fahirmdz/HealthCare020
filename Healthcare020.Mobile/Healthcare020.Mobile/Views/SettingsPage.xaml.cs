@@ -3,14 +3,13 @@ using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.ViewModels;
 using System;
 using System.Threading.Tasks;
-using Healthcare020.Mobile.Constants;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
+    public partial class SettingsPage
     {
         public SettingsViewModel SettingsVM { get; set; }
         private NavigationPage NavigationPageParent;
@@ -21,9 +20,9 @@ namespace Healthcare020.Mobile.Views
             InitializeComponent();
             BindingContext = SettingsVM = ViewModelLocator.SettingsViewModel;
 
-            EditProfileBtn.ImageSource = IconFont.Edit.GetIcon(); ;
+            EditProfileBtn.ImageSource = IconFont.Edit.GetIcon();
 
-            ChangePasswordBtn.ImageSource = IconFont.Key.GetIcon(); ;
+            ChangePasswordBtn.ImageSource = IconFont.Key.GetIcon();
         }
 
         protected override async void OnAppearing()
@@ -50,7 +49,7 @@ namespace Healthcare020.Mobile.Views
 
         private void DeleteAccountLabel_OnTapped(object sender, EventArgs e)
         {
-           SettingsVM.PasswordCheckNavigationCommand.Execute(sender);
+            SettingsVM.PasswordCheckNavigationCommand.Execute(sender);
         }
     }
 }

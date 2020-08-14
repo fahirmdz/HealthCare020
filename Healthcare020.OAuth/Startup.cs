@@ -1,4 +1,3 @@
-using System;
 using HealthCare020.Core.Constants;
 using Healthcare020.LoggerService.Configuration;
 using Healthcare020.LoggerService.Interfaces;

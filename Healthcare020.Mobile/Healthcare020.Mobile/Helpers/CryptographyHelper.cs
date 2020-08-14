@@ -6,7 +6,7 @@ namespace Healthcare020.Mobile.Helpers
 {
     public static class CryptographyHelper
     {
-       private static bool _optimalAsymmetricEncryptionPadding = false;
+       private static readonly bool _optimalAsymmetricEncryptionPadding = false;
 
         public static string Encrypt(this string plainText, string publicKeyXml, int keySize = 4096)
         {

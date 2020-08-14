@@ -30,7 +30,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [Authorize(AuthorizationPolicies.PacijentPolicy)]
-        public override async Task<IActionResult> GetById(int id, bool? EagerLoaded)
+        public override async Task<IActionResult> GetById(int id, bool? EagerLoaded=false)
         {
             return await base.GetById(id, EagerLoaded);
         }

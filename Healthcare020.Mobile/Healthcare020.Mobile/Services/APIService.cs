@@ -19,9 +19,8 @@ namespace Healthcare020.Mobile.Services
 {
     public class APIService : IAPIService
     {
-        private string BaseUrl;
-        private IFlurlRequest request;
-        private IFlurlClient _flurlClient;
+        private readonly string BaseUrl;
+        private readonly IFlurlRequest request;
 
         /// <summary>
         /// Create new API service with specific route
@@ -46,8 +45,8 @@ namespace Healthcare020.Mobile.Services
                         : AppResources.ApiUrl)
                 };
 
-                _flurlClient = new FlurlClient(httpClient);
-                request = _flurlClient.Request(route).AllowAnyHttpStatus();
+                IFlurlClient flurlClient = new FlurlClient(httpClient);
+                request = flurlClient.Request(route).AllowAnyHttpStatus();
                 if (Auth.IsAuthenticated(setLoginPage:false))
                     request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
                 BaseUrl = request.Url;
@@ -131,20 +130,31 @@ namespace Healthcare020.Mobile.Services
 
                     if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        var errorMessage = await response.Content?.ReadAsStringAsync() ?? string.Empty;
+                        if (response.Content != null)
+                        {
+                            var errorMessage = await response.Content?.ReadAsStringAsync() ?? string.Empty;
+                            return APIServiceResult<T>.BadRequest(errorMessage);
+                        }
                     }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
 
-                var result = await response.Content?.ReadAsAsync<T>();
+                if (response.Content != null)
+                {
+                    var result = await response.Content?.ReadAsAsync<T>();
 
-                return result != null ? APIServiceResult<T>.OK(result) : APIServiceResult<T>.NoContent();
+                    return result != null ? APIServiceResult<T>.OK(result) : APIServiceResult<T>.NoContent();
+                }
+
+                APIServiceResult<T>.NoContent();
             }
             catch (Exception ex)
             {
                 return APIServiceResult<T>.Exception();
             }
+
+            return APIServiceResult<T>.BadRequest();
         }
 
         /// <summary>
@@ -174,7 +184,11 @@ namespace Healthcare020.Mobile.Services
 
                     if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        var errorMessage = await response.Content?.ReadAsStringAsync() ?? string.Empty;
+                        if (response.Content != null)
+                        {
+                            var errorMessage = await response.Content.ReadAsStringAsync();
+                            return APIServiceResult<List<T>>.BadRequest(errorMessage);
+                        }
                     }
 
                     return APIServiceResult<List<T>>.WithStatusCode(response.StatusCode);
@@ -236,7 +250,11 @@ namespace Healthcare020.Mobile.Services
 
                     if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        var errorMessage = await response.Content?.ReadAsStringAsync() ?? string.Empty;
+                        if (response.Content != null)
+                        {
+                            var errorMessage = await response.Content.ReadAsStringAsync();
+                            return APIServiceResult<T>.BadRequest(errorMessage);
+                        }
                     }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
@@ -280,7 +298,11 @@ namespace Healthcare020.Mobile.Services
 
                     if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        var errorMessage = await response.Content?.ReadAsStringAsync() ?? string.Empty;
+                        if (response.Content != null)
+                        {
+                            var errorMessage = await response.Content.ReadAsStringAsync();
+                            return APIServiceResult<T>.BadRequest(errorMessage);
+                        }
                     }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
@@ -301,6 +323,7 @@ namespace Healthcare020.Mobile.Services
         /// </summary>
         /// <typeparam name="T">Type of return data</typeparam>
         /// <param name="dtoForCreation">Data Transfer Object for creating new entity</param>
+        /// <param name="ReturnData">Flag that indicates data returning</param>
         /// <param name="pathToAppend">Additional path to append on base url (e.g. "lock" custom operation as "/users/1/lock")</param>
         public async Task<APIServiceResult<T>> Post<T>(object dtoForCreation, bool ReturnData = false,
             string pathToAppend = "")
@@ -324,26 +347,29 @@ namespace Healthcare020.Mobile.Services
                     }
                     else if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        var errorDetails = await response.Content?.ReadAsStringAsync();
-                        return APIServiceResult<T>.BadRequest(errorDetails);
+                        if (response.Content != null)
+                        {
+                            var errorDetails = await response.Content?.ReadAsStringAsync();
+                            return APIServiceResult<T>.BadRequest(errorDetails);
+                        }
                     }
                     else if ((int)response.StatusCode == 422)
                     {
-                        var errorDetails = await response.Content?.ReadAsStringAsync();
+                        if (response.Content != null)
+                        {
+                            var errorDetails = await response.Content.ReadAsStringAsync();
+                            var validationProblemDetails =
+                                JsonConvert.DeserializeObject<ValidationProblemDetails>(errorDetails);
 
-                        var validationProblemDetails =
-                            JsonConvert.DeserializeObject<ValidationProblemDetails>(errorDetails);
+                            if (validationProblemDetails == null)
+                                return APIServiceResult<T>.BadRequest();
 
-                        if (validationProblemDetails == null)
-                            return APIServiceResult<T>.BadRequest();
-
-                        return APIServiceResult<T>.BadRequest(validationProblemDetails.Detail);
+                            return APIServiceResult<T>.BadRequest(validationProblemDetails.Detail);
+                        }
                     }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
-
-                var headers = response.Headers;
 
                 if (ReturnData)
                 {
@@ -393,13 +419,15 @@ namespace Healthcare020.Mobile.Services
                     }
                     else if ((int)response.StatusCode == 422)
                     {
-                        var errorDetails = await response.Content?.ReadAsStringAsync();
+                        if (response.Content != null)
+                        {
+                            var errorMessage = await response.Content.ReadAsStringAsync();
+                            return APIServiceResult<T>.WithStatusCode((HttpStatusCode)422,errorMessage);
+                        }
                     }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
-
-                var headers = response.Headers;
 
                 var result = await response.Content.ReadAsAsync<T>();
                 return APIServiceResult<T>.OK(result);

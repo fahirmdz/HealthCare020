@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+#pragma warning disable 1998
 
 namespace Healthcare020.Mobile.ViewModels
 {
@@ -41,20 +42,11 @@ namespace Healthcare020.Mobile.ViewModels
 
         protected virtual async Task CollectionItem_Tapped()
         {
-            return;
         }
 
         #region Properties
 
-        protected bool _enabledFlagIcons;
-        public bool EnabledFlagIcons
-        {
-            get => _enabledFlagIcons;
-            set => SetProperty(ref _enabledFlagIcons, value);
-        }
-
         protected string _searchEntryPlaceholder;
-
         public string SearchEntryPlaceholder
         {
             get => _searchEntryPlaceholder;
@@ -116,7 +108,6 @@ namespace Healthcare020.Mobile.ViewModels
 
         protected virtual async Task Search()
         {
-            return;
         }
 
         protected async void NextPage()

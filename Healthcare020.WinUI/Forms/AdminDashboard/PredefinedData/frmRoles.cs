@@ -1,16 +1,17 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Forms.AbstractForms;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Services;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmRoles : DisplayDataForm<TwoFieldsDto>
+    public sealed partial class frmRoles : DisplayDataForm<TwoFieldsDto>
     {
         private static frmRoles _instance;
 
@@ -18,17 +19,14 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         {
             get
             {
-                if(_instance==null || _instance.IsDisposed)
-                    _instance=new frmRoles();
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new frmRoles();
                 return _instance;
             }
         }
 
-
-
         private frmRoles()
         {
-
             var ID = new DataGridViewColumn
             {
                 HeaderText = "ID",
@@ -41,18 +39,18 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var Brisi = new DataGridViewButtonColumn
             {
-                HeaderText = "Brisanje",
-                Name = "Brisanje",
-                Text = "Izbriši",
+                HeaderText = Resources.DeleteVerb,
+                Name = Resources.DeleteVerb,
+                Text = Resources.DeleteIt,
                 ToolTipText = "Izbriši role",
                 UseColumnTextForButtonValue = true,
                 CellTemplate = new DataGridViewButtonCell { ToolTipText = "Izbriši role", UseColumnTextForButtonValue = true },
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent }
             };
-            AddColumnsToMainDgrv(new[]{ID,Naziv,Brisi});
+            AddColumnsToMainDgrv(new[] { ID, Naziv, Brisi });
             _apiService = new APIService(Routes.RolesRoute);
-            Text = Properties.Resources.frmRoles;
-            ResourceParameters = new TwoFieldsResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount};
+            Text = Resources.frmRoles;
+            ResourceParameters = new TwoFieldsResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount };
 
             InitializeComponent();
         }
@@ -63,9 +61,10 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var rolesResParams = ResourceParameters as TwoFieldsResourceParameters;
 
-            if (SearchText != (rolesResParams?.Naziv??string.Empty))
+            if (SearchText != (rolesResParams?.Naziv ?? string.Empty))
             {
-                rolesResParams.Naziv = SearchText;
+                if (rolesResParams != null)
+                    rolesResParams.Naziv = SearchText;
                 await LoadData();
             }
         }
@@ -74,7 +73,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         {
             if (MainDgrv.CurrentRow?.DataBoundItem is TwoFieldsDto role)
             {
-
                 if (MainDgrv.Columns[e.ColumnIndex].Name == "Brisanje")
                 {
                     var prompt = dlgPropmpt.ShowDialog();
@@ -107,7 +105,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             }
         }
 
-        public async void RefreshData() => await LoadData();
+        public new async void RefreshData() => await LoadData();
 
         private void frmRoles_Load(object sender, EventArgs e)
         {

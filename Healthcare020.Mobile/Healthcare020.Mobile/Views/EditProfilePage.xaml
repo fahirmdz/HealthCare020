@@ -5,13 +5,54 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:Healthcare020.Mobile.Resources;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <StackLayout>
-            <Label
+        <Grid Padding="20" IsVisible="{Binding MainBodyVisible}">
+            <Grid.Resources>
+                <Style BasedOn="{StaticResource CustomEntry}" TargetType="Entry">
+                    <Setter Property="Margin">0,15,0,0</Setter>
+                </Style>
+                <Style BasedOn="{StaticResource CustomValidationLabel}" TargetType="Label" />
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <Image
+                Aspect="AspectFill"
                 HorizontalOptions="CenterAndExpand"
-                Text="Welcome to Xamarin.Forms!"
+                Source="{StaticResource EditProfileImageSource}"
                 VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+
+            <StackLayout Grid.Row="1" Padding="40,10">
+                <StackLayout x:Name="FormBody">
+                    <Entry
+                        ClassId="OldPassword"
+                        IsPassword="True"
+                        Placeholder="{x:Static resources:AppResources.OldPassword}"
+                        Text="{Binding OldPassword}" />
+                    <Label x:Name="OldPasswordValidation" />
+
+                    <Entry
+                        ClassId="NewPassword"
+                        IsPassword="True"
+                        Placeholder="{x:Static resources:AppResources.NewPassword}"
+                        Text="{Binding NewPassword}" />
+                    <Label x:Name="NewPasswordValidation" />
+
+                    <Entry
+                        ClassId="NewPasswordConfirm"
+                        IsPassword="True"
+                        Placeholder="{x:Static resources:AppResources.PasswordConfirmation}"
+                        Text="{Binding NewPasswordConfirm}" />
+                    <Label x:Name="NewPasswordConfirmValidation" />
+                    <Button
+                        x:Name="ChangePasswordBtn"
+                        Style="{StaticResource CustomButtonStyle}"
+                        Text="{x:Static resources:AppResources.Confirm}" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

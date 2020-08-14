@@ -15,7 +15,7 @@ namespace HealthCare020.API.Controllers
     [Route("api/" + Routes.KorisniciRoute)]
     public class KorisnikController : BaseCRUDController<KorisnickiNalog, KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters, KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto>
     {
-        private IKorisnikService _korisnikService;
+        private readonly IKorisnikService _korisnikService;
 
         public KorisnikController(ICRUDService<KorisnickiNalog, KorisnickiNalogDtoLL, KorisnickiNalogDtoEL, KorisnickiNalogResourceParameters,
             KorisnickiNalogUpsertDto, KorisnickiNalogUpsertDto> crudService)

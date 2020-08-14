@@ -21,7 +21,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 {
     public partial class frmUserProfile : Form
     {
-        private static frmUserProfile _instance = null;
+        private static frmUserProfile _instance;
 
         private readonly APIService _apiService;
         private LicniPodaciDto LicniPodaci;
@@ -30,7 +30,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         {
             InitializeComponent();
             tabSelector.BackColor = Color.Black;
-            toolTip.SetToolTip(picProfilePicture,Resources.TooltipProfilePictureChange);
+            toolTip.SetToolTip(picProfilePicture, Resources.TooltipProfilePictureChange);
             _apiService = new APIService(Routes.LicniPodaciRoute);
         }
 
@@ -124,7 +124,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 var result = await _apiService.Get<MedicinskiTehnicarDtoEL>(new MedicinskiTehnicarResourceParameters
                 { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
 
-                if (!result.Succeeded || result?.Data == null)
+                if (!result.Succeeded || result.Data == null)
                 {
                     dlgError.ShowDialog(Resources.UnableToLoadUserProfileMessage);
                     return;
@@ -140,7 +140,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 var result = await _apiService.Get<RadnikPrijemDtoEL>(new RadnikPrijemResourceParameters()
                 { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
 
-                if (!result.Succeeded || result?.Data == null)
+                if (!result.Succeeded || result.Data == null)
                 {
                     dlgError.ShowDialog(Resources.UnableToLoadUserProfileMessage);
                     return;
@@ -205,7 +205,8 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
             cmbPolovi.SelectedIndex = char.ToLower(LicniPodaci.Pol) == 'm' ? 0 : 1;
             cmbDrzave.SelectedValue = LicniPodaci.Grad?.DrzavaId ?? 0;
-            cmbGradovi.SelectedValue = LicniPodaci.Grad.Id;
+            if (LicniPodaci.Grad != null)
+                cmbGradovi.SelectedValue = LicniPodaci.Grad.Id;
         }
 
         private async void picProfilePicture_MouseClick(object sender, MouseEventArgs e)
@@ -278,7 +279,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
             if (string.IsNullOrWhiteSpace(txtAdresa.Text))
             {
-                Errors.SetError(txtAdresa, Properties.Resources.RequiredField);
+                Errors.SetError(txtAdresa, Resources.RequiredField);
                 return false;
             }
 

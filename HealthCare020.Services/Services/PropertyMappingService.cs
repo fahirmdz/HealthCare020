@@ -7,7 +7,7 @@ namespace HealthCare020.Services.Services
 {
     public class PropertyMappingService : IPropertyMappingService
     {
-        private ICollection<IPropertyMapping> PropertyMapping;
+        private readonly ICollection<IPropertyMapping> PropertyMapping;
 
 
         public PropertyMappingService()
@@ -20,9 +20,10 @@ namespace HealthCare020.Services.Services
             //get matching mapping
             var matchingMapping = PropertyMapping.OfType<PropertyMapping<TSource, TDestination>>();
 
-            if (matchingMapping.Count() == 1)
+            var propertyMappings = matchingMapping.ToList();
+            if (propertyMappings.Count == 1)
             {
-                return matchingMapping.First().MappingDictionary;
+                return propertyMappings.First().MappingDictionary;
             }
 
             throw new Exception($"Cannot find exact property mapping instance for <{typeof(TSource)},{typeof(TDestination)}>");
@@ -42,7 +43,7 @@ namespace HealthCare020.Services.Services
                 var trimmedField = field.Trim();
 
                 //remove everything after first " " (space)
-                var indexOfFirstSpace = trimmedField.IndexOf(" ");
+                var indexOfFirstSpace = trimmedField.IndexOf(" ", StringComparison.Ordinal);
 
                 var propertyName = indexOfFirstSpace == -1 ? trimmedField : trimmedField.Remove(indexOfFirstSpace);
 

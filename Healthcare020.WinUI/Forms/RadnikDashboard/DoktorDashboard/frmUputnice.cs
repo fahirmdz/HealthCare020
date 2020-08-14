@@ -1,32 +1,29 @@
 ﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
 using System;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Properties;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
-    public partial class frmUputnice : DisplayDataForm<UputnicaDtoEL>
+    public sealed partial class frmUputnice : DisplayDataForm<UputnicaDtoEL>
     {
-        private static frmUputnice _instance = null;
-        private bool NamenjenjeTrenutnoLogovanomKorisniku;
+        private static frmUputnice _instance;
 
-        public static frmUputnice InstanceWithData(bool NamenjenjeTrenutnoLogovanomKorisniku=false) //if false then Kreirane
+        public static frmUputnice InstanceWithData(bool NamenjenjeTrenutnoLogovanomKorisniku = false) //if false then Kreirane
         {
             if (_instance == null || _instance.IsDisposed)
                 _instance = new frmUputnice(NamenjenjeTrenutnoLogovanomKorisniku);
             return _instance;
         }
 
-        private frmUputnice(bool NamenjenjeTrenutnoLogovanomKorisniku=false)
+        private frmUputnice(bool NamenjenjeTrenutnoLogovanomKorisniku = false)
         {
-            this.Text = NamenjenjeTrenutnoLogovanomKorisniku?Resources.frmUpuceneUputnice:Resources.frmKreiraneUputnice;
-
-            this.NamenjenjeTrenutnoLogovanomKorisniku = NamenjenjeTrenutnoLogovanomKorisniku;
+            Text = NamenjenjeTrenutnoLogovanomKorisniku ? Resources.frmUpuceneUputnice : Resources.frmKreiraneUputnice;
 
             var ID = new DataGridViewTextBoxColumn
             {
@@ -59,10 +56,10 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Pacijent, upucenKodDoktora, DatumVreme });
+            AddColumnsToMainDgrv(new[] { ID, Pacijent, upucenKodDoktora, DatumVreme });
 
             _apiService = new APIService(Routes.UputnicaRoute);
-            ResourceParameters = new UputnicaResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true, UpuceneUputnice = NamenjenjeTrenutnoLogovanomKorisniku};
+            ResourceParameters = new UputnicaResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true, UpuceneUputnice = NamenjenjeTrenutnoLogovanomKorisniku };
 
             InitializeComponent();
             btnNew.Visible = false;
@@ -90,12 +87,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             if (!(dgrvMain.CurrentRow?.DataBoundItem is UputnicaDtoEL uputnica))
                 return;
 
-            dlgForm.ShowDialog(frmNewUputnica.InstanceWithData(uputnica,newInstance:true),DialogFormSize.Large,NewInstance:true);
-        }
-
-        private void frmUputnice_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Dispose();
+            dlgForm.ShowDialog(frmNewUputnica.InstanceWithData(uputnica, newInstance: true), DialogFormSize.Large, NewInstance: true);
         }
 
         protected override async void txtSearch_Leave(object sender, EventArgs e)

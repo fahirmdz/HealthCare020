@@ -22,7 +22,7 @@ namespace Healthcare020.WinUI.Helpers
             if (string.IsNullOrWhiteSpace(textField.Text))
             {
                 if (SetErrors)
-                    errors.SetError(textField, Properties.Resources.RequiredField);
+                    errors.SetError(textField, Resources.RequiredField);
                 return false;
             }
 
@@ -30,7 +30,7 @@ namespace Healthcare020.WinUI.Helpers
                 || (textInputType == TextInputType.Letters && textField.Text.Any(char.IsDigit)))
             {
                 if (SetErrors)
-                    errors.SetError(textField, Properties.Resources.InvalidFormat);
+                    errors.SetError(textField, Resources.InvalidFormat);
                 return false;
             }
 
@@ -44,14 +44,14 @@ namespace Healthcare020.WinUI.Helpers
 
             if (string.IsNullOrWhiteSpace(textField.Text))
             {
-                errors.SetError(textField, Properties.Resources.RequiredField);
+                errors.SetError(textField, Resources.RequiredField);
                 return false;
             }
 
             if ((textInputType == TextInputType.Digits && textField.Text.Any(char.IsLetter))
                 || (textInputType == TextInputType.Letters && textField.Text.Any(char.IsDigit)))
             {
-                errors.SetError(textField, Properties.Resources.InvalidFormat);
+                errors.SetError(textField, Resources.InvalidFormat);
                 return false;
             }
 
@@ -76,7 +76,7 @@ namespace Healthcare020.WinUI.Helpers
 
             try
             {
-                var email = new MailAddress(textField.Text);
+                var mailAddress = new MailAddress(textField.Text);
 
                 return true;
             }

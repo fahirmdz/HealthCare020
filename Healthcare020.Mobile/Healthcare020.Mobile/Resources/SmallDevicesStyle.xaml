@@ -83,7 +83,6 @@
     </Style>
 
     <Style x:Key="CustomEntry" TargetType="Entry">
-        <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="Margin" Value="5" />

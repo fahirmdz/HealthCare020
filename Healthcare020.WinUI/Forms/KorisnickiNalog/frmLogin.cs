@@ -43,13 +43,13 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            this.KeyPreview = true;
+            KeyPreview = true;
             pnlBody.BringToFront();
         }
 
         private void frmLogin_Resize(object sender, EventArgs e)
         {
-            pnlTop.Size = new Size(Width, this.Height / 2);
+            pnlTop.Size = new Size(Width, Height / 2);
         }
 
         private void frmLogin_Shown(object sender, EventArgs e)
@@ -116,10 +116,6 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
                     case RoleType.Pacijent:
                         break;
-
-                    default:
-                        formToOpen = null;
-                        break;
                 }
 
                 if (formToOpen == null)
@@ -128,7 +124,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 MainForm.Instance.ReloadUserDropdownMenu();
 
                 formToOpen.OpenAsChildOfControl(Parent);
-                this.Close();
+                Close();
             }
             else
             {
@@ -164,7 +160,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Dispose();
+            Dispose();
         }
     }
 }

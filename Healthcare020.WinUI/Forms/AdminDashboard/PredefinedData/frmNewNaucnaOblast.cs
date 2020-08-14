@@ -1,20 +1,20 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using HealthCare020.Core.Constants;
-using HealthCare020.Core.Models;
-using HealthCare020.Core.Request;
-using Healthcare020.WinUI.Helpers;
+﻿using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Models;
 using Healthcare020.WinUI.Services;
+using HealthCare020.Core.Constants;
+using HealthCare020.Core.Models;
+using HealthCare020.Core.Request;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmNewNaucnaOblast : Form
+    public sealed partial class frmNewNaucnaOblast : Form
     {
-        private static frmNewNaucnaOblast _instance = null;
-        private APIService _apiService;
+        private static frmNewNaucnaOblast _instance;
+        private readonly APIService _apiService;
         private TwoFieldsDto NaucnaOblast;
 
         public new static frmNewNaucnaOblast ShowDialog()
@@ -52,13 +52,13 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             Text = NaucnaOblast == null ? Properties.Resources.frmNewNaucnaOblastAdd : Properties.Resources.frmNewNaucnaOblastUpdate;
 
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
+            Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
-            this.FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
 
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
-            this.TransparencyKey = Color.Transparent;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            TransparencyKey = Color.Transparent;
             pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
         }
 

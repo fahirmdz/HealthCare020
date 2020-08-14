@@ -1,10 +1,7 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Mappers;
 using Healthcare020.Mobile.Interfaces;
 using Healthcare020.Mobile.Services;
-using Healthcare020.Mobile.ViewModels;
-using TinyIoC;
 using Mapper = AutoMapper.Mapper;
 
 namespace Healthcare020.Mobile.Helpers
@@ -26,7 +23,7 @@ namespace Healthcare020.Mobile.Helpers
 
         public static ILocator GetLocator()
         {
-            return new Locator(Bootstrap.GetContainer());
+            return new Locator(GetContainer());
         }
     }
 }

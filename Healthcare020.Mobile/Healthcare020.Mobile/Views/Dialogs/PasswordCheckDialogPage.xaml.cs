@@ -22,7 +22,7 @@ namespace Healthcare020.Mobile.Views.Dialogs
             IsAnimationEnabled = true;
             CloseWhenBackgroundIsClicked = true;
             HasKeyboardOffset = false;
-            this.BackgroundColor = Color.FromRgba(0, 0, 0, 0.4);
+            BackgroundColor = Color.FromRgba(0, 0, 0, 0.4);
         }
 
         protected override void OnAppearing()

@@ -35,7 +35,7 @@ namespace HealthCare020.Core.ServiceModels
 
         public static ServiceResult NoContent(string message = "") => new ServiceResult(HttpStatusCode.NoContent, true, message);
 
-        public ServiceResult(object data):base()
+        public ServiceResult(object data)
         {
             Data = data;
         }

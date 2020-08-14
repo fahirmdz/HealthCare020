@@ -10,7 +10,6 @@ using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
 using HealthCare020.Services.Properties;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
@@ -25,9 +24,7 @@ namespace HealthCare020.Services
     {
         private readonly ISecurityService _securityService;
         private readonly IKorisnikService _korisnikService;
-        private readonly ICipherService _cipherService;
         private readonly IFaceRecognitionService _faceRecognitionService;
-        private readonly Logger _logger;
 
         public PacijentService(IMapper mapper,
             HealthCare020DbContext dbContext,
@@ -36,14 +33,11 @@ namespace HealthCare020.Services
             IHttpContextAccessor httpContextAccessor,
             IAuthService authService,
             ISecurityService securityService,
-            ICipherService cipherService,
             IFaceRecognitionService faceRecognitionService,
             IKorisnikService korisnikService) :
             base(mapper, dbContext, propertyMappingService, propertyCheckerService, httpContextAccessor, authService)
         {
-            _logger = LogManager.GetCurrentClassLogger();
             _securityService = securityService;
-            _cipherService = cipherService;
             _faceRecognitionService = faceRecognitionService;
             _korisnikService = korisnikService;
         }
@@ -131,7 +125,7 @@ namespace HealthCare020.Services
                 .Include(x => x.KorisnickiNalog)
                 .FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
             if (pacijent == null)
-                return ServiceResult.NotFound($"Pacijent povezan sa vasim korisnickim nalogom nije pronadjen.");
+                return ServiceResult.NotFound("Pacijent povezan sa vasim korisnickim nalogom nije pronadjen.");
 
             _mapper.Map(dtoForUpdate.KorisnickiNalog, pacijent.KorisnickiNalog);
 
@@ -251,7 +245,7 @@ namespace HealthCare020.Services
             if (zdravstvenaKnjizica.LicniPodaci.Ime != dto.Ime ||
                 zdravstvenaKnjizica.LicniPodaci.Prezime != dto.Prezime ||
                 zdravstvenaKnjizica.LicniPodaci.JMBG != dto.JMBG.Trim())
-                return (false, HttpStatusCode.BadRequest, $"Validacija unijetih podataka neuspjesna.");
+                return (false, HttpStatusCode.BadRequest, "Validacija unijetih podataka neuspjesna.");
 
             return (true, HttpStatusCode.OK, String.Empty);
         }
@@ -269,7 +263,7 @@ namespace HealthCare020.Services
             return number.ToString();
         }
 
-        private async Task<Guid> AddFaceForUser(byte[] image, string username, Guid? personId = null, bool update = false)
+        private async Task<Guid?> AddFaceForUser(byte[] image, string username, Guid? personId = null, bool update = false)
         {
             if (!update)
             {
@@ -282,22 +276,26 @@ namespace HealthCare020.Services
                     logger.Error($"Greška pri dodavanju pacijenta u person grupu Face API-ja. Username:{username}");
                 }
 
-                personId = addedPerson.PersonId;
+                if (addedPerson != null)
+                    personId = addedPerson.PersonId;
             }
 
-            using (var ms = new MemoryStream(image))
+            await using (var ms = new MemoryStream(image))
             {
-                var addedFace = await
-                    _faceRecognitionService.AddFaceToPerson(Resources.FaceAPI_PersonGroupId, personId.Value, ms);
-
-                if (addedFace == null)
+                if (personId != null)
                 {
-                    var logger = LogManager.GetCurrentClassLogger();
-                    logger.Error($"Greška pri dodavanju lica u person grupu Face API-ja. Username:{username}");
+                    var addedFace = await
+                        _faceRecognitionService.AddFaceToPerson(Resources.FaceAPI_PersonGroupId, personId.Value, ms);
+
+                    if (addedFace == null)
+                    {
+                        var logger = LogManager.GetCurrentClassLogger();
+                        logger.Error($"Greška pri dodavanju lica u person grupu Face API-ja. Username:{username}");
+                    }
                 }
             }
 
-            return personId.Value;
+            return personId;
         }
     }
 }

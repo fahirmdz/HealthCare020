@@ -1,6 +1,4 @@
-﻿using HealthCare020.Core.Entities;
-
-namespace HealthCare020.Core.Models
+﻿namespace HealthCare020.Core.Models
 {
     public class ZahtevZaPregledDtoLL:ZahtevZaPregledDto
     {

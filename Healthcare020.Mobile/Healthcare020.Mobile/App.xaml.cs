@@ -1,14 +1,12 @@
-﻿using System.Globalization;
-using Healthcare020.Mobile.Resources;
+﻿using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
 using Healthcare020.Mobile.Views;
-using HealthCare020.Core.Extensions;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 
 namespace Healthcare020.Mobile
 {
@@ -31,19 +29,16 @@ namespace Healthcare020.Mobile
             InitializeComponent();
             LoadStyles();
 
-            DependencyService.Register<MockDataStore>();
             Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
 
             if (!Auth.IsAuthenticated(false))
                 Task.Run(async () => { await Auth.AuthenticateWithPassword("fahirmdz", "testtest"); });
-            MainPage = new PacijentDasbhboardTabbedPage();
+            MainPage = new EditProfilePage();
         }
 
         protected override async void OnStart()
         {
-
-
-            Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture= new CultureInfo("bs-Latn-BA");
+            Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = new CultureInfo("bs-Latn-BA");
         }
 
         protected override void OnSleep()

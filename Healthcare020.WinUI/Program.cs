@@ -7,10 +7,8 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml;
 using NLog;
 
 namespace Healthcare020.WinUI
@@ -20,7 +18,7 @@ namespace Healthcare020.WinUI
         private static string GetLogFilePathString()
         {
             var dateString = DateTime.Now.Date.ToString("u");
-            var x=dateString.IndexOf(" ");
+            var x=dateString.IndexOf(" ", StringComparison.Ordinal);
             dateString = dateString.Substring(0, x);
 
             return $"{Resources.LogFilePath.Replace("#", dateString)}";
@@ -37,19 +35,6 @@ namespace Healthcare020.WinUI
                     "Greška!", MessageBoxButtons.YesNo) == DialogResult.OK)
                 {
                     Process.Start($@"{logFilePath}");
-                }
-                else
-                {
-
-                }
-
-                if (ex is UnauthorizedException)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                else
-                {
-                    MessageBox.Show("Unhadled domain exception:\n\n" + ex.Message);
                 }
             }
             catch (Exception exc)
@@ -91,7 +76,7 @@ namespace Healthcare020.WinUI
             //This handler is for catching non-UI thread exception
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            using (var reg = Registry.CurrentUser.OpenSubKey(Properties.Settings.Default.RegistryKey))
+            using (var reg = Registry.CurrentUser.OpenSubKey(Settings.Default.RegistryKey))
             {
                 if (reg != null)
                 {

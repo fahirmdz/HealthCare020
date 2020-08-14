@@ -11,7 +11,7 @@ namespace Healthcare020.Mobile.Views.Dialogs
     public partial class LekarskoUverenjeDialogPage
     {
         public LekarskoUverenjeViewModel LekarskoUverenjeVM { get; set; }
-        private int LekarskoUverenjeId;
+        private readonly int LekarskoUverenjeId;
 
         public LekarskoUverenjeDialogPage(int lekarskoUverenjeId)
         {
@@ -21,7 +21,7 @@ namespace Healthcare020.Mobile.Views.Dialogs
             IsAnimationEnabled = true;
             CloseWhenBackgroundIsClicked = true;
             HasKeyboardOffset = false;
-            this.BackgroundColor = Color.FromRgba(0, 0, 0, 0.4);
+            BackgroundColor = Color.FromRgba(0, 0, 0, 0.4);
         }
 
         protected override async void OnAppearing()

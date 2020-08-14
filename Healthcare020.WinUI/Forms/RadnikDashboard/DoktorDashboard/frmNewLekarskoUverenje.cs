@@ -13,9 +13,9 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmNewLekarskoUverenje : Form
     {
-        private static frmNewLekarskoUverenje _instance = null;
-        private PregledDtoEL Pregled;
-        private LekarskoUverenjeDtoEL LekarskoUverenje;
+        private static frmNewLekarskoUverenje _instance;
+        private readonly PregledDtoEL Pregled;
+        private readonly LekarskoUverenjeDtoEL LekarskoUverenje;
         private readonly APIService _apiService;
 
         public static frmNewLekarskoUverenje InstanceWithData(PregledDtoEL pregled, bool newInstance = false)
@@ -97,9 +97,10 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         {
             if (LekarskoUverenje != null || ValidateInputs())
             {
-                PDFService.GeneratePDFDocument(Pregled ?? LekarskoUverenje.Pregled,
-                (cmbZdravstvenoStanje.SelectedItem as ZdravstvenoStanjeDto)?.Opis ?? string.Empty,
-                txtOpisStanja.Text);
+                if (LekarskoUverenje != null)
+                    PDFService.GeneratePDFDocument(Pregled ?? LekarskoUverenje.Pregled,
+                        (cmbZdravstvenoStanje.SelectedItem as ZdravstvenoStanjeDto)?.Opis ?? string.Empty,
+                        txtOpisStanja.Text);
             }
         }
 
@@ -136,7 +137,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         private void btnUputnica_Click(object sender, EventArgs e)
         {
             dlgForm.SetShouldDisposeOnChildClose(false);
-            dlgForm.ShowDialog(frmNewUputnica.InstanceWithData(Pregled?.Pacijent??LekarskoUverenje.Pregled.Pacijent),DialogFormSize.Large, NewInstance:true);
+            dlgForm.ShowDialog(frmNewUputnica.InstanceWithData(Pregled?.Pacijent ?? LekarskoUverenje.Pregled.Pacijent), DialogFormSize.Large, NewInstance: true);
         }
     }
 }

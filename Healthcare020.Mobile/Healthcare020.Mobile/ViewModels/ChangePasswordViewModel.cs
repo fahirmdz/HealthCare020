@@ -16,7 +16,6 @@ namespace Healthcare020.Mobile.ViewModels
     public class ChangePasswordViewModel : BaseValidationViewModel
     {
         private IAPIService _apiService;
-        public StackLayout FormBody;
 
         public ChangePasswordViewModel()
         {
@@ -25,7 +24,7 @@ namespace Healthcare020.Mobile.ViewModels
 
         #region Methods
 
-        public async Task Init()
+        public void Init()
         {
             if (!Auth.IsAuthenticated())
             {

@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using Flurl.Http.Configuration;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using Healthcare020.WinUI.Helpers;
@@ -10,7 +9,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 {
     public partial class frmRadnikPrijemMainDashboard : Form
     {
-        private static frmRadnikPrijemMainDashboard _instance = null;
+        private static frmRadnikPrijemMainDashboard _instance;
         private readonly APIService _apiService;
 
         public static frmRadnikPrijemMainDashboard Instance

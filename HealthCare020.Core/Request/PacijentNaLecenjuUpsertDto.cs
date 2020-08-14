@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using HealthCare020.Core.ValidationAttributes;
+﻿using HealthCare020.Core.ValidationAttributes;
 
 namespace HealthCare020.Core.Request
 {

@@ -1,24 +1,24 @@
-﻿using System.Drawing;
+﻿using Healthcare020.WinUI.Forms;
+using System.Drawing;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms;
 
 namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    public partial class dlgPropmpt : Form
+    public sealed partial class dlgPropmpt : Form
     {
-        private static dlgPropmpt _instance = null;
+        private static dlgPropmpt _instance;
 
         private dlgPropmpt()
         {
             InitializeComponent();
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
+            Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
-            this.FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
 
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
-            this.BackColor=Color.Transparent;
-            this.TransparencyKey=Color.Transparent;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            TransparencyKey = Color.Transparent;
             pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
         }
 
@@ -39,7 +39,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private void dlgPropmpt_Load(object sender, System.EventArgs e)
         {
-            this.Dock = DockStyle.Fill;
+            Dock = DockStyle.Fill;
         }
 
         private void dlgPropmpt_Shown(object sender, System.EventArgs e)
@@ -51,7 +51,7 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private async void btnYes_Click(object sender, System.EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         private void pnlMain_MouseClick(object sender, MouseEventArgs e)

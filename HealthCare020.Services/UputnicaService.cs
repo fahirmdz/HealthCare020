@@ -86,13 +86,15 @@ namespace HealthCare020.Services
         public override async Task<ServiceResult> Delete(int id)
         {
             if(await _dbContext.ZahteviZaPregled.AnyAsync(x=>x.UputnicaId==id))
-                return ServiceResult.BadRequest($"Ne mozete brisati uputnicu sve dok ima zahteva za pregled koji su referencirani na nju.");
+                return ServiceResult.BadRequest("Ne mozete brisati uputnicu sve dok ima zahteva za pregled koji su referencirani na nju.");
 
             var getUputnicaResult = await GetUputnicaForManipulation(id);
             if (!getUputnicaResult.Succeeded)
                 return ServiceResult.WithStatusCode(getUputnicaResult.StatusCode, getUputnicaResult.Message);
 
             var uputnicaFromDb = getUputnicaResult.Data as Uputnica;
+            if(uputnicaFromDb==null)
+                return ServiceResult.NotFound();
 
             await Task.Run(() =>
             {
@@ -196,14 +198,14 @@ namespace HealthCare020.Services
         {
             var doktor = await _authService.GetCurrentLoggedInDoktor();
             if (doktor == null)
-                return ServiceResult.Forbidden($"Samo doktori mogu vrsiti izmene pregleda.");
+                return ServiceResult.Forbidden("Samo doktori mogu vrsiti izmene pregleda.");
 
             var uputnicaFromDb = await _dbContext.Uputnice.FindAsync(id);
             if (uputnicaFromDb == null)
                 return ServiceResult.NotFound($"Uputnica sa ID-em {id} nije pronadjen.");
 
             if (uputnicaFromDb.UputioDoktorId != doktor.Id)
-                return ServiceResult.Forbidden($"Nemate permisije za izmenu uputnica koje je kreirao drugi doktor.");
+                return ServiceResult.Forbidden("Nemate permisije za izmenu uputnica koje je kreirao drugi doktor.");
 
             return ServiceResult.OK(uputnicaFromDb);
         }

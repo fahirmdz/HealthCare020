@@ -31,9 +31,6 @@ namespace Healthcare020.Mobile.ViewModels
         public SettingsViewModel(IMapper mapper)
         {
             _mapper = mapper;
-            var FontAwesomeRegular = Application.Current.Resources["FontAwesomeRegular"] as OnPlatform<string>;
-
-
             var UserCircleIcon = IconFont.UserCircle.GetIcon(70);
             UserCircleIcon.Color = (Color) Application.Current.Resources[ResourceKeys.CustomNavyBlueDarkColor];
 
@@ -108,10 +105,6 @@ namespace Healthcare020.Mobile.ViewModels
                 if (imgSourceForProfilePic.IsEmpty)
                     imgSourceForProfilePic = IconFont.UserCircle.GetIcon();
                 ProfilePicImageSource = imgSourceForProfilePic;
-            }
-            else
-            {
-                return;
             }
         }
 

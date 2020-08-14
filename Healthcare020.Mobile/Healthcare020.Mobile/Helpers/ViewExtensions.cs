@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System.Windows.Controls;
 using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.Helpers

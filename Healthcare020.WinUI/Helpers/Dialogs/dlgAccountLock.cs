@@ -1,29 +1,29 @@
-﻿using System;
+﻿using Healthcare020.WinUI.Forms;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Healthcare020.WinUI.Forms;
 
 namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    public partial class dlgAccountLock : Form
+    public sealed partial class dlgAccountLock : Form
     {
-        private static dlgAccountLock _instance = null;
+        private static dlgAccountLock _instance;
         public int NumberOfHours = 2;
 
         private dlgAccountLock()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
+            Size = new Size(mainFormSize.Width - 14, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
 
             cmbBrojSati.Items.Add("2");
             cmbBrojSati.Items.Add("6");
             cmbBrojSati.Items.Add("18");
 
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor,true);
-            this.BackColor=Color.Transparent;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
             pnlMain.BackColor = Color.FromArgb(80, 0, 0, 0);
         }
 
@@ -46,9 +46,9 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
 
         private void dlgAccountLock_Load(object sender, EventArgs e)
         {
-            this.Dock = DockStyle.Fill;
-            this.CenterToParent();
-            this.BringToFront();
+            Dock = DockStyle.Fill;
+            CenterToParent();
+            BringToFront();
         }
 
         private void dlgAccountLock_Shown(object sender, EventArgs e)
@@ -62,22 +62,21 @@ namespace Healthcare020.WinUI.Helpers.Dialogs
             Dispose();
         }
 
-
-        private  void btnLockOk_Click(object sender, EventArgs e)
+        private void btnLockOk_Click(object sender, EventArgs e)
         {
             if (cmbBrojSati.SelectedIndex == -1)
             {
-                this.DialogResult = DialogResult.No;
+                DialogResult = DialogResult.No;
                 return;
             }
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
             NumberOfHours = int.Parse(cmbBrojSati.SelectedItem.ToString());
         }
 
         private void pnlMain_MouseClick(object sender, MouseEventArgs e)
         {
-            this.Close();
+            Close();
             Dispose();
         }
     }

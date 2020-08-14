@@ -1,5 +1,4 @@
-﻿using HealthCare020.Services.Security;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -7,7 +6,7 @@ namespace HealthCare020.Services.Services
 {
     public static class CryptographyHelper
     {
-        private static bool _optimalAsymmetricEncryptionPadding = false;
+        private static readonly bool _optimalAsymmetricEncryptionPadding = false;
 
         public static string Encrypt(this string plainText, string publicKeyXml, int keySize = 4096)
         {

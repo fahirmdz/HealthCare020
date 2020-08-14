@@ -5,7 +5,7 @@ namespace Healthcare020.LoggerService.Services
 {
     public  class LoggerManager:ILoggerManager
     {
-        private static ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public  void LogInfo(string message)
         {

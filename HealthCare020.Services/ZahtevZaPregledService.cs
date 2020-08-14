@@ -85,7 +85,7 @@ namespace HealthCare020.Services
 
             var pacijent = await _dbContext.Pacijenti.FirstOrDefaultAsync(x => x.KorisnickiNalogId == user.Id);
             if (pacijent == null)
-                return ServiceResult.Forbidden($"Samo pacijenti mogu kreirati zahtev za pregled.");
+                return ServiceResult.Forbidden("Samo pacijenti mogu kreirati zahtev za pregled.");
 
             if (await ValidateModel(dtoForCreation) is { } result && !result.Succeeded)
                 return ServiceResult.WithStatusCode(result.StatusCode, result.Message);
@@ -108,7 +108,7 @@ namespace HealthCare020.Services
         public override async Task<ServiceResult> Update(int id, ZahtevZaPregledUpsertDto dtoForUpdate)
         {
             if (!await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
-                return ServiceResult.Forbidden($"Samo pacijenti imaju pristup ovom resursu.");
+                return ServiceResult.Forbidden("Samo pacijenti imaju pristup ovom resursu.");
 
             var zahtevFromDb = await _dbContext.ZahteviZaPregled.FindAsync(id);
 

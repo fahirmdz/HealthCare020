@@ -1,33 +1,32 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Forms.AbstractForms;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Services;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmZdravstvenaStanja : DisplayDataForm<ZdravstvenoStanjeDto>
+    public sealed partial class frmZdravstvenaStanja : DisplayDataForm<ZdravstvenoStanjeDto>
     {
-        private static frmZdravstvenaStanja _instance = null;
-
+        private static frmZdravstvenaStanja _instance;
 
         public static frmZdravstvenaStanja Instance
         {
             get
             {
-                if(_instance==null || _instance.IsDisposed)
-                    _instance=new frmZdravstvenaStanja();
+                if (_instance == null || _instance.IsDisposed)
+                    _instance = new frmZdravstvenaStanja();
                 return _instance;
             }
         }
-        
-        private frmZdravstvenaStanja(ZdravstvenoStanjeDto zdravstvenoStanje=null)
-        {
 
+        private frmZdravstvenaStanja(ZdravstvenoStanjeDto zdravstvenoStanje = null)
+        {
             var ID = new DataGridViewTextBoxColumn
             {
                 Name = "ID",
@@ -39,7 +38,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             var Opis = new DataGridViewTextBoxColumn
             {
                 Name = "Opis",
-                HeaderText = "Opis",
+                HeaderText = Resources.Description,
                 ToolTipText = "Opis zdravstvenog stanja",
                 DataPropertyName = nameof(ZdravstvenoStanjeDto.Opis),
                 CellTemplate = new DataGridViewTextBoxCell()
@@ -47,18 +46,18 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             var Brisanje = new DataGridViewButtonColumn
             {
-                Name = "Brisanje",
-                HeaderText = "Brisanje",
+                Name = Resources.DeleteVerb,
+                HeaderText = Resources.DeleteVerb,
                 ToolTipText = "Izbriši zdravstveno stanje",
-                Text = "Izbriši",
+                Text = Resources.DeleteIt,
                 CellTemplate = new DataGridViewButtonCell { ToolTipText = "Izbriši zdravstveno stanje", UseColumnTextForButtonValue = true },
                 DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.Transparent, SelectionBackColor = Color.Transparent }
             };
 
             AddColumnsToMainDgrv(new DataGridViewColumn[] { ID, Opis, Brisanje });
             _apiService = new APIService(Routes.ZdravstvenaStanjaRoute);
-            Text = Properties.Resources.frmZdravstvenaStanja;
-            ResourceParameters = new ZdravstvenoStanjeResourceParameters{PageSize = PossibleRowsCount,PageNumber = 1};
+            Text = Resources.frmZdravstvenaStanja;
+            ResourceParameters = new ZdravstvenoStanjeResourceParameters { PageSize = PossibleRowsCount, PageNumber = 1 };
 
             InitializeComponent();
         }
@@ -68,7 +67,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             if (!(MainDgrv.CurrentRow?.DataBoundItem is ZdravstvenoStanjeDto zdravstvenoStanje))
                 return;
 
-            if (MainDgrv.Columns[e.ColumnIndex].Name == "Brisanje")
+            if (MainDgrv.Columns[e.ColumnIndex].Name == Resources.DeleteVerb)
             {
                 var prompDialog = dlgPropmpt.ShowDialog();
 
@@ -94,9 +93,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         protected override async void txtSearch_Leave(object sender, EventArgs e)
         {
             base.txtSearch_Leave(sender, e);
-            var resParams = ResourceParameters as ZdravstvenoStanjeResourceParameters;
 
-            if (SearchText.ToLower() != resParams.Opis)
+            if (ResourceParameters is ZdravstvenoStanjeResourceParameters resParams && SearchText.ToLower() != resParams.Opis)
             {
                 resParams.Opis = SearchText;
                 await LoadData();
@@ -105,7 +103,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(MainDgrv?.CurrentRow?.DataBoundItem is ZdravstvenoStanjeDto zdravstvenoStanje)
+            if (MainDgrv?.CurrentRow?.DataBoundItem is ZdravstvenoStanjeDto zdravstvenoStanje)
             {
                 frmNewZdravstvenoStanje.ShowDialogWithData(zdravstvenoStanje);
             }

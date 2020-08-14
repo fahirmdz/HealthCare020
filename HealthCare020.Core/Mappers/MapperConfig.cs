@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Linq;
-using AutoMapper;
 using AutoMapper.Configuration;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;

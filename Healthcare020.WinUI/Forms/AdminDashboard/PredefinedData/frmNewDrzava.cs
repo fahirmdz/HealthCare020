@@ -10,7 +10,7 @@ using Healthcare020.WinUI.Services;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmNewDrzava : Form
+    public sealed partial class frmNewDrzava : Form
     {
         private static frmNewDrzava _instance;
         private readonly APIService _apiService;
@@ -39,7 +39,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         {
             Drzava = drzava;
             InitializeComponent();
-            this.Text = Drzava != null ? Properties.Resources.frmNewDrzavaUpdate : Properties.Resources.frmNewDrzavaAdd;
+            Text = Drzava != null ? Properties.Resources.frmNewDrzavaUpdate : Properties.Resources.frmNewDrzavaAdd;
             _apiService = new APIService(Routes.DrzaveRoute);
         }
 

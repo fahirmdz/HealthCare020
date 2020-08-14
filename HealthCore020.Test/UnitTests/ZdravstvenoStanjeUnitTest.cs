@@ -23,7 +23,7 @@ namespace HealthCore020.Test.UnitTests
         {
             _dbContext = DbService.Instance.GetDbContext();
             _service = new ZdravstvenoStanjeService(
-                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Services.Mappers.Mapper()))),
+                new Mapper(new MapperConfiguration(cfg => cfg.AddProfile(new HealthCare020.Core.Mappers.Mapper()))),
                 _dbContext,
                 new PropertyMappingService(),
                 new PropertyCheckerService(),

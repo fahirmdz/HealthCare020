@@ -6,7 +6,7 @@ namespace HealthCare020.Services.Services
 {
     public class PropertyMapping<TSource, TDestination> : IPropertyMapping
     {
-        public Dictionary<string, PropertyMappingValue> MappingDictionary { get; private set; }
+        public Dictionary<string, PropertyMappingValue> MappingDictionary { get; }
 
         public PropertyMapping(Dictionary<string, PropertyMappingValue> mappingDictionary)
         {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace HealthCare020.API.Controllers
 {
     [ApiController]
-    public class BaseController<TEntity, TDto, TDtoEagerLoaded, TResourceParameters> : ControllerBase where TResourceParameters : BaseResourceParameters
+    public class BaseController<TEntity, TResourceParameters> : ControllerBase where TResourceParameters : BaseResourceParameters
     {
         private readonly IService<TEntity, TResourceParameters> _service;
 
@@ -29,11 +29,14 @@ namespace HealthCare020.API.Controllers
             if (!result.Succeeded)
                 return WithStatusCode(result.StatusCode, result.Message);
 
-            var resultSequence = result.Data as SequenceResult;
+            if (result.Data is SequenceResult resultSequence)
+            {
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultSequence.PaginationMetadata));
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(resultSequence.PaginationMetadata));
+                return Ok(resultSequence.Data);
+            }
 
-            return Ok(resultSequence.Data);
+            return Ok(result.Data);
         }
 
         [HttpGet("{id}")]
@@ -66,82 +69,12 @@ namespace HealthCare020.API.Controllers
                 case HttpStatusCode.Unauthorized:
                     return Unauthorized();
 
-               case HttpStatusCode.BadRequest:
+                case HttpStatusCode.BadRequest:
                     return BadRequest(message);
-               default:
-                   return StatusCode((int) statusCode);
+
+                default:
+                    return StatusCode((int)statusCode);
             }
-        }
-
-        //----HATEOAS support----
-        //protected virtual string CreateResourceUri(TResourceParameters resourceParameters, ResourceUriType type)
-        //{
-        //    var resourceParams = new BaseResourceParameters
-        //    {
-        //        Fields = resourceParameters.Fields,
-        //        OrderBy = resourceParameters.OrderBy,
-        //        PageSize = resourceParameters.PageSize,
-        //        PageNumber = resourceParameters.PageNumber
-        //    };
-
-        //    switch (type)
-        //    {
-        //        case ResourceUriType.PreviousPage:
-        //            resourceParams.PageNumber -= 1;
-        //            break;
-
-        //        case ResourceUriType.NextPage:
-        //            resourceParams.PageNumber += 1;
-        //            break;
-        //    }
-
-        //    return Url.Link("GetAll", resourceParams);
-        //}
-
-        //private IEnumerable<LinkDto> CreateLinksForResource(int id, string fields)
-        //{
-        //    var links = new List<LinkDto>();
-
-        //    if (string.IsNullOrWhiteSpace(fields))
-        //    {
-        //        links.Add(new LinkDto(Url.Link("GetById", new { id = id }), "self", "GET"));
-        //    }
-        //    else
-        //    {
-        //        links.Add(new LinkDto(Url.Link("GetById", new { id, fields }), "self", "GET"));
-        //    }
-
-        //    return links;
-        //}
-
-        //protected IEnumerable<LinkDto> CreateLinksForResources(TResourceParameters resourceParameters, bool hasNext, bool hasPrevious)
-        //{
-        //    var links = new List<LinkDto>();
-
-        //    //self
-        //    links.Add(new LinkDto(CreateResourceUri(resourceParameters, ResourceUriType.CurrentPage), "self", "GET"));
-
-        //    if (hasNext)
-        //    {
-        //        links.Add(new LinkDto(CreateResourceUri(resourceParameters, ResourceUriType.NextPage), "nextPage", "GET"));
-        //    }
-
-        //    if (hasPrevious)
-        //    {
-        //        links.Add(new LinkDto(CreateResourceUri(resourceParameters, ResourceUriType.PreviousPage), "previousPage", "GET"));
-        //    }
-
-        //    return links;
-        //}
-
-        /// <summary>
-        /// Get the value of EagerLoad property from ResourceParameters if it exists.
-        /// </summary>
-        protected bool ShouldEagerLoad(TResourceParameters resourceParameters)
-        {
-            var eagerLoadedProp = resourceParameters?.GetType().GetProperty("EagerLoaded")?.GetValue(resourceParameters);
-
-            return eagerLoadedProp != null && (bool)eagerLoadedProp;
         }
     }
 }

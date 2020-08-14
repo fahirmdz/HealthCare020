@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SplashScreenPage : ContentPage
+    public partial class SplashScreenPage
     {
         public BaseViewModel BaseVM { get; set; }
 

@@ -42,7 +42,7 @@ namespace HealthCare020.Services
                 if (!await _dbContext.Radnici
                     .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.LicniPodaciId == id))
                 {
-                    return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih uposlenika.");
+                    return ServiceResult.Forbidden("Nemate permisije za pristup licnim podacima drugih uposlenika.");
                 }
             }
             else if (await _authService.CurrentUserIsInRoleAsync(RoleType.Pacijent))
@@ -51,7 +51,7 @@ namespace HealthCare020.Services
                         .Include(x => x.ZdravstvenaKnjizica)
                         .AnyAsync(x => x.KorisnickiNalogId == user.Id && x.ZdravstvenaKnjizica.LicniPodaciId == id))
                 {
-                    return ServiceResult.Forbidden($"Nemate permisije za pristup licnim podacima drugih pacijenata.");
+                    return ServiceResult.Forbidden("Nemate permisije za pristup licnim podacima drugih pacijenata.");
                 }
             }
 
@@ -141,7 +141,7 @@ namespace HealthCare020.Services
                 return ServiceResult.NotFound($"Grad sa ID-em {dto.GradId} nije pronadjen");
 
             if (await _dbContext.LicniPodaci.AnyAsync(x =>x.Id != id &&  x.JMBG == dto.JMBG))
-                return ServiceResult.BadRequest($"Vec postoji korisnik sa istim JMBG.");
+                return ServiceResult.BadRequest("Vec postoji korisnik sa istim JMBG.");
 
             if (await _dbContext.LicniPodaci.AnyAsync(x => x.Id != id && x.BrojTelefona == dto.BrojTelefona.Trim()))
                 return ServiceResult.BadRequest($"Vec postoji korisnik koji koristi broj telefona -> {dto.BrojTelefona}");

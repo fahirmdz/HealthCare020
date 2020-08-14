@@ -8,7 +8,6 @@ namespace Healthcare020.Mobile.Controls
     public class CustomPicker : Picker
     {
         public static string PickerIsReady = "Ready";
-        public static string PickerIsNotReady = "NotReady";
 
         protected override void OnPropertyChanged(string propertyName = null)
         {

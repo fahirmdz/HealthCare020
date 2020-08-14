@@ -5,7 +5,7 @@ namespace Healthcare020.Mobile.Helpers
 {
     public static class ViewModelLocator
     {
-        private static ILocator Locator = Bootstrap.GetLocator();
+        private static readonly ILocator Locator = Bootstrap.GetLocator();
 
         static ViewModelLocator()
         {

@@ -52,10 +52,7 @@
                         TextColor="{StaticResource LightSmokeWhite}"
                         VerticalOptions="Center" />
 
-                    <Frame
-                        Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        VerticalOptions="FillAndExpand">
+                    <Frame BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
                         <Image Aspect="AspectFill" Source="{StaticResource Logo}" />
                     </Frame>
                 </Grid>
@@ -94,7 +91,6 @@
                             Text="{x:Static resources:AppResources.ZdravstvenoStanje}" />
 
                         <Label
-                            Grid.Column="1"
                             FontSize="{StaticResource FontSize-Medium}"
                             HorizontalOptions="Center"
                             Text="{Binding ZdravstvenoStanje}" />

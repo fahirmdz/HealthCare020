@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 namespace Healthcare020.Mobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BaseValidationContentPage : ContentPage
+    public partial class BaseValidationContentPage
     {
         /// <summary>
         /// Base validation view model (need to set on start)
@@ -81,7 +81,7 @@ namespace Healthcare020.Mobile.Views
             if (BaseValidationVM == null)
                 return false;
 
-            var invisibleEntries = FormBody.Children.OfType<Entry>()?.Where(x => !x.IsVisible);
+            var invisibleEntries = FormBody.Children.OfType<Entry>().Where(x => !x.IsVisible);
 
             //Remove errors for invisible entries (IsValidModel will be set based on errors value)
             BaseValidationVM.Errors =

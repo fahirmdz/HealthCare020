@@ -6,10 +6,6 @@ namespace HealthCore020.Test
 {
     public class HealthCore020DataDBInitializer
     {
-        public HealthCore020DataDBInitializer()
-        {
-        }
-
         public static void Seed_ZdravstvenoStanje(HealthCare020DbContext context)
         {
             context.Database.EnsureDeleted();

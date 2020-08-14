@@ -34,7 +34,7 @@ namespace HealthCare020.Services.Helpers
 
                 //remove " asc"  or " desc"  from the orderByClause,
                 //so we get the property name to look for in the mapping dictionary
-                var indexOfFirstSpace = trimmedOrderByClause.IndexOf(" ");
+                var indexOfFirstSpace = trimmedOrderByClause.IndexOf(" ", StringComparison.Ordinal);
                 var propertyName = indexOfFirstSpace == -1
                     ? trimmedOrderByClause
                     : trimmedOrderByClause.Remove(indexOfFirstSpace);

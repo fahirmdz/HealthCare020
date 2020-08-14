@@ -20,10 +20,7 @@
             DatumVreme = zahtevZaPregled.DatumVreme;
             Pacijent=new PacijentDtoEL(zahtevZaPregled.Pacijent);
             Doktor = zahtevZaPregled.Doktor;
-            if (zahtevZaPregled.Uputnica != null)
-                Uputnica = new UputnicaDtoEL(zahtevZaPregled.Uputnica);
-            else
-                Uputnica = null;
+            Uputnica = zahtevZaPregled.Uputnica != null ? new UputnicaDtoEL(zahtevZaPregled.Uputnica) : null;
         }
     }
 }

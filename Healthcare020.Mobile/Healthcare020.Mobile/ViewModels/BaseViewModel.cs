@@ -1,21 +1,17 @@
 ﻿using Acr.UserDialogs;
-using Healthcare020.Mobile.Models;
-using Healthcare020.Mobile.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
 namespace Healthcare020.Mobile.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-        public string LoadingMessage { get; set; }= string.Empty;
+        public string LoadingMessage { get; set; } = string.Empty;
 
         protected bool EnabledLoadingSpinner = false;
-        private bool isBusy = false;
+        private bool isBusy;
 
         public bool IsBusy
         {
@@ -61,13 +57,10 @@ namespace Healthcare020.Mobile.ViewModels
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
-            if (changed == null)
-                return;
 
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            changed?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion INotifyPropertyChanged
-
     }
 }

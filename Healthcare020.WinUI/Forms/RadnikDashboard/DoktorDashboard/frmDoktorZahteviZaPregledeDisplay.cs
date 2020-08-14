@@ -11,7 +11,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmDoktorZahteviZaPregledeDisplay : DisplayDataForm<ZahtevZaPregledDtoEL>
     {
-        private static frmDoktorZahteviZaPregledeDisplay _instance = null;
+        private static frmDoktorZahteviZaPregledeDisplay _instance;
 
         private frmDoktorZahteviZaPregledeDisplay()
         {
@@ -46,7 +46,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 CellTemplate = new DataGridViewTextBoxCell()
             };
 
-            base.AddColumnsToMainDgrv(new[] { ID, Pacijent, IsObradjen, DatumVreme });
+            AddColumnsToMainDgrv(new[] { ID, Pacijent, IsObradjen, DatumVreme });
 
             _apiService = new APIService(Routes.ZahteviZaPregledRoute);
             ResourceParameters = new ZahtevZaPregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };

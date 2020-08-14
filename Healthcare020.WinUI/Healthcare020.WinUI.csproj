@@ -435,7 +435,6 @@
     <Compile Include="Helpers\DynamicTypesExntesions.cs" />
     <Compile Include="Helpers\FormExtensions.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
-    <Compile Include="Helpers\StyleExtensions.cs" />
     <Compile Include="Forms\KorisnickiNalog\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -523,9 +522,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KorisnickiNalog\frmUserProfile.resx">
       <DependentUpon>frmUserProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AbstractForms\StatisticChartForm.resx">
-      <DependentUpon>StatisticChartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RadnikDashboard\DoktorDashboard\frmDoktorMainDashboard.resx">
       <DependentUpon>frmDoktorMainDashboard.cs</DependentUpon>

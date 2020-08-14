@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    partial class frmZdravstvenaStanja
+    sealed partial class frmZdravstvenaStanja
     {
         /// <summary>
         /// Required designer variable.

@@ -6,8 +6,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 {
     public partial class frmRadnikPrijemDataDisplay : Form
     {
-        private static frmRadnikPrijemDataDisplay _instance = null;
-        private Form DataForm;
+        private static frmRadnikPrijemDataDisplay _instance;
+        private readonly Form DataForm;
 
         /// <summary>
         /// Get instance of form

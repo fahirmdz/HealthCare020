@@ -1,19 +1,19 @@
-﻿using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Models;
-using Healthcare020.WinUI.Services;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 {
-    public partial class frmNewZdravstvenoStanje : Form
+    public sealed partial class frmNewZdravstvenoStanje : Form
     {
-        private static frmNewZdravstvenoStanje _instance = null;
-        private APIService _apiService;
+        private static frmNewZdravstvenoStanje _instance;
+        private readonly APIService _apiService;
         private ZdravstvenoStanjeDto ZdravstvenoStanje;
 
         public new static frmNewZdravstvenoStanje ShowDialog()
@@ -51,19 +51,19 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             Text = ZdravstvenoStanje == null ? Properties.Resources.frmNewZdravstvenoStanjeAdd : Properties.Resources.frmNewZdravstvenoStanjeUpdate;
 
             var mainFormSize = MainForm.Instance.Size;
-            this.Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
+            Size = new Size(mainFormSize.Width - 16, mainFormSize.Height - 14);
             pnlMain.MinimumSize = Size;
-            this.FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
 
-            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            this.BackColor = Color.Transparent;
-            this.TransparencyKey = Color.Transparent;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            TransparencyKey = Color.Transparent;
             pnlMain.BackColor = Color.FromArgb(125, 0, 0, 0);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            //IGNORE 
+            //IGNORE
         }
 
         private void frmNewZdravstvenoStanje_Shown(object sender, System.EventArgs e)
@@ -73,7 +73,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private void btnClose_Click(object sender, System.EventArgs e)
         {
-            this.Close();
+            Close();
             Dispose();
         }
 
@@ -83,7 +83,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             {
                 APIServiceResult<ZdravstvenoStanjeDto> result;
                 var upsertDto = new ZdravstvenoStanjeUpsertDto
-                    {Opis = txtOpis.Text};
+                { Opis = txtOpis.Text };
 
                 if (ZdravstvenoStanje == null)
                     result = await _apiService.Post<ZdravstvenoStanjeDto>(upsertDto);
@@ -97,7 +97,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
                     dlgSuccess.ShowDialog();
                     Close();
-                     await frmZdravstvenaStanja.Instance.RefreshData();
+                    await frmZdravstvenaStanja.Instance.RefreshData();
                 }
             }
 
@@ -105,16 +105,15 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             Dispose();
         }
 
-
         private bool ValidateInput()
         {
-            if(string.IsNullOrWhiteSpace(txtOpis.Text))
+            if (string.IsNullOrWhiteSpace(txtOpis.Text))
             {
                 Errors.SetError(txtOpis, Properties.Resources.RequiredField);
                 return false;
             }
 
-            if(txtOpis.Text.Any(char.IsDigit))
+            if (txtOpis.Text.Any(char.IsDigit))
             {
                 Errors.SetError(txtOpis, Properties.Resources.InvalidFormat);
                 return false;

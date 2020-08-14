@@ -10,8 +10,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 {
     public partial class frmPosetaOverview : Form
     {
-        private static frmPosetaOverview _instance = null;
-        private ZahtevZaPosetuDtoEL ZahtevZaPosetu;
+        private static frmPosetaOverview _instance;
+        private readonly ZahtevZaPosetuDtoEL ZahtevZaPosetu;
 
         private readonly APIService _apiService;
 
@@ -34,7 +34,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
             return _instance;
         }
 
-        private void frmPosetaOverview_Load(object sender, System.EventArgs e)
+        private void frmPosetaOverview_Load(object sender, EventArgs e)
         {
             txtPacijent.Text = ZahtevZaPosetu.PacijentNaLecenju.ImePrezime;
             txtDatumZahteva.Text = ZahtevZaPosetu.DatumVremeKreiranja.ToString("g");
@@ -43,8 +43,11 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 
             if (ZahtevZaPosetu.IsObradjen)
             {
-                dateZakazaniDatum.Value = ZahtevZaPosetu.ZakazanoDatumVreme.Value;
-                timeZakazanoVreme.Value = ZahtevZaPosetu.ZakazanoDatumVreme.Value;
+                if (ZahtevZaPosetu.ZakazanoDatumVreme != null)
+                {
+                    dateZakazaniDatum.Value = ZahtevZaPosetu.ZakazanoDatumVreme.Value;
+                    timeZakazanoVreme.Value = ZahtevZaPosetu.ZakazanoDatumVreme.Value;
+                }
             }
             else
             {

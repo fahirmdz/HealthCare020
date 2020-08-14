@@ -2,7 +2,7 @@
 
 namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    partial class dlgAccountLock
+    sealed partial class dlgAccountLock
     {
         /// <summary>
         /// Required designer variable.

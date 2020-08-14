@@ -33,7 +33,7 @@ namespace HealthCare020.Services
                 return ServiceResult.NotFound($"Zdravstveno stanje sa ID-em {id} nije pronadjeno");
 
             if (await _dbContext.LekarskaUverenja.AnyAsync(x => x.ZdravstvenoStanjeId == id))
-                return ServiceResult.BadRequest($"Ne mozete brisati zdravstveno stanje, sve dok ima lekarskih uverenja na kojima je referencirano");
+                return ServiceResult.BadRequest("Ne mozete brisati zdravstveno stanje, sve dok ima lekarskih uverenja na kojima je referencirano");
 
             await Task.Run(() =>
             {

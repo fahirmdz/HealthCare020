@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.Design;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace HealthCare020.Core.Configuration
 {

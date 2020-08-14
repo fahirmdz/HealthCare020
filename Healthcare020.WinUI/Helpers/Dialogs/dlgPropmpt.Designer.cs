@@ -2,7 +2,7 @@
 
 namespace Healthcare020.WinUI.Helpers.Dialogs
 {
-    partial class dlgPropmpt
+    sealed partial class dlgPropmpt
     {
         /// <summary>
         /// Required designer variable.

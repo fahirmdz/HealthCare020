@@ -10,7 +10,7 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
         {
             var g = new GraphicsPath();
             g.AddEllipse(0, 0, ClientSize.Width, ClientSize.Height);
-            this.Region = new Region(g);
+            Region = new Region(g);
             base.OnPaint(pe);
         }
     }

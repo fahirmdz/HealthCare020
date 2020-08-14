@@ -1,6 +1,6 @@
 ﻿namespace Healthcare020.WinUI.Forms
 {
-    partial class MainForm
+    sealed partial class MainForm
     {
         /// <summary>
         /// Required designer variable.

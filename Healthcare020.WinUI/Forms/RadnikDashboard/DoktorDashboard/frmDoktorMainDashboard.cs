@@ -5,7 +5,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
     public partial class frmDoktorMainDashboard : Form
     {
-        private static frmDoktorMainDashboard _instance = null;
+        private static frmDoktorMainDashboard _instance;
 
         public static frmDoktorMainDashboard Instance
         {

@@ -5,9 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customViews="clr-namespace:Healthcare020.Mobile.CustomViews;assembly=Healthcare020.Mobile"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:entities="clr-namespace:HealthCare020.Core.Entities;assembly=HealthCare020.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:Healthcare020.Mobile.ViewModels;assembly=Healthcare020.Mobile"
     mc:Ignorable="d">
 
     <ContentPage.Content>

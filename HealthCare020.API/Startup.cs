@@ -22,7 +22,6 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 
 namespace HealthCare020.API
 {
@@ -47,7 +46,7 @@ namespace HealthCare020.API
             services.ConfigureLoggerService();
             services.AddDbContext<HealthCare020DbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-                    .EnableSensitiveDataLogging(true));
+                    .EnableSensitiveDataLogging());
 
             services.AddSwaggerGen(x =>
             {
@@ -125,7 +124,7 @@ namespace HealthCare020.API
                 {
                     config.InvalidModelStateResponseFactory = context =>
                     {
-                        var detailsString =string.Empty;
+                        var detailsString = string.Empty;
 
                         foreach (var modelState in context.ModelState.Values)
                         {

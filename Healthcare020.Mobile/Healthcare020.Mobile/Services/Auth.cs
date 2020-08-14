@@ -64,8 +64,7 @@ namespace Healthcare020.Mobile.Services
                     await SecureStorage.SetAsync(PreferencesKeys.HasSavedLoginCredentials, true.ToString());
                 }
 
-                var responseToken =
-                    await GetTokenAndSetAccessTokenAsync(GetTokenEndpointCredentialsRequestBodyContent(username, password));
+                await GetTokenAndSetAccessTokenAsync(GetTokenEndpointCredentialsRequestBodyContent(username, password));
 
                 return await SetCurrentKorisnickiNalog();
             }
@@ -84,7 +83,7 @@ namespace Healthcare020.Mobile.Services
         {
             try
             {
-                var responseToken = await GetTokenAndSetAccessTokenAsync(GetTokenEndpointFaceRecognitionRequestBodyContent(image), AuthType.FaceID);
+                await GetTokenAndSetAccessTokenAsync(GetTokenEndpointFaceRecognitionRequestBodyContent(image), AuthType.FaceID);
 
                 return await SetCurrentKorisnickiNalog();
             }
@@ -137,8 +136,8 @@ namespace Healthcare020.Mobile.Services
         {
             var authenticated = AccessToken != null;
 
-            if(setLoginPage && !authenticated)
-                Application.Current.MainPage=new LoginPage();
+            if (setLoginPage && !authenticated)
+                Application.Current.MainPage = new LoginPage();
             return authenticated;
         }
 
@@ -179,7 +178,7 @@ namespace Healthcare020.Mobile.Services
                     Image = Convert.ToBase64String(image),
                     Scope = "openid offline_access face-recognition"
                 };
-                var content =new StringContent(JsonConvert.SerializeObject(requestBody));
+                var content = new StringContent(JsonConvert.SerializeObject(requestBody));
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 return content;
             }
@@ -189,10 +188,11 @@ namespace Healthcare020.Mobile.Services
             }
         }
 
-        private static async Task<TokenResponse> GetTokenAndSetAccessTokenAsync(HttpContent content, AuthType authType = AuthType.Credentials)
+        private static async Task GetTokenAndSetAccessTokenAsync(HttpContent content,
+            AuthType authType = AuthType.Credentials)
         {
             if (content == null)
-                return null;
+                return;
 
             string uri = authType == AuthType.Credentials ? AppResources.IdpTokenEndpoint : AppResources.IdpTokenEndpointFaceId;
 
@@ -219,18 +219,17 @@ namespace Healthcare020.Mobile.Services
                     if (tokenResponse != null && !string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
                     {
                         AccessToken = tokenResponse.AccessToken.ConvertToSecureString();
-                        return tokenResponse;
+                        return;
                     }
                 }
 
-                var error = await response.Content.ReadAsStringAsync();
+                await response.Content.ReadAsStringAsync();
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
-                return null;
+                return;
             }
             catch (Exception ex)
             {
-                var responseString = await response.Content.ReadAsStringAsync();
-                return null;
+                return;
             }
         }
 

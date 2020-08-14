@@ -217,10 +217,13 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\security.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\edit_profile.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionHealthcare020MobileAndroidHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionHealthcare020MobileAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadUnhandledDeviceExceptionHealthcare020MobileAndroidHideInfoBar="True" XamarinHotReloadDebuggerTimeoutExceptionHealthcare020MobileAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
