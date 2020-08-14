@@ -51,6 +51,9 @@ namespace Healthcare020.WinUI.Helpers
                 var client = new OAuth2Client(new Uri(Settings.Default.IdpTokenEndpoint), Settings.Default.IdpClientId,
                     Settings.Default.IdpClientSecret);
                 var tokens = client.RequestAccessTokenUserName(username, password, string.Empty);
+                if (tokens?.AccessToken == null)
+                    return false;
+
                 AccessToken = new NetworkCredential(string.Empty, tokens.AccessToken).SecurePassword;
 
                 var apiSerivce = new APIService(Routes.KorisniciRoute);

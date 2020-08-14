@@ -124,6 +124,10 @@ namespace HealthCare020.Services
                     result = result.Where(x =>
                         x.Radnik.KorisnickiNalog.Username.ToLower().StartsWith(resourceParameters.Username.ToLower()));
 
+                if (resourceParameters.KorisnickiNalogId.HasValue && await result.AnyAsync())
+                {
+                    result = result.Where(x => x.Radnik.KorisnickiNalogId == resourceParameters.KorisnickiNalogId);
+                }
                 result = result.Include(x => x.Radnik.LicniPodaci);
             }
 

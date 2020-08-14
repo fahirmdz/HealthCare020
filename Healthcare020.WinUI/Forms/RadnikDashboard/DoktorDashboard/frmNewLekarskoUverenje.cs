@@ -116,7 +116,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             cmbZdravstvenoStanje.DataSource = result.Data;
             cmbZdravstvenoStanje.ValueMember = nameof(ZdravstvenoStanjeDto.Id);
             cmbZdravstvenoStanje.DisplayMember = nameof(ZdravstvenoStanjeDto.Opis);
-            cmbZdravstvenoStanje.SelectedIndex = LekarskoUverenje?.ZdravstvenoStanje.Id ?? 0;
+            cmbZdravstvenoStanje.SelectedValue = LekarskoUverenje?.ZdravstvenoStanje?.Id??0;
         }
 
         private bool ValidateInputs()

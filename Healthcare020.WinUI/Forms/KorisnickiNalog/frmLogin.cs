@@ -45,6 +45,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         {
             KeyPreview = true;
             pnlBody.BringToFront();
+            txtUsername.Focus();
         }
 
         private void frmLogin_Resize(object sender, EventArgs e)

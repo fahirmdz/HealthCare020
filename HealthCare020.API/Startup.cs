@@ -117,8 +117,6 @@ namespace HealthCare020.API
                 .AddNewtonsoftJson(setupAction =>
                 {
                     //Input and output JSON formatters
-                    setupAction.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-                    setupAction.SerializerSettings.MaxDepth = 1;
                     setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 })
                 .AddXmlDataContractSerializerFormatters()

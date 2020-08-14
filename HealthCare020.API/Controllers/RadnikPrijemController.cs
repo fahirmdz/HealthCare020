@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HealthCare020.API.Constants;
+﻿using HealthCare020.API.Constants;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Models;
@@ -9,14 +8,27 @@ using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HealthCare020.API.Controllers
 {
-    [Route("api/"+Routes.RadniciPrijemRoute)]
-    public class RadnikPrijemController : BaseCRUDController<RadnikPrijem, RadnikPrijemDtoLL,RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto>
+    [Route("api/" + Routes.RadniciPrijemRoute)]
+    public class RadnikPrijemController : BaseCRUDController<RadnikPrijem, RadnikPrijemDtoLL, RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto>
     {
         public RadnikPrijemController(ICRUDService<RadnikPrijem, RadnikPrijemDtoLL, RadnikPrijemDtoEL, RadnikPrijemResourceParameters, RadnikPrijemUpsertDto, RadnikPrijemUpsertDto> crudService) : base(crudService)
         {
+        }
+
+        [Authorize]
+        public override async Task<IActionResult> Get(RadnikPrijemResourceParameters resourceParameters)
+        {
+            return await base.Get(resourceParameters);
+        }
+
+        [Authorize]
+        public override async Task<IActionResult> GetById(int id, bool? EagerLoaded)
+        {
+            return await base.GetById(id, EagerLoaded);
         }
 
         [Authorize(AuthorizationPolicies.AdministratorPolicy)]

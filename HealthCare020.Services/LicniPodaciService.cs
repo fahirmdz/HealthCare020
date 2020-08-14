@@ -34,6 +34,10 @@ namespace HealthCare020.Services
         public override async Task<ServiceResult> GetById(int id, bool EagerLoaded)
         {
             var user = await _authService.LoggedInUser();
+            if (user == null)
+            {
+                return ServiceResult.Unauthorized();
+            }
 
             if (await _authService.CurrentUserIsInRoleAsync(RoleType.RadnikPrijem) ||
                 await _authService.CurrentUserIsInRoleAsync(RoleType.MedicinskiTehnicar) ||
@@ -86,6 +90,11 @@ namespace HealthCare020.Services
 
         public override async Task<ServiceResult> Update(int id, LicniPodaciUpsertDto request)
         {
+            if (!await _authService.IsAuthenticated())
+            {
+                return ServiceResult.Unauthorized();
+            }
+
             if (await ValidateModel(request,id) is { } validationResult && !validationResult.Succeeded)
                 return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
 

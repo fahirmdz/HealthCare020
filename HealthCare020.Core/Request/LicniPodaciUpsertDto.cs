@@ -42,7 +42,6 @@ namespace HealthCare020.Core.Request
         [RequiredWithMessage]
         public int GradId { get; set; }
 
-        [RequiredWithMessage]
         public byte[] ProfilePicture { get; set; }
     }
 }

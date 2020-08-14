@@ -418,7 +418,13 @@ namespace Healthcare020.WinUI.Services
                             dlgError.ShowDialog(await response.Content?.ReadAsStringAsync() ?? string.Empty);
                     }
                     else if ((int)response.StatusCode == 422)
-                        dlgError.ShowDialog(Resources.InvalidInputData);
+                    {
+                        var msg = Resources.InvalidInputData;
+
+                        if (response.Content != null)
+                            msg = await response.Content.ReadAsStringAsync();
+                        dlgError.ShowDialog(msg);
+                    }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }
@@ -472,7 +478,13 @@ namespace Healthcare020.WinUI.Services
                         dlgError.ShowDialog(msg);
                     }
                     else if ((int)response.StatusCode == 422)
-                        dlgError.ShowDialog(Resources.InvalidInputData);
+                    {
+                        var msg = Resources.InvalidInputData;
+
+                        if (response.Content != null)
+                            msg = await response.Content.ReadAsStringAsync();
+                        dlgError.ShowDialog(msg);
+                    }
 
                     return APIServiceResult<T>.WithStatusCode(response.StatusCode);
                 }

@@ -3,8 +3,6 @@ using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using System.Windows.Forms;
-using HealthCare020.Core.Request;
-using Healthcare020.WinUI.Helpers.Dialogs;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
 {
@@ -20,6 +18,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
             ZahtevZaPosetu = zahtevZaPosetu;
             _apiService = new APIService(Routes.ZahtevZaPosetuRoute);
             InitializeComponent();
+            dateZakazaniDatum.Enabled = timeZakazanoVreme.Enabled = false;
         }
 
         public static frmPosetaOverview InstanceWithData(ZahtevZaPosetuDtoEL zahtevZaPosetu, bool newInstance = false)
@@ -55,19 +54,6 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
                 timeZakazanoVreme.MinDate=DateTime.Now;
             }
 
-        }
-
-        private async void btnSave_Click(object sender, EventArgs e)
-        {
-            var dateTimeForUpdating=new DateTime(dateZakazaniDatum.Value.Year,dateZakazaniDatum.Value.Month,dateZakazaniDatum.Value.Day,timeZakazanoVreme.Value.Hour,timeZakazanoVreme.Value.Minute,0);
-
-
-            var result = await _apiService.PartiallyUpdate<ZahtevZaPosetuDtoLL>(ZahtevZaPosetu.Id, new[]{new JsonPatchDto("replace","/ZakazanoDatumVreme", dateTimeForUpdating)});
-
-            ZahtevZaPosetu.ZakazanoDatumVreme = dateTimeForUpdating;
-
-            if(result.Succeeded)
-                dlgSuccess.ShowDialog();
         }
     }
 }
