@@ -1,7 +1,6 @@
 ﻿using Healthcare020.Mobile.Constants;
 using Healthcare020.Mobile.Resources;
 using Healthcare020.Mobile.Services;
-using Healthcare020.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -13,8 +12,6 @@ namespace Healthcare020.Mobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PacijentDasbhboardTabbedPage
     {
-        public BaseViewModel BaseVM;
-
         public PacijentDasbhboardTabbedPage()
         {
             InitializeComponent();

@@ -28,7 +28,7 @@ namespace Healthcare020.Mobile.Views
             base.OnAppearing();
 
             //Animation displaying
-            await Task.Delay(5000);
+            await Task.Delay(4000);
 
             if (await SecureStorage.GetAsync(PreferencesKeys.HasSavedLoginCredentials) is { } val && val == true.ToString())
             {

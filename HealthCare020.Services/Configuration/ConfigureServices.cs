@@ -5,9 +5,6 @@ using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
 using HealthCare020.Services.Interfaces;
 using HealthCare020.Services.Services;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,14 +14,6 @@ namespace HealthCare020.Services.Configuration
     {
         public static void AddHealthCare020Services(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDataProtection()
-                .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration
-                {
-                    EncryptionAlgorithm = EncryptionAlgorithm.AES_256_GCM,
-                    ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
-                });
-
-            services.AddScoped<ICipherService, CipherService>();
             services.AddScoped<IFaceRecognitionService, FaceRecognitionService>();
 
             services.Configure<ServicesConfiguration>(Configuration.GetSection("ServicesConfiguration"));

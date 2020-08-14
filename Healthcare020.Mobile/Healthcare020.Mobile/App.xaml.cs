@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthCare020.Core.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -29,11 +30,11 @@ namespace Healthcare020.Mobile
             InitializeComponent();
             LoadStyles();
 
-            Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental" });
+            Device.SetFlags(new[] { "Shapes_Experimental", "MediaElement_Experimental", "Expander_Experimental","CarouselView_Experimental" });
+            //if (!Auth.IsAuthenticated())
+            //    Task.Run(async()=> await Auth.AuthenticateWithPassword("fahirmdz", "testtest")).Wait();
 
-            if (!Auth.IsAuthenticated(false))
-                Task.Run(async () => { await Auth.AuthenticateWithPassword("fahirmdz", "testtest"); });
-            MainPage = new EditProfilePage();
+            MainPage = new SplashScreenPage();
         }
 
         protected override async void OnStart()

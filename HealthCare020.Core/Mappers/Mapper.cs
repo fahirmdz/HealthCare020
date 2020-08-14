@@ -193,14 +193,12 @@ namespace HealthCare020.Core.Mappers
             CreateMap<Pacijent, PacijentDtoLL>()
                 .ForMember(dest => dest.Username,
                     opt => opt.MapFrom(x => x.KorisnickiNalog.Username));
+
             CreateMap<Pacijent, PacijentDtoEL>()
                 .DisableCtorValidation()
                 .ForMember(dest => dest.ZdravstvenaKnjizica,
                     opt => opt.MapFrom(x => x.ZdravstvenaKnjizica))
-                .ForMember(dest => dest.Username,
-                    opt => opt.MapFrom(x => x.KorisnickiNalog.Username))
-                .ForMember(dest => dest.FaceId,
-                    opt => opt.MapFrom(x => x.KorisnickiNalog.FaceId));
+                .ForMember(dest => dest.KorisnickiNalog, opt => opt.MapFrom(x => x.KorisnickiNalog));
             CreateMap<PacijentUpsertDto, Pacijent>();
 
             #endregion Pacijent

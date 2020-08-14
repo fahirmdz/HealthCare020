@@ -34,7 +34,7 @@
             <!--#endregion-->
 
             <!--#region ResponsiveUnits-->
-            <x:Double x:Key="UnitNormal60Small50">60</x:Double>
+            <x:Double x:Key="UnitNormal60Small40">60</x:Double>
             <!--#endregion-->
 
             <!--#region Animations-->
@@ -106,9 +106,11 @@
             <Thickness x:Key="NextPrevNavigationThickness">0,0,0,5</Thickness>
             <Thickness x:Key="Thickness50to0">30,0</Thickness>
             <Thickness x:Key="Thickness50to10">50,10</Thickness>
+            <Thickness x:Key="Thickness20to10">20,10</Thickness>
             <Thickness x:Key="MT-40">0,40,0,0</Thickness>
             <Thickness x:Key="MT-20">0,20,0,0</Thickness>
             <Thickness x:Key="MR-20">0,0,20,0</Thickness>
+            <Thickness x:Key="MTNormal20Small0">0,20,0,0</Thickness>
             <!--#endregion-->
 
             <!--#region GridLengths-->
@@ -146,8 +148,13 @@
             </OnPlatform>
 
             <OnPlatform x:Key="FontSize-Smaller" x:TypeArguments="x:Double">
-                <On Platform="UWP">18</On>
+                <On Platform="UWP">15</On>
                 <On Platform="Android">12</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="FontSize-Smallest" x:TypeArguments="x:Double">
+                <On Platform="UWP">10</On>
+                <On Platform="Android">9</On>
             </OnPlatform>
 
             <OnPlatform x:Key="FontSize-Small" x:TypeArguments="x:Double">
@@ -234,7 +241,7 @@
                 <Setter Property="CornerRadius">25</Setter>
                 <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
                 <Setter Property="HorizontalOptions">FillAndExpand</Setter>
-                <Setter Property="HeightRequest" Value="{StaticResource UnitNormal60Small50}" />
+                <Setter Property="HeightRequest" Value="{StaticResource UnitNormal60Small40}" />
                 <Setter Property="FontSize" Value="{StaticResource FontSize-Small}" />
                 <Setter Property="Margin">15,0,15,10</Setter>
             </Style>
@@ -264,6 +271,14 @@
                 <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemiBold}" />
                 <Setter Property="FontSize" Value="{StaticResource FontSize-Medium}" />
                 <Setter Property="TextColor" Value="{StaticResource CustomNavyBlueDark}" />
+            </Style>
+
+            <Style x:Key="DescriptionLabelStyle" TargetType="Label">
+                <Setter Property="FontAttributes">Italic</Setter>
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Smallest}" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="Gray" />
             </Style>
 
             <Style x:Key="CustomEntryStyle" TargetType="Entry">
@@ -340,14 +355,14 @@
                 <Setter Property="CharacterSpacing" Value="1" />
                 <Setter Property="IsVisible">false</Setter>
             </Style>
-
             <!--#endregion-->
+            <Stretch x:Key="NormalUniformSmallUniformToFill">Uniform</Stretch>
 
             <!--#region WelcomePage styles-->
             <Style x:Key="WelcomePageLogoPath" TargetType="Path">
                 <Setter Property="Data">M364 0C364 34.275 359.292 68.2144 350.146 99.8804C341 131.546 327.594 160.319 310.693 184.555C293.793 208.791 273.73 228.016 251.648 241.133C229.567 254.249 205.901 261 182 261C158.099 261 134.433 254.249 112.352 241.133C90.2703 228.016 70.2068 208.791 53.3066 184.555C36.4063 160.319 23.0003 131.546 13.8539 99.8804C4.70756 68.2144 -2.08945e-06 34.275 0 -2.28173e-05L182 0H364Z</Setter>
                 <Setter Property="HeightRequest">250</Setter>
-                <Setter Property="Aspect" Value="UniformToFill" />
+                <Setter Property="Aspect" Value="{StaticResource NormalUniformSmallUniformToFill}" />
             </Style>
             <Style x:Key="WelcomePageCarouselStyle" TargetType="CarouselView">
                 <Setter Property="Margin">0,50,0,0</Setter>
@@ -379,6 +394,14 @@
                 <Setter Property="TextColor" Value="{StaticResource CustomNavyBlueDark}" />
                 <Setter Property="Margin" Value="7,0,5,0" />
                 <Setter Property="CharacterSpacing" Value="1" />
+            </Style>
+
+            <Style x:Key="SmallCenteredLabel" TargetType="Label">
+                <Setter Property="FontAttributes">Italic</Setter>
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-Light}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize-Smaller}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource LightNavyBlue}" />
             </Style>
 
             <!--#region NoviZahtevZaPregledPage styles-->

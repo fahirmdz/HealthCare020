@@ -40,6 +40,9 @@ namespace Healthcare020.Mobile.Services
             get; private set;
         }
 
+        /// <summary>
+        /// Current logged in Pacijent
+        /// </summary>
         public static PacijentDtoEL Pacijent { get; set; }
 
         /// <summary>
@@ -63,9 +66,8 @@ namespace Healthcare020.Mobile.Services
                     await SecureStorage.SetAsync("Password", password);
                     await SecureStorage.SetAsync(PreferencesKeys.HasSavedLoginCredentials, true.ToString());
                 }
-
-                await GetTokenAndSetAccessTokenAsync(GetTokenEndpointCredentialsRequestBodyContent(username, password));
-
+                if (!await GetTokenAndSetAccessTokenAsync(GetTokenEndpointCredentialsRequestBodyContent(username, password)))
+                    return false;
                 return await SetCurrentKorisnickiNalog();
             }
             catch (Exception ex)
@@ -83,8 +85,9 @@ namespace Healthcare020.Mobile.Services
         {
             try
             {
-                await GetTokenAndSetAccessTokenAsync(GetTokenEndpointFaceRecognitionRequestBodyContent(image), AuthType.FaceID);
-
+                if (!await GetTokenAndSetAccessTokenAsync(GetTokenEndpointFaceRecognitionRequestBodyContent(image),
+                    AuthType.FaceID))
+                    return false;
                 return await SetCurrentKorisnickiNalog();
             }
             catch (Exception ex)
@@ -188,11 +191,11 @@ namespace Healthcare020.Mobile.Services
             }
         }
 
-        private static async Task GetTokenAndSetAccessTokenAsync(HttpContent content,
+        private static async Task<bool> GetTokenAndSetAccessTokenAsync(HttpContent content,
             AuthType authType = AuthType.Credentials)
         {
             if (content == null)
-                return;
+                return false;
 
             string uri = authType == AuthType.Credentials ? AppResources.IdpTokenEndpoint : AppResources.IdpTokenEndpointFaceId;
 
@@ -219,17 +222,17 @@ namespace Healthcare020.Mobile.Services
                     if (tokenResponse != null && !string.IsNullOrWhiteSpace(tokenResponse.AccessToken))
                     {
                         AccessToken = tokenResponse.AccessToken.ConvertToSecureString();
-                        return;
+                        return true;
                     }
                 }
 
                 await response.Content.ReadAsStringAsync();
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
-                return;
+                return false;
             }
             catch (Exception ex)
             {
-                return;
+                return false;
             }
         }
 
@@ -237,16 +240,17 @@ namespace Healthcare020.Mobile.Services
         {
             try
             {
-                var apiSerivce = new APIService(Routes.KorisniciRoute);
+                var apiSerivce = new APIService(Routes.PacijentiRoute);
+                var pacijentGetResult = await apiSerivce.GetById<PacijentDtoEL>(0, eagerLoaded: true); // Id = 0 to return current logged in Pacijent
 
-                var result = await apiSerivce.GetById<KorisnickiNalogDtoLL>(0);
-                if (!result.Succeeded)
+                if (!pacijentGetResult.Succeeded)
                 {
                     AccessToken = null;
                     return false;
                 }
 
-                KorisnickiNalog = result.Data;
+                Pacijent = pacijentGetResult.Data;
+                KorisnickiNalog = Pacijent.KorisnickiNalog;
                 var topRole = KorisnickiNalog.Roles?.Min(x => x);
                 Role = topRole.HasValue ? (RoleType)topRole : RoleType.Pacijent;
 

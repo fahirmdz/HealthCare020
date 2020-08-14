@@ -36,9 +36,9 @@
             <StackLayout>
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="3.5*" />
+                        <RowDefinition Height="3*" />
                         <RowDefinition Height="2*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="1.5*" />
                     </Grid.RowDefinitions>
                     <StackLayout
                         Grid.Row="0"
@@ -47,7 +47,7 @@
                         VerticalOptions="End">
                         <!--  top controls  -->
                         <Frame
-                            Margin="0,20,0,0"
+                            Margin="{StaticResource MTNormal20Small0}"
                             BackgroundColor="{StaticResource LightSmokeWhite}"
                             CornerRadius="50"
                             HorizontalOptions="FillAndExpand"
@@ -68,12 +68,8 @@
                                 </custom:CircleImage>
                                 <Label
                                     Grid.Row="1"
-                                    FontAttributes="Italic"
-                                    FontFamily="{StaticResource Montserrat-Light}"
-                                    FontSize="{StaticResource FontSize-Smaller}"
-                                    HorizontalOptions="Center"
-                                    Text="{x:Static resources:AppResources.TapToChangeProfilePicture}"
-                                    TextColor="{StaticResource LightNavyBlue}" />
+                                    Style="{StaticResource SmallCenteredLabel}"
+                                    Text="{x:Static resources:AppResources.TapToChangeProfilePicture}" />
                                 <Label
                                     Grid.Row="1"
                                     Margin="0,30,0,10"
@@ -90,23 +86,33 @@
                         Grid.Row="1"
                         Margin="40,0,40,0"
                         Spacing="0"
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="CenterAndExpand">
                         <Frame
                             BorderColor="Transparent"
                             CornerRadius="50"
                             HasShadow="False"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="Center">
-                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                            <StackLayout
+                                HorizontalOptions="FillAndExpand"
+                                Spacing="1"
+                                VerticalOptions="Center">
+                                <Button
+                                    x:Name="LicniPodaciBtn"
+                                    Clicked="LicniPodaciBtn_OnClicked"
+                                    HeightRequest="40"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    Text="{x:Static resources:AppResources.PersonalData}" />
                                 <Button
                                     x:Name="EditProfileBtn"
                                     Clicked="EditProfileBtn_OnClicked"
-                                    Command="{Binding EditProfileNavigationCommand}"
+                                    HeightRequest="40"
                                     Style="{StaticResource CustomButtonStyle}"
                                     Text="{x:Static resources:AppResources.EditProfile}" />
                                 <Button
                                     x:Name="ChangePasswordBtn"
                                     Clicked="ChangePasswordBtn_OnClicked"
+                                    HeightRequest="40"
                                     Style="{StaticResource CustomButtonStyle}"
                                     Text="{x:Static resources:AppResources.ChangePassword}" />
                             </StackLayout>
@@ -115,7 +121,7 @@
 
                     <StackLayout
                         Grid.Row="2"
-                        Margin="40,5"
+                        Margin="40,0"
                         VerticalOptions="End">
                         <!--  bottom controls  -->
                         <Frame
@@ -146,7 +152,9 @@
                         </Label>
                     </StackLayout>
                 </Grid>
+
             </StackLayout>
         </Grid>
+
     </ContentPage.Content>
 </ContentPage>

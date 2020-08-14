@@ -47,7 +47,7 @@ namespace Healthcare020.Mobile.Services
 
                 IFlurlClient flurlClient = new FlurlClient(httpClient);
                 request = flurlClient.Request(route).AllowAnyHttpStatus();
-                if (Auth.IsAuthenticated(setLoginPage:false))
+                if (Auth.IsAuthenticated(setLoginPage: false))
                     request.Headers.Add("Authorization", $"Bearer {Auth.AccessToken.ConvertToString()}");
                 BaseUrl = request.Url;
             }
@@ -208,12 +208,7 @@ namespace Healthcare020.Mobile.Services
                 if (!string.IsNullOrWhiteSpace(xpaginationHeader))
                     paginationMetadata = JsonConvert.DeserializeObject<PaginationMetadata>(xpaginationHeader);
 
-                return new APIServiceResult<List<T>>
-                {
-                    PaginationMetadata = paginationMetadata ?? new PaginationMetadata(),
-                    Data = result,
-                    HasData = result != null
-                };
+                return APIServiceResult<List<T>>.OK(result,paginationMetadata);
             }
             catch (Exception ex)
             {
@@ -264,6 +259,14 @@ namespace Healthcare020.Mobile.Services
 
                 return APIServiceResult<T>.OK(result);
             }
+            catch (FlurlHttpTimeoutException ex)
+            {
+                return APIServiceResult<T>.Exception();
+            }
+            catch (FlurlHttpException ex)
+            {
+                return APIServiceResult<T>.Exception();
+            }
             catch (Exception ex)
             {
                 return APIServiceResult<T>.Exception();
@@ -292,11 +295,7 @@ namespace Healthcare020.Mobile.Services
                 RevertToBaseRequest();
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.Forbidden)
-                    {
-                    }
-
-                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                    if ((int)response.StatusCode == 422 || response.StatusCode == HttpStatusCode.BadRequest)
                     {
                         if (response.Content != null)
                         {
@@ -409,20 +408,12 @@ namespace Healthcare020.Mobile.Services
 
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    if (response.StatusCode == HttpStatusCode.Forbidden)
-                    {
-                        //dlgError.ShowDialog(Properties.Resources.AccessDenied);
-                    }
-                    else if (response.StatusCode == HttpStatusCode.BadRequest)
-                    {
-                        //dlgError.ShowDialog( ?? string.Empty);
-                    }
-                    else if ((int)response.StatusCode == 422)
+                    if ((int)response.StatusCode == 422 || response.StatusCode == HttpStatusCode.BadRequest)
                     {
                         if (response.Content != null)
                         {
                             var errorMessage = await response.Content.ReadAsStringAsync();
-                            return APIServiceResult<T>.WithStatusCode((HttpStatusCode)422,errorMessage);
+                            return APIServiceResult<T>.WithStatusCode((HttpStatusCode)422, errorMessage);
                         }
                     }
 

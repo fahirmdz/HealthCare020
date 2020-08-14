@@ -4,7 +4,7 @@
     public class PacijentDtoEL : PacijentDto
     {
         public ZdravstvenaKnjizicaDtoEL ZdravstvenaKnjizica { get; set; }
-        public string FaceId { get; set; }
+        public KorisnickiNalogDtoLL KorisnickiNalog { get; set; }
 
         public PacijentDtoEL()
         {
@@ -14,8 +14,6 @@
         public PacijentDtoEL(PacijentDtoEL pacijent)
         {
             Id = pacijent.Id;
-            Username = pacijent.Username;
-            KorisnickiNalogId = pacijent.KorisnickiNalogId;
             ZdravstvenaKnjizica=new ZdravstvenaKnjizicaDtoEL(pacijent.ZdravstvenaKnjizica);
         }
     }

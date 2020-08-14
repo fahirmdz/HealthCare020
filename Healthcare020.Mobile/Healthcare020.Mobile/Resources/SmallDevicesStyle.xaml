@@ -23,13 +23,14 @@
     <Thickness x:Key="MT-40">0,40,0,0</Thickness>
     <Thickness x:Key="MT-20">0,20,0,0</Thickness>
     <Thickness x:Key="MR-20">0,0,10,0</Thickness>
+    <Thickness x:Key="MTNormal20Small0">0</Thickness>
     <!--#endregion-->
 
     <!--#region Heights-->
     <!--#region RegisterPage style-->
 
     <!--#region ResponsiveUnits-->
-    <x:Double x:Key="UnitNormal60Small40">40</x:Double>
+    <x:Double x:Key="UnitNormal60Small40">20</x:Double>
     <!--#endregion-->
 
     <!--  Path with Logo  -->
@@ -51,6 +52,7 @@
         <Setter Property="Source" Value="{StaticResource Logo_Revert}" />
     </Style>
     <!--  /Path with Logo  -->
+    <Stretch x:Key="NormalUniformSmallUniformToFill">UniformToFill</Stretch>
 
     <!--  Path with Label  -->
     <Style x:Key="TitlePath" TargetType="Path">

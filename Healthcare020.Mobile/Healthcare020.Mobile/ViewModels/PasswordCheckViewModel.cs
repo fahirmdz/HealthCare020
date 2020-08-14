@@ -34,7 +34,10 @@ namespace Healthcare020.Mobile.ViewModels
         public async Task CheckPassword()
         {
             if (!ValidInput())
+            {
+                NotificationService.Instance.Toast("Neispravan unos");
                 return;
+            }
 
             _apiService.ChangeRoute($"{Routes.KorisniciRoute}/{Routes.CheckPasswordRoute}");
 

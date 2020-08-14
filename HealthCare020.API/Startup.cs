@@ -22,6 +22,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace HealthCare020.API
 {
@@ -116,7 +117,8 @@ namespace HealthCare020.API
                 .AddNewtonsoftJson(setupAction =>
                 {
                     //Input and output JSON formatters
-
+                    setupAction.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+                    setupAction.SerializerSettings.MaxDepth = 1;
                     setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 })
                 .AddXmlDataContractSerializerFormatters()

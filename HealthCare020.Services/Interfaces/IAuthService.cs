@@ -17,7 +17,7 @@ namespace HealthCare020.Services.Interfaces
 
         Task<KorisnickiNalog> LoggedInUser();
 
-        Task<Pacijent> GetCurrentLoggedInPacijent();
+        Task<Pacijent> GetCurrentLoggedInPacijent(bool eagerLoaded=false);
 
 
         Task<Doktor> GetCurrentLoggedInDoktor();

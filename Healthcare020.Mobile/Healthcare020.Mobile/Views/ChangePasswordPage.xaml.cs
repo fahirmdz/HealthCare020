@@ -17,6 +17,7 @@ namespace Healthcare020.Mobile.Views
             Title = AppResources.ChangePasswordPageTitle;
             BindingContext = ChangePasswordVM = ViewModelLocator.ChangePasswordViewModel;
             IconImageSource = IconFont.Key.GetIcon();
+
             //Validation requirements
             BaseValidationVM = ChangePasswordVM;
             SetFormBodyElement();
