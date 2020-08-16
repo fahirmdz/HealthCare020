@@ -232,7 +232,7 @@
     <value>Odjavi se</value>
   </data>
   <data name="MaxLength180Error" xml:space="preserve">
-    <value>Maksimalan broj karaketera je 180</value>
+    <value>Polje može sadržati izmedju 5 i 180 karaktera</value>
   </data>
   <data name="Napomena" xml:space="preserve">
     <value>Napomena</value>
