@@ -1,6 +1,6 @@
 ﻿================= **MOBILE**  ======================
 
-  - Za registraciju pacijenta na mobilnoj aplikacija, potrebno je potvrditi validnost ličnih podataka
+  - Za registraciju pacijenta na mobilnoj aplikaciji, potrebno je potvrditi validnost ličnih podataka
     tako što će se unijeti broj zdravstvene knjižice, JMBG, ime i prezime. Ukoliko se podaci poklapaju
     sa podacima iz baze podataka, korisnički nalog će se kreirati.
     Planirano je da će zdravstvena ustanova već imati podatke pacijenata.
