@@ -52,7 +52,7 @@
 
 
 
-# DESKTOP - Azure recognition services - Face API
+# DESKTOP - Azure cognitive services - Face API
 
  - U sklopu administratorskog panela na desktop aplikaciji, postoji tab "Security"
    na kojem je će se moći pregledati trenutno aktivni korisnici u sklopu "Healthcare020 Pacijenti"
