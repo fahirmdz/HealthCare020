@@ -286,7 +286,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://10.0.2.2:5305/connect/token.
+        ///   Looks up a localized string similar to http://10.0.2.2:5300/connect/token.
         /// </summary>
         public static string IdpTokenEndpoint {
             get {
@@ -295,7 +295,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://10.0.2.2:5305/connect/token.
+        ///   Looks up a localized string similar to http://10.0.2.2:5300/connect/token.
         /// </summary>
         public static string IdpTokenEndpointAndroid {
             get {
@@ -304,7 +304,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://10.0.2.2:5305/face-recognition.
+        ///   Looks up a localized string similar to http://10.0.2.2:5300/face-recognition.
         /// </summary>
         public static string IdpTokenEndpointFaceId {
             get {
@@ -336,6 +336,15 @@ namespace Healthcare020.Mobile.Resources {
         public static string InvalidLoginCredentials {
             get {
                 return ResourceManager.GetString("InvalidLoginCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JMBG mora sadržati izmedju 9 i 12 cifara.
+        /// </summary>
+        public static string JMBGLengthError {
+            get {
+                return ResourceManager.GetString("JMBGLengthError", resourceCulture);
             }
         }
         
@@ -493,7 +502,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LicniPodaci.
+        ///   Looks up a localized string similar to Licni podaci.
         /// </summary>
         public static string PersonalData {
             get {

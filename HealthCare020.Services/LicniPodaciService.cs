@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using AutoMapper;
+﻿using AutoMapper;
 using HealthCare020.Core.Entities;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
@@ -11,16 +9,17 @@ using HealthCare020.Repository;
 using HealthCare020.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using HealthCare020.Services.Properties;
 
 namespace HealthCare020.Services
 {
     public class LicniPodaciService : BaseCRUDService<LicniPodaciDto, LicniPodaciDto, LicniPodaciResourceParameters, LicniPodaci, LicniPodaciUpsertDto, LicniPodaciUpsertDto>
     {
         private readonly IFaceRecognitionService _faceRecognitionService;
+
         public LicniPodaciService(IMapper mapper,
             HealthCare020DbContext dbContext,
             IPropertyMappingService propertyMappingService,
@@ -95,7 +94,7 @@ namespace HealthCare020.Services
                 return ServiceResult.Unauthorized();
             }
 
-            if (await ValidateModel(request,id) is { } validationResult && !validationResult.Succeeded)
+            if (await ValidateModel(request, id) is { } validationResult && !validationResult.Succeeded)
                 return ServiceResult.WithStatusCode(validationResult.StatusCode, validationResult.Message);
 
             var entity = await _dbContext.LicniPodaci.FindAsync(id);
@@ -105,16 +104,26 @@ namespace HealthCare020.Services
             if (_authService.UserIsPacijent())
             {
                 var pacijent = await _authService.GetCurrentLoggedInPacijent();
-                if(pacijent==null)
+                if (pacijent == null)
                     return ServiceResult.BadRequest();
 
                 var korisnickiNalog = await _dbContext.KorisnickiNalozi.FindAsync(pacijent.KorisnickiNalogId);
-
-                if (!entity.ProfilePicture.SequenceEqual(request.ProfilePicture))
+                if (request.ProfilePicture != null && request.ProfilePicture.Any())
                 {
-                    var person = await _faceRecognitionService.AddFaceToPerson(Resources.FaceAPI_PersonGroupId,Guid.Parse(korisnickiNalog.FaceId),new MemoryStream(request.ProfilePicture));
-                }
+                    if (entity.ProfilePicture != null && korisnickiNalog.FaceId != null && (!entity.ProfilePicture?.SequenceEqual(request.ProfilePicture) ?? false))
+                    {
+                        await _faceRecognitionService.AddFaceForUser(request.ProfilePicture, korisnickiNalog.Username, Guid.Parse(korisnickiNalog.FaceId), true);
+                    }
+                    else
+                    {
+                        var addedPersonId =
+                            await _faceRecognitionService.AddFaceForUser(request.ProfilePicture, korisnickiNalog.Username);
+                        korisnickiNalog.FaceId = addedPersonId?.ToString();
 
+                        _dbContext.Update(korisnickiNalog);
+                        await _dbContext.SaveChangesAsync();
+                    }
+                }
             }
 
             if (!_dbContext.Gradovi.Any(x => x.Id == request.GradId))
@@ -149,13 +158,13 @@ namespace HealthCare020.Services
             if (!await _dbContext.Gradovi.AnyAsync(x => x.Id == dto.GradId))
                 return ServiceResult.NotFound($"Grad sa ID-em {dto.GradId} nije pronadjen");
 
-            if (await _dbContext.LicniPodaci.AnyAsync(x =>x.Id != id &&  x.JMBG == dto.JMBG))
+            if (await _dbContext.LicniPodaci.AnyAsync(x => x.Id != id && x.JMBG == dto.JMBG))
                 return ServiceResult.BadRequest("Vec postoji korisnik sa istim JMBG.");
 
             if (await _dbContext.LicniPodaci.AnyAsync(x => x.Id != id && x.BrojTelefona == dto.BrojTelefona.Trim()))
                 return ServiceResult.BadRequest($"Vec postoji korisnik koji koristi broj telefona -> {dto.BrojTelefona}");
 
-            if (await _dbContext.LicniPodaci.AnyAsync(x =>x.Id != id &&  x.EmailAddress == dto.EmailAddress.Trim()))
+            if (await _dbContext.LicniPodaci.AnyAsync(x => x.Id != id && x.EmailAddress == dto.EmailAddress.Trim()))
                 return ServiceResult.BadRequest($"Vec postoji korisnik koji koristi e-mail adresu -> {dto.EmailAddress}");
 
             return ServiceResult.WithStatusCode(HttpStatusCode.OK);

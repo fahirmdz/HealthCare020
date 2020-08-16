@@ -126,6 +126,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 MessageBox.Show(Properties.Resources.NotLoggedIn);
             }
         }
+
         private void btnSecurity_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color5);

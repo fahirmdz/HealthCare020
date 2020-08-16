@@ -90,7 +90,7 @@ namespace HealthCare020.Services
             }
 
             var addedPersonId =
-                await AddFaceForUser(dtoForCreation.ProfilePicture, dtoForCreation.KorisnickiNalog.Username);
+                await _faceRecognitionService.AddFaceForUser(dtoForCreation.ProfilePicture, dtoForCreation.KorisnickiNalog.Username);
 
             korisnickiNalog.PasswordSalt = _securityService.GenerateSalt();
             korisnickiNalog.PasswordHash = _securityService.GenerateHash(korisnickiNalog.PasswordSalt, dtoForCreation.KorisnickiNalog.Password);
@@ -276,41 +276,6 @@ namespace HealthCare020.Services
             } while (await _dbContext.KorisnickiNalozi.AnyAsync(x => x.FaceId == number.ToString()));
 
             return number.ToString();
-        }
-
-        private async Task<Guid?> AddFaceForUser(byte[] image, string username, Guid? personId = null, bool update = false)
-        {
-            if (!update)
-            {
-                var addedPerson =
-                    await _faceRecognitionService.CreatePersonInGroup(Resources.FaceAPI_PersonGroupId, username);
-
-                if (addedPerson == null)
-                {
-                    var logger = LogManager.GetCurrentClassLogger();
-                    logger.Error($"Greška pri dodavanju pacijenta u person grupu Face API-ja. Username:{username}");
-                }
-
-                if (addedPerson != null)
-                    personId = addedPerson.PersonId;
-            }
-
-            await using (var ms = new MemoryStream(image))
-            {
-                if (personId != null)
-                {
-                    var addedFace = await
-                        _faceRecognitionService.AddFaceToPerson(Resources.FaceAPI_PersonGroupId, personId.Value, ms);
-
-                    if (addedFace == null)
-                    {
-                        var logger = LogManager.GetCurrentClassLogger();
-                        logger.Error($"Greška pri dodavanju lica u person grupu Face API-ja. Username:{username}");
-                    }
-                }
-            }
-
-            return personId;
         }
     }
 }

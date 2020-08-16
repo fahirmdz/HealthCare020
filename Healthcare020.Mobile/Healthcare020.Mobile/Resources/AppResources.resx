@@ -194,15 +194,15 @@
     <value>devsecret_mobile</value>
   </data>
   <data name="IdpTokenEndpoint" xml:space="preserve">
-    <value>https://10.0.2.2:5305/connect/token</value>
+    <value>http://10.0.2.2:5300/connect/token</value>
     <comment>192.168.100.18:7600</comment>
   </data>
   <data name="IdpTokenEndpointAndroid" xml:space="preserve">
-    <value>https://10.0.2.2:5305/connect/token</value>
+    <value>http://10.0.2.2:5300/connect/token</value>
     <comment> 10.0.2.2:5007  10.0.2.2:5005</comment>
   </data>
   <data name="IdpTokenEndpointFaceId" xml:space="preserve">
-    <value>https://10.0.2.2:5305/face-recognition</value>
+    <value>http://10.0.2.2:5300/face-recognition</value>
   </data>
   <data name="ImePrezimeLengthError" xml:space="preserve">
     <value>Polje mora sadržati izmedju 2 i 20 slova</value>
@@ -212,6 +212,9 @@
   </data>
   <data name="InvalidLoginCredentials" xml:space="preserve">
     <value>Neispravno korisničko ime ili lozinka</value>
+  </data>
+  <data name="JMBGLengthError" xml:space="preserve">
+    <value>JMBG mora sadržati izmedju 9 i 12 cifara</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Prezime</value>
@@ -265,7 +268,7 @@
     <value>Lozinka mora sadržati izmedju 8 i 15 karaktera</value>
   </data>
   <data name="PersonalData" xml:space="preserve">
-    <value>LicniPodaci</value>
+    <value>Licni podaci</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Broj telefona</value>

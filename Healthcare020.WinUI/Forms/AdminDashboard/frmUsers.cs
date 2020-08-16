@@ -82,7 +82,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             AddColumnsToMainDgrv(new[] { ID, Username, LastOnline, DateCreated, Zakljucaj });
 
             Text = Resources.frmUsers;
-            ResourceParameters = new KorisnickiNalogResourceParameters { PageNumber = 1, PageSize = CurrentRowCount };
+            ResourceParameters = new KorisnickiNalogResourceParameters();
 
             InitializeComponent();
             btnBack.Visible = false;

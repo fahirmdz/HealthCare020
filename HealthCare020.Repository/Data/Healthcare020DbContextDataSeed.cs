@@ -265,9 +265,8 @@ namespace HealthCare020.Repository
                 new RoleKorisnickiNalog{Id=10,KorisnickiNalogId = 5,RoleId = 3},
                 new RoleKorisnickiNalog{Id=11,KorisnickiNalogId = 5,RoleId = 4},
                 new RoleKorisnickiNalog{Id=12,KorisnickiNalogId = 5,RoleId = 5},
-                new RoleKorisnickiNalog{Id=13,KorisnickiNalogId = 3,RoleId = 3},
                 new RoleKorisnickiNalog{Id=14,KorisnickiNalogId = 3,RoleId = 4},
-                new RoleKorisnickiNalog{Id=15,KorisnickiNalogId = 4,RoleId = 4},
+                new RoleKorisnickiNalog{Id=15,KorisnickiNalogId = 4,RoleId = 5},
                 new RoleKorisnickiNalog{Id=16,KorisnickiNalogId = 6,RoleId = 2},
                 new RoleKorisnickiNalog{Id=17,KorisnickiNalogId = 6,RoleId = 3},
                 new RoleKorisnickiNalog{Id=18,KorisnickiNalogId = 6,RoleId = 4},
@@ -511,7 +510,32 @@ namespace HealthCare020.Repository
                     Prezime = "Pacdvanaest",
                     Pol = 'M',
                 },
-
+                new LicniPodaci
+                {
+                    Id=18,
+                    Adresa = "Sarajevska 100",
+                    JMBG="1234567891",
+                    BrojTelefona = "0624745855",
+                    DatumRodjenja = DateTime.Now.AddYears(-24),
+                    EmailAddress = "pacijent20@live.com",
+                    GradId = 2,
+                    Ime = "Fahir",
+                    Prezime = "Pacdvadeset",
+                    Pol = 'M',
+                },
+                new LicniPodaci
+                {
+                    Id=19,
+                    Adresa = "Lumbago 100",
+                    JMBG="9874563211",
+                    BrojTelefona = "0624234123",
+                    DatumRodjenja = DateTime.Now.AddYears(-54),
+                    EmailAddress = "pacijent21@live.com",
+                    GradId = 4,
+                    Ime = "Fahir",
+                    Prezime = "Pacdvajedan",
+                    Pol = 'M',
+                }
             };
 
             modelBuilder.Entity<LicniPodaci>().HasData(licniPodaci);
@@ -654,6 +678,18 @@ namespace HealthCare020.Repository
                     Id=11,
                     DoktorId = 1,
                     LicniPodaciId = 17
+                },
+                new ZdravstvenaKnjizica
+                {
+                    Id=12,
+                    DoktorId = 1,
+                    LicniPodaciId = 18
+                },
+                new ZdravstvenaKnjizica
+                {
+                    Id=13,
+                    DoktorId = 1,
+                    LicniPodaciId = 19
                 }
             };
             modelBuilder.Entity<ZdravstvenaKnjizica>().HasData(zdravstveneKnjizice);
@@ -1186,8 +1222,8 @@ namespace HealthCare020.Repository
                 {
                     Id = 1,
                     BrojTelefonaPosetioca = "066985295",
-                    DatumVremeKreiranja = DateTime.Now.AddDays(-5),
-                    ZakazanoDatumVreme = DateTime.Now.AddDays(-4),
+                    DatumVremeKreiranja = DateTime.Today.AddDays(-4),
+                    ZakazanoDatumVreme = DateTime.Today.AddDays(-5).AddHours(14.5),
                     IsObradjen = true,
                     PacijentNaLecenjuId = 1,
                 },

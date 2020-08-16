@@ -56,7 +56,7 @@
                         x:Name="BrojTelefonaPosetioca"
                         ClassId="BrojTelefonaPosetioca"
                         IsVisible="False"
-                        Placeholder="BrojTelefonaPosetioca *"
+                        Placeholder="Broj telefona posetioca *"
                         Text="{Binding BrojTelefonaPosetioca}" />
                     <Label x:Name="BrojTelefonaPosetiocaValidation" />
 

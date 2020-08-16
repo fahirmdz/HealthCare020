@@ -5,6 +5,7 @@ using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCare020.Core.Enums;
 using Healthcare020.WinUI.Helpers;
@@ -136,6 +137,16 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 preglediResParams.PacijentPrezime = SearchText;
                 await base.LoadData();
             }
+        }
+
+        public void ShowSuccess()
+        {
+            dlgSuccess.ShowDialog();
+        }
+
+        public async Task ReloadData()
+        {
+            await LoadData();
         }
     }
 }

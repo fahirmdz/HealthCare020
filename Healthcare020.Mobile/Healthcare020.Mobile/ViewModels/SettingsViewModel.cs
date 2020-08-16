@@ -69,9 +69,12 @@ namespace Healthcare020.Mobile.ViewModels
             if (updateResult.Succeeded)
             {
                 ProfilePicImageSource = ImageSource.FromStream(() => UploadedPic.GetStream());
+                NotificationService.Instance.Toast(AppResources.Success);
             }
-
-           NotificationService.Instance.Toast(AppResources.Success);
+            else
+            {
+                NotificationService.Instance.Error(AppResources.Error);
+            }
         }
 
         public void InitializeAsync()
@@ -83,12 +86,13 @@ namespace Healthcare020.Mobile.ViewModels
             }
             _apiSerivce=new APIService();
             Pacijent = Auth.Pacijent;
-            var imgSourceForProfilePic = ImageSource.FromStream(() =>
-                new MemoryStream(Pacijent.ZdravstvenaKnjizica?.LicniPodaci?.ProfilePicture ?? Array.Empty<byte>()));
-
-            if (imgSourceForProfilePic.IsEmpty)
-                imgSourceForProfilePic = IconFont.UserCircle.GetIcon();
-            ProfilePicImageSource = imgSourceForProfilePic;
+            var profPic = Pacijent.ZdravstvenaKnjizica?.LicniPodaci?.ProfilePicture;
+            if(profPic==null || !profPic.Any())
+                ProfilePicImageSource=IconFont.UserCircle.GetIcon();
+            else
+            {
+                ProfilePicImageSource = ImageSource.FromStream(() => new MemoryStream(profPic));
+            }
         }
 
         public async Task DeleteAccount()

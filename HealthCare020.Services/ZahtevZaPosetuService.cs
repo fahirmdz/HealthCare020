@@ -81,7 +81,7 @@ namespace HealthCare020.Services
                     startMonth = 1;
                     year++;
                 }
-                monthsCountsList.Add(await _dbContext.Set<ZahtevZaPosetu>().CountAsync(x =>x.IsObradjen &&  x.DatumVremeKreiranja.Year == year
+                monthsCountsList.Add(await _dbContext.Set<ZahtevZaPosetu>().CountAsync(x =>x.IsObradjen && x.ZakazanoDatumVreme.HasValue &&  x.DatumVremeKreiranja.Year == year
                                                                                              && x.DatumVremeKreiranja.Month == startMonth
                                                                                              && (startMonth != firstMonth || x.DatumVremeKreiranja.Day >= startDayInFirstMonthToInclude)
                                                                                              && (startMonth != lastMonth || x.DatumVremeKreiranja.Day <= lastDayOfLastMonthToInclude)));

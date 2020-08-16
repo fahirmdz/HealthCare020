@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Healthcare020.WinUI.Helpers;
+using Healthcare020.WinUI.Helpers.Dialogs;
+using Healthcare020.WinUI.Models;
+using Healthcare020.WinUI.Properties;
+using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
 using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using HealthCare020.Core.ResourceParameters;
-using Healthcare020.WinUI.Helpers;
-using Healthcare020.WinUI.Helpers.Dialogs;
-using Healthcare020.WinUI.Models;
-using Healthcare020.WinUI.Properties;
-using Healthcare020.WinUI.Services;
 using MaterialSkin.Controls;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Healthcare020.WinUI.Forms.AdminDashboard
 {
@@ -69,7 +69,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         {
             if (ValidateInputs())
             {
-
                 RoleType roleChecked = RoleType.Doktor;
                 if (rbtnRadnikPrijem.Checked)
                     roleChecked = RoleType.RadnikPrijem;
@@ -89,7 +88,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                     _apiService.ChangeRoute(Routes.KorisniciRoute);
                     var korisnickiNalogInsertResult =
                         await _apiService.Post<KorisnickiNalogDtoLL>(korisnickiNalogUpsertDto);
-                    if(korisnickiNalogInsertResult.Succeeded)
+                    if (korisnickiNalogInsertResult.Succeeded)
                         dlgSuccess.ShowDialog();
                     return;
                 }
@@ -106,7 +105,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                     Pol = cmbPolovi.SelectedIndex == 1 ? 'Z' : 'M'
                 };
 
-
                 bool SuccededInsert = true;
                 if (rbtnDoktor.Checked)
                 {
@@ -122,21 +120,35 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                     var doktorInsertResult = await _apiService.Post<DoktorDtoLL>(doktorUpsertDto);
                     SuccededInsert = doktorInsertResult.Succeeded;
                 }
-                else if (rbtnRadnikPrijem.Checked)
+                else
                 {
-                    _apiService.ChangeRoute(Routes.RadniciPrijemRoute);
-                    var radnikPrijemUpsertDto = new RadnikPrijemUpsertDto
+                    var radnikUpsertDto = new RadnikPrijemUpsertDto
                     {
                         KorisnickiNalog = korisnickiNalogUpsertDto,
                         LicniPodaci = licniPodaciUpsertDto,
                         StacionarnoOdeljenjeId = int.Parse(cmbStacionarnaOdeljenja.SelectedValue.ToString())
                     };
-                    var radnikPrijemInsertResult = await _apiService.Post<RadnikPrijemDtoLL>(radnikPrijemUpsertDto);
-                    SuccededInsert = radnikPrijemInsertResult.Succeeded;
+                    if (rbtnMedTehnicar.Checked)
+                    {
+                        _apiService.ChangeRoute(Routes.MedicinskiTehnicariRoute);
+
+                        var medTehnicarResult = await _apiService.Post<RadnikPrijemDtoLL>(radnikUpsertDto);
+                        SuccededInsert = medTehnicarResult.Succeeded;
+                    }
+                    else if (rbtnRadnikPrijem.Checked)
+                    {
+                        _apiService.ChangeRoute(Routes.RadniciPrijemRoute);
+                        var radnikPrijemResult = await _apiService.Post<RadnikPrijemDtoLL>(radnikUpsertDto);
+                        SuccededInsert = radnikPrijemResult.Succeeded;
+                    }
                 }
 
                 if (SuccededInsert)
                     dlgSuccess.ShowDialog();
+
+                Close();
+                frmStartMenuAdministrator.Instance.btnUsers.PerformClick();
+                Dispose();
             }
         }
 
@@ -316,7 +328,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 return false;
             }
 
-            if (!txtUsername.ValidTextInput(Errors,Validation.TextInputType.Mixed))
+            if (!txtUsername.ValidTextInput(Errors, Validation.TextInputType.Mixed))
                 return false;
 
             if (rbtnAdministrator.Checked)
@@ -340,7 +352,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
             if (!cmbGradovi.ValidComboBoxItemSelected(Errors))
                 return false;
 
-            if (!txtAdresa.ValidTextInput(Errors,Validation.TextInputType.Mixed))
+            if (!txtAdresa.ValidTextInput(Errors, Validation.TextInputType.Mixed))
                 return false;
 
             if (!txtBrojTelefona.Text.ValidatePhoneNumber(true))

@@ -330,7 +330,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
         private System.Windows.Forms.Panel panelMenu;
         private FontAwesome.Sharp.IconButton btnStatistics;
         private FontAwesome.Sharp.IconButton btnPredefinedData;
-        private FontAwesome.Sharp.IconButton btnUsers;
+        public FontAwesome.Sharp.IconButton btnUsers;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.PictureBox btnHome;
         private System.Windows.Forms.Panel pnlTop;
