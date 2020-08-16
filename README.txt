@@ -62,6 +62,9 @@
    dodijeljen i koji će čuvati Face od tog pacijenta. Pri zameni profilne slike, ažurira se i Person
    objekat i dodaje novi Face.
 
+ - Za postojeće pacijente (testne korisničke naloge), potrebno je dodati profilnu sliku nakon logiranja na mobilnu aplikaciju,
+   na tab-u "Settings", kako bi se pomoću tog korisničkog naloga mogla izvšiti Face ID autentifikacija korisnika.
+
  - Na Login stranici, na mobilnoj aplikaciji, postoji mogućnost logiranja koristeći Face ID.
    U svrhu testiranja, ova funkcionalnost pruža mogućnost upload-a slike (selfie)
    iz galerije telefona. Planirani način FaceID autentifikacije je upload trenutno kreirane slike,
