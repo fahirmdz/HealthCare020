@@ -225,7 +225,8 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
         {
             PossibleRowsCount = dgrvMain.GetRowsCount();
             PossibleRowsCount = PossibleRowsCount <= 0 ? 1 : PossibleRowsCount;
-            dgrvMain.RowCount = PossibleRowsCount;
+            if (PossibleRowsCount > 1)
+                PossibleRowsCount--;
             ResourceParameters.PageSize = PossibleRowsCount;
         }
     }

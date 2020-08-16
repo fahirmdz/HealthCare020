@@ -52,9 +52,9 @@
             // 
             // pnlSide
             // 
+            this.pnlSide.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlSide.Controls.Add(this.txtLeftTitle);
             this.pnlSide.Controls.Add(this.btnClose);
-            this.pnlSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSide.Location = new System.Drawing.Point(0, 0);
             this.pnlSide.Name = "pnlSide";
             this.pnlSide.Size = new System.Drawing.Size(59, 377);
@@ -62,6 +62,7 @@
             // 
             // txtLeftTitle
             // 
+            this.txtLeftTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtLeftTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(68)))), ((int)(((byte)(82)))));
             this.txtLeftTitle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtLeftTitle.Cursor = System.Windows.Forms.Cursors.Default;
@@ -77,8 +78,9 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Flip = FontAwesome.Sharp.FlipOrientation.Normal;

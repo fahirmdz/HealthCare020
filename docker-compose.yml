@@ -20,7 +20,7 @@ services:
        dockerfile: "Dockerfile"
     environment: 
         IDENTITY_AUTHORITY: "http://healthcare020-oauth:5300"
-        ConnectionStrings:Healthcare020: Server=healthcare-sql,1433;Database=Healthcare020_DB;User=sa;Password=Banana_123!;
+        ConnectionStrings:Healthcare020: Server=healthcare-sql,1433;Database=160262;User=sa;Password=Banana_123!;
     ports: 
         - 5200:80
     networks:
@@ -37,7 +37,7 @@ services:
         dockerfile: "Dockerfile.OAuth"
     environment: 
         IDENTITY_ISSUER: "http://10.0.75.1:5300"
-        ConnectionStrings:Healthcare020: Server=healthcare-sql,1433;Database=Healthcare020_DB;User=sa;Password=Banana_123!;
+        ConnectionStrings:Healthcare020: Server=healthcare-sql,1433;Database=160262;User=sa;Password=Banana_123!;
     ports: 
         - 5300:80
     networks:
