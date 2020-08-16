@@ -35,25 +35,25 @@ namespace HealthCare020.API.Controllers
             return await base.GetById(id, EagerLoaded);
         }
 
-        [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
+        [Authorize(AuthorizationPolicies.DoktorPolicy)]
         public override async Task<IActionResult> Delete(int id)
         {
             return await base.Delete(id);
         }
 
-        [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
+        [Authorize(AuthorizationPolicies.DoktorPolicy)]
         public override async Task<IActionResult> PartiallyUpdate(int id, JsonPatchDocument<PregledUpsertDto> patchDocument)
         {
             return await base.PartiallyUpdate(id, patchDocument);
         }
 
-        [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
+        [Authorize(AuthorizationPolicies.DoktorPolicy)]
         public override async Task<IActionResult> Update(int id, PregledUpsertDto dtoForUpdate)
         {
             return await base.Update(id, dtoForUpdate);
         }
 
-        [Authorize(AuthorizationPolicies.MedicinskiTehnicarPolicy)]
+        [Authorize(AuthorizationPolicies.DoktorPolicy)]
         public override async Task<IActionResult> Insert(PregledUpsertDto dtoForCreation)
         {
             return await base.Insert(dtoForCreation);

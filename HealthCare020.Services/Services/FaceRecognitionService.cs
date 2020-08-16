@@ -24,11 +24,11 @@ namespace HealthCare020.Services.Services
             _faceClinet = new FaceClient(new ApiKeyServiceClientCredentials(Resources.AzureFaceAPI_Key)) { Endpoint = Resources.AzureFaceAPI_Endpoint };
         }
 
-        public async Task<IList<Person>> GetPersonGroupPersonsList(string personGroupId, int pageSize=6,string startPersonId="")
+        public async Task<IList<Person>> GetPersonGroupPersonsList(string personGroupId, int pageSize = 6, string startPersonId = "")
         {
             try
             {
-                var result = await _faceClinet.PersonGroupPerson.ListWithHttpMessagesAsync(personGroupId,start:startPersonId,top:pageSize);
+                var result = await _faceClinet.PersonGroupPerson.ListWithHttpMessagesAsync(personGroupId, start: startPersonId, top: pageSize);
                 if (result.Response.StatusCode == HttpStatusCode.OK)
                 {
                     return result.Body;
@@ -58,7 +58,7 @@ namespace HealthCare020.Services.Services
 
         public async Task<Person> CreatePersonInGroup(string personGroupId, string name)
         {
-            var person = await _faceClinet.PersonGroupPerson.CreateAsync(personGroupId, name,$"Date and time created: {DateTime.Now:g}");
+            var person = await _faceClinet.PersonGroupPerson.CreateAsync(personGroupId, name, $"Date and time created: {DateTime.Now:g}");
 
             return person;
         }
@@ -79,6 +79,40 @@ namespace HealthCare020.Services.Services
                 _logger.Error(ex);
                 return null;
             }
+        }
+
+        public async Task<Guid?> AddFaceForUser(byte[] image, string username, Guid? personId = null, bool update = false)
+        {
+            if (!update)
+            {
+                var addedPerson =
+                    await CreatePersonInGroup(Resources.FaceAPI_PersonGroupId, username);
+
+                if (addedPerson == null)
+                {
+                    var logger = LogManager.GetCurrentClassLogger();
+                    logger.Error($"Greška pri dodavanju pacijenta u person grupu Face API-ja. Username:{username}");
+                }
+
+                if (addedPerson != null)
+                    personId = addedPerson.PersonId;
+            }
+            if (personId != null)
+            {
+                await using (var ms = new MemoryStream(image))
+                {
+                    var addedFace = await
+                        AddFaceToPerson(Resources.FaceAPI_PersonGroupId, personId.Value, ms);
+
+                    if (addedFace == null)
+                    {
+                        var logger = LogManager.GetCurrentClassLogger();
+                        logger.Error($"Greška pri dodavanju lica u person grupu Face API-ja. Username:{username}");
+                    }
+                }
+            }
+
+            return personId;
         }
 
         private async Task<bool> TrainModel(string personGroupId)

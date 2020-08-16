@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthCare020.Repository.Migrations
 {
     [DbContext(typeof(HealthCare020DbContext))]
-    [Migration("20200816020513_InitDb")]
+    [Migration("20200816135425_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -238,161 +238,161 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 71, DateTimeKind.Local).AddTicks(4800),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 71, DateTimeKind.Local).AddTicks(5547),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 716, DateTimeKind.Local).AddTicks(566),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 716, DateTimeKind.Local).AddTicks(1193),
                             LockedOut = false,
-                            PasswordHash = "jFsdQEbCo4wJT/5ULBZl744GGsTUotqjSvMFzhCx3RdTiGFWzugabYR1KBQreVhx0PAf1R8HKJE28+akwTTh1g==",
-                            PasswordSalt = "irG9IF5lkGErL8hIGCo0Vw==",
+                            PasswordHash = "Efbgzggju7n82SUQyQ+fO2HsUiIhTo6ZZ6aRaMfRD4ynC4mFKIbjbisvXwdyAVrZAePoWKIJnXIMB+K2vhhBMw==",
+                            PasswordSalt = "RM88ZkkQJa0Im1K1bVXEAg==",
                             Username = "admin"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(5680),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(5703),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3458),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3481),
                             LockedOut = false,
-                            PasswordHash = "QrIlcP0WI41nI8HpMABhbtAQKw+xqitoPBPPV4DLrMHn3ZOfXO4oXSOE4005IUxLP9J3Ecfyqji+jm0G4CSCAw==",
-                            PasswordSalt = "qjpwx4Nb9NrDDFfxCFepYA==",
+                            PasswordHash = "458TEy7e/0piAvPNtKaYJoBV1Q9bW9bK86GxKtkozRKalY2OSnTRA8qWL4VDei7+0EnCZ9VmrePEmIvxQzEVWw==",
+                            PasswordSalt = "jyDwrAPkPRI/byEc/LjbtQ==",
                             Username = "doktor"
                         },
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6049),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6055),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3768),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3773),
                             LockedOut = false,
-                            PasswordHash = "cLfnYvYN+oYplCgc7Tc20/Jh1wDhIw2u+8begtETGj6362borAxX/BqZVSqYlLOehU/w0H0/upqa6LGvgrB6JA==",
-                            PasswordSalt = "avyn40Z11/HelkRwLM/7gg==",
+                            PasswordHash = "J1SOi5hgVBf9ECZRbZYFiL6u6XcIvHzXM/JbgeAfycbfZiXoohcmi4+deJ90acqKNwN3KRV7+mhyD+tHh318qQ==",
+                            PasswordSalt = "3iXtorTOMmzM5L9uBVRjRw==",
                             Username = "radnikprijem"
                         },
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6093),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6096),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3842),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3845),
                             LockedOut = false,
-                            PasswordHash = "8Jo+7QvrI93ilJWNIMh9R3t6/mzxuBiNw+4qDXKpc7EEI+HfwgtuLJDa0unog1OiwaS98Os73h+oVbJySj4byw==",
-                            PasswordSalt = "lxqvixOAHGiW8BWc3JhUDA==",
+                            PasswordHash = "gFdWzYgkNnLkinEiG5ovtMMyO3q83zHYyLadDoeo3FyrHsdX54cSFkXd0R7a+UkO7svxfbHtnDr75bBgj6z9gw==",
+                            PasswordSalt = "fDNXCxgUVW5RZ3o9bjcy5w==",
                             Username = "pacijent"
                         },
                         new
                         {
                             Id = 5,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6120),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6123),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3873),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3876),
                             LockedOut = false,
-                            PasswordHash = "19Ck22R1zvUhC/XFs6E00W6iZ9ow9J4njl4KyAL8ELP11yBZ37J89/0wMTonJ6TrM9EveGt4R747rydSb+cP4g==",
-                            PasswordSalt = "4JnSG+FtrthNPeqmKUFNUw==",
+                            PasswordHash = "poXfM8E0iBntDy2PZmn7mHeAvcRcMZ97JxVCPc/pxDAmEhKHJtPEb4hDI/uVahIOA6VV/i4WaaFarg/5bkx7Yw==",
+                            PasswordSalt = "/mtU/ZUo8GtXl/5IMnL6nA==",
                             Username = "medicinskitehnicar"
                         },
                         new
                         {
                             Id = 6,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6148),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6152),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3903),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3907),
                             LockedOut = false,
-                            PasswordHash = "RHqaFSrEYrzGWkKabQv4gbaoIibHXoOrWIt7zRA3iB4pYk3WKRRj2+Ln5LEsGHrKXr+VSIJjk8f0bEGCeQ3V7g==",
-                            PasswordSalt = "Xh3c8NhHegAqjN62NXKtMA==",
+                            PasswordHash = "PSRzBHQL6QT83sZVfFKvL0IBx419/Vi4dP+NY1vf69zeJOC5lfE0muJ+77gbGfIVBCVJ1Qas3k4SXggmj5Nm4w==",
+                            PasswordSalt = "XcGvF7GHupQKL6cgfP8Eqg==",
                             Username = "doktor2"
                         },
                         new
                         {
                             Id = 7,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6175),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6179),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3931),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3934),
                             LockedOut = false,
-                            PasswordHash = "G3g0TSGWPf1ny5KD9aWtHUWvTZ7pvslofEDQoAQQPbaIH4ZPp23bcyz0xWUTRCurMiMNRcDobr3p4HQNHUerTg==",
-                            PasswordSalt = "f1qwAojgFpsE2atK9eYPaA==",
+                            PasswordHash = "QEOb6mdcxmJS45eSHv3aqLc9N1fLHHggA6IK5+GiMnc5bzyp9phoqNF47aYptjyKT3eV7mmqMA6mkxio0+cdlQ==",
+                            PasswordSalt = "p62qq4AlU8ukFv6MW5IWvA==",
                             Username = "pacijent2"
                         },
                         new
                         {
                             Id = 8,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6202),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6205),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3957),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3961),
                             LockedOut = false,
-                            PasswordHash = "A7wS95qtLjnr3rSB6fCydgpbsW/djzKYa0LzUhCR5pzLPrcg17/lvLWfzQ8i+y852K7cCjzu0GSAn/5uQc+kCw==",
-                            PasswordSalt = "e+gkJr9Ljgn/mpuxNuoLOA==",
+                            PasswordHash = "wVdS8etAqi46lpRsj3h4YuZHwicKEaaP9/2zqvXrjUqYz89mtv0aImnQVI5CkrlyKpxYkQP0faXXcY+T7hi3Gw==",
+                            PasswordSalt = "oQqkKjLM05myBboLr/K/1w==",
                             Username = "pacijent3"
                         },
                         new
                         {
                             Id = 9,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6273),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6277),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4004),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4007),
                             LockedOut = false,
-                            PasswordHash = "MgVmJRaOjjIcxHCw4UprX9UVwQCxWniooIqJueSwfeYyUG34hcrqwrOSo/6+6TK45RiO2m1dPvYgJU+w2rxWxA==",
-                            PasswordSalt = "H6UkTGWOWaYYuO7r0lYp7g==",
+                            PasswordHash = "cxV5/fAufL5gBleohXIEdYdq45zb1kvgqB6HuaXXmwNmTWBzLxlR19JFlmpDGJIJkm5/+eb3LG2mQuhbdFKYxw==",
+                            PasswordSalt = "tgvTCBRCCIO3Xq2cdIZZPA==",
                             Username = "pacijent4"
                         },
                         new
                         {
                             Id = 10,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6303),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6306),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4032),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4036),
                             LockedOut = false,
-                            PasswordHash = "01DpYftXZ7La7XqTCd/nV1V95PknzfHxxcqyM+eo0kIRqFtm+00+e/X5mIMO5MI3vssYnabBQA+PX7NbSgqm5w==",
-                            PasswordSalt = "8cTu+APTck7icQFEV4t2jA==",
+                            PasswordHash = "JggKRJl4T/5+qQBrr93JMZ6RuLSZcevLgCiCRPZz0BBjmZihkMge6Od5tsfGaplZWojMhaxRkfTuOVtdrZDAzQ==",
+                            PasswordSalt = "yhQutk773R7D9NYjbN62VQ==",
                             Username = "pacijent5"
                         },
                         new
                         {
                             Id = 11,
-                            DateCreated = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6332),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6336),
+                            DateCreated = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4059),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4062),
                             LockedOut = false,
-                            PasswordHash = "IA/CA05Hi6Ij98yRIYKTQYPofdlBGyZ+3KhIyHNwf18YDfo/8959PsDnXneJNa4iTuq4xZX+GTC5JhTN77MqVw==",
-                            PasswordSalt = "/yIgu0FjD7ts02S1w1rwVg==",
+                            PasswordHash = "nYZQmvJpIe4Wt2AtUw+SsR/LVeLbmxa0yRvB9cucgb4wqTpqHjTpcf9yllfzde6bnbWH33xcJFppnQsDFGqBDQ==",
+                            PasswordSalt = "sa9tF1Mq120roosbpqZ8IA==",
                             Username = "pacijent6"
                         },
                         new
                         {
                             Id = 12,
-                            DateCreated = new DateTime(2020, 7, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6359),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6391),
+                            DateCreated = new DateTime(2020, 7, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4108),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4143),
                             LockedOut = false,
-                            PasswordHash = "lZV5YwQYZbptEOEAmcqLLV16zpRshOeHPPTlLFwKT9VSIX3/mZfTQv37uyBTnkQYCStAUZ4Dwn5fRPh4kQ0Pfg==",
-                            PasswordSalt = "KozdjYL1R8Qh0FXgKcVhxA==",
+                            PasswordHash = "SEEyGW89c8xvQS1SEIp9iykloRwJHR/28PnHM6Hh2oTxepgHr+Cxl6UPGuh7ANBv2Pai7sOZl1KxPniOfTpztA==",
+                            PasswordSalt = "aR8/IcylIM9UTRtF9OnCpQ==",
                             Username = "pacijent7"
                         },
                         new
                         {
                             Id = 13,
-                            DateCreated = new DateTime(2020, 6, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6417),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6421),
+                            DateCreated = new DateTime(2020, 6, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4170),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4174),
                             LockedOut = false,
-                            PasswordHash = "VzoP+oqFnWd/wNnIscfR07+DHbApqKm/9drNeeQRwlrqrZaXf1vMea6V7ofa+ZD9e7/cIX7r2Kjq2ddw9Sla4Q==",
-                            PasswordSalt = "vNnPSqnGUjNtbfqRGkvJ/w==",
+                            PasswordHash = "OjFEGQSWBVpoUGZCipJeDG3sk531m2067qY7bS0ofDWdkoLUGfNNvgVpDIME031qLrZ4WdwycfIL44n8RRA+CA==",
+                            PasswordSalt = "8T0/No3KOoVB2jYfqak+rQ==",
                             Username = "pacijent8"
                         },
                         new
                         {
                             Id = 14,
-                            DateCreated = new DateTime(2020, 6, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6444),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6448),
+                            DateCreated = new DateTime(2020, 6, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4197),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4201),
                             LockedOut = false,
-                            PasswordHash = "AipcFMcUf+AABfl74KheFJWjpGMfatGGTD1fdYOLAO4vasMaw1XtxNprONgHpfrbDOu6/uqa9yL3f1SU6mTZFw==",
-                            PasswordSalt = "U5hgsCvFu5XRvw3alpyW9w==",
+                            PasswordHash = "0BIylvSSQ8HD43H8jObvE7phiP0deZQTHQdWwL0Eiqr+gNFIPpDLv1p86tqd4sP2KAt0kGzslPLoKxM2h+0GzQ==",
+                            PasswordSalt = "C0rrqt14WI7F55aTuuSjXg==",
                             Username = "pacijent9"
                         },
                         new
                         {
                             Id = 15,
-                            DateCreated = new DateTime(2020, 4, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6472),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6476),
+                            DateCreated = new DateTime(2020, 4, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4224),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4228),
                             LockedOut = false,
-                            PasswordHash = "ZIZc+aomBDq+VGvIMWMfslwBK+p0w+hBn6jSZGMhL8uqahLzvxPH1OKpuUEoqYI0GoWTXvVE7OfeUKbDR2L71A==",
-                            PasswordSalt = "bsvNAwxkYP5qzqsgNSu7oQ==",
+                            PasswordHash = "QQw7Xa74jXUi4xoP+rhVuVzMbC3uqHiRFiKo4Ykb5eb5nfN0sN4lXIx60ht+GjAGVpEzEyegdAi9BFPgtVy1lw==",
+                            PasswordSalt = "NgFLmtmz/xVnO9tlE99lrw==",
                             Username = "pacijent10"
                         },
                         new
                         {
                             Id = 16,
-                            DateCreated = new DateTime(2020, 4, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6499),
-                            LastOnline = new DateTime(2020, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(6503),
+                            DateCreated = new DateTime(2020, 4, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4252),
+                            LastOnline = new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4256),
                             LockedOut = false,
-                            PasswordHash = "1CqHIQYJ2L+U9v1UJDFZF8GfW14ACEr0ejx+VUzzeZFeJcpekHnkv4HVIk7yhbYcU3FzUNkj54hKxgyGMaaKfQ==",
-                            PasswordSalt = "gphXZ1b4WsHrQfyJmgFywA==",
+                            PasswordHash = "mCiM2PsLJyab4BaM4h7wKxFk+7YzeDx1zC1dM5zv41wx+KvxRnMtlksXI/KW4d0leyMhW4HkRxvr4AKA43p4fA==",
+                            PasswordSalt = "fmd5V1cTA8bh1O3OQIQYHA==",
                             Username = "pacijent11"
                         });
                 });
@@ -525,7 +525,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 1,
                             Adresa = "Gradacacka 10",
                             BrojTelefona = "0624322123",
-                            DatumRodjenja = new DateTime(1980, 8, 16, 4, 5, 13, 73, DateTimeKind.Local).AddTicks(9881),
+                            DatumRodjenja = new DateTime(1980, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(7760),
                             EmailAddress = "doktor1@live.com",
                             GradId = 1,
                             Ime = "Fahir",
@@ -538,7 +538,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 2,
                             Adresa = "Envera Seh 10",
                             BrojTelefona = "062414322",
-                            DatumRodjenja = new DateTime(1988, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1421),
+                            DatumRodjenja = new DateTime(1988, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9343),
                             EmailAddress = "prijem1@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -551,7 +551,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 3,
                             Adresa = "Alojza Benca 10",
                             BrojTelefona = "067231222",
-                            DatumRodjenja = new DateTime(1973, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1463),
+                            DatumRodjenja = new DateTime(1973, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9393),
                             EmailAddress = "pacijent1@live.com",
                             GradId = 4,
                             Ime = "Fahir",
@@ -564,7 +564,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 4,
                             Adresa = "Seiz 10",
                             BrojTelefona = "064322233",
-                            DatumRodjenja = new DateTime(1970, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1468),
+                            DatumRodjenja = new DateTime(1970, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9399),
                             EmailAddress = "medtehnicar1@live.com",
                             GradId = 5,
                             Ime = "Fahir",
@@ -577,7 +577,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 5,
                             Adresa = "Helst 12",
                             BrojTelefona = "06123233",
-                            DatumRodjenja = new DateTime(1991, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1473),
+                            DatumRodjenja = new DateTime(1991, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9403),
                             EmailAddress = "doktor2@live.com",
                             GradId = 3,
                             Ime = "Fahir",
@@ -590,7 +590,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 6,
                             Adresa = "Neumsd 12",
                             BrojTelefona = "066585255",
-                            DatumRodjenja = new DateTime(1996, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1480),
+                            DatumRodjenja = new DateTime(1996, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9410),
                             EmailAddress = "pacijentlecenje1@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -603,7 +603,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 7,
                             Adresa = "Reu 12",
                             BrojTelefona = "06585524",
-                            DatumRodjenja = new DateTime(1966, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1484),
+                            DatumRodjenja = new DateTime(1966, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9415),
                             EmailAddress = "pacijentlecenje2@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -616,7 +616,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 8,
                             Adresa = "Golubacka 12",
                             BrojTelefona = "063412333",
-                            DatumRodjenja = new DateTime(1993, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1489),
+                            DatumRodjenja = new DateTime(1993, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9419),
                             EmailAddress = "pacijent3@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -629,7 +629,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 9,
                             Adresa = "Reu 17",
                             BrojTelefona = "0612323333",
-                            DatumRodjenja = new DateTime(1993, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1493),
+                            DatumRodjenja = new DateTime(1993, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9424),
                             EmailAddress = "pacijent4@live.com",
                             GradId = 5,
                             Ime = "Fahir",
@@ -642,7 +642,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 10,
                             Adresa = "Leur 91",
                             BrojTelefona = "06585524",
-                            DatumRodjenja = new DateTime(1993, 8, 31, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1498),
+                            DatumRodjenja = new DateTime(1993, 8, 31, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9429),
                             EmailAddress = "pacijent5@live.com",
                             GradId = 3,
                             Ime = "Fahir",
@@ -655,7 +655,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 11,
                             Adresa = "Reu 12",
                             BrojTelefona = "060365955",
-                            DatumRodjenja = new DateTime(1979, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1518),
+                            DatumRodjenja = new DateTime(1979, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9451),
                             EmailAddress = "pacijent6@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -668,7 +668,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 12,
                             Adresa = "Topolska 18",
                             BrojTelefona = "06585524",
-                            DatumRodjenja = new DateTime(1979, 9, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1522),
+                            DatumRodjenja = new DateTime(1979, 9, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9456),
                             EmailAddress = "pacijent7@live.com",
                             GradId = 3,
                             Ime = "Fahir",
@@ -681,7 +681,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 13,
                             Adresa = "Envera Sehovica 19",
                             BrojTelefona = "0675845555",
-                            DatumRodjenja = new DateTime(1979, 5, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1527),
+                            DatumRodjenja = new DateTime(1979, 5, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9462),
                             EmailAddress = "pacijent8@live.com",
                             GradId = 5,
                             Ime = "Fahir",
@@ -694,7 +694,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 14,
                             Adresa = "Reu 12",
                             BrojTelefona = "06585524",
-                            DatumRodjenja = new DateTime(1956, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1532),
+                            DatumRodjenja = new DateTime(1956, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9467),
                             EmailAddress = "pacijent9@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -707,7 +707,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 15,
                             Adresa = "Bosanskih gazija 9",
                             BrojTelefona = "065234121",
-                            DatumRodjenja = new DateTime(1956, 7, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1537),
+                            DatumRodjenja = new DateTime(1956, 7, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9472),
                             EmailAddress = "pacijent10@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -720,7 +720,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 16,
                             Adresa = "Frau Hermanova 2",
                             BrojTelefona = "0625485477",
-                            DatumRodjenja = new DateTime(1956, 5, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1541),
+                            DatumRodjenja = new DateTime(1956, 5, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9477),
                             EmailAddress = "pacijent11@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -733,7 +733,7 @@ namespace HealthCare020.Repository.Migrations
                             Id = 17,
                             Adresa = "Sarajevska 25",
                             BrojTelefona = "068575853",
-                            DatumRodjenja = new DateTime(1985, 8, 16, 4, 5, 13, 74, DateTimeKind.Local).AddTicks(1546),
+                            DatumRodjenja = new DateTime(1985, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9481),
                             EmailAddress = "pacijent12@live.com",
                             GradId = 2,
                             Ime = "Fahir",
@@ -989,7 +989,7 @@ namespace HealthCare020.Repository.Migrations
                             DoktorId = 1,
                             IsOdradjen = true,
                             PacijentId = 1,
-                            VrijemePregledaUid = 0L,
+                            VrijemePregledaUid = 2L,
                             ZahtevZaPregledId = 1
                         },
                         new
@@ -999,7 +999,7 @@ namespace HealthCare020.Repository.Migrations
                             DoktorId = 1,
                             IsOdradjen = true,
                             PacijentId = 1,
-                            VrijemePregledaUid = 0L,
+                            VrijemePregledaUid = 2L,
                             ZahtevZaPregledId = 3
                         },
                         new
@@ -1009,7 +1009,7 @@ namespace HealthCare020.Repository.Migrations
                             DoktorId = 1,
                             IsOdradjen = true,
                             PacijentId = 1,
-                            VrijemePregledaUid = 0L,
+                            VrijemePregledaUid = 2L,
                             ZahtevZaPregledId = 4
                         },
                         new
@@ -1019,7 +1019,7 @@ namespace HealthCare020.Repository.Migrations
                             DoktorId = 1,
                             IsOdradjen = true,
                             PacijentId = 1,
-                            VrijemePregledaUid = 0L,
+                            VrijemePregledaUid = 2L,
                             ZahtevZaPregledId = 5
                         },
                         new
@@ -1029,7 +1029,7 @@ namespace HealthCare020.Repository.Migrations
                             DoktorId = 1,
                             IsOdradjen = true,
                             PacijentId = 1,
-                            VrijemePregledaUid = 0L,
+                            VrijemePregledaUid = 2L,
                             ZahtevZaPregledId = 6
                         },
                         new
@@ -1353,12 +1353,6 @@ namespace HealthCare020.Repository.Migrations
                         },
                         new
                         {
-                            Id = 13,
-                            KorisnickiNalogId = 3,
-                            RoleId = 3
-                        },
-                        new
-                        {
                             Id = 14,
                             KorisnickiNalogId = 3,
                             RoleId = 4
@@ -1367,7 +1361,7 @@ namespace HealthCare020.Repository.Migrations
                         {
                             Id = 15,
                             KorisnickiNalogId = 4,
-                            RoleId = 4
+                            RoleId = 5
                         },
                         new
                         {
@@ -1533,7 +1527,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            DatumVreme = new DateTime(2020, 8, 15, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(7924),
+                            DatumVreme = new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(6683),
                             Napomena = "Pregledati urnarni trakt",
                             PacijentId = 1,
                             Razlog = "Mucnina u stomaku",
@@ -1543,7 +1537,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            DatumVreme = new DateTime(2020, 8, 15, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(8711),
+                            DatumVreme = new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(7510),
                             Napomena = "Pregledati glavu",
                             PacijentId = 1,
                             Razlog = "Bol u slepoocnici",
@@ -1553,7 +1547,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            DatumVreme = new DateTime(2020, 8, 15, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(8737),
+                            DatumVreme = new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(7536),
                             Napomena = "Pregledati urnarni trakt",
                             PacijentId = 2,
                             Razlog = "Mucnina u stomaku",
@@ -1563,7 +1557,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            DatumVreme = new DateTime(2020, 8, 15, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(8741),
+                            DatumVreme = new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(7540),
                             Napomena = "Pregledati urnarni trakt",
                             PacijentId = 2,
                             Razlog = "Mucnina u stomaku",
@@ -1606,16 +1600,16 @@ namespace HealthCare020.Repository.Migrations
                         {
                             Id = 1,
                             BrojTelefonaPosetioca = "066985295",
-                            DatumVremeKreiranja = new DateTime(2020, 8, 11, 4, 5, 13, 76, DateTimeKind.Local).AddTicks(1474),
+                            DatumVremeKreiranja = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             IsObradjen = true,
                             PacijentNaLecenjuId = 1,
-                            ZakazanoDatumVreme = new DateTime(2020, 8, 12, 4, 5, 13, 76, DateTimeKind.Local).AddTicks(1767)
+                            ZakazanoDatumVreme = new DateTime(2020, 8, 11, 14, 30, 0, 0, DateTimeKind.Local)
                         },
                         new
                         {
                             Id = 2,
                             BrojTelefonaPosetioca = "066585777",
-                            DatumVremeKreiranja = new DateTime(2020, 8, 12, 4, 5, 13, 76, DateTimeKind.Local).AddTicks(2759),
+                            DatumVremeKreiranja = new DateTime(2020, 8, 12, 15, 54, 24, 721, DateTimeKind.Local).AddTicks(1661),
                             IsObradjen = false,
                             PacijentNaLecenjuId = 2
                         });
@@ -1662,7 +1656,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            DatumVreme = new DateTime(2020, 8, 14, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(963),
+                            DatumVreme = new DateTime(2020, 8, 14, 15, 54, 24, 719, DateTimeKind.Local).AddTicks(9296),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Otežano disanje",
@@ -1671,7 +1665,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            DatumVreme = new DateTime(2020, 8, 13, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(1968),
+                            DatumVreme = new DateTime(2020, 8, 13, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(340),
                             DoktorId = 1,
                             IsObradjen = false,
                             Napomena = "Problemi sa mokraćnim kanalima",
@@ -1680,7 +1674,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            DatumVreme = new DateTime(2020, 7, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(1997),
+                            DatumVreme = new DateTime(2020, 7, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(372),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Problemi sa disanjem",
@@ -1689,7 +1683,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            DatumVreme = new DateTime(2020, 6, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2003),
+                            DatumVreme = new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(377),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Problemi sa radom srca",
@@ -1698,7 +1692,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 5,
-                            DatumVreme = new DateTime(2020, 4, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2006),
+                            DatumVreme = new DateTime(2020, 4, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(381),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Razredjena krv",
@@ -1707,7 +1701,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 6,
-                            DatumVreme = new DateTime(2019, 12, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2012),
+                            DatumVreme = new DateTime(2019, 12, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(387),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u grudima",
@@ -1716,7 +1710,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 7,
-                            DatumVreme = new DateTime(2020, 4, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2016),
+                            DatumVreme = new DateTime(2020, 4, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(392),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Bolovi u glavi",
@@ -1725,7 +1719,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 8,
-                            DatumVreme = new DateTime(2020, 6, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2020),
+                            DatumVreme = new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(396),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u vratu",
@@ -1734,7 +1728,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 9,
-                            DatumVreme = new DateTime(2020, 6, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2024),
+                            DatumVreme = new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(400),
                             DoktorId = 1,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u slepoocnici",
@@ -1743,7 +1737,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 10,
-                            DatumVreme = new DateTime(2020, 7, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2028),
+                            DatumVreme = new DateTime(2020, 7, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(405),
                             DoktorId = 2,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u grudima",
@@ -1752,7 +1746,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 11,
-                            DatumVreme = new DateTime(2020, 5, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2032),
+                            DatumVreme = new DateTime(2020, 5, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(409),
                             DoktorId = 2,
                             IsObradjen = true,
                             Napomena = "Peckanje u ocima",
@@ -1761,7 +1755,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 12,
-                            DatumVreme = new DateTime(2020, 6, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2036),
+                            DatumVreme = new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(413),
                             DoktorId = 2,
                             IsObradjen = true,
                             Napomena = "Bolovi u stomaku",
@@ -1770,7 +1764,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 13,
-                            DatumVreme = new DateTime(2020, 6, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2039),
+                            DatumVreme = new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(417),
                             DoktorId = 2,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u zeludcu",
@@ -1779,7 +1773,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 14,
-                            DatumVreme = new DateTime(2020, 7, 19, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2043),
+                            DatumVreme = new DateTime(2020, 7, 19, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(421),
                             DoktorId = 2,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u ramenu",
@@ -1788,7 +1782,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 15,
-                            DatumVreme = new DateTime(2020, 6, 25, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2047),
+                            DatumVreme = new DateTime(2020, 6, 25, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(425),
                             DoktorId = 2,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u ocima",
@@ -1797,7 +1791,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 16,
-                            DatumVreme = new DateTime(2020, 6, 16, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2050),
+                            DatumVreme = new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(429),
                             DoktorId = 2,
                             IsObradjen = true,
                             Napomena = "Blagi bolovi u ceonom dijelu",
@@ -1806,7 +1800,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 17,
-                            DatumVreme = new DateTime(2020, 8, 14, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2054),
+                            DatumVreme = new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(433),
                             DoktorId = 2,
                             IsObradjen = false,
                             Napomena = "Blagi bolovi u stomaku",
@@ -1815,7 +1809,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 18,
-                            DatumVreme = new DateTime(2020, 8, 14, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2058),
+                            DatumVreme = new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(437),
                             DoktorId = 2,
                             IsObradjen = false,
                             Napomena = "Blagi bolovi u zeludcu",
@@ -1824,7 +1818,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 19,
-                            DatumVreme = new DateTime(2020, 8, 14, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2061),
+                            DatumVreme = new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(441),
                             DoktorId = 1,
                             IsObradjen = false,
                             Napomena = "Blagi bolovi u stomaku",
@@ -1833,7 +1827,7 @@ namespace HealthCare020.Repository.Migrations
                         new
                         {
                             Id = 20,
-                            DatumVreme = new DateTime(2020, 8, 14, 4, 5, 13, 75, DateTimeKind.Local).AddTicks(2065),
+                            DatumVreme = new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(445),
                             DoktorId = 1,
                             IsObradjen = false,
                             Napomena = "Blagi bolovi u zeludcu",

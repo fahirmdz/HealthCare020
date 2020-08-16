@@ -226,7 +226,7 @@ namespace Healthcare020.Mobile.Services
                     }
                 }
 
-                await response.Content.ReadAsStringAsync();
+                var str=await response.Content.ReadAsStringAsync();
                 NotificationService.Instance.Error(AppResources.UnsuccessfullyAuthentication);
                 return false;
             }

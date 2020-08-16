@@ -12,15 +12,7 @@
 
     <ContentView.Content>
         <StackLayout>
-            <controls:NoDataFrame IsVisible="{Binding DataAvailable, Converter={StaticResource OppositeBooleanConverter}}" Message="Trenutno nema dostupnih zahteva za pregled">
-                <controls:NoDataFrame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding RefreshDataCommand}" />
-                </controls:NoDataFrame.GestureRecognizers>
-            </controls:NoDataFrame>
-            <StackLayout
-                HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding DataAvailable}"
-                VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout
                     Margin="30,5,0,0"
                     HorizontalOptions="FillAndExpand"
@@ -41,183 +33,191 @@
                         ReturnCommand="{Binding SearchCommand}"
                         Text="{Binding SearchString}" />
                 </StackLayout>
-                <ListView
-                    x:Name="MainCollectionView"
-                    Margin="15"
-                    BackgroundColor="{StaticResource LightSmokeWhite}"
-                    HasUnevenRows="True"
-                    HorizontalOptions="FillAndExpand"
-                    ItemsSource="{Binding MainCollection}"
-                    SelectionMode="None"
-                    VerticalOptions="FillAndExpand">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid
-                                    Margin="10"
-                                    BackgroundColor="{StaticResource LighterNavyBlue}"
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="StartAndExpand">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <BoxView
-                                        BackgroundColor="{StaticResource LighterNavyBlue}"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="FillAndExpand"
-                                        WidthRequest="3" />
+                <controls:NoDataFrame IsVisible="{Binding DataAvailable, Converter={StaticResource OppositeBooleanConverter}}" Message="Trenutno nema dostupnih zahteva za pregled">
+                    <controls:NoDataFrame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RefreshDataCommand}" />
+                    </controls:NoDataFrame.GestureRecognizers>
+                </controls:NoDataFrame>
+                <StackLayout IsVisible="{Binding DataAvailable}">
+                    <ListView
+                        x:Name="MainCollectionView"
+                        Margin="15"
+                        BackgroundColor="{StaticResource LightSmokeWhite}"
+                        HasUnevenRows="True"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding DataAvailable}"
+                        ItemsSource="{Binding MainCollection}"
+                        SelectionMode="None"
+                        VerticalOptions="FillAndExpand">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
                                     <Grid
-                                        Grid.Column="1"
-                                        BackgroundColor="{StaticResource LightNavyBlue}"
-                                        HorizontalOptions="FillAndExpand">
+                                        Margin="10"
+                                        BackgroundColor="{StaticResource LighterNavyBlue}"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="StartAndExpand">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="3.5*" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <StackLayout
-                                            BackgroundColor="{StaticResource LightNavyBlue}"
-                                            ClassId="LabelsToScaleStack"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center">
-
-                                            <Label
-                                                ClassId="MonthDateLabel"
-                                                FontSize="{StaticResource FontSize-Medium}"
-                                                HorizontalOptions="Center"
-                                                Text="{Binding DateTime, StringFormat='{0:dd}'}"
-                                                TextColor="Aqua" />
-                                            <Label
-                                                Margin="0,-5,0,0"
-                                                ClassId="MonthNameLabel"
-                                                FontSize="{StaticResource FontSize-Small}"
-                                                HorizontalOptions="Center"
-                                                Text="{Binding DateTime, StringFormat='{0:MMMM}'}"
-                                                TextColor="Aqua" />
-                                            <Label
-                                                Margin="0,-10,0,0"
-                                                ClassId="MonthNameLabel"
-                                                FontSize="{StaticResource FontSize-Smaller}"
-                                                HorizontalOptions="Center"
-                                                Text="{Binding DateTime, StringFormat='{0:yyyy}'}"
-                                                TextColor="Aqua" />
-                                        </StackLayout>
                                         <BoxView
-                                            Grid.Column="1"
+                                            BackgroundColor="{StaticResource LighterNavyBlue}"
                                             HorizontalOptions="Start"
                                             VerticalOptions="FillAndExpand"
-                                            WidthRequest="1" />
+                                            WidthRequest="3" />
                                         <Grid
-                                            Grid.Column="2"
-                                            Margin="20"
-                                            HorizontalOptions="FillAndExpand"
-                                            VerticalOptions="Center">
+                                            Grid.Column="1"
+                                            BackgroundColor="{StaticResource LightNavyBlue}"
+                                            HorizontalOptions="FillAndExpand">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2*" />
                                                 <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="3.5*" />
                                             </Grid.ColumnDefinitions>
-                                            <StackLayout>
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    FontFamily="{StaticResource Montserrat-Bold}"
-                                                    FontSize="{StaticResource FontSize-Small}"
-                                                    Text="{Binding PrimaryTextTitle}"
-                                                    TextColor="White" />
-                                                <Label
-                                                    FontFamily="{StaticResource Montserrat-Light}"
-                                                    FontSize="{StaticResource FontSize-Small}"
-                                                    Text="{Binding PrimaryTextContent}"
-                                                    TextColor="White" />
-                                            </StackLayout>
                                             <StackLayout
-                                                Grid.Column="1"
-                                                HorizontalOptions="FillAndExpand"
-                                                Orientation="Horizontal"
-                                                Style="{DynamicResource FlagIconsStyle}"
-                                                VerticalOptions="Fill">
-                                                <Image
-                                                    HorizontalOptions="FillAndExpand"
-                                                    IsVisible="{Binding ItemFlag}"
-                                                    VerticalOptions="CenterAndExpand">
-                                                    <Image.Source>
-                                                        <FontImageSource
-                                                            FontFamily="{StaticResource FontAwesomeRegular}"
-                                                            Glyph="{x:Static resources:IconFont.Check}"
-                                                            Size="25"
-                                                            Color="LawnGreen" />
-                                                    </Image.Source>
-                                                </Image>
-                                                <Image
-                                                    HorizontalOptions="FillAndExpand"
-                                                    IsVisible="{Binding ItemFlag, Converter={StaticResource OppositeBooleanConverter}}"
-                                                    VerticalOptions="CenterAndExpand">
-                                                    <Image.Source>
-                                                        <FontImageSource
-                                                            FontFamily="{StaticResource FontAwesomeRegular}"
-                                                            Glyph="{x:Static resources:IconFont.CalendarAlt}"
-                                                            Size="25"
-                                                            Color="{StaticResource CustomNavyBlueDark}" />
-                                                    </Image.Source>
-                                                </Image>
+                                                BackgroundColor="{StaticResource LightNavyBlue}"
+                                                ClassId="LabelsToScaleStack"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center">
+
+                                                <Label
+                                                    ClassId="MonthDateLabel"
+                                                    FontSize="{StaticResource FontSize-Medium}"
+                                                    HorizontalOptions="Center"
+                                                    Text="{Binding DateTime, StringFormat='{0:dd}'}"
+                                                    TextColor="Aqua" />
+                                                <Label
+                                                    Margin="0,-5,0,0"
+                                                    ClassId="MonthNameLabel"
+                                                    FontSize="{StaticResource FontSize-Small}"
+                                                    HorizontalOptions="Center"
+                                                    Text="{Binding DateTime, StringFormat='{0:MMMM}'}"
+                                                    TextColor="Aqua" />
+                                                <Label
+                                                    Margin="0,-10,0,0"
+                                                    ClassId="MonthNameLabel"
+                                                    FontSize="{StaticResource FontSize-Smaller}"
+                                                    HorizontalOptions="Center"
+                                                    Text="{Binding DateTime, StringFormat='{0:yyyy}'}"
+                                                    TextColor="Aqua" />
                                             </StackLayout>
+                                            <BoxView
+                                                Grid.Column="1"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="FillAndExpand"
+                                                WidthRequest="1" />
+                                            <Grid
+                                                Grid.Column="2"
+                                                Margin="20"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="Center">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackLayout>
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontFamily="{StaticResource Montserrat-Bold}"
+                                                        FontSize="{StaticResource FontSize-Small}"
+                                                        Text="{Binding PrimaryTextTitle}"
+                                                        TextColor="White" />
+                                                    <Label
+                                                        FontFamily="{StaticResource Montserrat-Light}"
+                                                        FontSize="{StaticResource FontSize-Small}"
+                                                        Text="{Binding PrimaryTextContent}"
+                                                        TextColor="White" />
+                                                </StackLayout>
+                                                <StackLayout
+                                                    Grid.Column="1"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Orientation="Horizontal"
+                                                    Style="{DynamicResource FlagIconsStyle}"
+                                                    VerticalOptions="Fill">
+                                                    <Image
+                                                        HorizontalOptions="FillAndExpand"
+                                                        IsVisible="{Binding ItemFlag}"
+                                                        VerticalOptions="CenterAndExpand">
+                                                        <Image.Source>
+                                                            <FontImageSource
+                                                                FontFamily="{StaticResource FontAwesomeRegular}"
+                                                                Glyph="{x:Static resources:IconFont.Check}"
+                                                                Size="25"
+                                                                Color="LawnGreen" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                    <Image
+                                                        HorizontalOptions="FillAndExpand"
+                                                        IsVisible="{Binding ItemFlag, Converter={StaticResource OppositeBooleanConverter}}"
+                                                        VerticalOptions="CenterAndExpand">
+                                                        <Image.Source>
+                                                            <FontImageSource
+                                                                FontFamily="{StaticResource FontAwesomeRegular}"
+                                                                Glyph="{x:Static resources:IconFont.CalendarAlt}"
+                                                                Size="25"
+                                                                Color="{StaticResource CustomNavyBlueDark}" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                </StackLayout>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <StackLayout
-                    x:Name="PrevNextNavigations"
-                    Margin="{StaticResource NextPrevNavigationThickness}"
-                    HorizontalOptions="CenterAndExpand"
-                    Orientation="Horizontal"
-                    VerticalOptions="End">
-                    <Image x:Name="PrevPageNavigation" HorizontalOptions="Center">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding PrevPageCommand}" />
-                        </Image.GestureRecognizers>
-                        <Image.Source>
-                            <FontImageSource
-                                x:Name="PrevPageNavigationIcon"
-                                FontFamily="{StaticResource FontAwesomeRegular}"
-                                Glyph="{x:Static resources:IconFont.ArrowLeft}"
-                                Size="{StaticResource IconSize-Medium}">
-                                <FontImageSource.Color>
-                                    <Binding Path="PrevNavigationButtonEnabled">
-                                        <Binding.Converter>
-                                            <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </FontImageSource.Color>
-                            </FontImageSource>
-                        </Image.Source>
-                    </Image>
-                    <Image
-                        x:Name="NextPageNavigation"
-                        Margin="70,0,0,0"
-                        HorizontalOptions="Center">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NextPageCommand}" />
-                        </Image.GestureRecognizers>
-                        <Image.Source>
-                            <FontImageSource
-                                x:Name="NextPageNavigationIcon"
-                                FontFamily="{StaticResource FontAwesomeRegular}"
-                                Glyph="{x:Static resources:IconFont.ArrowRight}"
-                                Size="{StaticResource IconSize-Medium}">
-                                <FontImageSource.Color>
-                                    <Binding Path="NextNavigationButtonEnabled">
-                                        <Binding.Converter>
-                                            <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </FontImageSource.Color>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout
+                        x:Name="PrevNextNavigations"
+                        Margin="{StaticResource NextPrevNavigationThickness}"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal"
+                        VerticalOptions="End">
+                        <Image x:Name="PrevPageNavigation" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PrevPageCommand}" />
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource
+                                    x:Name="PrevPageNavigationIcon"
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{x:Static resources:IconFont.ArrowLeft}"
+                                    Size="{StaticResource IconSize-Medium}">
+                                    <FontImageSource.Color>
+                                        <Binding Path="PrevNavigationButtonEnabled">
+                                            <Binding.Converter>
+                                                <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </FontImageSource.Color>
+                                </FontImageSource>
+                            </Image.Source>
+                        </Image>
+                        <Image
+                            x:Name="NextPageNavigation"
+                            Margin="70,0,0,0"
+                            HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NextPageCommand}" />
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource
+                                    x:Name="NextPageNavigationIcon"
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{x:Static resources:IconFont.ArrowRight}"
+                                    Size="{StaticResource IconSize-Medium}">
+                                    <FontImageSource.Color>
+                                        <Binding Path="NextNavigationButtonEnabled">
+                                            <Binding.Converter>
+                                                <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </FontImageSource.Color>
 
-                            </FontImageSource>
-                        </Image.Source>
-                    </Image>
+                                </FontImageSource>
+                            </Image.Source>
+                        </Image>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

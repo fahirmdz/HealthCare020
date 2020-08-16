@@ -3,11 +3,11 @@ using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using System;
 using System.Windows.Forms;
-using HealthCare020.Core.Enums;
 using dlgForm = Healthcare020.WinUI.Helpers.Dialogs.dlgForm;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
@@ -61,8 +61,8 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
             var isMedicinskiTehnicar = Auth.Role == RoleType.MedicinskiTehnicar;
             btnPdf.Visible = !isMedicinskiTehnicar;
-            btnSave.Visible = !isMedicinskiTehnicar;
-            btnUputnica.Visible = !isMedicinskiTehnicar;
+            btnSave.Visible = false;
+            btnUputnica.Visible = false;
         }
 
         private frmNewLekarskoUverenje(PregledDtoEL pregled)
@@ -95,18 +95,19 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 {
                     dlgSuccess.ShowDialog();
                     Close();
+                    await frmDoktorPreglediDisplay.InstanceWithData(true).ReloadData();
+                    frmDoktorPreglediDisplay.InstanceWithData(true).ShowSuccess();
                 }
             }
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
         {
-            if (LekarskoUverenje != null || ValidateInputs())
+            if (LekarskoUverenje != null || Pregled!=null || ValidateInputs())
             {
-                if (LekarskoUverenje != null)
-                    PDFService.GeneratePDFDocument(Pregled ?? LekarskoUverenje.Pregled,
-                        (cmbZdravstvenoStanje.SelectedItem as ZdravstvenoStanjeDto)?.Opis ?? string.Empty,
-                        txtOpisStanja.Text);
+                PDFService.GeneratePDFDocument(Pregled ?? LekarskoUverenje.Pregled,
+                    (cmbZdravstvenoStanje.SelectedItem as ZdravstvenoStanjeDto)?.Opis ?? string.Empty,
+                    txtOpisStanja.Text);
             }
         }
 
@@ -122,7 +123,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             cmbZdravstvenoStanje.DataSource = result.Data;
             cmbZdravstvenoStanje.ValueMember = nameof(ZdravstvenoStanjeDto.Id);
             cmbZdravstvenoStanje.DisplayMember = nameof(ZdravstvenoStanjeDto.Opis);
-            cmbZdravstvenoStanje.SelectedValue = LekarskoUverenje?.ZdravstvenoStanje?.Id??0;
+            cmbZdravstvenoStanje.SelectedValue = LekarskoUverenje?.ZdravstvenoStanje?.Id ?? 0;
         }
 
         private bool ValidateInputs()

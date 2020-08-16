@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Nexmo.Api;
+using System;
+using NLog;
 
 namespace HealthCare020.Services.Services
 {
@@ -11,9 +13,11 @@ namespace HealthCare020.Services.Services
     {
         private string APIKey { get; }
         private string APISecret { get; }
+        private readonly ILogger _logger;
 
         public SMSGateway(IOptions<ServicesConfiguration> options, IWebHostEnvironment env)
         {
+            _logger = LogManager.GetCurrentClassLogger();
             ServicesConfiguration.SMSGatewayConf conf;
             if (env.IsDevelopment())
             {
@@ -36,20 +40,27 @@ namespace HealthCare020.Services.Services
 
         public void Send(string recipientNumber, string message)
         {
-            var number = recipientNumber[0] == '0' ? recipientNumber.Replace("0", "387") : recipientNumber;
-            number = number[0] == '6' ? $"387{number}" : number;
+            try
+            {
+                var number = recipientNumber[0] == '0' ? recipientNumber.Replace("0", "387") : recipientNumber;
+                number = number[0] == '6' ? $"387{number}" : number;
 
-            var client = new Client(creds: new Nexmo.Api.Request.Credentials
+                var client = new Client(creds: new Nexmo.Api.Request.Credentials
+                {
+                    ApiKey = APIKey,
+                    ApiSecret = APISecret
+                });
+                client.SMS.Send(request: new SMS.SMSRequest
+                {
+                    @from = "Healthcare",
+                    to = number,
+                    text = message
+                });
+            }
+            catch (Exception ex)
             {
-                ApiKey = APIKey,
-                ApiSecret = APISecret
-            });
-            client.SMS.Send(request: new SMS.SMSRequest
-            {
-                @from = "Healthcare",
-                to = number,
-                text = message
-            });
+                _logger.Error(ex);
+            }
         }
     }
 }

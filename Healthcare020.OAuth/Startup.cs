@@ -2,6 +2,7 @@ using Healthcare020.LoggerService.Configuration;
 using Healthcare020.LoggerService.Interfaces;
 using Healthcare020.OAuth.Configuration;
 using Healthcare020.OAuth.Extensions;
+using Healthcare020.OAuth.Properties;
 using Healthcare020.OAuth.Services;
 using Healthcare020.OAuth.Validators;
 using HealthCare020.Core.Constants;
@@ -14,7 +15,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 
 namespace Healthcare020.OAuth
@@ -42,7 +42,7 @@ namespace Healthcare020.OAuth
 
             services.AddIdentityServer(opt =>
                 {
-                    opt.IssuerUri = "http://healthcare020-oauth";
+                    opt.IssuerUri = Resources.ProductionUri;
                     opt.Discovery.CustomEntries.Add("face-recognition", $"~/{Routes.FaceRecognitionRoute}");
                 })
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())

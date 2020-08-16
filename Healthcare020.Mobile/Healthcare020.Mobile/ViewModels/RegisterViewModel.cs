@@ -156,6 +156,7 @@ namespace Healthcare020.Mobile.ViewModels
 
         [Required(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.RequiredFieldError))]
         [DigitsOnly(ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.DigitsOnlyError))]
+        [StringLength(12, ErrorMessageResourceName = "JMBGLengthError", ErrorMessageResourceType = typeof(AppResources), MinimumLength = 9)]
         public string JMBG
         {
             get => _jmbg;

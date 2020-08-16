@@ -39,7 +39,6 @@
             <StackLayout
                 Grid.Row="1"
                 HorizontalOptions="FillAndExpand"
-                IsVisible="{Binding DataAvailable}"
                 VerticalOptions="FillAndExpand">
                 <StackLayout
                     Margin="30,5,0,0"
@@ -61,70 +60,103 @@
                         Placeholder="Pretraži zahteve po napomeni"
                         Text="{Binding SearchString}" />
                 </StackLayout>
-                <CollectionView
-                    x:Name="MainCollection"
-                    Margin="15"
-                    BackgroundColor="{StaticResource LightSmokeWhite}"
-                    HorizontalOptions="FillAndExpand"
-                    ItemsSource="{Binding ZahteviZaPregled}"
-                    SelectionMode="None"
-                    VerticalOptions="FillAndExpand">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="22" Orientation="Vertical" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <pancakeView:PancakeView
-                                BackgroundColor="{StaticResource LighterNavyBlue}"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="StartAndExpand">
-                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <BoxView
-                                        BackgroundColor="{StaticResource LighterNavyBlue}"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="FillAndExpand"
-                                        WidthRequest="3" />
-                                    <Expander Grid.Column="1" Tapped="Expander_OnTapped">
-                                        <Expander.Header>
-                                            <Grid BackgroundColor="{StaticResource LightNavyBlue}" HorizontalOptions="FillAndExpand">
+                <StackLayout IsVisible="{Binding DataAvailable}">
+                    <CollectionView
+                        x:Name="MainCollection"
+                        Margin="15"
+                        BackgroundColor="{StaticResource LightSmokeWhite}"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding ZahteviZaPregled}"
+                        SelectionMode="None"
+                        VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="22" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <pancakeView:PancakeView
+                                    BackgroundColor="{StaticResource LighterNavyBlue}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="StartAndExpand">
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <BoxView
+                                            BackgroundColor="{StaticResource LighterNavyBlue}"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="FillAndExpand"
+                                            WidthRequest="3" />
+                                        <Expander Grid.Column="1" Tapped="Expander_OnTapped">
+                                            <Expander.Header>
+                                                <Grid BackgroundColor="{StaticResource LightNavyBlue}" HorizontalOptions="FillAndExpand">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="3.5*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="CollectionItem_OnTapped" />
+                                                    </Grid.GestureRecognizers>
+                                                    <StackLayout
+                                                        BackgroundColor="{StaticResource LightNavyBlue}"
+                                                        ClassId="LabelsToScaleStack"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center">
+                                                        <Label
+                                                            ClassId="MonthDateLabel"
+                                                            FontSize="{StaticResource FontSize-Medium}"
+                                                            HorizontalOptions="Center"
+                                                            Text="{Binding DatumVreme, StringFormat='{0:dd}'}"
+                                                            TextColor="Aqua" />
+                                                        <Label
+                                                            Margin="0,-5,0,0"
+                                                            ClassId="MonthNameLabel"
+                                                            FontSize="{StaticResource FontSize-Small}"
+                                                            HorizontalOptions="Center"
+                                                            Text="{Binding DatumVreme, StringFormat='{0:MMMM}'}"
+                                                            TextColor="Aqua" />
+                                                        <Label
+                                                            Margin="0,-10,0,0"
+                                                            ClassId="MonthNameLabel"
+                                                            FontSize="{StaticResource FontSize-Smaller}"
+                                                            HorizontalOptions="Center"
+                                                            Text="{Binding DatumVreme, StringFormat='{0:yyyy}'}"
+                                                            TextColor="Aqua" />
+                                                    </StackLayout>
+                                                    <BoxView
+                                                        Grid.Column="1"
+                                                        HorizontalOptions="Start"
+                                                        VerticalOptions="FillAndExpand"
+                                                        WidthRequest="1" />
+                                                    <StackLayout
+                                                        Grid.Column="2"
+                                                        Margin="20"
+                                                        HorizontalOptions="Start"
+                                                        VerticalOptions="Center">
+                                                        <StackLayout>
+                                                            <Label
+                                                                FontAttributes="Bold"
+                                                                FontFamily="{StaticResource Montserrat-Bold}"
+                                                                FontSize="{StaticResource FontSize-Small}"
+                                                                Text="Doktor: "
+                                                                TextColor="White" />
+                                                            <Label
+                                                                FontFamily="{StaticResource Montserrat-Light}"
+                                                                FontSize="{StaticResource FontSize-Small}"
+                                                                Text="{Binding Doktor}"
+                                                                TextColor="White" />
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </Expander.Header>
+                                            <Grid BackgroundColor="{StaticResource LighterNavyBlue}" HorizontalOptions="FillAndExpand">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*" />
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="3.5*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Grid.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="CollectionItem_OnTapped" />
-                                                </Grid.GestureRecognizers>
-                                                <StackLayout
-                                                    BackgroundColor="{StaticResource LightNavyBlue}"
-                                                    ClassId="LabelsToScaleStack"
-                                                    HorizontalOptions="Center"
-                                                    VerticalOptions="Center">
-                                                    <Label
-                                                        ClassId="MonthDateLabel"
-                                                        FontSize="{StaticResource FontSize-Medium}"
-                                                        HorizontalOptions="Center"
-                                                        Text="{Binding DatumVreme, StringFormat='{0:dd}'}"
-                                                        TextColor="Aqua" />
-                                                    <Label
-                                                        Margin="0,-5,0,0"
-                                                        ClassId="MonthNameLabel"
-                                                        FontSize="{StaticResource FontSize-Small}"
-                                                        HorizontalOptions="Center"
-                                                        Text="{Binding DatumVreme, StringFormat='{0:MMMM}'}"
-                                                        TextColor="Aqua" />
-                                                    <Label
-                                                        Margin="0,-10,0,0"
-                                                        ClassId="MonthNameLabel"
-                                                        FontSize="{StaticResource FontSize-Smaller}"
-                                                        HorizontalOptions="Center"
-                                                        Text="{Binding DatumVreme, StringFormat='{0:yyyy}'}"
-                                                        TextColor="Aqua" />
-                                                </StackLayout>
                                                 <BoxView
                                                     Grid.Column="1"
                                                     HorizontalOptions="Start"
@@ -132,125 +164,94 @@
                                                     WidthRequest="1" />
                                                 <StackLayout
                                                     Grid.Column="2"
-                                                    Margin="20"
-                                                    HorizontalOptions="Start"
-                                                    VerticalOptions="Center">
-                                                    <StackLayout>
-                                                        <Label
-                                                            FontAttributes="Bold"
-                                                            FontFamily="{StaticResource Montserrat-Bold}"
-                                                            FontSize="{StaticResource FontSize-Small}"
-                                                            Text="Doktor: "
-                                                            TextColor="White" />
-                                                        <Label
-                                                            FontFamily="{StaticResource Montserrat-Light}"
-                                                            FontSize="{StaticResource FontSize-Small}"
-                                                            Text="{Binding Doktor}"
-                                                            TextColor="White" />
-                                                    </StackLayout>
-                                                </StackLayout>
-                                            </Grid>
-                                        </Expander.Header>
-                                        <Grid BackgroundColor="{StaticResource LighterNavyBlue}" HorizontalOptions="FillAndExpand">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="3.5*" />
-                                            </Grid.ColumnDefinitions>
-                                            <BoxView
-                                                Grid.Column="1"
-                                                HorizontalOptions="Start"
-                                                VerticalOptions="FillAndExpand"
-                                                WidthRequest="1" />
-                                            <StackLayout
-                                                Grid.Column="2"
-                                                Margin="0,5"
-                                                BackgroundColor="{StaticResource LighterNavyBlue}"
-                                                Spacing="2">
-                                                <Label
-                                                    Margin="20,0"
-                                                    FontFamily="{StaticResource Montserrat-Bold}"
-                                                    FontSize="{StaticResource FontSize-Small}"
-                                                    Text="Napomena:"
-                                                    TextColor="White" />
-                                                <Label
-                                                    Margin="20,2,10,10"
-                                                    FontSize="{StaticResource FontSize-Small}"
-                                                    HorizontalOptions="Start"
-                                                    Text="{Binding Napomena}"
-                                                    TextColor="White" />
-                                                <StackLayout Orientation="Horizontal">
+                                                    Margin="0,5"
+                                                    BackgroundColor="{StaticResource LighterNavyBlue}"
+                                                    Spacing="2">
                                                     <Label
                                                         Margin="20,0"
                                                         FontFamily="{StaticResource Montserrat-Bold}"
                                                         FontSize="{StaticResource FontSize-Small}"
-                                                        Text="Obrađen:"
+                                                        Text="Napomena:"
                                                         TextColor="White" />
                                                     <Label
-                                                        Margin="0"
+                                                        Margin="20,2,10,10"
                                                         FontSize="{StaticResource FontSize-Small}"
                                                         HorizontalOptions="Start"
-                                                        Text="{Binding IsObradjen, Converter={StaticResource BooleanYesOrNoConverter}}"
+                                                        Text="{Binding Napomena}"
                                                         TextColor="White" />
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label
+                                                            Margin="20,0"
+                                                            FontFamily="{StaticResource Montserrat-Bold}"
+                                                            FontSize="{StaticResource FontSize-Small}"
+                                                            Text="Obrađen:"
+                                                            TextColor="White" />
+                                                        <Label
+                                                            Margin="0"
+                                                            FontSize="{StaticResource FontSize-Small}"
+                                                            HorizontalOptions="Start"
+                                                            Text="{Binding IsObradjen, Converter={StaticResource BooleanYesOrNoConverter}}"
+                                                            TextColor="White" />
+                                                    </StackLayout>
                                                 </StackLayout>
-                                            </StackLayout>
-                                        </Grid>
-                                    </Expander>
-                                </Grid>
-                            </pancakeView:PancakeView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                <StackLayout
-                    x:Name="PrevNextNavigations"
-                    Margin="{StaticResource NextPrevNavigationThickness}"
-                    HorizontalOptions="CenterAndExpand"
-                    Orientation="Horizontal"
-                    VerticalOptions="End">
-                    <Image x:Name="PrevPageNavigation" HorizontalOptions="Center">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding PrevPageCommand}" />
-                        </Image.GestureRecognizers>
-                        <Image.Source>
-                            <FontImageSource
-                                x:Name="PrevPageNavigationIcon"
-                                FontFamily="{StaticResource FontAwesomeRegular}"
-                                Glyph="{x:Static resources:IconFont.ArrowLeft}"
-                                Size="{StaticResource IconSize-Medium}">
-                                <FontImageSource.Color>
-                                    <Binding Path="PrevNavigationButtonEnabled">
-                                        <Binding.Converter>
-                                            <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </FontImageSource.Color>
-                            </FontImageSource>
-                        </Image.Source>
-                    </Image>
-                    <Image
-                        x:Name="NextPageNavigation"
-                        Margin="70,0,0,0"
-                        HorizontalOptions="Center">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NextPageCommand}" />
-                        </Image.GestureRecognizers>
-                        <Image.Source>
-                            <FontImageSource
-                                x:Name="NextPageNavigationIcon"
-                                FontFamily="{StaticResource FontAwesomeRegular}"
-                                Glyph="{x:Static resources:IconFont.ArrowRight}"
-                                Size="{StaticResource IconSize-Medium}">
-                                <FontImageSource.Color>
-                                    <Binding Path="NextNavigationButtonEnabled">
-                                        <Binding.Converter>
-                                            <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </FontImageSource.Color>
+                                            </Grid>
+                                        </Expander>
+                                    </Grid>
+                                </pancakeView:PancakeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <StackLayout
+                        x:Name="PrevNextNavigations"
+                        Margin="{StaticResource NextPrevNavigationThickness}"
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal"
+                        VerticalOptions="End">
+                        <Image x:Name="PrevPageNavigation" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding PrevPageCommand}" />
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource
+                                    x:Name="PrevPageNavigationIcon"
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{x:Static resources:IconFont.ArrowLeft}"
+                                    Size="{StaticResource IconSize-Medium}">
+                                    <FontImageSource.Color>
+                                        <Binding Path="PrevNavigationButtonEnabled">
+                                            <Binding.Converter>
+                                                <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </FontImageSource.Color>
+                                </FontImageSource>
+                            </Image.Source>
+                        </Image>
+                        <Image
+                            x:Name="NextPageNavigation"
+                            Margin="70,0,0,0"
+                            HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NextPageCommand}" />
+                            </Image.GestureRecognizers>
+                            <Image.Source>
+                                <FontImageSource
+                                    x:Name="NextPageNavigationIcon"
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{x:Static resources:IconFont.ArrowRight}"
+                                    Size="{StaticResource IconSize-Medium}">
+                                    <FontImageSource.Color>
+                                        <Binding Path="NextNavigationButtonEnabled">
+                                            <Binding.Converter>
+                                                <converters:BooleanToColorConverter FalseColor="LightGray" TrueColor="{StaticResource HealthcareCyan}" />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </FontImageSource.Color>
 
-                            </FontImageSource>
-                        </Image.Source>
-                    </Image>
+                                </FontImageSource>
+                            </Image.Source>
+                        </Image>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </Grid>

@@ -9,6 +9,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Healthcare020.OAuth.Properties;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Healthcare020.OAuth.Controllers
 {
@@ -16,10 +19,12 @@ namespace Healthcare020.OAuth.Controllers
     public class FaceRecognitionController : Controller
     {
         private readonly IKorisnikService _korisnikService;
+        private readonly IWebHostEnvironment Environment;
 
-        public FaceRecognitionController(IKorisnikService korisnikService)
+        public FaceRecognitionController(IKorisnikService korisnikService,IWebHostEnvironment environment)
         {
             _korisnikService = korisnikService;
+            Environment = environment;
         }
 
         [HttpPost]
@@ -54,9 +59,10 @@ namespace Healthcare020.OAuth.Controllers
                                          + "&scope=openid offline_access face-recognition";
             var client = new HttpClient();
             HttpResponseMessage response;
+            var uri = Environment.IsDevelopment() ? $"{Request.Scheme}://{Request.Host.Value}" : Resources.ProductionUri;
             using (var stringContent = new StringContent(postBody, Encoding.UTF8, "application/x-www-form-urlencoded"))
             {
-                response = await client.PostAsync($"{Request.Scheme}://{Request.Host.Value}/connect/token", stringContent);
+                response = await client.PostAsync($@"{uri}/connect/token", stringContent);
             }
 
             if (response.StatusCode == HttpStatusCode.OK)

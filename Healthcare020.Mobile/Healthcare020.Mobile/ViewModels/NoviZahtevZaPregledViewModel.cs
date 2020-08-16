@@ -78,6 +78,7 @@ namespace Healthcare020.Mobile.ViewModels
             }
             else
             {
+                MainBodyVisible = true;
                 NotificationService.Instance.Error(result.StatusCode == HttpStatusCode.BadRequest
                     ? result.Message
                     : string.Empty);
@@ -111,7 +112,7 @@ namespace Healthcare020.Mobile.ViewModels
 
         private string _napomena;
 
-        [MaxLength(180, ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.MaxLength180Error))]
+        [StringLength(180, ErrorMessageResourceType = typeof(AppResources), ErrorMessageResourceName = nameof(AppResources.MaxLength180Error),MinimumLength = 5)]
         public string Napomena
         {
             get => _napomena;

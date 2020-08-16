@@ -16,6 +16,8 @@ namespace HealthCare020.Services.Interfaces
 
         Task<PersistedFace> AddFaceToPerson(string personGroupId, Guid personId, Stream stream);
 
+        Task<Guid?> AddFaceForUser(byte[] image, string username, Guid? personId = null, bool update = false);
+
         Task<Guid?> IdentifyFace(Stream stream, string personGroupId);
 
         Task DeletePersonGroup(string personGroupId);

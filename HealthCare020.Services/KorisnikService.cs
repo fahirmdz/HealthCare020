@@ -222,10 +222,11 @@ namespace HealthCare020.Services
             if (!identifiedPersonGuid.HasValue)
                 return null;
 
-            var encryptedPersonGuid = identifiedPersonGuid.ToString();
+            var personGuid = identifiedPersonGuid.ToString();
 
+            var korisnici = _dbContext.KorisnickiNalozi.ToList();
             var korisnickiNalog =
-                await _dbContext.KorisnickiNalozi.FirstOrDefaultAsync(x => x.FaceId == encryptedPersonGuid);
+                await _dbContext.KorisnickiNalozi.FirstOrDefaultAsync(x => x.FaceId.Equals(personGuid));
             if (korisnickiNalog == null)
                 return null;
 
