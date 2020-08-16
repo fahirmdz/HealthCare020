@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace HealthCare020.Services.Services
@@ -58,9 +59,18 @@ namespace HealthCare020.Services.Services
 
         public async Task<Person> CreatePersonInGroup(string personGroupId, string name)
         {
-            var person = await _faceClinet.PersonGroupPerson.CreateAsync(personGroupId, name, $"Date and time created: {DateTime.Now:g}");
+            try
+            {
+                var person = await _faceClinet.PersonGroupPerson.CreateWithHttpMessagesAsync(personGroupId, name,
+                    $"Date and time created: {DateTime.Now:g}");
 
-            return person;
+                return person?.Body;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Data);
+                return null;
+            }
         }
 
         public async Task<PersistedFace> AddFaceToPerson(string personGroupId, Guid personId, Stream stream)
@@ -148,6 +158,7 @@ namespace HealthCare020.Services.Services
             }
             catch (Exception ex)
             {
+                _logger.Error(ex.Data);
                 return null;
             }
         }
@@ -159,7 +170,17 @@ namespace HealthCare020.Services.Services
 
         public async Task<Person> GetPerson(Guid personId, string personGroupId)
         {
-            return await _faceClinet.PersonGroupPerson.GetAsync(personGroupId, personId);
+            try
+            {
+                var personRes = await _faceClinet.PersonGroupPerson.GetWithHttpMessagesAsync(personGroupId, personId);
+                return personRes?.Body;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Data);
+                return null;
+            }
         }
 
         public async Task DeletePersonFromGroup(Guid personId, string personGroupId)
@@ -169,7 +190,14 @@ namespace HealthCare020.Services.Services
 
         public async Task DeletePersonGroup(string personGroupId)
         {
-            await _faceClinet.PersonGroup.DeleteAsync(personGroupId);
+            try
+            {
+                await _faceClinet.PersonGroup.DeleteWithHttpMessagesAsync(personGroupId);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Data);
+            }
         }
 
         public async Task DeleteFacesFromPerson(string personGroupId, Guid personId)

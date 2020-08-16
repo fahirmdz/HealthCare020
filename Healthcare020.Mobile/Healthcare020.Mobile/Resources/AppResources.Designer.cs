@@ -394,7 +394,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maksimalan broj karaketera je 180.
+        ///   Looks up a localized string similar to Polje može sadržati izmedju 5 i 180 karaktera.
         /// </summary>
         public static string MaxLength180Error {
             get {
