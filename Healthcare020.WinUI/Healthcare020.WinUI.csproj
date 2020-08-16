@@ -49,9 +49,6 @@
     <Reference Include="IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e7877f4675df049f, processorArchitecture=MSIL">
       <HintPath>..\packages\IdentityModel.4.0.0\lib\net461\IdentityModel.dll</HintPath>
     </Reference>
-    <Reference Include="JTextBox">
-      <HintPath>D:\Downloads\JTextBox.dll</HintPath>
-    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
