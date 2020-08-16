@@ -7,16 +7,16 @@
 
   - Lični podaci pacijenata koji se mogu koristiti pri registraciji (nisu registrovani)
       1)
-         BrojZdravstveneKnjizice: 12
-         JMBG: 1234567891
-         Ime: Fahir
-         Prezime: Pacdvadeset
+        * BrojZdravstveneKnjizice: 12
+        * JMBG: 1234567891
+        * Ime: Fahir
+        * Prezime: Pacdvadeset
 
       2)
-         BrojZdravstveneKnjizice: 13
-         JMBG: 9874563211
-         Ime: Fahir
-         Prezime: Pacdvajedan
+        * BrojZdravstveneKnjizice: 13
+        * JMBG: 9874563211
+        * Ime: Fahir
+        * Prezime: Pacdvajedan
 
 
 # DESKTOP and recommendation system
