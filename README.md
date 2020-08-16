@@ -1,4 +1,4 @@
-# ================= **MOBILE**  ======================
+# MOBILE
 
   - Za registraciju pacijenta na mobilnoj aplikaciji, potrebno je potvrditi validnost ličnih podataka
     tako što će se unijeti broj zdravstvene knjižice, JMBG, ime i prezime. Ukoliko se podaci poklapaju
@@ -18,17 +18,15 @@
          Ime: Fahir
          Prezime: Pacdvajedan
 
-=========================================================
 
-
-# ================ **DESKTOP** Recommendation system =======================
+# DESKTOP and recommendation system
 
  - **STEPS**
      1) Logovati se na mobilnu aplikaciju koristeci username naveden ispod i password "testtest"
      2) Na prvom tabu kliknuti na Zakazi pregled i kreirati zahtev za pregled odabirom doktora "Fahir Dokt"
      3) Logovati se na desktop aplikaciju koristeci kredencijale:
-           - Username: doktor
-           - Passowrd: testtest
+           * Username: doktor
+           * Passowrd: testtest
      4) Nakon uspesnog logovanja kliknuti na button "Zahtevi za pregled" i pronaci kreirani zahtev
      5) Duplim klikom na red zahteva otvorice se dialog sa prikazom informacija o zahtevu
      6) Klikom na "Zakazi" otvorice se novi dialog za zakazivanje pregleda
@@ -38,21 +36,20 @@
 
      **FORMAT => PacijentUsername : PreporucenoVrijeme : Godiste**
 
-     -> pacijent : 10:00AM : 1993
-     -> pacijent2 : 12:00AM : 1993
-     -> pacijent3: 12:00AM : 1993
-     -> pacijent4: 12:00PM : 1993
-     -> pacijent5: 14:00PM : 1979
-     -> pacijent6: 14:00PM : 1979
-     -> pacijent7: 14:00PM : 1979
-     -> pacijent8: 15:00PM : 1956
-     -> pacijent9: 15:00PM : 1956
-     -> pacijent10: 15:00PM : 1956
-
-============================================================================
+     * pacijent : 10:00AM : 1993
+     * pacijent2 : 12:00AM : 1993
+     * pacijent3: 12:00AM : 1993
+     * pacijent4: 12:00PM : 1993
+     * pacijent5: 14:00PM : 1979
+     * pacijent6: 14:00PM : 1979
+     * pacijent7: 14:00PM : 1979
+     * pacijent8: 15:00PM : 1956
+     * pacijent9: 15:00PM : 1956
+     * pacijent10: 15:00PM : 1956
 
 
-# =============== **DESKTOP** Azure recognition services - Face API =======================
+
+# DESKTOP - Azure recognition services - Face API
 
  - U sklopu administratorskog panela na desktop aplikaciji, postoji tab "Security"
    na kojem je će se moći pregledati trenutno aktivni korisnici u sklopu "Healthcare020 Pacijenti"
@@ -70,9 +67,8 @@
    iz galerije telefona. Planirani način FaceID autentifikacije je upload trenutno kreirane slike,
    tako što će korisnik proslijediti trenutni selfie, a ne sliku iz galerije.
 
-==========================================================================================
 
-# ============= **MOBILE <-> DESKTOP** Zahtev za posetu ====================
+# MOBILE <-> DESKTOP - Zahtev za posetu
 
 - Na mobilnoj aplikaciji, postoji opcija za kreiranje zahteva za posetu, za neautentificirane
   korisnike tj. potencijalne posetioce. Posetioc unosi ime i prezime pacijenta na lečenju i bira
@@ -84,8 +80,8 @@
 
 - Na desktop aplikaciji, logirajući se kao radnik na prijemu, koristeći kredencijale:
 
-           -Username: radnikprijem
-           -Password: testtest
+           * Username: radnikprijem
+           * Password: testtest
 
   radnici će biti u mogućnosti da klikom na button "Automatski rasporedi posete", pozovu sistem automatskog rasporedjivanja zahteva za posete.
   Sistem je implementiran tako da rasporedjuje posete u dva dnevna termina i to za svakog pacijenta po maksimalno 2 posetioca u jednom terminu.
@@ -95,21 +91,21 @@
   (Možete mi se javiti da verifikujem vaš broj telefona, da bi isprobali funckionalnost)
 
 
-# ============= **DESKTOP** Doktori i medicinski tehničari ================
+# DESKTOP - Doktori i medicinski tehničari
 
  - Na desktop aplikaciji, pored administratora i radnika na prijemu, mogu se logovati i doktori i medicinski tehničari.
 
  - Kredencijali za testne korisnički nalozi za doktore su:
 
        1)
-           - Username: doktor
-           - Password: testtest
+           * Username: doktor
+           * Password: testtest
        2)
-           - Username: doktor2
-           - Password: testtest
+           * Username: doktor2
+           * Password: testtest
 
  - Kredencijali za testni korisnički nalog za medicinske tehničare je:
 
        1)
-           - Username: medicinskitehnicar
-           - Password: testtest
+           * Username: medicinskitehnicar
+           * Password: testtest
