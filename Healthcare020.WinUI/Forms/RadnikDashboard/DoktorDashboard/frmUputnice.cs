@@ -1,8 +1,10 @@
 ﻿using Healthcare020.WinUI.Forms.AbstractForms;
+using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
 using Healthcare020.WinUI.Properties;
 using Healthcare020.WinUI.Services;
 using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
 using System;
@@ -59,7 +61,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             AddColumnsToMainDgrv(new[] { ID, Pacijent, upucenKodDoktora, DatumVreme });
 
             _apiService = new APIService(Routes.UputnicaRoute);
-            ResourceParameters = new UputnicaResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true, UpuceneUputnice = NamenjenjeTrenutnoLogovanomKorisniku };
+            ResourceParameters = new UputnicaResourceParameters { EagerLoaded = true, UpuceneUputnice = NamenjenjeTrenutnoLogovanomKorisniku };
 
             InitializeComponent();
             btnNew.Visible = false;
@@ -84,6 +86,9 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (Auth.Role == RoleType.MedicinskiTehnicar)
+                return;
+
             if (!(dgrvMain.CurrentRow?.DataBoundItem is UputnicaDtoEL uputnica))
                 return;
 

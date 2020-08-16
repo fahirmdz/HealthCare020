@@ -61,7 +61,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://healthcare020-api.com:5001/api/.
+        ///   Looks up a localized string similar to http://10.0.2.2:5200/api/.
         /// </summary>
         public static string ApiUrl {
             get {
@@ -70,7 +70,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://192.168.100.18:7500/api/.
+        ///   Looks up a localized string similar to http://10.0.2.2:5200/api/.
         /// </summary>
         public static string ApiUrlAndroid {
             get {
@@ -286,7 +286,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://192.168.100.18:7600/connect/token.
+        ///   Looks up a localized string similar to https://10.0.2.2:5305/connect/token.
         /// </summary>
         public static string IdpTokenEndpoint {
             get {
@@ -295,7 +295,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://192.168.100.18:7600/connect/token.
+        ///   Looks up a localized string similar to https://10.0.2.2:5305/connect/token.
         /// </summary>
         public static string IdpTokenEndpointAndroid {
             get {
@@ -304,7 +304,7 @@ namespace Healthcare020.Mobile.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://192.168.100.18:7600/face-recognition.
+        ///   Looks up a localized string similar to https://10.0.2.2:5305/face-recognition.
         /// </summary>
         public static string IdpTokenEndpointFaceId {
             get {

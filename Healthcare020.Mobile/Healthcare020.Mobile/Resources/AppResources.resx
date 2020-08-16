@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApiUrl" xml:space="preserve">
-    <value>https://healthcare020-api.com:5001/api/</value>
+    <value>http://10.0.2.2:5200/api/</value>
   </data>
   <data name="ApiUrlAndroid" xml:space="preserve">
-    <value>https://192.168.100.18:7500/api/</value>
+    <value>http://10.0.2.2:5200/api/</value>
     <comment> 10.0.2.2:5001</comment>
   </data>
   <data name="AzureFaceAPI_Endpoint" xml:space="preserve">
@@ -194,15 +194,15 @@
     <value>devsecret_mobile</value>
   </data>
   <data name="IdpTokenEndpoint" xml:space="preserve">
-    <value>https://192.168.100.18:7600/connect/token</value>
+    <value>https://10.0.2.2:5305/connect/token</value>
     <comment>192.168.100.18:7600</comment>
   </data>
   <data name="IdpTokenEndpointAndroid" xml:space="preserve">
-    <value>https://192.168.100.18:7600/connect/token</value>
+    <value>https://10.0.2.2:5305/connect/token</value>
     <comment> 10.0.2.2:5007  10.0.2.2:5005</comment>
   </data>
   <data name="IdpTokenEndpointFaceId" xml:space="preserve">
-    <value>https://192.168.100.18:7600/face-recognition</value>
+    <value>https://10.0.2.2:5305/face-recognition</value>
   </data>
   <data name="ImePrezimeLengthError" xml:space="preserve">
     <value>Polje mora sadržati izmedju 2 i 20 slova</value>

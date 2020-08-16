@@ -113,6 +113,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                         break;
 
                     case RoleType.MedicinskiTehnicar:
+                        formToOpen = frmDoktorMainDashboard.Instance;
                         break;
 
                     case RoleType.Pacijent:

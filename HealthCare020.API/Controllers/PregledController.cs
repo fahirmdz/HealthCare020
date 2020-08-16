@@ -59,6 +59,7 @@ namespace HealthCare020.API.Controllers
             return await base.Insert(dtoForCreation);
         }
 
+        //[Authorize(AuthorizationPolicies.DoktorPolicy)]
         [AllowAnonymous]
         [HttpGet("recommend-time")]
         public async Task<IActionResult> GetRecommendedPregledTime([FromQuery] int godiste)

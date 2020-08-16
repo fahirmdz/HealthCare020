@@ -50,7 +50,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             AddColumnsToMainDgrv(new[] { ID, Naziv, Brisi });
             _apiService = new APIService(Routes.RolesRoute);
             Text = Resources.frmRoles;
-            ResourceParameters = new TwoFieldsResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount };
+            ResourceParameters = new TwoFieldsResourceParameters();
 
             InitializeComponent();
         }
@@ -109,6 +109,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private void frmRoles_Load(object sender, EventArgs e)
         {
+            DisplayDataForm_Load(sender, e);
             FormForBackButton = frmPredefinedDataMenu.Instance;
         }
     }

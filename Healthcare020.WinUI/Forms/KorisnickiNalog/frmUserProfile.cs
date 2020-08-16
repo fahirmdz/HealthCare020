@@ -117,6 +117,22 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                 var doktor = result.Data.First();
                 licniPodaciId = doktor.Radnik?.LicniPodaciId ?? 0;
             }
+            else if (Auth.Role == RoleType.MedicinskiTehnicar)
+            {
+                _apiService.ChangeRoute(Routes.MedicinskiTehnicariRoute);
+
+                var result = await _apiService.Get<MedicinskiTehnicarDtoLL>(new MedicinskiTehnicarResourceParameters
+                { KorisnickiNalogId = Auth.KorisnickiNalog.Id});
+
+                if (!result.Succeeded || result.Data == null)
+                {
+                    dlgError.ShowDialog(Resources.UnableToLoadUserProfileMessage);
+                    return;
+                }
+
+                var medicinskiTehnicar = result.Data.First();
+                licniPodaciId = medicinskiTehnicar.LicniPodaciId;
+            }
             else if (Auth.Role == RoleType.RadnikPrijem)
             {
                 _apiService.ChangeRoute(Routes.RadniciPrijemRoute);

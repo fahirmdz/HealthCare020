@@ -109,7 +109,10 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             cmbDoktori.DataSource = result.Data.Select(x => new ComboBoxItem($"{x.Radnik.Ime} {x.Radnik.Prezime}", x.Id)).ToList();
             cmbDoktori.ValueMember = nameof(ComboBoxItem.Value);
             cmbDoktori.DisplayMember = nameof(ComboBoxItem.Text);
-            cmbDoktori.SelectedValue = Uputnica?.UpucenKodDoktoraId ?? 0;
+            cmbDoktori.SelectedValue = Uputnica != null
+                ? Uputnica.UputioDoktorId == Auth.CurrentLoggedInDoktor.Id ? Uputnica.UpucenKodDoktoraId :
+                Uputnica.UputioDoktorId
+                : 0;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

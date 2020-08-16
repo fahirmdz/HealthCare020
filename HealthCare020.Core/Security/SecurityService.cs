@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using HealthCare020.Services.Interfaces;
 
-namespace HealthCare020.Services.Services
+namespace HealthCare020.Core.Security
 {
     public class SecurityService:ISecurityService
     {

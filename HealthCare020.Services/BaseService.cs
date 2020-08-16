@@ -5,12 +5,12 @@ using HealthCare020.Core.ServiceModels;
 using HealthCare020.Repository;
 using HealthCare020.Services.Helpers;
 using HealthCare020.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Services
 {
@@ -32,7 +32,10 @@ namespace HealthCare020.Services
             _authService = authService;
         }
 
-        public virtual async Task<List<int>> Count(int MonthsCount) => new List<int>{await _dbContext.Set<TEntity>().CountAsync()};
+        public virtual async Task<List<int>> Count(int MonthsCount)
+        {
+            return new List<int> { await _dbContext.Set<TEntity>().CountAsync() };
+        }
 
         public virtual async Task<ServiceResult> Get(TResourceParameters resourceParameters)
         {
@@ -124,7 +127,6 @@ namespace HealthCare020.Services
 
         public virtual async Task<bool> AuthorizePacijentForGetById(int id)
         {
-
             return true;
         }
 

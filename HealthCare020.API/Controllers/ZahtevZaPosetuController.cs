@@ -40,6 +40,7 @@ namespace HealthCare020.API.Controllers
         }
 
         [HttpGet("auto-scheduling")]
+        [Authorize(AuthorizationPolicies.RadnikPrijemPolicy)]
         public async Task<IActionResult> AutoScheduling()
         {
             if (_crudService is ZahtevZaPosetuService service)

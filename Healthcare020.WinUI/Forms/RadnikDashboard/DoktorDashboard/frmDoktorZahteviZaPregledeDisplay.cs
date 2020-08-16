@@ -5,7 +5,10 @@ using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using HealthCare020.Core.ResourceParameters;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCare020.Core.Enums;
+using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 {
@@ -49,7 +52,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             AddColumnsToMainDgrv(new[] { ID, Pacijent, IsObradjen, DatumVreme });
 
             _apiService = new APIService(Routes.ZahteviZaPregledRoute);
-            ResourceParameters = new ZahtevZaPregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
+            ResourceParameters = new ZahtevZaPregledResourceParameters() { EagerLoaded = true };
 
             InitializeComponent();
 
@@ -69,6 +72,9 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (Auth.Role == RoleType.MedicinskiTehnicar)
+                return;
+
             if (!(dgrvMain.CurrentRow?.DataBoundItem is ZahtevZaPregledDtoEL zahtevZaPregled))
                 return;
 
@@ -111,6 +117,16 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
                 zahteviZaPregledResParams.PacijentPrezime = SearchText;
                 await base.LoadData();
             }
+        }
+
+        public void ShowSuccess()
+        {
+            dlgSuccess.ShowDialog();
+        }
+
+        public async Task ReloadData()
+        {
+            await LoadData();
         }
     }
 }

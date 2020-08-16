@@ -91,6 +91,7 @@ namespace Healthcare020.WinUI.Services
                     return APIServiceResult<List<int>>.WithStatusCode(response.StatusCode);
                 }
 
+                var str = await response.Content.ReadAsStringAsync();
                 return APIServiceResult<List<int>>.OK(await response.Content.ReadAsAsync<List<int>>());
             }
             catch (Exception ex)

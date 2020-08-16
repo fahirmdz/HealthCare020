@@ -74,7 +74,6 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
             ResourceParameters = new ZahtevZaPosetuResourceParameters()
             {
                 PageNumber = 1,
-                PageSize = PossibleRowsCount,
                 EagerLoaded = true,
                 NeobradjeneOnly = NeobradjeniZahteviOnly,
                 ObradjeneOnly = ObradjeniZahteviOnly

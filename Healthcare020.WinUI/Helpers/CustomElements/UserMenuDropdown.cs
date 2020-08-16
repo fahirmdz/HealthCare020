@@ -122,7 +122,9 @@ namespace Healthcare020.WinUI.Helpers.CustomElements
                 case RoleType.Doktor:
                     frmDoktorMainDashboard.Instance.OpenAsChildOfControl(Parent);
                     break;
-
+                case RoleType.MedicinskiTehnicar:
+                    frmDoktorMainDashboard.Instance.OpenAsChildOfControl(Parent);
+                    break;
                 case RoleType.RadnikPrijem:
                     frmRadnikPrijemMainDashboard.Instance.OpenAsChildOfControl(Parent);
                     break;

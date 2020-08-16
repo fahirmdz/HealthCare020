@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthCare020.Repository
 {
-    public class HealthCare020DbContext : DbContext
+    public partial class HealthCare020DbContext : DbContext
     {
         public HealthCare020DbContext(DbContextOptions<HealthCare020DbContext> options) : base(options)
         {
@@ -70,7 +70,12 @@ namespace HealthCare020.Repository
                 .HasOne(x => x.ZdravstvenaKnjizica)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            OnModelCreatingPartial(modelBuilder);
         }
+
+         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
 
         public DbSet<Drzava> Drzave { get; set; }
         public DbSet<Grad> Gradovi { get; set; }

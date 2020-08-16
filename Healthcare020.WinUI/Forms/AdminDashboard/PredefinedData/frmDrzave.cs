@@ -57,7 +57,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             _apiService = new APIService(Routes.DrzaveRoute);
             Text = Resources.frmDrzave;
-            ResourceParameters = new DrzavaResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount };
+            ResourceParameters = new DrzavaResourceParameters();
 
             InitializeComponent();
         }

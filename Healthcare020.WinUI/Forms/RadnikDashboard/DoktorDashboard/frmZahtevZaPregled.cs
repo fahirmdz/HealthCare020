@@ -1,5 +1,6 @@
 ﻿using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using System.Windows.Forms;
 
@@ -14,7 +15,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         {
             ZahtevZaPregled = zahtevZaPregled;
             InitializeComponent();
-            btnZakazi.Visible = !ZahtevZaPregled.IsObradjen;
+            btnZakazi.Visible = !ZahtevZaPregled.IsObradjen && Auth.Role != RoleType.MedicinskiTehnicar;
         }
 
         public static frmZahtevZaPregled InstanceWithData(ZahtevZaPregledDtoEL zahtevZaPregled)

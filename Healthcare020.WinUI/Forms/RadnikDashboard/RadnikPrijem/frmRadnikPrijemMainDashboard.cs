@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using HealthCare020.Core.Constants;
+using HealthCare020.Core.Enums;
 using HealthCare020.Core.Models;
 using Healthcare020.WinUI.Helpers;
 using Healthcare020.WinUI.Helpers.Dialogs;
@@ -26,6 +27,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem
         {
             _apiService=new APIService(Routes.ZahtevZaPosetuRoute);
             InitializeComponent();
+            btnAutoSchedulePosete.Visible = Auth.Role != RoleType.MedicinskiTehnicar;
         }
 
         private void btnPosete_Click(object sender, System.EventArgs e)

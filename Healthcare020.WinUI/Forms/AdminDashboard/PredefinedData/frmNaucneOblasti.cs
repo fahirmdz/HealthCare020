@@ -57,7 +57,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             };
 
             AddColumnsToMainDgrv(new DataGridViewColumn[] { ID, Naziv, Brisi });
-            ResourceParameters = new TwoFieldsResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount };
+            ResourceParameters = new TwoFieldsResourceParameters();
             _apiService = new APIService(Routes.NaucneOblastiRoute);
             InitializeComponent();
         }
@@ -117,6 +117,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private void frmNaucneOblasti_Load(object sender, EventArgs e)
         {
+            DisplayDataForm_Load(sender, e);
             FormForBackButton = frmPredefinedDataMenu.Instance;
         }
     }

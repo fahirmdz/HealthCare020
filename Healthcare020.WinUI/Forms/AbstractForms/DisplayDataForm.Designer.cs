@@ -104,7 +104,6 @@
             this.dgrvMain.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellDoubleClick);
             this.dgrvMain.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgrvMain_CellFormatting);
             this.dgrvMain.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrvMain_CellValueChanged);
-            this.dgrvMain.SizeChanged += new System.EventHandler(this.dgrvMain_SizeChanged);
             // 
             // btnPrevPage
             // 

@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -50,9 +51,11 @@ namespace HealthCare020.Services
         public override async Task<List<int>> Count(int MonthsCount)
         {
             if (MonthsCount == 0)
-                return new List<int> { await _dbContext.ZahteviZaPregled.CountAsync() };
+                return new List<int> { await _dbContext.Set<ZahtevZaPregled>().CountAsync() };
 
-            int startMonth = DateTime.Now.Month - MonthsCount;
+            int startMonth = DateTime.Now.Month - MonthsCount+1;
+            int firstMonth = DateTime.Now.Month - MonthsCount+1;
+            int lastMonth = DateTime.Now.Month;
             var year = DateTime.Now.Year;
 
             if (startMonth < 1)
@@ -60,6 +63,15 @@ namespace HealthCare020.Services
                 startMonth += 12;
                 year = DateTime.Now.Year - 1;
             }
+
+            var daysOfStartMonth = DateTime.DaysInMonth(year, startMonth);
+            var dayInMonth = DateTime.Now.Day;
+            var lastDayOfLastMonthToInclude = dayInMonth==1?DateTime.DaysInMonth(year,DateTime.Now.Month):dayInMonth;
+            var startDayInFirstMonthToInclude = dayInMonth==1?1:dayInMonth;
+            if (startDayInFirstMonthToInclude > daysOfStartMonth)
+                startDayInFirstMonthToInclude = daysOfStartMonth;
+
+
 
             var monthsCountsList = new List<int>();
 
@@ -70,7 +82,10 @@ namespace HealthCare020.Services
                     startMonth = 1;
                     year++;
                 }
-                monthsCountsList.Add(await _dbContext.ZahteviZaPregled.CountAsync(x => x.DatumVreme.Year == year && x.DatumVreme.Month == startMonth));
+                monthsCountsList.Add(await _dbContext.Set<ZahtevZaPregled>().CountAsync(x => x.DatumVreme.Year == year
+                                                                                     && x.DatumVreme.Month == startMonth
+                                                                                     && (startMonth != firstMonth || x.DatumVreme.Day >= startDayInFirstMonthToInclude)
+                                                                                     && (startMonth != lastMonth || x.DatumVreme.Day <= lastDayOfLastMonthToInclude)));
                 startMonth++;
             }
 
