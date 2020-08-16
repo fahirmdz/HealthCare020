@@ -1,4 +1,4 @@
-﻿================= **MOBILE**  ======================
+# ================= **MOBILE**  ======================
 
   - Za registraciju pacijenta na mobilnoj aplikaciji, potrebno je potvrditi validnost ličnih podataka
     tako što će se unijeti broj zdravstvene knjižice, JMBG, ime i prezime. Ukoliko se podaci poklapaju
@@ -18,10 +18,10 @@
          Ime: Fahir
          Prezime: Pacdvajedan
 
-======================================================================================================================================
+=========================================================
 
 
-================ **DESKTOP** Recommendation system =======================
+# ================ **DESKTOP** Recommendation system =======================
 
  - **STEPS**
      1) Logovati se na mobilnu aplikaciju koristeci username naveden ispod i password "testtest"
@@ -52,7 +52,7 @@
 ============================================================================
 
 
-=============== **DESKTOP** Azure recognition services - Face API =======================
+# =============== **DESKTOP** Azure recognition services - Face API =======================
 
  - U sklopu administratorskog panela na desktop aplikaciji, postoji tab "Security"
    na kojem je će se moći pregledati trenutno aktivni korisnici u sklopu "Healthcare020 Pacijenti"
@@ -72,7 +72,7 @@
 
 ==========================================================================================
 
-============= **MOBILE <-> DESKTOP** Zahtev za posetu ====================
+# ============= **MOBILE <-> DESKTOP** Zahtev za posetu ====================
 
 - Na mobilnoj aplikaciji, postoji opcija za kreiranje zahteva za posetu, za neautentificirane
   korisnike tj. potencijalne posetioce. Posetioc unosi ime i prezime pacijenta na lečenju i bira
@@ -95,7 +95,7 @@
   (Možete mi se javiti da verifikujem vaš broj telefona, da bi isprobali funckionalnost)
 
 
-============= **DESKTOP** Doktori i medicinski tehničari ================
+# ============= **DESKTOP** Doktori i medicinski tehničari ================
 
  - Na desktop aplikaciji, pored administratora i radnika na prijemu, mogu se logovati i doktori i medicinski tehničari.
 
