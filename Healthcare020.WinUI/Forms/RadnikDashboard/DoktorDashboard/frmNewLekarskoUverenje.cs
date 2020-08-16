@@ -7,6 +7,7 @@ using HealthCare020.Core.Models;
 using HealthCare020.Core.Request;
 using System;
 using System.Windows.Forms;
+using HealthCare020.Core.Enums;
 using dlgForm = Healthcare020.WinUI.Helpers.Dialogs.dlgForm;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
@@ -57,6 +58,11 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             btnSave.Visible = false;
             txtOpisStanja.ReadOnly = true;
             cmbZdravstvenoStanje.Enabled = false;
+
+            var isMedicinskiTehnicar = Auth.Role == RoleType.MedicinskiTehnicar;
+            btnPdf.Visible = !isMedicinskiTehnicar;
+            btnSave.Visible = !isMedicinskiTehnicar;
+            btnUputnica.Visible = !isMedicinskiTehnicar;
         }
 
         private frmNewLekarskoUverenje(PregledDtoEL pregled)
@@ -116,7 +122,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             cmbZdravstvenoStanje.DataSource = result.Data;
             cmbZdravstvenoStanje.ValueMember = nameof(ZdravstvenoStanjeDto.Id);
             cmbZdravstvenoStanje.DisplayMember = nameof(ZdravstvenoStanjeDto.Opis);
-            cmbZdravstvenoStanje.SelectedIndex = LekarskoUverenje?.ZdravstvenoStanje.Id ?? 0;
+            cmbZdravstvenoStanje.SelectedValue = LekarskoUverenje?.ZdravstvenoStanje?.Id??0;
         }
 
         private bool ValidateInputs()

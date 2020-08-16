@@ -45,6 +45,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
         {
             KeyPreview = true;
             pnlBody.BringToFront();
+            txtUsername.Focus();
         }
 
         private void frmLogin_Resize(object sender, EventArgs e)
@@ -112,6 +113,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                         break;
 
                     case RoleType.MedicinskiTehnicar:
+                        formToOpen = frmDoktorMainDashboard.Instance;
                         break;
 
                     case RoleType.Pacijent:

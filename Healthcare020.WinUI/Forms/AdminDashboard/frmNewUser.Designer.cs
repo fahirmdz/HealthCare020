@@ -108,7 +108,7 @@
             this.txtUsername.SelectionLength = 0;
             this.txtUsername.SelectionStart = 0;
             this.txtUsername.Size = new System.Drawing.Size(239, 23);
-            this.txtUsername.TabIndex = 6;
+            this.txtUsername.TabIndex = 10;
             this.txtUsername.UseSystemPasswordChar = false;
             // 
             // lblPassword
@@ -139,7 +139,7 @@
             this.txtPassword.SelectionLength = 0;
             this.txtPassword.SelectionStart = 0;
             this.txtPassword.Size = new System.Drawing.Size(203, 23);
-            this.txtPassword.TabIndex = 8;
+            this.txtPassword.TabIndex = 11;
             this.txtPassword.UseSystemPasswordChar = false;
             // 
             // txtConfirmPassword
@@ -156,7 +156,7 @@
             this.txtConfirmPassword.SelectionLength = 0;
             this.txtConfirmPassword.SelectionStart = 0;
             this.txtConfirmPassword.Size = new System.Drawing.Size(239, 23);
-            this.txtConfirmPassword.TabIndex = 10;
+            this.txtConfirmPassword.TabIndex = 12;
             this.txtConfirmPassword.UseSystemPasswordChar = false;
             // 
             // lblConfirmPassword
@@ -219,7 +219,7 @@
             this.rbtnAdministrator.MouseState = MaterialSkin.MouseState.HOVER;
             this.rbtnAdministrator.Name = "rbtnAdministrator";
             this.rbtnAdministrator.Ripple = true;
-            this.rbtnAdministrator.Size = new System.Drawing.Size(114, 30);
+            this.rbtnAdministrator.Size = new System.Drawing.Size(158, 30);
             this.rbtnAdministrator.TabIndex = 18;
             this.rbtnAdministrator.Text = "Administratoristrator";
             this.rbtnAdministrator.UseVisualStyleBackColor = true;
@@ -356,7 +356,7 @@
             this.cmbPolovi.Location = new System.Drawing.Point(412, 113);
             this.cmbPolovi.Name = "cmbPolovi";
             this.cmbPolovi.Size = new System.Drawing.Size(239, 31);
-            this.cmbPolovi.TabIndex = 55;
+            this.cmbPolovi.TabIndex = 4;
             // 
             // lblJmbg
             // 
@@ -389,7 +389,7 @@
             this.cmbNaucneOblasti.Location = new System.Drawing.Point(735, 364);
             this.cmbNaucneOblasti.Name = "cmbNaucneOblasti";
             this.cmbNaucneOblasti.Size = new System.Drawing.Size(207, 31);
-            this.cmbNaucneOblasti.TabIndex = 69;
+            this.cmbNaucneOblasti.TabIndex = 14;
             // 
             // lblStacionarnoOdeljenje
             // 
@@ -412,7 +412,7 @@
             this.cmbStacionarnaOdeljenja.Location = new System.Drawing.Point(735, 266);
             this.cmbStacionarnaOdeljenja.Name = "cmbStacionarnaOdeljenja";
             this.cmbStacionarnaOdeljenja.Size = new System.Drawing.Size(207, 31);
-            this.cmbStacionarnaOdeljenja.TabIndex = 67;
+            this.cmbStacionarnaOdeljenja.TabIndex = 13;
             // 
             // btnSave
             // 
@@ -431,7 +431,7 @@
             this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
             this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
             this.btnSave.Size = new System.Drawing.Size(198, 55);
-            this.btnSave.TabIndex = 66;
+            this.btnSave.TabIndex = 15;
             this.btnSave.Text = "Sačuvaj";
             this.btnSave.TextColor = System.Drawing.Color.White;
             this.btnSave.UseVisualStyleBackColor = true;
@@ -458,7 +458,7 @@
             this.cmbDrzave.Location = new System.Drawing.Point(71, 272);
             this.cmbDrzave.Name = "cmbDrzave";
             this.cmbDrzave.Size = new System.Drawing.Size(250, 31);
-            this.cmbDrzave.TabIndex = 64;
+            this.cmbDrzave.TabIndex = 7;
             this.cmbDrzave.SelectionChangeCommitted += new System.EventHandler(this.cmbDrzave_SelectionChangeCommitted);
             // 
             // lblCity
@@ -533,7 +533,7 @@
             this.cmbGradovi.Location = new System.Drawing.Point(412, 272);
             this.cmbGradovi.Name = "cmbGradovi";
             this.cmbGradovi.Size = new System.Drawing.Size(239, 31);
-            this.cmbGradovi.TabIndex = 54;
+            this.cmbGradovi.TabIndex = 8;
             // 
             // txtEmail
             // 
@@ -550,7 +550,7 @@
             this.txtEmail.SelectionLength = 0;
             this.txtEmail.SelectionStart = 0;
             this.txtEmail.Size = new System.Drawing.Size(250, 23);
-            this.txtEmail.TabIndex = 53;
+            this.txtEmail.TabIndex = 9;
             this.txtEmail.UseSystemPasswordChar = false;
             // 
             // txtBrojTelefona
@@ -568,7 +568,7 @@
             this.txtBrojTelefona.SelectionLength = 0;
             this.txtBrojTelefona.SelectionStart = 0;
             this.txtBrojTelefona.Size = new System.Drawing.Size(239, 23);
-            this.txtBrojTelefona.TabIndex = 52;
+            this.txtBrojTelefona.TabIndex = 6;
             this.txtBrojTelefona.UseSystemPasswordChar = false;
             // 
             // txtJmbg
@@ -585,7 +585,7 @@
             this.txtJmbg.SelectionLength = 0;
             this.txtJmbg.SelectionStart = 0;
             this.txtJmbg.Size = new System.Drawing.Size(250, 23);
-            this.txtJmbg.TabIndex = 51;
+            this.txtJmbg.TabIndex = 3;
             this.txtJmbg.UseSystemPasswordChar = false;
             // 
             // txtAdresa
@@ -603,7 +603,7 @@
             this.txtAdresa.SelectionLength = 0;
             this.txtAdresa.SelectionStart = 0;
             this.txtAdresa.Size = new System.Drawing.Size(250, 23);
-            this.txtAdresa.TabIndex = 50;
+            this.txtAdresa.TabIndex = 5;
             this.txtAdresa.UseSystemPasswordChar = false;
             // 
             // txtPrezime
@@ -621,7 +621,7 @@
             this.txtPrezime.SelectionLength = 0;
             this.txtPrezime.SelectionStart = 0;
             this.txtPrezime.Size = new System.Drawing.Size(239, 23);
-            this.txtPrezime.TabIndex = 49;
+            this.txtPrezime.TabIndex = 2;
             this.txtPrezime.UseSystemPasswordChar = false;
             // 
             // txtIme
@@ -639,7 +639,7 @@
             this.txtIme.SelectionLength = 0;
             this.txtIme.SelectionStart = 0;
             this.txtIme.Size = new System.Drawing.Size(250, 23);
-            this.txtIme.TabIndex = 48;
+            this.txtIme.TabIndex = 1;
             this.txtIme.UseSystemPasswordChar = false;
             // 
             // frmNewUser

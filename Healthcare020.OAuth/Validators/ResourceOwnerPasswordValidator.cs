@@ -59,28 +59,29 @@ namespace Healthcare020.OAuth.Validators
                 if (string.IsNullOrWhiteSpace(context.UserName) || string.IsNullOrWhiteSpace(context.Password))
                     return;
 
-                var korisnickiNalog = await _korisnikService.Authenticate(context.UserName, context.Password);
 
-                if (korisnickiNalog == null || !korisnickiNalog.Roles.Any())
+                if (!user.Roles.Any())
                 {
                     context.Result = new GrantValidationResult(TokenRequestErrors.InvalidTarget, "Invalid credentials");
                     return;
                 }
 
                 //E.g. role with Id = 1 is Administrator, Id = 2 is Doktor, etc.. Here is role with the lowest value of ID (highest permissions)
-                var leadRole = korisnickiNalog.Roles.Min();
+                var leadRole = user.Roles.Min();
 
                 //1. condition -> If mobile client request access token and user doesn't have Pacijent role
                 //2. condition -> If desktop client request access token and user doesn't have one of these roles => Administrator, Doktor or RadnikPrijem
                 if ((context.Request.ClientId == OAuthConstants.MobileClientId && !RoleType.Pacijent.EqualInt(leadRole))
                     || (context.Request.ClientId == OAuthConstants.DesktopClientId && !RoleType.Administrator.EqualInt(leadRole)
-                                                                                   && !RoleType.Doktor.EqualInt(leadRole) && !RoleType.RadnikPrijem.EqualInt(leadRole)))
+                                                                                   && !RoleType.Doktor.EqualInt(leadRole)
+                                                                                   && !RoleType.MedicinskiTehnicar.EqualInt(leadRole)
+                                                                                   && !RoleType.RadnikPrijem.EqualInt(leadRole)))
                 {
                     context.Result = new GrantValidationResult(TokenRequestErrors.InvalidTarget, "Invalid credentials");
                     return;
                 }
 
-                await BuildSuccessResultAsync(korisnickiNalog.Username, korisnickiNalog.Id.ToString(), context);
+                await BuildSuccessResultAsync(user.Username, user.Id.ToString(), context);
             }
         }
 

@@ -24,7 +24,8 @@ namespace HealthCare020.Services
 {
     public class PregledService : BaseCRUDService<PregledDtoLL, PregledDtoEL, PregledResourceParameters, Pregled, PregledUpsertDto, PregledUpsertDto>, IPregledService
     {
-        private static readonly string MODEL_PATH = Path.Combine(Environment.CurrentDirectory, "Data", Resources.MLModelName);
+        private static readonly string MODEL_FOLDER_PATH = Path.Combine(Environment.CurrentDirectory, "Data");
+        private static readonly string MODEL_PATH = Path.Combine(Environment.CurrentDirectory, "Data",Resources.MLModelName);
         private static readonly MLContext mlContext = new MLContext(1);
         private static readonly uint[] TimeOfDayHalfsUids = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }; // => Starts at 9 AM and every iteration is 30 minutes to add
 
@@ -58,9 +59,11 @@ namespace HealthCare020.Services
         public override async Task<List<int>> Count(int MonthsCount)
         {
             if (MonthsCount == 0)
-                return new List<int> { await _dbContext.Pregledi.CountAsync() };
+                return new List<int> { await _dbContext.Set<Pregled>().CountAsync() };
 
-            int startMonth = DateTime.Now.Month - MonthsCount;
+            int startMonth = DateTime.Now.Month - MonthsCount + 1;
+            int firstMonth = DateTime.Now.Month - MonthsCount + 1;
+            int lastMonth = DateTime.Now.Month;
             var year = DateTime.Now.Year;
 
             if (startMonth < 1)
@@ -68,6 +71,13 @@ namespace HealthCare020.Services
                 startMonth += 12;
                 year = DateTime.Now.Year - 1;
             }
+
+            var daysOfStartMonth = DateTime.DaysInMonth(year, startMonth);
+            var dayInMonth = DateTime.Now.Day;
+            var lastDayOfLastMonthToInclude = dayInMonth == 1 ? DateTime.DaysInMonth(year, DateTime.Now.Month) : dayInMonth;
+            var startDayInFirstMonthToInclude = dayInMonth == 1 ? 1 : dayInMonth;
+            if (startDayInFirstMonthToInclude > daysOfStartMonth)
+                startDayInFirstMonthToInclude = daysOfStartMonth;
 
             var monthsCountsList = new List<int>();
 
@@ -78,8 +88,10 @@ namespace HealthCare020.Services
                     startMonth = 1;
                     year++;
                 }
-                monthsCountsList.Add(await _dbContext.Pregledi.CountAsync(x => x.IsOdradjen &&
-                                                                               x.DatumPregleda.Year == year && x.DatumPregleda.Month == startMonth));
+                monthsCountsList.Add(await _dbContext.Set<Pregled>().CountAsync(x => x.DatumPregleda.Year == year
+                                                                                             && x.DatumPregleda.Month == startMonth
+                                                                                             && (startMonth != firstMonth || x.DatumPregleda.Day >= startDayInFirstMonthToInclude)
+                                                                                             && (startMonth != lastMonth || x.DatumPregleda.Day <= lastDayOfLastMonthToInclude)));
                 startMonth++;
             }
 
@@ -96,7 +108,7 @@ namespace HealthCare020.Services
 
             if (await _dbContext.Pregledi.AnyAsync(x => x.DatumPregleda == dtoForCreation.DatumPregleda))
             {
-                return ServiceResult.BadRequest($"Termin {dtoForCreation.DatumPregleda :g} je već zauzet");
+                return ServiceResult.BadRequest($"Termin {dtoForCreation.DatumPregleda:g} je već zauzet");
             }
             var entity = new Pregled
             {
@@ -151,7 +163,7 @@ namespace HealthCare020.Services
 
             var pregledFromDb = getPregledResult.Data as Pregled;
 
-            if(pregledFromDb==null)
+            if (pregledFromDb == null)
                 return ServiceResult.NotFound();
 
             if (await _dbContext.LekarskaUverenja.AnyAsync(x => x.PregledId == id))
@@ -346,7 +358,7 @@ namespace HealthCare020.Services
         public async Task<uint> RecommendTimeForPregled(int godistePacijenta)
         {
             ITransformer model;
-            if (File.Exists(MODEL_PATH))
+            if (Directory.Exists(MODEL_FOLDER_PATH) && File.Exists(MODEL_PATH))
             {
                 model = mlContext.Model.Load(MODEL_PATH, out _);
             }
@@ -410,6 +422,8 @@ namespace HealthCare020.Services
 
             var model = est.Fit(dataView);
 
+            if (!Directory.Exists(MODEL_FOLDER_PATH))
+                Directory.CreateDirectory(MODEL_FOLDER_PATH);
             mlContext.Model.Save(model, dataView.Schema, MODEL_PATH);
             return model;
         }
@@ -437,6 +451,7 @@ namespace HealthCare020.Services
         {
             return uid * 30;
         }
+
         #endregion Helpers
 
         //===============================================

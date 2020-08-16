@@ -22,7 +22,6 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Newtonsoft.Json;
 
 namespace HealthCare020.API
 {
@@ -46,7 +45,7 @@ namespace HealthCare020.API
         {
             services.ConfigureLoggerService();
             services.AddDbContext<HealthCare020DbContext>(x =>
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                x.UseSqlServer(Configuration.GetConnectionString("Healthcare020"))
                     .EnableSensitiveDataLogging());
 
             services.AddSwaggerGen(x =>
@@ -65,14 +64,14 @@ namespace HealthCare020.API
                         Password = new OpenApiOAuthFlow
                         {
                             AuthorizationUrl = new Uri(Environment.IsDevelopment() ? "https://localhost:5007/connect/authorize"
-                                : "https://healthcare020-oauth.com:5005/connect/authorize"),
+                                : "http://localhost:5300/connect/authorize"),
 
                             TokenUrl = new Uri(Environment.IsDevelopment() ? "https://localhost:5007/connect/token"
-                                : "https://healthcare020-oauth.com:5005/connect/token")
+                                : "http://localhost:5300/connect/token")
                         }
                     },
                     OpenIdConnectUrl = new Uri(Environment.IsDevelopment() ? "https://localhost:5007/.well-known/openid-configuration"
-                        : "https://healthcare020-oauth.com:5005/.well-known/openid-configuration"),
+                        : "http://localhost:5300/.well-known/openid-configuration"),
 
                     Scheme = JwtBearerDefaults.AuthenticationScheme,
                     BearerFormat = "JWT",
@@ -104,7 +103,7 @@ namespace HealthCare020.API
                 options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US"), new CultureInfo("bs-Latn-BA") };
             });
 
-            services.AddAuthConfiguration(Environment);
+            services.AddAuthConfiguration(Environment, Configuration);
 
             var logger = new LoggerManager();
             services.AddSession();
@@ -117,8 +116,6 @@ namespace HealthCare020.API
                 .AddNewtonsoftJson(setupAction =>
                 {
                     //Input and output JSON formatters
-                    setupAction.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-                    setupAction.SerializerSettings.MaxDepth = 1;
                     setupAction.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 })
                 .AddXmlDataContractSerializerFormatters()
@@ -162,12 +159,13 @@ namespace HealthCare020.API
             if (env.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
-
-                //app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
 
             app.ConfigureExceptionHandler(logger);
@@ -178,7 +176,6 @@ namespace HealthCare020.API
                 c.OAuthClientId("Healthcare020_WebAPI");
                 c.OAuthClientSecret("devsecret");
             });
-            app.UseHttpsRedirection();
             app.UseResponseCaching();
 
             app.UseRouting();

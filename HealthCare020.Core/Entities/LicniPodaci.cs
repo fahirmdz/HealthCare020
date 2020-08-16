@@ -10,11 +10,11 @@ namespace HealthCare020.Core.Entities
         public int Id { get; set; }
 
         [Required(AllowEmptyStrings = false)]
-        [StringLength(maximumLength: 15, MinimumLength = 2)]
+        [StringLength(maximumLength: 20, MinimumLength = 2)]
         public string Ime { get; set; }
 
         [Required(AllowEmptyStrings = false)]
-        [StringLength(maximumLength:2,MinimumLength = 15)]
+        [StringLength(maximumLength:20,MinimumLength = 2)]
         public string Prezime { get; set; }
 
         [Required(AllowEmptyStrings = false)]

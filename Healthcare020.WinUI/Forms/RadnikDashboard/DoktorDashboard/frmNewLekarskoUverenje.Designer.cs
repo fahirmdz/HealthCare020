@@ -117,7 +117,7 @@
             this.txtOpisStanja.Name = "txtOpisStanja";
             this.txtOpisStanja.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtOpisStanja.Size = new System.Drawing.Size(585, 246);
-            this.txtOpisStanja.TabIndex = 66;
+            this.txtOpisStanja.TabIndex = 1;
             // 
             // lblDoktor
             // 
@@ -169,7 +169,7 @@
             this.btnPdf.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
             this.btnPdf.OnHoverTextColor = System.Drawing.Color.White;
             this.btnPdf.Size = new System.Drawing.Size(151, 50);
-            this.btnPdf.TabIndex = 73;
+            this.btnPdf.TabIndex = 2;
             this.btnPdf.Text = "PDF";
             this.btnPdf.TextColor = System.Drawing.Color.White;
             this.btnPdf.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
             this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
             this.btnSave.Size = new System.Drawing.Size(151, 75);
-            this.btnSave.TabIndex = 72;
+            this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Sačuvaj";
             this.btnSave.TextColor = System.Drawing.Color.White;
             this.btnSave.UseVisualStyleBackColor = true;
@@ -220,7 +220,7 @@
             this.cmbZdravstvenoStanje.Location = new System.Drawing.Point(226, 185);
             this.cmbZdravstvenoStanje.Name = "cmbZdravstvenoStanje";
             this.cmbZdravstvenoStanje.Size = new System.Drawing.Size(175, 31);
-            this.cmbZdravstvenoStanje.TabIndex = 75;
+            this.cmbZdravstvenoStanje.TabIndex = 0;
             // 
             // Errors
             // 
@@ -249,7 +249,7 @@
             this.btnUputnica.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
             this.btnUputnica.OnHoverTextColor = System.Drawing.Color.White;
             this.btnUputnica.Size = new System.Drawing.Size(151, 61);
-            this.btnUputnica.TabIndex = 76;
+            this.btnUputnica.TabIndex = 3;
             this.btnUputnica.Text = "Kreiraj uputnicu";
             this.btnUputnica.TextColor = System.Drawing.Color.White;
             this.btnUputnica.UseVisualStyleBackColor = true;

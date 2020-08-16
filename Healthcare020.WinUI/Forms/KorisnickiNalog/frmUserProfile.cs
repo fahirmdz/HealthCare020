@@ -121,8 +121,8 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             {
                 _apiService.ChangeRoute(Routes.MedicinskiTehnicariRoute);
 
-                var result = await _apiService.Get<MedicinskiTehnicarDtoEL>(new MedicinskiTehnicarResourceParameters
-                { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
+                var result = await _apiService.Get<MedicinskiTehnicarDtoLL>(new MedicinskiTehnicarResourceParameters
+                { KorisnickiNalogId = Auth.KorisnickiNalog.Id});
 
                 if (!result.Succeeded || result.Data == null)
                 {
@@ -130,14 +130,14 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
                     return;
                 }
 
-                var medTehnicar = result.Data.First();
-                licniPodaciId = medTehnicar.LicniPodaciId;
+                var medicinskiTehnicar = result.Data.First();
+                licniPodaciId = medicinskiTehnicar.LicniPodaciId;
             }
             else if (Auth.Role == RoleType.RadnikPrijem)
             {
                 _apiService.ChangeRoute(Routes.RadniciPrijemRoute);
 
-                var result = await _apiService.Get<RadnikPrijemDtoEL>(new RadnikPrijemResourceParameters()
+                var result = await _apiService.Get<RadnikPrijemDtoEL>(new RadnikPrijemResourceParameters
                 { KorisnickiNalogId = Auth.KorisnickiNalog.Id, EagerLoaded = true });
 
                 if (!result.Succeeded || result.Data == null)

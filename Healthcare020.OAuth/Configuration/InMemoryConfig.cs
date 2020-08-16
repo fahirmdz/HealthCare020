@@ -34,6 +34,7 @@ namespace Healthcare020.OAuth.Configuration
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,FaceRecognitionScope,IdentityServerConstants.LocalApi.ScopeName },
                     RefreshTokenUsage = TokenUsage.ReUse,
+                    AllowedCorsOrigins = new[]{"http://localhost:5300","https://localhost:5007","https://ecardealer-oauth.com"},
                     RefreshTokenExpiration = TokenExpiration.Sliding,
                     AbsoluteRefreshTokenLifetime = 2592000,
                     AllowOfflineAccess = true
@@ -43,6 +44,7 @@ namespace Healthcare020.OAuth.Configuration
                     ClientId = OAuthConstants.MobileClientId,
                     ClientSecrets = new [] { new Secret("devsecret_mobile".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedCorsOrigins = new[]{"http://localhost:5300","https://localhost:5007","https://ecardealer-oauth.com"},
                     AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,FaceRecognitionScope,IdentityServerConstants.LocalApi.ScopeName },
                     RefreshTokenUsage = TokenUsage.ReUse,
                     RefreshTokenExpiration = TokenExpiration.Sliding,
@@ -53,6 +55,7 @@ namespace Healthcare020.OAuth.Configuration
                 {
                     ClientId = OAuthConstants.DesktopClientId,
                     ClientSecrets = new [] { new Secret("devsecret_desktop".Sha512()) },
+                    AllowedCorsOrigins = new[]{"http://localhost:5300","https://localhost:5007","https://ecardealer-oauth.com"},
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.LocalApi.ScopeName },
                     RefreshTokenUsage = TokenUsage.ReUse,

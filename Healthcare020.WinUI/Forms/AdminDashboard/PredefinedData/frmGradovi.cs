@@ -28,7 +28,6 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
         private frmGradovi()
         {
-
             var ID = new DataGridViewColumn
             {
                 HeaderText = "ID",
@@ -62,7 +61,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
 
             _apiService = new APIService(Routes.GradoviRoute);
             Text = Resources.frmGradovi;
-            ResourceParameters = new GradResourceParameters { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
+            ResourceParameters = new GradResourceParameters {EagerLoaded = true};
 
             InitializeComponent();
         }

@@ -2,12 +2,12 @@ version: '3'
 services: 
     #mssql docker
  healthcare-sql:
-    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    image: "mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-18.04"
     restart: unless-stopped
     environment: 
-        - ACCEPT_EULA=Y
-        - SA_PASSOWRD=test
-        - MSSQL_PID=Developer
+       - ACCEPT_EULA=Y
+       - SA_PASSWORD=Banana_123!
+       - MSSQL_PID=Developer
     ports: 
         - 1401:1433
     networks:
@@ -17,8 +17,10 @@ services:
     restart: unless-stopped
     build:
        context: .
+       dockerfile: "Dockerfile"
     environment: 
-        - ConnectionStrings:Healthcare020=Server=healthcare-sql,1433;Database=Healthcare020;User=sa;Password=test;ConnectRetryCount=0
+        IDENTITY_AUTHORITY: "http://healthcare020-oauth:5300"
+        ConnectionStrings:Healthcare020: Server=healthcare-sql,1433;Database=Healthcare020_DB;User=sa;Password=Banana_123!;
     ports: 
         - 5200:80
     networks:
@@ -27,6 +29,24 @@ services:
         - healthcare-sql
     depends_on: 
         - healthcare-sql
+
+ healthcare020-oauth:
+    restart: unless-stopped
+    build:
+        context: .
+        dockerfile: "Dockerfile.OAuth"
+    environment: 
+        IDENTITY_ISSUER: "http://10.0.75.1:5300"
+        ConnectionStrings:Healthcare020: Server=healthcare-sql,1433;Database=Healthcare020_DB;User=sa;Password=Banana_123!;
+    ports: 
+        - 5300:80
+    networks:
+        - healthcare020-net
+    links:
+        - healthcare-sql
+    depends_on: 
+        - healthcare-sql
+
 networks:
     healthcare020-net:
         driver: bridge

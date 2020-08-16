@@ -12,7 +12,7 @@ namespace Healthcare020.WinUI.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace Healthcare020.WinUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://healthcare020-api.com:5001/api/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5200/api/")]
         public string ApiUrl {
             get {
                 return ((string)(this["ApiUrl"]));
@@ -37,7 +37,7 @@ namespace Healthcare020.WinUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://healthcare020-oauth.com:5005/connect/token")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5300/connect/token")]
         public string IdpTokenEndpoint {
             get {
                 return ((string)(this["IdpTokenEndpoint"]));

@@ -65,7 +65,7 @@
             this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
             this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
             this.btnSave.Size = new System.Drawing.Size(151, 75);
-            this.btnSave.TabIndex = 86;
+            this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Sačuvaj";
             this.btnSave.TextColor = System.Drawing.Color.White;
             this.btnSave.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@
             this.txtRazlog.Name = "txtRazlog";
             this.txtRazlog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtRazlog.Size = new System.Drawing.Size(479, 99);
-            this.txtRazlog.TabIndex = 81;
+            this.txtRazlog.TabIndex = 1;
             // 
             // lblDoktor
             // 
@@ -175,7 +175,7 @@
             this.txtNapomena.Name = "txtNapomena";
             this.txtNapomena.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtNapomena.Size = new System.Drawing.Size(479, 99);
-            this.txtNapomena.TabIndex = 90;
+            this.txtNapomena.TabIndex = 2;
             // 
             // lblNapomena
             // 
@@ -199,7 +199,7 @@
             this.cmbDoktori.Location = new System.Drawing.Point(248, 157);
             this.cmbDoktori.Name = "cmbDoktori";
             this.cmbDoktori.Size = new System.Drawing.Size(267, 31);
-            this.cmbDoktori.TabIndex = 91;
+            this.cmbDoktori.TabIndex = 0;
             // 
             // btnCancel
             // 
@@ -218,7 +218,7 @@
             this.btnCancel.OnHoverButtonColor = System.Drawing.Color.Gray;
             this.btnCancel.OnHoverTextColor = System.Drawing.Color.White;
             this.btnCancel.Size = new System.Drawing.Size(151, 46);
-            this.btnCancel.TabIndex = 92;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Poništi";
             this.btnCancel.TextColor = System.Drawing.Color.White;
             this.btnCancel.UseVisualStyleBackColor = true;

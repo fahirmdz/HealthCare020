@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="ApiUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://healthcare020-api.com:5001/api/</Value>
+      <Value Profile="(Default)">http://localhost:5200/api/</Value>
     </Setting>
     <Setting Name="IdpTokenEndpoint" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://healthcare020-oauth.com:5005/connect/token</Value>
+      <Value Profile="(Default)">http://localhost:5300/connect/token</Value>
     </Setting>
     <Setting Name="IdpClientId" Type="System.String" Scope="User">
       <Value Profile="(Default)">Healthcare020_Desktop</Value>

@@ -134,6 +134,8 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
 
         protected void DisplayDataForm_Load(object sender, EventArgs e)
         {
+            CalculateRowsCount();
+            ResourceParameters.PageSize = PossibleRowsCount;
             SizeChanged += formDisplayed_SizeChanged;
         }
 
@@ -144,15 +146,20 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             var result = await _apiService
                 .Get<TDto>(ResourceParameters);
 
+            btnNextPage.Enabled = result.HasData && result.Data.Any() &&  ResourceParameters.PageNumber != result.PaginationMetadata.TotalPages;
+
             if (!result.Succeeded || !result.HasData)
+            {
+                UseWaitCursor = false;
+                Cursor.Current = Cursors.Default;
                 return;
+            }
 
             _dataForDgrv = new BindingList<TDto>(result.Data);
             CurrentRowCount = _dataForDgrv.Count;
 
             dgrvMain.DataSource = _dataForDgrv;
 
-            btnNextPage.Enabled = result.HasData && result.Data.Any() &&  ResourceParameters.PageNumber != result.PaginationMetadata.TotalPages;
             btnPrevPage.Enabled = ResourceParameters.PageNumber != 1;
 
             UseWaitCursor = false;
@@ -214,19 +221,12 @@ namespace Healthcare020.WinUI.Forms.AbstractForms
             FormForBackButton?.OpenAsChildOfControl(Parent);
         }
 
-        private void CalculateRowsCount()
+        protected void CalculateRowsCount()
         {
             PossibleRowsCount = dgrvMain.GetRowsCount();
             PossibleRowsCount = PossibleRowsCount <= 0 ? 1 : PossibleRowsCount;
             dgrvMain.RowCount = PossibleRowsCount;
             ResourceParameters.PageSize = PossibleRowsCount;
-        }
-
-        private async void dgrvMain_SizeChanged(object sender, EventArgs e)
-        {
-            dgrvMain.DataSource = null;
-            CalculateRowsCount();
-            await LoadData();
         }
     }
 }

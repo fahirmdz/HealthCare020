@@ -52,9 +52,11 @@ namespace HealthCare020.Services
         public override async Task<List<int>> Count(int MonthsCount)
         {
             if (MonthsCount == 0)
-                return new List<int> { await _dbContext.ZahteviZaPosetu.CountAsync() };
+                return new List<int> { await _dbContext.Set<ZahtevZaPosetu>().CountAsync() };
 
-            int startMonth = DateTime.Now.Month - MonthsCount;
+            int startMonth = DateTime.Now.Month - MonthsCount + 1;
+            int firstMonth = DateTime.Now.Month - MonthsCount + 1;
+            int lastMonth = DateTime.Now.Month;
             var year = DateTime.Now.Year;
 
             if (startMonth < 1)
@@ -62,6 +64,13 @@ namespace HealthCare020.Services
                 startMonth += 12;
                 year = DateTime.Now.Year - 1;
             }
+
+            var daysOfStartMonth = DateTime.DaysInMonth(year, startMonth);
+            var dayInMonth = DateTime.Now.Day;
+            var lastDayOfLastMonthToInclude = dayInMonth == 1 ? DateTime.DaysInMonth(year, DateTime.Now.Month) : dayInMonth;
+            var startDayInFirstMonthToInclude = dayInMonth == 1 ? 1 : dayInMonth;
+            if (startDayInFirstMonthToInclude > daysOfStartMonth)
+                startDayInFirstMonthToInclude = daysOfStartMonth;
 
             var monthsCountsList = new List<int>();
 
@@ -72,9 +81,10 @@ namespace HealthCare020.Services
                     startMonth = 1;
                     year++;
                 }
-                monthsCountsList.Add(await _dbContext.ZahteviZaPosetu.CountAsync(x => x.ZakazanoDatumVreme.HasValue &&
-                                                                                      (x.ZakazanoDatumVreme.Value.Year == year
-                                                                                       && x.ZakazanoDatumVreme.Value.Month == startMonth)));
+                monthsCountsList.Add(await _dbContext.Set<ZahtevZaPosetu>().CountAsync(x =>x.IsObradjen &&  x.DatumVremeKreiranja.Year == year
+                                                                                             && x.DatumVremeKreiranja.Month == startMonth
+                                                                                             && (startMonth != firstMonth || x.DatumVremeKreiranja.Day >= startDayInFirstMonthToInclude)
+                                                                                             && (startMonth != lastMonth || x.DatumVremeKreiranja.Day <= lastDayOfLastMonthToInclude)));
                 startMonth++;
             }
 

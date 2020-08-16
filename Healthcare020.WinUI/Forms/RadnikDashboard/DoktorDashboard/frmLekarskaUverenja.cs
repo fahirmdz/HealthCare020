@@ -58,7 +58,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme, ZdravstvenoStanje });
 
             _apiService = new APIService(Routes.LekarskoUverenjeRoute);
-            ResourceParameters = new LekarskoUverenjeResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true };
+            ResourceParameters = new LekarskoUverenjeResourceParameters() { EagerLoaded = true };
 
             InitializeComponent();
             btnNew.Visible = false;

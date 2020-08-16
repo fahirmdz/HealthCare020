@@ -33,7 +33,6 @@
             this.lblIsObradjen = new System.Windows.Forms.Label();
             this.txtPacijent = new System.Windows.Forms.Label();
             this.txtDatumZahteva = new System.Windows.Forms.Label();
-            this.btnSave = new Healthcare020.WinUI.Helpers.CustomElements.Button_WOC();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.horizontalDivider = new MaterialSkin.Controls.MaterialDivider();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -88,29 +87,6 @@
             this.txtDatumZahteva.Name = "txtDatumZahteva";
             this.txtDatumZahteva.Size = new System.Drawing.Size(0, 20);
             this.txtDatumZahteva.TabIndex = 71;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.BorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(646, 363);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.btnSave.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
-            this.btnSave.OnHoverTextColor = System.Drawing.Color.White;
-            this.btnSave.Size = new System.Drawing.Size(142, 75);
-            this.btnSave.TabIndex = 70;
-            this.btnSave.Text = "Sačuvaj";
-            this.btnSave.TextColor = System.Drawing.Color.White;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // picLogo
             // 
@@ -252,7 +228,6 @@
             this.Controls.Add(this.lblIsObradjen);
             this.Controls.Add(this.txtPacijent);
             this.Controls.Add(this.txtDatumZahteva);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.horizontalDivider);
             this.Controls.Add(this.lblTitle);
@@ -275,7 +250,6 @@
         private System.Windows.Forms.Label lblIsObradjen;
         private System.Windows.Forms.Label txtPacijent;
         private System.Windows.Forms.Label txtDatumZahteva;
-        private Helpers.CustomElements.Button_WOC btnSave;
         private System.Windows.Forms.PictureBox picLogo;
         private MaterialSkin.Controls.MaterialDivider horizontalDivider;
         private System.Windows.Forms.Label lblTitle;

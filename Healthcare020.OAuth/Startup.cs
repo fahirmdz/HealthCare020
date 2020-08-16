@@ -1,10 +1,10 @@
-using HealthCare020.Core.Constants;
 using Healthcare020.LoggerService.Configuration;
 using Healthcare020.LoggerService.Interfaces;
 using Healthcare020.OAuth.Configuration;
 using Healthcare020.OAuth.Extensions;
 using Healthcare020.OAuth.Services;
 using Healthcare020.OAuth.Validators;
+using HealthCare020.Core.Constants;
 using HealthCare020.Repository;
 using HealthCare020.Services.Configuration;
 using IdentityServer4.Services;
@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
 
 namespace Healthcare020.OAuth
 {
@@ -37,23 +38,18 @@ namespace Healthcare020.OAuth
         {
             services.ConfigureLoggerService();
             services.AddDbContext<HealthCare020DbContext>(x =>
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging(true));
+                x.UseSqlServer(Configuration.GetConnectionString("Healthcare020")).EnableSensitiveDataLogging(true));
 
-            var cors = new DefaultCorsPolicyService(new Logger<DefaultCorsPolicyService>(new LoggerFactory()))
-            {
-                AllowedOrigins = { "https://localhost:5001","https://localhost:5003" }
-            };
-            services.AddSingleton<ICorsPolicyService>(cors);
-
-            services.AddIdentityServer(opt=>
+            services.AddIdentityServer(opt =>
                 {
-                    opt.IssuerUri = "https://healthcare020-oauth.com/";
-                    opt.Discovery.CustomEntries.Add("face-recognition",$"~/{Routes.FaceRecognitionRoute}");
+                    opt.IssuerUri = "http://healthcare020-oauth";
+                    opt.Discovery.CustomEntries.Add("face-recognition", $"~/{Routes.FaceRecognitionRoute}");
                 })
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
                 .AddInMemoryApiResources(InMemoryConfig.Apis)
                 .AddDeveloperSigningCredential()
+                .AddCorsPolicyService<InMemoryCorsPolicyService>()
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddProfileService<ProfileService>();
 
@@ -66,8 +62,16 @@ namespace Healthcare020.OAuth
         {
             if (env.IsDevelopment())
             {
+                IdentityModelEventSource.ShowPII = true;
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                IdentityModelEventSource.ShowPII = true;
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseRouting();
             app.ConfigureExceptionHandler(logger);

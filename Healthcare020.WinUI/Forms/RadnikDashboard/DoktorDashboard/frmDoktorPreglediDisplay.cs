@@ -6,6 +6,8 @@ using HealthCare020.Core.Constants;
 using HealthCare020.Core.Models;
 using System;
 using System.Windows.Forms;
+using HealthCare020.Core.Enums;
+using Healthcare020.WinUI.Helpers;
 using PregledResourceParameters = HealthCare020.Core.ResourceParameters.PregledResourceParameters;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
@@ -60,7 +62,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
             AddColumnsToMainDgrv(new[] { ID, Pacijent, DatumVreme, IsOdradjen });
 
             _apiService = new APIService(Routes.PreglediRoute);
-            ResourceParameters = new PregledResourceParameters() { PageNumber = 1, PageSize = PossibleRowsCount, EagerLoaded = true, OnlyZakazani = OnlyZakazani };
+            ResourceParameters = new PregledResourceParameters() {EagerLoaded = true, OnlyZakazani = OnlyZakazani };
 
             InitializeComponent();
             btnNew.Visible = false;
@@ -93,6 +95,9 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
 
         protected override void dgrvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (Auth.Role == RoleType.MedicinskiTehnicar)
+                return;
+
             if (!(dgrvMain.CurrentRow?.DataBoundItem is PregledDtoEL pregled))
                 return;
 

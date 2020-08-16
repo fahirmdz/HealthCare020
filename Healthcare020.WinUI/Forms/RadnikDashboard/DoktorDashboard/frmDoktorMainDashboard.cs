@@ -1,4 +1,6 @@
 ﻿using System.Windows.Forms;
+using HealthCare020.Core.Enums;
+using Healthcare020.WinUI.Forms.RadnikDashboard.RadnikPrijem;
 using Healthcare020.WinUI.Helpers;
 
 namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
@@ -20,6 +22,7 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         private frmDoktorMainDashboard()
         {
             InitializeComponent();
+            btnPosete.Visible = Auth.Role == RoleType.MedicinskiTehnicar;
         }
 
         private void btnSviPregledi_Click(object sender, System.EventArgs e)
@@ -50,6 +53,11 @@ namespace Healthcare020.WinUI.Forms.RadnikDashboard.DoktorDashboard
         private void btnUputniceNamenjene_Click(object sender, System.EventArgs e)
         {
             frmDoktorDataDisplay.InstanceWithData(frmUputnice.InstanceWithData(NamenjenjeTrenutnoLogovanomKorisniku:true)).OpenAsChildOfControl(Parent);
+        }
+
+        private void btnPosete_Click(object sender, System.EventArgs e)
+        {
+            frmRadnikPrijemMainDashboard.Instance.OpenAsChildOfControl(Parent);
         }
     }
 }

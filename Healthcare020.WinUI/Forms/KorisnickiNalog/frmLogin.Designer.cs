@@ -85,7 +85,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.btnLogin.OnHoverButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
             this.btnLogin.OnHoverTextColor = System.Drawing.Color.White;
             this.btnLogin.Size = new System.Drawing.Size(267, 37);
-            this.btnLogin.TabIndex = 23;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Log In";
             this.btnLogin.TextColor = System.Drawing.Color.White;
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -123,7 +123,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.cbxRememberMe.Name = "cbxRememberMe";
             this.cbxRememberMe.Ripple = true;
             this.cbxRememberMe.Size = new System.Drawing.Size(104, 30);
-            this.cbxRememberMe.TabIndex = 18;
+            this.cbxRememberMe.TabIndex = 2;
             this.cbxRememberMe.Text = "Zapamti me";
             this.cbxRememberMe.UseVisualStyleBackColor = true;
             // 
@@ -150,7 +150,7 @@ namespace Healthcare020.WinUI.Forms.KorisnickiNalog
             this.txtPassword.SelectionLength = 0;
             this.txtPassword.SelectionStart = 0;
             this.txtPassword.Size = new System.Drawing.Size(156, 23);
-            this.txtPassword.TabIndex = 17;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = false;
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress_1);
             // 

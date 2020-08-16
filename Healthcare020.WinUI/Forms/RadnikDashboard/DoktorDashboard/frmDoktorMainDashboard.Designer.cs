@@ -42,6 +42,7 @@
             this.lblLekarskaUverenja = new System.Windows.Forms.Label();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.btnPosete = new FontAwesome.Sharp.IconButton();
             this.lblUputnice = new System.Windows.Forms.Label();
             this.materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
             this.btnUputniceNamenjene = new FontAwesome.Sharp.IconButton();
@@ -247,6 +248,7 @@
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.btnPosete);
             this.pnlMain.Controls.Add(this.lblUputnice);
             this.pnlMain.Controls.Add(this.materialDivider3);
             this.pnlMain.Controls.Add(this.btnUputniceNamenjene);
@@ -265,6 +267,28 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1208, 607);
             this.pnlMain.TabIndex = 36;
+            // 
+            // btnPosete
+            // 
+            this.btnPosete.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnPosete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(120)))), ((int)(((byte)(143)))));
+            this.btnPosete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPosete.FlatAppearance.BorderSize = 0;
+            this.btnPosete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPosete.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.btnPosete.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPosete.ForeColor = System.Drawing.Color.White;
+            this.btnPosete.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnPosete.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(241)))), ((int)(((byte)(219)))));
+            this.btnPosete.IconSize = 2;
+            this.btnPosete.Location = new System.Drawing.Point(945, 72);
+            this.btnPosete.Name = "btnPosete";
+            this.btnPosete.Rotation = 0D;
+            this.btnPosete.Size = new System.Drawing.Size(208, 83);
+            this.btnPosete.TabIndex = 39;
+            this.btnPosete.Text = "Posete";
+            this.btnPosete.UseVisualStyleBackColor = false;
+            this.btnPosete.Click += new System.EventHandler(this.btnPosete_Click);
             // 
             // lblUputnice
             // 
@@ -352,5 +376,6 @@
         private FontAwesome.Sharp.IconButton btnUputniceNamenjene;
         private System.Windows.Forms.Label lblUputnice;
         private MaterialSkin.Controls.MaterialDivider materialDivider3;
+        private FontAwesome.Sharp.IconButton btnPosete;
     }
 }

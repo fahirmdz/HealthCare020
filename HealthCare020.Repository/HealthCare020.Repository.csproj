@@ -18,4 +18,8 @@
     <ProjectReference Include="..\HealthCare020.Core\HealthCare020.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

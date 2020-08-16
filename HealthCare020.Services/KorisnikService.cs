@@ -19,6 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using HealthCare020.Core.Security;
 
 namespace HealthCare020.Services
 

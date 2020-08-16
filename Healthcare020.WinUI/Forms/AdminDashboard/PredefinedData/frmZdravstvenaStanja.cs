@@ -57,7 +57,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
             AddColumnsToMainDgrv(new DataGridViewColumn[] { ID, Opis, Brisanje });
             _apiService = new APIService(Routes.ZdravstvenaStanjaRoute);
             Text = Resources.frmZdravstvenaStanja;
-            ResourceParameters = new ZdravstvenoStanjeResourceParameters { PageSize = PossibleRowsCount, PageNumber = 1 };
+            ResourceParameters = new ZdravstvenoStanjeResourceParameters();
 
             InitializeComponent();
         }
@@ -112,6 +112,7 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard.PredefinedData
         private void frmZdravstvenaStanja_Load(object sender, EventArgs e)
         {
             FormForBackButton = frmPredefinedDataMenu.Instance;
+            base.DisplayDataForm_Load(sender, e);
         }
     }
 }

@@ -19,6 +19,17 @@ namespace HealthCare020.API.Controllers
         {
         }
 
+        [AllowAnonymous]
+        public override Task<IActionResult> GetById(int id, bool? EagerLoaded)
+        {
+            return base.GetById(id, EagerLoaded);
+        }
+        [AllowAnonymous]
+        public override Task<IActionResult> Update(int id, LicniPodaciUpsertDto dtoForUpdate)
+        {
+            return base.Update(id, dtoForUpdate);
+        }
+
         [Authorize(AuthorizationPolicies.AdministratorPolicy)]
         public override async Task<IActionResult> Get(LicniPodaciResourceParameters resourceParameters)
         {
