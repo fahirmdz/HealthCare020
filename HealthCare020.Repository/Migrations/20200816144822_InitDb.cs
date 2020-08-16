@@ -512,22 +512,22 @@ namespace HealthCare020.Repository.Migrations
                 columns: new[] { "Id", "DateCreated", "FaceId", "LastOnline", "LockedOut", "LockedOutUntil", "PasswordHash", "PasswordSalt", "Username" },
                 values: new object[,]
                 {
-                    { 16, new DateTime(2020, 4, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4252), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4256), false, null, "mCiM2PsLJyab4BaM4h7wKxFk+7YzeDx1zC1dM5zv41wx+KvxRnMtlksXI/KW4d0leyMhW4HkRxvr4AKA43p4fA==", "fmd5V1cTA8bh1O3OQIQYHA==", "pacijent11" },
-                    { 15, new DateTime(2020, 4, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4224), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4228), false, null, "QQw7Xa74jXUi4xoP+rhVuVzMbC3uqHiRFiKo4Ykb5eb5nfN0sN4lXIx60ht+GjAGVpEzEyegdAi9BFPgtVy1lw==", "NgFLmtmz/xVnO9tlE99lrw==", "pacijent10" },
-                    { 14, new DateTime(2020, 6, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4197), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4201), false, null, "0BIylvSSQ8HD43H8jObvE7phiP0deZQTHQdWwL0Eiqr+gNFIPpDLv1p86tqd4sP2KAt0kGzslPLoKxM2h+0GzQ==", "C0rrqt14WI7F55aTuuSjXg==", "pacijent9" },
-                    { 13, new DateTime(2020, 6, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4170), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4174), false, null, "OjFEGQSWBVpoUGZCipJeDG3sk531m2067qY7bS0ofDWdkoLUGfNNvgVpDIME031qLrZ4WdwycfIL44n8RRA+CA==", "8T0/No3KOoVB2jYfqak+rQ==", "pacijent8" },
-                    { 12, new DateTime(2020, 7, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4108), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4143), false, null, "SEEyGW89c8xvQS1SEIp9iykloRwJHR/28PnHM6Hh2oTxepgHr+Cxl6UPGuh7ANBv2Pai7sOZl1KxPniOfTpztA==", "aR8/IcylIM9UTRtF9OnCpQ==", "pacijent7" },
-                    { 11, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4059), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4062), false, null, "nYZQmvJpIe4Wt2AtUw+SsR/LVeLbmxa0yRvB9cucgb4wqTpqHjTpcf9yllfzde6bnbWH33xcJFppnQsDFGqBDQ==", "sa9tF1Mq120roosbpqZ8IA==", "pacijent6" },
-                    { 10, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4032), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4036), false, null, "JggKRJl4T/5+qQBrr93JMZ6RuLSZcevLgCiCRPZz0BBjmZihkMge6Od5tsfGaplZWojMhaxRkfTuOVtdrZDAzQ==", "yhQutk773R7D9NYjbN62VQ==", "pacijent5" },
-                    { 9, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4004), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(4007), false, null, "cxV5/fAufL5gBleohXIEdYdq45zb1kvgqB6HuaXXmwNmTWBzLxlR19JFlmpDGJIJkm5/+eb3LG2mQuhbdFKYxw==", "tgvTCBRCCIO3Xq2cdIZZPA==", "pacijent4" },
-                    { 8, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3957), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3961), false, null, "wVdS8etAqi46lpRsj3h4YuZHwicKEaaP9/2zqvXrjUqYz89mtv0aImnQVI5CkrlyKpxYkQP0faXXcY+T7hi3Gw==", "oQqkKjLM05myBboLr/K/1w==", "pacijent3" },
-                    { 7, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3931), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3934), false, null, "QEOb6mdcxmJS45eSHv3aqLc9N1fLHHggA6IK5+GiMnc5bzyp9phoqNF47aYptjyKT3eV7mmqMA6mkxio0+cdlQ==", "p62qq4AlU8ukFv6MW5IWvA==", "pacijent2" },
-                    { 6, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3903), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3907), false, null, "PSRzBHQL6QT83sZVfFKvL0IBx419/Vi4dP+NY1vf69zeJOC5lfE0muJ+77gbGfIVBCVJ1Qas3k4SXggmj5Nm4w==", "XcGvF7GHupQKL6cgfP8Eqg==", "doktor2" },
-                    { 5, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3873), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3876), false, null, "poXfM8E0iBntDy2PZmn7mHeAvcRcMZ97JxVCPc/pxDAmEhKHJtPEb4hDI/uVahIOA6VV/i4WaaFarg/5bkx7Yw==", "/mtU/ZUo8GtXl/5IMnL6nA==", "medicinskitehnicar" },
-                    { 4, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3842), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3845), false, null, "gFdWzYgkNnLkinEiG5ovtMMyO3q83zHYyLadDoeo3FyrHsdX54cSFkXd0R7a+UkO7svxfbHtnDr75bBgj6z9gw==", "fDNXCxgUVW5RZ3o9bjcy5w==", "pacijent" },
-                    { 3, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3768), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3773), false, null, "J1SOi5hgVBf9ECZRbZYFiL6u6XcIvHzXM/JbgeAfycbfZiXoohcmi4+deJ90acqKNwN3KRV7+mhyD+tHh318qQ==", "3iXtorTOMmzM5L9uBVRjRw==", "radnikprijem" },
-                    { 2, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3458), null, new DateTime(2020, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(3481), false, null, "458TEy7e/0piAvPNtKaYJoBV1Q9bW9bK86GxKtkozRKalY2OSnTRA8qWL4VDei7+0EnCZ9VmrePEmIvxQzEVWw==", "jyDwrAPkPRI/byEc/LjbtQ==", "doktor" },
-                    { 1, new DateTime(2020, 8, 16, 15, 54, 24, 716, DateTimeKind.Local).AddTicks(566), null, new DateTime(2020, 8, 16, 15, 54, 24, 716, DateTimeKind.Local).AddTicks(1193), false, null, "Efbgzggju7n82SUQyQ+fO2HsUiIhTo6ZZ6aRaMfRD4ynC4mFKIbjbisvXwdyAVrZAePoWKIJnXIMB+K2vhhBMw==", "RM88ZkkQJa0Im1K1bVXEAg==", "admin" }
+                    { 16, new DateTime(2020, 4, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(4009), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(4013), false, null, "GzA0KyIMwzJgtrvcX1+gBuhfNt+F68cOPOQ2wQjIRh7C88OVubW1E54lM5qNnQRGBbb3NKuDA2UOxNunaWgb/w==", "bwSSV9pf0F+/e4B7QQUvgQ==", "pacijent11" },
+                    { 15, new DateTime(2020, 4, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3960), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3963), false, null, "9u6oFk9MMBjPGUUVRgIFpAlU3PprXpvlNjA46cP8FKzYSSoyarG/bV+2D+L9hH7LjJaDDzh8zXW2VR6wuxQJkA==", "oCbzAXVr5wiv2zdyTkSanQ==", "pacijent10" },
+                    { 14, new DateTime(2020, 6, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3933), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3936), false, null, "qr5XonUoIbeyMXKlEo+123OZWE1mBKL6GVRlPnVTV/h93lek7qXNbpC9fRBuKdhiI8prNwo4TYMLZsxJ6lvmfA==", "s4KcmX6Qs7bbFQ4lu0770Q==", "pacijent9" },
+                    { 13, new DateTime(2020, 6, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3905), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3909), false, null, "CaCLNEqksFFP2SVDRdQvVTxc0W+P4a3ErFLC8JBlfYP+CC0uGPpJbM3BfHwT/ScthnhCqlJ79DYZMPxvIblgZA==", "lB+3m62hIseR7L98xY+Y5A==", "pacijent8" },
+                    { 12, new DateTime(2020, 7, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3849), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3880), false, null, "chBSFnvVKA7nSH+NsSEsxlpaf1EHkIZ/JvPBiyRqeNYL51FQeddnOtXRtm5oRayGA4Ba5NKkSmmu273U7ddrtw==", "Pl1T7KdHZ2a5oT9GJqEvww==", "pacijent7" },
+                    { 11, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3823), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3826), false, null, "fmHEjenXgw3CYmCAuQT+09qb8VBmhwHEEeYXhTqP4ODY3C7ycUkiQ6h8fe71FagfTERtB/Pm1qh3sSUtoDliXg==", "JBAQVD7697pa6EgcwAnfxg==", "pacijent6" },
+                    { 10, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3795), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3799), false, null, "Fp5whjP4htxTEXCUfw6DlF70jeRlAD4Z/cdmdt28vy0uLiHSzbD3Z8tF0PNmuRwpNTkDAmhVeB1AGH8KFXetVA==", "rWMFZ7Lfla8uN4dR+Hn4Sg==", "pacijent5" },
+                    { 9, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3766), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3770), false, null, "IVPVd+1Z5q6rMi5LUxOvp8m6ygjpmT9Gn6m+nDxAZH8EyGmObPn/3nUq4DuMIxx+QQunM73vYJY9zLaRaMJHWQ==", "Z5WLxbxZBogptikyG1GNyw==", "pacijent4" },
+                    { 8, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3697), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3700), false, null, "Z94Requ4YzCBq/LZ/k0WOG46Pd8PM/pJghO3lBsCdlgsCV6onxofAzcqHP7fF75LLRSRluJ/Vh4Ezci7JOAQHw==", "mf+jOA62QXhqkdCtkTHsGQ==", "pacijent3" },
+                    { 7, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3670), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3673), false, null, "6YHRopApPigGZPfO1qN58V8eCPG083A+mbdh+9+d++DQ+G36voBFRa6OHTbxm93Zh2iDDljBf3Mo7gsl2s3V/A==", "w1pNpz0Lj1XD0sgqaVzckw==", "pacijent2" },
+                    { 6, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3643), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3646), false, null, "arRaqqwS0xULaFrQYMHxTfpwjN0Hlim8v4ZB/O8SgThDMof+OtXHJXKLnvTjG6AXKmOc2Bbo+Q7HASRYhdMu3Q==", "z7ePZgqiBaiRDzbfR0yN4A==", "doktor2" },
+                    { 5, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3614), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3617), false, null, "420FANtzotja4xXY3cjKwpxw1NNxTdkW1SK6ajsyx22vplfr+BXFFyjA9P4Jr1VsEY26QHUMAOrmbpdKjvaEBQ==", "x+Iy5lCdqYBDOy3FfGbg6g==", "medicinskitehnicar" },
+                    { 4, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3585), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3589), false, null, "mRLo9qBlQ+WSq9c6yNV0F4D/6MxwL8v5n2fwZ0y8hrpUdMSgRhlDCssYIZmFnBm4mFOSORgtblXq5Gk0HwV7MA==", "X6K73BFpLgvBp/72hjMZOw==", "pacijent" },
+                    { 3, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3545), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3549), false, null, "3i5+1AF7rVLe1I9jeS5iN6lkMB9XzAJGUicKFhGiDWmBDe4UF0qFaIQnqha/N+aKWfwsVqgflJXmDt2zno64Rg==", "KLgua8APDW8NLRoqMRAw0Q==", "radnikprijem" },
+                    { 2, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3145), null, new DateTime(2020, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(3171), false, null, "p/udGw+eacGF2J7bfENa4NoTz/EIWNOSob+BcJNRpCj0ww/tEwO3ENFpUeqDOV/mdsR+zjoGT5I2NJ1K42PQ2Q==", "W+ujb8PAb+l0ZsIl785wbg==", "doktor" },
+                    { 1, new DateTime(2020, 8, 16, 16, 48, 21, 807, DateTimeKind.Local).AddTicks(1576), null, new DateTime(2020, 8, 16, 16, 48, 21, 807, DateTimeKind.Local).AddTicks(2327), false, null, "aUXEjr5Dry8a9yPUWHBAkhSY+yaFs1foqP/Sa1ijlwr/80UsbRxCj5trckBZQKXczXnSSg02wTS49fFq1jb/Ow==", "oQGC3ZW02GIMuHApb3kpxw==", "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -638,23 +638,25 @@ namespace HealthCare020.Repository.Migrations
                 columns: new[] { "Id", "Adresa", "BrojTelefona", "DatumRodjenja", "EmailAddress", "GradId", "Ime", "JMBG", "Pol", "Prezime", "ProfilePicture" },
                 values: new object[,]
                 {
-                    { 1, "Gradacacka 10", "0624322123", new DateTime(1980, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(7760), "doktor1@live.com", 1, "Fahir", "010202001", "M", "Dokt", null },
-                    { 4, "Seiz 10", "064322233", new DateTime(1970, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9399), "medtehnicar1@live.com", 5, "Fahir", "1475856888", "M", "Tehnicar", null },
-                    { 3, "Alojza Benca 10", "067231222", new DateTime(1973, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9393), "pacijent1@live.com", 4, "Fahir", "013475855", "M", "Pacijent", null },
-                    { 12, "Topolska 18", "06585524", new DateTime(1979, 9, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9456), "pacijent7@live.com", 3, "Fahir", "84575856999", "M", "Pacsedam", null },
-                    { 10, "Leur 91", "06585524", new DateTime(1993, 8, 31, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9429), "pacijent5@live.com", 3, "Fahir", "2557766355", "M", "Pacpet", null },
-                    { 5, "Helst 12", "06123233", new DateTime(1991, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9403), "doktor2@live.com", 3, "Fahir", "1154651655", "M", "Doktdva", null },
-                    { 17, "Sarajevska 25", "068575853", new DateTime(1985, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9481), "pacijent12@live.com", 2, "Fahir", "8352121332", "M", "Pacdvanaest", null },
-                    { 9, "Reu 17", "0612323333", new DateTime(1993, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9424), "pacijent4@live.com", 5, "Fahir", "25111020201", "M", "Paccetiri", null },
-                    { 16, "Frau Hermanova 2", "0625485477", new DateTime(1956, 5, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9477), "pacijent11@live.com", 2, "Fahir", "8422222211", "M", "Pacjedanaest", null },
-                    { 14, "Reu 12", "06585524", new DateTime(1956, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9467), "pacijent9@live.com", 2, "Fahir", "2557766355", "M", "Pacdevet", null },
-                    { 11, "Reu 12", "060365955", new DateTime(1979, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9451), "pacijent6@live.com", 2, "Fahir", "2574214855", "M", "Pacsest", null },
-                    { 8, "Golubacka 12", "063412333", new DateTime(1993, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9419), "pacijent3@live.com", 2, "Fahir", "2534123332", "M", "Pactri", null },
-                    { 7, "Reu 12", "06585524", new DateTime(1966, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9415), "pacijentlecenje2@live.com", 2, "Fahir", "2557766355", "M", "Lecenjedva", null },
-                    { 6, "Neumsd 12", "066585255", new DateTime(1996, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9410), "pacijentlecenje1@live.com", 2, "Fahir", "7584247777", "M", "Lecenje", null },
-                    { 2, "Envera Seh 10", "062414322", new DateTime(1988, 8, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9343), "prijem1@live.com", 2, "Fahir", "013412333", "M", "Prijem", null },
-                    { 15, "Bosanskih gazija 9", "065234121", new DateTime(1956, 7, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9472), "pacijent10@live.com", 2, "Fahir", "2557766355", "M", "Pacdeset", null },
-                    { 13, "Envera Sehovica 19", "0675845555", new DateTime(1979, 5, 16, 15, 54, 24, 718, DateTimeKind.Local).AddTicks(9462), "pacijent8@live.com", 5, "Fahir", "85442222222", "M", "Pacosam", null }
+                    { 1, "Gradacacka 10", "0624322123", new DateTime(1980, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(7489), "doktor1@live.com", 1, "Fahir", "010202001", "M", "Dokt", null },
+                    { 4, "Seiz 10", "064322233", new DateTime(1970, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9063), "medtehnicar1@live.com", 5, "Fahir", "1475856888", "M", "Tehnicar", null },
+                    { 19, "Lumbago 100", "0624234123", new DateTime(1966, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9152), "pacijent21@live.com", 4, "Fahir", "9874563211", "M", "Pacdvajedan", null },
+                    { 3, "Alojza Benca 10", "067231222", new DateTime(1973, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9057), "pacijent1@live.com", 4, "Fahir", "013475855", "M", "Pacijent", null },
+                    { 12, "Topolska 18", "06585524", new DateTime(1979, 9, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9118), "pacijent7@live.com", 3, "Fahir", "84575856999", "M", "Pacsedam", null },
+                    { 10, "Leur 91", "06585524", new DateTime(1993, 8, 31, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9093), "pacijent5@live.com", 3, "Fahir", "2557766355", "M", "Pacpet", null },
+                    { 5, "Helst 12", "06123233", new DateTime(1991, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9068), "doktor2@live.com", 3, "Fahir", "1154651655", "M", "Doktdva", null },
+                    { 18, "Sarajevska 100", "0624745855", new DateTime(1996, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9147), "pacijent20@live.com", 2, "Fahir", "1234567891", "M", "Pacdvadeset", null },
+                    { 9, "Reu 17", "0612323333", new DateTime(1993, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9088), "pacijent4@live.com", 5, "Fahir", "25111020201", "M", "Paccetiri", null },
+                    { 17, "Sarajevska 25", "068575853", new DateTime(1985, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9142), "pacijent12@live.com", 2, "Fahir", "8352121332", "M", "Pacdvanaest", null },
+                    { 15, "Bosanskih gazija 9", "065234121", new DateTime(1956, 7, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9132), "pacijent10@live.com", 2, "Fahir", "2557766355", "M", "Pacdeset", null },
+                    { 14, "Reu 12", "06585524", new DateTime(1956, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9128), "pacijent9@live.com", 2, "Fahir", "2557766355", "M", "Pacdevet", null },
+                    { 11, "Reu 12", "060365955", new DateTime(1979, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9113), "pacijent6@live.com", 2, "Fahir", "2574214855", "M", "Pacsest", null },
+                    { 8, "Golubacka 12", "063412333", new DateTime(1993, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9084), "pacijent3@live.com", 2, "Fahir", "2534123332", "M", "Pactri", null },
+                    { 7, "Reu 12", "06585524", new DateTime(1966, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9079), "pacijentlecenje2@live.com", 2, "Fahir", "2557766355", "M", "Lecenjedva", null },
+                    { 6, "Neumsd 12", "066585255", new DateTime(1996, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9075), "pacijentlecenje1@live.com", 2, "Fahir", "7584247777", "M", "Lecenje", null },
+                    { 2, "Envera Seh 10", "062414322", new DateTime(1988, 8, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(8989), "prijem1@live.com", 2, "Fahir", "013412333", "M", "Prijem", null },
+                    { 16, "Frau Hermanova 2", "0625485477", new DateTime(1956, 5, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9137), "pacijent11@live.com", 2, "Fahir", "8422222211", "M", "Pacjedanaest", null },
+                    { 13, "Envera Sehovica 19", "0675845555", new DateTime(1979, 5, 16, 16, 48, 21, 809, DateTimeKind.Local).AddTicks(9123), "pacijent8@live.com", 5, "Fahir", "85442222222", "M", "Pacosam", null }
                 });
 
             migrationBuilder.InsertData(
@@ -702,7 +704,7 @@ namespace HealthCare020.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, "066985295", new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local), true, 1, new DateTime(2020, 8, 11, 14, 30, 0, 0, DateTimeKind.Local) },
-                    { 2, "066585777", new DateTime(2020, 8, 12, 15, 54, 24, 721, DateTimeKind.Local).AddTicks(1661), false, 2, null }
+                    { 2, "066585777", new DateTime(2020, 8, 12, 16, 48, 21, 812, DateTimeKind.Local).AddTicks(685), false, 2, null }
                 });
 
             migrationBuilder.InsertData(
@@ -720,7 +722,9 @@ namespace HealthCare020.Repository.Migrations
                     { 8, 1, 14 },
                     { 9, 1, 15 },
                     { 10, 1, 16 },
-                    { 11, 1, 17 }
+                    { 11, 1, 17 },
+                    { 12, 1, 18 },
+                    { 13, 1, 19 }
                 });
 
             migrationBuilder.InsertData(
@@ -746,10 +750,10 @@ namespace HealthCare020.Repository.Migrations
                 columns: new[] { "Id", "DatumVreme", "Napomena", "PacijentId", "Razlog", "UpucenKodDoktoraId", "UputioDoktorId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(6683), "Pregledati urnarni trakt", 1, "Mucnina u stomaku", 2, 1 },
-                    { 2, new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(7510), "Pregledati glavu", 1, "Bol u slepoocnici", 1, 2 },
-                    { 3, new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(7536), "Pregledati urnarni trakt", 2, "Mucnina u stomaku", 2, 1 },
-                    { 4, new DateTime(2020, 8, 15, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(7540), "Pregledati urnarni trakt", 2, "Mucnina u stomaku", 1, 2 }
+                    { 1, new DateTime(2020, 8, 15, 16, 48, 21, 811, DateTimeKind.Local).AddTicks(5807), "Pregledati urnarni trakt", 1, "Mucnina u stomaku", 2, 1 },
+                    { 2, new DateTime(2020, 8, 15, 16, 48, 21, 811, DateTimeKind.Local).AddTicks(6653), "Pregledati glavu", 1, "Bol u slepoocnici", 1, 2 },
+                    { 3, new DateTime(2020, 8, 15, 16, 48, 21, 811, DateTimeKind.Local).AddTicks(6680), "Pregledati urnarni trakt", 2, "Mucnina u stomaku", 2, 1 },
+                    { 4, new DateTime(2020, 8, 15, 16, 48, 21, 811, DateTimeKind.Local).AddTicks(6684), "Pregledati urnarni trakt", 2, "Mucnina u stomaku", 1, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -757,26 +761,26 @@ namespace HealthCare020.Repository.Migrations
                 columns: new[] { "Id", "DatumVreme", "DoktorId", "IsObradjen", "Napomena", "PacijentId", "UputnicaId" },
                 values: new object[,]
                 {
-                    { 20, new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(445), 1, false, "Blagi bolovi u zeludcu", 8, null },
-                    { 18, new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(437), 2, false, "Blagi bolovi u zeludcu", 8, null },
-                    { 14, new DateTime(2020, 7, 19, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(421), 2, true, "Blagi bolovi u ramenu", 8, null },
-                    { 13, new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(417), 2, true, "Blagi bolovi u zeludcu", 7, null },
-                    { 12, new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(413), 2, true, "Bolovi u stomaku", 6, null },
-                    { 11, new DateTime(2020, 5, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(409), 2, true, "Peckanje u ocima", 5, null },
-                    { 10, new DateTime(2020, 7, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(405), 2, true, "Blagi bolovi u grudima", 4, null },
-                    { 9, new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(400), 1, true, "Blagi bolovi u slepoocnici", 3, null },
-                    { 19, new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(441), 1, false, "Blagi bolovi u stomaku", 2, null },
-                    { 8, new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(396), 1, true, "Blagi bolovi u vratu", 2, null },
-                    { 15, new DateTime(2020, 6, 25, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(425), 2, true, "Blagi bolovi u ocima", 9, null },
-                    { 7, new DateTime(2020, 4, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(392), 1, true, "Bolovi u glavi", 2, null },
-                    { 6, new DateTime(2019, 12, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(387), 1, true, "Blagi bolovi u grudima", 1, null },
-                    { 5, new DateTime(2020, 4, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(381), 1, true, "Razredjena krv", 1, null },
-                    { 4, new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(377), 1, true, "Problemi sa radom srca", 1, null },
-                    { 3, new DateTime(2020, 7, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(372), 1, true, "Problemi sa disanjem", 1, null },
-                    { 2, new DateTime(2020, 8, 13, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(340), 1, false, "Problemi sa mokraćnim kanalima", 1, null },
-                    { 1, new DateTime(2020, 8, 14, 15, 54, 24, 719, DateTimeKind.Local).AddTicks(9296), 1, true, "Otežano disanje", 1, null },
-                    { 17, new DateTime(2020, 8, 14, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(433), 2, false, "Blagi bolovi u stomaku", 2, null },
-                    { 16, new DateTime(2020, 6, 16, 15, 54, 24, 720, DateTimeKind.Local).AddTicks(429), 2, true, "Blagi bolovi u ceonom dijelu", 10, null }
+                    { 20, new DateTime(2020, 8, 14, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9880), 1, false, "Blagi bolovi u zeludcu", 8, null },
+                    { 18, new DateTime(2020, 8, 14, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9872), 2, false, "Blagi bolovi u zeludcu", 8, null },
+                    { 14, new DateTime(2020, 7, 19, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9856), 2, true, "Blagi bolovi u ramenu", 8, null },
+                    { 13, new DateTime(2020, 6, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9852), 2, true, "Blagi bolovi u zeludcu", 7, null },
+                    { 12, new DateTime(2020, 6, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9848), 2, true, "Bolovi u stomaku", 6, null },
+                    { 11, new DateTime(2020, 5, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9844), 2, true, "Peckanje u ocima", 5, null },
+                    { 10, new DateTime(2020, 7, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9840), 2, true, "Blagi bolovi u grudima", 4, null },
+                    { 9, new DateTime(2020, 6, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9835), 1, true, "Blagi bolovi u slepoocnici", 3, null },
+                    { 19, new DateTime(2020, 8, 14, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9876), 1, false, "Blagi bolovi u stomaku", 2, null },
+                    { 8, new DateTime(2020, 6, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9831), 1, true, "Blagi bolovi u vratu", 2, null },
+                    { 15, new DateTime(2020, 6, 25, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9860), 2, true, "Blagi bolovi u ocima", 9, null },
+                    { 7, new DateTime(2020, 4, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9827), 1, true, "Bolovi u glavi", 2, null },
+                    { 6, new DateTime(2019, 12, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9822), 1, true, "Blagi bolovi u grudima", 1, null },
+                    { 5, new DateTime(2020, 4, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9816), 1, true, "Razredjena krv", 1, null },
+                    { 4, new DateTime(2020, 6, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9812), 1, true, "Problemi sa radom srca", 1, null },
+                    { 3, new DateTime(2020, 7, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9807), 1, true, "Problemi sa disanjem", 1, null },
+                    { 2, new DateTime(2020, 8, 13, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9776), 1, false, "Problemi sa mokraćnim kanalima", 1, null },
+                    { 1, new DateTime(2020, 8, 14, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(8725), 1, true, "Otežano disanje", 1, null },
+                    { 17, new DateTime(2020, 8, 14, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9868), 2, false, "Blagi bolovi u stomaku", 2, null },
+                    { 16, new DateTime(2020, 6, 16, 16, 48, 21, 810, DateTimeKind.Local).AddTicks(9864), 2, true, "Blagi bolovi u ceonom dijelu", 10, null }
                 });
 
             migrationBuilder.InsertData(
