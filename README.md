@@ -1,3 +1,62 @@
+# Login credentials
+
+###### Mobile
+
+ #
+      
+         * Username: pacijent
+         * Password: testtest
+      
+         * Username: pacijent2
+         * Password: testtest
+
+         * Username: pacijent3
+         * Password: testtest
+
+         * Username: pacijent4
+         * Password: testtest
+
+         * Username: pacijent5
+         * Password: testtest
+
+         * Username: pacijent6
+         * Password: testtest
+
+         * Username: pacijent7
+         * Password: testtest
+
+         * Username: pacijent8
+         * Password: testtest
+
+         * Username: pacijent9
+         * Password: testtest
+
+         * Username: pacijent10
+         * Password: testtest
+
+         * Username: pacijent11
+         * Password: testtest
+
+###### Desktop
+
+ #
+
+         * Username: doktor
+         * Password: testtest
+
+         * Username: doktor2
+         * Password: testtest
+
+         * Username: medicinskitehnicar
+         * Password: testtest
+  
+         * Username: radnikprijem
+         * Password: testtest
+
+         * Username: admin
+         * Password: testtest
+   
+
 # MOBILE
 
   - Za registraciju pacijenta na mobilnoj aplikaciji, potrebno je potvrditi validnost ličnih podataka
@@ -5,9 +64,9 @@
     sa podacima iz baze podataka, korisnički nalog će se kreirati.
     Planirano je da će zdravstvena ustanova već imati podatke pacijenata.
 
-  - Lični podaci pacijenata koji se mogu koristiti pri registraciji (nisu registrovani)
-           
-      1)
+  - Lični podaci pacijenata koji se mogu koristiti pri registraciji (nisu registrovani):
+      
+    1)
       
          * BrojZdravstveneKnjizice: 12
          * JMBG: 1234567891
@@ -36,8 +95,8 @@
      7) U dijelu "Vrijeme pregleda" ce biti vidljivi rezultati recommendation sistema
 
  - Preporuceno vrijeme koje bi sistem preporuke trebao vratiti bazirano na godistu rodjena pacijenta:
-
-     **FORMAT => PacijentUsername : PreporucenoVrijeme : Godiste**
+#
+     FORMAT => PacijentUsername : PreporucenoVrijeme : GodinaRodjenjaPacijenta
 
      * pacijent : 10:00AM : 1993
      * pacijent2 : 12:00AM : 1993
