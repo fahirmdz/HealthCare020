@@ -196,6 +196,8 @@ namespace Healthcare020.WinUI.Forms.AdminDashboard
                 cmbDrzave.DataSource = drzave;
                 cmbDrzave.DisplayMember = nameof(DrzavaDto.Naziv);
                 cmbDrzave.ValueMember = nameof(DrzavaDto.Id);
+
+                await LoadGradovi((int) cmbDrzave.SelectedValue);
             }
 
             cmbPolovi.DataSource = new List<ComboBoxItem>

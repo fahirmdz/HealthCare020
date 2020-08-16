@@ -390,7 +390,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent3@live.com",
                     GradId = 2,
                     Ime = "Fahir",
-                    Prezime = "Pactri",
+                    Prezime = "Pacdva",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -403,7 +403,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent4@live.com",
                     GradId = 5,
                     Ime = "Fahir",
-                    Prezime = "Paccetiri",
+                    Prezime = "Pactri",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -416,7 +416,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent5@live.com",
                     GradId = 3,
                     Ime = "Fahir",
-                    Prezime = "Pacpet",
+                    Prezime = "Paccetiri",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -429,7 +429,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent6@live.com",
                     GradId = 2,
                     Ime = "Fahir",
-                    Prezime = "Pacsest",
+                    Prezime = "Pacpet",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -442,7 +442,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent7@live.com",
                     GradId = 3,
                     Ime = "Fahir",
-                    Prezime = "Pacsedam",
+                    Prezime = "Pacsest",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -455,20 +455,20 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent8@live.com",
                     GradId = 5,
                     Ime = "Fahir",
-                    Prezime = "Pacosam",
+                    Prezime = "Pacsedam",
                     Pol = 'M',
                 },
                 new LicniPodaci
                 {
                     Id=14,
                     Adresa = "Reu 12",
-                    JMBG="2557766355",
+                    JMBG="2551876355",
                     BrojTelefona = "06585524",
                     DatumRodjenja = DateTime.Now.AddYears(-64),
                     EmailAddress = "pacijent9@live.com",
                     GradId = 2,
                     Ime = "Fahir",
-                    Prezime = "Pacdevet",
+                    Prezime = "Pacosam",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -481,7 +481,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent10@live.com",
                     GradId = 2,
                     Ime = "Fahir",
-                    Prezime = "Pacdeset",
+                    Prezime = "Pacdevet",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -494,7 +494,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent11@live.com",
                     GradId = 2,
                     Ime = "Fahir",
-                    Prezime = "Pacjedanaest",
+                    Prezime = "Pacdeset",
                     Pol = 'M',
                 },
                 new LicniPodaci
@@ -507,7 +507,7 @@ namespace HealthCare020.Repository
                     EmailAddress = "pacijent12@live.com",
                     GradId = 2,
                     Ime = "Fahir",
-                    Prezime = "Pacdvanaest",
+                    Prezime = "Pacjedanaest",
                     Pol = 'M',
                 },
                 new LicniPodaci
