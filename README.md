@@ -157,17 +157,17 @@
 
  - Na desktop aplikaciji, pored administratora i radnika na prijemu, mogu se logovati i doktori i medicinski tehničari.
 
- - Kredencijali za testne korisnički naloge doktora su:
+ - Kredencijali za testne korisničke naloge doktora su:
 
-       1)
+     
            * Username: doktor
            * Password: testtest
-       2)
+       
            * Username: doktor2
            * Password: testtest
 
  - Kredencijali za testni korisnički nalog medicinskog tehničara su:
 
-       1)
+       
            * Username: medicinskitehnicar
            * Password: testtest
