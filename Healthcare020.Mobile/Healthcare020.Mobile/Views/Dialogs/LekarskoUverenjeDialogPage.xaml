@@ -52,7 +52,10 @@
                         TextColor="{StaticResource LightSmokeWhite}"
                         VerticalOptions="Center" />
 
-                    <Frame BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                    <Frame
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="FillAndExpand">
                         <Image Aspect="AspectFill" Source="{StaticResource Logo}" />
                     </Frame>
                 </Grid>
