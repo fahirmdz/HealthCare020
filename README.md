@@ -1,7 +1,7 @@
-# Healthcare020
+<h1 align="center">Healthcare020</h1>
 
 <h3>Scheduling medical examinations and visits, managing examination reports and refferals</h3>
-<hr/>
+
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602511800/Welcome_Loading_dmxcvd.png" 
 alt="Kitten" title="A cute kitten" width="200" height="400" />
