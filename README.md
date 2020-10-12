@@ -43,8 +43,12 @@ alt="Img" title="A cute kitten" width="200" height="400" />
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Predefined_Data_dpl1wk.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
+ </p>
+ <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Predefined_Data_List_zafeyh.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
+</p>
+<p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_New_User_svqzfu.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
 </p>
@@ -59,8 +63,12 @@ alt="Img" title="A cute kitten" width="730" height="400" />
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_ZakazivanjePregleda_h5foer.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
+</p>
+<p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Prijem_Dashboard_ub2zsr.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
+ </p>
+<p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_RadnikPrijem_ZahtevZaPosetu_vj2ab2.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
 </p>
