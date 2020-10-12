@@ -27,5 +27,3 @@ alt="Kitten" title="A cute kitten" width="200" height="400" />
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512052/LekarskoUverenje_vfojoc.png" 
 alt="Kitten" title="A cute kitten" width="200" height="400" />
 </div>
-
-
