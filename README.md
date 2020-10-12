@@ -55,8 +55,12 @@ alt="Img" title="A cute kitten" width="730" height="400" />
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Doktor_Dashboard_vdnny0.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
+ </p>
+ <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Doktor_ZahteviZaPregled_zpyqve.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
+ </p>
+  <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_ZahtevZaPregled_y87ftb.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
 </p>
