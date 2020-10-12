@@ -6,7 +6,6 @@
 
 ## Mobile
 
- #
  <br>
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602511800/Welcome_Loading_dmxcvd.png" 
@@ -40,7 +39,6 @@ alt="Img" title="A cute kitten" width="200" height="400" />
 
 ## Desktop
 
- #
 
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Predefined_Data_dpl1wk.png" 
