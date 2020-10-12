@@ -1,11 +1,32 @@
 # Healthcare020
 
-#### Scheduling medical examinations and visits, managing examination reports and refferals
+<h4 >Scheduling medical examinations and visits, managing examination reports and refferals</h4>
 
- #
+### Prerequisites
+* Installed Docker
+* Android smarthpone or emulator
+
+See the [Docker website]('https://docs.docker.com/get-docker/') for installation instructions.
+
+### Build and run
+1. Clone this repo
+
+         git clone https://github.com/fahirmdz/HealthCare020.git
+2. Build the images
+
+         cd HealthCare020
+         docker-compose build
+
+3. Run
+
+         docker-compose up
+
+
+<br>
+<br>
+
 
 ## Mobile
-
  <br>
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602511800/Welcome_Loading_dmxcvd.png" 
@@ -35,10 +56,11 @@ alt="Img" title="A cute kitten" width="200" height="400" />
 </p>
 <br>
 <br>
+<br>
+<br>
 
 
-## Desktop
-
+<h2 >Desktop</h2>
 
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Predefined_Data_dpl1wk.png" 
