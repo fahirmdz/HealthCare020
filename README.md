@@ -4,9 +4,10 @@
 
  #
 
-#### Mobile
+## Mobile
 
  #
+ <br>
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602511800/Welcome_Loading_dmxcvd.png" 
 alt="Img" title="A cute kitten" width="200" height="400" />
@@ -33,11 +34,11 @@ alt="Img" title="A cute kitten" width="200" height="400" />
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512052/LekarskoUverenje_vfojoc.png"
 alt="Img" title="A cute kitten" width="200" height="400" />
 </p>
-
-
+<br>
+<br>
  #
 
-#### Desktop
+## Desktop
 
  #
 
@@ -49,7 +50,6 @@ alt="Img" title="A cute kitten" width="730" height="400" />
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_New_User_svqzfu.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
 </p>
-<br>
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Doktor_Dashboard_vdnny0.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
@@ -58,7 +58,6 @@ alt="Img" title="A cute kitten" width="730" height="400" />
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_ZahtevZaPregled_y87ftb.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
 </p>
-<br>
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_ZakazivanjePregleda_h5foer.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
