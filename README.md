@@ -27,6 +27,7 @@ See the <a href="https://docs.docker.com/get-docker/">Docker website</a> for ins
 
 
 ## Mobile
+<br>
  <br>
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602511800/Welcome_Loading_dmxcvd.png" 
@@ -61,7 +62,8 @@ alt="Img" title="A cute kitten" width="200" height="400" />
 
 
 <h2 >Desktop</h2>
-
+<br>
+<br>
 <p align="center">
 <img src="https://res.cloudinary.com/ecardealer/image/upload/v1602512894/Desktop_Predefined_Data_dpl1wk.png" 
 alt="Img" title="A cute kitten" width="730" height="400" />
