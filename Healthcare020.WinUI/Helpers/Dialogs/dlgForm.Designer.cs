@@ -52,9 +52,9 @@
             // 
             // pnlSide
             // 
-            this.pnlSide.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlSide.Controls.Add(this.txtLeftTitle);
             this.pnlSide.Controls.Add(this.btnClose);
+            this.pnlSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSide.Location = new System.Drawing.Point(0, 0);
             this.pnlSide.Name = "pnlSide";
             this.pnlSide.Size = new System.Drawing.Size(59, 377);
