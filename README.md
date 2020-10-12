@@ -6,7 +6,7 @@
 * Installed Docker
 * Android smarthpone or emulator
 
-See the [Docker website]('https://docs.docker.com/get-docker/') for installation instructions.
+See the <a href="https://docs.docker.com/get-docker/">Docker website</a> for installation instructions.
 
 ### Build and run
 1. Clone this repo
